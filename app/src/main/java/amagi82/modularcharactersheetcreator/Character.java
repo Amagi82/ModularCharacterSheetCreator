@@ -3,12 +3,15 @@ package amagi82.modularcharactersheetcreator;
 
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
+
 public class Character {
 
     private Bitmap imageCharacterIcon;
     private String name = "";
     private String characterClass = "";
     private String gameSystem = "";
+    private ArrayList<Module> moduleList = new ArrayList<>();
 
     public Character() {
     }
@@ -49,5 +52,13 @@ public class Character {
 
     public void setGameSystem(String gameSystem) {
         this.gameSystem = gameSystem;
+    }
+
+    public ArrayList<Module> getModuleList() {
+        return moduleList;
+    }
+
+    public void setModuleList(ArrayList<Module> moduleList) {
+        this.moduleList = moduleList;
     }
 }

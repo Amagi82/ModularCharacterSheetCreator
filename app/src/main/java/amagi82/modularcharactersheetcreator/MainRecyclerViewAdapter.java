@@ -25,9 +25,9 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
         public ViewHolder(View itemView) {
             super(itemView);
             imageCharacterIcon = (CircleImageView) itemView.findViewById(R.id.imageCharacterIcon);
-            tvName= (TextView) itemView.findViewById(R.id.tvName);
-            tvCharacterClass= (TextView) itemView.findViewById(R.id.tvCharacterClass);
-            tvGameSystem= (TextView) itemView.findViewById(R.id.tvGameSystem);
+            tvName = (TextView) itemView.findViewById(R.id.tvName);
+            tvCharacterClass = (TextView) itemView.findViewById(R.id.tvCharacterClass);
+            tvGameSystem = (TextView) itemView.findViewById(R.id.tvGameSystem);
         }
     }
 
@@ -45,9 +45,9 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if(characters.get(position).getImageCharacterIcon() == null) {
+        if (characters.get(position).getImageCharacterIcon() == null) {
             holder.imageCharacterIcon.setImageResource(R.drawable.ic_face_grey600_24dp);
-        }else holder.imageCharacterIcon.setImageBitmap(characters.get(position).getImageCharacterIcon());
+        } else holder.imageCharacterIcon.setImageBitmap(characters.get(position).getImageCharacterIcon());
         holder.tvName.setText(characters.get(position).getName());
         holder.tvCharacterClass.setText(characters.get(position).getCharacterClass());
         holder.tvGameSystem.setText(characters.get(position).getGameSystem());
