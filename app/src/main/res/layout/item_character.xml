@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/default_list_item_height"
     android:padding="@dimen/default_horizontal_margin">
 
     <!-- update to circle icon -->
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageCharacterIcon"
         android:layout_width="@dimen/item_icon_size"
         android:layout_height="@dimen/item_icon_size"
         android:contentDescription="@string/character_icon"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        app:border_width="1dp"
+        app:border_color="@color/black"/>
 
     <TextView
         android:id="@+id/tvGameSystem"
