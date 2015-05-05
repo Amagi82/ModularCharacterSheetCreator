@@ -10,7 +10,7 @@ import android.widget.FrameLayout;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainFragment.OnCharacterCreatedListener {
 
     FrameLayout container;
     public static ArrayList<Character> characterArray = new ArrayList<>();
@@ -55,5 +55,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCharacterCreated() {
+//        CharacterFragment fragment = new CharacterFragment();
+//        FragmentManager fragmentManager = getFragmentManager();
+//        fragmentManager.beginTransaction().replace(MainActivity.container.getId(), fragment).addToBackStack(null).commit();
     }
 }
