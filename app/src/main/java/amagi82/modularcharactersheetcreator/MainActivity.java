@@ -10,7 +10,7 @@ import android.widget.FrameLayout;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements MainFragment.OnCharacterCreatedListener {
+public class MainActivity extends AppCompatActivity implements MainFragment.OnCharacterAddedListener, CharacterSheetFragment.OnModuleAddedListener {
 
     FrameLayout container;
     public static ArrayList<amagi82.modularcharactersheetcreator.models.Character> characterArray = new ArrayList<>();
@@ -58,9 +58,14 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnCh
     }
 
     @Override
-    public void onCharacterCreated() {
+    public void onCharacterAdded() {
 //        CharacterFragment fragment = new CharacterFragment();
 //        FragmentManager fragmentManager = getFragmentManager();
 //        fragmentManager.beginTransaction().replace(MainActivity.container.getId(), fragment).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void onModuleAdded() {
+
     }
 }

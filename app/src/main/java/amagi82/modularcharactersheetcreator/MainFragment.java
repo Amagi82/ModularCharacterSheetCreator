@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.melnykov.fab.FloatingActionButton;
+import com.melnykov.fab.ScrollDirectionListener;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ import amagi82.modularcharactersheetcreator.models.Character;
 
 public class MainFragment extends Fragment {
 
-    OnCharacterCreatedListener listener;
+    OnCharacterAddedListener listener;
 
     public MainFragment() {
     }
@@ -29,13 +30,13 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        ArrayList<amagi82.modularcharactersheetcreator.models.Character> characters = new ArrayList<>();
+        ArrayList<Character> characters = new ArrayList<>();
         characters.add(new Character("Thomas Anstis", "Vampire", "Gangrel"));
         characters.add(new Character("Tom Lytton", "Vampire", "Brujah"));
         characters.add(new Character("Georgia Johnson", "Vampire", "Tremere"));
         characters.add(new Character("Augustus von Rabenholtz", "Vampire", "Ventrue"));
 
-        RecyclerView mainRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_main);
+        RecyclerView mainRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         mainRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), null));
 
@@ -53,21 +54,19 @@ public class MainFragment extends Fragment {
 
         //Set up the Floating Action Button
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
-//        fab.attachToListView(gridView, new ScrollDirectionListener() {
-//            @Override
-//            public void onScrollDown() {
-//                Log.d("ListViewFragment", "onScrollDown()");
-//            }
-//
-//            @Override
-//            public void onScrollUp() {
-//                Log.d("ListViewFragment", "onScrollUp()");
-//            }
-//        });
+        fab.setImageResource(R.drawable.ic_person_add_white_24dp);
+        fab.attachToRecyclerView(mainRecyclerView, new ScrollDirectionListener() {
+            @Override
+            public void onScrollDown() {
+            }
+            @Override
+            public void onScrollUp() {
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onCharacterCreated();
+                listener.onCharacterAdded();
             }
         });
 
@@ -79,14 +78,13 @@ public class MainFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            listener = (OnCharacterCreatedListener) activity;
+            listener = (OnCharacterAddedListener) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnCharacterCreatedListener");
+            throw new ClassCastException(activity.toString() + " must implement OnCharacterAddedListener");
         }
     }
 
-    public interface OnCharacterCreatedListener {
-        void onCharacterCreated();
+    public interface OnCharacterAddedListener {
+        void onCharacterAdded();
     }
-
 }
