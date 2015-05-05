@@ -1,17 +1,37 @@
 package amagi82.modularcharactersheetcreator;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
+
+import java.util.ArrayList;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
+
+    FrameLayout container;
+    public static ArrayList<Character> characterArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Add toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        setTitle(getString(R.string.characters));
+
+        //Set MainFragment
+        FrameLayout fragmentContainer = (FrameLayout) findViewById(R.id.container);
+        container = new FrameLayout(this);
+        container.setId(R.id.container_id);
+        getSupportFragmentManager().beginTransaction().replace(container.getId(), new MainFragment()).commit();
+        fragmentContainer.addView(container);
+
     }
 
 
