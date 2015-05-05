@@ -1,8 +1,11 @@
 package amagi82.modularcharactersheetcreator;
 
 
+import android.graphics.Bitmap;
+
 public class Character {
 
+    private Bitmap imageCharacterIcon;
     private String name = "";
     private String characterClass = "";
     private String gameSystem = "";
@@ -18,6 +21,14 @@ public class Character {
         this.name = name;
         this.characterClass = characterClass;
         this.gameSystem = gameSystem;
+    }
+
+    public Bitmap getImageCharacterIcon() {
+        return imageCharacterIcon;
+    }
+
+    public void setImageCharacterIcon(Bitmap imageCharacterIcon) {
+        this.imageCharacterIcon = imageCharacterIcon;
     }
 
     public void setName(String name) {
