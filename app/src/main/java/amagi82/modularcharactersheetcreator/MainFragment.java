@@ -13,6 +13,10 @@ import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
+import amagi82.modularcharactersheetcreator.adapters.MainRecyclerViewAdapter;
+import amagi82.modularcharactersheetcreator.adapters.extras.DividerItemDecoration;
+import amagi82.modularcharactersheetcreator.models.Character;
+
 
 public class MainFragment extends Fragment {
 
@@ -25,11 +29,11 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        ArrayList<Character> characters = new ArrayList<>();
+        ArrayList<amagi82.modularcharactersheetcreator.models.Character> characters = new ArrayList<>();
         characters.add(new Character("Thomas Anstis", "Vampire", "Gangrel"));
         characters.add(new Character("Tom Lytton", "Vampire", "Brujah"));
         characters.add(new Character("Georgia Johnson", "Vampire", "Tremere"));
-        characters.add(new Character("Augustus von Rabenholtz", "Vampire", "???"));
+        characters.add(new Character("Augustus von Rabenholtz", "Vampire", "Ventrue"));
 
         RecyclerView mainRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_main);
 

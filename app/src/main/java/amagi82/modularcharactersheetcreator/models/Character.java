@@ -1,9 +1,11 @@
-package amagi82.modularcharactersheetcreator;
+package amagi82.modularcharactersheetcreator.models;
 
 
 import android.graphics.Bitmap;
 
 import java.util.ArrayList;
+
+import amagi82.modularcharactersheetcreator.models.modules.Module;
 
 public class Character {
 

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements MainFragment.OnCharacterCreatedListener {
 
     FrameLayout container;
-    public static ArrayList<Character> characterArray = new ArrayList<>();
+    public static ArrayList<amagi82.modularcharactersheetcreator.models.Character> characterArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
