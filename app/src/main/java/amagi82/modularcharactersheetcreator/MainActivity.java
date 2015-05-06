@@ -9,8 +9,11 @@ import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 
+import amagi82.modularcharactersheetcreator.adapters.CharacterSheetRecyclerViewAdapter;
+import amagi82.modularcharactersheetcreator.models.modules.Module;
 
-public class MainActivity extends AppCompatActivity implements MainFragment.OnCharacterAddedListener, CharacterSheetFragment.OnModuleAddedListener {
+
+public class MainActivity extends AppCompatActivity implements MainFragment.OnCharacterAddedListener, CharacterSheetFragment.OnModuleAddedListener , CharacterSheetRecyclerViewAdapter.OnModuleClickedListener{
 
     FrameLayout container;
     public static ArrayList<amagi82.modularcharactersheetcreator.models.Character> characterArray = new ArrayList<>();
@@ -66,6 +69,11 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnCh
 
     @Override
     public void onModuleAdded() {
+
+    }
+
+    @Override
+    public void onModuleClicked(ArrayList<? extends Module> module, int position) {
 
     }
 }

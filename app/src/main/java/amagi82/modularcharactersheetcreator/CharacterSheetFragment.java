@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.adapters.CharacterSheetRecyclerViewAdapter;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
+import amagi82.modularcharactersheetcreator.models.modules.TextOnlyModule;
 
 public class CharacterSheetFragment extends Fragment {
 
@@ -33,6 +34,17 @@ public class CharacterSheetFragment extends Fragment {
         RecyclerView characterSheetRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         //characterSheetRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), null));
+
+        TextOnlyModule module1 = new TextOnlyModule();
+        module1.setText("Test text 1");
+        TextOnlyModule module2 = new TextOnlyModule();
+        module2.setText("Jurassic World comes out next month");
+
+
+        modules.add(module1);
+        modules.add(module2);
+
+
 
         // use a staggered grid layout manager
         RecyclerView.LayoutManager characterSheetLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL); //columns,orientation
