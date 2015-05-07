@@ -16,9 +16,9 @@ public class NewCharacterFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        getActivity().setTitle(getResources().getString(R.string.new_character));
+        getActivity().getMenuInflater().inflate(R.menu.menu_new_character, null);
 
-        
+        getActivity().setTitle(getResources().getString(R.string.new_character));
 
         return rootView;
     }

@@ -29,7 +29,7 @@ public class CharacterSheetFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         GameCharacter character = MainActivity.gameCharacterList.get(getArguments().getInt("character"));
-        getActivity().setTitle(character.getName());
+        getActivity().setTitle(character.getCharacterName());
 
         RecyclerView characterSheetRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 

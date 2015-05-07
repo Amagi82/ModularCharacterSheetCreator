@@ -1,13 +1,18 @@
 package amagi82.modularcharactersheetcreator;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+
+import com.balysv.materialmenu.MaterialMenuDrawable;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -25,7 +30,9 @@ import amagi82.modularcharactersheetcreator.models.modules.TextOnlyModule;
 
 public class MainActivity extends AppCompatActivity implements OnFabClickedListener, OnItemClickedListener {
 
-    FrameLayout container;
+    private FrameLayout container;
+    private MaterialMenuDrawable materialMenu;
+    private Toolbar toolbar;
     public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
 
     @Override
@@ -61,16 +68,74 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         }
 
         //Add toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final FragmentManager fm = getSupportFragmentManager();
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle(getString(R.string.characters));
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle your drawable state here
+                if (fm.getBackStackEntryCount() > 0) {
+                    fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                }
+                toolbar.setNavigationIcon(null);
+                materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
+            }
+        });
+        materialMenu = new MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN);
+        materialMenu.setNeverDrawTouch(true);
 
         //Set MainFragment
         FrameLayout fragmentContainer = (FrameLayout) findViewById(R.id.container);
         container = new FrameLayout(this);
         container.setId(R.id.container_id);
-        getSupportFragmentManager().beginTransaction().replace(container.getId(), new MainFragment()).commit();
+        fm.beginTransaction().replace(container.getId(), new MainFragment()).commit();
         fragmentContainer.addView(container);
+
+        fm.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                getMenuInflater().inflate(R.menu.menu_main, null);
+                if (fm.getBackStackEntryCount() == 0) {
+                    toolbar.setNavigationIcon(null);
+                    materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
+                }
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     //Load characters from save file
@@ -98,28 +163,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                 e.printStackTrace();
             }
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -156,6 +199,8 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 //        CharacterFragment fragment = new CharacterFragment();
 //        FragmentManager fragmentManager = getFragmentManager();
 //        fragmentManager.beginTransaction().replace(MainActivity.container.getId(), fragment).addToBackStack(null).commit();
+        toolbar.setNavigationIcon(materialMenu);
+        materialMenu.animateIconState(MaterialMenuDrawable.IconState.X, false);
     }
 
     @Override
@@ -175,5 +220,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         bundle.putInt("character", position);
         fragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
+        toolbar.setNavigationIcon(materialMenu);
+        materialMenu.animateIconState(MaterialMenuDrawable.IconState.ARROW, false);
     }
 }

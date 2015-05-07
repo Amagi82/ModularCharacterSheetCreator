@@ -38,7 +38,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
         if (gameCharacters.get(position).getImageCharacterIcon() == null) {
             holder.imageCharacterIcon.setImageResource(R.drawable.ic_face_grey600_24dp);
         } else holder.imageCharacterIcon.setImageBitmap(gameCharacters.get(position).getImageCharacterIcon());
-        holder.tvName.setText(gameCharacters.get(position).getName());
+        holder.tvName.setText(gameCharacters.get(position).getCharacterName());
         holder.tvCharacterClass.setText(gameCharacters.get(position).getCharacterClass());
         holder.tvGameSystem.setText(gameCharacters.get(position).getGameSystem());
         holder.container.setOnClickListener(new View.OnClickListener() {
