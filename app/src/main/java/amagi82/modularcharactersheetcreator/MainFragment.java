@@ -12,12 +12,9 @@ import android.view.ViewGroup;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ScrollDirectionListener;
 
-import java.util.ArrayList;
-
 import amagi82.modularcharactersheetcreator.adapters.MainRecyclerViewAdapter;
 import amagi82.modularcharactersheetcreator.adapters.extras.DividerItemDecoration;
 import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
-import amagi82.modularcharactersheetcreator.models.GameCharacter;
 
 
 public class MainFragment extends Fragment {
@@ -33,13 +30,6 @@ public class MainFragment extends Fragment {
 
         getActivity().setTitle(getResources().getString(R.string.characters));
 
-        ArrayList<GameCharacter> gameCharacters = new ArrayList<>();
-        gameCharacters.add(new GameCharacter("Thomas Anstis", "Vampire", "Gangrel"));
-        gameCharacters.add(new GameCharacter("Tom Lytton", "Vampire", "Brujah"));
-        gameCharacters.add(new GameCharacter("Georgia Johnson", "Vampire", "Tremere"));
-        gameCharacters.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "Ventrue"));
-        MainActivity.gameCharacterList = gameCharacters;
-
         RecyclerView mainRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         mainRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), null));
@@ -53,7 +43,7 @@ public class MainFragment extends Fragment {
         mainRecyclerView.setLayoutManager(mainLayoutManager);
 
         // specify an adapter (see also next example)
-        RecyclerView.Adapter mainRecyclerViewAdapter = new MainRecyclerViewAdapter(gameCharacters, getActivity());
+        RecyclerView.Adapter mainRecyclerViewAdapter = new MainRecyclerViewAdapter(MainActivity.gameCharacterList, getActivity());
         mainRecyclerView.setAdapter(mainRecyclerViewAdapter);
 
         //Set up the Floating Action Button

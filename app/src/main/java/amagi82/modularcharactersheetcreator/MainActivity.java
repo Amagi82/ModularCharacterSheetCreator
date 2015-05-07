@@ -1,18 +1,26 @@
 package amagi82.modularcharactersheetcreator;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
+import amagi82.modularcharactersheetcreator.models.modules.TextOnlyModule;
 
 
 public class MainActivity extends AppCompatActivity implements OnFabClickedListener, OnItemClickedListener {
@@ -25,6 +33,33 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.i(null, "onCreate called");
+        Log.i("gameCharacterList = ", gameCharacterList.toString());
+
+        loadGameCharacters();
+
+        Log.i("gameCharacterList = ", gameCharacterList.toString());
+
+        if(MainActivity.gameCharacterList.size() == 0) {
+            Log.i(null,"Data created");
+            ArrayList<GameCharacter> gameCharacters = new ArrayList<>();
+            gameCharacters.add(new GameCharacter("Thomas Anstis", "Vampire", "Gangrel"));
+            gameCharacters.add(new GameCharacter("Tom Lytton", "Vampire", "Brujah"));
+            gameCharacters.add(new GameCharacter("Georgia Johnson", "Vampire", "Tremere"));
+            gameCharacters.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "Ventrue"));
+            MainActivity.gameCharacterList = gameCharacters;
+
+            TextOnlyModule module1 = new TextOnlyModule();
+            module1.setText("Test text 1");
+            TextOnlyModule module2 = new TextOnlyModule();
+            module2.setText("Jurassic World comes out next month");
+
+            for(GameCharacter character : gameCharacterList){
+                character.getModuleList().add(module1);
+                character.getModuleList().add(module2);
+            }
+        }
+
         //Add toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -36,6 +71,33 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         container.setId(R.id.container_id);
         getSupportFragmentManager().beginTransaction().replace(container.getId(), new MainFragment()).commit();
         fragmentContainer.addView(container);
+    }
+
+    //Load characters from save file
+    @SuppressWarnings("unchecked")
+    private void loadGameCharacters() {
+        FileInputStream fis = null;
+        ObjectInputStream oi = null;
+        try {
+            fis = openFileInput("Characters");
+            oi = new ObjectInputStream(fis);
+            gameCharacterList = (ArrayList<GameCharacter>) oi.readObject();
+        } catch (IOException e) {
+            Log.e("InternalStorage", e.getMessage());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (fis != null) fis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (oi != null) oi.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -64,16 +126,29 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     protected void onStop() {
         super.onStop();
 
-
-//        FileOutputStream fos;
-//        try {
-//            fos = openFileOutput("Characters", Context.MODE_PRIVATE);
-//            fos.write(gameCharacterList.);
-//            fos.close();
-//        } catch (java.io.IOException e) {
-//            e.printStackTrace();
-//        }
-
+        //Save characters to internal memory
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+        try {
+            fos = openFileOutput("Characters", Context.MODE_PRIVATE);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(gameCharacterList);
+            oos.flush();
+            Log.i(null, "Characters saved");
+        } catch (IOException e) {
+            Log.e("InternalStorage", e.getMessage());
+        } finally {
+            try{
+                if(fos != null) fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try{
+                if(oos != null) oos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -89,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     }
 
     @Override
-    public void onModuleClicked(ArrayList<? extends Module> module, int position) {
+    public void onModuleClicked(ArrayList<Module> module, int position) {
 
     }
 

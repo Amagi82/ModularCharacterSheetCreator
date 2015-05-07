@@ -1,10 +1,12 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
 
-public abstract class Module {
+import java.io.Serializable;
+
+public abstract class Module implements Serializable{
 
     public enum ViewType {TEXTONLY, TEXTTEXT}
-    ViewType viewType;
+    private ViewType viewType;
     private int desiredWidth;
     private int desiredHeight;
 

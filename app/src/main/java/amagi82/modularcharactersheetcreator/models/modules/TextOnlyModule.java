@@ -1,7 +1,9 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
 
-public class TextOnlyModule extends Module{
+import java.io.Serializable;
+
+public class TextOnlyModule extends Module implements Serializable{
 
     String text;
 

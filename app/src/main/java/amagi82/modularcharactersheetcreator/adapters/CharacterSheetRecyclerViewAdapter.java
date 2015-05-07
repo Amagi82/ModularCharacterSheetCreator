@@ -17,10 +17,10 @@ import amagi82.modularcharactersheetcreator.models.modules.TextOnlyModule;
 
 public class CharacterSheetRecyclerViewAdapter extends RecyclerView.Adapter<CharacterSheetRecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<? extends Module> modules;
+    private ArrayList<Module> modules;
     private OnItemClickedListener listener;
 
-    public CharacterSheetRecyclerViewAdapter(ArrayList<? extends Module> modules, Activity activity) {
+    public CharacterSheetRecyclerViewAdapter(ArrayList<Module> modules, Activity activity) {
         listener = (OnItemClickedListener) activity;
         this.modules = modules;
     }
@@ -28,6 +28,8 @@ public class CharacterSheetRecyclerViewAdapter extends RecyclerView.Adapter<Char
     // Create new views (invoked by the layout manager)
     @Override
     public CharacterSheetRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        //Log.i("viewtype = ", viewType + "");
+
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_text_only, parent, false);
         return new ViewHolder(v);
     }
@@ -35,8 +37,15 @@ public class CharacterSheetRecyclerViewAdapter extends RecyclerView.Adapter<Char
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        TextOnlyModule module = (TextOnlyModule) modules.get(position);
-        holder.tvText.setText(module.getText());
+
+        switch(modules.get(position).getViewType()){
+            case TEXTONLY:
+                TextOnlyModule module = (TextOnlyModule) modules.get(position);
+                holder.tvText.setText(module.getText());
+                break;
+
+        }
+
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -3,11 +3,12 @@ package amagi82.modularcharactersheetcreator.models;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 
-public class GameCharacter {
+public class GameCharacter implements Serializable{
 
     private Bitmap imageCharacterIcon;
     private String name = "";
