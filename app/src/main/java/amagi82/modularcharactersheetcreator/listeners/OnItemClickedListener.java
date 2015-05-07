@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 
-public interface OnModuleClickedListener {
+public interface OnItemClickedListener {
+    void onCharacterClicked(int position);
     void onModuleClicked(ArrayList<? extends Module> module, int position);
 }

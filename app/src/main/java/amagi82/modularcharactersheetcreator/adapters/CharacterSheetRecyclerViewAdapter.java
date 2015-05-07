@@ -11,17 +11,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.listeners.OnModuleClickedListener;
+import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.models.modules.TextOnlyModule;
 
 public class CharacterSheetRecyclerViewAdapter extends RecyclerView.Adapter<CharacterSheetRecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<? extends Module> modules;
-    private OnModuleClickedListener listener;
+    private OnItemClickedListener listener;
 
     public CharacterSheetRecyclerViewAdapter(ArrayList<? extends Module> modules, Activity activity) {
-        listener = (OnModuleClickedListener) activity;
+        listener = (OnItemClickedListener) activity;
         this.modules = modules;
     }
 

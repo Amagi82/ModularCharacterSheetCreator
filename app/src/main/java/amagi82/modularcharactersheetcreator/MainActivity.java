@@ -9,15 +9,13 @@ import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 
-import amagi82.modularcharactersheetcreator.listeners.OnCharacterAddedListener;
-import amagi82.modularcharactersheetcreator.listeners.OnCharacterClickedListener;
-import amagi82.modularcharactersheetcreator.listeners.OnModuleAddedListener;
-import amagi82.modularcharactersheetcreator.listeners.OnModuleClickedListener;
+import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
+import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 
 
-public class MainActivity extends AppCompatActivity implements OnCharacterAddedListener, OnCharacterClickedListener, OnModuleAddedListener, OnModuleClickedListener {
+public class MainActivity extends AppCompatActivity implements OnFabClickedListener, OnItemClickedListener {
 
     FrameLayout container;
     public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
@@ -38,9 +36,7 @@ public class MainActivity extends AppCompatActivity implements OnCharacterAddedL
         container.setId(R.id.container_id);
         getSupportFragmentManager().beginTransaction().replace(container.getId(), new MainFragment()).commit();
         fragmentContainer.addView(container);
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,6 +58,22 @@ public class MainActivity extends AppCompatActivity implements OnCharacterAddedL
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+
+//        FileOutputStream fos;
+//        try {
+//            fos = openFileOutput("Characters", Context.MODE_PRIVATE);
+//            fos.write(gameCharacterList.);
+//            fos.close();
+//        } catch (java.io.IOException e) {
+//            e.printStackTrace();
+//        }
+
     }
 
     @Override

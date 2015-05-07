@@ -16,14 +16,14 @@ import com.melnykov.fab.ScrollDirectionListener;
 import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.adapters.CharacterSheetRecyclerViewAdapter;
-import amagi82.modularcharactersheetcreator.listeners.OnModuleAddedListener;
+import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.models.modules.TextOnlyModule;
 
 public class CharacterSheetFragment extends Fragment {
 
-    OnModuleAddedListener listener;
+    private OnFabClickedListener listener;
 
     public CharacterSheetFragment() {
     }
@@ -33,6 +33,7 @@ public class CharacterSheetFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         GameCharacter character = MainActivity.gameCharacterList.get(getArguments().getInt("character"));
+        getActivity().setTitle(character.getName());
         ArrayList<Module> modules = character.getModuleList();
 
         RecyclerView characterSheetRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
@@ -81,9 +82,9 @@ public class CharacterSheetFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            listener = (OnModuleAddedListener) activity;
+            listener = (OnFabClickedListener) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnModuleAddedListener");
+            throw new ClassCastException(activity.toString() + " must implement OnFabClickedListener");
         }
     }
 }

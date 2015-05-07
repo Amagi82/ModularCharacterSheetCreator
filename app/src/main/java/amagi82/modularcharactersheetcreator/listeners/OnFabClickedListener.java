@@ -1,6 +1,7 @@
 package amagi82.modularcharactersheetcreator.listeners;
 
 
-public interface OnModuleAddedListener {
+public interface OnFabClickedListener {
+    void onCharacterAdded();
     void onModuleAdded();
 }

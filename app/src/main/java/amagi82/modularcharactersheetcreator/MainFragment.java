@@ -16,13 +16,13 @@ import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.adapters.MainRecyclerViewAdapter;
 import amagi82.modularcharactersheetcreator.adapters.extras.DividerItemDecoration;
-import amagi82.modularcharactersheetcreator.listeners.OnCharacterAddedListener;
+import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 
 
 public class MainFragment extends Fragment {
 
-    OnCharacterAddedListener listener;
+    private OnFabClickedListener listener;
 
     public MainFragment() {
     }
@@ -31,11 +31,14 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
+        getActivity().setTitle(getResources().getString(R.string.characters));
+
         ArrayList<GameCharacter> gameCharacters = new ArrayList<>();
         gameCharacters.add(new GameCharacter("Thomas Anstis", "Vampire", "Gangrel"));
         gameCharacters.add(new GameCharacter("Tom Lytton", "Vampire", "Brujah"));
         gameCharacters.add(new GameCharacter("Georgia Johnson", "Vampire", "Tremere"));
         gameCharacters.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "Ventrue"));
+        MainActivity.gameCharacterList = gameCharacters;
 
         RecyclerView mainRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
@@ -50,7 +53,7 @@ public class MainFragment extends Fragment {
         mainRecyclerView.setLayoutManager(mainLayoutManager);
 
         // specify an adapter (see also next example)
-        RecyclerView.Adapter mainRecyclerViewAdapter = new MainRecyclerViewAdapter(gameCharacters);
+        RecyclerView.Adapter mainRecyclerViewAdapter = new MainRecyclerViewAdapter(gameCharacters, getActivity());
         mainRecyclerView.setAdapter(mainRecyclerViewAdapter);
 
         //Set up the Floating Action Button
@@ -79,9 +82,9 @@ public class MainFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            listener = (OnCharacterAddedListener) activity;
+            listener = (OnFabClickedListener) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnCharacterAddedListener");
+            throw new ClassCastException(activity.toString() + " must implement OnFabClickedListener");
         }
     }
 }

@@ -11,17 +11,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.listeners.OnCharacterClickedListener;
+import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<GameCharacter> gameCharacters;
-    private OnCharacterClickedListener listener;
+    private OnItemClickedListener listener;
 
     public MainRecyclerViewAdapter(ArrayList<GameCharacter> gameCharacters, Activity activity) {
-        listener = (OnCharacterClickedListener) activity;
+        listener = (OnItemClickedListener) activity;
         this.gameCharacters = gameCharacters;
     }
 

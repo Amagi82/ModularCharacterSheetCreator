@@ -1,7 +1,7 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
 
-public class Module {
+public abstract class Module {
 
     public enum ViewType {TEXTONLY, TEXTTEXT}
     ViewType viewType;
