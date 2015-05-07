@@ -16,13 +16,14 @@ import com.melnykov.fab.ScrollDirectionListener;
 import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.adapters.CharacterSheetRecyclerViewAdapter;
+import amagi82.modularcharactersheetcreator.listeners.OnModuleAddedListener;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.models.modules.TextOnlyModule;
 
 public class CharacterSheetFragment extends Fragment {
 
     OnModuleAddedListener listener;
-    private ArrayList<Module> modules = new ArrayList<>();
 
     public CharacterSheetFragment() {
     }
@@ -30,6 +31,9 @@ public class CharacterSheetFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+        GameCharacter character = MainActivity.gameCharacterList.get(getArguments().getInt("character"));
+        ArrayList<Module> modules = character.getModuleList();
 
         RecyclerView characterSheetRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
@@ -40,18 +44,15 @@ public class CharacterSheetFragment extends Fragment {
         TextOnlyModule module2 = new TextOnlyModule();
         module2.setText("Jurassic World comes out next month");
 
-
         modules.add(module1);
         modules.add(module2);
-
-
 
         // use a staggered grid layout manager
         RecyclerView.LayoutManager characterSheetLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL); //columns,orientation
         characterSheetRecyclerView.setLayoutManager(characterSheetLayoutManager);
 
         // specify an adapter (see also next example)
-        RecyclerView.Adapter characterRecyclerViewAdapter = new CharacterSheetRecyclerViewAdapter(modules);
+        RecyclerView.Adapter characterRecyclerViewAdapter = new CharacterSheetRecyclerViewAdapter(modules, getActivity());
         characterSheetRecyclerView.setAdapter(characterRecyclerViewAdapter);
 
         //Set up the Floating Action Button
@@ -84,9 +85,5 @@ public class CharacterSheetFragment extends Fragment {
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement OnModuleAddedListener");
         }
-    }
-
-    public interface OnModuleAddedListener {
-        void onModuleAdded();
     }
 }

@@ -16,7 +16,8 @@ import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.adapters.MainRecyclerViewAdapter;
 import amagi82.modularcharactersheetcreator.adapters.extras.DividerItemDecoration;
-import amagi82.modularcharactersheetcreator.models.Character;
+import amagi82.modularcharactersheetcreator.listeners.OnCharacterAddedListener;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
 
 
 public class MainFragment extends Fragment {
@@ -30,11 +31,11 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        ArrayList<Character> characters = new ArrayList<>();
-        characters.add(new Character("Thomas Anstis", "Vampire", "Gangrel"));
-        characters.add(new Character("Tom Lytton", "Vampire", "Brujah"));
-        characters.add(new Character("Georgia Johnson", "Vampire", "Tremere"));
-        characters.add(new Character("Augustus von Rabenholtz", "Vampire", "Ventrue"));
+        ArrayList<GameCharacter> gameCharacters = new ArrayList<>();
+        gameCharacters.add(new GameCharacter("Thomas Anstis", "Vampire", "Gangrel"));
+        gameCharacters.add(new GameCharacter("Tom Lytton", "Vampire", "Brujah"));
+        gameCharacters.add(new GameCharacter("Georgia Johnson", "Vampire", "Tremere"));
+        gameCharacters.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "Ventrue"));
 
         RecyclerView mainRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
@@ -49,7 +50,7 @@ public class MainFragment extends Fragment {
         mainRecyclerView.setLayoutManager(mainLayoutManager);
 
         // specify an adapter (see also next example)
-        RecyclerView.Adapter mainRecyclerViewAdapter = new MainRecyclerViewAdapter(characters);
+        RecyclerView.Adapter mainRecyclerViewAdapter = new MainRecyclerViewAdapter(gameCharacters);
         mainRecyclerView.setAdapter(mainRecyclerViewAdapter);
 
         //Set up the Floating Action Button
@@ -82,9 +83,5 @@ public class MainFragment extends Fragment {
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement OnCharacterAddedListener");
         }
-    }
-
-    public interface OnCharacterAddedListener {
-        void onCharacterAdded();
     }
 }

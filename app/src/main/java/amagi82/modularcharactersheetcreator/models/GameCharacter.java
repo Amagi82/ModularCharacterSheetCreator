@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 
-public class Character {
+public class GameCharacter {
 
     private Bitmap imageCharacterIcon;
     private String name = "";
@@ -15,14 +15,14 @@ public class Character {
     private String gameSystem = "";
     private ArrayList<Module> moduleList = new ArrayList<>();
 
-    public Character() {
+    public GameCharacter() {
     }
 
     public String getName() {
         return name;
     }
 
-    public Character(String name, String gameSystem, String characterClass) {
+    public GameCharacter(String name, String gameSystem, String characterClass) {
         this.name = name;
         this.characterClass = characterClass;
         this.gameSystem = gameSystem;

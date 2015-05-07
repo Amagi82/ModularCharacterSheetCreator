@@ -9,14 +9,18 @@ import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 
-import amagi82.modularcharactersheetcreator.adapters.CharacterSheetRecyclerViewAdapter;
+import amagi82.modularcharactersheetcreator.listeners.OnCharacterAddedListener;
+import amagi82.modularcharactersheetcreator.listeners.OnCharacterClickedListener;
+import amagi82.modularcharactersheetcreator.listeners.OnModuleAddedListener;
+import amagi82.modularcharactersheetcreator.listeners.OnModuleClickedListener;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 
 
-public class MainActivity extends AppCompatActivity implements MainFragment.OnCharacterAddedListener, CharacterSheetFragment.OnModuleAddedListener , CharacterSheetRecyclerViewAdapter.OnModuleClickedListener{
+public class MainActivity extends AppCompatActivity implements OnCharacterAddedListener, OnCharacterClickedListener, OnModuleAddedListener, OnModuleClickedListener {
 
     FrameLayout container;
-    public static ArrayList<amagi82.modularcharactersheetcreator.models.Character> characterArray = new ArrayList<>();
+    public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,5 +79,14 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnCh
     @Override
     public void onModuleClicked(ArrayList<? extends Module> module, int position) {
 
+    }
+
+    @Override
+    public void onCharacterClicked(int position) {
+        CharacterSheetFragment fragment = new CharacterSheetFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("character", position);
+        fragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
     }
 }

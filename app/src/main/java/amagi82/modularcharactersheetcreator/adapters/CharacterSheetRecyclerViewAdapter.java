@@ -1,6 +1,7 @@
 package amagi82.modularcharactersheetcreator.adapters;
 
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.listeners.OnModuleClickedListener;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.models.modules.TextOnlyModule;
 
@@ -18,7 +20,8 @@ public class CharacterSheetRecyclerViewAdapter extends RecyclerView.Adapter<Char
     private ArrayList<? extends Module> modules;
     private OnModuleClickedListener listener;
 
-    public CharacterSheetRecyclerViewAdapter(ArrayList<? extends Module> modules) {
+    public CharacterSheetRecyclerViewAdapter(ArrayList<? extends Module> modules, Activity activity) {
+        listener = (OnModuleClickedListener) activity;
         this.modules = modules;
     }
 
@@ -40,17 +43,12 @@ public class CharacterSheetRecyclerViewAdapter extends RecyclerView.Adapter<Char
                 listener.onModuleClicked(modules, position);
             }
         });
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return modules.size();
-    }
-
-    public interface OnModuleClickedListener {
-        void onModuleClicked(ArrayList<? extends Module> module, int position);
     }
 
     // Provide a reference to the views for each data item
@@ -61,9 +59,9 @@ public class CharacterSheetRecyclerViewAdapter extends RecyclerView.Adapter<Char
 
         public ViewHolder(final View itemView) {
             super(itemView);
+
             container = itemView;
             tvText = (TextView) itemView.findViewById(R.id.tvText);
-
         }
     }
 }
