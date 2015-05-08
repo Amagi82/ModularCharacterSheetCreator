@@ -17,7 +17,6 @@
     <string name="templates">Templates</string>
 
     <string-array name="game_systems">
-        <item>Other</item>
         <item>Call of Cthulhu</item>
         <item>D&amp;D</item>
         <item>Dungeon Quest</item>
@@ -38,7 +37,6 @@
     </string-array>
 
     <string-array name="cwod_vampire_clans">
-        <item>Other</item>
         <item>Assamite</item>
         <item>Brujah</item>
         <item>Follower of Set</item>
@@ -56,7 +54,6 @@
     </string-array>
 
     <string-array name="fantasy_classes">
-        <item>Other</item>
         <item>Barbarian</item>
         <item>Bard</item>
         <item>Cleric</item>
