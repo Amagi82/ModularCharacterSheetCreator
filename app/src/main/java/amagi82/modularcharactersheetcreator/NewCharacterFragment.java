@@ -14,7 +14,7 @@ public class NewCharacterFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_new_character, container, false);
 
         getActivity().getMenuInflater().inflate(R.menu.menu_new_character, null);
 

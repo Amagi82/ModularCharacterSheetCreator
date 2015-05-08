@@ -11,13 +11,18 @@
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_face_grey600_24dp"
+        android:layout_marginLeft="@dimen/default_small_margin"
+        android:layout_marginStart="@dimen/default_small_margin"
+        android:src="@drawable/ic_face_grey600_36dp"
         android:contentDescription="@string/character_icon"/>
 
     <EditText
         android:id="@+id/etCharacterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/default_vertical_margin"
+        android:paddingBottom="@dimen/default_vertical_margin"
+        android:textSize="16sp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@id/imageCharacterIcon"
@@ -25,21 +30,50 @@
         android:hint="@string/name"/>
 
     <EditText
-        android:id="@+id/etCharacterClass"
+        android:id="@+id/etGameSystem"
+        android:paddingTop="@dimen/default_vertical_margin"
+        android:paddingBottom="@dimen/default_vertical_margin"
+        android:textSize="16sp"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etCharacterName"
-        android:hint="Character Name"/>
+        android:layout_below="@id/etCharacterName"
+        android:hint="@string/game_system"/>
 
     <EditText
-        android:id="@+id/etGameSystem"
+        android:id="@+id/etCharacterClass"
+        android:paddingTop="@dimen/default_vertical_margin"
+        android:paddingBottom="@dimen/default_vertical_margin"
+        android:textSize="16sp"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etGameSystem"
+        android:hint="@string/character_class"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_color_lens_grey600_24dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingTop="@dimen/default_small_margin"
+        android:paddingBottom="@dimen/default_vertical_margin"
+        android:layout_marginRight="@dimen/default_horizontal_margin"
+        android:layout_marginEnd="@dimen/default_horizontal_margin"
+        android:layout_below="@id/etCharacterClass"
+        android:contentDescription="@string/color"/>
+
+    <EditText
+        android:id="@+id/etColor"
+        android:hint="@string/default_colors"
+        android:textSize="16sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/etCharacterClass"
-        android:hint="Character Name"/>
-
-
-
-
+        android:paddingTop="@dimen/default_vertical_margin"
+        android:paddingBottom="@dimen/default_vertical_margin"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"/>
 
 </RelativeLayout>

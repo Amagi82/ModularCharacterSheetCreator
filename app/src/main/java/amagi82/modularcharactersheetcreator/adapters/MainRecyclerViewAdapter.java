@@ -36,7 +36,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         if (gameCharacters.get(position).getImageCharacterIcon() == null) {
-            holder.imageCharacterIcon.setImageResource(R.drawable.ic_face_grey600_24dp);
+            holder.imageCharacterIcon.setImageResource(R.drawable.ic_face_grey600_36dp);
         } else holder.imageCharacterIcon.setImageBitmap(gameCharacters.get(position).getImageCharacterIcon());
         holder.tvName.setText(gameCharacters.get(position).getCharacterName());
         holder.tvCharacterClass.setText(gameCharacters.get(position).getCharacterClass());

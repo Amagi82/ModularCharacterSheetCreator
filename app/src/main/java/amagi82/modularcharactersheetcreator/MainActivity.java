@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     private FrameLayout container;
     private MaterialMenuDrawable materialMenu;
     private Toolbar toolbar;
+    private FragmentManager fm;
     public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
 
     @Override
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         }
 
         //Add toolbar
-        final FragmentManager fm = getSupportFragmentManager();
+        fm = getSupportFragmentManager();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle(getString(R.string.characters));
@@ -196,9 +197,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     @Override
     public void onCharacterAdded() {
-//        CharacterFragment fragment = new CharacterFragment();
-//        FragmentManager fragmentManager = getFragmentManager();
-//        fragmentManager.beginTransaction().replace(MainActivity.container.getId(), fragment).addToBackStack(null).commit();
+        fm.beginTransaction().replace(container.getId(), new NewCharacterFragment()).addToBackStack(null).commit();
         toolbar.setNavigationIcon(materialMenu);
         materialMenu.animateIconState(MaterialMenuDrawable.IconState.X, false);
     }

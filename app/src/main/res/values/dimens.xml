@@ -2,6 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="default_horizontal_margin">16dp</dimen>
     <dimen name="default_vertical_margin">16dp</dimen>
+    <dimen name="default_small_margin">8dp</dimen>
     <dimen name="default_list_item_height">72dp</dimen>
     <dimen name="text_indent_margin">72dp</dimen>
     <dimen name="actionbar_height">56dp</dimen>
