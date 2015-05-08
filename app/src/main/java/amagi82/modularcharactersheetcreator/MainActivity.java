@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         fm.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
             public void onBackStackChanged() {
-                getMenuInflater().inflate(R.menu.menu_main, null);
+
                 if (fm.getBackStackEntryCount() == 0) {
                     toolbar.setNavigationIcon(null);
                     materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);

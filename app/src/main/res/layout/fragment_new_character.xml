@@ -9,71 +9,78 @@
         android:id="@+id/imageCharacterIcon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginLeft="@dimen/default_small_margin"
         android:layout_marginStart="@dimen/default_small_margin"
-        android:src="@drawable/ic_face_grey600_36dp"
-        android:contentDescription="@string/character_icon"/>
+        android:contentDescription="@string/character_icon"
+        android:src="@drawable/ic_face_grey600_36dp"/>
 
     <EditText
         android:id="@+id/etCharacterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/default_vertical_margin"
-        android:paddingBottom="@dimen/default_vertical_margin"
-        android:textSize="16sp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@id/imageCharacterIcon"
         android:layout_toStartOf="@id/imageCharacterIcon"
-        android:hint="@string/name"/>
+        android:hint="@string/name"
+        android:paddingBottom="@dimen/default_vertical_margin"
+        android:paddingTop="@dimen/default_vertical_margin"
+        android:textSize="16sp"/>
+
+    <ImageView
+        android:id="@+id/icon_game_system"
+        style="@style/icon_new_character_left"
+        android:layout_below="@id/etCharacterName"
+        android:contentDescription="@string/game_systems"
+        android:src="@drawable/ic_list_grey600_24dp"/>
 
     <EditText
         android:id="@+id/etGameSystem"
-        android:paddingTop="@dimen/default_vertical_margin"
-        android:paddingBottom="@dimen/default_vertical_margin"
-        android:textSize="16sp"
-        android:clickable="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/et_new_character"
         android:layout_below="@id/etCharacterName"
         android:hint="@string/game_system"/>
 
+    <ImageView
+        android:id="@+id/icon_class"
+        style="@style/icon_new_character_left"
+        android:layout_below="@id/etGameSystem"
+        android:contentDescription="@string/character_classes"
+        android:src="@drawable/ic_list_grey600_24dp"/>
+
     <EditText
         android:id="@+id/etCharacterClass"
-        android:paddingTop="@dimen/default_vertical_margin"
-        android:paddingBottom="@dimen/default_vertical_margin"
-        android:textSize="16sp"
-        android:clickable="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/et_new_character"
         android:layout_below="@+id/etGameSystem"
         android:hint="@string/character_class"/>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_color_lens_grey600_24dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:paddingTop="@dimen/default_small_margin"
-        android:paddingBottom="@dimen/default_vertical_margin"
-        android:layout_marginRight="@dimen/default_horizontal_margin"
-        android:layout_marginEnd="@dimen/default_horizontal_margin"
+        android:id="@+id/icon_template"
+        style="@style/icon_new_character_left"
         android:layout_below="@id/etCharacterClass"
-        android:contentDescription="@string/color"/>
+        android:contentDescription="@string/templates"
+        android:src="@drawable/ic_extension_grey600_24dp"/>
+
+    <EditText
+        android:id="@+id/etTemplate"
+        style="@style/et_new_character"
+        android:layout_below="@id/etCharacterClass"
+        android:focusable="false"
+        android:hint="@string/template"/>
+
+    <ImageView
+        android:id="@+id/icon_color"
+        style="@style/icon_new_character_left"
+        android:layout_below="@id/etTemplate"
+        android:contentDescription="@string/color"
+        android:src="@drawable/ic_color_lens_grey600_24dp"/>
 
     <EditText
         android:id="@+id/etColor"
-        android:hint="@string/default_colors"
-        android:textSize="16sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etCharacterClass"
-        android:paddingTop="@dimen/default_vertical_margin"
-        android:paddingBottom="@dimen/default_vertical_margin"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"/>
+        style="@style/et_new_character"
+        android:layout_below="@id/etTemplate"
+        android:focusable="false"
+        android:hint="@string/default_colors"/>
 
 </RelativeLayout>

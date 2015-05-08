@@ -11,4 +11,62 @@
     <string name="character_class">Character Class</string>
     <string name="color">Color</string>
     <string name="default_colors">Default colors</string>
+    <string name="character_classes">Character classes</string>
+    <string name="template">Template</string>
+    <string name="game_systems">Game systems</string>
+    <string name="templates">Templates</string>
+
+    <string-array name="game_systems">
+        <item>Other</item>
+        <item>Call of Cthulhu</item>
+        <item>D&amp;D</item>
+        <item>Dungeon Quest</item>
+        <item>Earthdawn</item>
+        <item>Feng Shui</item>
+        <item>GURPS</item>
+        <item>HeroQuest</item>
+        <item>cWoD Vampire</item>
+        <item>cWoD Mage</item>
+        <item>cWoD Werewolf</item>
+        <item>cWoD Wraith</item>
+        <item>cWoD Changeling</item>
+        <item>nWoD Vampire</item>
+        <item>nWoD Werewolf</item>
+        <item>nWoD Mage</item>
+        <item>Pathfinder</item>
+        <item>Shadowrun</item>
+    </string-array>
+
+    <string-array name="cwod_vampire_clans">
+        <item>Other</item>
+        <item>Assamite</item>
+        <item>Brujah</item>
+        <item>Follower of Set</item>
+        <item>Gangrel</item>
+        <item>Giovanni</item>
+        <item>Lasombra</item>
+        <item>Malkavian</item>
+        <item>Nosferatu</item>
+        <item>Ravnos</item>
+        <item>Toreador</item>
+        <item>Tremere</item>
+        <item>Tzimisce</item>
+        <item>Ventrue</item>
+        <item>Caitiff</item>
+    </string-array>
+
+    <string-array name="fantasy_classes">
+        <item>Other</item>
+        <item>Barbarian</item>
+        <item>Bard</item>
+        <item>Cleric</item>
+        <item>Druid</item>
+        <item>Fighter</item>
+        <item>Monk</item>
+        <item>Paladin</item>
+        <item>Ranger</item>
+        <item>Rogue</item>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
+    </string-array>
 </resources>
