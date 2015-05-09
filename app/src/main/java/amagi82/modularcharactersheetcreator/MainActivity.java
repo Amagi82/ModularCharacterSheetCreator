@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     private NewCharacterFragment newCharacterFragment;
     private ArrayList<Integer> gameCharactersSelected = new ArrayList<>();
     public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
-    private boolean isEditCharactersMode;
     private Menu menu;
 
     @Override
@@ -87,9 +86,9 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                 // Handle your drawable state here
                 if (fm.getBackStackEntryCount() > 0) {
                     fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    gameCharactersSelected.clear();
-                    editCharactersMode(false);
                 }
+                gameCharactersSelected.clear();
+                editCharactersMode(false);
                 toolbar.setNavigationIcon(null);
                 materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
             }
@@ -216,7 +215,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                 R.menu.menu_main_longclick_multiple, menu);
         toolbar.setBackgroundColor(getResources().getColor(on? R.color.grey_500 : R.color.primary));
         if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(on? R.color.grey_700 : R.color.primary_dark));
-        if(!on) isEditCharactersMode = false;
     }
 
     @Override
@@ -268,6 +266,8 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     @Override
     public void onCharacterClicked(int position) {
+        gameCharactersSelected.clear();
+        editCharactersMode(false);
         CharacterSheetFragment fragment = new CharacterSheetFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("character", position);
@@ -280,7 +280,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     @Override
     public void onCharacterLongClicked(int position) {
         gameCharactersSelected.add(position);
-        if(!isEditCharactersMode) editCharactersMode(true);
-        isEditCharactersMode = true;
+        editCharactersMode(true);
     }
 }
