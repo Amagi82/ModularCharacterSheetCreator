@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:padding="@dimen/default_horizontal_margin">
 
     <ImageView
@@ -17,7 +18,7 @@
         android:src="@drawable/ic_face_grey600_36dp"/>
 
     <EditText
-        android:id="@+id/etCharacterName"
+        android:id="@+id/etName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -32,34 +33,47 @@
     <ImageView
         android:id="@+id/iconGameSystem"
         style="@style/icon_new_character_left"
-        android:layout_below="@id/etCharacterName"
+        android:layout_below="@id/etName"
         android:contentDescription="@string/game_systems"
         android:src="@drawable/ic_list_grey600_24dp"/>
 
     <EditText
         android:id="@+id/etGameSystem"
         style="@style/et_new_character"
-        android:layout_below="@id/etCharacterName"
+        android:layout_below="@id/etName"
         android:hint="@string/game_system"/>
+
+    <ImageView
+        android:id="@+id/iconRace"
+        style="@style/icon_new_character_left"
+        android:layout_below="@id/etGameSystem"
+        android:contentDescription="@string/character_race"
+        android:src="@drawable/ic_list_grey600_24dp"/>
+
+    <EditText
+        android:id="@+id/etRace"
+        style="@style/et_new_character"
+        android:layout_below="@+id/etGameSystem"
+        android:hint="@string/character_race"/>
 
     <ImageView
         android:id="@+id/iconClass"
         style="@style/icon_new_character_left"
-        android:layout_below="@id/etGameSystem"
+        android:layout_below="@id/etRace"
         android:contentDescription="@string/character_classes"
         android:visibility="invisible"
         android:src="@drawable/ic_list_grey600_24dp"/>
 
     <EditText
-        android:id="@+id/etCharacterClass"
+        android:id="@+id/etClass"
         style="@style/et_new_character"
-        android:layout_below="@+id/etGameSystem"
+        android:layout_below="@+id/etRace"
         android:hint="@string/character_class"/>
 
     <ImageView
         android:id="@+id/iconTemplate"
         style="@style/icon_new_character_left"
-        android:layout_below="@id/etCharacterClass"
+        android:layout_below="@id/etClass"
         android:visibility="invisible"
         android:contentDescription="@string/templates"
         android:src="@drawable/ic_extension_grey600_24dp"/>
@@ -67,7 +81,7 @@
     <EditText
         android:id="@+id/etTemplate"
         style="@style/et_new_character"
-        android:layout_below="@id/etCharacterClass"
+        android:layout_below="@id/etClass"
         android:focusable="false"
         android:hint="@string/template"/>
 
