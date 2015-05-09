@@ -15,28 +15,48 @@
     <string name="template">Template</string>
     <string name="game_systems">Game systems</string>
     <string name="templates">Templates</string>
+    <string name="other">Other</string>
+    <string name="dnd">D&amp;D</string>
+    <string name="world_of_darkness">World of Darkness</string>
+    <string name="edition">Edition</string>
 
     <string-array name="game_systems">
+        <item>Other</item>
         <item>Call of Cthulhu</item>
         <item>D&amp;D</item>
-        <item>Dungeon Quest</item>
+        <item>Dungeon World</item>
         <item>Earthdawn</item>
         <item>Feng Shui</item>
         <item>GURPS</item>
-        <item>HeroQuest</item>
-        <item>cWoD Vampire</item>
-        <item>cWoD Mage</item>
-        <item>cWoD Werewolf</item>
-        <item>cWoD Wraith</item>
-        <item>cWoD Changeling</item>
-        <item>nWoD Vampire</item>
-        <item>nWoD Werewolf</item>
-        <item>nWoD Mage</item>
         <item>Pathfinder</item>
         <item>Shadowrun</item>
+        <item>World of Darkness</item>
     </string-array>
 
-    <string-array name="cwod_vampire_clans">
+    <string-array name="game_systems_dnd">
+        <item>1st</item>
+        <item>2nd</item>
+        <item>AD&amp;D 2nd</item>
+        <item>3rd</item>
+        <item>3.5</item>
+        <item>4th</item>
+        <item>5th</item>
+    </string-array>
+
+    <string-array name="game_systems_wod">
+        <item>Other</item>
+        <item>Vampire: The Masquerade</item>
+        <item>Werewolf: The Apocalypse</item>
+        <item>Mage: The Ascension</item>
+        <item>Wraith: The Oblivion</item>
+        <item>Changeling: The Dreaming</item>
+        <item>Vampire: The Requiem</item>
+        <item>Werewolf: The Forsaken</item>
+        <item>Mage: The Awakening</item>
+    </string-array>
+
+    <string-array name="classes_cwod_vampire">
+        <item>Other</item>
         <item>Assamite</item>
         <item>Brujah</item>
         <item>Follower of Set</item>
@@ -53,7 +73,8 @@
         <item>Caitiff</item>
     </string-array>
 
-    <string-array name="fantasy_classes">
+    <string-array name="classes_fantasy">
+        <item>Other</item>
         <item>Barbarian</item>
         <item>Bard</item>
         <item>Cleric</item>

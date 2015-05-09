@@ -47,6 +47,7 @@
         style="@style/icon_new_character_left"
         android:layout_below="@id/etGameSystem"
         android:contentDescription="@string/character_classes"
+        android:visibility="invisible"
         android:src="@drawable/ic_list_grey600_24dp"/>
 
     <EditText
@@ -59,6 +60,7 @@
         android:id="@+id/iconTemplate"
         style="@style/icon_new_character_left"
         android:layout_below="@id/etCharacterClass"
+        android:visibility="invisible"
         android:contentDescription="@string/templates"
         android:src="@drawable/ic_extension_grey600_24dp"/>
 
