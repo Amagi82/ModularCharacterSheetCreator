@@ -47,6 +47,7 @@
         android:id="@+id/iconRace"
         style="@style/icon_new_character_left"
         android:layout_below="@id/etGameSystem"
+        android:visibility="gone"
         android:contentDescription="@string/character_race"
         android:src="@drawable/ic_list_grey600_24dp"/>
 

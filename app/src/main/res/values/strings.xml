@@ -74,7 +74,7 @@
         <item>Caitiff</item>
     </string-array>
 
-    <string-array name="classes_fantasy">
+    <string-array name="classes_dnd">
         <item>Other</item>
         <item>Barbarian</item>
         <item>Bard</item>
@@ -89,6 +89,20 @@
         <item>Wizard</item>
     </string-array>
 
+    <string-array name="races_dnd">
+        <item>Other</item>
+        <item>Dragonborn</item>
+        <item>Dwarf</item>
+        <item>Eladrin</item>
+        <item>Elf</item>
+        <item>Gnome</item>
+        <item>Half-elf</item>
+        <item>Half-orc</item>
+        <item>Halfling</item>
+        <item>Human</item>
+        <item>Tiefling</item>
+    </string-array>
+
     <string-array name="classes_dungeon_world">
         <item>Other</item>
         <item>Bard</item>
@@ -99,6 +113,39 @@
         <item>Ranger</item>
         <item>Thief</item>
         <item>Wizard</item>
+    </string-array>
+
+    <string-array name="races_dungeon_world">
+        <item>Dwarf</item>
+        <item>Elf</item>
+        <item>Halfling</item>
+        <item>Human</item>
+    </string-array>
+
+    <string-array name="classes_pathfinder">
+        <item>Other</item>
+        <item>Barbarian</item>
+        <item>Bard</item>
+        <item>Cleric</item>
+        <item>Druid</item>
+        <item>Fighter</item>
+        <item>Monk</item>
+        <item>Paladin</item>
+        <item>Ranger</item>
+        <item>Rogue</item>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
+    </string-array>
+
+    <string-array name="races_pathfinder">
+        <item>Other</item>
+        <item>Dwarf</item>
+        <item>Elf</item>
+        <item>Gnome</item>
+        <item>Half-elf</item>
+        <item>Half-orc</item>
+        <item>Halfling</item>
+        <item>Human</item>
     </string-array>
 
     <string-array name="classes_earthdawn">
@@ -128,7 +175,7 @@
         <item>Obsidiman</item>
         <item>Ork</item>
         <item>Troll</item>
-        <item>T'skrang</item>
+        <item>T\'skrang</item>
         <item>Windling</item>
     </string-array>
 
