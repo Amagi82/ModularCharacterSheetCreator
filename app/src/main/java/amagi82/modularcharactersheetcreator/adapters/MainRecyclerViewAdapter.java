@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
+import amagi82.modularcharactersheetcreator.listeners.OnItemLongClickedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -19,9 +20,11 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
 
     private ArrayList<GameCharacter> gameCharacters;
     private OnItemClickedListener listener;
+    private OnItemLongClickedListener longClickListener;
 
     public MainRecyclerViewAdapter(ArrayList<GameCharacter> gameCharacters, Activity activity) {
         listener = (OnItemClickedListener) activity;
+        longClickListener = (OnItemLongClickedListener) activity;
         this.gameCharacters = gameCharacters;
     }
 
@@ -34,7 +37,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         if (gameCharacters.get(position).getImageCharacterIcon() == null) {
             holder.imageCharacterIcon.setImageResource(R.drawable.ic_face_grey600_36dp);
         } else holder.imageCharacterIcon.setImageBitmap(gameCharacters.get(position).getImageCharacterIcon());
@@ -45,6 +48,14 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
             @Override
             public void onClick(View v) {
                 listener.onCharacterClicked(position);
+            }
+        });
+        holder.container.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                holder.imageCharacterIcon.setImageResource(R.drawable.ic_check_circle_grey600_36dp);
+                longClickListener.onCharacterLongClicked(position);
+                return true;
             }
         });
     }

@@ -2,6 +2,7 @@ package amagi82.modularcharactersheetcreator;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -24,19 +25,23 @@ import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
+import amagi82.modularcharactersheetcreator.listeners.OnItemLongClickedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.models.modules.TextOnlyModule;
 
 
-public class MainActivity extends AppCompatActivity implements OnFabClickedListener, OnItemClickedListener {
+public class MainActivity extends AppCompatActivity implements OnFabClickedListener, OnItemClickedListener , OnItemLongClickedListener{
 
     private FrameLayout container;
     private MaterialMenuDrawable materialMenu;
     private Toolbar toolbar;
     private FragmentManager fm;
     private NewCharacterFragment newCharacterFragment;
+    private ArrayList<Integer> gameCharactersSelected = new ArrayList<>();
     public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
+    private boolean isEditCharactersMode;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                 // Handle your drawable state here
                 if (fm.getBackStackEntryCount() > 0) {
                     fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    gameCharactersSelected.clear();
+                    editCharactersMode(false);
                 }
                 toolbar.setNavigationIcon(null);
                 materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
@@ -113,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        this.menu = menu;
         return true;
     }
 
@@ -121,11 +129,29 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch(item.getItemId()){
+            case R.id.action_settings:
+                return true; //is return necessary here??
+            case R.id.action_delete:
+                for(int position : gameCharactersSelected){
+                    gameCharacterList.remove(position);
+                }
+                gameCharactersSelected.clear();
+                editCharactersMode(false);
+                return true;
+            case R.id.action_edit:
+                newCharacterFragment = new NewCharacterFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("character", gameCharactersSelected.get(0));
+                bundle.putBoolean("edit mode", true);
+                newCharacterFragment.setArguments(bundle);
+                fm.beginTransaction().replace(container.getId(), newCharacterFragment).addToBackStack(null).commit();
+                toolbar.setNavigationIcon(materialMenu);
+                materialMenu.animateIconState(MaterialMenuDrawable.IconState.X, false);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                gameCharactersSelected.clear();
+                editCharactersMode(false);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -133,19 +159,23 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     @Override
     public void onBackPressed() {
-        if(newCharacterFragment != null && newCharacterFragment.isVisible()){
+        if(newCharacterFragment != null && newCharacterFragment.isVisible()) {
             new MaterialDialog.Builder(this).title("Cancel").content("Are you sure you want to discard this character?")
                     .positiveText("KEEP EDITING").negativeText("DISCARD").callback(new MaterialDialog.ButtonCallback() {
-                        @Override
-                        public void onPositive(MaterialDialog dialog) {
-                        }
+                @Override
+                public void onPositive(MaterialDialog dialog) {
+                }
 
-                        @Override
-                        public void onNegative(MaterialDialog dialog) {
-                            fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                        }
+                @Override
+                public void onNegative(MaterialDialog dialog) {
+                    fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                }
             }).show();
-        }else{
+        }else if(gameCharactersSelected.size() > 0){
+            Log.i(null, "back press intercepted");
+            gameCharactersSelected.clear();
+            editCharactersMode(false);
+        }else {
             super.onBackPressed();
         }
     }
@@ -175,6 +205,18 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                 e.printStackTrace();
             }
         }
+    }
+
+    private void editCharactersMode(boolean on){
+        Log.i(null, "gameCharactersSelected size = "+ gameCharactersSelected.size());
+        toolbar.setNavigationIcon(on ? materialMenu : null);
+        materialMenu.animateIconState(on ? MaterialMenuDrawable.IconState.ARROW : MaterialMenuDrawable.IconState.BURGER, false);
+        menu.clear();
+        getMenuInflater().inflate(!on ? R.menu.menu_main : gameCharactersSelected.size() == 1 ? R.menu.menu_main_longclick_single :
+                R.menu.menu_main_longclick_multiple, menu);
+        toolbar.setBackgroundColor(getResources().getColor(on? R.color.grey_500 : R.color.primary));
+        if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(on? R.color.grey_700 : R.color.primary_dark));
+        if(!on) isEditCharactersMode = false;
     }
 
     @Override
@@ -230,8 +272,15 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         Bundle bundle = new Bundle();
         bundle.putInt("character", position);
         fragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
+        fm.beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
         toolbar.setNavigationIcon(materialMenu);
         materialMenu.animateIconState(MaterialMenuDrawable.IconState.ARROW, false);
+    }
+
+    @Override
+    public void onCharacterLongClicked(int position) {
+        gameCharactersSelected.add(position);
+        if(!isEditCharactersMode) editCharactersMode(true);
+        isEditCharactersMode = true;
     }
 }

@@ -20,6 +20,9 @@
     <string name="world_of_darkness">World of Darkness</string>
     <string name="edition">Edition</string>
     <string name="character_race">Character race</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="edit_character">Edit character</string>
 
     <string-array name="game_systems">
         <item>Other</item>

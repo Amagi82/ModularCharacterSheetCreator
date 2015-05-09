@@ -27,6 +27,8 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     private EditText etClass;
     private int idRace;
     private int idClass;
+    private int characterPosition;
+    private boolean isEditMode = false;
 
     public NewCharacterFragment() {
     }
@@ -36,7 +38,13 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         View rootView = inflater.inflate(R.layout.fragment_new_character, container, false);
         setHasOptionsMenu(true);
 
-        getActivity().setTitle(getResources().getString(R.string.new_character));
+        //If this is a character being edited, not a new character, change title and load character data
+        Bundle arguments = getArguments();
+        if(arguments != null) {
+            isEditMode = getArguments().getBoolean("edit mode");
+            characterPosition = getArguments().getInt("character");
+        }
+        getActivity().setTitle(getResources().getString(isEditMode? R.string.edit_character : R.string.new_character));
 
         ImageView iconCharacter = (ImageView) rootView.findViewById(R.id.iconCharacter);
         ImageView iconGameSystem = (ImageView) rootView.findViewById(R.id.iconGameSystem);
@@ -50,6 +58,15 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         etClass = (EditText) rootView.findViewById(R.id.etClass);
         EditText etTemplate = (EditText) rootView.findViewById(R.id.etTemplate);
         EditText etColor = (EditText) rootView.findViewById(R.id.etColor);
+
+        if(isEditMode){
+            GameCharacter character = MainActivity.gameCharacterList.get(characterPosition);
+            iconCharacter.setImageBitmap(character.getImageCharacterIcon());
+            etName.setText(character.getCharacterName());
+            etGameSystem.setText(character.getGameSystem());
+            etRace.setText(character.getCharacterRace());
+            etClass.setText(character.getCharacterClass());
+        }
 
         iconCharacter.setOnClickListener(this);
         iconGameSystem.setOnClickListener(this);
@@ -75,7 +92,11 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
             GameCharacter character = new GameCharacter(etName.getText().toString(), etGameSystem.getText().toString(), etClass.getText().toString());
             character.setCharacterRace(etRace.getText().toString());
             //TODO- set up the rest of the character data once implemented
-            MainActivity.gameCharacterList.add(0, character);
+            if(isEditMode){
+                MainActivity.gameCharacterList.set(characterPosition, character);
+            }else{
+                MainActivity.gameCharacterList.add(0, character);
+            }
             getFragmentManager().popBackStack();
         }
         return super.onOptionsItemSelected(item);
