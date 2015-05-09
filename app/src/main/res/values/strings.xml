@@ -7,8 +7,8 @@
     <string name="new_character">New Character</string>
     <string name="name">Name</string>
     <string name="add">ADD</string>
-    <string name="game_system">Game System</string>
-    <string name="character_class">Character Class</string>
+    <string name="game_system">Game system</string>
+    <string name="character_class">Character class</string>
     <string name="color">Color</string>
     <string name="default_colors">Default colors</string>
     <string name="character_classes">Character classes</string>
@@ -37,7 +37,6 @@
     <string-array name="game_systems_dnd">
         <item>1st</item>
         <item>2nd</item>
-        <item>AD&amp;D 2nd</item>
         <item>3rd</item>
         <item>3.5</item>
         <item>4th</item>

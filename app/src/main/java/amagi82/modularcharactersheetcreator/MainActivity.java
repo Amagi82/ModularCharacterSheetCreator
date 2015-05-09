@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.balysv.materialmenu.MaterialMenuDrawable;
 
 import java.io.FileInputStream;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     private MaterialMenuDrawable materialMenu;
     private Toolbar toolbar;
     private FragmentManager fm;
+    private NewCharacterFragment newCharacterFragment;
     public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
 
     @Override
@@ -130,13 +132,22 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     }
 
     @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-    }
+    public void onBackPressed() {
+        if(newCharacterFragment != null && newCharacterFragment.isVisible()){
+            new MaterialDialog.Builder(this).title("Cancel").content("Are you sure you want to discard this character?")
+                    .positiveText("KEEP EDITING").negativeText("DISCARD").callback(new MaterialDialog.ButtonCallback() {
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
+                        }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+                        @Override
+                        public void onNegative(MaterialDialog dialog) {
+                            fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                        }
+            }).show();
+        }else{
+            super.onBackPressed();
+        }
     }
 
     //Load characters from save file
@@ -197,7 +208,8 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     @Override
     public void onCharacterAdded() {
-        fm.beginTransaction().replace(container.getId(), new NewCharacterFragment()).addToBackStack(null).commit();
+        newCharacterFragment = new NewCharacterFragment();
+        fm.beginTransaction().replace(container.getId(), newCharacterFragment).addToBackStack(null).commit();
         toolbar.setNavigationIcon(materialMenu);
         materialMenu.animateIconState(MaterialMenuDrawable.IconState.X, false);
     }

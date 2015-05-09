@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -14,25 +15,16 @@ import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
+
 public class NewCharacterFragment extends Fragment implements View.OnClickListener {
 
-    enum GameSystem {
-        OTHER, CTHULHU, DND, DUNGEONWORLD, EARTHDAWN, FENGSHUI, GURPS, PATHFINDER, SHADOWRUN, CWODVAMPIRE, CWODWEREWOLF, CWODMAGE, CWODWRAITH,
-        CWODCHANGELING, NWODVAMPIRE, NWODWEREWOLF, NWODMAGE
-    }
-    private ImageView iconCharacter;
-    private ImageView iconGameSystem;
     private ImageView iconRace;
     private ImageView iconClass;
-    private ImageView iconTemplate;
-    private ImageView iconColor;
     private EditText etName;
     private EditText etGameSystem;
     private EditText etRace;
     private EditText etClass;
-    private EditText etTemplate;
-    private EditText etColor;
-    private GameSystem gameSystem;
     private int idRace;
     private int idClass;
 
@@ -46,18 +38,18 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
 
         getActivity().setTitle(getResources().getString(R.string.new_character));
 
-        iconCharacter = (ImageView) rootView.findViewById(R.id.iconCharacter);
-        iconGameSystem = (ImageView) rootView.findViewById(R.id.iconGameSystem);
+        ImageView iconCharacter = (ImageView) rootView.findViewById(R.id.iconCharacter);
+        ImageView iconGameSystem = (ImageView) rootView.findViewById(R.id.iconGameSystem);
         iconRace = (ImageView) rootView.findViewById(R.id.iconRace);
         iconClass = (ImageView) rootView.findViewById(R.id.iconClass);
-        iconTemplate = (ImageView) rootView.findViewById(R.id.iconTemplate);
-        iconColor = (ImageView) rootView.findViewById(R.id.iconColor);
+        ImageView iconTemplate = (ImageView) rootView.findViewById(R.id.iconTemplate);
+        ImageView iconColor = (ImageView) rootView.findViewById(R.id.iconColor);
         etName = (EditText) rootView.findViewById(R.id.etName);
         etGameSystem = (EditText) rootView.findViewById(R.id.etGameSystem);
         etRace = (EditText) rootView.findViewById(R.id.etRace);
         etClass = (EditText) rootView.findViewById(R.id.etClass);
-        etTemplate = (EditText) rootView.findViewById(R.id.etTemplate);
-        etColor = (EditText) rootView.findViewById(R.id.etColor);
+        EditText etTemplate = (EditText) rootView.findViewById(R.id.etTemplate);
+        EditText etColor = (EditText) rootView.findViewById(R.id.etColor);
 
         iconCharacter.setOnClickListener(this);
         iconGameSystem.setOnClickListener(this);
@@ -78,6 +70,18 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.action_add){
+            GameCharacter character = new GameCharacter(etName.getText().toString(), etGameSystem.getText().toString(), etClass.getText().toString());
+            character.setCharacterRace(etRace.getText().toString());
+            //TODO- set up the rest of the character data once implemented
+            MainActivity.gameCharacterList.add(0, character);
+            getFragmentManager().popBackStack();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iconCharacter:
@@ -87,7 +91,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                 chooseGameSystem(R.array.game_systems, etGameSystem);
                 break;
             case R.id.iconRace:
-                chooseArchetype(idRace, etClass);
+                chooseArchetype(idRace, etRace);
                 break;
             case R.id.iconClass:
                 chooseArchetype(idClass, etClass);
@@ -112,11 +116,11 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                         editText.setText(editText.getText() + " " + text + " " + getString(R.string.edition));
                     } else {
                         editText.setText(text);
-                        if (text.equals(getString(R.string.dnd))) chooseArchetype(R.array.game_systems_dnd, editText);
-                        if (text.equals(getString(R.string.world_of_darkness))) chooseArchetype(R.array.game_systems_wod, editText);
+                        if (text.equals(getString(R.string.dnd))) chooseGameSystem(R.array.game_systems_dnd, editText);
+                        if (text.equals(getString(R.string.world_of_darkness))) chooseGameSystem(R.array.game_systems_wod, editText);
                     }
                 }
-                changeGameSystem(text.toString().contains(":")? -position : position);
+                gameSystemChanged(text.toString().contains(":") ? -position : position);
             }
         }).show();
     }
@@ -130,169 +134,123 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         }).show();
     }
 
-    private void changeGameSystem(int position){
-        switch (position){
-            case 1:
-                gameSystem = GameSystem.CTHULHU;
-                break;
-            case 2:
-                gameSystem = GameSystem.DND;
-                break;
-            case 3:
-                gameSystem = GameSystem.DUNGEONWORLD;
-                break;
-            case 4:
-                gameSystem = GameSystem.EARTHDAWN;
-                break;
-            case 5:
-                gameSystem = GameSystem.FENGSHUI;
-                break;
-            case 6:
-                gameSystem = GameSystem.GURPS;
-                break;
-            case 7:
-                gameSystem = GameSystem.PATHFINDER;
-                break;
-            case 8:
-                gameSystem = GameSystem.SHADOWRUN;
-                break;
-            case -1:
-                gameSystem = GameSystem.CWODVAMPIRE;
-                break;
-            case -2:
-                gameSystem = GameSystem.CWODWEREWOLF;
-                break;
-            case -3:
-                gameSystem = GameSystem.CWODMAGE;
-                break;
-            case -4:
-                gameSystem = GameSystem.CWODWRAITH;
-                break;
-            case -5:
-                gameSystem = GameSystem.CWODCHANGELING;
-                break;
-            case -6:
-                gameSystem = GameSystem.CWODCHANGELING;
-                break;
-            case -7:
-                gameSystem = GameSystem.CWODCHANGELING;
-                break;
-            case -8:
-                gameSystem = GameSystem.CWODCHANGELING;
-                break;
-            default:
-                gameSystem = GameSystem.OTHER;
-                break;
-        }
-        Log.i("system = ", gameSystem.name());
-        gameSystemChanged();
-    }
-
-    //TODO: roll this and the above method into one?
-    private void gameSystemChanged() {
+    private void gameSystemChanged(int position) {
         etRace.setHint(getString(R.string.character_race));
-        iconClass.setVisibility(View.VISIBLE);
         etClass.setHint(getString(R.string.character_class));
-        switch (gameSystem) {
-            case CTHULHU:
+        switch (position) {
+            case 1:
                 iconRace.setVisibility(View.GONE);
                 etRace.setVisibility(View.GONE);
                 iconClass.setVisibility(View.INVISIBLE);
                 etClass.setHint("Profession");
                 break;
-            case DND:
+            case 2:
                 idRace = R.array.races_dnd;
                 idClass = R.array.classes_dnd;
                 iconRace.setVisibility(View.VISIBLE);
+                iconClass.setVisibility(View.VISIBLE);
                 etRace.setVisibility(View.VISIBLE);
                 break;
-            case DUNGEONWORLD:
+            case 3:
                 idRace = R.array.races_dungeon_world;
                 idClass = R.array.classes_dungeon_world;
                 iconRace.setVisibility(View.VISIBLE);
+                iconClass.setVisibility(View.VISIBLE);
                 etRace.setVisibility(View.VISIBLE);
                 break;
-            case EARTHDAWN:
+            case 4:
                 idRace = R.array.races_earthdawn;
                 idClass = R.array.classes_earthdawn;
                 iconRace.setVisibility(View.VISIBLE);
+                iconClass.setVisibility(View.VISIBLE);
                 etRace.setVisibility(View.VISIBLE);
                 etClass.setHint("Discipline");
                 break;
-            case FENGSHUI:
+            case 5:
                 idClass = R.array.classes_feng_shui;
                 iconRace.setVisibility(View.GONE);
                 etRace.setVisibility(View.VISIBLE);
                 etRace.setHint("Character species, if not human");
+                iconClass.setVisibility(View.VISIBLE);
                 etClass.setHint("Archetype");
                 break;
-            case GURPS:
+            case 6:
                 iconClass.setVisibility(View.INVISIBLE);
                 etRace.setVisibility(View.VISIBLE);
                 etClass.setHint("Character concept");
                 break;
-            case PATHFINDER:
+            case 7:
                 idRace = R.array.races_pathfinder;
                 idClass = R.array.classes_pathfinder;
                 iconRace.setVisibility(View.VISIBLE);
+                iconClass.setVisibility(View.VISIBLE);
                 etRace.setVisibility(View.VISIBLE);
                 break;
-            case SHADOWRUN:
+            case 8:
                 idRace = R.array.races_shadowrun;
                 idClass = R.array.classes_shadowrun;
                 iconRace.setVisibility(View.VISIBLE);
+                iconClass.setVisibility(View.VISIBLE);
                 etRace.setVisibility(View.VISIBLE);
                 etClass.setHint("Archetype");
                 break;
-            case CWODVAMPIRE:
+            case -1:
                 idClass = R.array.classes_cwod_vampire;
                 iconRace.setVisibility(View.GONE);
+                iconClass.setVisibility(View.VISIBLE);
                 etRace.setVisibility(View.GONE);
                 etClass.setHint("Clan");
                 break;
-            case CWODWEREWOLF:
+            case -2:
                 idRace = R.array.races_cwod_werewolf;
                 idClass = R.array.classes_cwod_werewolf;
                 iconRace.setVisibility(View.VISIBLE);
+                iconClass.setVisibility(View.VISIBLE);
                 etRace.setVisibility(View.VISIBLE);
                 etRace.setHint("Breed");
                 etClass.setHint("Tribe");
                 break;
-            case CWODMAGE:
+            case -3:
                 idClass = R.array.classes_cwod_mage;
                 iconRace.setVisibility(View.GONE);
+                iconClass.setVisibility(View.VISIBLE);
                 etRace.setVisibility(View.GONE);
                 etClass.setHint("Tradition");
                 break;
-            case CWODWRAITH:
+            case -4:
                 idClass = R.array.classes_cwod_wraith;
                 iconRace.setVisibility(View.GONE);
+                iconClass.setVisibility(View.VISIBLE);
                 etRace.setVisibility(View.GONE);
                 etClass.setHint("Faction");
                 break;
-            case CWODCHANGELING:
+            case -5:
                 idRace = R.array.classes_cwod_changeling;
                 idClass = R.array.classes_cwod_changeling;
                 iconRace.setVisibility(View.VISIBLE);
+                iconClass.setVisibility(View.VISIBLE);
                 etRace.setVisibility(View.VISIBLE);
                 etRace.setHint("Court");
                 etClass.setHint("Kith");
                 break;
-            case NWODVAMPIRE:
+            case -6:
                 idClass = R.array.classes_nwod_vampire;
                 iconRace.setVisibility(View.GONE);
+                iconClass.setVisibility(View.VISIBLE);
                 etRace.setVisibility(View.GONE);
                 etClass.setHint("Clan");
                 break;
-            case NWODWEREWOLF:
+            case -7:
                 idClass = R.array.classes_nwod_werewolf;
                 iconRace.setVisibility(View.GONE);
+                iconClass.setVisibility(View.VISIBLE);
                 etRace.setVisibility(View.GONE);
                 etClass.setHint("Tribe");
                 break;
-            case NWODMAGE:
+            case -8:
                 idClass = R.array.classes_nwod_mage;
                 iconRace.setVisibility(View.GONE);
+                iconClass.setVisibility(View.VISIBLE);
                 etRace.setVisibility(View.GONE);
                 etClass.setHint("Order");
                 break;

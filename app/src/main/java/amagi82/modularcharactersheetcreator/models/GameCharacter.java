@@ -12,6 +12,7 @@ public class GameCharacter implements Serializable{
 
     private Bitmap imageCharacterIcon;
     private String characterName = "";
+    private String characterRace = "";
     private String characterClass = "";
     private String gameSystem = "";
     private int colorPrimary;
@@ -56,6 +57,14 @@ public class GameCharacter implements Serializable{
 
     public void setCharacterName(String characterName) {
         this.characterName = characterName;
+    }
+
+    public String getCharacterRace() {
+        return characterRace;
+    }
+
+    public void setCharacterRace(String characterRace) {
+        this.characterRace = characterRace;
     }
 
     public String getCharacterClass() {
