@@ -12,6 +12,8 @@
     <color name="grey_500">#9E9E9E</color>
     <color name="grey_700">#616161</color>
 
+    <color name="selection_alpha">#10000000</color>
+
     <color name="outlineDark">#212121</color>
     <color name="outlineMed">#717171</color>
     <color name="fillDark">#414141</color>

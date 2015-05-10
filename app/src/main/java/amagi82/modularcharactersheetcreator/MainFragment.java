@@ -30,7 +30,7 @@ public class MainFragment extends Fragment {
 
         getActivity().setTitle(getResources().getString(R.string.characters));
 
-        RecyclerView mainRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        final RecyclerView mainRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         mainRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), null));
 
@@ -43,7 +43,7 @@ public class MainFragment extends Fragment {
         mainRecyclerView.setLayoutManager(mainLayoutManager);
 
         // specify an adapter (see also next example)
-        RecyclerView.Adapter mainRecyclerViewAdapter = new MainRecyclerViewAdapter(MainActivity.gameCharacterList, getActivity());
+        final RecyclerView.Adapter mainRecyclerViewAdapter = new MainRecyclerViewAdapter(MainActivity.gameCharacterList, getActivity());
         mainRecyclerView.setAdapter(mainRecyclerViewAdapter);
 
         //Set up the Floating Action Button

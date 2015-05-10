@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
@@ -21,6 +22,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     private ArrayList<GameCharacter> gameCharacters;
     private OnItemClickedListener listener;
     private OnItemLongClickedListener longClickListener;
+    private HashSet<Integer> gameCharactersSelected = new HashSet<>();
 
     public MainRecyclerViewAdapter(ArrayList<GameCharacter> gameCharacters, Activity activity) {
         listener = (OnItemClickedListener) activity;
@@ -53,7 +55,15 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
         holder.container.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                holder.imageCharacterIcon.setImageResource(R.drawable.ic_check_circle_grey600_36dp);
+                if(gameCharactersSelected.contains(position)){
+                    gameCharactersSelected.remove(position);
+                    holder.container.setBackgroundResource(0);
+                    notifyItemChanged(position);
+                }else{
+                    holder.imageCharacterIcon.setImageResource(R.drawable.ic_check_circle_grey600_36dp);
+                    holder.container.setBackgroundResource(R.color.selection_alpha);
+                    gameCharactersSelected.add(position);
+                }
                 longClickListener.onCharacterLongClicked(position);
                 return true;
             }
@@ -68,7 +78,6 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
 
     // Provide a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
         View container;
         CircleImageView imageCharacterIcon;
         TextView tvName;

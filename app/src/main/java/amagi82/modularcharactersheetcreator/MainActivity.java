@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     private Toolbar toolbar;
     private FragmentManager fm;
     private NewCharacterFragment newCharacterFragment;
-    private ArrayList<Integer> gameCharactersSelected = new ArrayList<>();
+    private HashSet<Integer> gameCharactersSelected = new HashSet<>();
     public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
     private Menu menu;
 
@@ -106,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         fm.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
             public void onBackStackChanged() {
-
                 if (fm.getBackStackEntryCount() == 0) {
                     toolbar.setNavigationIcon(null);
                     materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
             case R.id.action_edit:
                 newCharacterFragment = new NewCharacterFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt("character", gameCharactersSelected.get(0));
+                bundle.putInt("character", gameCharactersSelected.iterator().next());
                 bundle.putBoolean("edit mode", true);
                 newCharacterFragment.setArguments(bundle);
                 fm.beginTransaction().replace(container.getId(), newCharacterFragment).addToBackStack(null).commit();
@@ -279,7 +279,12 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     @Override
     public void onCharacterLongClicked(int position) {
-        gameCharactersSelected.add(position);
+        if(gameCharactersSelected.contains(position)){
+            gameCharactersSelected.remove(position);
+        }else{
+            gameCharactersSelected.add(position);
+        }
         editCharactersMode(true);
+
     }
 }
