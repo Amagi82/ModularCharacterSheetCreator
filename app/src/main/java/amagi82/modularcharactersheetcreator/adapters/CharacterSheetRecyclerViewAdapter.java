@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
-import amagi82.modularcharactersheetcreator.models.modules.TextOnlyModule;
+import amagi82.modularcharactersheetcreator.models.modules.TextModule;
 
 public class CharacterSheetRecyclerViewAdapter extends RecyclerView.Adapter<CharacterSheetRecyclerViewAdapter.ViewHolder> {
 
@@ -40,7 +40,7 @@ public class CharacterSheetRecyclerViewAdapter extends RecyclerView.Adapter<Char
 
         switch(modules.get(position).getViewType()){
             case TEXTONLY:
-                TextOnlyModule module = (TextOnlyModule) modules.get(position);
+                TextModule module = (TextModule) modules.get(position);
                 holder.tvText.setText(module.getText());
                 break;
 

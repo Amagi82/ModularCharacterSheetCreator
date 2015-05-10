@@ -3,9 +3,13 @@ package amagi82.modularcharactersheetcreator.models.modules;
 
 import java.io.Serializable;
 
+/*
+    Base class for all card modules
+ */
+
 public abstract class Module implements Serializable{
 
-    public enum ViewType {TEXTONLY, TEXTTEXT}
+    public enum ViewType {TEXT, TEXTTITLE, WODSTATBLOCK, WODSTATBLOCKWITHSPECIALTIES, TITLETEXTBLOCK, WODTITLESTAT}
     private ViewType viewType;
     private int desiredWidth;
     private int desiredHeight;

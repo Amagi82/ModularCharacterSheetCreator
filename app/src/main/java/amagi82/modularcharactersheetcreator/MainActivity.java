@@ -29,7 +29,7 @@ import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnItemLongClickedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
-import amagi82.modularcharactersheetcreator.models.modules.TextOnlyModule;
+import amagi82.modularcharactersheetcreator.models.modules.TextModule;
 
 
 public class MainActivity extends AppCompatActivity implements OnFabClickedListener, OnItemClickedListener , OnItemLongClickedListener{
@@ -64,9 +64,9 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
             gameCharacters.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "Ventrue"));
             MainActivity.gameCharacterList = gameCharacters;
 
-            TextOnlyModule module1 = new TextOnlyModule();
+            TextModule module1 = new TextModule();
             module1.setText("Test text 1");
-            TextOnlyModule module2 = new TextOnlyModule();
+            TextModule module2 = new TextModule();
             module2.setText("Jurassic World comes out next month");
 
             for(GameCharacter character : gameCharacterList){

@@ -3,12 +3,16 @@ package amagi82.modularcharactersheetcreator.models.modules;
 
 import java.io.Serializable;
 
-public class TextOnlyModule extends Module implements Serializable{
+/*
+    Module for plain text. Useful for notes
+ */
+
+public class TextModule extends Module implements Serializable{
 
     String text;
 
-    public TextOnlyModule() {
-        super(ViewType.TEXTONLY);
+    public TextModule() {
+        super(ViewType.TEXT);
     }
 
     public String getText() {
