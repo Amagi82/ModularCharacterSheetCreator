@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public abstract class Module implements Serializable{
 
-    public enum ViewType {TEXT, TEXTTITLE, WODSTATBLOCK, WODSTATBLOCKWITHSPECIALTIES, TITLETEXTBLOCK, WODTITLESTAT}
+    public enum ViewType {TEXT, HEADER, TEXTTITLE, WODSTATBLOCK, WODSTATBLOCKWITHSPECIALTIES, TITLETEXTBLOCK, WODTITLESTAT, WODBLOODGRADIENT}
     private ViewType viewType;
     private int desiredWidth;
     private int desiredHeight;
