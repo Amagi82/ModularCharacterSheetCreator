@@ -39,7 +39,7 @@ public class CharacterSheetRecyclerViewAdapter extends RecyclerView.Adapter<Char
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         switch(modules.get(position).getViewType()){
-            case TEXTONLY:
+            case TEXT:
                 TextModule module = (TextModule) modules.get(position);
                 holder.tvText.setText(module.getText());
                 break;
