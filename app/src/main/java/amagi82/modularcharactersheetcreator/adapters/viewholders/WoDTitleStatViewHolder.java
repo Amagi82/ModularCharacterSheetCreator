@@ -1,7 +1,12 @@
 package amagi82.modularcharactersheetcreator.adapters.viewholders;
 
-/**
- * Created by jim on 5/11/15.
- */
-public class WoDTitleStatViewHolder {
+
+import android.view.View;
+
+public class WoDTitleStatViewHolder extends ContainerViewHolder {
+
+
+    public WoDTitleStatViewHolder (final View itemView) {
+        super(itemView);
+    }
 }

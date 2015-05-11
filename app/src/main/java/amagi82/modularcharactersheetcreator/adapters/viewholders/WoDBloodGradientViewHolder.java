@@ -1,7 +1,12 @@
 package amagi82.modularcharactersheetcreator.adapters.viewholders;
 
-/**
- * Created by jim on 5/11/15.
- */
-public class WoDBloodGradientViewHolder {
+
+import android.view.View;
+
+public class WoDBloodGradientViewHolder extends ContainerViewHolder {
+
+
+    public WoDBloodGradientViewHolder(final View itemView) {
+        super(itemView);
+    }
 }

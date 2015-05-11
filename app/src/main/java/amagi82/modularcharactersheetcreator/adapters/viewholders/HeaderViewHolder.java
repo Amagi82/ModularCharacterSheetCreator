@@ -1,7 +1,14 @@
 package amagi82.modularcharactersheetcreator.adapters.viewholders;
 
-/**
- * Created by jim on 5/11/15.
- */
-public class HeaderViewHolder {
+
+import android.view.View;
+import android.widget.TextView;
+
+public class HeaderViewHolder extends ContainerViewHolder {
+
+    TextView tvHeader;
+
+    public HeaderViewHolder(final View itemView) {
+        super(itemView);
+    }
 }
