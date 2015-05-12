@@ -24,16 +24,13 @@
         <EditText
             android:id="@+id/etName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_toLeftOf="@id/iconCharacter"
             android:layout_toStartOf="@id/iconCharacter"
+            android:layout_marginLeft="0dp"
+            android:layout_marginStart="0dp"
             android:hint="@string/name"
             android:inputType="textNoSuggestions"
-            android:paddingBottom="@dimen/default_vertical_margin"
-            android:paddingTop="@dimen/default_vertical_margin"
-            android:textSize="16sp"/>
+            style="@style/et_new_character"/>
 
         <ImageView
             android:id="@+id/iconGameSystem"

@@ -23,6 +23,7 @@
     <style name="et_new_character" parent="et_new_character.Base"/>
 
     <style name="et_new_character.Base">
+        <item name="android:layout_alignParentLeft">true</item>
         <item name="android:layout_marginLeft">40dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
