@@ -3,6 +3,7 @@ package amagi82.modularcharactersheetcreator;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        Log.i(null,position+" bound to viewholder");
         GameCharacter gameCharacter = gameCharacters.get(position);
         if (gameCharacter.getImageCharacterIcon() == null) {
             holder.imageCharacterIcon.setImageResource(R.drawable.ic_face_grey600_36dp);
@@ -74,9 +76,11 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     public void toggleSelection(int position) {
         if (selectedItems.get(position, false)) {
             selectedItems.delete(position);
+            Log.i(null, "deleted "+ position);
         }
         else {
             selectedItems.put(position, true);
+            Log.i(null,"added "+ position);
         }
         notifyItemChanged(position);
     }
@@ -86,6 +90,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     }
 
     public int getSelectedItemCount() {
+        Log.i(null, "selectedItems contains: "+ selectedItems.toString());
         return selectedItems.size();
     }
 

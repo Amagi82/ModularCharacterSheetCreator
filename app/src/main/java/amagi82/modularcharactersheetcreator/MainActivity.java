@@ -94,11 +94,10 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                 if (fm.getBackStackEntryCount() > 0) {
                     fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 }
-                //gameCharactersSelected.clear();
-                //editCharactersMode(false);
                 toolbar.setNavigationIcon(null);
                 materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
-                //recyclerViewAdapter.notifyDataSetChanged();
+                recyclerViewAdapter.clearSelections();
+                selectedItemsChanged();
             }
         });
         materialMenu = new MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN);
@@ -111,14 +110,12 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         container.setId(R.id.container_id);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        //recyclerView.addItemDecoration(new DividerItemDecoration(this, null));
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // specify an adapter (see also next example)
         recyclerViewAdapter = new MainRecyclerViewAdapter(gameCharacterList, this);
         recyclerView.setAdapter(recyclerViewAdapter);
 
@@ -194,6 +191,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
                 recyclerViewAdapter.clearSelections();
                 selectedItemsChanged();
+                recyclerView.setVisibility(View.GONE);
 
                 fm.beginTransaction().replace(container.getId(), newCharacterFragment).addToBackStack(null).commit();
                 toolbar.setNavigationIcon(materialMenu);
@@ -254,8 +252,8 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         }
     }
 
-    private void toggleSelection(int idx) {
-        recyclerViewAdapter.toggleSelection(idx);
+    private void toggleSelection(int index) {
+        recyclerViewAdapter.toggleSelection(index);
         setTitle(getString(R.string.selected_count, recyclerViewAdapter.getSelectedItemCount()));
     }
 
@@ -298,18 +296,17 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     @Override
     public void onAddModule() {
-
     }
 
     @Override
     public void onModuleClicked(ArrayList<Module> module, int position) {
-
     }
 
     @Override
     public void onCharacterClicked(int position) {
         recyclerViewAdapter.clearSelections();
         selectedItemsChanged();
+        recyclerView.setVisibility(View.GONE);
 
         CharacterSheetFragment fragment = new CharacterSheetFragment();
         Bundle bundle = new Bundle();
@@ -322,6 +319,8 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     @Override
     public void onCharacterLongClicked(int position) {
+        toolbar.setNavigationIcon(materialMenu);
+        materialMenu.animateIconState(MaterialMenuDrawable.IconState.ARROW, false);
         fab.setVisibility(View.GONE);
         toolbar.setBackgroundColor(getResources().getColor(R.color.grey_500));
         if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.grey_700));
@@ -337,6 +336,8 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         Log.i(null, "selected item count = " + count);
         getMenuInflater().inflate(count ==0? R.menu.menu_main : count ==1? R.menu.menu_main_longclick_single : R.menu.menu_main_longclick_multiple, menu);
         if(count == 0){
+            toolbar.setNavigationIcon(null);
+            materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
             toolbar.setBackgroundColor(getResources().getColor(R.color.primary));
             if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.primary_dark));
             fab.setVisibility(View.VISIBLE);
