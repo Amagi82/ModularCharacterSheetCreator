@@ -4,19 +4,16 @@
 
     <style name="ToolBar.Base">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/app_bar_height</item>
+        <item name="android:layout_height">?actionBarSize</item>
         <item name="android:background">@color/primary</item>
-        <item name="android:paddingRight">@dimen/default_small_margin</item>
     </style>
-
-    <style name="ActionMenuText" parent="TextAppearance.AppCompat.Button"/>
 
     <style name="icon_new_character" parent="icon_new_character.Base"/>
 
     <style name="icon_new_character.Base">
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:layout_marginRight">@dimen/default_horizontal_margin</item>
-        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingRight">@dimen/default_horizontal_margin</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">12dp</item>
