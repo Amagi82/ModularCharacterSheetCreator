@@ -80,21 +80,26 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.menu_new_character, menu);
+        menu.findItem(R.id.action_add).getActionView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(null, "menu item clicked");
+                GameCharacter character = new GameCharacter(etName.getText().toString(), etGameSystem.getText().toString(), etClass.getText().toString());
+                character.setCharacterRace(etRace.getText().toString());
+                //TODO- set up the rest of the character data once implemented
+                if (isEditMode) {
+                    MainActivity.gameCharacterList.set(characterPosition, character);
+                } else {
+                    MainActivity.gameCharacterList.add(0, character);
+                }
+                getFragmentManager().popBackStack();
+            }
+        });
+
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_add){
-            GameCharacter character = new GameCharacter(etName.getText().toString(), etGameSystem.getText().toString(), etClass.getText().toString());
-            character.setCharacterRace(etRace.getText().toString());
-            //TODO- set up the rest of the character data once implemented
-            if(isEditMode){
-                MainActivity.gameCharacterList.set(characterPosition, character);
-            }else{
-                MainActivity.gameCharacterList.add(0, character);
-            }
-            getFragmentManager().popBackStack();
-        }
         return super.onOptionsItemSelected(item);
     }
 

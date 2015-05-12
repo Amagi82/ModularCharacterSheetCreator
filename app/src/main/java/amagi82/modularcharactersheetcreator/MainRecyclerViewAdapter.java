@@ -1,17 +1,17 @@
-package amagi82.modularcharactersheetcreator.adapters;
+package amagi82.modularcharactersheetcreator;
 
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.List;
 
-import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnItemLongClickedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
@@ -22,12 +22,14 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     private ArrayList<GameCharacter> gameCharacters;
     private OnItemClickedListener listener;
     private OnItemLongClickedListener longClickListener;
-    private HashSet<Integer> gameCharactersSelected = new HashSet<>();
+    private SparseBooleanArray selectedItems;
 
     public MainRecyclerViewAdapter(ArrayList<GameCharacter> gameCharacters, Activity activity) {
         listener = (OnItemClickedListener) activity;
         longClickListener = (OnItemLongClickedListener) activity;
         this.gameCharacters = gameCharacters;
+
+        selectedItems = new SparseBooleanArray();
     }
 
     // Create new views (invoked by the layout manager)
@@ -40,12 +42,14 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        if (gameCharacters.get(position).getImageCharacterIcon() == null) {
+        GameCharacter gameCharacter = gameCharacters.get(position);
+        if (gameCharacter.getImageCharacterIcon() == null) {
             holder.imageCharacterIcon.setImageResource(R.drawable.ic_face_grey600_36dp);
-        } else holder.imageCharacterIcon.setImageBitmap(gameCharacters.get(position).getImageCharacterIcon());
-        holder.tvName.setText(gameCharacters.get(position).getCharacterName());
-        holder.tvCharacterClass.setText(gameCharacters.get(position).getCharacterClass());
-        holder.tvGameSystem.setText(gameCharacters.get(position).getGameSystem());
+        } else holder.imageCharacterIcon.setImageBitmap(gameCharacter.getImageCharacterIcon());
+        holder.container.setBackgroundResource(0);
+        holder.tvName.setText(gameCharacter.getCharacterName());
+        holder.tvCharacterClass.setText(gameCharacter.getCharacterRace() +" "+ gameCharacter.getCharacterClass());
+        holder.tvGameSystem.setText(gameCharacter.getGameSystem());
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,15 +59,6 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
         holder.container.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if(gameCharactersSelected.contains(position)){
-                    gameCharactersSelected.remove(position);
-                    holder.container.setBackgroundResource(0);
-                    notifyItemChanged(position);
-                }else{
-                    holder.imageCharacterIcon.setImageResource(R.drawable.ic_check_circle_grey600_36dp);
-                    holder.container.setBackgroundResource(R.color.selection_alpha);
-                    gameCharactersSelected.add(position);
-                }
                 longClickListener.onCharacterLongClicked(position);
                 return true;
             }
@@ -74,6 +69,55 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     @Override
     public int getItemCount() {
         return gameCharacters.size();
+    }
+
+    public void toggleSelection(int position) {
+        if (selectedItems.get(position, false)) {
+            selectedItems.delete(position);
+        }
+        else {
+            selectedItems.put(position, true);
+        }
+        notifyItemChanged(position);
+    }
+
+    public void clearSelections() {
+        selectedItems.clear();
+    }
+
+    public int getSelectedItemCount() {
+        return selectedItems.size();
+    }
+
+    public List<Integer> getSelectedItems() {
+        List<Integer> items = new ArrayList<>(selectedItems.size());
+        for (int i = 0; i < selectedItems.size(); i++) {
+            items.add(selectedItems.keyAt(i));
+        }
+        return items;
+    }
+
+    /**
+     * Adds and item into the underlying data set
+     * at the position passed into the method.
+     *
+     * @param newCharacter The item to add to the data set.
+     * @param position The index of the item to remove.
+     */
+    public void addData(GameCharacter newCharacter, int position) {
+        gameCharacters.add(position, newCharacter);
+        notifyItemInserted(position);
+    }
+
+    /**
+     * Removes the item that currently is at the passed in position from the
+     * underlying data set.
+     *
+     * @param position The index of the item to remove.
+     */
+    public void removeData(int position) {
+        gameCharacters.remove(position);
+        notifyItemRemoved(position);
     }
 
     // Provide a reference to the views for each data item

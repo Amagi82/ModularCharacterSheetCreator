@@ -6,6 +6,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -15,6 +17,8 @@ import android.widget.FrameLayout;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.balysv.materialmenu.MaterialMenuDrawable;
+import com.melnykov.fab.FloatingActionButton;
+import com.melnykov.fab.ScrollDirectionListener;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -22,7 +26,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.List;
 
 import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
@@ -39,9 +43,11 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     private Toolbar toolbar;
     private FragmentManager fm;
     private NewCharacterFragment newCharacterFragment;
-    private HashSet<Integer> gameCharactersSelected = new HashSet<>();
     public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
     private Menu menu;
+    private MainRecyclerViewAdapter recyclerViewAdapter;
+    RecyclerView recyclerView;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,26 +94,65 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                 if (fm.getBackStackEntryCount() > 0) {
                     fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 }
-                gameCharactersSelected.clear();
-                editCharactersMode(false);
+                //gameCharactersSelected.clear();
+                //editCharactersMode(false);
                 toolbar.setNavigationIcon(null);
                 materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
+                //recyclerViewAdapter.notifyDataSetChanged();
             }
         });
         materialMenu = new MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN);
         materialMenu.setNeverDrawTouch(true);
 
-        //Set MainFragment
-        FrameLayout fragmentContainer = (FrameLayout) findViewById(R.id.container);
-        container = new FrameLayout(this);
+
+        setTitle(getResources().getString(R.string.characters));
+
+        container = (FrameLayout) findViewById(R.id.container);
         container.setId(R.id.container_id);
-        fm.beginTransaction().replace(container.getId(), new MainFragment()).commit();
-        fragmentContainer.addView(container);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        //recyclerView.addItemDecoration(new DividerItemDecoration(this, null));
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // specify an adapter (see also next example)
+        recyclerViewAdapter = new MainRecyclerViewAdapter(gameCharacterList, this);
+        recyclerView.setAdapter(recyclerViewAdapter);
+
+        //Set up the Floating Action Button
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.ic_person_add_white_24dp);
+        fab.attachToRecyclerView(recyclerView, new ScrollDirectionListener() {
+            @Override
+            public void onScrollDown() {
+            }
+
+            @Override
+            public void onScrollUp() {
+            }
+        });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newCharacterFragment = new NewCharacterFragment();
+                recyclerView.setVisibility(View.GONE);
+                fab.setVisibility(View.GONE);
+                fm.beginTransaction().replace(container.getId(), newCharacterFragment).addToBackStack(null).commit();
+                toolbar.setNavigationIcon(materialMenu);
+                materialMenu.animateIconState(MaterialMenuDrawable.IconState.X, false);
+            }
+        });
 
         fm.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
             public void onBackStackChanged() {
                 if (fm.getBackStackEntryCount() == 0) {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    fab.setVisibility(View.VISIBLE);
+                    recyclerViewAdapter.notifyItemInserted(0);  //TODO: make handle set as well as add
                     toolbar.setNavigationIcon(null);
                     materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
                 }
@@ -128,28 +173,32 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        Log.i(null, "MainActivity options selected item "+item.toString());
         switch(item.getItemId()){
             case R.id.action_settings:
                 return true; //is return necessary here??
             case R.id.action_delete:
-                for(int position : gameCharactersSelected){
-                    gameCharacterList.remove(position);
+                List<Integer> selectedItemPositions = recyclerViewAdapter.getSelectedItems();
+                for (int i = selectedItemPositions.size() - 1; i >= 0; i--) {
+                    recyclerViewAdapter.removeData(selectedItemPositions.get(i));
                 }
-                gameCharactersSelected.clear();
-                editCharactersMode(false);
+                recyclerViewAdapter.clearSelections();
+                selectedItemsChanged();
                 return true;
             case R.id.action_edit:
                 newCharacterFragment = new NewCharacterFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt("character", gameCharactersSelected.iterator().next());
+                bundle.putInt("character", recyclerViewAdapter.getSelectedItems().iterator().next());
                 bundle.putBoolean("edit mode", true);
                 newCharacterFragment.setArguments(bundle);
+
+                recyclerViewAdapter.clearSelections();
+                selectedItemsChanged();
+
                 fm.beginTransaction().replace(container.getId(), newCharacterFragment).addToBackStack(null).commit();
                 toolbar.setNavigationIcon(materialMenu);
                 materialMenu.animateIconState(MaterialMenuDrawable.IconState.X, false);
 
-                gameCharactersSelected.clear();
-                editCharactersMode(false);
                 return true;
         }
 
@@ -170,10 +219,9 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                     fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 }
             }).show();
-        }else if(gameCharactersSelected.size() > 0){
-            Log.i(null, "back press intercepted");
-            gameCharactersSelected.clear();
-            editCharactersMode(false);
+        }else if(recyclerViewAdapter.getSelectedItemCount() > 0){
+            recyclerViewAdapter.clearSelections();
+            selectedItemsChanged();
         }else {
             super.onBackPressed();
         }
@@ -206,15 +254,9 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         }
     }
 
-    private void editCharactersMode(boolean on){
-        Log.i(null, "gameCharactersSelected size = "+ gameCharactersSelected.size());
-        toolbar.setNavigationIcon(on ? materialMenu : null);
-        materialMenu.animateIconState(on ? MaterialMenuDrawable.IconState.ARROW : MaterialMenuDrawable.IconState.BURGER, false);
-        menu.clear();
-        getMenuInflater().inflate(!on ? R.menu.menu_main : gameCharactersSelected.size() == 1 ? R.menu.menu_main_longclick_single :
-                R.menu.menu_main_longclick_multiple, menu);
-        toolbar.setBackgroundColor(getResources().getColor(on? R.color.grey_500 : R.color.primary));
-        if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(on? R.color.grey_700 : R.color.primary_dark));
+    private void toggleSelection(int idx) {
+        recyclerViewAdapter.toggleSelection(idx);
+        setTitle(getString(R.string.selected_count, recyclerViewAdapter.getSelectedItemCount()));
     }
 
     @Override
@@ -247,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     }
 
     @Override
-    public void onCharacterAdded() {
+    public void onAddCharacter() {
         newCharacterFragment = new NewCharacterFragment();
         fm.beginTransaction().replace(container.getId(), newCharacterFragment).addToBackStack(null).commit();
         toolbar.setNavigationIcon(materialMenu);
@@ -255,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     }
 
     @Override
-    public void onModuleAdded() {
+    public void onAddModule() {
 
     }
 
@@ -266,8 +308,9 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     @Override
     public void onCharacterClicked(int position) {
-        gameCharactersSelected.clear();
-        editCharactersMode(false);
+        recyclerViewAdapter.clearSelections();
+        selectedItemsChanged();
+
         CharacterSheetFragment fragment = new CharacterSheetFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("character", position);
@@ -279,12 +322,25 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     @Override
     public void onCharacterLongClicked(int position) {
-        if(gameCharactersSelected.contains(position)){
-            gameCharactersSelected.remove(position);
-        }else{
-            gameCharactersSelected.add(position);
-        }
-        editCharactersMode(true);
+        fab.setVisibility(View.GONE);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.grey_500));
+        if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.grey_700));
 
+        Log.i("position ", position + " clicked");
+        toggleSelection(position);
+        selectedItemsChanged();
+    }
+
+    private void selectedItemsChanged() {
+        int count = recyclerViewAdapter.getSelectedItemCount();
+        menu.clear();
+        Log.i(null, "selected item count = " + count);
+        getMenuInflater().inflate(count ==0? R.menu.menu_main : count ==1? R.menu.menu_main_longclick_single : R.menu.menu_main_longclick_multiple, menu);
+        if(count == 0){
+            toolbar.setBackgroundColor(getResources().getColor(R.color.primary));
+            if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.primary_dark));
+            fab.setVisibility(View.VISIBLE);
+            setTitle(getString(R.string.characters));
+        }
     }
 }

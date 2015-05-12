@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ScrollDirectionListener;
 
-import amagi82.modularcharactersheetcreator.adapters.MainRecyclerViewAdapter;
 import amagi82.modularcharactersheetcreator.adapters.extras.DividerItemDecoration;
 import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
 
@@ -60,7 +59,7 @@ public class MainFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onCharacterAdded();
+                listener.onAddCharacter();
             }
         });
 
