@@ -1,37 +1,32 @@
 <resources>
 
-    <style name="ToolBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textColorPrimary">@color/white</item>
-        <item name="android:textColorSecondary">@color/white</item>
-        <item name="android:windowActionBarOverlay">true</item>
+    <style name="ToolBar" parent="ToolBar.Base"/>
+
+    <style name="ToolBar.Base">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/app_bar_height</item>
+        <item name="android:background">@color/primary</item>
+        <item name="android:paddingRight">@dimen/default_small_margin</item>
     </style>
 
-    <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">20sp</item>
-    </style>
+    <style name="ActionMenuText" parent="TextAppearance.AppCompat.Button"/>
 
-    <style name="ToolbarSubtitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">16sp</item>
-    </style>
+    <style name="icon_new_character" parent="icon_new_character.Base"/>
 
-    <style name="icon_new_character_left" parent="icon_new_character_left_base">
+    <style name="icon_new_character.Base">
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:layout_marginRight">@dimen/default_horizontal_margin</item>
         <item name="android:paddingRight">16dp</item>
-    </style>
-
-    <style name="icon_new_character_left_base">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
     </style>
 
-    <style name="et_new_character" parent="et_new_character_base">
-        <item name="android:layout_marginLeft">40dp</item>
-    </style>
+    <style name="et_new_character" parent="et_new_character.Base"/>
 
-    <style name="et_new_character_base">
+    <style name="et_new_character.Base">
+        <item name="android:layout_marginLeft">40dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:inputType">textNoSuggestions</item>
@@ -39,5 +34,17 @@
         <item name="android:paddingTop">@dimen/default_vertical_margin</item>
         <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="card">
+        <item name="android:layout_margin">@dimen/card_margin</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="text_title" parent="Base.TextAppearance.AppCompat.Title"/>
+
+    <style name="text_body" parent="Base.TextAppearance.AppCompat.Body1"/>
+
+    <style name="text_header" parent="Base.TextAppearance.AppCompat.Headline"/>
 
 </resources>

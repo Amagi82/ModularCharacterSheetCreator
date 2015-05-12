@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="icon_new_character_left" parent="icon_new_character_left_base">
+    <style name="ToolBar" parent="ToolBar.Base">
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:paddingEnd">@dimen/default_small_margin</item>
+    </style>
+
+    <style name="icon_new_character" parent="icon_new_character.Base">
         <item name="android:layout_alignParentStart">true</item>
         <item name="android:layout_marginEnd">@dimen/default_horizontal_margin</item>
         <item name="android:paddingEnd">16dp</item>
     </style>
 
-    <style name="et_new_character" parent="et_new_character_base">
+    <style name="et_new_character" parent="et_new_character.Base">
         <item name="android:layout_marginStart">40dp</item>
     </style>
 </resources>

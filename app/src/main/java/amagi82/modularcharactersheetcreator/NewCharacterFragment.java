@@ -117,10 +117,16 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
             case R.id.iconClass:
                 chooseArchetype(idClass, etClass);
                 break;
-            case R.id.iconTemplate | R.id.etTemplate:
+            case R.id.iconTemplate:
                 Log.i(null, "Offer template if available");
                 break;
-            case R.id.iconColor | R.id.etColor:
+            case R.id.etTemplate:
+                Log.i(null, "Offer template if available");
+                break;
+            case R.id.iconColor:
+                Log.i(null, "Offer color choices");
+                break;
+            case R.id.etColor:
                 Log.i(null, "Offer color choices");
                 break;
             default:

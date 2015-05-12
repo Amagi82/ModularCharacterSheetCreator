@@ -4,8 +4,16 @@
     <dimen name="default_vertical_margin">16dp</dimen>
     <dimen name="default_small_margin">8dp</dimen>
     <dimen name="default_list_item_height">72dp</dimen>
+
+    <dimen name="card_margin">4dp</dimen>
+    <dimen name="card_padding">16dp</dimen>
+    <dimen name="card_corner_radius">2dp</dimen>
+
     <dimen name="text_indent_margin">72dp</dimen>
-    <dimen name="actionbar_height">56dp</dimen>
+
+    <dimen name="app_bar_height">56dp</dimen>
+    <dimen name="app_bar_elevation">4dp</dimen>
+
     <dimen name="item_icon_size">40dp</dimen>
 
     <dimen name="fab_size_normal">56dp</dimen>

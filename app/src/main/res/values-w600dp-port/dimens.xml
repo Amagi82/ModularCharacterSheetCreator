@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- For screens with more than 600dp of available width. Key:
+7" portrait - 600dp
+7" landscape - 960dp
+10" portrait - 720dp
+10" landscape - 1280dp -->
+
+<resources>
+    <dimen name="app_bar_height">64dp</dimen>
+</resources>

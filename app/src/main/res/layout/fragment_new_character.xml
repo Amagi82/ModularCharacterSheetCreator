@@ -33,7 +33,7 @@
 
     <ImageView
         android:id="@+id/iconGameSystem"
-        style="@style/icon_new_character_left"
+        style="@style/icon_new_character"
         android:layout_below="@id/etName"
         android:contentDescription="@string/game_systems"
         android:src="@drawable/ic_list_grey600_24dp"/>
@@ -46,7 +46,7 @@
 
     <ImageView
         android:id="@+id/iconRace"
-        style="@style/icon_new_character_left"
+        style="@style/icon_new_character"
         android:layout_below="@id/etGameSystem"
         android:visibility="gone"
         android:contentDescription="@string/character_race"
@@ -60,7 +60,7 @@
 
     <ImageView
         android:id="@+id/iconClass"
-        style="@style/icon_new_character_left"
+        style="@style/icon_new_character"
         android:layout_below="@id/etRace"
         android:contentDescription="@string/character_classes"
         android:visibility="invisible"
@@ -74,7 +74,7 @@
 
     <ImageView
         android:id="@+id/iconTemplate"
-        style="@style/icon_new_character_left"
+        style="@style/icon_new_character"
         android:layout_below="@id/etClass"
         android:visibility="invisible"
         android:contentDescription="@string/templates"
@@ -89,7 +89,7 @@
 
     <ImageView
         android:id="@+id/iconColor"
-        style="@style/icon_new_character_left"
+        style="@style/icon_new_character"
         android:layout_below="@id/etTemplate"
         android:contentDescription="@string/color"
         android:src="@drawable/ic_color_lens_grey600_24dp"/>

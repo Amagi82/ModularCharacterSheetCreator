@@ -38,10 +38,10 @@ public class CharacterSheetRecyclerViewAdapter extends RecyclerView.Adapter<Cont
         Module.ViewType viewTypeEnums[] = Module.ViewType.values();
         switch (viewTypeEnums[viewType]) {
             case TEXT:
-                return new TextViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_text_only, parent, false));
+                return new TextViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_text, parent, false));
 
             default:
-                return new TextViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_text_only, parent, false));
+                return new TextViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_text, parent, false));
         }
     }
 

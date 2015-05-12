@@ -8,15 +8,8 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_height"
-        android:background="@color/primary"
-        android:elevation="4dp"
-        android:paddingRight="8dp"
-        android:paddingEnd="8dp"
-        android:theme="@style/ToolBar"
-        app:titleTextAppearance="@style/ToolbarTitle"
-        app:subtitleTextAppearance="@style/ToolbarSubtitle"
+        style="@style/ToolBar"
+        app:theme="@style/ToolBarTheme"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <FrameLayout
