@@ -51,13 +51,11 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         iconRace = (ImageView) rootView.findViewById(R.id.iconRace);
         iconClass = (ImageView) rootView.findViewById(R.id.iconClass);
         ImageView iconTemplate = (ImageView) rootView.findViewById(R.id.iconTemplate);
-        ImageView iconColor = (ImageView) rootView.findViewById(R.id.iconColor);
         etName = (EditText) rootView.findViewById(R.id.etName);
         etGameSystem = (EditText) rootView.findViewById(R.id.etGameSystem);
         etRace = (EditText) rootView.findViewById(R.id.etRace);
         etClass = (EditText) rootView.findViewById(R.id.etClass);
         EditText etTemplate = (EditText) rootView.findViewById(R.id.etTemplate);
-        EditText etColor = (EditText) rootView.findViewById(R.id.etColor);
 
         if(isEditMode){
             GameCharacter character = MainActivity.gameCharacterList.get(characterPosition);
@@ -73,9 +71,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         iconRace.setOnClickListener(this);
         iconClass.setOnClickListener(this);
         iconTemplate.setOnClickListener(this);
-        iconColor.setOnClickListener(this);
         etTemplate.setOnClickListener(this);
-        etColor.setOnClickListener(this);
 
         return rootView;
     }
@@ -122,12 +118,6 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                 break;
             case R.id.etTemplate:
                 Log.i(null, "Offer template if available");
-                break;
-            case R.id.iconColor:
-                Log.i(null, "Offer color choices");
-                break;
-            case R.id.etColor:
-                Log.i(null, "Offer color choices");
                 break;
             default:
                 break;
