@@ -141,6 +141,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                 if (!text.equals(getString(R.string.other))) {
                     if (editText.getText().toString().equals(getString(R.string.dnd))) {
                         editText.setText(editText.getText() + " " + text + " " + getString(R.string.edition));
+                        return;
                     } else {
                         editText.setText(text);
                         if (text.equals(getString(R.string.dnd))) chooseGameSystem(R.array.game_systems_dnd, editText);

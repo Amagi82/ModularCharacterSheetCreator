@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ScrollDirectionListener;
@@ -165,19 +164,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     @Override
     public void onBackPressed() {
         //
-        if(newCharacterFragment != null && newCharacterFragment.isVisible()) {
-            new MaterialDialog.Builder(this).title("Cancel").content("Are you sure you want to discard this character?")
-                    .positiveText("KEEP EDITING").negativeText("DISCARD").callback(new MaterialDialog.ButtonCallback() {
-                @Override
-                public void onPositive(MaterialDialog dialog) {
-                }
-
-                @Override
-                public void onNegative(MaterialDialog dialog) {
-                    fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                }
-            }).show();
-        }else if(selectedItems.size() > 0){
+        if(selectedItems.size() > 0){
             resetDefaultMenu();
         }else {
             super.onBackPressed();
@@ -329,6 +316,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         getMenuInflater().inflate(count == 0 ? R.menu.menu_main : count == 1 ? R.menu.menu_main_longclick_single : R.menu.menu_main_longclick_multiple, menu);
         if(count == 0) resetDefaultMenu();
     }
+
     private void toggleSelection(int position) {
         if (selectedItems.get(position, false)) {
             selectedItems.delete(position);
