@@ -28,13 +28,12 @@ public class CharacterSheetFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        int padding = getResources().getDimensionPixelSize(R.dimen.card_margin);
-        rootView.setPadding(padding,padding,padding,padding);
-
         GameCharacter character = MainActivity.gameCharacterList.get(getArguments().getInt("character"));
         getActivity().setTitle(character.getCharacterName());
 
+        int padding = getResources().getDimensionPixelSize(R.dimen.card_margin);
         RecyclerView characterSheetRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        characterSheetRecyclerView.setPadding(padding,padding,padding,padding);
 
         //characterSheetRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), null));
 
@@ -53,6 +52,7 @@ public class CharacterSheetFragment extends Fragment {
             @Override
             public void onScrollDown() {
             }
+
             @Override
             public void onScrollUp() {
             }
@@ -63,7 +63,8 @@ public class CharacterSheetFragment extends Fragment {
                 listener.onAddModule();
             }
         });
-
+        fab.hide(false);
+        fab.show();
 
         return rootView;
     }

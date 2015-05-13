@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                 //Floating action button clicked - add new character
                 newCharacterFragment = new NewCharacterFragment();
                 recyclerView.setVisibility(View.GONE);
-                fab.setVisibility(View.GONE);
+                fab.hide();
                 fm.beginTransaction().replace(container.getId(), newCharacterFragment).addToBackStack(null).commit();
                 toolbar.setNavigationIcon(materialMenu);
                 materialMenu.animateIconState(MaterialMenuDrawable.IconState.X, false);
@@ -287,6 +287,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     public void onCharacterClicked(int position) {
         resetDefaultMenu();
         recyclerView.setVisibility(View.GONE);
+        fab.hide();
 
         CharacterSheetFragment fragment = new CharacterSheetFragment();
         Bundle bundle = new Bundle();
@@ -301,7 +302,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     public void onCharacterLongClicked(int position) {
         toolbar.setNavigationIcon(materialMenu);
         materialMenu.animateIconState(MaterialMenuDrawable.IconState.ARROW, false);
-        fab.setVisibility(View.GONE);
+        fab.hide();
         toolbar.setBackgroundColor(getResources().getColor(R.color.grey_600));
         if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.grey_700));
 
@@ -317,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         selectedItems.clear();
         recyclerViewAdapter.notifyDataSetChanged();
         materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
-        fab.setVisibility(View.VISIBLE);
+        fab.show();
         setTitle(getString(R.string.characters));
     }
 
