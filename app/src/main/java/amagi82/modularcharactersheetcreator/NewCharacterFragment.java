@@ -1,6 +1,7 @@
 package amagi82.modularcharactersheetcreator;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -88,7 +90,6 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         menu.findItem(R.id.action_add).getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(null, "menu item clicked");
                 GameCharacter character = new GameCharacter(etName.getText().toString(), etGameSystem.getText().toString(), etClass.getText().toString());
                 character.setCharacterRace(etRace.getText().toString());
                 //TODO- set up the rest of the character data once implemented
@@ -98,6 +99,10 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                     listener.OnGameCharacterAdded(character);
                 }
                 getFragmentManager().popBackStack();
+
+                //Dismiss keyboard
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(etName.getWindowToken(), 0);
             }
         });
 
