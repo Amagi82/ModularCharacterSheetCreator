@@ -42,7 +42,7 @@ import amagi82.modularcharactersheetcreator.models.modules.TextModule;
 public class MainActivity extends AppCompatActivity implements OnFabClickedListener, OnItemClickedListener , OnItemLongClickedListener, OnGameCharacterAddedListener{
 
     public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
-    private SparseBooleanArray selectedItems = new SparseBooleanArray();
+    public static SparseBooleanArray selectedItems = new SparseBooleanArray();
     private FrameLayout container;
     private FragmentManager fm = getSupportFragmentManager();
     private Toolbar toolbar;
@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
             public void onClick(View v) {
                 //Up navigation
                 if (fm.getBackStackEntryCount() > 0) fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                resetDefaultMenu();
             }
         });
 
@@ -83,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewAdapter = new MainRecyclerViewAdapter(this);
-        //recyclerViewAdapter.setHasStableIds(true);
         recyclerView.setAdapter(recyclerViewAdapter);
 
         //Set up the Floating Action Button
@@ -302,7 +302,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         toolbar.setNavigationIcon(materialMenu);
         materialMenu.animateIconState(MaterialMenuDrawable.IconState.ARROW, false);
         fab.setVisibility(View.GONE);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.grey_500));
+        toolbar.setBackgroundColor(getResources().getColor(R.color.grey_600));
         if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.grey_700));
 
         toggleSelection(position);
@@ -315,6 +315,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         toolbar.setBackgroundColor(getResources().getColor(R.color.primary));
         if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.primary_dark));
         selectedItems.clear();
+        recyclerViewAdapter.notifyDataSetChanged();
         materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
         fab.setVisibility(View.VISIBLE);
         setTitle(getString(R.string.characters));
@@ -327,7 +328,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         getMenuInflater().inflate(count == 0 ? R.menu.menu_main : count == 1 ? R.menu.menu_main_longclick_single : R.menu.menu_main_longclick_multiple, menu);
         if(count == 0) resetDefaultMenu();
     }
-    public void toggleSelection(int position) {
+    private void toggleSelection(int position) {
         if (selectedItems.get(position, false)) {
             selectedItems.delete(position);
         }
@@ -338,7 +339,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         selectedItemsChanged();
     }
 
-    public List<Integer> getSelectedItems() {
+    private List<Integer> getSelectedItems() {
         List<Integer> items = new ArrayList<>(selectedItems.size());
         for (int i = 0; i < selectedItems.size(); i++) {
             items.add(selectedItems.keyAt(i));

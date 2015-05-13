@@ -10,7 +10,9 @@
     <color name="black">#000</color>
 
     <color name="grey_500">#9E9E9E</color>
+    <color name="grey_600">#757575</color>
     <color name="grey_700">#616161</color>
+    <color name="grey_800">#424242</color>
 
     <color name="selection_alpha">#10000000</color>
 

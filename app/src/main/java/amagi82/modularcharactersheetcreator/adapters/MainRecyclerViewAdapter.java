@@ -2,6 +2,8 @@ package amagi82.modularcharactersheetcreator.adapters;
 
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +21,12 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
 
     private static OnItemClickedListener listener;
     private static OnItemLongClickedListener longClickListener;
+    private Activity activity;
 
     public MainRecyclerViewAdapter(Activity activity) {
         listener = (OnItemClickedListener) activity;
         longClickListener = (OnItemLongClickedListener) activity;
+        this.activity = activity;
     }
 
     // Create new views (invoked by the layout manager)
@@ -35,14 +39,19 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        boolean isSelected = MainActivity.selectedItems.get(position, false);
         final GameCharacter gameCharacter = MainActivity.gameCharacterList.get(position);
-        if (gameCharacter.getImageCharacterIcon() == null) {
-            holder.imageCharacterIcon.setImageResource(R.drawable.ic_face_grey600_36dp);
-        } else holder.imageCharacterIcon.setImageBitmap(gameCharacter.getImageCharacterIcon());
-        holder.container.setBackgroundResource(0);
+        holder.imageCharacterIcon.setImageBitmap(isSelected? getBitmap(R.drawable.ic_check_circle_grey600_36dp) :
+                gameCharacter.getImageCharacterIcon() != null? gameCharacter.getImageCharacterIcon() : getBitmap(R.drawable.ic_face_grey600_36dp));
+        holder.container.setBackgroundResource(isSelected? R.color.selection_alpha : 0);
         holder.tvName.setText(gameCharacter.getCharacterName());
         holder.tvCharacterClass.setText(gameCharacter.getCharacterRace() + " " + gameCharacter.getCharacterClass());
         holder.tvGameSystem.setText(gameCharacter.getGameSystem());
+    }
+
+    //Convenience method to get bitmap from drawable resource
+    private Bitmap getBitmap(int id){
+        return BitmapFactory.decodeResource(activity.getResources(), id);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

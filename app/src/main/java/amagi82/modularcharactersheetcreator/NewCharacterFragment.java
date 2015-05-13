@@ -17,6 +17,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterAddedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewCharacterFragment extends Fragment implements View.OnClickListener {
 
@@ -50,7 +51,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         }
         getActivity().setTitle(getResources().getString(isEditMode? R.string.edit_character : R.string.new_character));
 
-        ImageView iconCharacter = (ImageView) rootView.findViewById(R.id.iconCharacter);
+        CircleImageView iconCharacter = (CircleImageView) rootView.findViewById(R.id.iconCharacter);
         ImageView iconGameSystem = (ImageView) rootView.findViewById(R.id.iconGameSystem);
         iconRace = (ImageView) rootView.findViewById(R.id.iconRace);
         iconClass = (ImageView) rootView.findViewById(R.id.iconClass);
