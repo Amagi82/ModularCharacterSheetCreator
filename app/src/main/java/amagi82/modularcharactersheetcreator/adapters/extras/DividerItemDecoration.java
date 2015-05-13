@@ -11,6 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
+
+
+/*
+    This may be useless. Rolled dividers into layouts
+ */
+
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private Drawable divider;

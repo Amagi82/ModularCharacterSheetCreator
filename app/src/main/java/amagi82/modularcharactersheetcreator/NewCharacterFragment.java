@@ -15,10 +15,12 @@ import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterAddedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 
 public class NewCharacterFragment extends Fragment implements View.OnClickListener {
 
+    private OnGameCharacterAddedListener listener;
     private ImageView iconRace;
     private ImageView iconClass;
     private EditText etName;
@@ -37,6 +39,8 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_new_character, container, false);
         setHasOptionsMenu(true);
+
+        listener = (OnGameCharacterAddedListener) getActivity();
 
         //If this is a character being edited, not a new character, change title and load character data
         Bundle arguments = getArguments();
@@ -88,9 +92,9 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                 character.setCharacterRace(etRace.getText().toString());
                 //TODO- set up the rest of the character data once implemented
                 if (isEditMode) {
-                    MainActivity.gameCharacterList.set(characterPosition, character);
+                    listener.OnGameCharacterUpdated(characterPosition, character);
                 } else {
-                    MainActivity.gameCharacterList.add(0, character);
+                    listener.OnGameCharacterAdded(character);
                 }
                 getFragmentManager().popBackStack();
             }
