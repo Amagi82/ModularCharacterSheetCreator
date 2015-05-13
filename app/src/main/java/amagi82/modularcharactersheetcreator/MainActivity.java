@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 import amagi82.modularcharactersheetcreator.adapters.MainRecyclerViewAdapter;
 import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
@@ -136,16 +135,18 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
             case R.id.action_settings:
                 break;
             case R.id.action_delete:
+                Log.i(null, selectedItems.toString());
                 for (int position = selectedItems.size()-1; position >= 0; position--) {
-                    gameCharacterList.remove(position);
-                    recyclerViewAdapter.notifyItemRemoved(position);
+                    gameCharacterList.remove(selectedItems.keyAt(position));
+                    recyclerViewAdapter.notifyItemRemoved(selectedItems.keyAt(position));
                 }
+                selectedItems.clear();
                 resetDefaultMenu();
                 break;
             case R.id.action_edit:
                 newCharacterFragment = new NewCharacterFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt("character", getSelectedItems().iterator().next());
+                bundle.putInt("character", selectedItems.keyAt(0));
                 bundle.putBoolean("edit mode", true);
                 newCharacterFragment.setArguments(bundle);
 
@@ -302,8 +303,14 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         toolbar.setNavigationIcon(null);
         toolbar.setBackgroundColor(getResources().getColor(R.color.primary));
         if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.primary_dark));
-        selectedItems.clear();
-        recyclerViewAdapter.notifyDataSetChanged();
+        if(selectedItems.size()>0){
+            for(int i=gameCharacterList.size()-1; i>= 0; i--){
+                if(selectedItems.get(i)) {
+                    selectedItems.delete(i);
+                    recyclerViewAdapter.notifyItemChanged(i);
+                }
+            }
+        }
         materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
         fab.show();
         setTitle(getString(R.string.characters));
@@ -326,13 +333,5 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         }
         recyclerViewAdapter.notifyItemChanged(position);
         selectedItemsChanged();
-    }
-
-    private List<Integer> getSelectedItems() {
-        List<Integer> items = new ArrayList<>(selectedItems.size());
-        for (int i = 0; i < selectedItems.size(); i++) {
-            items.add(selectedItems.keyAt(i));
-        }
-        return items;
     }
 }
