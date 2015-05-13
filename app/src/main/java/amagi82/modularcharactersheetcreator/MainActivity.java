@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,7 +38,8 @@ import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.models.modules.TextModule;
 
 
-public class MainActivity extends AppCompatActivity implements OnFabClickedListener, OnItemClickedListener , OnItemLongClickedListener, OnGameCharacterAddedListener{
+public class MainActivity extends AppCompatActivity implements OnFabClickedListener, OnItemClickedListener , OnItemLongClickedListener,
+        OnGameCharacterAddedListener, View.OnClickListener, FragmentManager.OnBackStackChangedListener{
 
     public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
     public static SparseBooleanArray selectedItems = new SparseBooleanArray();
@@ -65,14 +67,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         setTitle(getString(R.string.characters));
         materialMenu = new MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN);
         materialMenu.setNeverDrawTouch(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Up navigation
-                if (fm.getBackStackEntryCount() > 0) fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                resetDefaultMenu();
-            }
-        });
+        toolbar.setNavigationOnClickListener(this);
 
         //Container holds recycler view and is replaced with fragments
         container = (FrameLayout) findViewById(R.id.container);
@@ -96,28 +91,9 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
             public void onScrollUp() {
             }
         });
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Floating action button clicked - add new character
-                newCharacterFragment = new NewCharacterFragment();
-                recyclerView.setVisibility(View.GONE);
-                fab.hide();
-                fm.beginTransaction().replace(container.getId(), newCharacterFragment).addToBackStack(null).commit();
-                toolbar.setNavigationIcon(materialMenu);
-                materialMenu.animateIconState(MaterialMenuDrawable.IconState.X, false);
-            }
-        });
+        fab.setOnClickListener(this);
 
-        fm.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                if (fm.getBackStackEntryCount() == 0) {
-                    recyclerView.setVisibility(View.VISIBLE);
-                    resetDefaultMenu();
-                }
-            }
-        });
+        fm.addOnBackStackChangedListener(this);
     }
 
     @Override
@@ -135,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
             case R.id.action_settings:
                 break;
             case R.id.action_delete:
-                Log.i(null, selectedItems.toString());
                 for (int position = selectedItems.size()-1; position >= 0; position--) {
                     gameCharacterList.remove(selectedItems.keyAt(position));
                     recyclerViewAdapter.notifyItemRemoved(selectedItems.keyAt(position));
@@ -149,30 +124,67 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                 bundle.putInt("character", selectedItems.keyAt(0));
                 bundle.putBoolean("edit mode", true);
                 newCharacterFragment.setArguments(bundle);
-
-                resetDefaultMenu();
-                recyclerView.setVisibility(View.GONE);
-
-                fm.beginTransaction().replace(container.getId(), newCharacterFragment).addToBackStack(null).commit();
-                toolbar.setNavigationIcon(materialMenu);
-                materialMenu.animateIconState(MaterialMenuDrawable.IconState.X, false);
-
+                attachFragment(newCharacterFragment, MaterialMenuDrawable.IconState.X);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
-        //
-        if(selectedItems.size() > 0){
-            resetDefaultMenu();
-        }else {
-            super.onBackPressed();
-        }
+    private void attachFragment(Fragment fragment, MaterialMenuDrawable.IconState iconState) {
+        resetDefaultMenu();
+        fab.hide();
+        recyclerView.setVisibility(View.GONE);
+        fm.beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
+        toolbar.setNavigationIcon(materialMenu);
+        materialMenu.animateIconState(iconState, false);
     }
 
-    //Load characters from save file
+
+    /*
+        Handle item selection
+     */
+    private void resetDefaultMenu(){
+        menu.clear();
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        toolbar.setNavigationIcon(null);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.primary));
+        if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.primary_dark));
+        if(selectedItems.size()>0){
+            for(int i=gameCharacterList.size()-1; i>= 0; i--){
+                if(selectedItems.get(i)) {
+                    selectedItems.delete(i);
+                    recyclerViewAdapter.notifyItemChanged(i);
+                }
+            }
+        }
+        materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
+        fab.show();
+        setTitle(getString(R.string.characters));
+    }
+
+    private void selectedItemsChanged() {
+        int count = selectedItems.size();
+        setTitle(getString(R.string.selected_count, count));
+        menu.clear();
+        getMenuInflater().inflate(count == 0 ? R.menu.menu_main : count == 1 ? R.menu.menu_main_longclick_single : R.menu.menu_main_longclick_multiple, menu);
+        if(count == 0) resetDefaultMenu();
+    }
+
+    private void toggleSelection(int position) {
+        if (selectedItems.get(position, false)) {
+            selectedItems.delete(position);
+        }
+        else {
+            selectedItems.put(position, true);
+        }
+        recyclerViewAdapter.notifyItemChanged(position);
+        selectedItemsChanged();
+    }
+
+
+    /*
+        Load and save gameCharacters
+     */
     @SuppressWarnings("unchecked")
     private void loadGameCharacters() {
         FileInputStream fis = null;
@@ -251,6 +263,10 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         }
     }
 
+
+    /*
+        Handle user clicks and interface methods
+     */
     @Override
     public void OnGameCharacterAdded(GameCharacter character) {
         gameCharacterList.add(0, character);
@@ -273,17 +289,11 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     @Override
     public void onCharacterClicked(int position) {
-        resetDefaultMenu();
-        recyclerView.setVisibility(View.GONE);
-        fab.hide();
-
         CharacterSheetFragment fragment = new CharacterSheetFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("character", position);
         fragment.setArguments(bundle);
-        fm.beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
-        toolbar.setNavigationIcon(materialMenu);
-        materialMenu.animateIconState(MaterialMenuDrawable.IconState.ARROW, false);
+        attachFragment(fragment, MaterialMenuDrawable.IconState.ARROW);
     }
 
     @Override
@@ -297,41 +307,32 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         toggleSelection(position);
     }
 
-    private void resetDefaultMenu(){
-        menu.clear();
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        toolbar.setNavigationIcon(null);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.primary));
-        if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.primary_dark));
-        if(selectedItems.size()>0){
-            for(int i=gameCharacterList.size()-1; i>= 0; i--){
-                if(selectedItems.get(i)) {
-                    selectedItems.delete(i);
-                    recyclerViewAdapter.notifyItemChanged(i);
-                }
-            }
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.fab) {
+            //Floating action button clicked - add new character
+            attachFragment(new NewCharacterFragment(), MaterialMenuDrawable.IconState.X);
+        }else {
+            //Up navigation clicked
+            if (fm.getBackStackEntryCount() > 0) fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            resetDefaultMenu();
         }
-        materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
-        fab.show();
-        setTitle(getString(R.string.characters));
     }
 
-    private void selectedItemsChanged() {
-        int count = selectedItems.size();
-        setTitle(getString(R.string.selected_count, count));
-        menu.clear();
-        getMenuInflater().inflate(count == 0 ? R.menu.menu_main : count == 1 ? R.menu.menu_main_longclick_single : R.menu.menu_main_longclick_multiple, menu);
-        if(count == 0) resetDefaultMenu();
+    @Override
+    public void onBackPressed() {
+        if(selectedItems.size() > 0){
+            resetDefaultMenu();
+        }else {
+            super.onBackPressed();
+        }
     }
 
-    private void toggleSelection(int position) {
-        if (selectedItems.get(position, false)) {
-            selectedItems.delete(position);
+    @Override
+    public void onBackStackChanged() {
+        if (fm.getBackStackEntryCount() == 0) {
+            recyclerView.setVisibility(View.VISIBLE);
+            resetDefaultMenu();
         }
-        else {
-            selectedItems.put(position, true);
-        }
-        recyclerViewAdapter.notifyItemChanged(position);
-        selectedItemsChanged();
     }
 }
