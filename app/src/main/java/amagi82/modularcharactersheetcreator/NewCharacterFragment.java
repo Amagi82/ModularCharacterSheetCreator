@@ -2,8 +2,12 @@ package amagi82.modularcharactersheetcreator;
 
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextPaint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -106,6 +110,37 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
             }
         });
 
+    }
+
+    //TODO: finish and test this, and add color selection for background color. Fade color of toolbar to selected color.
+    private void createDefaultIcon(){
+        int iconSize = getResources().getDimensionPixelSize(R.dimen.item_icon_size);
+        int textColor = getResources().getColor(R.color.white);
+        int backgroundColor = getResources().getColor(R.color.primary);
+
+
+        //Title TextPaint
+        TextPaint textPaint = new TextPaint();
+        textPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        textPaint.setTextAlign(Paint.Align.CENTER);
+        textPaint.setLinearText(true);
+        textPaint.setColor(textColor);
+        //textPaint.setTextSize(titleSize);
+
+        RectF rectF = new RectF();
+
+        rectF.set(0, 0, iconSize, iconSize);
+        //rectF.offset((getWidth() - iconSize) / 2, (getHeight() - iconSize) / 2);
+
+        float centerX = rectF.centerX();
+        float centerY = rectF.centerY();
+
+        int xPos = (int) centerX;
+        int yPos = (int) (centerY - (textPaint.descent() + textPaint.ascent()) / 2);
+
+        Canvas canvas = new Canvas();
+        canvas.drawColor(backgroundColor);
+        //canvas.drawText(titleText, xPos, yPos, textPaint);
     }
 
     @Override
