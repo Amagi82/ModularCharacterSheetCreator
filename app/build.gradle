@@ -28,4 +28,5 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:1.2.2'
     compile 'com.balysv.materialmenu:material-menu-toolbar:1.5.1'
     compile 'com.afollestad:material-dialogs:0.7.3.3'
+    compile 'com.nispok:snackbar:2.10.8'
 }

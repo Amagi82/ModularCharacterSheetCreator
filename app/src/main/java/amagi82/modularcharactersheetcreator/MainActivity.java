@@ -20,6 +20,9 @@ import android.widget.FrameLayout;
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ScrollDirectionListener;
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.SnackbarManager;
+import com.nispok.snackbar.listeners.ActionClickListener;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -33,6 +36,7 @@ import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterAddedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnItemLongClickedListener;
+import amagi82.modularcharactersheetcreator.listeners.SnackbarEventListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.models.modules.TextModule;
@@ -47,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     private FragmentManager fm = getSupportFragmentManager();
     private Toolbar toolbar;
     private MaterialMenuDrawable materialMenu;
-    private NewCharacterFragment newCharacterFragment;
     private Menu menu;
     private RecyclerView recyclerView;
     private MainRecyclerViewAdapter recyclerViewAdapter;
@@ -111,20 +114,43 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
             case R.id.action_settings:
                 break;
             case R.id.action_delete:
-                for (int position = selectedItems.size()-1; position >= 0; position--) {
-                    gameCharacterList.remove(selectedItems.keyAt(position));
-                    recyclerViewAdapter.notifyItemRemoved(selectedItems.keyAt(position));
+                //Save the characters and positions temporarily in case the user wants to undo the delete
+                final ArrayList<GameCharacter> storedCharacters = new ArrayList<>();
+                final SparseBooleanArray storedPositions = selectedItems.clone();
+                for(int i = 0; i<storedPositions.size(); i++) storedCharacters.add(gameCharacterList.get(storedPositions.keyAt(i)));
+
+                //Delete the characters
+                for (int i = selectedItems.size() - 1; i >= 0; i--) {
+                    gameCharacterList.remove(selectedItems.keyAt(i));
+                    recyclerViewAdapter.notifyItemRemoved(selectedItems.keyAt(i));
                 }
                 selectedItems.clear();
                 resetDefaultMenu();
+
+                //Allow the user to undo delete
+                SnackbarManager.show(
+                        Snackbar.with(getApplicationContext())
+                                .text(getString(R.string.deleted_count, storedPositions.size())) // text to display
+                                .actionLabel(getString(R.string.undo))
+                                .actionColor(getResources().getColor(R.color.accent))
+                                .actionListener(new ActionClickListener() {
+                                    @Override
+                                    public void onActionClicked(Snackbar snackbar) {
+                                        //User clicked UNDO, so add the stored characters back in their original positions
+                                        for (int i = 0; i < storedPositions.size(); i++) {
+                                            gameCharacterList.add(storedPositions.keyAt(i), storedCharacters.get(i));
+                                            recyclerViewAdapter.notifyItemInserted(storedPositions.keyAt(i));
+                                        }
+                                    }
+                                }).eventListener(new SnackbarEventListener(fab)), this); //Hide the floating action button while Snackbar present
                 break;
             case R.id.action_edit:
-                newCharacterFragment = new NewCharacterFragment();
+                NewCharacterFragment fragment = new NewCharacterFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt("character", selectedItems.keyAt(0));
                 bundle.putBoolean("edit mode", true);
-                newCharacterFragment.setArguments(bundle);
-                attachFragment(newCharacterFragment, MaterialMenuDrawable.IconState.X);
+                fragment.setArguments(bundle);
+                attachFragment(fragment, MaterialMenuDrawable.IconState.X);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -159,6 +185,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         }
         materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
         fab.show();
+
         setTitle(getString(R.string.characters));
     }
 

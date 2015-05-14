@@ -24,6 +24,8 @@
     <string name="edit">Edit</string>
     <string name="edit_character">Edit character</string>
     <string name="selected_count">%1$s selected</string>
+    <string name="deleted_count">%1$s deleted</string>
+    <string name="undo">UNDO</string>
 
     <string-array name="game_systems">
         <item>Other</item>
