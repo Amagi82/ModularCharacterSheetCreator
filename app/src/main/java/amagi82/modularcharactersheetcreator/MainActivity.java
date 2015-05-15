@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         setSupportActionBar(toolbar);
         setTitle(getString(R.string.characters));
         materialMenu = new MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN);
-        materialMenu.setNeverDrawTouch(true);
         toolbar.setNavigationOnClickListener(this);
 
         //Container holds recycler view and is replaced with fragments
@@ -162,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         recyclerView.setVisibility(View.GONE);
         fm.beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
         toolbar.setNavigationIcon(materialMenu);
-        materialMenu.animateIconState(iconState, false);
+        materialMenu.animateIconState(iconState);
     }
 
 
@@ -243,10 +242,10 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         if(gameCharacterList.size() == 0) {
             Log.i(null, "Data created");
             ArrayList<GameCharacter> gameCharacters = new ArrayList<>();
-            gameCharacters.add(new GameCharacter("Thomas Anstis", "Vampire", "Gangrel"));
-            gameCharacters.add(new GameCharacter("Tom Lytton", "Vampire", "Brujah"));
-            gameCharacters.add(new GameCharacter("Georgia Johnson", "Vampire", "Tremere"));
-            gameCharacters.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "Ventrue"));
+            gameCharacters.add(new GameCharacter("Thomas Anstis", "Vampire", "", "Gangrel"));
+            gameCharacters.add(new GameCharacter("Tom Lytton", "Vampire", "", "Brujah"));
+            gameCharacters.add(new GameCharacter("Georgia Johnson", "Vampire", "", "Tremere"));
+            gameCharacters.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "", "Ventrue"));
             gameCharacterList = gameCharacters;
 
             TextModule module1 = new TextModule();
@@ -326,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     @Override
     public void onCharacterLongClicked(int position) {
         toolbar.setNavigationIcon(materialMenu);
-        materialMenu.animateIconState(MaterialMenuDrawable.IconState.ARROW, false);
+        materialMenu.animateIconState(MaterialMenuDrawable.IconState.ARROW);
         fab.hide();
         toolbar.setBackgroundColor(getResources().getColor(R.color.grey_600));
         if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.grey_700));

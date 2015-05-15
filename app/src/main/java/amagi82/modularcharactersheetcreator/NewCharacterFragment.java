@@ -2,12 +2,16 @@ package amagi82.modularcharactersheetcreator;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.RectF;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.TextPaint;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,6 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class NewCharacterFragment extends Fragment implements View.OnClickListener {
 
     private OnGameCharacterAddedListener listener;
+    private CircleImageView iconCharacter;
     private ImageView iconRace;
     private ImageView iconClass;
     private EditText etName;
@@ -38,6 +43,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     private int idClass;
     private int characterPosition;
     private boolean isEditMode = false;
+    private boolean isIconCharacterPresent = false;
 
     public NewCharacterFragment() {
     }
@@ -57,7 +63,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         }
         getActivity().setTitle(getResources().getString(isEditMode? R.string.edit_character : R.string.new_character));
 
-        CircleImageView iconCharacter = (CircleImageView) rootView.findViewById(R.id.iconCharacter);
+        iconCharacter = (CircleImageView) rootView.findViewById(R.id.iconCharacter);
         ImageView iconGameSystem = (ImageView) rootView.findViewById(R.id.iconGameSystem);
         iconRace = (ImageView) rootView.findViewById(R.id.iconRace);
         iconClass = (ImageView) rootView.findViewById(R.id.iconClass);
@@ -70,11 +76,12 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
 
         if(isEditMode){
             GameCharacter character = MainActivity.gameCharacterList.get(characterPosition);
-            iconCharacter.setImageBitmap(character.getImageCharacterIcon());
+            iconCharacter.setImageBitmap(character.getCharacterIcon());
             etName.setText(character.getCharacterName());
             etGameSystem.setText(character.getGameSystem());
             etRace.setText(character.getCharacterRace());
             etClass.setText(character.getCharacterClass());
+            isIconCharacterPresent = true;
         }
 
         iconCharacter.setOnClickListener(this);
@@ -83,6 +90,28 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         iconClass.setOnClickListener(this);
         iconTemplate.setOnClickListener(this);
         etTemplate.setOnClickListener(this);
+
+        etName.addTextChangedListener(new TextWatcher() {
+            char firstLetter;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                firstLetter = s.charAt(0);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (firstLetter != s.charAt(0)) {
+                    iconCharacter.setImageBitmap(createDefaultIcon());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                isIconCharacterPresent = true;
+            }
+        });
+
 
         return rootView;
     }
@@ -94,8 +123,9 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         menu.findItem(R.id.action_add).getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GameCharacter character = new GameCharacter(etName.getText().toString(), etGameSystem.getText().toString(), etClass.getText().toString());
-                character.setCharacterRace(etRace.getText().toString());
+                GameCharacter character = new GameCharacter(etName.getText().toString(), etGameSystem.getText().toString(),
+                        etRace.getText().toString(), etClass.getText().toString());
+                character.setCharacterIcon(isIconCharacterPresent ? ((BitmapDrawable) iconCharacter.getDrawable()).getBitmap() : createDefaultIcon());
                 //TODO- set up the rest of the character data once implemented
                 if (isEditMode) {
                     listener.OnGameCharacterUpdated(characterPosition, character);
@@ -112,35 +142,31 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
 
     }
 
-    //TODO: finish and test this, and add color selection for background color. Fade color of toolbar to selected color.
-    private void createDefaultIcon(){
-        int iconSize = getResources().getDimensionPixelSize(R.dimen.item_icon_size);
+    private Bitmap createDefaultIcon(){
+        int iconSize = getResources().getDimensionPixelSize(R.dimen.circle_icon_size);
         int textColor = getResources().getColor(R.color.white);
         int backgroundColor = getResources().getColor(R.color.primary);
 
-
-        //Title TextPaint
         TextPaint textPaint = new TextPaint();
         textPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setLinearText(true);
         textPaint.setColor(textColor);
-        //textPaint.setTextSize(titleSize);
+        textPaint.setTextSize(getResources().getDimension(R.dimen.text_size_circle_icon));
 
-        RectF rectF = new RectF();
+        Rect rect = new Rect();
+        rect.set(0, 0, iconSize, iconSize);
 
-        rectF.set(0, 0, iconSize, iconSize);
-        //rectF.offset((getWidth() - iconSize) / 2, (getHeight() - iconSize) / 2);
+        int xPos = rect.centerX();
+        int yPos = (int) (rect.centerY() - (textPaint.descent() + textPaint.ascent()) * .5);
 
-        float centerX = rectF.centerX();
-        float centerY = rectF.centerY();
+        Bitmap bitmap = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ARGB_8888);
 
-        int xPos = (int) centerX;
-        int yPos = (int) (centerY - (textPaint.descent() + textPaint.ascent()) / 2);
-
-        Canvas canvas = new Canvas();
+        Canvas canvas = new Canvas(bitmap);
         canvas.drawColor(backgroundColor);
-        //canvas.drawText(titleText, xPos, yPos, textPaint);
+        canvas.drawText(etName.getText().toString().substring(0, 1), xPos, yPos, textPaint);
+
+        return bitmap;
     }
 
     @Override

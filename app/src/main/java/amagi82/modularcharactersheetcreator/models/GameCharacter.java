@@ -2,7 +2,12 @@ package amagi82.modularcharactersheetcreator.models;
 
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -10,7 +15,7 @@ import amagi82.modularcharactersheetcreator.models.modules.Module;
 
 public class GameCharacter implements Serializable{
 
-    private Bitmap imageCharacterIcon;
+    transient private Bitmap characterIcon;
     private String characterName = "";
     private String characterRace = "";
     private String characterClass = "";
@@ -29,30 +34,43 @@ public class GameCharacter implements Serializable{
         return characterName;
     }
 
-    public GameCharacter(String characterName, String gameSystem, String characterClass) {
+    public GameCharacter(String characterName, String gameSystem, String characterRace, String characterClass) {
         this.characterName = characterName;
+        this.characterRace = characterRace;
         this.characterClass = characterClass;
         this.gameSystem = gameSystem;
     }
 
-    public GameCharacter(String characterName, String gameSystem, String characterClass, int colorPrimary, int colorBackground, int colorText,
-                         int colorTextTitle, int colorTitles) {
-        this.characterName = characterName;
-        this.characterClass = characterClass;
-        this.gameSystem = gameSystem;
-        this.colorPrimary = colorPrimary;
-        this.colorBackground = colorBackground;
-        this.colorText = colorText;
-        this.colorTextTitle = colorTextTitle;
-        this.colorTitles = colorTitles;
+    private void writeObject(ObjectOutputStream oos) throws IOException {
+        // This will serialize all fields that you did not mark with 'transient'
+        // (Java's default behaviour)
+        oos.defaultWriteObject();
+        // Manually serialize all transient fields that you want to be serialized
+        if(characterIcon!=null){
+            ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+            boolean success = characterIcon.compress(Bitmap.CompressFormat.PNG, 100, byteStream);
+            if(success){
+                oos.writeObject(byteStream.toByteArray());
+            }
+        }
     }
 
-    public Bitmap getImageCharacterIcon() {
-        return imageCharacterIcon;
+    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException{
+        // Deserializing non-transient fields
+        ois.defaultReadObject();
+        // All other fields that you serialized
+        byte[] image = (byte[]) ois.readObject();
+        if(image != null && image.length > 0){
+            characterIcon = BitmapFactory.decodeByteArray(image, 0, image.length);
+        }
     }
 
-    public void setImageCharacterIcon(Bitmap imageCharacterIcon) {
-        this.imageCharacterIcon = imageCharacterIcon;
+    public Bitmap getCharacterIcon() {
+        return characterIcon;
+    }
+
+    public void setCharacterIcon(Bitmap characterIcon) {
+        this.characterIcon = characterIcon;
     }
 
     public void setCharacterName(String characterName) {

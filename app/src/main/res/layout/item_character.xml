@@ -7,9 +7,9 @@
 
     <!-- update to circle icon -->
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageCharacterIcon"
-        android:layout_width="@dimen/item_icon_size"
-        android:layout_height="@dimen/item_icon_size"
+        android:id="@+id/characterIcon"
+        android:layout_width="@dimen/circle_icon_size"
+        android:layout_height="@dimen/circle_icon_size"
         android:layout_marginLeft="@dimen/default_horizontal_margin"
         android:layout_marginRight="@dimen/default_horizontal_margin"
         android:layout_alignParentLeft="true"

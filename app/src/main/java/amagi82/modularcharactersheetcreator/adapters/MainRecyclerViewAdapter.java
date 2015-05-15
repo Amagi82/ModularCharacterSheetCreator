@@ -42,7 +42,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
         boolean isSelected = MainActivity.selectedItems.get(position, false);
         final GameCharacter gameCharacter = MainActivity.gameCharacterList.get(position);
         holder.imageCharacterIcon.setImageBitmap(isSelected? getBitmap(R.drawable.ic_check_circle_grey600_36dp) :
-                gameCharacter.getImageCharacterIcon() != null? gameCharacter.getImageCharacterIcon() : getBitmap(R.drawable.ic_face_grey600_36dp));
+                gameCharacter.getCharacterIcon() != null? gameCharacter.getCharacterIcon() : getBitmap(R.drawable.ic_face_grey600_36dp));
         holder.container.setBackgroundResource(isSelected? R.color.selection_alpha : 0);
         holder.tvName.setText(gameCharacter.getCharacterName());
         holder.tvCharacterClass.setText(gameCharacter.getCharacterRace() + " " + gameCharacter.getCharacterClass());
@@ -85,7 +85,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
                     return true;
                 }
             });
-            imageCharacterIcon = (CircleImageView) itemView.findViewById(R.id.imageCharacterIcon);
+            imageCharacterIcon = (CircleImageView) itemView.findViewById(R.id.characterIcon);
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvCharacterClass = (TextView) itemView.findViewById(R.id.tvCharacterClass);
             tvGameSystem = (TextView) itemView.findViewById(R.id.tvGameSystem);
