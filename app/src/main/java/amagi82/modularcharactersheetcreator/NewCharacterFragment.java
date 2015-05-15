@@ -31,6 +31,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewCharacterFragment extends Fragment implements View.OnClickListener {
 
+    private GameCharacter gameCharacter;
     private OnGameCharacterAddedListener listener;
     private CircleImageView iconCharacter;
     private ImageView iconRace;
@@ -75,12 +76,12 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         EditText etTemplate = (EditText) rootView.findViewById(R.id.etTemplate);
 
         if(isEditMode){
-            GameCharacter character = MainActivity.gameCharacterList.get(characterPosition);
-            iconCharacter.setImageBitmap(character.getCharacterIcon());
-            etName.setText(character.getCharacterName());
-            etGameSystem.setText(character.getGameSystem());
-            etRace.setText(character.getCharacterRace());
-            etClass.setText(character.getCharacterClass());
+            gameCharacter = MainActivity.gameCharacterList.get(characterPosition);
+            iconCharacter.setImageBitmap(gameCharacter.getCharacterIcon());
+            etName.setText(gameCharacter.getCharacterName());
+            etGameSystem.setText(gameCharacter.getGameSystem());
+            etRace.setText(gameCharacter.getCharacterRace());
+            etClass.setText(gameCharacter.getCharacterClass());
             isIconCharacterPresent = true;
         }
 
@@ -91,6 +92,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         iconTemplate.setOnClickListener(this);
         etTemplate.setOnClickListener(this);
 
+        //Make a new icon for the first letter of the character's name. TODO: allow custom icons and don't replace icon if custom
         etName.addTextChangedListener(new TextWatcher() {
             char firstLetter;
 
@@ -112,7 +114,6 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
             }
         });
 
-
         return rootView;
     }
 
@@ -123,14 +124,17 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         menu.findItem(R.id.action_add).getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GameCharacter character = new GameCharacter(etName.getText().toString(), etGameSystem.getText().toString(),
-                        etRace.getText().toString(), etClass.getText().toString());
-                character.setCharacterIcon(isIconCharacterPresent ? ((BitmapDrawable) iconCharacter.getDrawable()).getBitmap() : createDefaultIcon());
+                if (gameCharacter == null) gameCharacter = new GameCharacter();
+                gameCharacter.setCharacterName(etName.getText().toString());
+                gameCharacter.setGameSystem(etGameSystem.getText().toString());
+                gameCharacter.setCharacterRace(etRace.getText().toString());
+                gameCharacter.setCharacterClass(etClass.getText().toString());
+                gameCharacter.setCharacterIcon(isIconCharacterPresent ? ((BitmapDrawable) iconCharacter.getDrawable()).getBitmap() : createDefaultIcon());
                 //TODO- set up the rest of the character data once implemented
                 if (isEditMode) {
-                    listener.OnGameCharacterUpdated(characterPosition, character);
+                    listener.OnGameCharacterUpdated(characterPosition, gameCharacter);
                 } else {
-                    listener.OnGameCharacterAdded(character);
+                    listener.OnGameCharacterAdded(gameCharacter);
                 }
                 getFragmentManager().popBackStack();
 
@@ -139,7 +143,6 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                 imm.hideSoftInputFromWindow(etName.getWindowToken(), 0);
             }
         });
-
     }
 
     private Bitmap createDefaultIcon(){
