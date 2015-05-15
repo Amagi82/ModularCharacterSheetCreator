@@ -14,7 +14,7 @@ import android.view.View;
 
 
 /*
-    This may be useless. Rolled dividers into layouts
+    This may be useless. Rolled dividers into layouts, which avoided some bugs with dividers not animating along with items
  */
 
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
