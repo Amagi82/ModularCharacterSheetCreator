@@ -29,4 +29,5 @@ dependencies {
     compile 'com.balysv.materialmenu:material-menu-toolbar:1.5.3'
     compile 'com.afollestad:material-dialogs:0.7.3.4'
     compile 'com.nispok:snackbar:2.10.8'
+    compile 'com.edmodo:cropper:1.0.1'
 }

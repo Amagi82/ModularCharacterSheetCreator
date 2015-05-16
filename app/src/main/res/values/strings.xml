@@ -26,6 +26,15 @@
     <string name="selected_count">%1$s selected</string>
     <string name="deleted_count">%1$s deleted</string>
     <string name="undo">UNDO</string>
+    <string name="crop_image">Crop image</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
+    <string-array name="icon_choices">
+        <item>Take photo</item>
+        <item>Choose photo</item>
+        <item>Use default</item>
+    </string-array>
 
     <string-array name="game_systems">
         <item>Other</item>

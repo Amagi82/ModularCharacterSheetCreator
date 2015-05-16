@@ -1,13 +1,20 @@
 package amagi82.modularcharactersheetcreator;
 
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextPaint;
@@ -22,8 +29,13 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.edmodo.cropper.CropImageView;
+
+import java.io.File;
+import java.io.IOException;
 
 import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterAddedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
@@ -31,6 +43,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewCharacterFragment extends Fragment implements View.OnClickListener {
 
+    private static final int PICK_FROM_CAMERA = 1;
+    private static final int CROP_FROM_CAMERA = 2;
+    private static final int PICK_FROM_FILE = 3;
+    private Uri imageCaptureUri;
     private GameCharacter gameCharacter;
     private OnGameCharacterAddedListener listener;
     private CircleImageView iconCharacter;
@@ -40,11 +56,14 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     private EditText etGameSystem;
     private EditText etRace;
     private EditText etClass;
+    private CropImageView cropper;
     private int idRace;
     private int idClass;
     private int characterPosition;
+    private int circleImageSize;
     private boolean isEditMode = false;
     private boolean isIconCharacterPresent = false;
+    private boolean hasCustomCharacterIcon = false;
 
     public NewCharacterFragment() {
     }
@@ -74,6 +93,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         etRace = (EditText) rootView.findViewById(R.id.etRace);
         etClass = (EditText) rootView.findViewById(R.id.etClass);
         EditText etTemplate = (EditText) rootView.findViewById(R.id.etTemplate);
+        circleImageSize = (int) getResources().getDimension(R.dimen.circle_icon_size);
 
         if(isEditMode){
             gameCharacter = MainActivity.gameCharacterList.get(characterPosition);
@@ -83,7 +103,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
             etRace.setText(gameCharacter.getCharacterRace());
             etClass.setText(gameCharacter.getCharacterClass());
             isIconCharacterPresent = true;
-        }
+        }else gameCharacter = new GameCharacter();
 
         iconCharacter.setOnClickListener(this);
         iconGameSystem.setOnClickListener(this);
@@ -98,12 +118,12 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                firstLetter = s.charAt(0);
+                if (s.length() > 0) firstLetter = s.charAt(0);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (firstLetter != s.charAt(0)) {
+                if (!hasCustomCharacterIcon && s.length() > 0 && firstLetter != s.charAt(0)) {
                     iconCharacter.setImageBitmap(createDefaultIcon());
                 }
             }
@@ -124,12 +144,12 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         menu.findItem(R.id.action_add).getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (gameCharacter == null) gameCharacter = new GameCharacter();
                 gameCharacter.setCharacterName(etName.getText().toString());
                 gameCharacter.setGameSystem(etGameSystem.getText().toString());
                 gameCharacter.setCharacterRace(etRace.getText().toString());
                 gameCharacter.setCharacterClass(etClass.getText().toString());
-                gameCharacter.setCharacterIcon(isIconCharacterPresent ? ((BitmapDrawable) iconCharacter.getDrawable()).getBitmap() : createDefaultIcon());
+                if(!hasCustomCharacterIcon) gameCharacter.setCharacterIcon(isIconCharacterPresent ?
+                        ((BitmapDrawable) iconCharacter.getDrawable()).getBitmap() : createDefaultIcon());
                 //TODO- set up the rest of the character data once implemented
                 if (isEditMode) {
                     listener.OnGameCharacterUpdated(characterPosition, gameCharacter);
@@ -146,9 +166,9 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     }
 
     private Bitmap createDefaultIcon(){
-        int iconSize = getResources().getDimensionPixelSize(R.dimen.circle_icon_size);
         int textColor = getResources().getColor(R.color.white);
         int backgroundColor = getResources().getColor(R.color.primary);
+        String firstLetter = etName.getText().length() > 0? etName.getText().toString().substring(0, 1) : "";
 
         TextPaint textPaint = new TextPaint();
         textPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
@@ -158,16 +178,16 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         textPaint.setTextSize(getResources().getDimension(R.dimen.text_size_circle_icon));
 
         Rect rect = new Rect();
-        rect.set(0, 0, iconSize, iconSize);
+        rect.set(0, 0, circleImageSize, circleImageSize);
 
         int xPos = rect.centerX();
         int yPos = (int) (rect.centerY() - (textPaint.descent() + textPaint.ascent()) * .5);
 
-        Bitmap bitmap = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(circleImageSize, circleImageSize, Bitmap.Config.ARGB_8888);
 
         Canvas canvas = new Canvas(bitmap);
         canvas.drawColor(backgroundColor);
-        canvas.drawText(etName.getText().toString().substring(0, 1), xPos, yPos, textPaint);
+        canvas.drawText(firstLetter, xPos, yPos, textPaint);
 
         return bitmap;
     }
@@ -181,7 +201,40 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iconCharacter:
-                Log.i(null, "character icon clicked");
+
+                new MaterialDialog.Builder(getActivity()).items(R.array.icon_choices)
+                        .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View view, int position, CharSequence text) {
+                        switch (position){
+                            case 0:
+                                if(getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
+                                    Intent intentTakePhoto 	 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                    imageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+                                            "tmp_avatar_" + String.valueOf(System.currentTimeMillis()) + ".jpg"));
+                                    intentTakePhoto.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageCaptureUri);
+                                    try {
+                                        intentTakePhoto.putExtra("return-data", true);
+                                        startActivityForResult(intentTakePhoto, PICK_FROM_CAMERA);
+                                    } catch (ActivityNotFoundException e) {
+                                        e.printStackTrace();
+                                    }
+                                }else{
+                                    Toast.makeText(getActivity(), "No camera detected on your device", Toast.LENGTH_SHORT).show();
+                                }
+                                break;
+
+                            case 1:
+                                Intent intentFromGallery = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
+                                startActivityForResult(Intent.createChooser(intentFromGallery, "Complete action using"), PICK_FROM_FILE);
+                                break;
+                            case 2:
+                                iconCharacter.setImageBitmap(createDefaultIcon());
+                                hasCustomCharacterIcon = false;
+                                break;
+                        }
+                    }
+                }).show();
                 break;
             case R.id.iconGameSystem:
                 chooseGameSystem(R.array.game_systems, etGameSystem);
@@ -200,6 +253,37 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) return;
+        if (data != null) imageCaptureUri = data.getData();
+
+        try {
+            final Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageCaptureUri);
+            MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                    .title(getResources().getString(R.string.crop_image)).customView(R.layout.crop_image, false)
+                    .positiveText(getResources().getString(R.string.ok))
+                    .negativeText(getResources().getString(R.string.cancel))
+                    .callback(new MaterialDialog.ButtonCallback() {
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
+                            Bitmap croppedBitmap = cropper.getCroppedImage();
+                            Bitmap.createScaledBitmap(croppedBitmap, circleImageSize, circleImageSize, true);
+                            gameCharacter.setCharacterIcon(croppedBitmap);
+                            iconCharacter.setImageBitmap(croppedBitmap);
+                            hasCustomCharacterIcon = true;
+                        }
+                    })
+                    .build();
+            cropper = (CropImageView) dialog.findViewById(R.id.cropImageView);
+            cropper.setImageBitmap(bitmap);
+            dialog.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
