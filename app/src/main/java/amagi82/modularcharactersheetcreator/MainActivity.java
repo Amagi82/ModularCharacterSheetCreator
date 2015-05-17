@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
             oi = new ObjectInputStream(fis);
             gameCharacterList = (ArrayList<GameCharacter>) oi.readObject();
         } catch (IOException e) {
-            Log.e("InternalStorage", e.getMessage());
+            Log.e("InternalStorage", ""+e.toString());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }finally {
@@ -260,6 +260,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         }
     }
 
+    //TODO: back up saves in temp file http://stackoverflow.com/questions/18914977/finish-write-to-disk-task-before-the-app-quits-in-android
     @Override
     protected void onStop() {
         super.onStop();

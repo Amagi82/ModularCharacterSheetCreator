@@ -7,8 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -20,12 +22,14 @@ import android.text.Editable;
 import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,6 +40,7 @@ import com.edmodo.cropper.CropImageView;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterAddedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
@@ -44,11 +49,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class NewCharacterFragment extends Fragment implements View.OnClickListener {
 
     private static final int PICK_FROM_CAMERA = 1;
-    private static final int CROP_FROM_CAMERA = 2;
-    private static final int PICK_FROM_FILE = 3;
+    private static final int PICK_FROM_FILE = 2;
     private Uri imageCaptureUri;
     private GameCharacter gameCharacter;
     private OnGameCharacterAddedListener listener;
+    private MaterialDialog dialog;
     private CircleImageView iconCharacter;
     private ImageView iconRace;
     private ImageView iconClass;
@@ -200,14 +205,14 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iconCharacter:
-
-                new MaterialDialog.Builder(getActivity()).items(R.array.icon_choices)
+            case R.id.iconCharacter: //Select an image for a custom icon
+                dialog = new MaterialDialog.Builder(getActivity()).items(R.array.icon_choices)
                         .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View view, int position, CharSequence text) {
                         switch (position){
                             case 0:
+                                //Get image from camera. Check to make sure device is equipped with a camera
                                 if(getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
                                     Intent intentTakePhoto 	 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                                     imageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
@@ -225,10 +230,12 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                                 break;
 
                             case 1:
+                                //Get image from gallery
                                 Intent intentFromGallery = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
                                 startActivityForResult(Intent.createChooser(intentFromGallery, "Complete action using"), PICK_FROM_FILE);
                                 break;
                             case 2:
+                                //Just use the default icon
                                 iconCharacter.setImageBitmap(createDefaultIcon());
                                 hasCustomCharacterIcon = false;
                                 break;
@@ -256,14 +263,38 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    //Called when an image is selected from the camera or the gallery, and lets you crop it into an icon
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) return;
         if (data != null) imageCaptureUri = data.getData();
 
         try {
-            final Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageCaptureUri);
-            MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+            //Measure the size of the image without loading it into memory
+            InputStream input = getActivity().getContentResolver().openInputStream(imageCaptureUri);
+            BitmapFactory.Options bitmapInfo = new BitmapFactory.Options();
+            bitmapInfo.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(input, null, bitmapInfo);
+            input.close();
+            if ((bitmapInfo.outWidth == -1) || (bitmapInfo.outHeight == -1)) return;
+
+            //Get screen size, and find ratio of image size to screen size
+            WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+            Display display = wm.getDefaultDisplay();
+            wm = null;
+            Point size = new Point();
+            display.getSize(size);
+            double ratio = Math.max(bitmapInfo.outHeight / (size.y*.8), bitmapInfo.outWidth / (size.x*.8));
+
+            //Scale image size down to match screen size
+            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+            bitmapOptions.inSampleSize = (int) ratio;
+            bitmapOptions.inPreferredConfig=Bitmap.Config.ARGB_8888;//optional
+            input = getActivity().getContentResolver().openInputStream(imageCaptureUri);
+            Bitmap bitmap = BitmapFactory.decodeStream(input, null, bitmapOptions);
+            input.close();
+
+            dialog = new MaterialDialog.Builder(getActivity())
                     .title(getResources().getString(R.string.crop_image)).customView(R.layout.crop_image, false)
                     .positiveText(getResources().getString(R.string.ok))
                     .negativeText(getResources().getString(R.string.cancel))
@@ -288,7 +319,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     }
 
     private void chooseGameSystem(final int arrayId, final EditText editText) {
-        new MaterialDialog.Builder(getActivity()).items(arrayId).itemsCallback(new MaterialDialog.ListCallback() {
+        dialog = new MaterialDialog.Builder(getActivity()).items(arrayId).itemsCallback(new MaterialDialog.ListCallback() {
             @Override
             public void onSelection(MaterialDialog dialog, View view, int position, CharSequence text) {
                 if (!text.equals(getString(R.string.other))) {
@@ -307,7 +338,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     }
 
     private void chooseArchetype(final int arrayId, final EditText editText) {
-        new MaterialDialog.Builder(getActivity()).items(arrayId).itemsCallback(new MaterialDialog.ListCallback() {
+        dialog = new MaterialDialog.Builder(getActivity()).items(arrayId).itemsCallback(new MaterialDialog.ListCallback() {
             @Override
             public void onSelection(MaterialDialog dialog, View view, int position, CharSequence text) {
                 if (!text.equals(getString(R.string.other))) editText.setText(text);
@@ -439,5 +470,11 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                 iconClass.setVisibility(View.INVISIBLE);
                 etRace.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onPause() {
+        if (dialog != null) dialog.dismiss();
+        super.onPause();
     }
 }
