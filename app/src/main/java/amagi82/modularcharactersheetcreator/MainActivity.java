@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
     public static SparseBooleanArray selectedItems = new SparseBooleanArray();
+    private boolean isHomeScreen = true;
     private FrameLayout container;
     private FragmentManager fm = getSupportFragmentManager();
     private Toolbar toolbar;
@@ -96,6 +97,18 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         fab.setOnClickListener(this);
 
         fm.addOnBackStackChangedListener(this);
+
+        //After orientation change, restore state of fab, main recyclerview, and toolbar.
+        if(savedInstanceState != null) {
+            isHomeScreen = savedInstanceState.getBoolean("isHomeScreen");
+            if(!isHomeScreen){
+                fab.hide();
+                recyclerView.setVisibility(View.GONE);
+                toolbar.setNavigationIcon(materialMenu);
+                materialMenu.setIconState(savedInstanceState.getBoolean("isMaterialMenuX", true)?
+                        MaterialMenuDrawable.IconState.X : MaterialMenuDrawable.IconState.ARROW);
+            }
+        }
     }
 
     @Override
@@ -103,6 +116,12 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         this.menu = menu; //Get a menu reference so we can change it elsewhere
+
+        //If selected items are still present after orientation change, retain the state of the toolbar and menu.
+        if(selectedItems.size() > 0){
+            activateSelectionMode();
+            selectedItemsChanged();
+        }
         return true;
     }
 
@@ -162,6 +181,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         fm.beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
         toolbar.setNavigationIcon(materialMenu);
         materialMenu.animateIconState(iconState);
+        isHomeScreen = false;
     }
 
 
@@ -194,6 +214,14 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         menu.clear();
         getMenuInflater().inflate(count == 0 ? R.menu.menu_main : count == 1 ? R.menu.menu_main_longclick_single : R.menu.menu_main_longclick_multiple, menu);
         if(count == 0) resetDefaultMenu();
+    }
+
+    private void activateSelectionMode() {
+        toolbar.setNavigationIcon(materialMenu);
+        materialMenu.animateIconState(MaterialMenuDrawable.IconState.ARROW);
+        fab.hide();
+        toolbar.setBackgroundColor(getResources().getColor(R.color.grey_600));
+        if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.grey_700));
     }
 
     private void toggleSelection(int position) {
@@ -279,7 +307,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     }
 
     private void saveGameCharacters(final String filename) {
-
         Runnable r = new Runnable() {
             @Override
             public void run() {
@@ -316,6 +343,14 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         thread.start();
     }
 
+    //Save state for orientation change
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putBoolean("isHomeScreen", isHomeScreen);
+        savedInstanceState.putBoolean("isMaterialMenuX", materialMenu.getIconState() == MaterialMenuDrawable.IconState.X);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
     /*
         Handle user clicks and interface methods
      */
@@ -350,12 +385,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     @Override
     public void onCharacterLongClicked(int position) {
-        toolbar.setNavigationIcon(materialMenu);
-        materialMenu.animateIconState(MaterialMenuDrawable.IconState.ARROW);
-        fab.hide();
-        toolbar.setBackgroundColor(getResources().getColor(R.color.grey_600));
-        if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.grey_700));
-
+        activateSelectionMode();
         toggleSelection(position);
     }
 
@@ -385,6 +415,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         if (fm.getBackStackEntryCount() == 0) {
             recyclerView.setVisibility(View.VISIBLE);
             resetDefaultMenu();
+            isHomeScreen = true;
         }
     }
 }
