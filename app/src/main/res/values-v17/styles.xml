@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="icon_new_character" parent="icon_new_character.Base">
+    <style name="IconNewCharacter" parent="IconNewCharacter_Base">
         <item name="android:layout_alignParentStart">true</item>
         <item name="android:layout_marginEnd">@dimen/default_horizontal_margin</item>
         <item name="android:paddingEnd">@dimen/default_horizontal_margin</item>
     </style>
 
-    <style name="et_new_character" parent="et_new_character.Base">
+    <style name="EditTextNewCharacter" parent="EditTextNewCharacter_Base">
         <item name="android:layout_alignParentStart">true</item>
         <item name="android:textDirection">locale</item>
         <item name="android:layout_marginStart">40dp</item>

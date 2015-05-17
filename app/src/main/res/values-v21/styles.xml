@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="ToolBar" parent="ToolBar.Base">
+    <style name="ToolBar" parent="ToolBar_Base">
         <item name="android:elevation">4dp</item>
     </style>
 </resources>

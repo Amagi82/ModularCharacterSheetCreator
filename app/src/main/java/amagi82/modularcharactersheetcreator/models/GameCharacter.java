@@ -30,10 +30,6 @@ public class GameCharacter implements Serializable{
     public GameCharacter() {
     }
 
-    public String getCharacterName() {
-        return characterName;
-    }
-
     public GameCharacter(String characterName, String gameSystem, String characterRace, String characterClass) {
         this.characterName = characterName;
         this.characterRace = characterRace;
@@ -71,6 +67,10 @@ public class GameCharacter implements Serializable{
 
     public void setCharacterIcon(Bitmap characterIcon) {
         this.characterIcon = characterIcon;
+    }
+
+    public String getCharacterName() {
+        return characterName;
     }
 
     public void setCharacterName(String characterName) {

@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loadGameCharacters();
+        if(gameCharacterList.size() == 0) loadGameCharacters("Characters");
         addExampleCharacters();
 
         //Add toolbar
@@ -209,21 +209,29 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
 
     /*
-        Load and save gameCharacters
+        Load and save game characters. If the load succeeds, it saves that file as a backup, and if it fails, it loads the backup.
      */
     @SuppressWarnings("unchecked")
-    private void loadGameCharacters() {
+    private void loadGameCharacters(String filename) {
+        long start = System.currentTimeMillis();
         FileInputStream fis = null;
         ObjectInputStream oi = null;
         try {
-            fis = openFileInput("Characters");
+            fis = openFileInput(filename);
             oi = new ObjectInputStream(fis);
             gameCharacterList = (ArrayList<GameCharacter>) oi.readObject();
-        } catch (IOException e) {
-            Log.e("InternalStorage", ""+e.toString());
-        } catch (ClassNotFoundException e) {
+            Log.i(null, filename + " save loaded successfully");
+            Log.i(null, filename + " contains " + fis.getChannel().size() + " bytes");
+
+            //Save characters to backup file if we successfully loaded the primary file
+            if(filename.equals("Characters")) saveGameCharacters("Backup");
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-        }finally {
+            if(filename.equals("Characters")){
+                Log.i(null, "Main save file corrupted. Attempting to load backup save");
+                loadGameCharacters("Backup");
+            }else Log.i(null, "Both primary and backup game saves corrupted");
+        } finally {
             try {
                 if (fis != null) fis.close();
             } catch (IOException e) {
@@ -235,6 +243,9 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                 e.printStackTrace();
             }
         }
+        Log.i(null, "loadGameCharacters took " + (System.currentTimeMillis() - start) + "ms");
+
+
     }
 
     //Populate list if empty - remove for production version
@@ -260,36 +271,50 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         }
     }
 
-    //TODO: back up saves in temp file http://stackoverflow.com/questions/18914977/finish-write-to-disk-task-before-the-app-quits-in-android
     @Override
     protected void onStop() {
         super.onStop();
-
-        //Save characters to internal memory
-        FileOutputStream fos = null;
-        ObjectOutputStream oos = null;
-        try {
-            fos = openFileOutput("Characters", Context.MODE_PRIVATE);
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject(gameCharacterList);
-            oos.flush();
-            Log.i(null, "Characters saved");
-        } catch (IOException e) {
-            Log.e("InternalStorage", e.getMessage());
-        } finally {
-            try{
-                if(fos != null) fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try{
-                if(oos != null) oos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        //Save characters to default file
+        saveGameCharacters("Characters");
     }
 
+    private void saveGameCharacters(final String filename) {
+
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                long start = System.currentTimeMillis();
+
+                //Save characters to internal memory
+                FileOutputStream fos = null;
+                ObjectOutputStream oos = null;
+                try {
+                    fos = openFileOutput(filename, Context.MODE_PRIVATE);
+                    oos = new ObjectOutputStream(fos);
+                    oos.writeObject(gameCharacterList);
+                    oos.flush();
+                    Log.i(null, filename + " saved");
+                } catch (IOException e) {
+                    Log.i(null, "Failed to save " + filename);
+                    e.printStackTrace();
+                } finally {
+                    try{
+                        if(fos != null) fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try{
+                        if(oos != null) oos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Log.i(null, "saveGameCharacters took " + (System.currentTimeMillis() - start) + "ms");
+            }
+        };
+        Thread thread = new Thread(r);
+        thread.start();
+    }
 
     /*
         Handle user clicks and interface methods

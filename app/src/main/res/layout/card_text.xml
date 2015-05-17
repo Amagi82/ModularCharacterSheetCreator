@@ -5,7 +5,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     card_view:contentPadding="@dimen/card_padding"
     card_view:cardCornerRadius="@dimen/card_corner_radius"
-    style="@style/card">
+    style="@style/Card">
 
     <TextView
         android:id="@+id/tvText"
