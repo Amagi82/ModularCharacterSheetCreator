@@ -129,7 +129,7 @@ public class StatRatingBar extends RatingBar {
 
         for (int i=0;i<getNumStars();++i) {
 
-            if(!vertical){
+            if(!vertical && barType != BarType.HEALTHBAR){
                 path.computeBounds(rectangle, true);
                 path.offset((i + .5F) * getWidth() / getNumStars() - rectangle.centerX(), getHeight() / 2 - rectangle.centerY());
             }
@@ -145,7 +145,9 @@ public class StatRatingBar extends RatingBar {
                 path = createPathHealthBox(shapeSize, agg? Healthbox.EMPTY : lethal? Healthbox.X : bashing? Healthbox.CHECK : Healthbox.EMPTY);
 
                 path.computeBounds(rectangle, true);
-                path.offset(getWidth() / 2 - rectangle.centerX(), (i + .5F) * getHeight() / getNumStars() - rectangle.centerY());
+                if(!vertical){
+                    path.offset((i + .5F) * getWidth() / getNumStars() - rectangle.centerX(), getHeight() / 2 - rectangle.centerY());
+                }else path.offset(getWidth() / 2 - rectangle.centerX(), (i + .5F) * getHeight() / getNumStars() - rectangle.centerY());
 
                 if(agg) canvas.drawPath(path, paintInside);
                 canvas.drawPath(path, paintOutline);

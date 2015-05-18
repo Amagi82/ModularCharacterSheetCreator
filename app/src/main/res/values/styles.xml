@@ -128,4 +128,27 @@
         <item name="android:paddingBottom">@dimen/default_vertical_margin</item>
     </style>
 
+    <style name="StatRatingBarTen">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:numStars">10</item>
+        <item name="android:paddingBottom">@dimen/default_vertical_margin</item>
+    </style>
+
+    <style name="Icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/default_icon_padding</item>
+        <item name="android:layout_marginLeft">@dimen/default_small_margin</item>
+        <item name="android:layout_marginRight">@dimen/default_small_margin</item>
+        <item name="android:layout_marginTop">@dimen/default_small_margin</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.7dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
 </resources>

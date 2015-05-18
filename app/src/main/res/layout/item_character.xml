@@ -63,7 +63,5 @@
 
     <View
         android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="0.7dp"
-        android:background="?android:attr/listDivider"/>
+        style="@style/Divider"/>
 </RelativeLayout>

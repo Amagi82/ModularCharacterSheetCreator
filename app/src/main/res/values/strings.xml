@@ -29,6 +29,11 @@
     <string name="crop_image">Crop image</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="take_bashing_damage">Take bashing damage</string>
+    <string name="take_lethal_damage">Take lethal damage</string>
+    <string name="take_agg_damage">Take agg damage</string>
+    <string name="heal_damage">Heal damage</string>
+    <string name="health">Health</string>
 
     <string-array name="icon_choices">
         <item>Take photo</item>
