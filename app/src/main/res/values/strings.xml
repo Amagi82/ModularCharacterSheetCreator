@@ -37,6 +37,10 @@
     <string name="blood_pool">Blood Pool</string>
     <string name="gain_blood">Gain blood</string>
     <string name="spend_blood">Spend blood</string>
+    <string name="what_module_needed">What module do you need?</string>
+    <string name="choose_width">Choose module width</string>
+    <string name="width">Width</string>
+    <string name="choose_color">Choose module color</string>
 
     <string-array name="icon_choices">
         <item>Take photo</item>
