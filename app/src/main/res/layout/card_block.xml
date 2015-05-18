@@ -6,16 +6,12 @@
     card_view:cardCornerRadius="@dimen/card_corner_radius">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/card_linear_layout"
+        style="@style/LinearLayoutWodCardBlock">
 
         <TextView
             android:id="@+id/tvTitle"
-            style="@style/TextTitle_Padded"/>
-
-        <TextView
-            android:id="@+id/tvText"
-            style="@style/TextBody_Padded"/>
+            style="@style/TextTitle"
+            android:paddingBottom="@dimen/default_small_margin"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>

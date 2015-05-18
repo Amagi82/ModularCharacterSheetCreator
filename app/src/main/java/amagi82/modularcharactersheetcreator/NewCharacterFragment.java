@@ -286,7 +286,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
             input.close();
 
             dialog = new MaterialDialog.Builder(getActivity())
-                    .title(getResources().getString(R.string.crop_image)).customView(R.layout.crop_image, false)
+                    .title(getResources().getString(R.string.crop_image)).customView(R.layout.dialog_crop_image, false)
                     .positiveText(getResources().getString(R.string.ok))
                     .negativeText(getResources().getString(R.string.cancel))
                     .callback(new MaterialDialog.ButtonCallback() {
