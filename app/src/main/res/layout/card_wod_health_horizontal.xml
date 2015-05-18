@@ -6,7 +6,7 @@
     card_view:cardCornerRadius="@dimen/card_corner_radius">
 
     <RelativeLayout
-        android:id="@+id/card_linear_layout"
+        android:id="@+id/card_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

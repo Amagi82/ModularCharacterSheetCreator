@@ -30,5 +30,6 @@ dependencies {
     compile 'com.afollestad:material-dialogs:0.7.3.4'
     compile 'com.nispok:snackbar:2.10.8'
     compile 'com.edmodo:cropper:1.0.1'
-    compile 'me.grantland:autofittextview:0.2.1'
+    compile 'com.github.lzyzsd:circleprogress:1.1.0'
+    compile 'com.akexorcist:RoundCornerProgressBar:1.1.0'
 }

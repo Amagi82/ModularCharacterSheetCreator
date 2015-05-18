@@ -34,6 +34,9 @@
     <string name="take_agg_damage">Take agg damage</string>
     <string name="heal_damage">Heal damage</string>
     <string name="health">Health</string>
+    <string name="blood_pool">Blood Pool</string>
+    <string name="gain_blood">Gain blood</string>
+    <string name="spend_blood">Spend blood</string>
 
     <string-array name="icon_choices">
         <item>Take photo</item>
