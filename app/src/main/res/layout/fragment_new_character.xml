@@ -20,7 +20,6 @@
             android:layout_marginLeft="@dimen/default_small_margin"
             android:layout_marginStart="@dimen/default_small_margin"
             android:contentDescription="@string/character_icon"
-            android:src="@drawable/ic_face_grey600_36dp"
             app:border_color="@color/grey_700"
             app:border_width="1dp"/>
 

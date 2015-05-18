@@ -25,6 +25,7 @@ public class GameCharacter implements Serializable{
     private int colorText;
     private int colorTextTitle;
     private int colorTitles;
+    private boolean hasCustomCharacterIcon = false;
     private ArrayList<Module> moduleList = new ArrayList<>();
 
     public GameCharacter() {
@@ -147,5 +148,13 @@ public class GameCharacter implements Serializable{
 
     public void setColorTitles(int colorTitles) {
         this.colorTitles = colorTitles;
+    }
+
+    public boolean hasCustomCharacterIcon() {
+        return hasCustomCharacterIcon;
+    }
+
+    public void setHasCustomCharacterIcon(boolean hasCustomCharacterIcon) {
+        this.hasCustomCharacterIcon = hasCustomCharacterIcon;
     }
 }

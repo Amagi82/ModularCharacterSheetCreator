@@ -26,7 +26,6 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -67,7 +66,6 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     private int characterPosition;
     private int circleImageSize;
     private boolean isEditMode = false;
-    private boolean isIconCharacterPresent = false;
     private boolean hasCustomCharacterIcon = false;
 
     public NewCharacterFragment() {
@@ -107,8 +105,11 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
             etGameSystem.setText(gameCharacter.getGameSystem());
             etRace.setText(gameCharacter.getCharacterRace());
             etClass.setText(gameCharacter.getCharacterClass());
-            isIconCharacterPresent = true;
-        }else gameCharacter = new GameCharacter();
+            hasCustomCharacterIcon = gameCharacter.hasCustomCharacterIcon();
+        }else {
+            gameCharacter = new GameCharacter();
+            if(!hasCustomCharacterIcon) iconCharacter.setImageBitmap(createDefaultIcon());
+        }
 
         iconCharacter.setOnClickListener(this);
         iconGameSystem.setOnClickListener(this);
@@ -117,25 +118,20 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         iconTemplate.setOnClickListener(this);
         etTemplate.setOnClickListener(this);
 
-        //Make a new icon for the first letter of the character's name. TODO: allow custom icons and don't replace icon if custom
+        //Make a new icon for the first letter of the character's name.
         etName.addTextChangedListener(new TextWatcher() {
-            char firstLetter;
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (s.length() > 0) firstLetter = s.charAt(0);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!hasCustomCharacterIcon && s.length() > 0 && firstLetter != s.charAt(0)) {
-                    iconCharacter.setImageBitmap(createDefaultIcon());
-                }
+                if (!hasCustomCharacterIcon) iconCharacter.setImageBitmap(createDefaultIcon());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                isIconCharacterPresent = true;
             }
         });
 
@@ -153,8 +149,8 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                 gameCharacter.setGameSystem(etGameSystem.getText().toString());
                 gameCharacter.setCharacterRace(etRace.getText().toString());
                 gameCharacter.setCharacterClass(etClass.getText().toString());
-                if(!hasCustomCharacterIcon) gameCharacter.setCharacterIcon(isIconCharacterPresent ?
-                        ((BitmapDrawable) iconCharacter.getDrawable()).getBitmap() : createDefaultIcon());
+                gameCharacter.setCharacterIcon(((BitmapDrawable) iconCharacter.getDrawable()).getBitmap());
+                gameCharacter.setHasCustomCharacterIcon(hasCustomCharacterIcon);
                 //TODO- set up the rest of the character data once implemented
                 if (isEditMode) {
                     listener.OnGameCharacterUpdated(characterPosition, gameCharacter);
@@ -195,11 +191,6 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         canvas.drawText(firstLetter, xPos, yPos, textPaint);
 
         return bitmap;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -303,7 +294,6 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                         public void onPositive(MaterialDialog dialog) {
                             Bitmap croppedBitmap = cropper.getCroppedImage();
                             Bitmap.createScaledBitmap(croppedBitmap, circleImageSize, circleImageSize, true);
-                            gameCharacter.setCharacterIcon(croppedBitmap);
                             iconCharacter.setImageBitmap(croppedBitmap);
                             hasCustomCharacterIcon = true;
                         }

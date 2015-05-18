@@ -41,8 +41,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         boolean isSelected = MainActivity.selectedItems.get(position, false);
         final GameCharacter gameCharacter = MainActivity.gameCharacterList.get(position);
-        holder.imageCharacterIcon.setImageBitmap(isSelected? getBitmap(R.drawable.ic_check_circle_grey600_36dp) :
-                gameCharacter.getCharacterIcon() != null? gameCharacter.getCharacterIcon() : getBitmap(R.drawable.ic_face_grey600_36dp));
+        holder.imageCharacterIcon.setImageBitmap(isSelected? getBitmap(R.drawable.ic_check_circle_grey600_36dp) : gameCharacter.getCharacterIcon());
         holder.container.setBackgroundResource(isSelected? R.color.selection_alpha : 0);
         holder.tvName.setText(gameCharacter.getCharacterName());
         holder.tvCharacterClass.setText(gameCharacter.getCharacterRace() + " " + gameCharacter.getCharacterClass());
