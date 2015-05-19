@@ -6,7 +6,7 @@
     <string name="character_icon">character icon</string>
     <string name="new_character">New character</string>
     <string name="name">Name</string>
-    <string name="add">ADD</string>
+    <string name="add">Add</string>
     <string name="game_system">Game system</string>
     <string name="character_class">Character class</string>
     <string name="color">Color</string>
@@ -25,7 +25,7 @@
     <string name="edit_character">Edit character</string>
     <string name="selected_count">%1$s selected</string>
     <string name="deleted_count">%1$s deleted</string>
-    <string name="undo">UNDO</string>
+    <string name="undo">Undo</string>
     <string name="crop_image">Crop image</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -42,6 +42,8 @@
     <string name="width">Width</string>
     <string name="choose_color">Choose module color</string>
     <string name="willpower">Willpower</string>
+    <string name="save">Save</string>
+    <string name="discard_changes">Discard changes</string>
 
     <string-array name="icon_choices">
         <item>Take photo</item>

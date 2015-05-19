@@ -24,4 +24,6 @@
     <dimen name="fab_elevation_lollipop">8dp</dimen>
 
     <dimen name="text_size_circle_icon">24sp</dimen>
+
+    <dimen name="divider">0.7dp</dimen>
 </resources>

@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.adapters.MainRecyclerViewAdapter;
 import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
-import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterAddedListener;
+import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterChangedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnItemLongClickedListener;
 import amagi82.modularcharactersheetcreator.listeners.SnackbarEventListener;
@@ -43,7 +43,7 @@ import amagi82.modularcharactersheetcreator.models.modules.TextModule;
 
 
 public class MainActivity extends AppCompatActivity implements OnFabClickedListener, OnItemClickedListener , OnItemLongClickedListener,
-        OnGameCharacterAddedListener, View.OnClickListener, FragmentManager.OnBackStackChangedListener{
+        OnGameCharacterChangedListener, View.OnClickListener, FragmentManager.OnBackStackChangedListener{
 
     public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
     public static SparseBooleanArray selectedItems = new SparseBooleanArray();
@@ -129,8 +129,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action item clicks
         switch(item.getItemId()){
-            case R.id.action_settings:
-                break;
             case R.id.action_delete:
                 //Save the characters and positions temporarily in case the user wants to undo the delete
                 final ArrayList<GameCharacter> storedCharacters = new ArrayList<>();
@@ -163,12 +161,12 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                                 }).eventListener(new SnackbarEventListener(fab)), this); //Hide the floating action button while Snackbar present
                 break;
             case R.id.action_edit:
-                NewCharacterFragment fragment = new NewCharacterFragment();
+                GameCharactersFragment fragment = new GameCharactersFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt("character", selectedItems.keyAt(0));
                 bundle.putBoolean("edit mode", true);
                 fragment.setArguments(bundle);
-                attachFragment(fragment, MaterialMenuDrawable.IconState.X);
+                attachFragment(fragment, MaterialMenuDrawable.IconState.ARROW);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -367,6 +365,37 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     }
 
     @Override
+    public void OnGameCharacterDeleted(final int position) {
+        final GameCharacter gameCharacter = gameCharacterList.get(position);
+        Log.i(null, "deleting position #"+position);
+        Log.i(null, "name of character 0 = "+gameCharacterList.get(0).getCharacterName());
+        Log.i(null, "name of character 1 = "+gameCharacterList.get(1).getCharacterName());
+        Log.i(null, "name of character 2 = "+gameCharacterList.get(2).getCharacterName());
+        Log.i(null, "gameCharactersList before = " + gameCharacterList.toString());
+        gameCharacterList.remove(position);
+        recyclerViewAdapter.notifyItemRemoved(position);
+        Log.i(null, "gameCharactersList after = " + gameCharacterList.toString());
+        Log.i(null, "name of character 0 = " + gameCharacterList.get(0).getCharacterName());
+        Log.i(null, "name of character 1 = " + gameCharacterList.get(1).getCharacterName());
+        Log.i(null, "name of character 2 = "+gameCharacterList.get(2).getCharacterName());
+
+        //Allow the user to undo delete
+        SnackbarManager.show(
+                Snackbar.with(getApplicationContext())
+                        .text(getString(R.string.deleted_count, gameCharacter.getCharacterName())) // text to display
+                        .actionLabel(getString(R.string.undo))
+                        .actionColor(getResources().getColor(R.color.accent))
+                        .actionListener(new ActionClickListener() {
+                            @Override
+                            public void onActionClicked(Snackbar snackbar) {
+                                //User clicked UNDO, so add the stored characters back in their original positions
+                                gameCharacterList.add(position, gameCharacter);
+                                recyclerViewAdapter.notifyItemInserted(position);
+                            }
+                        }).eventListener(new SnackbarEventListener(fab)), this); //Hide the floating action button while Snackbar present
+    }
+
+    @Override
     public void onAddModule() {
     }
 
@@ -393,7 +422,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     public void onClick(View v) {
         if (v.getId() == R.id.fab) {
             //Floating action button clicked - add new character
-            attachFragment(new NewCharacterFragment(), MaterialMenuDrawable.IconState.X);
+            attachFragment(new GameCharactersFragment(), MaterialMenuDrawable.IconState.X);
         }else {
             //Up navigation clicked
             if (fm.getBackStackEntryCount() > 0) fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);

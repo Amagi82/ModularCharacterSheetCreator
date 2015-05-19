@@ -26,10 +26,12 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -41,17 +43,17 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterAddedListener;
+import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterChangedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class NewCharacterFragment extends Fragment implements View.OnClickListener {
+public class GameCharactersFragment extends Fragment implements View.OnClickListener {
 
     private static final int PICK_FROM_CAMERA = 1;
     private static final int PICK_FROM_FILE = 2;
     private Uri imageCaptureUri;
     private GameCharacter gameCharacter;
-    private OnGameCharacterAddedListener listener;
+    private OnGameCharacterChangedListener listener;
     private MaterialDialog dialog;
     private CircleImageView iconCharacter;
     private ImageView iconRace;
@@ -68,23 +70,24 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     private boolean isEditMode = false;
     private boolean hasCustomCharacterIcon = false;
 
-    public NewCharacterFragment() {
+    public GameCharactersFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_new_character, container, false);
-        setHasOptionsMenu(true);
 
-        listener = (OnGameCharacterAddedListener) getActivity();
-
-        //If this is a character being edited, not a new character, change title and load character data
+        //Check if we're editing a character or creating a new one
         Bundle arguments = getArguments();
         if(arguments != null) {
             isEditMode = getArguments().getBoolean("edit mode");
             characterPosition = getArguments().getInt("character");
         }
         getActivity().setTitle(getResources().getString(isEditMode? R.string.edit_character : R.string.new_character));
+
+        View rootView = inflater.inflate(isEditMode? R.layout.fragment_edit_character : R.layout.fragment_new_character, container, false);
+        setHasOptionsMenu(true);
+
+        listener = (OnGameCharacterChangedListener) getActivity();
 
         iconCharacter = (CircleImageView) rootView.findViewById(R.id.iconCharacter);
         ImageView iconGameSystem = (ImageView) rootView.findViewById(R.id.iconGameSystem);
@@ -106,6 +109,9 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
             etRace.setText(gameCharacter.getCharacterRace());
             etClass.setText(gameCharacter.getCharacterClass());
             hasCustomCharacterIcon = gameCharacter.hasCustomCharacterIcon();
+
+            Button bDelete = (Button) rootView.findViewById(R.id.bDelete);
+            bDelete.setOnClickListener(this);
         }else {
             gameCharacter = new GameCharacter();
             if(!hasCustomCharacterIcon) iconCharacter.setImageBitmap(createDefaultIcon());
@@ -134,36 +140,52 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
             public void afterTextChanged(Editable s) {
             }
         });
-
         return rootView;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        inflater.inflate(R.menu.menu_new_character, menu);
-        menu.findItem(R.id.action_add).getActionView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gameCharacter.setCharacterName(etName.getText().toString());
-                gameCharacter.setGameSystem(etGameSystem.getText().toString());
-                gameCharacter.setCharacterRace(etRace.getText().toString());
-                gameCharacter.setCharacterClass(etClass.getText().toString());
-                gameCharacter.setCharacterIcon(((BitmapDrawable) iconCharacter.getDrawable()).getBitmap());
-                gameCharacter.setHasCustomCharacterIcon(hasCustomCharacterIcon);
-                //TODO- set up the rest of the character data once implemented
-                if (isEditMode) {
-                    listener.OnGameCharacterUpdated(characterPosition, gameCharacter);
-                } else {
+        inflater.inflate(isEditMode? R.menu.menu_edit_character : R.menu.menu_new_character, menu);
+        if(!isEditMode){
+            menu.findItem(R.id.action_add).getActionView().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    saveCharacter();
                     listener.OnGameCharacterAdded(gameCharacter);
-                }
-                getFragmentManager().popBackStack();
+                    getFragmentManager().popBackStack();
 
-                //Dismiss keyboard
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(etName.getWindowToken(), 0);
-            }
-        });
+                    //Dismiss keyboard
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(etName.getWindowToken(), 0);
+                }
+            });
+        }
+    }
+
+    private void saveCharacter() {
+        gameCharacter.setCharacterName(etName.getText().toString());
+        gameCharacter.setGameSystem(etGameSystem.getText().toString());
+        gameCharacter.setCharacterRace(etRace.getText().toString());
+        gameCharacter.setCharacterClass(etClass.getText().toString());
+        gameCharacter.setCharacterIcon(((BitmapDrawable) iconCharacter.getDrawable()).getBitmap());
+        gameCharacter.setHasCustomCharacterIcon(hasCustomCharacterIcon);
+    }
+
+    //On edit mode, we save changes when the user hits the back button
+    @Override
+    public void onDestroyView() {
+        if (isEditMode) {
+            saveCharacter();
+            listener.OnGameCharacterUpdated(characterPosition, gameCharacter);
+        }
+        super.onDestroyView();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.action_discard) getFragmentManager().popBackStack();
+        return super.onOptionsItemSelected(item);
     }
 
     private Bitmap createDefaultIcon(){
@@ -248,6 +270,10 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                 break;
             case R.id.etTemplate:
                 Log.i(null, "Offer template if available");
+                break;
+            case R.id.bDelete:
+                listener.OnGameCharacterDeleted(characterPosition);
+                getFragmentManager().popBackStack();
                 break;
             default:
                 break;

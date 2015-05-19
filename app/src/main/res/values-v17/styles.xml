@@ -12,4 +12,8 @@
         <item name="android:textDirection">locale</item>
         <item name="android:layout_marginStart">40dp</item>
     </style>
+
+    <style name="ActionButton" parent="ActionButton_Base">
+        <item name="android:paddingEnd">@dimen/default_large_margin</item>
+    </style>
 </resources>
