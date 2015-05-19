@@ -3,6 +3,7 @@
     style="@style/Card"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     card_view:cardCornerRadius="@dimen/card_corner_radius">
 
     <RelativeLayout
@@ -32,7 +33,8 @@
             android:layout_below="@id/statRatingBar"
             android:paddingBottom="@dimen/default_vertical_margin"
             android:paddingLeft="@dimen/default_horizontal_margin"
-            android:paddingRight="@dimen/default_horizontal_margin"/>
+            android:paddingRight="@dimen/default_horizontal_margin"
+            tools:text="Mauled"/>
 
         <TextView
             android:id="@+id/tvPenalty"
@@ -41,7 +43,8 @@
             android:layout_alignParentRight="true"
             android:layout_below="@id/statRatingBar"
             android:paddingEnd="@dimen/default_horizontal_margin"
-            android:paddingRight="@dimen/default_horizontal_margin"/>
+            android:paddingRight="@dimen/default_horizontal_margin"
+            tools:text="-2 Dice"/>
 
         <View
             style="@style/Divider"

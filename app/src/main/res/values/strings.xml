@@ -41,6 +41,7 @@
     <string name="choose_width">Choose module width</string>
     <string name="width">Width</string>
     <string name="choose_color">Choose module color</string>
+    <string name="willpower">Willpower</string>
 
     <string-array name="icon_choices">
         <item>Take photo</item>

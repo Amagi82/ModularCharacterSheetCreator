@@ -3,6 +3,7 @@
     style="@style/Card"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     card_view:cardCornerRadius="@dimen/card_corner_radius">
 
     <LinearLayout
@@ -12,13 +13,15 @@
         <TextView
             android:id="@+id/tvTitle"
             style="@style/TextTitle"
-            android:paddingBottom="@dimen/default_vertical_margin"/>
+            android:paddingBottom="@dimen/default_vertical_margin"
+            tools:text="Humanity"/>
 
         <TextView
             android:id="@+id/tvText"
             style="@style/TextBody"
             android:layout_gravity="center_horizontal"
-            android:paddingBottom="@dimen/default_vertical_margin"/>
+            android:paddingBottom="@dimen/default_vertical_margin"
+            tools:text="Path of Humanity"/>
 
         <amagi82.modularcharactersheetcreator.widgets.StatRatingBar
             android:id="@+id/statRatingBar"

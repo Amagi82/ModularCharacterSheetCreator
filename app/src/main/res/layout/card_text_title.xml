@@ -3,19 +3,22 @@
     style="@style/Card"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     card_view:cardCornerRadius="@dimen/card_corner_radius">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvTitle"
-            style="@style/TextTitle_Padded"/>
+            style="@style/TextTitle_Padded"
+            tools:text="Title"/>
 
         <TextView
             android:id="@+id/tvText"
-            style="@style/TextBody_Padded"/>
+            style="@style/TextBody_Padded"
+            tools:text="Description"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>

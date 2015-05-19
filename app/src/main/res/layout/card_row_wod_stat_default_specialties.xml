@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    style="@style/LinearLayoutWodRow"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:weightSum="4"
-    style="@style/LinearLayoutWodRow">
+    android:orientation="horizontal"
+    android:weightSum="4">
 
     <TextView
         android:id="@+id/tvText"
-        android:layout_weight="0"
+        style="@style/TextBody_Column"
         android:layout_width="wrap_content"
-        style="@style/TextBody_Column"/>
+        android:layout_weight="0"
+        tools:text="Intelligence"/>
 
     <TextView
         android:id="@+id/tvSpecialty"
+        style="@style/TextCaption_Column"
         android:layout_width="wrap_content"
         android:layout_weight="0"
-        style="@style/TextCaption_Column"/>
+        tools:text="Problem Solver"/>
 
     <amagi82.modularcharactersheetcreator.widgets.StatRatingBar
         android:id="@+id/statRatingBar"

@@ -12,7 +12,8 @@
         <TextView
             android:id="@+id/tvTitle"
             style="@style/TextTitle"
-            android:paddingBottom="@dimen/default_vertical_margin"/>
+            android:paddingBottom="@dimen/default_vertical_margin"
+            android:text="@string/willpower"/>
 
         <amagi82.modularcharactersheetcreator.widgets.StatRatingBar
             android:id="@+id/statRatingBar"
