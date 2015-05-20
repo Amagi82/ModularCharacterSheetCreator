@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameCharactersFragment">
+    tools:context=".NewCharactersFragment">
 
     <Button
         android:id="@+id/bDelete"
@@ -16,7 +16,7 @@
         android:layout_above="@id/bDelete"/>
 
     <include
-        layout="@layout/fragment_new_character"
+        layout="@layout/fragment_add_character"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bDelete"

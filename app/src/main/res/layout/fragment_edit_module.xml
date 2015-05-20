@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditModuleFragment">
+
+    <Button
+        android:id="@+id/bDelete"
+        style="@style/FlatButton"
+        android:text="@string/delete"/>
+
+    <View
+        style="@style/Divider"
+        android:layout_above="@id/bDelete"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bDelete"
+        android:animateLayoutChanges="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_horizontal_margin">
+
+            <FrameLayout
+                android:id="@+iatch_parent"
+                android:layout_width="mrap_content"
+                android:layout_height="wd/container"/>
+
+            <ImageView
+                android:id="@+id/iconChooseWidth"
+                style="@style/IconNewCharacter"
+                android:layout_below="@id/container"
+                android:contentDescription="@string/choose_width"
+                android:src="@drawable/ic_choose_width_24dp"/>
+
+            <EditText
+                android:id="@+id/etChooseWidth"
+                style="@style/EditTextNewCharacter"
+                android:layout_below="@id/container"
+                android:focusable="false"
+                android:hint="@string/width"
+                android:inputType="number"/>
+
+            <ImageView
+                android:id="@+id/iconChooseColor"
+                style="@style/IconNewCharacter"
+                android:layout_below="@id/etChooseWidth"
+                android:contentDescription="@string/choose_color"
+                android:src="@drawable/ic_palette_grey600_24dp"/>
+
+            <EditText
+                android:id="@+id/etChooseColor"
+                style="@style/EditTextNewCharacter"
+                android:layout_below="@+id/etChooseWidth"
+                android:hint="@string/color"/>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

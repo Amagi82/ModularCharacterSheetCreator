@@ -12,7 +12,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -51,7 +50,8 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
 
     private static final int PICK_FROM_CAMERA = 1;
     private static final int PICK_FROM_FILE = 2;
-    private Uri imageCaptureUri;
+    private static Uri imageCaptureUri;
+    private static Bitmap croppedBitmap;
     private GameCharacter gameCharacter;
     private OnGameCharacterChangedListener listener;
     private MaterialDialog dialog;
@@ -85,7 +85,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         }
         getActivity().setTitle(getResources().getString(isEditMode? R.string.edit_character : R.string.new_character));
 
-        View rootView = inflater.inflate(isEditMode? R.layout.fragment_edit_character : R.layout.fragment_new_character, container, false);
+        View rootView = inflater.inflate(isEditMode? R.layout.fragment_edit_character : R.layout.fragment_add_character, container, false);
         setHasOptionsMenu(true);
 
         listener = (OnGameCharacterChangedListener) getActivity();
@@ -145,6 +145,22 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     }
 
     @Override
+    public void onPause() {
+        if (dialog != null) dialog.dismiss();
+        super.onPause();
+    }
+
+    //On edit mode, we save changes when the user hits the back button
+    @Override
+    public void onDestroyView() {
+        if (!deletingCharacter && isEditMode) {
+            saveCharacter();
+            listener.OnGameCharacterUpdated(characterPosition, gameCharacter);
+        }
+        super.onDestroyView();
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         inflater.inflate(isEditMode ? R.menu.menu_edit_character : R.menu.menu_new_character, menu);
@@ -164,25 +180,6 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         }
     }
 
-    private void saveCharacter() {
-        gameCharacter.setCharacterName(etName.getText().toString());
-        gameCharacter.setGameSystem(etGameSystem.getText().toString());
-        gameCharacter.setCharacterRace(etRace.getText().toString());
-        gameCharacter.setCharacterClass(etClass.getText().toString());
-        gameCharacter.setCharacterIcon(((BitmapDrawable) iconCharacter.getDrawable()).getBitmap());
-        gameCharacter.setHasCustomCharacterIcon(hasCustomCharacterIcon);
-    }
-
-    //On edit mode, we save changes when the user hits the back button
-    @Override
-    public void onDestroyView() {
-        if (!deletingCharacter && isEditMode) {
-            saveCharacter();
-            listener.OnGameCharacterUpdated(characterPosition, gameCharacter);
-        }
-        super.onDestroyView();
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.action_discard) {
@@ -190,6 +187,15 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
             getFragmentManager().popBackStack();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveCharacter() {
+        gameCharacter.setCharacterName(etName.getText().toString());
+        gameCharacter.setGameSystem(etGameSystem.getText().toString());
+        gameCharacter.setCharacterRace(etRace.getText().toString());
+        gameCharacter.setCharacterClass(etClass.getText().toString());
+        gameCharacter.setCharacterIcon(croppedBitmap);
+        gameCharacter.setHasCustomCharacterIcon(hasCustomCharacterIcon);
     }
 
     private Bitmap createDefaultIcon(){
@@ -323,7 +329,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                     .callback(new MaterialDialog.ButtonCallback() {
                         @Override
                         public void onPositive(MaterialDialog dialog) {
-                            Bitmap croppedBitmap = cropper.getCroppedImage();
+                            croppedBitmap = cropper.getCroppedImage();
                             croppedBitmap = Bitmap.createScaledBitmap(croppedBitmap, circleImageSize, circleImageSize, true);
                             iconCharacter.setImageBitmap(croppedBitmap);
                             hasCustomCharacterIcon = true;
@@ -491,11 +497,5 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                 iconClass.setVisibility(View.INVISIBLE);
                 etRace.setVisibility(View.VISIBLE);
         }
-    }
-
-    @Override
-    public void onPause() {
-        if (dialog != null) dialog.dismiss();
-        super.onPause();
     }
 }
