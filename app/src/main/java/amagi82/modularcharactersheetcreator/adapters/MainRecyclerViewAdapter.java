@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import amagi82.modularcharactersheetcreator.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
@@ -21,12 +23,14 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
 
     private static OnItemClickedListener listener;
     private static OnItemLongClickedListener longClickListener;
+    private ArrayList<GameCharacter> gameCharacters = new ArrayList<>();
     private Activity activity;
 
-    public MainRecyclerViewAdapter(Activity activity) {
+    public MainRecyclerViewAdapter(Activity activity, ArrayList<GameCharacter> gameCharacters) {
         listener = (OnItemClickedListener) activity;
         longClickListener = (OnItemLongClickedListener) activity;
         this.activity = activity;
+        this.gameCharacters = gameCharacters;
     }
 
     // Create new views (invoked by the layout manager)
@@ -40,7 +44,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         boolean isSelected = MainActivity.selectedItems.get(position, false);
-        final GameCharacter gameCharacter = MainActivity.gameCharacterList.get(position);
+        final GameCharacter gameCharacter = gameCharacters.get(position);
         holder.imageCharacterIcon.setImageBitmap(isSelected? getBitmap(R.drawable.ic_check_circle_grey600_36dp) : gameCharacter.getCharacterIcon());
         holder.container.setBackgroundResource(isSelected? R.color.selection_alpha : 0);
         holder.tvName.setText(gameCharacter.getCharacterName());
@@ -52,6 +56,8 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     private Bitmap getBitmap(int id){
         return BitmapFactory.decodeResource(activity.getResources(), id);
     }
+
+
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override

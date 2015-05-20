@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     private MaterialMenuDrawable materialMenu;
     private Menu menu;
     private RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
     private MainRecyclerViewAdapter recyclerViewAdapter;
     private FloatingActionButton fab;
 
@@ -78,8 +79,9 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewAdapter = new MainRecyclerViewAdapter(this);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerViewAdapter = new MainRecyclerViewAdapter(this, gameCharacterList);
         recyclerView.setAdapter(recyclerViewAdapter);
 
         //Set up the Floating Action Button
@@ -136,10 +138,8 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                 for(int i = 0; i<storedPositions.size(); i++) storedCharacters.add(gameCharacterList.get(storedPositions.keyAt(i)));
 
                 //Delete the characters
-                for (int i = selectedItems.size() - 1; i >= 0; i--) {
-                    gameCharacterList.remove(selectedItems.keyAt(i));
-                    recyclerViewAdapter.notifyItemRemoved(selectedItems.keyAt(i));
-                }
+                for (int i = selectedItems.size() - 1; i >= 0; i--) removeCharacter(selectedItems.keyAt(i));
+
                 selectedItems.clear();
                 resetDefaultMenu();
 
@@ -153,10 +153,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                                     @Override
                                     public void onActionClicked(Snackbar snackbar) {
                                         //User clicked UNDO, so add the stored characters back in their original positions
-                                        for (int i = 0; i < storedPositions.size(); i++) {
-                                            gameCharacterList.add(storedPositions.keyAt(i), storedCharacters.get(i));
-                                            recyclerViewAdapter.notifyItemInserted(storedPositions.keyAt(i));
-                                        }
+                                        for (int i = 0; i < storedPositions.size(); i++) addCharacter(storedPositions.keyAt(i), storedCharacters.get(i));
                                     }
                                 }).eventListener(new SnackbarEventListener(fab)), this); //Hide the floating action button while Snackbar present
                 break;
@@ -182,6 +179,23 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         isHomeScreen = false;
     }
 
+    private void addCharacter(int position, GameCharacter gameCharacter){
+        gameCharacterList.add(position, gameCharacter);
+        recyclerViewAdapter.notifyItemInserted(position);
+        layoutManager.scrollToPosition(position);
+    }
+
+    private void updateCharacter(int position, GameCharacter gameCharacter){
+        gameCharacterList.set(position, gameCharacter);
+        recyclerViewAdapter.notifyItemChanged(position);
+        layoutManager.scrollToPosition(position);
+    }
+
+    private void removeCharacter(int position){
+        layoutManager.scrollToPosition(position);
+        gameCharacterList.remove(position);
+        recyclerViewAdapter.notifyItemRemoved(position);
+    }
 
     /*
         Handle item selection
@@ -354,30 +368,18 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
      */
     @Override
     public void OnGameCharacterAdded(GameCharacter character) {
-        gameCharacterList.add(0, character);
-        recyclerViewAdapter.notifyItemInserted(0);
+        addCharacter(0, character);
     }
 
     @Override
     public void OnGameCharacterUpdated(int position, GameCharacter character) {
-        gameCharacterList.set(position, character);
-        recyclerViewAdapter.notifyItemChanged(position);
+        updateCharacter(position, character);
     }
 
     @Override
     public void OnGameCharacterDeleted(final int position) {
         final GameCharacter gameCharacter = gameCharacterList.get(position);
-        Log.i(null, "deleting position #"+position);
-        Log.i(null, "name of character 0 = "+gameCharacterList.get(0).getCharacterName());
-        Log.i(null, "name of character 1 = "+gameCharacterList.get(1).getCharacterName());
-        Log.i(null, "name of character 2 = "+gameCharacterList.get(2).getCharacterName());
-        Log.i(null, "gameCharactersList before = " + gameCharacterList.toString());
-        gameCharacterList.remove(position);
-        recyclerViewAdapter.notifyItemRemoved(position);
-        Log.i(null, "gameCharactersList after = " + gameCharacterList.toString());
-        Log.i(null, "name of character 0 = " + gameCharacterList.get(0).getCharacterName());
-        Log.i(null, "name of character 1 = " + gameCharacterList.get(1).getCharacterName());
-        Log.i(null, "name of character 2 = "+gameCharacterList.get(2).getCharacterName());
+        removeCharacter(position);
 
         //Allow the user to undo delete
         SnackbarManager.show(
@@ -389,8 +391,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                             @Override
                             public void onActionClicked(Snackbar snackbar) {
                                 //User clicked UNDO, so add the stored characters back in their original positions
-                                gameCharacterList.add(position, gameCharacter);
-                                recyclerViewAdapter.notifyItemInserted(position);
+                                addCharacter(position, gameCharacter);
                             }
                         }).eventListener(new SnackbarEventListener(fab)), this); //Hide the floating action button while Snackbar present
     }

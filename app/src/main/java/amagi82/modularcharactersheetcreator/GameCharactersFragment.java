@@ -69,6 +69,7 @@ public class GameCharactersFragment extends Fragment implements View.OnClickList
     private int circleImageSize;
     private boolean isEditMode = false;
     private boolean hasCustomCharacterIcon = false;
+    private boolean deletingCharacter = false;
 
     public GameCharactersFragment() {
     }
@@ -175,7 +176,7 @@ public class GameCharactersFragment extends Fragment implements View.OnClickList
     //On edit mode, we save changes when the user hits the back button
     @Override
     public void onDestroyView() {
-        if (isEditMode) {
+        if (!deletingCharacter) {
             saveCharacter();
             listener.OnGameCharacterUpdated(characterPosition, gameCharacter);
         }
@@ -273,6 +274,7 @@ public class GameCharactersFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.bDelete:
                 listener.OnGameCharacterDeleted(characterPosition);
+                deletingCharacter = true;
                 getFragmentManager().popBackStack();
                 break;
             default:
