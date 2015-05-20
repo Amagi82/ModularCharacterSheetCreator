@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                                 }).eventListener(new SnackbarEventListener(fab)), this); //Hide the floating action button while Snackbar present
                 break;
             case R.id.action_edit:
-                GameCharactersFragment fragment = new GameCharactersFragment();
+                NewCharacterFragment fragment = new NewCharacterFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt("character", selectedItems.keyAt(0));
                 bundle.putBoolean("edit mode", true);
@@ -171,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     private void attachFragment(Fragment fragment, MaterialMenuDrawable.IconState iconState) {
         resetDefaultMenu();
+        SnackbarManager.getCurrentSnackbar().dismiss();
         fab.hide();
         recyclerView.setVisibility(View.GONE);
         fm.beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
@@ -423,7 +424,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     public void onClick(View v) {
         if (v.getId() == R.id.fab) {
             //Floating action button clicked - add new character
-            attachFragment(new GameCharactersFragment(), MaterialMenuDrawable.IconState.X);
+            attachFragment(new NewCharacterFragment(), MaterialMenuDrawable.IconState.X);
         }else {
             //Up navigation clicked
             if (fm.getBackStackEntryCount() > 0) fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);

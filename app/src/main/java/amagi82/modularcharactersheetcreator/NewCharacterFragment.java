@@ -47,7 +47,7 @@ import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterChangedList
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class GameCharactersFragment extends Fragment implements View.OnClickListener {
+public class NewCharacterFragment extends Fragment implements View.OnClickListener {
 
     private static final int PICK_FROM_CAMERA = 1;
     private static final int PICK_FROM_FILE = 2;
@@ -71,7 +71,7 @@ public class GameCharactersFragment extends Fragment implements View.OnClickList
     private boolean hasCustomCharacterIcon = false;
     private boolean deletingCharacter = false;
 
-    public GameCharactersFragment() {
+    public NewCharacterFragment() {
     }
 
     @Override
@@ -176,7 +176,7 @@ public class GameCharactersFragment extends Fragment implements View.OnClickList
     //On edit mode, we save changes when the user hits the back button
     @Override
     public void onDestroyView() {
-        if (!deletingCharacter) {
+        if (!deletingCharacter && isEditMode) {
             saveCharacter();
             listener.OnGameCharacterUpdated(characterPosition, gameCharacter);
         }

@@ -25,8 +25,13 @@ public class SnackbarEventListener extends EventListenerAdapter {
     }
 
     @Override
+    public void onDismiss(Snackbar snackbar) {
+        super.onDismiss(snackbar);
+        fab.show();
+    }
+
+    @Override
     public void onDismissed(Snackbar snackbar) {
         super.onDismissed(snackbar);
-        fab.show();
     }
 }
