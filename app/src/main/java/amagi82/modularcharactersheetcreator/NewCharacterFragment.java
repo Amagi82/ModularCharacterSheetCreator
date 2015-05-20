@@ -321,7 +321,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                         @Override
                         public void onPositive(MaterialDialog dialog) {
                             Bitmap croppedBitmap = cropper.getCroppedImage();
-                            Bitmap.createScaledBitmap(croppedBitmap, circleImageSize, circleImageSize, true);
+                            croppedBitmap = Bitmap.createScaledBitmap(croppedBitmap, circleImageSize, circleImageSize, true);
                             iconCharacter.setImageBitmap(croppedBitmap);
                             hasCustomCharacterIcon = true;
                         }

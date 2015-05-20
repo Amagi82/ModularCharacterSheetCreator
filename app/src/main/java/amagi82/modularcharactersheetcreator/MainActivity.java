@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     private void attachFragment(Fragment fragment, MaterialMenuDrawable.IconState iconState) {
         resetDefaultMenu();
-        SnackbarManager.getCurrentSnackbar().dismiss();
+        if (SnackbarManager.getCurrentSnackbar() != null) SnackbarManager.getCurrentSnackbar().dismiss();
         fab.hide();
         recyclerView.setVisibility(View.GONE);
         fm.beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
@@ -324,7 +324,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
             @Override
             public void run() {
                 long start = System.currentTimeMillis();
-
                 //Save characters to internal memory
                 FileOutputStream fos = null;
                 ObjectOutputStream oos = null;
