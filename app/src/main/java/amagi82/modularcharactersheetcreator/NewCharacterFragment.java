@@ -147,7 +147,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        inflater.inflate(isEditMode? R.menu.menu_edit_character : R.menu.menu_new_character, menu);
+        inflater.inflate(isEditMode ? R.menu.menu_edit_character : R.menu.menu_new_character, menu);
         if(!isEditMode){
             menu.findItem(R.id.action_add).getActionView().setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -185,7 +185,10 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_discard) getFragmentManager().popBackStack();
+        if(item.getItemId() == R.id.action_discard) {
+            isEditMode = false;
+            getFragmentManager().popBackStack();
+        }
         return super.onOptionsItemSelected(item);
     }
 
