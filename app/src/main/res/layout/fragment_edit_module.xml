@@ -27,9 +27,9 @@
             android:padding="@dimen/default_horizontal_margin">
 
             <FrameLayout
-                android:id="@+iatch_parent"
-                android:layout_width="mrap_content"
-                android:layout_height="wd/container"/>
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <ImageView
                 android:id="@+id/iconChooseWidth"

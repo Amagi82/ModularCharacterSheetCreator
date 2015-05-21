@@ -423,7 +423,9 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     public void onClick(View v) {
         if (v.getId() == R.id.fab) {
             //Floating action button clicked - add new character
-            attachFragment(new NewCharacterFragment(), MaterialMenuDrawable.IconState.X);
+            //attachFragment(new NewCharacterFragment(), MaterialMenuDrawable.IconState.X);
+
+            attachFragment(new CreateCharacterFragment(), MaterialMenuDrawable.IconState.ARROW);
         }else {
             //Up navigation clicked
             if (fm.getBackStackEntryCount() > 0) fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);

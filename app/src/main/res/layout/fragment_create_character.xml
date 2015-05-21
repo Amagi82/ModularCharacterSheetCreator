@@ -17,8 +17,8 @@
         android:paddingStart="@dimen/default_horizontal_margin"
         android:paddingTop="@dimen/default_vertical_margin">
 
+        <!--Name -->
         <ImageView
-            android:id="@+id/iconName"
             style="@style/IconNewCharacter"
             android:contentDescription="@string/game_systems"
             android:src="@drawable/ic_person_grey600_24dp"/>
@@ -28,8 +28,8 @@
             style="@style/EditTextNewCharacter"
             android:hint="@string/name"/>
 
+        <!--Game system -->
         <ImageView
-            android:id="@+id/iconGameSystem"
             style="@style/IconNewCharacter"
             android:layout_below="@id/etName"
             android:contentDescription="@string/game_systems"
@@ -38,9 +38,9 @@
         <Spinner
             android:id="@+id/spinGameSystem"
             style="@style/SpinnerNewCharacter"
-            android:layout_below="@id/etName"
-            android:prompt="@string/game_system"/>
+            android:layout_below="@id/etName"/>
 
+        <!--Character race -->
         <ImageView
             android:id="@+id/iconRace"
             style="@style/IconNewCharacter"
@@ -54,8 +54,11 @@
             android:id="@+id/spinRace"
             style="@style/SpinnerNewCharacter"
             android:layout_below="@id/spinGameSystem"
-            android:prompt="@string/character_race"/>
+            android:prompt="@string/character_race"
+            android:visibility="gone"
+            tools:visibility="visible"/>
 
+        <!--Character class -->
         <ImageView
             android:id="@+id/iconClass"
             style="@style/IconNewCharacter"
@@ -69,16 +72,16 @@
             android:id="@+id/spinClass"
             style="@style/SpinnerNewCharacter"
             android:layout_below="@id/spinRace"
-            android:prompt="@string/character_class"/>
+            android:prompt="@string/character_class"
+            android:visibility="gone"
+            tools:visibility="visible"/>
 
+        <!--Character portrait -->
         <ImageView
-            android:id="@+id/iconPortrait"
             style="@style/IconNewCharacter"
             android:layout_below="@id/spinClass"
             android:contentDescription="@string/templates"
-            android:src="@drawable/ic_camera_alt_grey600_24dp"
-            android:visibility="gone"
-            tools:visibility="visible"/>
+            android:src="@drawable/ic_camera_alt_grey600_24dp"/>
 
         <ImageButton
             android:id="@+id/imagePortrait"
@@ -87,17 +90,16 @@
             android:layout_below="@id/spinClass"
             android:layout_marginLeft="60dp"
             android:layout_marginStart="60dp"
+            android:layout_marginBottom="@dimen/default_small_margin"
             android:contentDescription="@string/character_icon"
             android:src="@drawable/ic_person_white_48dp"/>
 
+        <!--Themes -->
         <ImageView
-            android:id="@+id/iconTheme"
             style="@style/IconNewCharacter"
             android:layout_below="@id/imagePortrait"
             android:contentDescription="@string/templates"
-            android:src="@drawable/ic_palette_grey600_24dp"
-            android:visibility="gone"
-            tools:visibility="visible"/>
+            android:src="@drawable/ic_palette_grey600_24dp"/>
 
         <Spinner
             android:id="@+id/spinTheme"
@@ -105,6 +107,7 @@
             android:layout_below="@id/imagePortrait"
             android:prompt="@string/theme"/>
 
+        <!--Templates -->
         <ImageView
             android:id="@+id/iconTemplate"
             style="@style/IconNewCharacter"
@@ -118,6 +121,8 @@
             android:id="@+id/spinTemplate"
             style="@style/SpinnerNewCharacter"
             android:layout_below="@id/spinTheme"
-            android:prompt="@string/template"/>
+            android:prompt="@string/template"
+            android:visibility="gone"
+            tools:visibility="visible"/>
     </RelativeLayout>
 </ScrollView>
