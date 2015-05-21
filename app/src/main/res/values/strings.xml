@@ -44,6 +44,7 @@
     <string name="willpower">Willpower</string>
     <string name="save">Save</string>
     <string name="discard_changes">Discard changes</string>
+    <string name="theme">Theme</string>
 
     <string-array name="icon_choices">
         <item>Take photo</item>

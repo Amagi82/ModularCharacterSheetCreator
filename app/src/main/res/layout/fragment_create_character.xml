@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    tools:context=".CreateCharactersFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_vertical_margin"
+        android:paddingEnd="@dimen/default_extra_large_margin"
+        android:paddingLeft="@dimen/default_horizontal_margin"
+        android:paddingRight="@dimen/default_extra_large_margin"
+        android:paddingStart="@dimen/default_horizontal_margin"
+        android:paddingTop="@dimen/default_vertical_margin">
+
+        <ImageView
+            android:id="@+id/iconName"
+            style="@style/IconNewCharacter"
+            android:contentDescription="@string/game_systems"
+            android:src="@drawable/ic_person_grey600_24dp"/>
+
+        <EditText
+            android:id="@+id/etName"
+            style="@style/EditTextNewCharacter"
+            android:hint="@string/name"/>
+
+        <ImageView
+            android:id="@+id/iconGameSystem"
+            style="@style/IconNewCharacter"
+            android:layout_below="@id/etName"
+            android:contentDescription="@string/game_systems"
+            android:src="@drawable/ic_public_grey600_24dp"/>
+
+        <Spinner
+            android:id="@+id/spinGameSystem"
+            style="@style/SpinnerNewCharacter"
+            android:layout_below="@id/etName"
+            android:prompt="@string/game_system"/>
+
+        <ImageView
+            android:id="@+id/iconRace"
+            style="@style/IconNewCharacter"
+            android:layout_below="@id/spinGameSystem"
+            android:contentDescription="@string/character_race"
+            android:src="@drawable/ic_race_grey600_24dp"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <Spinner
+            android:id="@+id/spinRace"
+            style="@style/SpinnerNewCharacter"
+            android:layout_below="@id/spinGameSystem"
+            android:prompt="@string/character_race"/>
+
+        <ImageView
+            android:id="@+id/iconClass"
+            style="@style/IconNewCharacter"
+            android:layout_below="@id/spinRace"
+            android:contentDescription="@string/character_classes"
+            android:src="@drawable/ic_assignment_grey600_24dp"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <Spinner
+            android:id="@+id/spinClass"
+            style="@style/SpinnerNewCharacter"
+            android:layout_below="@id/spinRace"
+            android:prompt="@string/character_class"/>
+
+        <ImageView
+            android:id="@+id/iconPortrait"
+            style="@style/IconNewCharacter"
+            android:layout_below="@id/spinClass"
+            android:contentDescription="@string/templates"
+            android:src="@drawable/ic_camera_alt_grey600_24dp"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <ImageButton
+            android:id="@+id/imagePortrait"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_below="@id/spinClass"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:contentDescription="@string/character_icon"
+            android:src="@drawable/ic_person_white_48dp"/>
+
+        <ImageView
+            android:id="@+id/iconTheme"
+            style="@style/IconNewCharacter"
+            android:layout_below="@id/imagePortrait"
+            android:contentDescription="@string/templates"
+            android:src="@drawable/ic_palette_grey600_24dp"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <Spinner
+            android:id="@+id/spinTheme"
+            style="@style/SpinnerNewCharacter"
+            android:layout_below="@id/imagePortrait"
+            android:prompt="@string/theme"/>
+
+        <ImageView
+            android:id="@+id/iconTemplate"
+            style="@style/IconNewCharacter"
+            android:layout_below="@id/spinTheme"
+            android:contentDescription="@string/templates"
+            android:src="@drawable/ic_extension_grey600_24dp"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <Spinner
+            android:id="@+id/spinTemplate"
+            style="@style/SpinnerNewCharacter"
+            android:layout_below="@id/spinTheme"
+            android:prompt="@string/template"/>
+    </RelativeLayout>
+</ScrollView>

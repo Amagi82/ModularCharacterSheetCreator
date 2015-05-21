@@ -1,5 +1,7 @@
 <resources>
     <!-- Default screen margins, per the Material Design guidelines. -->
+    <dimen name="default_keyline">56dp</dimen>
+    <dimen name="default_extra_large_margin">32dp</dimen>
     <dimen name="default_large_margin">24dp</dimen>
     <dimen name="default_horizontal_margin">16dp</dimen>
     <dimen name="default_vertical_margin">16dp</dimen>
