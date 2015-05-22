@@ -14,8 +14,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterChangedListener;
+
 public class CreateCharacterFragment extends Fragment {
 
+    private OnGameCharacterChangedListener listener;
     private boolean isEditMode = false;
 
     public CreateCharacterFragment() {
@@ -34,7 +37,7 @@ public class CreateCharacterFragment extends Fragment {
 
         View rootView = inflater.inflate(isEditMode? R.layout.fragment_edit_character : R.layout.fragment_create_character, container, false);
         setHasOptionsMenu(true);
-        //listener = (OnGameCharacterChangedListener) getActivity();
+        listener = (OnGameCharacterChangedListener) getActivity();
 
         EditText etName = (EditText) rootView.findViewById(R.id.etName);
         Spinner spinGameSystem = (Spinner) rootView.findViewById(R.id.spinGameSystem);
