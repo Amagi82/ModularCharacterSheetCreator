@@ -32,6 +32,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.adapters.MainRecyclerViewAdapter;
+import amagi82.modularcharactersheetcreator.listeners.OnBackPressedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterChangedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
     public static SparseBooleanArray selectedItems = new SparseBooleanArray();
+    private OnBackPressedListener backListener;
     private boolean isHomeScreen = true;
     private FrameLayout container;
     private FragmentManager fm = getSupportFragmentManager();
@@ -158,11 +160,12 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                                 }).eventListener(new SnackbarEventListener(fab)), this); //Hide the floating action button while Snackbar present
                 break;
             case R.id.action_edit:
-                NewCharacterFragment fragment = new NewCharacterFragment();
+                CreateCharacterFragment fragment = new CreateCharacterFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt("character", selectedItems.keyAt(0));
                 bundle.putBoolean("edit mode", true);
                 fragment.setArguments(bundle);
+                backListener = fragment;
                 attachFragment(fragment, MaterialMenuDrawable.IconState.ARROW);
                 break;
         }
@@ -423,11 +426,12 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     public void onClick(View v) {
         if (v.getId() == R.id.fab) {
             //Floating action button clicked - add new character
-            //attachFragment(new NewCharacterFragment(), MaterialMenuDrawable.IconState.X);
-
-            attachFragment(new CreateCharacterFragment(), MaterialMenuDrawable.IconState.ARROW);
+            CreateCharacterFragment fragment = new CreateCharacterFragment();
+            backListener = fragment;
+            attachFragment(fragment, MaterialMenuDrawable.IconState.ARROW);
         }else {
             //Up navigation clicked
+            backListener.onBackPressed();
             if (fm.getBackStackEntryCount() > 0) fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             resetDefaultMenu();
         }
@@ -438,6 +442,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         if(selectedItems.size() > 0){
             resetDefaultMenu();
         }else {
+            backListener.onBackPressed();
             super.onBackPressed();
         }
     }

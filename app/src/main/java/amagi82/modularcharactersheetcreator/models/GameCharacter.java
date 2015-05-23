@@ -3,6 +3,7 @@ package amagi82.modularcharactersheetcreator.models;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -20,12 +21,12 @@ public class GameCharacter implements Serializable{
     private String characterRace = "";
     private String characterClass = "";
     private String gameSystem = "";
+    private Uri portraitUri;
     private int colorPrimary;
     private int colorBackground;
     private int colorText;
     private int colorTextTitle;
     private int colorTitles;
-    private boolean hasCustomCharacterIcon = false;
     private ArrayList<Module> moduleList = new ArrayList<>();
 
     public GameCharacter() {
@@ -150,11 +151,11 @@ public class GameCharacter implements Serializable{
         this.colorTitles = colorTitles;
     }
 
-    public boolean hasCustomCharacterIcon() {
-        return hasCustomCharacterIcon;
+    public Uri getPortraitUri() {
+        return portraitUri;
     }
 
-    public void setHasCustomCharacterIcon(boolean hasCustomCharacterIcon) {
-        this.hasCustomCharacterIcon = hasCustomCharacterIcon;
+    public void setPortraitUri(Uri portraitUri) {
+        this.portraitUri = portraitUri;
     }
 }

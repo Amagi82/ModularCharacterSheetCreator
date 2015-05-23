@@ -17,6 +17,7 @@
 
     <dimen name="app_bar_elevation">4dp</dimen>
 
+    <dimen name="portrait_thumbnail_size">72dp</dimen>
     <dimen name="circle_icon_size">40dp</dimen>
 
     <dimen name="fab_size_normal">56dp</dimen>
