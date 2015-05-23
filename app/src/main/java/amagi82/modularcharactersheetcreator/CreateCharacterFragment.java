@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -16,7 +17,7 @@ import android.widget.Spinner;
 
 import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterChangedListener;
 
-public class CreateCharacterFragment extends Fragment {
+public class CreateCharacterFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private OnGameCharacterChangedListener listener;
     private boolean isEditMode = false;
@@ -52,10 +53,16 @@ public class CreateCharacterFragment extends Fragment {
 
         etName.requestFocus();
 
+        //TODO: make custom ArrayAdapter for spinners
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.game_systems, R.layout.spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinGameSystem.setAdapter(adapter);
-        spinGameSystem.setPrompt("Game system");
+
+        spinGameSystem.setOnItemSelectedListener(this);
+        spinRace.setOnItemSelectedListener(this);
+        spinClass.setOnItemSelectedListener(this);
+        spinTheme.setOnItemSelectedListener(this);
+        spinTemplate.setOnItemSelectedListener(this);
 
         return rootView;
     }
@@ -80,4 +87,35 @@ public class CreateCharacterFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()){
+            case R.id.spinGameSystem:
+                break;
+            case R.id.spinRace:
+                break;
+            case R.id.spinClass:
+                break;
+            case R.id.spinTheme:
+                break;
+            case R.id.spinTemplate:
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        switch (parent.getId()){
+            case R.id.spinGameSystem:
+                break;
+            case R.id.spinRace:
+                break;
+            case R.id.spinClass:
+                break;
+            case R.id.spinTheme:
+                break;
+            case R.id.spinTemplate:
+                break;
+        }
+    }
 }
