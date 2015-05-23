@@ -26,6 +26,10 @@ public class CreateCharacterFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_create_character, container, false);
+        setHasOptionsMenu(true);
+
+        listener = (OnGameCharacterChangedListener) getActivity();
 
         //Check if we're editing a character or creating a new one
         Bundle arguments = getArguments();
@@ -34,10 +38,6 @@ public class CreateCharacterFragment extends Fragment {
             //characterPosition = getArguments().getInt("character");
         }
         getActivity().setTitle(getResources().getString(isEditMode ? R.string.edit_character : R.string.new_character));
-
-        View rootView = inflater.inflate(isEditMode? R.layout.fragment_edit_character : R.layout.fragment_create_character, container, false);
-        setHasOptionsMenu(true);
-        listener = (OnGameCharacterChangedListener) getActivity();
 
         EditText etName = (EditText) rootView.findViewById(R.id.etName);
         Spinner spinGameSystem = (Spinner) rootView.findViewById(R.id.spinGameSystem);
@@ -69,6 +69,14 @@ public class CreateCharacterFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_delete:
+                break;
+            case R.id.action_save_template:
+                break;
+            case R.id.action_discard:
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 
