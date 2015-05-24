@@ -38,7 +38,8 @@
         <Spinner
             android:id="@+id/spinGameSystem"
             style="@style/SpinnerNewCharacter"
-            android:layout_below="@id/etName"/>
+            android:layout_below="@id/etName"
+            android:prompt="@string/game_system"/>
 
         <!--Character race -->
         <ImageView

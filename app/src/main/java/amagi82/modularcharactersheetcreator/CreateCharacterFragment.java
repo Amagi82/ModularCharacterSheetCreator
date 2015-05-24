@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import amagi82.modularcharactersheetcreator.adapters.SpinAdapter;
 import amagi82.modularcharactersheetcreator.listeners.OnBackPressedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterChangedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
@@ -28,9 +29,6 @@ public class CreateCharacterFragment extends Fragment implements OnBackPressedLi
     private GameCharacter gameCharacter;
     private int characterPosition;
     private boolean isEditMode = false;
-
-    public CreateCharacterFragment() {
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,7 +51,9 @@ public class CreateCharacterFragment extends Fragment implements OnBackPressedLi
         //TODO: make custom ArrayAdapter for spinners
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.game_systems, R.layout.spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinGameSystem.setAdapter(adapter);
+        spinGameSystem.setPrompt("Choose game system");
+        spinGameSystem.setAdapter(new SpinAdapter(adapter, R.layout.spinner_item, getActivity()));
+
 
         spinGameSystem.setOnItemSelectedListener(this);
         spinRace.setOnItemSelectedListener(this);
@@ -73,13 +73,18 @@ public class CreateCharacterFragment extends Fragment implements OnBackPressedLi
                 spinGameSystem.setSelection(getSpinnerIndex(spinGameSystem, gameCharacter.getGameSystem()));
                 spinRace.setSelection(getSpinnerIndex(spinRace, gameCharacter.getCharacterRace()));
                 spinClass.setSelection(getSpinnerIndex(spinClass, gameCharacter.getCharacterClass()));
-                int thumbSize = (int) getResources().getDimension(R.dimen.portrait_thumbnail_size);
-                Bitmap thumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(gameCharacter.getPortraitUri().getPath()), thumbSize, thumbSize);
-                imagePortrait.setImageBitmap(thumbImage);
+                if(gameCharacter.getPortraitUri() != null){
+                    int thumbSize = (int) getResources().getDimension(R.dimen.portrait_thumbnail_size);
+                    Bitmap thumbImage = ThumbnailUtils.extractThumbnail(
+                            BitmapFactory.decodeFile(gameCharacter.getPortraitUri().getPath()), thumbSize, thumbSize);
+                    imagePortrait.setImageBitmap(thumbImage);
+                }
+
                 //spinTheme.setSelection(getSpinnerIndex(spinTheme, gameCharacter.getTheme()));
                 //spinTemplate.setSelection(getSpinnerIndex(spinTemplate, gameCharacter.getTemplate()));
             }
         }
+        if(gameCharacter == null) gameCharacter = new GameCharacter();
         getActivity().setTitle(getResources().getString(isEditMode ? R.string.edit_character : R.string.new_character));
 
         return rootView;
@@ -96,7 +101,6 @@ public class CreateCharacterFragment extends Fragment implements OnBackPressedLi
         }
         return index;
     }
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -124,32 +128,43 @@ public class CreateCharacterFragment extends Fragment implements OnBackPressedLi
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (parent.getId()){
-            case R.id.spinGameSystem:
-                break;
-            case R.id.spinRace:
-                break;
-            case R.id.spinClass:
-                break;
-            case R.id.spinTheme:
-                break;
-            case R.id.spinTemplate:
-                break;
-        }
+        //String selected = parent.getSelectedItem().toString();
+//        switch (parent.getId()){
+//            case R.id.spinGameSystem:
+//                gameCharacter.setGameSystem(selected);
+//                break;
+//            case R.id.spinRace:
+//                gameCharacter.setCharacterRace(selected);
+//                break;
+//            case R.id.spinClass:
+//                gameCharacter.setCharacterClass(selected);
+//                break;
+//            case R.id.spinTheme:
+//
+//                break;
+//            case R.id.spinTemplate:
+//
+//                break;
+//        }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         switch (parent.getId()){
             case R.id.spinGameSystem:
+                gameCharacter.setGameSystem("");
                 break;
             case R.id.spinRace:
+                gameCharacter.setCharacterRace("");
                 break;
             case R.id.spinClass:
+                gameCharacter.setCharacterClass("");
                 break;
             case R.id.spinTheme:
+
                 break;
             case R.id.spinTemplate:
+
                 break;
         }
     }

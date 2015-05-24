@@ -29,7 +29,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -109,7 +108,6 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
             etGameSystem.setText(gameCharacter.getGameSystem());
             etRace.setText(gameCharacter.getCharacterRace());
             etClass.setText(gameCharacter.getCharacterClass());
-            hasCustomCharacterIcon = gameCharacter.hasCustomCharacterIcon();
 
             Button bDelete = (Button) rootView.findViewById(R.id.bDelete);
             bDelete.setOnClickListener(this);
@@ -164,20 +162,20 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         inflater.inflate(isEditMode ? R.menu.menu_edit_character : R.menu.menu_new_character, menu);
-        if(!isEditMode){
-            menu.findItem(R.id.action_add).getActionView().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    saveCharacter();
-                    listener.OnGameCharacterAdded(gameCharacter);
-                    getFragmentManager().popBackStack();
-
-                    //Dismiss keyboard
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(etName.getWindowToken(), 0);
-                }
-            });
-        }
+//        if(!isEditMode){
+//            menu.findItem(R.id.action_add).getActionView().setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    saveCharacter();
+//                    listener.OnGameCharacterAdded(gameCharacter);
+//                    getFragmentManager().popBackStack();
+//
+//                    //Dismiss keyboard
+//                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                    imm.hideSoftInputFromWindow(etName.getWindowToken(), 0);
+//                }
+//            });
+//        }
     }
 
     @Override
@@ -195,7 +193,6 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         gameCharacter.setCharacterRace(etRace.getText().toString());
         gameCharacter.setCharacterClass(etClass.getText().toString());
         gameCharacter.setCharacterIcon(croppedBitmap);
-        gameCharacter.setHasCustomCharacterIcon(hasCustomCharacterIcon);
     }
 
     private Bitmap createDefaultIcon(){
