@@ -53,6 +53,7 @@
     </string-array>
 
     <string-array name="game_systems">
+        <item>Game system</item>
         <item>Other</item>
         <item>Call of Cthulhu</item>
         <item>D&amp;D</item>

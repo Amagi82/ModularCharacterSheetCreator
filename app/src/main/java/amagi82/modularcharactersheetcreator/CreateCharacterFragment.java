@@ -12,13 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import amagi82.modularcharactersheetcreator.adapters.SpinAdapter;
+import amagi82.modularcharactersheetcreator.adapters.SpinnerArrayAdapter;
 import amagi82.modularcharactersheetcreator.listeners.OnBackPressedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterChangedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
@@ -48,11 +47,7 @@ public class CreateCharacterFragment extends Fragment implements OnBackPressedLi
         ImageView iconTemplate = (ImageView) rootView.findViewById(R.id.iconTemplate);
         Spinner spinTemplate = (Spinner) rootView.findViewById(R.id.spinTemplate);
 
-        //TODO: make custom ArrayAdapter for spinners
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.game_systems, R.layout.spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinGameSystem.setPrompt("Choose game system");
-        spinGameSystem.setAdapter(new SpinAdapter(adapter, R.layout.spinner_item, getActivity()));
+        spinGameSystem.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), R.array.game_systems));
 
 
         spinGameSystem.setOnItemSelectedListener(this);
@@ -150,23 +145,6 @@ public class CreateCharacterFragment extends Fragment implements OnBackPressedLi
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        switch (parent.getId()){
-            case R.id.spinGameSystem:
-                gameCharacter.setGameSystem("");
-                break;
-            case R.id.spinRace:
-                gameCharacter.setCharacterRace("");
-                break;
-            case R.id.spinClass:
-                gameCharacter.setCharacterClass("");
-                break;
-            case R.id.spinTheme:
-
-                break;
-            case R.id.spinTemplate:
-
-                break;
-        }
     }
 
     @Override
