@@ -1,32 +1,31 @@
 <resources>
     <!-- Default screen margins, per the Material Design guidelines. -->
-    <dimen name="default_keyline">56dp</dimen>
+    <dimen name="default_list_item_height">72dp</dimen>
+    <dimen name="default_keyline">72dp</dimen>
+    <dimen name="default_keyline_padded_layout">56dp</dimen>
     <dimen name="default_extra_large_margin">32dp</dimen>
     <dimen name="default_large_margin">24dp</dimen>
     <dimen name="default_horizontal_margin">16dp</dimen>
     <dimen name="default_vertical_margin">16dp</dimen>
-    <dimen name="default_small_margin">8dp</dimen>
-    <dimen name="default_list_item_height">72dp</dimen>
     <dimen name="default_icon_padding">12dp</dimen>
+    <dimen name="default_small_margin">8dp</dimen>
+    <dimen name="default_tiny_margin">4dp</dimen>
 
-    <dimen name="card_margin">4dp</dimen>
     <dimen name="card_padding">16dp</dimen>
+    <dimen name="card_margin">4dp</dimen>
     <dimen name="card_corner_radius">2dp</dimen>
-
-    <dimen name="text_indent_margin">72dp</dimen>
 
     <dimen name="app_bar_elevation">4dp</dimen>
 
-    <dimen name="portrait_thumbnail_size">72dp</dimen>
+    <dimen name="portrait_thumbnail_size">88dp</dimen>
     <dimen name="circle_icon_size">40dp</dimen>
+    <dimen name="text_size_circle_icon">24sp</dimen>
 
     <dimen name="fab_size_normal">56dp</dimen>
     <dimen name="fab_size_mini">40dp</dimen>
     <dimen name="fab_shadow_size">12dp</dimen>
     <dimen name="fab_scroll_threshold">4dp</dimen>
     <dimen name="fab_elevation_lollipop">8dp</dimen>
-
-    <dimen name="text_size_circle_icon">24sp</dimen>
 
     <dimen name="divider">0.7dp</dimen>
 </resources>

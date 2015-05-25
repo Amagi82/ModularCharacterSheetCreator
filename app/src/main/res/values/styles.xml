@@ -12,20 +12,16 @@
     <style name="IconNewCharacter" parent="IconNewCharacter_Base"/>
 
     <style name="IconNewCharacter_Base">
-        <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_marginRight">@dimen/default_horizontal_margin</item>
-        <item name="android:paddingRight">@dimen/default_horizontal_margin</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingTop">12dp</item>
-        <item name="android:paddingBottom">12dp</item>
+        <item name="android:layout_marginBottom">@dimen/default_icon_padding</item>
     </style>
 
     <style name="EditTextNewCharacter" parent="EditTextNewCharacter_Base"/>
 
     <style name="EditTextNewCharacter_Base" parent="Widget.AppCompat.EditText">
         <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_marginLeft">@dimen/default_keyline</item>
+        <item name="android:layout_marginLeft">@dimen/default_keyline_padded_layout</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:inputType">textNoSuggestions</item>
@@ -38,7 +34,7 @@
 
     <style name="SpinnerNewCharacter_Base" parent="Widget.AppCompat.Spinner.Underlined">
         <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_marginLeft">@dimen/default_keyline</item>
+        <item name="android:layout_marginLeft">@dimen/default_keyline_padded_layout</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingBottom">@dimen/default_vertical_margin</item>

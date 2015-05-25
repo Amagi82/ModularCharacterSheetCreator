@@ -3,20 +3,18 @@
 
     <style name="IconNewCharacter" parent="IconNewCharacter_Base">
         <item name="android:layout_alignParentStart">true</item>
-        <item name="android:layout_marginEnd">@dimen/default_horizontal_margin</item>
-        <item name="android:paddingEnd">@dimen/default_horizontal_margin</item>
     </style>
 
     <style name="EditTextNewCharacter" parent="EditTextNewCharacter_Base">
         <item name="android:layout_alignParentStart">true</item>
         <item name="android:textDirection">locale</item>
-        <item name="android:layout_marginStart">@dimen/default_keyline</item>
+        <item name="android:layout_marginStart">@dimen/default_keyline_padded_layout</item>
     </style>
 
     <style name="SpinnerNewCharacter" parent="SpinnerNewCharacter_Base">
         <item name="android:layout_alignParentStart">true</item>
         <item name="android:textDirection">locale</item>
-        <item name="android:layout_marginStart">@dimen/default_keyline</item>
+        <item name="android:layout_marginStart">@dimen/default_keyline_padded_layout</item>
     </style>
 
     <style name="ActionButton" parent="ActionButton_Base">

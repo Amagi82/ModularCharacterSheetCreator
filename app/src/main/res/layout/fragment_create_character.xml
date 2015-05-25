@@ -18,111 +18,112 @@
         android:paddingTop="@dimen/default_vertical_margin">
 
         <!--Name -->
-        <ImageView
-            style="@style/IconNewCharacter"
-            android:contentDescription="@string/game_systems"
-            android:src="@drawable/ic_person_grey600_24dp"/>
-
         <EditText
             android:id="@+id/etName"
             style="@style/EditTextNewCharacter"
             android:hint="@string/name"/>
 
-        <!--Game system -->
         <ImageView
             style="@style/IconNewCharacter"
-            android:layout_below="@id/etName"
+            android:layout_alignBottom="@id/etName"
             android:contentDescription="@string/game_systems"
-            android:src="@drawable/ic_public_grey600_24dp"/>
+            android:src="@drawable/ic_person_grey600_24dp"/>
 
+        <!--Game system -->
         <Spinner
             android:id="@+id/spinGameSystem"
             style="@style/SpinnerNewCharacter"
-            android:layout_below="@id/etName"
-            android:prompt="@string/game_system"/>
+            android:layout_below="@id/etName"/>
+
+        <ImageView
+            style="@style/IconNewCharacter"
+            android:layout_alignBottom="@id/spinGameSystem"
+            android:contentDescription="@string/game_systems"
+            android:src="@drawable/ic_public_grey600_24dp"/>
 
         <!--Character race -->
+        <Spinner
+            android:id="@+id/spinRace"
+            style="@style/SpinnerNewCharacter"
+            android:layout_below="@id/spinGameSystem"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
         <ImageView
             android:id="@+id/iconRace"
             style="@style/IconNewCharacter"
-            android:layout_below="@id/spinGameSystem"
+            android:layout_alignBottom="@id/spinRace"
             android:contentDescription="@string/character_race"
             android:src="@drawable/ic_race_grey600_24dp"
             android:visibility="gone"
             tools:visibility="visible"/>
 
+        <!--Character class -->
         <Spinner
-            android:id="@+id/spinRace"
+            android:id="@+id/spinClass"
             style="@style/SpinnerNewCharacter"
-            android:layout_below="@id/spinGameSystem"
-            android:prompt="@string/character_race"
+            android:layout_below="@id/spinRace"
             android:visibility="gone"
             tools:visibility="visible"/>
 
-        <!--Character class -->
         <ImageView
             android:id="@+id/iconClass"
             style="@style/IconNewCharacter"
-            android:layout_below="@id/spinRace"
+            android:layout_alignBottom="@id/spinClass"
             android:contentDescription="@string/character_classes"
             android:src="@drawable/ic_assignment_grey600_24dp"
             android:visibility="gone"
             tools:visibility="visible"/>
 
-        <Spinner
-            android:id="@+id/spinClass"
-            style="@style/SpinnerNewCharacter"
-            android:layout_below="@id/spinRace"
-            android:prompt="@string/character_class"
-            android:visibility="gone"
-            tools:visibility="visible"/>
-
         <!--Character portrait -->
-        <ImageView
-            style="@style/IconNewCharacter"
-            android:layout_below="@id/spinClass"
-            android:contentDescription="@string/templates"
-            android:src="@drawable/ic_camera_alt_grey600_24dp"/>
-
-        <ImageButton
+       <ImageButton
             android:id="@+id/imagePortrait"
             android:layout_width="@dimen/portrait_thumbnail_size"
             android:layout_height="@dimen/portrait_thumbnail_size"
             android:layout_below="@id/spinClass"
-            android:layout_marginLeft="@dimen/default_keyline"
-            android:layout_marginStart="@dimen/default_keyline"
+            android:layout_marginLeft="@dimen/default_keyline_padded_layout"
+            android:layout_marginStart="@dimen/default_keyline_padded_layout"
             android:layout_marginBottom="@dimen/default_small_margin"
             android:contentDescription="@string/character_icon"
             android:src="@drawable/ic_person_white_48dp"/>
 
-        <!--Themes -->
         <ImageView
             style="@style/IconNewCharacter"
-            android:layout_below="@id/imagePortrait"
+            android:layout_marginTop="@dimen/default_tiny_margin"
+            android:layout_alignTop="@id/imagePortrait"
             android:contentDescription="@string/templates"
-            android:src="@drawable/ic_palette_grey600_24dp"/>
+            android:src="@drawable/ic_camera_alt_grey600_24dp"/>
 
+        <!--Themes -->
         <Spinner
             android:id="@+id/spinTheme"
             style="@style/SpinnerNewCharacter"
             android:layout_below="@id/imagePortrait"
-            android:prompt="@string/theme"/>
-
-        <!--Templates -->
-        <ImageView
-            android:id="@+id/iconTemplate"
-            style="@style/IconNewCharacter"
-            android:layout_below="@id/spinTheme"
-            android:contentDescription="@string/templates"
-            android:src="@drawable/ic_extension_grey600_24dp"
             android:visibility="gone"
             tools:visibility="visible"/>
 
+        <ImageView
+            style="@style/IconNewCharacter"
+            android:layout_alignBottom="@id/spinTheme"
+            android:contentDescription="@string/templates"
+            android:src="@drawable/ic_palette_grey600_24dp"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <!--Templates -->
         <Spinner
             android:id="@+id/spinTemplate"
             style="@style/SpinnerNewCharacter"
             android:layout_below="@id/spinTheme"
-            android:prompt="@string/template"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <ImageView
+            android:id="@+id/iconTemplate"
+            style="@style/IconNewCharacter"
+            android:layout_alignBottom="@id/spinTemplate"
+            android:contentDescription="@string/templates"
+            android:src="@drawable/ic_extension_grey600_24dp"
             android:visibility="gone"
             tools:visibility="visible"/>
     </RelativeLayout>

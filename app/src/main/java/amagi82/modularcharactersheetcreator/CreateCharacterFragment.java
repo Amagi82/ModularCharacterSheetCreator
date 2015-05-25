@@ -48,7 +48,10 @@ public class CreateCharacterFragment extends Fragment implements OnBackPressedLi
         Spinner spinTemplate = (Spinner) rootView.findViewById(R.id.spinTemplate);
 
         spinGameSystem.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), R.array.game_systems));
-
+//        spinRace.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), R.array.game_systems));
+//        spinClass.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), R.array.game_systems));
+//        spinTheme.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), R.array.game_systems));
+//        spinTemplate.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), R.array.game_systems));
 
         spinGameSystem.setOnItemSelectedListener(this);
         spinRace.setOnItemSelectedListener(this);

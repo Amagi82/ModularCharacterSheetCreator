@@ -20,8 +20,10 @@
     <color name="outlineMed">#717171</color>
     <color name="fillDark">#414141</color>
 
-    <color name="textMed">#A8000000</color>
-    <color name="textDark">#DE000000</color>
+    <color name="textMaterialPrimary">@color/primary_text_default_material_light</color>
+    <color name="textMaterialSecondary">@color/secondary_text_default_material_light</color>
+    <color name="textDisabledMaterialPrimary">@color/primary_text_disabled_material_light</color>
+    <color name="textDisabledMaterialSecondary">@color/secondary_text_disabled_material_light</color>
 
     <color name="darkRed">#CC0000</color>
 </resources>
