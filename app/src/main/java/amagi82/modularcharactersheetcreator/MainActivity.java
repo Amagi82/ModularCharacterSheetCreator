@@ -65,10 +65,10 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         addExampleCharacters();
 
         //Add toolbar
-        CollapsingToolbarLayout appbar = (CollapsingToolbarLayout) findViewById(R.id.appbar);
+        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        appbar.setTitle(getString(R.string.characters));
+        collapsingToolbar.setTitle(getString(R.string.characters));
         materialMenu = new MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN);
         toolbar.setNavigationOnClickListener(this);
 
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
         //Set up the Floating Action Button
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setImageResource(R.drawable.ic_person_add_white_24dp);
+        //fab.setImageResource(R.drawable.ic_person_add_white_24dp);
 
         fm.addOnBackStackChangedListener(this);
 
