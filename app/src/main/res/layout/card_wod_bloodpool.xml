@@ -13,7 +13,7 @@
         <TextView
             android:id="@+id/tvTitle"
             style="@style/TextTitle"
-            android:paddingBottom="@dimen/default_vertical_margin"
+            android:paddingBottom="@dimen/default_margin"
             android:text="@string/blood_pool"/>
 
         <LinearLayout

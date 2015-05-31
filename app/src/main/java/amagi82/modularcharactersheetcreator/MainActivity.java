@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -18,11 +19,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
-import com.melnykov.fab.FloatingActionButton;
-import com.melnykov.fab.ScrollDirectionListener;
-import com.nispok.snackbar.Snackbar;
-import com.nispok.snackbar.SnackbarManager;
-import com.nispok.snackbar.listeners.ActionClickListener;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -37,7 +33,6 @@ import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterChangedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnItemLongClickedListener;
-import amagi82.modularcharactersheetcreator.listeners.SnackbarEventListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.models.modules.TextModule;
@@ -89,16 +84,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         //Set up the Floating Action Button
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setImageResource(R.drawable.ic_person_add_white_24dp);
-        fab.attachToRecyclerView(recyclerView, new ScrollDirectionListener() {
-            @Override
-            public void onScrollDown() {
-            }
-
-            @Override
-            public void onScrollUp() {
-            }
-        });
-        fab.setOnClickListener(this);
 
         fm.addOnBackStackChangedListener(this);
 
@@ -106,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         if(savedInstanceState != null) {
             isHomeScreen = savedInstanceState.getBoolean("isHomeScreen");
             if(!isHomeScreen){
-                fab.hide();
+//                fab.hide();
                 recyclerView.setVisibility(View.GONE);
                 toolbar.setNavigationIcon(materialMenu);
                 materialMenu.setIconState(savedInstanceState.getBoolean("isMaterialMenuX", true)?
@@ -145,19 +130,19 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
                 selectedItems.clear();
                 resetDefaultMenu();
 
-                //Allow the user to undo delete
-                SnackbarManager.show(
-                        Snackbar.with(getApplicationContext())
-                                .text(getString(R.string.deleted_count, storedPositions.size())) // text to display
-                                .actionLabel(getString(R.string.undo))
-                                .actionColor(getResources().getColor(R.color.accent))
-                                .actionListener(new ActionClickListener() {
-                                    @Override
-                                    public void onActionClicked(Snackbar snackbar) {
-                                        //User clicked UNDO, so add the stored characters back in their original positions
-                                        for (int i = 0; i < storedPositions.size(); i++) addCharacter(storedPositions.keyAt(i), storedCharacters.get(i));
-                                    }
-                                }).eventListener(new SnackbarEventListener(fab)), this); //Hide the floating action button while Snackbar present
+//                //Allow the user to undo delete
+//                SnackbarManager.show(
+//                        Snackbar.with(getApplicationContext())
+//                                .text(getString(R.string.deleted_count, storedPositions.size())) // text to display
+//                                .actionLabel(getString(R.string.undo))
+//                                .actionColor(getResources().getColor(R.color.accent))
+//                                .actionListener(new ActionClickListener() {
+//                                    @Override
+//                                    public void onActionClicked(Snackbar snackbar) {
+//                                        //User clicked UNDO, so add the stored characters back in their original positions
+//                                        for (int i = 0; i < storedPositions.size(); i++) addCharacter(storedPositions.keyAt(i), storedCharacters.get(i));
+//                                    }
+//                                }).eventListener(new SnackbarEventListener(fab)), this); //Hide the floating action button while Snackbar present
                 break;
             case R.id.action_edit:
                 CreateCharacterFragment fragment = new CreateCharacterFragment();
@@ -174,8 +159,8 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     private void attachFragment(Fragment fragment, MaterialMenuDrawable.IconState iconState) {
         resetDefaultMenu();
-        if (SnackbarManager.getCurrentSnackbar() != null) SnackbarManager.getCurrentSnackbar().dismiss();
-        fab.hide();
+//        if (SnackbarManager.getCurrentSnackbar() != null) SnackbarManager.getCurrentSnackbar().dismiss();
+//        fab.hide();
         recyclerView.setVisibility(View.GONE);
         fm.beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
         toolbar.setNavigationIcon(materialMenu);
@@ -219,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
             }
         }
         materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
-        fab.show();
+//        fab.show();
 
         setTitle(getString(R.string.characters));
     }
@@ -235,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     private void activateSelectionMode() {
         toolbar.setNavigationIcon(materialMenu);
         materialMenu.animateIconState(MaterialMenuDrawable.IconState.ARROW);
-        fab.hide();
+//        fab.hide();
         toolbar.setBackgroundColor(getResources().getColor(R.color.grey_600));
         if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.grey_700));
     }
@@ -384,19 +369,19 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         final GameCharacter gameCharacter = gameCharacterList.get(position);
         removeCharacter(position);
 
-        //Allow the user to undo delete
-        SnackbarManager.show(
-                Snackbar.with(getApplicationContext())
-                        .text(getString(R.string.deleted_count, gameCharacter.getCharacterName())) // text to display
-                        .actionLabel(getString(R.string.undo))
-                        .actionColor(getResources().getColor(R.color.accent))
-                        .actionListener(new ActionClickListener() {
-                            @Override
-                            public void onActionClicked(Snackbar snackbar) {
-                                //User clicked UNDO, so add the stored characters back in their original positions
-                                addCharacter(position, gameCharacter);
-                            }
-                        }).eventListener(new SnackbarEventListener(fab)), this); //Hide the floating action button while Snackbar present
+//        //Allow the user to undo delete
+//        SnackbarManager.show(
+//                Snackbar.with(getApplicationContext())
+//                        .text(getString(R.string.deleted_count, gameCharacter.getCharacterName())) // text to display
+//                        .actionLabel(getString(R.string.undo))
+//                        .actionColor(getResources().getColor(R.color.accent))
+//                        .actionListener(new ActionClickListener() {
+//                            @Override
+//                            public void onActionClicked(Snackbar snackbar) {
+//                                //User clicked UNDO, so add the stored characters back in their original positions
+//                                addCharacter(position, gameCharacter);
+//                            }
+//                        }).eventListener(new SnackbarEventListener(fab)), this); //Hide the floating action button while Snackbar present
     }
 
     @Override

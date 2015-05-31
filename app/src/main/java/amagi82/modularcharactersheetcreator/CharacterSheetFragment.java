@@ -3,15 +3,13 @@ package amagi82.modularcharactersheetcreator;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.melnykov.fab.FloatingActionButton;
-import com.melnykov.fab.ScrollDirectionListener;
 
 import amagi82.modularcharactersheetcreator.adapters.CharacterSheetRecyclerViewAdapter;
 import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
@@ -48,23 +46,6 @@ public class CharacterSheetFragment extends Fragment {
         //Set up the Floating Action Button
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.setImageResource(R.drawable.ic_add_white_24dp);
-        fab.attachToRecyclerView(characterSheetRecyclerView, new ScrollDirectionListener() {
-            @Override
-            public void onScrollDown() {
-            }
-
-            @Override
-            public void onScrollUp() {
-            }
-        });
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onAddModule();
-            }
-        });
-        fab.hide(false);
-        fab.show();
 
         return rootView;
     }

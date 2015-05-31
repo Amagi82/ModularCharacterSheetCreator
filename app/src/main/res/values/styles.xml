@@ -26,8 +26,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:inputType">textNoSuggestions</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:paddingBottom">@dimen/default_vertical_margin</item>
-        <item name="android:paddingTop">@dimen/default_vertical_margin</item>
+        <item name="android:paddingBottom">@dimen/default_margin</item>
+        <item name="android:paddingTop">@dimen/default_margin</item>
     </style>
 
     <style name="SpinnerNewCharacter" parent="SpinnerNewCharacter_Base"/>
@@ -37,8 +37,8 @@
         <item name="android:layout_marginLeft">@dimen/default_keyline_padded_layout</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingBottom">@dimen/default_vertical_margin</item>
-        <item name="android:paddingTop">@dimen/default_vertical_margin</item>
+        <item name="android:paddingBottom">@dimen/default_margin</item>
+        <item name="android:paddingTop">@dimen/default_margin</item>
         <item name="android:layout_marginBottom">@dimen/default_small_margin</item>
     </style>
 
@@ -75,8 +75,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">@dimen/default_large_margin</item>
-        <item name="android:paddingLeft">@dimen/default_horizontal_margin</item>
-        <item name="android:paddingRight">@dimen/default_horizontal_margin</item>
+        <item name="android:paddingLeft">@dimen/default_margin</item>
+        <item name="android:paddingRight">@dimen/default_margin</item>
         <item name="android:paddingBottom">@dimen/default_large_margin</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
@@ -89,8 +89,8 @@
 
     <style name="TextTitle_Padded" parent="TextTitle">
         <item name="android:paddingTop">@dimen/default_large_margin</item>
-        <item name="android:paddingLeft">@dimen/default_horizontal_margin</item>
-        <item name="android:paddingRight">@dimen/default_horizontal_margin</item>
+        <item name="android:paddingLeft">@dimen/default_margin</item>
+        <item name="android:paddingRight">@dimen/default_margin</item>
         <item name="android:paddingBottom">@dimen/default_small_margin</item>
     </style>
 
@@ -122,8 +122,8 @@
     <style name="TextBody_Padded" parent="TextBody">
         <item name="android:layout_width">match_parent</item>
         <item name="android:paddingTop">@dimen/default_small_margin</item>
-        <item name="android:paddingLeft">@dimen/default_horizontal_margin</item>
-        <item name="android:paddingRight">@dimen/default_horizontal_margin</item>
+        <item name="android:paddingLeft">@dimen/default_margin</item>
+        <item name="android:paddingRight">@dimen/default_margin</item>
         <item name="android:paddingBottom">@dimen/default_large_margin</item>
     </style>
 
@@ -153,9 +153,9 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
         <item name="android:paddingTop">@dimen/default_large_margin</item>
-        <item name="android:paddingLeft">@dimen/default_horizontal_margin</item>
-        <item name="android:paddingRight">@dimen/default_horizontal_margin</item>
-        <item name="android:paddingBottom">@dimen/default_vertical_margin</item>
+        <item name="android:paddingLeft">@dimen/default_margin</item>
+        <item name="android:paddingRight">@dimen/default_margin</item>
+        <item name="android:paddingBottom">@dimen/default_margin</item>
     </style>
 
     <style name="StatRatingBarTen">
@@ -163,7 +163,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:numStars">10</item>
-        <item name="android:paddingBottom">@dimen/default_vertical_margin</item>
+        <item name="android:paddingBottom">@dimen/default_margin</item>
     </style>
 
     <style name="Icon">

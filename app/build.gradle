@@ -21,15 +21,14 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:recyclerview-v7:21.0.3'
     compile 'com.android.support:cardview-v7:21.0.3'
-    compile 'com.melnykov:floatingactionbutton:1.3.0'
+    compile 'com.android.support:design:22.2.0'
     compile 'de.hdodenhof:circleimageview:1.2.2'
-    compile 'com.balysv.materialmenu:material-menu-toolbar:1.5.3'
-    compile 'com.afollestad:material-dialogs:0.7.3.4'
-    compile 'com.nispok:snackbar:2.10.8'
-    compile 'com.edmodo:cropper:1.0.1'
-    compile 'com.github.lzyzsd:circleprogress:1.1.0'
-    compile 'com.akexorcist:RoundCornerProgressBar:1.1.0'
+    compile 'com.balysv.materialmenu:material-menu-toolbar:1.5.3' //Spinning hamburger to arrow to X button
+    compile 'com.afollestad:material-dialogs:0.7.3.4' //Material design confirmation dialogs
+    compile 'com.edmodo:cropper:1.0.1' //Photo cropping
+    compile 'com.github.lzyzsd:circleprogress:1.1.0' //Circle progress bar- used for blood pools or health bars
+    compile 'com.akexorcist:RoundCornerProgressBar:1.1.0' //Usable for health bars
 }

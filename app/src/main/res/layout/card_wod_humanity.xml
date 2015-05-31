@@ -13,14 +13,14 @@
         <TextView
             android:id="@+id/tvTitle"
             style="@style/TextTitle"
-            android:paddingBottom="@dimen/default_vertical_margin"
+            android:paddingBottom="@dimen/default_margin"
             tools:text="Humanity"/>
 
         <TextView
             android:id="@+id/tvText"
             style="@style/TextBody"
             android:layout_gravity="center_horizontal"
-            android:paddingBottom="@dimen/default_vertical_margin"
+            android:paddingBottom="@dimen/default_margin"
             tools:text="Path of Humanity"/>
 
         <amagi82.modularcharactersheetcreator.widgets.StatRatingBar

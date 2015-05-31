@@ -10,12 +10,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/default_vertical_margin"
+        android:paddingBottom="@dimen/default_margin"
         android:paddingEnd="@dimen/default_extra_large_margin"
-        android:paddingLeft="@dimen/default_horizontal_margin"
+        android:paddingLeft="@dimen/default_margin"
         android:paddingRight="@dimen/default_extra_large_margin"
-        android:paddingStart="@dimen/default_horizontal_margin"
-        android:paddingTop="@dimen/default_vertical_margin">
+        android:paddingStart="@dimen/default_margin"
+        android:paddingTop="@dimen/default_margin">
 
         <!--Name -->
         <EditText

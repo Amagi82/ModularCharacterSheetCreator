@@ -21,9 +21,9 @@
             style="@style/StatRatingBarTen"
             android:layout_below="@id/tvTitle"
             android:numStars="7"
-            android:paddingBottom="@dimen/default_vertical_margin"
-            android:paddingLeft="@dimen/default_horizontal_margin"
-            android:paddingRight="@dimen/default_horizontal_margin"
+            android:paddingBottom="@dimen/default_margin"
+            android:paddingLeft="@dimen/default_margin"
+            android:paddingRight="@dimen/default_margin"
             android:paddingTop="@dimen/default_small_margin"
             card_view:barType="healthbox"/>
 
@@ -31,9 +31,9 @@
             android:id="@+id/tvText"
             style="@style/TextBody"
             android:layout_below="@id/statRatingBar"
-            android:paddingBottom="@dimen/default_vertical_margin"
-            android:paddingLeft="@dimen/default_horizontal_margin"
-            android:paddingRight="@dimen/default_horizontal_margin"
+            android:paddingBottom="@dimen/default_margin"
+            android:paddingLeft="@dimen/default_margin"
+            android:paddingRight="@dimen/default_margin"
             tools:text="Mauled"/>
 
         <TextView
@@ -42,8 +42,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@id/statRatingBar"
-            android:paddingEnd="@dimen/default_horizontal_margin"
-            android:paddingRight="@dimen/default_horizontal_margin"
+            android:paddingEnd="@dimen/default_margin"
+            android:paddingRight="@dimen/default_margin"
             tools:text="-2 Dice"/>
 
         <View
@@ -57,8 +57,8 @@
             android:layout_alignParentStart="true"
             android:layout_below="@id/tvText"
             android:layout_marginBottom="@dimen/default_small_margin"
-            android:layout_marginLeft="@dimen/default_horizontal_margin"
-            android:layout_marginStart="@dimen/default_horizontal_margin"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
             android:contentDescription="@string/heal_damage"
             android:src="@drawable/ic_favorite_grey600_24dp"/>
 
@@ -68,8 +68,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@id/tvText"
-            android:layout_marginEnd="@dimen/default_horizontal_margin"
-            android:layout_marginRight="@dimen/default_horizontal_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"
             android:contentDescription="@string/take_agg_damage"
             android:src="@drawable/ic_agg_claws"/>
 
