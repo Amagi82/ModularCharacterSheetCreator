@@ -24,5 +24,7 @@
 
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="extended_appbar_height">144dp</dimen>
+
     <dimen name="divider">0.7dp</dimen>
 </resources>
