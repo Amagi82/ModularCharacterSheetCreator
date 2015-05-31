@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -64,15 +65,16 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         addExampleCharacters();
 
         //Add toolbar
+        CollapsingToolbarLayout appbar = (CollapsingToolbarLayout) findViewById(R.id.appbar);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle(getString(R.string.characters));
+        appbar.setTitle(getString(R.string.characters));
         materialMenu = new MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN);
         toolbar.setNavigationOnClickListener(this);
 
         //Container holds recycler view and is replaced with fragments
-        container = (FrameLayout) findViewById(R.id.container);
-        container.setId(R.id.container_id);
+//        container = (FrameLayout) findViewById(R.id.container);
+//        container.setId(R.id.container_id);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
@@ -162,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 //        if (SnackbarManager.getCurrentSnackbar() != null) SnackbarManager.getCurrentSnackbar().dismiss();
 //        fab.hide();
         recyclerView.setVisibility(View.GONE);
-        fm.beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
+//        fm.beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
         toolbar.setNavigationIcon(materialMenu);
         materialMenu.animateIconState(iconState);
         isHomeScreen = false;
@@ -273,8 +275,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
             }
         }
         Log.i(null, "loadGameCharacters took " + (System.currentTimeMillis() - start) + "ms");
-
-
     }
 
     //Populate list if empty - remove for production version
@@ -282,6 +282,14 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         if(gameCharacterList.size() == 0) {
             Log.i(null, "Data created");
             ArrayList<GameCharacter> gameCharacters = new ArrayList<>();
+            gameCharacters.add(new GameCharacter("Thomas Anstis", "Vampire", "", "Gangrel"));
+            gameCharacters.add(new GameCharacter("Tom Lytton", "Vampire", "", "Brujah"));
+            gameCharacters.add(new GameCharacter("Georgia Johnson", "Vampire", "", "Tremere"));
+            gameCharacters.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "", "Ventrue"));
+            gameCharacters.add(new GameCharacter("Thomas Anstis", "Vampire", "", "Gangrel"));
+            gameCharacters.add(new GameCharacter("Tom Lytton", "Vampire", "", "Brujah"));
+            gameCharacters.add(new GameCharacter("Georgia Johnson", "Vampire", "", "Tremere"));
+            gameCharacters.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "", "Ventrue"));
             gameCharacters.add(new GameCharacter("Thomas Anstis", "Vampire", "", "Gangrel"));
             gameCharacters.add(new GameCharacter("Tom Lytton", "Vampire", "", "Brujah"));
             gameCharacters.add(new GameCharacter("Georgia Johnson", "Vampire", "", "Tremere"));
