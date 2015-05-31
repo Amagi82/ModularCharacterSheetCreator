@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
         //Set up the Floating Action Button
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        //fab.setImageResource(R.drawable.ic_person_add_white_24dp);
+        fab.setOnClickListener(this);
 
         fm.addOnBackStackChangedListener(this);
 
