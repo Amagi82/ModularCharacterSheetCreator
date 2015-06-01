@@ -2,22 +2,22 @@ package amagi82.modularcharactersheetcreator;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
 
@@ -43,15 +43,13 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         OnGameCharacterChangedListener, View.OnClickListener, FragmentManager.OnBackStackChangedListener{
 
     public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
-    public static SparseBooleanArray selectedItems = new SparseBooleanArray();
     private OnBackPressedListener backListener;
     private boolean isHomeScreen = true;
-    private FrameLayout container;
+    private CoordinatorLayout container;
     private FragmentManager fm = getSupportFragmentManager();
     private Toolbar toolbar;
     private MaterialMenuDrawable materialMenu;
     private Menu menu;
-    private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private MainRecyclerViewAdapter recyclerViewAdapter;
     private FloatingActionButton fab;
@@ -73,10 +71,10 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         toolbar.setNavigationOnClickListener(this);
 
         //Container holds recycler view and is replaced with fragments
-//        container = (FrameLayout) findViewById(R.id.container);
-//        container.setId(R.id.container_id);
+        container = (CoordinatorLayout) findViewById(R.id.container);
+        container.setId(R.id.container_id);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -107,12 +105,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         this.menu = menu; //Get a menu reference so we can change it elsewhere
-
-        //If selected items are still present after orientation change, retain the state of the toolbar and menu.
-        if(selectedItems.size() > 0){
-            activateSelectionMode();
-            selectedItemsChanged();
-        }
         return true;
     }
 
@@ -121,16 +113,15 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         // Handle action item clicks
         switch(item.getItemId()){
             case R.id.action_delete:
-                //Save the characters and positions temporarily in case the user wants to undo the delete
-                final ArrayList<GameCharacter> storedCharacters = new ArrayList<>();
-                final SparseBooleanArray storedPositions = selectedItems.clone();
-                for(int i = 0; i<storedPositions.size(); i++) storedCharacters.add(gameCharacterList.get(storedPositions.keyAt(i)));
-
-                //Delete the characters
-                for (int i = selectedItems.size() - 1; i >= 0; i--) removeCharacter(selectedItems.keyAt(i));
-
-                selectedItems.clear();
-                resetDefaultMenu();
+//                //Save the characters and positions temporarily in case the user wants to undo the delete
+//                final ArrayList<GameCharacter> storedCharacters = new ArrayList<>();
+//                final SparseBooleanArray storedPositions = selectedItems.clone();
+//                for(int i = 0; i<storedPositions.size(); i++) storedCharacters.add(gameCharacterList.get(storedPositions.keyAt(i)));
+//
+//                //Delete the characters
+//                for (int i = selectedItems.size() - 1; i >= 0; i--) removeCharacter(selectedItems.keyAt(i));
+//
+//
 
 //                //Allow the user to undo delete
 //                SnackbarManager.show(
@@ -147,24 +138,26 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 //                                }).eventListener(new SnackbarEventListener(fab)), this); //Hide the floating action button while Snackbar present
                 break;
             case R.id.action_edit:
-                CreateCharacterFragment fragment = new CreateCharacterFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt("character", selectedItems.keyAt(0));
-                bundle.putBoolean("edit mode", true);
-                fragment.setArguments(bundle);
-                backListener = fragment;
-                attachFragment(fragment, MaterialMenuDrawable.IconState.ARROW);
+//                CreateCharacterFragment fragment = new CreateCharacterFragment();
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("character", selectedItems.keyAt(0));
+//                bundle.putBoolean("edit mode", true);
+//                fragment.setArguments(bundle);
+//                backListener = fragment;
+//                attachFragment(fragment, MaterialMenuDrawable.IconState.ARROW);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void attachFragment(Fragment fragment, MaterialMenuDrawable.IconState iconState) {
-        resetDefaultMenu();
-//        if (SnackbarManager.getCurrentSnackbar() != null) SnackbarManager.getCurrentSnackbar().dismiss();
-//        fab.hide();
-        recyclerView.setVisibility(View.GONE);
-//        fm.beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
+
+        Pair<View, String> p1 = Pair.create((View) toolbar, "toolbar");
+        Pair<View, String> p2 = Pair.create((View) fab, "fab");
+        @SuppressWarnings("unchecked") ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1, p2);
+        fragment.setArguments(options.toBundle());
+        fm.beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
+
         toolbar.setNavigationIcon(materialMenu);
         materialMenu.animateIconState(iconState);
         isHomeScreen = false;
@@ -187,57 +180,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         gameCharacterList.remove(position);
         recyclerViewAdapter.notifyItemRemoved(position);
     }
-
-    /*
-        Handle item selection
-     */
-    private void resetDefaultMenu(){
-        menu.clear();
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        toolbar.setNavigationIcon(null);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.primary));
-        if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.primary_dark));
-        if(selectedItems.size()>0){
-            for(int i=gameCharacterList.size()-1; i>= 0; i--){
-                if(selectedItems.get(i)) {
-                    selectedItems.delete(i);
-                    recyclerViewAdapter.notifyItemChanged(i);
-                }
-            }
-        }
-        materialMenu.setIconState(MaterialMenuDrawable.IconState.BURGER);
-//        fab.show();
-
-        setTitle(getString(R.string.characters));
-    }
-
-    private void selectedItemsChanged() {
-        int count = selectedItems.size();
-        setTitle(getString(R.string.selected_count, count));
-        menu.clear();
-        getMenuInflater().inflate(count == 0 ? R.menu.menu_main : count == 1 ? R.menu.menu_main_longclick_single : R.menu.menu_main_longclick_multiple, menu);
-        if(count == 0) resetDefaultMenu();
-    }
-
-    private void activateSelectionMode() {
-        toolbar.setNavigationIcon(materialMenu);
-        materialMenu.animateIconState(MaterialMenuDrawable.IconState.ARROW);
-//        fab.hide();
-        toolbar.setBackgroundColor(getResources().getColor(R.color.grey_600));
-        if(Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(getResources().getColor(R.color.grey_700));
-    }
-
-    private void toggleSelection(int position) {
-        if (selectedItems.get(position, false)) {
-            selectedItems.delete(position);
-        }
-        else {
-            selectedItems.put(position, true);
-        }
-        recyclerViewAdapter.notifyItemChanged(position);
-        selectedItemsChanged();
-    }
-
 
     /*
         Load and save game characters. If the load succeeds, it saves that file as a backup, and if it fails, it loads the backup.
@@ -376,20 +318,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     public void OnGameCharacterDeleted(final int position) {
         final GameCharacter gameCharacter = gameCharacterList.get(position);
         removeCharacter(position);
-
-//        //Allow the user to undo delete
-//        SnackbarManager.show(
-//                Snackbar.with(getApplicationContext())
-//                        .text(getString(R.string.deleted_count, gameCharacter.getCharacterName())) // text to display
-//                        .actionLabel(getString(R.string.undo))
-//                        .actionColor(getResources().getColor(R.color.accent))
-//                        .actionListener(new ActionClickListener() {
-//                            @Override
-//                            public void onActionClicked(Snackbar snackbar) {
-//                                //User clicked UNDO, so add the stored characters back in their original positions
-//                                addCharacter(position, gameCharacter);
-//                            }
-//                        }).eventListener(new SnackbarEventListener(fab)), this); //Hide the floating action button while Snackbar present
     }
 
     @Override
@@ -411,8 +339,6 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
 
     @Override
     public void onCharacterLongClicked(int position) {
-        activateSelectionMode();
-        toggleSelection(position);
     }
 
     @Override
@@ -426,25 +352,19 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
             //Up navigation clicked
             backListener.onBackPressed();
             if (fm.getBackStackEntryCount() > 0) fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            resetDefaultMenu();
         }
     }
 
     @Override
     public void onBackPressed() {
-        if(selectedItems.size() > 0){
-            resetDefaultMenu();
-        }else {
-            backListener.onBackPressed();
-            super.onBackPressed();
-        }
+        backListener.onBackPressed();
+        super.onBackPressed();
+
     }
 
     @Override
     public void onBackStackChanged() {
         if (fm.getBackStackEntryCount() == 0) {
-            recyclerView.setVisibility(View.VISIBLE);
-            resetDefaultMenu();
             isHomeScreen = true;
         }
     }

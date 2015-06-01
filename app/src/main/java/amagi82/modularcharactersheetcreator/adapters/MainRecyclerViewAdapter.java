@@ -43,10 +43,8 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        boolean isSelected = MainActivity.selectedItems.get(position, false);
         final GameCharacter gameCharacter = gameCharacters.get(position);
-        holder.imageCharacterIcon.setImageBitmap(isSelected? getBitmap(R.drawable.ic_check_circle_grey600_36dp) : gameCharacter.getCharacterIcon());
-        holder.container.setBackgroundResource(isSelected? R.color.selection_alpha : 0);
+        holder.imageCharacterIcon.setImageBitmap(gameCharacter.getCharacterIcon());
         holder.tvName.setText(gameCharacter.getCharacterName());
         holder.tvCharacterClass.setText(gameCharacter.getCharacterRace() + " " + gameCharacter.getCharacterClass());
         holder.tvGameSystem.setText(gameCharacter.getGameSystem());
