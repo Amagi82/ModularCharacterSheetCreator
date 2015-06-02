@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,22 +21,30 @@ import android.widget.Spinner;
 
 import amagi82.modularcharactersheetcreator.adapters.SpinnerArrayAdapter;
 import amagi82.modularcharactersheetcreator.listeners.OnBackPressedListener;
-import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterChangedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 public class CreateCharacterFragment extends Fragment implements OnBackPressedListener, AdapterView.OnItemSelectedListener {
 
-    private OnGameCharacterChangedListener listener;
+    //private OnGameCharacterChangedListener listener;
     private GameCharacter gameCharacter;
     private int characterPosition;
     private boolean isEditMode = false;
+    @InjectView(R.id.toolbar) Toolbar toolbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_create_character, container, false);
         setHasOptionsMenu(true);
+        ButterKnife.inject(this, rootView);
 
-        listener = (OnGameCharacterChangedListener) getActivity();
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
+        //activity.getActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle(getString(R.string.new_character));
+
+        //listener = (OnGameCharacterChangedListener) getActivity();
 
         EditText etName = (EditText) rootView.findViewById(R.id.etName);
         Spinner spinGameSystem = (Spinner) rootView.findViewById(R.id.spinGameSystem);
@@ -66,7 +76,7 @@ public class CreateCharacterFragment extends Fragment implements OnBackPressedLi
             characterPosition = args.getInt("character");
 
             if(isEditMode && gameCharacter == null){
-                gameCharacter = MainActivity.gameCharacterList.get(characterPosition);
+                gameCharacter = MainApplication.getGameCharacters().get(characterPosition);
                 etName.setText(gameCharacter.getCharacterName());
                 spinGameSystem.setSelection(getSpinnerIndex(spinGameSystem, gameCharacter.getGameSystem()));
                 spinRace.setSelection(getSpinnerIndex(spinRace, gameCharacter.getCharacterRace()));
@@ -110,7 +120,7 @@ public class CreateCharacterFragment extends Fragment implements OnBackPressedLi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_delete:
-                listener.OnGameCharacterDeleted(characterPosition);
+                //listener.OnGameCharacterDeleted(characterPosition);
                 getFragmentManager().popBackStack();
                 break;
             case R.id.action_save_template:
@@ -152,9 +162,9 @@ public class CreateCharacterFragment extends Fragment implements OnBackPressedLi
 
     @Override
     public void onBackPressed() {
-        if(gameCharacter != null){
-            if(isEditMode) listener.OnGameCharacterUpdated(characterPosition, gameCharacter);
-            else listener.OnGameCharacterAdded(gameCharacter);
-        }
+//        if(gameCharacter != null){
+//            if(isEditMode) listener.OnGameCharacterUpdated(characterPosition, gameCharacter);
+//            else listener.OnGameCharacterAdded(gameCharacter);
+//        }
     }
 }

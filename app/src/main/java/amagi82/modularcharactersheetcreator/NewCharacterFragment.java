@@ -102,7 +102,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         circleImageSize = (int) getResources().getDimension(R.dimen.circle_icon_size);
 
         if(isEditMode){
-            gameCharacter = MainActivity.gameCharacterList.get(characterPosition);
+            gameCharacter = MainApplication.getGameCharacters().get(characterPosition);
             iconCharacter.setImageBitmap(gameCharacter.getCharacterIcon());
             etName.setText(gameCharacter.getCharacterName());
             etGameSystem.setText(gameCharacter.getGameSystem());

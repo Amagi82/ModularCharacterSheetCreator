@@ -11,8 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import amagi82.modularcharactersheetcreator.MainActivity;
+import amagi82.modularcharactersheetcreator.MainApplication;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnItemLongClickedListener;
@@ -25,10 +26,10 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
 
     private static OnItemClickedListener listener;
     private static OnItemLongClickedListener longClickListener;
-    private ArrayList<GameCharacter> gameCharacters = new ArrayList<>();
+    private List<GameCharacter> gameCharacters = new ArrayList<>();
     private Activity activity;
 
-    public MainRecyclerViewAdapter(ArrayList<GameCharacter> gameCharacters) {
+    public MainRecyclerViewAdapter(List<GameCharacter> gameCharacters) {
 //        listener = (OnItemClickedListener) activity;
 //        longClickListener = (OnItemLongClickedListener) activity;
 //        this.activity = activity;
@@ -62,7 +63,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return MainActivity.gameCharacterList.size();
+        return MainApplication.getGameCharacters().size();
     }
 
     // Provide a reference to the views for each data item
