@@ -17,6 +17,8 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
 import amagi82.modularcharactersheetcreator.listeners.OnItemLongClickedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder> {
@@ -26,10 +28,10 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     private ArrayList<GameCharacter> gameCharacters = new ArrayList<>();
     private Activity activity;
 
-    public MainRecyclerViewAdapter(Activity activity, ArrayList<GameCharacter> gameCharacters) {
-        listener = (OnItemClickedListener) activity;
-        longClickListener = (OnItemLongClickedListener) activity;
-        this.activity = activity;
+    public MainRecyclerViewAdapter(ArrayList<GameCharacter> gameCharacters) {
+//        listener = (OnItemClickedListener) activity;
+//        longClickListener = (OnItemLongClickedListener) activity;
+//        this.activity = activity;
         this.gameCharacters = gameCharacters;
     }
 
@@ -65,33 +67,34 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
 
     // Provide a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        View container;
-        CircleImageView imageCharacterIcon;
-        TextView tvName;
-        TextView tvCharacterClass;
-        TextView tvGameSystem;
+        //View container;
+        @InjectView(R.id.characterIcon) CircleImageView imageCharacterIcon;
+        @InjectView(R.id.tvName) TextView tvName;
+        @InjectView(R.id.tvCharacterClass) TextView tvCharacterClass;
+        @InjectView(R.id.tvGameSystem) TextView tvGameSystem;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.inject(this, itemView);
 
-            container = itemView;
-            container.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onCharacterClicked(getAdapterPosition());
-                }
-            });
-            container.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    longClickListener.onCharacterLongClicked(getAdapterPosition());
-                    return true;
-                }
-            });
-            imageCharacterIcon = (CircleImageView) itemView.findViewById(R.id.characterIcon);
-            tvName = (TextView) itemView.findViewById(R.id.tvName);
-            tvCharacterClass = (TextView) itemView.findViewById(R.id.tvCharacterClass);
-            tvGameSystem = (TextView) itemView.findViewById(R.id.tvGameSystem);
+//            container = itemView;
+//            container.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    listener.onCharacterClicked(getAdapterPosition());
+//                }
+//            });
+//            container.setOnLongClickListener(new View.OnLongClickListener() {
+//                @Override
+//                public boolean onLongClick(View v) {
+//                    longClickListener.onCharacterLongClicked(getAdapterPosition());
+//                    return true;
+//                }
+//            });
+//            imageCharacterIcon = (CircleImageView) itemView.findViewById(R.id.characterIcon);
+//            tvName = (TextView) itemView.findViewById(R.id.tvName);
+//            tvCharacterClass = (TextView) itemView.findViewById(R.id.tvCharacterClass);
+//            tvGameSystem = (TextView) itemView.findViewById(R.id.tvGameSystem);
         }
     }
 }

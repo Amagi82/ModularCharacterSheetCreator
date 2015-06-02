@@ -1,9 +1,7 @@
 package amagi82.modularcharactersheetcreator;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -12,7 +10,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -57,47 +54,48 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
         if(gameCharacterList.size() == 0) loadGameCharacters("Characters");
         addExampleCharacters();
+        setContentView(R.layout.activity_main);
 
-        //Add toolbar
-        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        collapsingToolbar.setTitle(getString(R.string.characters));
-        materialMenu = new MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN);
-        toolbar.setNavigationOnClickListener(this);
 
-        //Container holds recycler view and is replaced with fragments
-        container = (CoordinatorLayout) findViewById(R.id.container);
-        container.setId(R.id.container_id);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerViewAdapter = new MainRecyclerViewAdapter(this, gameCharacterList);
-        recyclerView.setAdapter(recyclerViewAdapter);
-
-        //Set up the Floating Action Button
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(this);
+//        //Add toolbar
+//        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+//        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        collapsingToolbar.setTitle(getString(R.string.characters));
+//        materialMenu = new MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN);
+//        toolbar.setNavigationOnClickListener(this);
+//
+//        //Container holds recycler view and is replaced with fragments
+//        container = (CoordinatorLayout) findViewById(R.id.container);
+//        container.setId(R.id.container_id);
+//
+//        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+//        recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
+//        layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerViewAdapter = new MainRecyclerViewAdapter(this, gameCharacterList);
+//        recyclerView.setAdapter(recyclerViewAdapter);
+//
+//        //Set up the Floating Action Button
+//        fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(this);
 
         fm.addOnBackStackChangedListener(this);
 
-        //After orientation change, restore state of fab, main recyclerview, and toolbar.
-        if(savedInstanceState != null) {
-            isHomeScreen = savedInstanceState.getBoolean("isHomeScreen");
-            if(!isHomeScreen){
-//                fab.hide();
-                recyclerView.setVisibility(View.GONE);
-                toolbar.setNavigationIcon(materialMenu);
-                materialMenu.setIconState(savedInstanceState.getBoolean("isMaterialMenuX", true)?
-                        MaterialMenuDrawable.IconState.X : MaterialMenuDrawable.IconState.ARROW);
-            }
-        }
+//        //After orientation change, restore state of fab, main recyclerview, and toolbar.
+//        if(savedInstanceState != null) {
+//            isHomeScreen = savedInstanceState.getBoolean("isHomeScreen");
+//            if(!isHomeScreen){
+////                fab.hide();
+//                recyclerView.setVisibility(View.GONE);
+//                toolbar.setNavigationIcon(materialMenu);
+//                materialMenu.setIconState(savedInstanceState.getBoolean("isMaterialMenuX", true)?
+//                        MaterialMenuDrawable.IconState.X : MaterialMenuDrawable.IconState.ARROW);
+//            }
+//        }
     }
 
     @Override
@@ -156,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements OnFabClickedListe
         Pair<View, String> p2 = Pair.create((View) fab, "fab");
         @SuppressWarnings("unchecked") ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1, p2);
         fragment.setArguments(options.toBundle());
-        fm.beginTransaction().replace(container.getId(), fragment).addToBackStack(null).commit();
+        fm.beginTransaction().replace(R.id.fragment, fragment).addToBackStack(null).commit();
 
         toolbar.setNavigationIcon(materialMenu);
         materialMenu.animateIconState(iconState);

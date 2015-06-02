@@ -1,22 +1,55 @@
-<FrameLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MainFragment">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/extended_appbar_height"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:expandedTitleMarginStart="@dimen/default_keyline"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:transitionName="toolbar"
+                app:contentInsetStart="@dimen/default_keyline"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <view
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        class="android.support.design.widget.FloatingActionButton"
-        android:src="@drawable/ic_person_add_white_24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/default_margin"
-        android:elevation="@dimen/elevation_fab_resting"/>
-
-</FrameLayout>
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_person_add_white_24dp"
+        android:transitionName="fab"
+        app:borderWidth="0dp"
+        app:fabSize="mini"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom|left|start"/>
+</android.support.design.widget.CoordinatorLayout>
