@@ -1,13 +1,21 @@
 package amagi82.modularcharactersheetcreator;
 
+
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.TransitionInflater;
+import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.view.animation.PathInterpolator;
 
 import com.squareup.otto.Subscribe;
 
@@ -18,7 +26,7 @@ import amagi82.modularcharactersheetcreator.utils.BusProvider;
 public class MainActivity extends AppCompatActivity {
 
 
-//    implements OnFabClickedListener, OnItemClickedListener , OnItemLongClickedListener,
+    //    implements OnFabClickedListener, OnItemClickedListener , OnItemLongClickedListener,
 //    OnGameCharacterChangedListener, View.OnClickListener, FragmentManager.OnBackStackChangedListener
 //
 //    public static ArrayList<GameCharacter> gameCharacterList = new ArrayList<>();
@@ -38,13 +46,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
-
+        Fragment fragment = new MainFragment();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //Add transition info to new fragment
+            //fragment.setSharedElementReturnTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
+            fragment.setExitTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
+        }
+        fm.beginTransaction().add(R.id.container, fragment).commit();
 
 
 //        //Add toolbar
 //        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-//        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 //        collapsingToolbar.setTitle(getString(R.string.characters));
 //        materialMenu = new MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN);
@@ -83,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         // Register ourselves so that we can provide the initial value.
         BusProvider.getBus().register(this);
     }
@@ -91,18 +103,51 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
         // Always unregister when an object no longer should be on the bus.
         BusProvider.getBus().unregister(this);
     }
 
-    @Subscribe public void onCreateCharacter(CreateCharacterEvent event) {
-        CreateCharacterFragment fragment = new CreateCharacterFragment();
-        Pair<View, String> p1 = Pair.create((View) event.toolbar, "toolbar");
-        Pair<View, String> p2 = Pair.create((View) event.fab, "fab");
-        @SuppressWarnings("unchecked") ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1, p2);
-        fragment.setArguments(options.toBundle());
-        fm.beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
+    @Subscribe
+    public void onCreateCharacter(CreateCharacterEvent event) {
+        final Fragment fragment = new CreateCharacterFragment();
+        final FloatingActionButton fab = event.fab;
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        final int width = 2*size.x / fab.getWidth();
+
+        Log.i(null, "width == "+width);
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            fragment.setEnterTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
+//        }
+        int moveX =fab.getWidth()*2;
+        int moveY =fab.getHeight()*2;
+
+        fab.animate()
+                .translationX(moveX)
+                .translationY(moveY)
+                .setInterpolator(new PathInterpolator(1, 0))
+                .setDuration(800)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        fab.setImageResource(0);
+                        fab.animate().scaleX(width).scaleY(width).setDuration(2000).setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                Log.i(null, "width after == "+fab.getWidth());
+                                fm.beginTransaction()
+                                        .replace(R.id.container, fragment)
+                                        .addToBackStack("transaction")
+                                        .commit();
+                            }
+                        });
+                    }
+                });
     }
 
     @Override
@@ -116,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action item clicks
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_delete:
 //                //Save the characters and positions temporarily in case the user wants to undo the delete
 //                final ArrayList<GameCharacter> storedCharacters = new ArrayList<>();

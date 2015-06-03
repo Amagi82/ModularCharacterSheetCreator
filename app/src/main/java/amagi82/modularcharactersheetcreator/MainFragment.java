@@ -26,12 +26,13 @@ public class MainFragment extends Fragment {
     @InjectView(R.id.recycler_view) RecyclerView recyclerView;
     @InjectView(R.id.fab) FloatingActionButton fab;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
         ButterKnife.inject(this, rootView);
         collapsingToolbar.setTitle(getString(R.string.characters));
+
 
         recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -42,7 +43,7 @@ public class MainFragment extends Fragment {
 
     @OnClick(R.id.fab)
     public void onFabClicked() {
-        BusProvider.getBus().post(new CreateCharacterEvent(toolbar, fab));
+        BusProvider.getBus().post(new CreateCharacterEvent(fab));
     }
 
 
