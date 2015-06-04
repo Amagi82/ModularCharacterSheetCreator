@@ -47,7 +47,7 @@
 
             <ImageView
                 style="@style/IconNewCharacter"
-                android:layout_alignBottom="@id/etName"
+                android:layout_alignBaseline="@id/etName"
                 android:contentDescription="@string/game_systems"
                 android:src="@drawable/ic_person_grey600_24dp"/>
 
@@ -59,7 +59,7 @@
 
             <ImageView
                 style="@style/IconNewCharacter"
-                android:layout_alignBottom="@id/spinGameSystem"
+                android:layout_alignBaseline="@id/spinGameSystem"
                 android:contentDescription="@string/game_systems"
                 android:src="@drawable/ic_public_grey600_24dp"/>
 
@@ -74,7 +74,7 @@
             <ImageView
                 android:id="@+id/iconRace"
                 style="@style/IconNewCharacter"
-                android:layout_alignBottom="@id/spinRace"
+                android:layout_alignBaseline="@id/spinRace"
                 android:contentDescription="@string/character_race"
                 android:src="@drawable/ic_race_grey600_24dp"
                 android:visibility="gone"
@@ -91,7 +91,7 @@
             <ImageView
                 android:id="@+id/iconClass"
                 style="@style/IconNewCharacter"
-                android:layout_alignBottom="@id/spinClass"
+                android:layout_alignBaseline="@id/spinClass"
                 android:contentDescription="@string/character_classes"
                 android:src="@drawable/ic_assignment_grey600_24dp"
                 android:visibility="gone"

@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +23,8 @@ import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class CreateCharacterFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    //private OnGameCharacterChangedListener listener;
     private GameCharacter gameCharacter;
     private int characterPosition;
     private boolean isEditMode = false;
@@ -48,13 +45,15 @@ public class CreateCharacterFragment extends Fragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_create_character, container, false);
-        setHasOptionsMenu(true);
         ButterKnife.inject(this, rootView);
+        setHasOptionsMenu(true);
 
         colorMask.animate().alpha(0).setDuration(300);
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationOnClickListener(this);
         toolbar.setTitle(getString(R.string.new_character));
+        toolbar.inflateMenu(isEditMode ? R.menu.menu_edit_character : R.menu.menu_new_character);
+        toolbar.setOnMenuItemClickListener(this);
 
         spinGameSystem.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), R.array.game_systems));
 //        spinRace.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), R.array.game_systems));
@@ -110,30 +109,6 @@ public class CreateCharacterFragment extends Fragment implements View.OnClickLis
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(isEditMode ? R.menu.menu_edit_character : R.menu.menu_new_character, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_delete:
-                //listener.OnGameCharacterDeleted(characterPosition);
-                getFragmentManager().popBackStack();
-                break;
-            case R.id.action_save_template:
-                //TODO: After templates created, save to custom list. Use dialog to name and confirm.
-                break;
-            case R.id.action_discard:
-                gameCharacter = null;
-                getFragmentManager().popBackStack();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         //String selected = parent.getSelectedItem().toString();
 //        switch (parent.getId()){
@@ -164,5 +139,23 @@ public class CreateCharacterFragment extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
 
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_delete:
+                //listener.OnGameCharacterDeleted(characterPosition);
+                getFragmentManager().popBackStack();
+                return true;
+            case R.id.action_save_template:
+                //TODO: After templates created, save to custom list. Use dialog to name and confirm.
+                return true;
+            case R.id.action_discard:
+                gameCharacter = null;
+                getFragmentManager().popBackStack();
+                return true;
+        }
+        return false;
     }
 }
