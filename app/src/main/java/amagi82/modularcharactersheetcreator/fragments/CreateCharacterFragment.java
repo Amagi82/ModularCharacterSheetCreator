@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,13 +25,25 @@ import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class CreateCharacterFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class CreateCharacterFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     //private OnGameCharacterChangedListener listener;
     private GameCharacter gameCharacter;
     private int characterPosition;
     private boolean isEditMode = false;
+    @InjectView(R.id.color_mask) View colorMask;
     @InjectView(R.id.toolbar) Toolbar toolbar;
+    @InjectView(R.id.etName) EditText etName;
+    @InjectView(R.id.spinGameSystem) Spinner spinGameSystem;
+    @InjectView(R.id.iconRace) ImageView iconRace;
+    @InjectView(R.id.spinRace) Spinner spinRace;
+    @InjectView(R.id.iconClass) ImageView iconClass;
+    @InjectView(R.id.spinClass) Spinner spinClass;
+    @InjectView(R.id.imagePortrait) ImageButton imagePortrait;
+    @InjectView(R.id.spinTheme) Spinner spinTheme;
+    @InjectView(R.id.iconTemplate) ImageView iconTemplate;
+    @InjectView(R.id.spinTemplate) Spinner spinTemplate;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,23 +51,10 @@ public class CreateCharacterFragment extends Fragment implements AdapterView.OnI
         setHasOptionsMenu(true);
         ButterKnife.inject(this, rootView);
 
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
-        //activity.getActionBar().setDisplayHomeAsUpEnabled(true);
+        colorMask.animate().alpha(0).setDuration(300);
+        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        toolbar.setNavigationOnClickListener(this);
         toolbar.setTitle(getString(R.string.new_character));
-
-        //listener = (OnGameCharacterChangedListener) getActivity();
-
-        EditText etName = (EditText) rootView.findViewById(R.id.etName);
-        Spinner spinGameSystem = (Spinner) rootView.findViewById(R.id.spinGameSystem);
-        ImageView iconRace = (ImageView) rootView.findViewById(R.id.iconRace);
-        Spinner spinRace = (Spinner) rootView.findViewById(R.id.spinRace);
-        ImageView iconClass = (ImageView) rootView.findViewById(R.id.iconClass);
-        Spinner spinClass = (Spinner) rootView.findViewById(R.id.spinClass);
-        ImageButton imagePortrait = (ImageButton) rootView.findViewById(R.id.imagePortrait);
-        Spinner spinTheme = (Spinner) rootView.findViewById(R.id.spinTheme);
-        ImageView iconTemplate = (ImageView) rootView.findViewById(R.id.iconTemplate);
-        Spinner spinTemplate = (Spinner) rootView.findViewById(R.id.spinTemplate);
 
         spinGameSystem.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), R.array.game_systems));
 //        spinRace.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), R.array.game_systems));
@@ -162,4 +160,9 @@ public class CreateCharacterFragment extends Fragment implements AdapterView.OnI
     }
 
 
+    //Up navigation
+    @Override
+    public void onClick(View v) {
+
+    }
 }

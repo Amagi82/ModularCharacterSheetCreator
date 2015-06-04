@@ -18,12 +18,11 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:transitionName="toolbar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
     </android.support.design.widget.AppBarLayout>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
@@ -151,4 +150,10 @@
                 tools:visibility="visible"/>
         </RelativeLayout>
     </ScrollView>
+
+    <View
+        android:id="@+id/color_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/accent"/>
 </android.support.design.widget.CoordinatorLayout>
