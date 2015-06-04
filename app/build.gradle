@@ -26,8 +26,6 @@ dependencies {
     compile 'com.android.support:cardview-v7:22.2.0'
     compile 'com.android.support:design:22.2.0'
     compile 'de.hdodenhof:circleimageview:1.2.2'
-    compile 'com.balysv.materialmenu:material-menu-toolbar:1.5.3' //Spinning hamburger to arrow to X button
-    compile 'com.afollestad:material-dialogs:0.7.3.4' //Material design confirmation dialogs
     compile 'com.edmodo:cropper:1.0.1' //Photo cropping
     compile 'com.github.lzyzsd:circleprogress:1.1.0' //Circle progress bar- used for blood pools or health bars
     compile 'com.akexorcist:RoundCornerProgressBar:1.1.0' //Usable for health bars

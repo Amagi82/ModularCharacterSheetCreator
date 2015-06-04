@@ -1,7 +1,6 @@
-package amagi82.modularcharactersheetcreator;
+package amagi82.modularcharactersheetcreator.fragments;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -11,13 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import amagi82.modularcharactersheetcreator.MainApplication;
+import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterSheetRecyclerViewAdapter;
-import amagi82.modularcharactersheetcreator.listeners.OnFabClickedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 
 public class CharacterSheetFragment extends Fragment {
-
-    private OnFabClickedListener listener;
 
     public CharacterSheetFragment() {
     }
@@ -48,15 +46,5 @@ public class CharacterSheetFragment extends Fragment {
         fab.setImageResource(R.drawable.ic_add_white_24dp);
 
         return rootView;
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            listener = (OnFabClickedListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnFabClickedListener");
-        }
     }
 }

@@ -12,16 +12,22 @@ import amagi82.modularcharactersheetcreator.R;
 public class DefaultIconFactory {
 
     private Context context;
+    private int circleImageSize;
+    private TextPaint textPaint;
+    private int textColor;
 
     public DefaultIconFactory(Context context) {
         this.context = context;
+        circleImageSize = (int) context.getResources().getDimension(R.dimen.circle_icon_size);
+        textPaint = new TextPaint();
+        textColor = getColor(R.color.white);
     }
 
-    public Bitmap createIcon(String name, int backgroundColor, int textColor, int circleImageSize){
+    public Bitmap createIcon(String name, int backgroundColor){
 
         String firstLetter = name.length() > 0? name.substring(0,1) : "";
 
-        TextPaint textPaint = new TextPaint();
+        textPaint.reset();
         textPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setLinearText(true);
@@ -44,14 +50,10 @@ public class DefaultIconFactory {
     }
 
     public  Bitmap createIcon(String name){
-        return createIcon(name, getColor(R.color.primary), getColor(R.color.white), getIconSize(R.dimen.circle_icon_size));
+        return createIcon(name, getColor(R.color.primary));
     }
 
     private int getColor(int colorId){
         return context.getResources().getColor(colorId);
-    }
-
-    private int getIconSize(int dimenId){
-        return (int) context.getResources().getDimension(dimenId);
     }
 }

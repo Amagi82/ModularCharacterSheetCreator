@@ -1,9 +1,7 @@
 package amagi82.modularcharactersheetcreator.adapters;
 
 
-import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,25 +13,22 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.MainApplication;
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
-import amagi82.modularcharactersheetcreator.listeners.OnItemLongClickedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.utils.DefaultIconFactory;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder> {
 
-    private static OnItemClickedListener listener;
-    private static OnItemLongClickedListener longClickListener;
     private List<GameCharacter> gameCharacters = new ArrayList<>();
-    private Activity activity;
+    private DefaultIconFactory iconFactory;
+    private Context context;
 
-    public MainRecyclerViewAdapter(List<GameCharacter> gameCharacters) {
-//        listener = (OnItemClickedListener) activity;
-//        longClickListener = (OnItemLongClickedListener) activity;
-//        this.activity = activity;
+    public MainRecyclerViewAdapter(Context context, List<GameCharacter> gameCharacters) {
+        this.context = context;
         this.gameCharacters = gameCharacters;
+        iconFactory = new DefaultIconFactory(context);
     }
 
     // Create new views (invoked by the layout manager)
@@ -47,18 +42,15 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final GameCharacter gameCharacter = gameCharacters.get(position);
+        if(gameCharacter.getCharacterIcon() == null){
+            int color = gameCharacter.getColorPrimary() < 1? context.getResources().getColor(R.color.primary) : gameCharacter.getColorPrimary();
+            gameCharacter.setCharacterIcon(iconFactory.createIcon(gameCharacter.getCharacterName(),color));
+        }
         holder.imageCharacterIcon.setImageBitmap(gameCharacter.getCharacterIcon());
         holder.tvName.setText(gameCharacter.getCharacterName());
         holder.tvCharacterClass.setText(gameCharacter.getCharacterRace() + " " + gameCharacter.getCharacterClass());
         holder.tvGameSystem.setText(gameCharacter.getGameSystem());
     }
-
-    //Convenience method to get bitmap from drawable resource
-    private Bitmap getBitmap(int id){
-        return BitmapFactory.decodeResource(activity.getResources(), id);
-    }
-
-
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
@@ -92,10 +84,6 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
 //                    return true;
 //                }
 //            });
-//            imageCharacterIcon = (CircleImageView) itemView.findViewById(R.id.characterIcon);
-//            tvName = (TextView) itemView.findViewById(R.id.tvName);
-//            tvCharacterClass = (TextView) itemView.findViewById(R.id.tvCharacterClass);
-//            tvGameSystem = (TextView) itemView.findViewById(R.id.tvGameSystem);
         }
     }
 }

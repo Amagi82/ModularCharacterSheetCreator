@@ -12,17 +12,14 @@ import java.util.ArrayList;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.ContainerViewHolder;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.TextViewHolder;
-import amagi82.modularcharactersheetcreator.listeners.OnItemClickedListener;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.models.modules.TextModule;
 
 public class CharacterSheetRecyclerViewAdapter extends RecyclerView.Adapter<ContainerViewHolder> {
 
     private ArrayList<Module> modules;
-    private OnItemClickedListener listener;
 
     public CharacterSheetRecyclerViewAdapter(ArrayList<Module> modules, Activity activity) {
-        listener = (OnItemClickedListener) activity;
         this.modules = modules;
     }
 
@@ -61,7 +58,7 @@ public class CharacterSheetRecyclerViewAdapter extends RecyclerView.Adapter<Cont
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onModuleClicked(modules, position);
+
             }
         });
     }

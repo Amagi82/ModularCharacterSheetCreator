@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator;
+package amagi82.modularcharactersheetcreator.fragments;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,13 +19,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import amagi82.modularcharactersheetcreator.MainApplication;
+import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.SpinnerArrayAdapter;
-import amagi82.modularcharactersheetcreator.listeners.OnBackPressedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class CreateCharacterFragment extends Fragment implements OnBackPressedListener, AdapterView.OnItemSelectedListener {
+public class CreateCharacterFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     //private OnGameCharacterChangedListener listener;
     private GameCharacter gameCharacter;
@@ -160,11 +161,5 @@ public class CreateCharacterFragment extends Fragment implements OnBackPressedLi
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
-    @Override
-    public void onBackPressed() {
-//        if(gameCharacter != null){
-//            if(isEditMode) listener.OnGameCharacterUpdated(characterPosition, gameCharacter);
-//            else listener.OnGameCharacterAdded(gameCharacter);
-//        }
-    }
+
 }

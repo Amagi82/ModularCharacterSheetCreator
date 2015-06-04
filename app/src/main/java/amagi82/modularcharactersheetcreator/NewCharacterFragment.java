@@ -2,10 +2,8 @@ package amagi82.modularcharactersheetcreator;
 
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -14,8 +12,6 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextPaint;
@@ -32,16 +28,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.edmodo.cropper.CropImageView;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import amagi82.modularcharactersheetcreator.listeners.OnGameCharacterChangedListener;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -52,8 +44,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     private static Uri imageCaptureUri;
     private static Bitmap croppedBitmap;
     private GameCharacter gameCharacter;
-    private OnGameCharacterChangedListener listener;
-    private MaterialDialog dialog;
+    //private MaterialDialog dialog;
     private CircleImageView iconCharacter;
     private ImageView iconRace;
     private ImageView iconClass;
@@ -86,8 +77,6 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
 
         View rootView = inflater.inflate(isEditMode? R.layout.fragment_edit_character : R.layout.fragment_add_character, container, false);
         setHasOptionsMenu(true);
-
-        listener = (OnGameCharacterChangedListener) getActivity();
 
         iconCharacter = (CircleImageView) rootView.findViewById(R.id.iconCharacter);
         ImageView iconGameSystem = (ImageView) rootView.findViewById(R.id.iconGameSystem);
@@ -142,18 +131,17 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         return rootView;
     }
 
-    @Override
-    public void onPause() {
-        if (dialog != null) dialog.dismiss();
-        super.onPause();
-    }
+//    @Override
+//    public void onPause() {
+//        if (dialog != null) dialog.dismiss();
+//        super.onPause();
+//    }
 
     //On edit mode, we save changes when the user hits the back button
     @Override
     public void onDestroyView() {
         if (!deletingCharacter && isEditMode) {
             saveCharacter();
-            listener.OnGameCharacterUpdated(characterPosition, gameCharacter);
         }
         super.onDestroyView();
     }
@@ -226,42 +214,42 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iconCharacter: //Select an image for a custom icon
-                dialog = new MaterialDialog.Builder(getActivity()).items(R.array.icon_choices)
-                        .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View view, int position, CharSequence text) {
-                        switch (position){
-                            case 0:
-                                //Get image from camera. Check to make sure device is equipped with a camera
-                                if(getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
-                                    Intent intentTakePhoto 	 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                    imageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
-                                            "tmp_avatar_" + String.valueOf(System.currentTimeMillis()) + ".jpg"));
-                                    intentTakePhoto.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageCaptureUri);
-                                    try {
-                                        intentTakePhoto.putExtra("return-data", true);
-                                        startActivityForResult(intentTakePhoto, PICK_FROM_CAMERA);
-                                    } catch (ActivityNotFoundException e) {
-                                        e.printStackTrace();
-                                    }
-                                }else{
-                                    Toast.makeText(getActivity(), "No camera detected on your device", Toast.LENGTH_SHORT).show();
-                                }
-                                break;
-
-                            case 1:
-                                //Get image from gallery
-                                Intent intentFromGallery = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
-                                startActivityForResult(Intent.createChooser(intentFromGallery, "Complete action using"), PICK_FROM_FILE);
-                                break;
-                            case 2:
-                                //Just use the default icon
-                                iconCharacter.setImageBitmap(createDefaultIcon());
-                                hasCustomCharacterIcon = false;
-                                break;
-                        }
-                    }
-                }).show();
+//                dialog = new MaterialDialog.Builder(getActivity()).items(R.array.icon_choices)
+//                        .itemsCallback(new MaterialDialog.ListCallback() {
+//                    @Override
+//                    public void onSelection(MaterialDialog dialog, View view, int position, CharSequence text) {
+//                        switch (position){
+//                            case 0:
+//                                //Get image from camera. Check to make sure device is equipped with a camera
+//                                if(getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
+//                                    Intent intentTakePhoto 	 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                                    imageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+//                                            "tmp_avatar_" + String.valueOf(System.currentTimeMillis()) + ".jpg"));
+//                                    intentTakePhoto.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageCaptureUri);
+//                                    try {
+//                                        intentTakePhoto.putExtra("return-data", true);
+//                                        startActivityForResult(intentTakePhoto, PICK_FROM_CAMERA);
+//                                    } catch (ActivityNotFoundException e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                }else{
+//                                    Toast.makeText(getActivity(), "No camera detected on your device", Toast.LENGTH_SHORT).show();
+//                                }
+//                                break;
+//
+//                            case 1:
+//                                //Get image from gallery
+//                                Intent intentFromGallery = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
+//                                startActivityForResult(Intent.createChooser(intentFromGallery, "Complete action using"), PICK_FROM_FILE);
+//                                break;
+//                            case 2:
+//                                //Just use the default icon
+//                                iconCharacter.setImageBitmap(createDefaultIcon());
+//                                hasCustomCharacterIcon = false;
+//                                break;
+//                        }
+//                    }
+//                }).show();
                 break;
             case R.id.iconGameSystem:
                 chooseGameSystem(R.array.game_systems, etGameSystem);
@@ -279,7 +267,6 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
                 Log.i(null, "Offer template if available");
                 break;
             case R.id.bDelete:
-                listener.OnGameCharacterDeleted(characterPosition);
                 deletingCharacter = true;
                 getFragmentManager().popBackStack();
                 break;
@@ -319,23 +306,23 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
             Bitmap bitmap = BitmapFactory.decodeStream(input, null, bitmapOptions);
             input.close();
 
-            dialog = new MaterialDialog.Builder(getActivity())
-                    .title(getResources().getString(R.string.crop_image)).customView(R.layout.dialog_crop_image, false)
-                    .positiveText(getResources().getString(R.string.ok))
-                    .negativeText(getResources().getString(R.string.cancel))
-                    .callback(new MaterialDialog.ButtonCallback() {
-                        @Override
-                        public void onPositive(MaterialDialog dialog) {
-                            croppedBitmap = cropper.getCroppedImage();
-                            croppedBitmap = Bitmap.createScaledBitmap(croppedBitmap, circleImageSize, circleImageSize, true);
-                            iconCharacter.setImageBitmap(croppedBitmap);
-                            hasCustomCharacterIcon = true;
-                        }
-                    })
-                    .build();
-            cropper = (CropImageView) dialog.findViewById(R.id.cropImageView);
-            cropper.setImageBitmap(bitmap);
-            dialog.show();
+//            dialog = new MaterialDialog.Builder(getActivity())
+//                    .title(getResources().getString(R.string.crop_image)).customView(R.layout.dialog_crop_image, false)
+//                    .positiveText(getResources().getString(R.string.ok))
+//                    .negativeText(getResources().getString(R.string.cancel))
+//                    .callback(new MaterialDialog.ButtonCallback() {
+//                        @Override
+//                        public void onPositive(MaterialDialog dialog) {
+//                            croppedBitmap = cropper.getCroppedImage();
+//                            croppedBitmap = Bitmap.createScaledBitmap(croppedBitmap, circleImageSize, circleImageSize, true);
+//                            iconCharacter.setImageBitmap(croppedBitmap);
+//                            hasCustomCharacterIcon = true;
+//                        }
+//                    })
+//                    .build();
+//            cropper = (CropImageView) dialog.findViewById(R.id.cropImageView);
+//            cropper.setImageBitmap(bitmap);
+//            dialog.show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -343,31 +330,31 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     }
 
     private void chooseGameSystem(final int arrayId, final EditText editText) {
-        dialog = new MaterialDialog.Builder(getActivity()).items(arrayId).itemsCallback(new MaterialDialog.ListCallback() {
-            @Override
-            public void onSelection(MaterialDialog dialog, View view, int position, CharSequence text) {
-                if (!text.equals(getString(R.string.other))) {
-                    if (editText.getText().toString().equals(getString(R.string.dnd))) {
-                        editText.setText(editText.getText() + " " + text + " " + getString(R.string.edition));
-                        return;
-                    } else {
-                        editText.setText(text);
-                        if (text.equals(getString(R.string.dnd))) chooseGameSystem(R.array.game_systems_dnd, editText);
-                        if (text.equals(getString(R.string.world_of_darkness))) chooseGameSystem(R.array.game_systems_wod, editText);
-                    }
-                }
-                gameSystemChanged(text.toString().contains(":") ? -position : position);
-            }
-        }).show();
+//        dialog = new MaterialDialog.Builder(getActivity()).items(arrayId).itemsCallback(new MaterialDialog.ListCallback() {
+//            @Override
+//            public void onSelection(MaterialDialog dialog, View view, int position, CharSequence text) {
+//                if (!text.equals(getString(R.string.other))) {
+//                    if (editText.getText().toString().equals(getString(R.string.dnd))) {
+//                        editText.setText(editText.getText() + " " + text + " " + getString(R.string.edition));
+//                        return;
+//                    } else {
+//                        editText.setText(text);
+//                        if (text.equals(getString(R.string.dnd))) chooseGameSystem(R.array.game_systems_dnd, editText);
+//                        if (text.equals(getString(R.string.world_of_darkness))) chooseGameSystem(R.array.game_systems_wod, editText);
+//                    }
+//                }
+//                gameSystemChanged(text.toString().contains(":") ? -position : position);
+//            }
+//        }).show();
     }
 
     private void chooseArchetype(final int arrayId, final EditText editText) {
-        dialog = new MaterialDialog.Builder(getActivity()).items(arrayId).itemsCallback(new MaterialDialog.ListCallback() {
-            @Override
-            public void onSelection(MaterialDialog dialog, View view, int position, CharSequence text) {
-                if (!text.equals(getString(R.string.other))) editText.setText(text);
-            }
-        }).show();
+//        dialog = new MaterialDialog.Builder(getActivity()).items(arrayId).itemsCallback(new MaterialDialog.ListCallback() {
+//            @Override
+//            public void onSelection(MaterialDialog dialog, View view, int position, CharSequence text) {
+//                if (!text.equals(getString(R.string.other))) editText.setText(text);
+//            }
+//        }).show();
     }
 
     private void gameSystemChanged(int position) {

@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator;
+package amagi82.modularcharactersheetcreator.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import amagi82.modularcharactersheetcreator.MainApplication;
+import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.MainRecyclerViewAdapter;
 import amagi82.modularcharactersheetcreator.events.CreateCharacterEvent;
 import amagi82.modularcharactersheetcreator.utils.BusProvider;
@@ -36,7 +38,7 @@ public class MainFragment extends Fragment {
 
         recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        MainRecyclerViewAdapter recyclerViewAdapter = new MainRecyclerViewAdapter(MainApplication.getGameCharacters());
+        MainRecyclerViewAdapter recyclerViewAdapter = new MainRecyclerViewAdapter(getActivity(), MainApplication.getGameCharacters());
         recyclerView.setAdapter(recyclerViewAdapter);
         return rootView;
     }
