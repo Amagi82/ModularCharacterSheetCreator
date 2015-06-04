@@ -41,7 +41,6 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
     @InjectView(R.id.iconTemplate) ImageView iconTemplate;
     @InjectView(R.id.spinTemplate) Spinner spinTemplate;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_create_character, container, false);
@@ -55,11 +54,7 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
         toolbar.inflateMenu(isEditMode ? R.menu.menu_edit_character : R.menu.menu_new_character);
         toolbar.setOnMenuItemClickListener(this);
 
-        spinGameSystem.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), R.array.game_systems));
-//        spinRace.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), R.array.game_systems));
-//        spinClass.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), R.array.game_systems));
-//        spinTheme.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), R.array.game_systems));
-//        spinTemplate.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), R.array.game_systems));
+        setSpinnerAdapter(spinGameSystem, R.array.game_systems);
 
         spinGameSystem.setOnItemSelectedListener(this);
         spinRace.setOnItemSelectedListener(this);
@@ -96,6 +91,10 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
         return rootView;
     }
 
+    private void setSpinnerAdapter(Spinner spinner, int arrayId){
+        spinner.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), arrayId));
+    }
+
     //Get the index of the user's selection
     private int getSpinnerIndex(Spinner spinner, String string) {
         int index = 0;
@@ -110,24 +109,24 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        //String selected = parent.getSelectedItem().toString();
-//        switch (parent.getId()){
-//            case R.id.spinGameSystem:
-//                gameCharacter.setGameSystem(selected);
-//                break;
-//            case R.id.spinRace:
-//                gameCharacter.setCharacterRace(selected);
-//                break;
-//            case R.id.spinClass:
-//                gameCharacter.setCharacterClass(selected);
-//                break;
-//            case R.id.spinTheme:
-//
-//                break;
-//            case R.id.spinTemplate:
-//
-//                break;
-//        }
+        String selected = parent.getSelectedItem().toString();
+        switch (parent.getId()){
+            case R.id.spinGameSystem:
+                gameCharacter.setGameSystem(selected);
+                break;
+            case R.id.spinRace:
+                gameCharacter.setCharacterRace(selected);
+                break;
+            case R.id.spinClass:
+                gameCharacter.setCharacterClass(selected);
+                break;
+            case R.id.spinTheme:
+
+                break;
+            case R.id.spinTemplate:
+
+                break;
+        }
     }
 
     @Override
@@ -140,6 +139,8 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
     public void onClick(View v) {
 
     }
+
+
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
@@ -157,5 +158,11 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
     }
 }
