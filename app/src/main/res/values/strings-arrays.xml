@@ -42,6 +42,7 @@
     </string-array>
 
     <string-array name="classes_cwod_vampire">
+        <item>Clan</item>
         <item>Other</item>
         <item>Assamite</item>
         <item>Brujah</item>
@@ -60,6 +61,7 @@
     </string-array>
 
     <string-array name="classes_dnd">
+        <item>Class</item>
         <item>Other</item>
         <item>Barbarian</item>
         <item>Bard</item>
@@ -75,6 +77,7 @@
     </string-array>
 
     <string-array name="races_dnd">
+        <item>Race</item>
         <item>Other</item>
         <item>Dragonborn</item>
         <item>Dwarf</item>
@@ -89,6 +92,7 @@
     </string-array>
 
     <string-array name="classes_dungeon_world">
+        <item>Class</item>
         <item>Other</item>
         <item>Bard</item>
         <item>Cleric</item>
@@ -101,6 +105,7 @@
     </string-array>
 
     <string-array name="races_dungeon_world">
+        <item>Race</item>
         <item>Dwarf</item>
         <item>Elf</item>
         <item>Halfling</item>
@@ -108,6 +113,7 @@
     </string-array>
 
     <string-array name="classes_pathfinder">
+        <item>Class</item>
         <item>Other</item>
         <item>Barbarian</item>
         <item>Bard</item>
@@ -123,6 +129,7 @@
     </string-array>
 
     <string-array name="races_pathfinder">
+        <item>Race</item>
         <item>Other</item>
         <item>Dwarf</item>
         <item>Elf</item>
@@ -134,6 +141,7 @@
     </string-array>
 
     <string-array name="classes_earthdawn">
+        <item>Discipline</item>
         <item>Other</item>
         <item>Air Sailor</item>
         <item>Archer</item>
@@ -153,6 +161,7 @@
     </string-array>
 
     <string-array name="races_earthdawn">
+        <item>Race</item>
         <item>Other</item>
         <item>Dwarf</item>
         <item>Elf</item>
@@ -165,6 +174,7 @@
     </string-array>
 
     <string-array name="classes_feng_shui">
+        <item>Archetype</item>
         <item>Other</item>
         <item>$10,000 Man</item>
         <item>Abomination</item>
@@ -241,6 +251,7 @@
     </string-array>
 
     <string-array name="classes_shadowrun">
+        <item>Archetype</item>
         <item>Other</item>
         <item>Adept</item>
         <item>Combat Decker</item>
@@ -261,6 +272,7 @@
     </string-array>
 
     <string-array name="races_shadowrun">
+        <item>Race</item>
         <item>Other</item>
         <item>Dwarf</item>
         <item>Elf</item>
@@ -270,6 +282,7 @@
     </string-array>
 
     <string-array name="classes_cwod_werewolf">
+        <item>Tribe</item>
         <item>Other</item>
         <item>Black Fury</item>
         <item>Bone Gnawer</item>
@@ -287,12 +300,14 @@
     </string-array>
 
     <string-array name="races_cwod_werewolf">
+        <item>Breed</item>
         <item>Homid</item>
         <item>Lupus</item>
         <item>Metis</item>
     </string-array>
 
     <string-array name="classes_cwod_mage">
+        <item>Tradition</item>
         <item>Other</item>
         <item>Akashic Brotherhood</item>
         <item>Celestial Chorus</item>
@@ -311,12 +326,14 @@
     </string-array>
 
     <string-array name="classes_cwod_wraith">
+        <item>Faction</item>
         <item>Hierarchy</item>
         <item>Heretic</item>
         <item>Renegade</item>
     </string-array>
 
     <string-array name="classes_cwod_changeling">
+        <item>Kith</item>
         <item>Other</item>
         <item>Boggan</item>
         <item>Eshu</item>
@@ -330,11 +347,13 @@
     </string-array>
 
     <string-array name="races_cwod_changeling">
+        <item>Court</item>
         <item>Seelie</item>
         <item>Unseelie</item>
     </string-array>
 
     <string-array name="classes_nwod_vampire">
+        <item>Clan</item>
         <item>Other</item>
         <item>Daeva</item>
         <item>Gangrel</item>
@@ -345,6 +364,7 @@
     </string-array>
 
     <string-array name="classes_nwod_werewolf">
+        <item>Tribe</item>
         <item>Other</item>
         <item>Blood Talon</item>
         <item>Bone Shadow</item>
@@ -354,6 +374,7 @@
     </string-array>
 
     <string-array name="classes_nwod_mage">
+        <item>Order</item>
         <item>Other</item>
         <item>Adamantine Arrow</item>
         <item>Free Council</item>
