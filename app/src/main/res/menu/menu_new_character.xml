@@ -3,7 +3,7 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:title="@string/discard_changes"
+        android:title="@string/action_discard_changes"
         android:id="@+id/action_discard"
         android:orderInCategory="100"
         app:showAsAction="never"/>

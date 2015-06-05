@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="icon_choices">
+        <item>Take photo</item>
+        <item>Choose photo</item>
+        <item>Use default</item>
+    </string-array>
+
+    <string-array name="game_systems">
+        <item>Game system</item>
+        <item>Other</item>
+        <item>Call of Cthulhu</item>
+        <item>D&amp;D</item>
+        <item>Dungeon World</item>
+        <item>Earthdawn</item>
+        <item>Feng Shui</item>
+        <item>GURPS</item>
+        <item>Pathfinder</item>
+        <item>Shadowrun</item>
+        <item>World of Darkness</item>
+    </string-array>
+
+    <string-array name="game_systems_dnd">
+        <item>1st</item>
+        <item>2nd</item>
+        <item>3rd</item>
+        <item>3.5</item>
+        <item>4th</item>
+        <item>5th</item>
+    </string-array>
+
+    <string-array name="game_systems_wod">
+        <item>Other</item>
+        <item>Vampire: The Masquerade</item>
+        <item>Werewolf: The Apocalypse</item>
+        <item>Mage: The Ascension</item>
+        <item>Wraith: The Oblivion</item>
+        <item>Changeling: The Dreaming</item>
+        <item>Vampire: The Requiem</item>
+        <item>Werewolf: The Forsaken</item>
+        <item>Mage: The Awakening</item>
+    </string-array>
+
+    <string-array name="classes_cwod_vampire">
+        <item>Other</item>
+        <item>Assamite</item>
+        <item>Brujah</item>
+        <item>Follower of Set</item>
+        <item>Gangrel</item>
+        <item>Giovanni</item>
+        <item>Lasombra</item>
+        <item>Malkavian</item>
+        <item>Nosferatu</item>
+        <item>Ravnos</item>
+        <item>Toreador</item>
+        <item>Tremere</item>
+        <item>Tzimisce</item>
+        <item>Ventrue</item>
+        <item>Caitiff</item>
+    </string-array>
+
+    <string-array name="classes_dnd">
+        <item>Other</item>
+        <item>Barbarian</item>
+        <item>Bard</item>
+        <item>Cleric</item>
+        <item>Druid</item>
+        <item>Fighter</item>
+        <item>Monk</item>
+        <item>Paladin</item>
+        <item>Ranger</item>
+        <item>Rogue</item>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
+    </string-array>
+
+    <string-array name="races_dnd">
+        <item>Other</item>
+        <item>Dragonborn</item>
+        <item>Dwarf</item>
+        <item>Eladrin</item>
+        <item>Elf</item>
+        <item>Gnome</item>
+        <item>Half-elf</item>
+        <item>Half-orc</item>
+        <item>Halfling</item>
+        <item>Human</item>
+        <item>Tiefling</item>
+    </string-array>
+
+    <string-array name="classes_dungeon_world">
+        <item>Other</item>
+        <item>Bard</item>
+        <item>Cleric</item>
+        <item>Druid</item>
+        <item>Fighter</item>
+        <item>Paladin</item>
+        <item>Ranger</item>
+        <item>Thief</item>
+        <item>Wizard</item>
+    </string-array>
+
+    <string-array name="races_dungeon_world">
+        <item>Dwarf</item>
+        <item>Elf</item>
+        <item>Halfling</item>
+        <item>Human</item>
+    </string-array>
+
+    <string-array name="classes_pathfinder">
+        <item>Other</item>
+        <item>Barbarian</item>
+        <item>Bard</item>
+        <item>Cleric</item>
+        <item>Druid</item>
+        <item>Fighter</item>
+        <item>Monk</item>
+        <item>Paladin</item>
+        <item>Ranger</item>
+        <item>Rogue</item>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
+    </string-array>
+
+    <string-array name="races_pathfinder">
+        <item>Other</item>
+        <item>Dwarf</item>
+        <item>Elf</item>
+        <item>Gnome</item>
+        <item>Half-elf</item>
+        <item>Half-orc</item>
+        <item>Halfling</item>
+        <item>Human</item>
+    </string-array>
+
+    <string-array name="classes_earthdawn">
+        <item>Other</item>
+        <item>Air Sailor</item>
+        <item>Archer</item>
+        <item>Beastmaster</item>
+        <item>Cavalryman</item>
+        <item>Elementalist</item>
+        <item>Illusionist</item>
+        <item>Nethermancer</item>
+        <item>Scout</item>
+        <item>Sky Raider</item>
+        <item>Swordmaster</item>
+        <item>Thief</item>
+        <item>Troubadour</item>
+        <item>Warrior</item>
+        <item>Weaponsmith</item>
+        <item>Wizard</item>
+    </string-array>
+
+    <string-array name="races_earthdawn">
+        <item>Other</item>
+        <item>Dwarf</item>
+        <item>Elf</item>
+        <item>Human</item>
+        <item>Obsidiman</item>
+        <item>Ork</item>
+        <item>Troll</item>
+        <item>T\'skrang</item>
+        <item>Windling</item>
+    </string-array>
+
+    <string-array name="classes_feng_shui">
+        <item>Other</item>
+        <item>$10,000 Man</item>
+        <item>Abomination</item>
+        <item>Archer</item>
+        <item>Athlete</item>
+        <item>Bandit</item>
+        <item>Big Bruiser</item>
+        <item>Bodyguard</item>
+        <item>Bounty Hunter</item>
+        <item>Consumer on the Brink</item>
+        <item>Criminal Mastermind</item>
+        <item>Cyborg</item>
+        <item>Dallas Rocket</item>
+        <item>Demon Martial Artist</item>
+        <item>Drifter</item>
+        <item>Driver</item>
+        <item>Elemental</item>
+        <item>Everyman Hero</item>
+        <item>Ex-Special Forces</item>
+        <item>Exorcist Monk</item>
+        <item>Free Sex Militant</item>
+        <item>Full Metal Nutball</item>
+        <item>Gambler</item>
+        <item>Gardener</item>
+        <item>Gearhead</item>
+        <item>Gene Freak</item>
+        <item>Gentleman Retainer</item>
+        <item>Ghost</item>
+        <item>Golden Candle Agent</item>
+        <item>Golem</item>
+        <item>Gorilla Fighter</item>
+        <item>Guiding Hand Archer</item>
+        <item>Highway Ronin</item>
+        <item>Journalist</item>
+        <item>Karate Cop</item>
+        <item>Killer</item>
+        <item>Lodge Survivor</item>
+        <item>Magic Cop</item>
+        <item>Martial Artist</item>
+        <item>Maverick Cop</item>
+        <item>Medic</item>
+        <item>Modern Mage</item>
+        <item>Monster Hunter</item>
+        <item>Ninja</item>
+        <item>Old Master</item>
+        <item>Pledged Agent</item>
+        <item>Portal Jockey</item>
+        <item>Private Investigator</item>
+        <item>Redeemed Pirate</item>
+        <item>Rookie</item>
+        <item>Science Ninja</item>
+        <item>Scrappy Kid</item>
+        <item>Shaolin Disciple</item>
+        <item>Shaolin Master</item>
+        <item>Sifu</item>
+        <item>Smuggler</item>
+        <item>Sorcerer</item>
+        <item>Spy</item>
+        <item>Super Soldier</item>
+        <item>Supernatural Creature</item>
+        <item>Sword Master</item>
+        <item>Tainted One</item>
+        <item>Taoist Wizard</item>
+        <item>Tart With a Heart</item>
+        <item>Techie</item>
+        <item>Thief</item>
+        <item>Thumper</item>
+        <item>Transformed Animal</item>
+        <item>Transformed Dragon</item>
+        <item>Two-Fisted Archeologist</item>
+        <item>Über-kid</item>
+        <item>Velocity Addict</item>
+        <item>Viking Warrior</item>
+    </string-array>
+
+    <string-array name="classes_shadowrun">
+        <item>Other</item>
+        <item>Adept</item>
+        <item>Combat Decker</item>
+        <item>Combat Mage</item>
+        <item>Covert Ops Specialist</item>
+        <item>Drone Rigger</item>
+        <item>Face</item>
+        <item>Investigator</item>
+        <item>Mercenary</item>
+        <item>Sprawl Ganger</item>
+        <item>Street Mage</item>
+        <item>Street Samurai</item>
+        <item>Street Shaman</item>
+        <item>Tech Wiz</item>
+        <item>Tribal Shaman</item>
+        <item>Vehicle Rigger</item>
+        <item>Weapons Specialist</item>
+    </string-array>
+
+    <string-array name="races_shadowrun">
+        <item>Other</item>
+        <item>Dwarf</item>
+        <item>Elf</item>
+        <item>Human</item>
+        <item>Ork</item>
+        <item>Troll</item>
+    </string-array>
+
+    <string-array name="classes_cwod_werewolf">
+        <item>Other</item>
+        <item>Black Fury</item>
+        <item>Bone Gnawer</item>
+        <item>Child of Gaia</item>
+        <item>Fianna</item>
+        <item>Get of Fenris</item>
+        <item>Glass Walker</item>
+        <item>Red Talon</item>
+        <item>Shadow Lord</item>
+        <item>Silent Strider</item>
+        <item>Silver Fang</item>
+        <item>Stargazer</item>
+        <item>Uktena</item>
+        <item>Wendigo</item>
+    </string-array>
+
+    <string-array name="races_cwod_werewolf">
+        <item>Homid</item>
+        <item>Lupus</item>
+        <item>Metis</item>
+    </string-array>
+
+    <string-array name="classes_cwod_mage">
+        <item>Other</item>
+        <item>Akashic Brotherhood</item>
+        <item>Celestial Chorus</item>
+        <item>Cult of Ecstasy</item>
+        <item>Dreamspeaker</item>
+        <item>Euthanatos</item>
+        <item>Order of Hermes</item>
+        <item>Son of Ether</item>
+        <item>Verbena</item>
+        <item>Virtual Adept</item>
+        <item>Iteration X</item>
+        <item>New World Order</item>
+        <item>Progenitor</item>
+        <item>Syndicate</item>
+        <item>Void Engineer</item>
+    </string-array>
+
+    <string-array name="classes_cwod_wraith">
+        <item>Hierarchy</item>
+        <item>Heretic</item>
+        <item>Renegade</item>
+    </string-array>
+
+    <string-array name="classes_cwod_changeling">
+        <item>Other</item>
+        <item>Boggan</item>
+        <item>Eshu</item>
+        <item>Nocker</item>
+        <item>Pooka</item>
+        <item>Redcap</item>
+        <item>Satyr</item>
+        <item>Sidhe</item>
+        <item>Sluagh</item>
+        <item>Troll</item>
+    </string-array>
+
+    <string-array name="races_cwod_changeling">
+        <item>Seelie</item>
+        <item>Unseelie</item>
+    </string-array>
+
+    <string-array name="classes_nwod_vampire">
+        <item>Other</item>
+        <item>Daeva</item>
+        <item>Gangrel</item>
+        <item>Julii</item>
+        <item>Mekhet</item>
+        <item>Nosferatu</item>
+        <item>Ventrue</item>
+    </string-array>
+
+    <string-array name="classes_nwod_werewolf">
+        <item>Other</item>
+        <item>Blood Talon</item>
+        <item>Bone Shadow</item>
+        <item>Hunter in Darkness</item>
+        <item>Iron Master</item>
+        <item>Storm Lord</item>
+    </string-array>
+
+    <string-array name="classes_nwod_mage">
+        <item>Other</item>
+        <item>Adamantine Arrow</item>
+        <item>Free Council</item>
+        <item>Guardian of the Veil</item>
+        <item>Mysterium</item>
+        <item>Silver Ladder</item>
+        <item>Seer of the Throne</item>
+    </string-array>
+</resources>

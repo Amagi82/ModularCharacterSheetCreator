@@ -9,7 +9,7 @@
     <Button
         android:id="@+id/bDelete"
         style="@style/FlatButton"
-        android:text="@string/delete"/>
+        android:text="Delete"/>
 
     <View
         style="@style/Divider"

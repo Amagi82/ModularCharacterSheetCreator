@@ -10,7 +10,8 @@ abstract class GameSystem {
     private boolean hasGameSystemSubTypes;
     private boolean hasCharacterClasses;
     private boolean hasCharacterRaces;
-    private int characterClassTerm;
+    private int characterClassTerm = R.string.character_class;
+    private int characterRaceTerm = R.string.character_race;
 
     public GameSystem(int gameSystemSubTypeArrayId, int characterClassesArrayId, int characterRacesArrayId, boolean hasGameSystemSubTypes,
                       boolean hasCharacterClasses, boolean hasCharacterRaces) {

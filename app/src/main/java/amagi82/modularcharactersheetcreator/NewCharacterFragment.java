@@ -16,7 +16,6 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextPaint;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -75,19 +74,19 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
         }
         getActivity().setTitle(getResources().getString(isEditMode? R.string.edit_character : R.string.new_character));
 
-        View rootView = inflater.inflate(isEditMode? R.layout.fragment_edit_character : R.layout.fragment_add_character, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_create_character, container, false);
         setHasOptionsMenu(true);
 
-        iconCharacter = (CircleImageView) rootView.findViewById(R.id.iconCharacter);
-        ImageView iconGameSystem = (ImageView) rootView.findViewById(R.id.iconGameSystem);
-        iconRace = (ImageView) rootView.findViewById(R.id.iconRace);
-        iconClass = (ImageView) rootView.findViewById(R.id.iconClass);
-        ImageView iconTemplate = (ImageView) rootView.findViewById(R.id.iconTemplate);
-        etName = (EditText) rootView.findViewById(R.id.etName);
-        etGameSystem = (EditText) rootView.findViewById(R.id.etGameSystem);
-        etRace = (EditText) rootView.findViewById(R.id.etRace);
-        etClass = (EditText) rootView.findViewById(R.id.etClass);
-        EditText etTemplate = (EditText) rootView.findViewById(R.id.etTemplate);
+//        iconCharacter = (CircleImageView) rootView.findViewById(R.id.iconCharacter);
+//        ImageView iconGameSystem = (ImageView) rootView.findViewById(R.id.iconGameSystem);
+//        iconRace = (ImageView) rootView.findViewById(R.id.iconRace);
+//        iconClass = (ImageView) rootView.findViewById(R.id.iconClass);
+//        ImageView iconTemplate = (ImageView) rootView.findViewById(R.id.iconTemplate);
+//        etName = (EditText) rootView.findViewById(R.id.etName);
+//        etGameSystem = (EditText) rootView.findViewById(R.id.etGameSystem);
+//        etRace = (EditText) rootView.findViewById(R.id.etRace);
+//        etClass = (EditText) rootView.findViewById(R.id.etClass);
+//        EditText etTemplate = (EditText) rootView.findViewById(R.id.etTemplate);
         circleImageSize = (int) getResources().getDimension(R.dimen.circle_icon_size);
 
         if(isEditMode){
@@ -105,12 +104,12 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
             if(!hasCustomCharacterIcon) iconCharacter.setImageBitmap(createDefaultIcon());
         }
 
-        iconCharacter.setOnClickListener(this);
-        iconGameSystem.setOnClickListener(this);
-        iconRace.setOnClickListener(this);
-        iconClass.setOnClickListener(this);
-        iconTemplate.setOnClickListener(this);
-        etTemplate.setOnClickListener(this);
+//        iconCharacter.setOnClickListener(this);
+//        iconGameSystem.setOnClickListener(this);
+//        iconRace.setOnClickListener(this);
+//        iconClass.setOnClickListener(this);
+//        iconTemplate.setOnClickListener(this);
+//        etTemplate.setOnClickListener(this);
 
         //Make a new icon for the first letter of the character's name.
         etName.addTextChangedListener(new TextWatcher() {
@@ -213,7 +212,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iconCharacter: //Select an image for a custom icon
+            //case R.id.iconCharacter: //Select an image for a custom icon
 //                dialog = new MaterialDialog.Builder(getActivity()).items(R.array.icon_choices)
 //                        .itemsCallback(new MaterialDialog.ListCallback() {
 //                    @Override
@@ -250,28 +249,28 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
 //                        }
 //                    }
 //                }).show();
-                break;
-            case R.id.iconGameSystem:
-                chooseGameSystem(R.array.game_systems, etGameSystem);
-                break;
-            case R.id.iconRace:
-                chooseArchetype(idRace, etRace);
-                break;
-            case R.id.iconClass:
-                chooseArchetype(idClass, etClass);
-                break;
-            case R.id.iconTemplate:
-                Log.i(null, "Offer template if available");
-                break;
-            case R.id.etTemplate:
-                Log.i(null, "Offer template if available");
-                break;
-            case R.id.bDelete:
-                deletingCharacter = true;
-                getFragmentManager().popBackStack();
-                break;
-            default:
-                break;
+//                break;
+//            case R.id.iconGameSystem:
+//                chooseGameSystem(R.array.game_systems, etGameSystem);
+//                break;
+//            case R.id.iconRace:
+//                chooseArchetype(idRace, etRace);
+//                break;
+//            case R.id.iconClass:
+//                chooseArchetype(idClass, etClass);
+//                break;
+//            case R.id.iconTemplate:
+//                Log.i(null, "Offer template if available");
+//                break;
+//            case R.id.etTemplate:
+//                Log.i(null, "Offer template if available");
+//                break;
+//            case R.id.bDelete:
+//                deletingCharacter = true;
+//                getFragmentManager().popBackStack();
+//                break;
+//            default:
+//                break;
         }
     }
 
