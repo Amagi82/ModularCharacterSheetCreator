@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="extended_appbar_height">154dp</dimen>
+    <dimen name="extended_appbar_height_min">154dp</dimen>
 </resources>

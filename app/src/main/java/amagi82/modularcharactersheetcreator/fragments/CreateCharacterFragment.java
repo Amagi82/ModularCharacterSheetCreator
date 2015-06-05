@@ -1,10 +1,11 @@
 package amagi82.modularcharactersheetcreator.fragments;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.ThumbnailUtils;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,12 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
 import amagi82.modularcharactersheetcreator.MainApplication;
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.adapters.MainRecyclerViewAdapter;
 import amagi82.modularcharactersheetcreator.adapters.SpinnerArrayAdapter;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import butterknife.ButterKnife;
@@ -28,65 +29,73 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
     private GameCharacter gameCharacter;
     private int characterPosition;
     private boolean isEditMode = false;
-    @InjectView(R.id.color_mask) View colorMask;
+//    @InjectView(R.id.color_mask) View colorMask;
     @InjectView(R.id.toolbar) Toolbar toolbar;
     @InjectView(R.id.etName) EditText etName;
-    @InjectView(R.id.spinGameSystem) Spinner spinGameSystem;
-    @InjectView(R.id.iconRace) ImageView iconRace;
-    @InjectView(R.id.spinRace) Spinner spinRace;
-    @InjectView(R.id.iconClass) ImageView iconClass;
-    @InjectView(R.id.spinClass) Spinner spinClass;
-    @InjectView(R.id.imagePortrait) ImageButton imagePortrait;
-    @InjectView(R.id.spinTheme) Spinner spinTheme;
-    @InjectView(R.id.iconTemplate) ImageView iconTemplate;
-    @InjectView(R.id.spinTemplate) Spinner spinTemplate;
+    @InjectView(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
+    @InjectView(R.id.imagePortrait) ImageView imagePortrait;
+    @InjectView(R.id.fab) FloatingActionButton fab;
+    @InjectView(R.id.recycler_view) RecyclerView recyclerView;
+//    @InjectView(R.id.spinGameSystem) Spinner spinGameSystem;
+//    @InjectView(R.id.iconRace) ImageView iconRace;
+//    @InjectView(R.id.spinRace) Spinner spinRace;
+//    @InjectView(R.id.iconClass) ImageView iconClass;
+//    @InjectView(R.id.spinClass) Spinner spinClass;
+//    @InjectView(R.id.imagePortrait) ImageButton imagePortrait;
+//    @InjectView(R.id.spinTheme) Spinner spinTheme;
+//    @InjectView(R.id.iconTemplate) ImageView iconTemplate;
+//    @InjectView(R.id.spinTemplate) Spinner spinTemplate;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_create_character, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_character, container, false);
         ButterKnife.inject(this, rootView);
         setHasOptionsMenu(true);
 
-        colorMask.animate().alpha(0).setDuration(300);
+        //colorMask.animate().alpha(0).setDuration(300);
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationOnClickListener(this);
-        toolbar.setTitle(getString(R.string.new_character));
+        collapsingToolbar.setTitle(getString(R.string.new_character));
         toolbar.inflateMenu(isEditMode ? R.menu.menu_edit_character : R.menu.menu_new_character);
         toolbar.setOnMenuItemClickListener(this);
 
-        setSpinnerAdapter(spinGameSystem, R.array.game_systems);
+        recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        MainRecyclerViewAdapter recyclerViewAdapter = new MainRecyclerViewAdapter(getActivity(), MainApplication.getGameCharacters());
+        recyclerView.setAdapter(recyclerViewAdapter);
 
-        spinGameSystem.setOnItemSelectedListener(this);
-        spinRace.setOnItemSelectedListener(this);
-        spinClass.setOnItemSelectedListener(this);
-        spinTheme.setOnItemSelectedListener(this);
-        spinTemplate.setOnItemSelectedListener(this);
+//        setSpinnerAdapter(spinGameSystem, R.array.game_systems);
+//
+//        spinGameSystem.setOnItemSelectedListener(this);
+//        spinRace.setOnItemSelectedListener(this);
+//        spinClass.setOnItemSelectedListener(this);
+//        spinTheme.setOnItemSelectedListener(this);
+//        spinTemplate.setOnItemSelectedListener(this);
 
         //Check if we're editing a character or creating a new one
-        Bundle args = getArguments();
-        if(args != null) {
-            isEditMode = args.getBoolean("edit mode");
-            characterPosition = args.getInt("character");
-
-            if(isEditMode && gameCharacter == null){
-                gameCharacter = MainApplication.getGameCharacters().get(characterPosition);
-                etName.setText(gameCharacter.getCharacterName());
-                spinGameSystem.setSelection(getSpinnerIndex(spinGameSystem, gameCharacter.getGameSystem()));
-                spinRace.setSelection(getSpinnerIndex(spinRace, gameCharacter.getCharacterRace()));
-                spinClass.setSelection(getSpinnerIndex(spinClass, gameCharacter.getCharacterClass()));
-                if(gameCharacter.getPortraitUri() != null){
-                    int thumbSize = (int) getResources().getDimension(R.dimen.portrait_thumbnail_size);
-                    Bitmap thumbImage = ThumbnailUtils.extractThumbnail(
-                            BitmapFactory.decodeFile(gameCharacter.getPortraitUri().getPath()), thumbSize, thumbSize);
-                    imagePortrait.setImageBitmap(thumbImage);
-                }
-
-                //spinTheme.setSelection(getSpinnerIndex(spinTheme, gameCharacter.getTheme()));
-                //spinTemplate.setSelection(getSpinnerIndex(spinTemplate, gameCharacter.getTemplate()));
-            }
-        }
+//        Bundle args = getArguments();
+//        if(args != null) {
+//            isEditMode = args.getBoolean("edit mode");
+//            characterPosition = args.getInt("character");
+//
+//            if(isEditMode && gameCharacter == null){
+//                gameCharacter = MainApplication.getGameCharacters().get(characterPosition);
+//                etName.setText(gameCharacter.getCharacterName());
+//                spinGameSystem.setSelection(getSpinnerIndex(spinGameSystem, gameCharacter.getGameSystem()));
+//                spinRace.setSelection(getSpinnerIndex(spinRace, gameCharacter.getCharacterRace()));
+//                spinClass.setSelection(getSpinnerIndex(spinClass, gameCharacter.getCharacterClass()));
+//                if(gameCharacter.getPortraitUri() != null){
+//                    int thumbSize = (int) getResources().getDimension(R.dimen.portrait_thumbnail_size);
+//                    Bitmap thumbImage = ThumbnailUtils.extractThumbnail(
+//                            BitmapFactory.decodeFile(gameCharacter.getPortraitUri().getPath()), thumbSize, thumbSize);
+//                    imagePortrait.setImageBitmap(thumbImage);
+//                }
+//
+//                //spinTheme.setSelection(getSpinnerIndex(spinTheme, gameCharacter.getTheme()));
+//                //spinTemplate.setSelection(getSpinnerIndex(spinTemplate, gameCharacter.getTemplate()));
+//            }
+//        }
         if(gameCharacter == null) gameCharacter = new GameCharacter();
-        getActivity().setTitle(getResources().getString(isEditMode ? R.string.edit_character : R.string.new_character));
 
         return rootView;
     }

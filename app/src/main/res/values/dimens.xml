@@ -24,7 +24,11 @@
 
     <dimen name="fab_margin">16dp</dimen>
 
-    <dimen name="extended_appbar_height">138dp</dimen>
+    <dimen name="extended_appbar_height_min">138dp</dimen>
+    <dimen name="extended_appbar_height">240dp</dimen>
+    <dimen name="toolbar_text_indent">48dp</dimen>
 
     <dimen name="divider">0.7dp</dimen>
+    <dimen name="toolbar_edittext_indent">44dp</dimen>
+    <dimen name="toolbar_edittext_minwidth">180dp</dimen>
 </resources>
