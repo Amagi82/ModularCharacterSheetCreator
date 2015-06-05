@@ -1,6 +1,7 @@
 package amagi82.modularcharactersheetcreator.fragments;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -29,8 +30,10 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
     private GameCharacter gameCharacter;
     private int characterPosition;
     private boolean isEditMode = false;
+    private EditText editText;
 //    @InjectView(R.id.color_mask) View colorMask;
     @InjectView(R.id.toolbar) Toolbar toolbar;
+    @InjectView(R.id.appbar) AppBarLayout appbar;
     @InjectView(R.id.etName) EditText etName;
     @InjectView(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
     @InjectView(R.id.imagePortrait) ImageView imagePortrait;
@@ -52,12 +55,33 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
         ButterKnife.inject(this, rootView);
         setHasOptionsMenu(true);
 
+        if(gameCharacter == null) gameCharacter = new GameCharacter();
+
         //colorMask.animate().alpha(0).setDuration(300);
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationOnClickListener(this);
-        collapsingToolbar.setTitle(getString(R.string.new_character));
+        //collapsingToolbar.setTitle(gameCharacter.getCharacterName().length() < 1? getString(R.string.new_character) : gameCharacter.getCharacterName());
         toolbar.inflateMenu(isEditMode ? R.menu.menu_edit_character : R.menu.menu_new_character);
         toolbar.setOnMenuItemClickListener(this);
+
+//        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+//            @Override
+//            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+//                Log.i(null, "offset == " + i);
+//                if(i > -5){
+//                    etName.setVisibility(View.VISIBLE);
+//                    if(!gameCharacter.getCharacterName().equals(etName.getText().toString())) etName.setText(gameCharacter.getCharacterName());
+//                    collapsingToolbar.setTitle("");
+//
+//                }else {
+//                    collapsingToolbar.setTitle(etName.getText());
+//                    etName.setVisibility(View.GONE);
+//
+//                }
+//            }
+//        });
+
+
 
         recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -95,7 +119,7 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
 //                //spinTemplate.setSelection(getSpinnerIndex(spinTemplate, gameCharacter.getTemplate()));
 //            }
 //        }
-        if(gameCharacter == null) gameCharacter = new GameCharacter();
+
 
         return rootView;
     }
@@ -143,6 +167,20 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
     }
 
 
+//    @OnClick(R.id.collapsing_toolbar)
+//    void collapsingToolbarClicked(){
+//        new AlertDialog.Builder(getActivity()).setTitle(getText(R.string.character_name))
+//                .setView(editText = new EditText(getActivity()))
+//                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//                        gameCharacter.setCharacterName(editText.getText().toString());
+//                        collapsingToolbar.setTitle(editText.getText().toString());
+//                    }
+//                }).setNegativeButton("Cancel", null
+//        ).show();
+//    }
+
+
     //Up navigation
     @Override
     public void onClick(View v) {
@@ -159,7 +197,6 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
                 getFragmentManager().popBackStack();
                 return true;
             case R.id.action_save_template:
-                //TODO: After templates created, save to custom list. Use dialog to name and confirm.
                 return true;
             case R.id.action_discard:
                 gameCharacter = null;

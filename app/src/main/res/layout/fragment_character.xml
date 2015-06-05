@@ -39,17 +39,19 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
             <EditText
+                android:id="@+id/etName"
+                style="@style/Widget.AppCompat.EditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/toolbar_edittext_indent"
-                android:layout_marginRight="@dimen/default_keyline_padded_layout"
-                android:layout_marginBottom="2dp"
-                android:minWidth="@dimen/toolbar_edittext_minwidth"
-                android:id="@+id/etName"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:hint="Name"
                 android:layout_gravity="bottom"
-                style="@style/Widget.AppCompat.EditText"/>
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="@dimen/toolbar_edittext_indent"
+                android:layout_marginStart="@dimen/toolbar_edittext_indent"
+                android:layout_marginRight="@dimen/default_keyline_padded_layout"
+                android:layout_marginEnd="@dimen/default_keyline_padded_layout"
+                android:hint="@string/name"
+                android:minWidth="@dimen/toolbar_edittext_minwidth"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
