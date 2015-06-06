@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="icon_choices">
+    <string-array name="portrait_choices_initial">
         <item>Take photo</item>
         <item>Choose photo</item>
-        <item>Use default</item>
+    </string-array>
+
+    <string-array name="portrait_choices">
+        <item>Take photo</item>
+        <item>Choose photo</item>
+        <item>Remove</item>
     </string-array>
 
     <string-array name="game_systems">
