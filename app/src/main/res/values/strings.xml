@@ -11,19 +11,23 @@
     <string name="action_settings">Settings</string>
 
     <!--Character creation-->
+    <string name="cancel">Cancel</string>
     <string name="character_name">Character name</string>
     <string name="character_class">Character class</string>
     <string name="character_classes">Character classes</string>
     <string name="character_icon">Character icon</string>
     <string name="character_race">Character race</string>
     <string name="characters">Characters</string>
-    <string name="crop_image">Crop image</string>
+    <string name="crop_image_portrait">Crop image for portrait</string>
+    <string name="crop_image_icon">Crop image for icon</string>
     <string name="edit_character">Edit character</string>
     <string name="edition">Edition</string>
     <string name="game_systems">Game systems</string>
     <string name="name">Name</string>
     <string name="new_character">New character</string>
+    <string name="ok">OK</string>
     <string name="profession">Profession</string>
+    <string name="skip">Skip</string>
     <string name="world_of_darkness">World of Darkness</string>
 
     <!--Modules-->
