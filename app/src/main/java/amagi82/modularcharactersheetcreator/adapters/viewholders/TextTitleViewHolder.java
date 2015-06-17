@@ -5,16 +5,17 @@ import android.view.View;
 import android.widget.TextView;
 
 import amagi82.modularcharactersheetcreator.R;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 public class TextTitleViewHolder extends ContainerViewHolder {
 
-    TextView tvText;
-    TextView tvTitle;
+    @InjectView(R.id.tvText) public TextView tvText;
+    @InjectView(R.id.tvTitle) public TextView tvTitle;
 
     public TextTitleViewHolder(final View itemView) {
         super(itemView);
-
-        tvText = (TextView) itemView.findViewById(R.id.tvText);
+        ButterKnife.inject(this, itemView);
 
     }
 }
