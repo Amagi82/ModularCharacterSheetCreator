@@ -38,7 +38,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
+<!--
             <EditText
                 android:id="@+id/etName"
                 android:visibility="invisible"
@@ -54,7 +54,7 @@
                 android:hint="@string/name"
                 android:minWidth="@dimen/toolbar_edittext_minwidth"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
-
+-->
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>

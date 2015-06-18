@@ -25,10 +25,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.edmodo.cropper.CropImageView;
@@ -42,13 +40,12 @@ import java.util.Date;
 import amagi82.modularcharactersheetcreator.MainApplication;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.MainRecyclerViewAdapter;
-import amagi82.modularcharactersheetcreator.adapters.SpinnerArrayAdapter;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int PICK_FROM_FILE = 2;
@@ -61,7 +58,7 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
 //    @InjectView(R.id.color_mask) View colorMask;
     @InjectView(R.id.toolbar) Toolbar toolbar;
     @InjectView(R.id.appbar) AppBarLayout appbar;
-    @InjectView(R.id.etName) EditText etName;
+    //@InjectView(R.id.etName) EditText etName;
     @InjectView(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
     @InjectView(R.id.imagePortrait) ImageView imagePortrait;
     @InjectView(R.id.fab) FloatingActionButton fab;
@@ -87,7 +84,7 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
         //colorMask.animate().alpha(0).setDuration(300);
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationOnClickListener(this);
-        //collapsingToolbar.setTitle(gameCharacter.getCharacterName().length() < 1? getString(R.string.new_character) : gameCharacter.getCharacterName());
+        collapsingToolbar.setTitle(gameCharacter.getCharacterName().length() < 1? getString(R.string.new_character) : gameCharacter.getCharacterName());
         toolbar.inflateMenu(isEditMode ? R.menu.menu_edit_character : R.menu.menu_new_character);
         toolbar.setOnMenuItemClickListener(this);
 
@@ -110,20 +107,9 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
 //            }
 //        });
 
-
-
-        recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         MainRecyclerViewAdapter recyclerViewAdapter = new MainRecyclerViewAdapter(getActivity(), MainApplication.getGameCharacters());
         recyclerView.setAdapter(recyclerViewAdapter);
-
-//        setSpinnerAdapter(spinGameSystem, R.array.game_systems);
-//
-//        spinGameSystem.setOnItemSelectedListener(this);
-//        spinRace.setOnItemSelectedListener(this);
-//        spinClass.setOnItemSelectedListener(this);
-//        spinTheme.setOnItemSelectedListener(this);
-//        spinTemplate.setOnItemSelectedListener(this);
 
         //Check if we're editing a character or creating a new one
 //        Bundle args = getArguments();
@@ -148,7 +134,6 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
 //                //spinTemplate.setSelection(getSpinnerIndex(spinTemplate, gameCharacter.getTemplate()));
 //            }
 //        }
-
 
         return rootView;
     }
@@ -284,6 +269,7 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
             e.printStackTrace();
         }
     }
+
     private void setIcon(Bitmap bitmap){
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View cropImageView = inflater.inflate(R.layout.dialog_crop_image, null);
@@ -309,71 +295,10 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
                 }).show();
     }
 
-
-    private void setSpinnerAdapter(Spinner spinner, int arrayId) {
-        spinner.setAdapter(SpinnerArrayAdapter.createFromResource(getActivity(), arrayId));
-    }
-
-    //Get the index of the user's selection
-    private int getSpinnerIndex(Spinner spinner, String string) {
-        int index = 0;
-        for (int i = 0; i < spinner.getCount(); i++) {
-            if (spinner.getItemAtPosition(i).toString().equals(string)) {
-                index = i;
-                break;
-            }
-        }
-        return index;
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String selected = parent.getSelectedItem().toString();
-        switch (parent.getId()){
-            case R.id.spinGameSystem:
-                gameCharacter.setGameSystem(selected);
-                break;
-            case R.id.spinRace:
-                gameCharacter.setCharacterRace(selected);
-                break;
-            case R.id.spinClass:
-                gameCharacter.setCharacterClass(selected);
-                break;
-            case R.id.spinTheme:
-
-                break;
-            case R.id.spinTemplate:
-
-                break;
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-    }
-
-
-//    @OnClick(R.id.collapsing_toolbar)
-//    void collapsingToolbarClicked(){
-//        new AlertDialog.Builder(getActivity()).setTitle(getText(R.string.character_name))
-//                .setView(editText = new EditText(getActivity()))
-//                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int whichButton) {
-//                        gameCharacter.setCharacterName(editText.getText().toString());
-//                        collapsingToolbar.setTitle(editText.getText().toString());
-//                    }
-//                }).setNegativeButton("Cancel", null
-//        ).show();
-//    }
-
-
     //Up navigation
     @Override
     public void onClick(View v) {
-
     }
-
-
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {

@@ -11,7 +11,7 @@ import com.squareup.otto.Subscribe;
 import amagi82.modularcharactersheetcreator.events.CreateCharacterEvent;
 import amagi82.modularcharactersheetcreator.fragments.CreateCharacterFragment;
 import amagi82.modularcharactersheetcreator.fragments.MainFragment;
-import amagi82.modularcharactersheetcreator.utils.BusProvider;
+import amagi82.modularcharactersheetcreator.utils.Otto;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -29,18 +29,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Register ourselves so that we can provide the initial value.
-        BusProvider.getBus().register(this);
+    @Override protected void onStart() {
+        super.onStart();
+        Otto.BUS.getBus().register(this);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        // Always unregister when an object no longer should be on the bus.
-        BusProvider.getBus().unregister(this);
+    @Override protected void onStop() {
+        super.onStop();
+        Otto.BUS.getBus().unregister(this);
     }
 
     @Subscribe
