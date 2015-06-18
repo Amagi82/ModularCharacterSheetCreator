@@ -28,6 +28,7 @@ public class GameCharacter implements Serializable{
     private int colorText;
     private int colorTextTitle;
     private int colorTitles;
+    private long timeStamp;
 
     private ArrayList<Module> moduleList = new ArrayList<>();
 
@@ -40,6 +41,7 @@ public class GameCharacter implements Serializable{
         this.race = race;
         this.archetype = archetype;
         entityId = name + gameSystem + race + archetype;
+        timeStamp = System.currentTimeMillis();
     }
 
     private void writeObject(ObjectOutputStream oos) throws IOException {
@@ -164,5 +166,13 @@ public class GameCharacter implements Serializable{
 
     public String getEntityId() {
         return entityId;
+    }
+
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp() {
+        timeStamp = System.currentTimeMillis();
     }
 }
