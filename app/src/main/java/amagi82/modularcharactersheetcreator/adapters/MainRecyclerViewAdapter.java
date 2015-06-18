@@ -20,13 +20,19 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder> {
 
-    private List<GameCharacter> gameCharacters = new ArrayList<>();
+    private List<GameCharacter> gameCharacters;
     private DefaultIconFactory iconFactory;
     private Context context;
 
     public MainRecyclerViewAdapter(Context context, List<GameCharacter> gameCharacters) {
         this.context = context;
         this.gameCharacters = gameCharacters;
+        iconFactory = new DefaultIconFactory(context);
+    }
+
+    public MainRecyclerViewAdapter(Context context) {
+        this.context = context;
+        gameCharacters = new ArrayList<>();
         iconFactory = new DefaultIconFactory(context);
     }
 

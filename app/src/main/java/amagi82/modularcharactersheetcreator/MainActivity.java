@@ -5,12 +5,20 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
+import com.colintmiller.simplenosql.NoSQL;
+import com.colintmiller.simplenosql.NoSQLEntity;
 import com.squareup.otto.Subscribe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import amagi82.modularcharactersheetcreator.events.CreateCharacterEvent;
 import amagi82.modularcharactersheetcreator.fragments.CreateCharacterFragment;
 import amagi82.modularcharactersheetcreator.fragments.MainFragment;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.modules.TextModule;
 import amagi82.modularcharactersheetcreator.utils.Otto;
 
 
@@ -23,7 +31,43 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SavedData.CHARACTERS.getCharacters(this);
+        //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
+
+        //SavedData.CHARACTERS.getCharacters(this);
+        List<GameCharacter> characters = new ArrayList<>();
+        if (characters.size() == 0) {
+            Log.i(null, "Creating data");
+            List<GameCharacter> sampleData = new ArrayList<>();
+            sampleData.add(new GameCharacter("Thomas Anstis", "Vampire", "", "Gangrel"));
+            sampleData.add(new GameCharacter("Tom Lytton", "Vampire", "", "Brujah"));
+            sampleData.add(new GameCharacter("Georgia Johnson", "Vampire", "", "Tremere"));
+            sampleData.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "", "Ventrue"));
+            sampleData.add(new GameCharacter("Dr. Von Natsi", "Mage", "", "Etherite"));
+            sampleData.add(new GameCharacter("Revin", "Pathfinder", "Tiefling", "Paladin of Glasya"));
+            sampleData.add(new GameCharacter("Sven", "Shadowrun", "Human", "Shaman of Loki"));
+            sampleData.add(new GameCharacter("Fir'keelie Selenya'Tala", "Earthdawn", "Windling", "Windmaster"));
+            sampleData.add(new GameCharacter("Scarlett Lee", "Dungeon World", "Human", "Fighter"));
+            sampleData.add(new GameCharacter("Raven", "Shadowrun", "Human", "Shaman"));
+            characters = sampleData;
+
+            TextModule module1 = new TextModule();
+            module1.setText("Test text 1");
+            TextModule module2 = new TextModule();
+            module2.setText("This is another module");
+
+            for (GameCharacter character : characters) {
+                character.getModuleList().add(module1);
+                character.getModuleList().add(module2);
+            }
+        }
+
+        //Log.i(null, "saving "+character.getCharacterName());
+
+        for (GameCharacter character : characters) {
+            NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>("bucket", character.getEntityId());
+            entity.setData(character);
+            NoSQL.with(this).using(GameCharacter.class).save(entity);
+        }
 
         if (fm.getBackStackEntryCount() == 0) {
             Fragment fragment = new MainFragment();
@@ -39,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     @Override protected void onStop() {
         super.onStop();
         Otto.BUS.getBus().unregister(this);
-        SavedData.CHARACTERS.saveGameCharacters("Characters");
+        //SavedData.CHARACTERS.saveGameCharacters("Characters");
     }
 
     @Subscribe

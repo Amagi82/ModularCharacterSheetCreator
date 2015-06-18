@@ -27,6 +27,7 @@ public class GameCharacter implements Serializable{
     private int colorText;
     private int colorTextTitle;
     private int colorTitles;
+    private String entityId;
     private ArrayList<Module> moduleList = new ArrayList<>();
 
     public GameCharacter() {
@@ -34,9 +35,10 @@ public class GameCharacter implements Serializable{
 
     public GameCharacter(String characterName, String gameSystem, String characterRace, String characterClass) {
         this.characterName = characterName;
+        this.gameSystem = gameSystem;
         this.characterRace = characterRace;
         this.characterClass = characterClass;
-        this.gameSystem = gameSystem;
+        entityId = characterName + gameSystem + characterRace + characterClass;
     }
 
     private void writeObject(ObjectOutputStream oos) throws IOException {
@@ -157,5 +159,9 @@ public class GameCharacter implements Serializable{
 
     public void setPortraitUri(Uri portraitUri) {
         this.portraitUri = portraitUri;
+    }
+
+    public String getEntityId() {
+        return entityId;
     }
 }
