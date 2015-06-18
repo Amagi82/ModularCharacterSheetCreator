@@ -24,7 +24,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -89,20 +88,20 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
 //        EditText etTemplate = (EditText) rootView.findViewById(R.id.etTemplate);
         circleImageSize = (int) getResources().getDimension(R.dimen.circle_icon_size);
 
-        if(isEditMode){
-            gameCharacter = MainApplication.getGameCharacters().get(characterPosition);
-            iconCharacter.setImageBitmap(gameCharacter.getCharacterIcon());
-            etName.setText(gameCharacter.getCharacterName());
-            etGameSystem.setText(gameCharacter.getGameSystem());
-            etRace.setText(gameCharacter.getCharacterRace());
-            etClass.setText(gameCharacter.getCharacterClass());
-
-            Button bDelete = (Button) rootView.findViewById(R.id.bDelete);
-            bDelete.setOnClickListener(this);
-        }else {
-            gameCharacter = new GameCharacter();
-            if(!hasCustomCharacterIcon) iconCharacter.setImageBitmap(createDefaultIcon());
-        }
+//        if(isEditMode){
+//            gameCharacter = MainApplication.getGameCharacters().get(characterPosition);
+//            iconCharacter.setImageBitmap(gameCharacter.getCharacterIcon());
+//            etName.setText(gameCharacter.getCharacterName());
+//            etGameSystem.setText(gameCharacter.getGameSystem());
+//            etRace.setText(gameCharacter.getCharacterRace());
+//            etClass.setText(gameCharacter.getCharacterClass());
+//
+//            Button bDelete = (Button) rootView.findViewById(R.id.bDelete);
+//            bDelete.setOnClickListener(this);
+//        }else {
+//            gameCharacter = new GameCharacter();
+//            if(!hasCustomCharacterIcon) iconCharacter.setImageBitmap(createDefaultIcon());
+//        }
 
 //        iconCharacter.setOnClickListener(this);
 //        iconGameSystem.setOnClickListener(this);

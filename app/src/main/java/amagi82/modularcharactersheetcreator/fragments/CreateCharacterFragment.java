@@ -16,7 +16,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -37,9 +36,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import amagi82.modularcharactersheetcreator.MainApplication;
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.adapters.MainRecyclerViewAdapter;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -107,9 +104,9 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
 //            }
 //        });
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        MainRecyclerViewAdapter recyclerViewAdapter = new MainRecyclerViewAdapter(getActivity(), MainApplication.getGameCharacters());
-        recyclerView.setAdapter(recyclerViewAdapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        MainRecyclerViewAdapter recyclerViewAdapter = new MainRecyclerViewAdapter(getActivity(), MainApplication.getGameCharacters());
+//        recyclerView.setAdapter(recyclerViewAdapter);
 
         //Check if we're editing a character or creating a new one
 //        Bundle args = getArguments();

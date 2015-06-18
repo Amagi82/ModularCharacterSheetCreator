@@ -3,16 +3,13 @@ package amagi82.modularcharactersheetcreator.fragments;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import amagi82.modularcharactersheetcreator.MainApplication;
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.adapters.MainRecyclerViewAdapter;
 import amagi82.modularcharactersheetcreator.events.CreateCharacterEvent;
 import amagi82.modularcharactersheetcreator.utils.Otto;
 import butterknife.ButterKnife;
@@ -33,10 +30,10 @@ public class MainFragment extends Fragment {
         ButterKnife.inject(this, rootView);
         toolbar.setTitle(getString(R.string.characters));
 
-        recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        MainRecyclerViewAdapter recyclerViewAdapter = new MainRecyclerViewAdapter(getActivity(), MainApplication.getGameCharacters());
-        recyclerView.setAdapter(recyclerViewAdapter);
+//        recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        MainRecyclerViewAdapter recyclerViewAdapter = new MainRecyclerViewAdapter(getActivity(), MainApplication.getGameCharacters());
+//        recyclerView.setAdapter(recyclerViewAdapter);
         return rootView;
     }
 

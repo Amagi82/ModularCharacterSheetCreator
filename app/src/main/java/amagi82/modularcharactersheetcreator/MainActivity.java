@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SavedData.CHARACTERS.getCharacters(this);
+
         if (fm.getBackStackEntryCount() == 0) {
             Fragment fragment = new MainFragment();
             fm.beginTransaction().add(R.id.container, fragment).commit();
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     @Override protected void onStop() {
         super.onStop();
         Otto.BUS.getBus().unregister(this);
+        SavedData.CHARACTERS.saveGameCharacters("Characters");
     }
 
     @Subscribe

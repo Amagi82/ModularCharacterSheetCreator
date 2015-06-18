@@ -10,10 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import amagi82.modularcharactersheetcreator.MainApplication;
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.adapters.CharacterSheetRecyclerViewAdapter;
-import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -27,8 +24,8 @@ public class CharacterSheetFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.inject(this, rootView);
 
-        GameCharacter character = MainApplication.getGameCharacters().get(getArguments().getInt("character"));
-        getActivity().setTitle(character.getCharacterName());
+//        GameCharacter character = MainApplication.getGameCharacters().get(getArguments().getInt("character"));
+//        getActivity().setTitle(character.getCharacterName());
 
         int padding = getResources().getDimensionPixelSize(R.dimen.card_margin);
         recyclerView.setPadding(padding,padding,padding,padding);
@@ -40,8 +37,8 @@ public class CharacterSheetFragment extends Fragment {
         recyclerView.setLayoutManager(characterSheetLayoutManager);
 
         // specify an adapter (see also next example)
-        RecyclerView.Adapter characterRecyclerViewAdapter = new CharacterSheetRecyclerViewAdapter(character.getModuleList(), getActivity());
-        recyclerView.setAdapter(characterRecyclerViewAdapter);
+//        RecyclerView.Adapter characterRecyclerViewAdapter = new CharacterSheetRecyclerViewAdapter(character.getModuleList(), getActivity());
+//        recyclerView.setAdapter(characterRecyclerViewAdapter);
 
         //Set up the Floating Action Button
         fab.setImageResource(R.drawable.ic_add_white_24dp);
