@@ -51,7 +51,7 @@ public class MainFragment extends Fragment{
             @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
                 Log.i(null, "Retrieved results = " + entities.toString());
                 for(int i = 0; i<entities.size(); i++){
-                    Log.i(null, entities.get(i).getData().getCharacterName()+" retrieved");
+                    Log.i(null, entities.get(i).getData().getName()+" retrieved");
                 }
             }
         });

@@ -25,7 +25,7 @@ public class CharacterSheetFragment extends Fragment {
         ButterKnife.inject(this, rootView);
 
 //        GameCharacter character = MainApplication.getGameCharacters().get(getArguments().getInt("character"));
-//        getActivity().setTitle(character.getCharacterName());
+//        getActivity().setTitle(character.getName());
 
         int padding = getResources().getDimensionPixelSize(R.dimen.card_margin);
         recyclerView.setPadding(padding,padding,padding,padding);

@@ -81,7 +81,7 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
         //colorMask.animate().alpha(0).setDuration(300);
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationOnClickListener(this);
-        collapsingToolbar.setTitle(gameCharacter.getCharacterName().length() < 1? getString(R.string.new_character) : gameCharacter.getCharacterName());
+        collapsingToolbar.setTitle(gameCharacter.getName().length() < 1? getString(R.string.new_character) : gameCharacter.getName());
         toolbar.inflateMenu(isEditMode ? R.menu.menu_edit_character : R.menu.menu_new_character);
         toolbar.setOnMenuItemClickListener(this);
 
@@ -93,7 +93,7 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
 //                Log.i(null, "offset == " + i);
 //                if(i > -5){
 //                    etName.setVisibility(View.VISIBLE);
-//                    if(!gameCharacter.getCharacterName().equals(etName.getText().toString())) etName.setText(gameCharacter.getCharacterName());
+//                    if(!gameCharacter.getName().equals(etName.getText().toString())) etName.setText(gameCharacter.getName());
 //                    collapsingToolbar.setTitle("");
 //
 //                }else {
@@ -116,10 +116,10 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
 //
 //            if(isEditMode && gameCharacter == null){
 //                gameCharacter = MainApplication.getGameCharacters().get(characterPosition);
-//                etName.setText(gameCharacter.getCharacterName());
+//                etName.setText(gameCharacter.getName());
 //                spinGameSystem.setSelection(getSpinnerIndex(spinGameSystem, gameCharacter.getGameSystem()));
-//                spinRace.setSelection(getSpinnerIndex(spinRace, gameCharacter.getCharacterRace()));
-//                spinClass.setSelection(getSpinnerIndex(spinClass, gameCharacter.getCharacterClass()));
+//                spinRace.setSelection(getSpinnerIndex(spinRace, gameCharacter.getRace()));
+//                spinClass.setSelection(getSpinnerIndex(spinClass, gameCharacter.getArchetype()));
 //                if(gameCharacter.getPortraitUri() != null){
 //                    int thumbSize = (int) getResources().getDimension(R.dimen.portrait_thumbnail_size);
 //                    Bitmap thumbImage = ThumbnailUtils.extractThumbnail(
@@ -173,7 +173,7 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
                     case 2:
                         //Just use the default icon
                         gameCharacter.setPortraitUri(null);
-                        gameCharacter.setCharacterIcon(null);
+                        gameCharacter.setIcon(null);
                         imagePortrait.setImageResource(0);
                         break;
                 }
@@ -250,7 +250,7 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
                         public void onClick(DialogInterface dialog, int which) {
                             imagePortrait.setImageBitmap(cropper.getCroppedImage());
                             gameCharacter.setPortraitUri(Uri.parse(MediaStore.Images.Media.insertImage(
-                                    getActivity().getContentResolver(), cropper.getCroppedImage(), gameCharacter.getCharacterName(), gameCharacter.getGameSystem())));
+                                    getActivity().getContentResolver(), cropper.getCroppedImage(), gameCharacter.getName(), gameCharacter.getGameSystem())));
                             Log.i(null, "portrait uri == "+gameCharacter.getPortraitUri()+" and as a string: "+gameCharacter.getPortraitUri().toString());
                             setIcon(bitmap);
                         }
@@ -282,7 +282,7 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
                         Bitmap croppedBitmap = cropper.getCroppedImage();
                         int circleImageSize = (int) getResources().getDimension(R.dimen.circle_icon_size);
                         croppedBitmap = Bitmap.createScaledBitmap(croppedBitmap, circleImageSize, circleImageSize, true);
-                        gameCharacter.setCharacterIcon(croppedBitmap);
+                        gameCharacter.setIcon(croppedBitmap);
                     }
                 })
                 .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {

@@ -47,13 +47,13 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final GameCharacter gameCharacter = gameCharacters.get(position);
-        if(gameCharacter.getCharacterIcon() == null){
+        if(gameCharacter.getIcon() == null){
             int color = gameCharacter.getColorPrimary() < 1? context.getResources().getColor(R.color.primary) : gameCharacter.getColorPrimary();
-            gameCharacter.setCharacterIcon(iconFactory.createIcon(gameCharacter.getCharacterName(),color));
+            gameCharacter.setIcon(iconFactory.createIcon(gameCharacter.getName(), color));
         }
-        holder.imageCharacterIcon.setImageBitmap(gameCharacter.getCharacterIcon());
-        holder.tvName.setText(gameCharacter.getCharacterName());
-        holder.tvCharacterClass.setText(gameCharacter.getCharacterRace() + " " + gameCharacter.getCharacterClass());
+        holder.imageCharacterIcon.setImageBitmap(gameCharacter.getIcon());
+        holder.tvName.setText(gameCharacter.getName());
+        holder.tvCharacterClass.setText(gameCharacter.getRace() + " " + gameCharacter.getArchetype());
         holder.tvGameSystem.setText(gameCharacter.getGameSystem());
     }
 

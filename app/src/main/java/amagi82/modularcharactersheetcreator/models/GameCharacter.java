@@ -16,10 +16,11 @@ import amagi82.modularcharactersheetcreator.models.modules.Module;
 
 public class GameCharacter implements Serializable{
 
-    transient private Bitmap characterIcon;
-    private String characterName = "";
-    private String characterRace = "";
-    private String characterClass = "";
+    transient private Bitmap icon;
+    private String entityId;
+    private String name = "";
+    private String race = "";
+    private String archetype = "";
     private String gameSystem = "";
     private Uri portraitUri;
     private int colorPrimary;
@@ -27,18 +28,18 @@ public class GameCharacter implements Serializable{
     private int colorText;
     private int colorTextTitle;
     private int colorTitles;
-    private String entityId;
+
     private ArrayList<Module> moduleList = new ArrayList<>();
 
     public GameCharacter() {
     }
 
-    public GameCharacter(String characterName, String gameSystem, String characterRace, String characterClass) {
-        this.characterName = characterName;
+    public GameCharacter(String name, String gameSystem, String race, String archetype) {
+        this.name = name;
         this.gameSystem = gameSystem;
-        this.characterRace = characterRace;
-        this.characterClass = characterClass;
-        entityId = characterName + gameSystem + characterRace + characterClass;
+        this.race = race;
+        this.archetype = archetype;
+        entityId = name + gameSystem + race + archetype;
     }
 
     private void writeObject(ObjectOutputStream oos) throws IOException {
@@ -46,9 +47,9 @@ public class GameCharacter implements Serializable{
         // (Java's default behaviour)
         oos.defaultWriteObject();
         // Manually serialize all transient fields that you want to be serialized
-        if(characterIcon!=null){
+        if(icon !=null){
             ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-            boolean success = characterIcon.compress(Bitmap.CompressFormat.PNG, 100, byteStream);
+            boolean success = icon.compress(Bitmap.CompressFormat.PNG, 100, byteStream);
             if(success){
                 oos.writeObject(byteStream.toByteArray());
             }
@@ -61,40 +62,40 @@ public class GameCharacter implements Serializable{
         // All other fields that you serialized
         byte[] image = (byte[]) ois.readObject();
         if(image != null && image.length > 0){
-            characterIcon = BitmapFactory.decodeByteArray(image, 0, image.length);
+            icon = BitmapFactory.decodeByteArray(image, 0, image.length);
         }
     }
 
-    public Bitmap getCharacterIcon() {
-        return characterIcon;
+    public Bitmap getIcon() {
+        return icon;
     }
 
-    public void setCharacterIcon(Bitmap characterIcon) {
-        this.characterIcon = characterIcon;
+    public void setIcon(Bitmap icon) {
+        this.icon = icon;
     }
 
-    public String getCharacterName() {
-        return characterName;
+    public String getName() {
+        return name;
     }
 
-    public void setCharacterName(String characterName) {
-        this.characterName = characterName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCharacterRace() {
-        return characterRace;
+    public String getRace() {
+        return race;
     }
 
-    public void setCharacterRace(String characterRace) {
-        this.characterRace = characterRace;
+    public void setRace(String race) {
+        this.race = race;
     }
 
-    public String getCharacterClass() {
-        return characterClass;
+    public String getArchetype() {
+        return archetype;
     }
 
-    public void setCharacterClass(String characterClass) {
-        this.characterClass = characterClass;
+    public void setArchetype(String archetype) {
+        this.archetype = archetype;
     }
 
     public String getGameSystem() {

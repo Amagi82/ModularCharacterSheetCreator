@@ -90,11 +90,11 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
 
 //        if(isEditMode){
 //            gameCharacter = MainApplication.getGameCharacters().get(characterPosition);
-//            iconCharacter.setImageBitmap(gameCharacter.getCharacterIcon());
-//            etName.setText(gameCharacter.getCharacterName());
+//            iconCharacter.setImageBitmap(gameCharacter.getIcon());
+//            etName.setText(gameCharacter.getName());
 //            etGameSystem.setText(gameCharacter.getGameSystem());
-//            etRace.setText(gameCharacter.getCharacterRace());
-//            etClass.setText(gameCharacter.getCharacterClass());
+//            etRace.setText(gameCharacter.getRace());
+//            etClass.setText(gameCharacter.getArchetype());
 //
 //            Button bDelete = (Button) rootView.findViewById(R.id.bDelete);
 //            bDelete.setOnClickListener(this);
@@ -174,11 +174,11 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     }
 
     private void saveCharacter() {
-        gameCharacter.setCharacterName(etName.getText().toString());
+        gameCharacter.setName(etName.getText().toString());
         gameCharacter.setGameSystem(etGameSystem.getText().toString());
-        gameCharacter.setCharacterRace(etRace.getText().toString());
-        gameCharacter.setCharacterClass(etClass.getText().toString());
-        gameCharacter.setCharacterIcon(croppedBitmap);
+        gameCharacter.setRace(etRace.getText().toString());
+        gameCharacter.setArchetype(etClass.getText().toString());
+        gameCharacter.setIcon(croppedBitmap);
     }
 
     private Bitmap createDefaultIcon(){
