@@ -19,7 +19,6 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.MainRecyclerViewAdapter;
-import amagi82.modularcharactersheetcreator.events.CharactersLoadedEvent;
 import amagi82.modularcharactersheetcreator.events.CreateCharacterEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.utils.Otto;
@@ -57,10 +56,6 @@ public class MainFragment extends Fragment{
         });
 
         return rootView;
-    }
-
-    public void onCharactersLoaded(CharactersLoadedEvent event){
-
     }
 
     @OnClick(R.id.fab)

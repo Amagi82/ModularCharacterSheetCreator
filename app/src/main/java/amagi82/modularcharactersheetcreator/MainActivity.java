@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
         //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
 
-        //SavedData.CHARACTERS.getCharacters(this);
 //        List<GameCharacter> characters = new ArrayList<>();
 //        if (characters.size() == 0) {
 //            Log.i(null, "Creating data");
@@ -52,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
 //                character.getModuleList().add(module2);
 //            }
 //        }
-//
-//        //Log.i(null, "saving "+character.getName());
 //
 //        for (GameCharacter character : characters) {
 //            NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>("bucket", character.getEntityId());
@@ -87,15 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        //Save characters to default file
-//        saveGameCharacters("Characters");
-//    }
-//
-//
 
 //    /*
 //        Handle user clicks and interface methods

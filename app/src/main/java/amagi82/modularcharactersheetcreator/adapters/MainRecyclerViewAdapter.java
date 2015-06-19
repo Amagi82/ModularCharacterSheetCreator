@@ -51,9 +51,9 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
             int color = gameCharacter.getColorPrimary() < 1? context.getResources().getColor(R.color.primary) : gameCharacter.getColorPrimary();
             gameCharacter.setIcon(iconFactory.createIcon(gameCharacter.getName(), color));
         }
-        holder.imageCharacterIcon.setImageBitmap(gameCharacter.getIcon());
+        holder.icon.setImageBitmap(gameCharacter.getIcon());
         holder.tvName.setText(gameCharacter.getName());
-        holder.tvCharacterClass.setText(gameCharacter.getRace() + " " + gameCharacter.getArchetype());
+        holder.tvArchetype.setText(gameCharacter.getRace() + " " + gameCharacter.getArchetype());
         holder.tvGameSystem.setText(gameCharacter.getGameSystem());
     }
 
@@ -66,9 +66,9 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     // Provide a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder {
         //View container;
-        @InjectView(R.id.characterIcon) CircleImageView imageCharacterIcon;
+        @InjectView(R.id.icon) CircleImageView icon;
         @InjectView(R.id.tvName) TextView tvName;
-        @InjectView(R.id.tvCharacterClass) TextView tvCharacterClass;
+        @InjectView(R.id.tvArchetype) TextView tvArchetype;
         @InjectView(R.id.tvGameSystem) TextView tvGameSystem;
 
         public ViewHolder(View itemView) {
