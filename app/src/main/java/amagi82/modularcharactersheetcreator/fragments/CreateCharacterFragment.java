@@ -105,7 +105,7 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
 //        });
 
 //        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        MainRecyclerViewAdapter recyclerViewAdapter = new MainRecyclerViewAdapter(getActivity(), MainApplication.getGameCharacters());
+//        MainRVAdapter recyclerViewAdapter = new MainRVAdapter(getActivity(), MainApplication.getGameCharacters());
 //        recyclerView.setAdapter(recyclerViewAdapter);
 
         //Check if we're editing a character or creating a new one

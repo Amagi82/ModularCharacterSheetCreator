@@ -3,6 +3,7 @@ package amagi82.modularcharactersheetcreator.fragments;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,7 +19,11 @@ import com.colintmiller.simplenosql.RetrievalCallback;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.adapters.MainRecyclerViewAdapter;
+import amagi82.modularcharactersheetcreator.adapters.MainRVAdapter;
+import amagi82.modularcharactersheetcreator.events.CharacterChangedEvent;
+import amagi82.modularcharactersheetcreator.events.CharacterInsertedEvent;
+import amagi82.modularcharactersheetcreator.events.CharacterMovedEvent;
+import amagi82.modularcharactersheetcreator.events.CharacterRemovedEvent;
 import amagi82.modularcharactersheetcreator.events.CreateCharacterEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.utils.Otto;
@@ -31,6 +36,7 @@ public class MainFragment extends Fragment{
     @InjectView(R.id.toolbar) Toolbar toolbar;
     @InjectView(R.id.recycler_view) RecyclerView recyclerView;
     @InjectView(R.id.fab) FloatingActionButton fab;
+    private SortedList<GameCharacter> characters;
     //@InjectView(R.id.fab_frame) FrameLayout fab_frame;
 
     @Override
@@ -39,18 +45,48 @@ public class MainFragment extends Fragment{
         ButterKnife.inject(this, rootView);
         toolbar.setTitle(getString(R.string.characters));
 
+        characters = new SortedList<>(GameCharacter.class, new SortedList.Callback<GameCharacter>() {
+            @Override public int compare(GameCharacter o1, GameCharacter o2) {
+                return o1.getTimeStamp() < o2.getTimeStamp()? -1 : 1;
+            }
+
+            @Override public void onInserted(int position, int count) {
+                Otto.BUS.getBus().post(new CharacterInsertedEvent(position, count));
+            }
+
+            @Override public void onRemoved(int position, int count) {
+                Otto.BUS.getBus().post(new CharacterRemovedEvent(position, count));
+            }
+
+            @Override public void onMoved(int fromPosition, int toPosition) {
+                Otto.BUS.getBus().post(new CharacterMovedEvent(fromPosition, toPosition));
+            }
+
+            @Override public void onChanged(int position, int count) {
+                Otto.BUS.getBus().post(new CharacterChangedEvent(position, count));
+            }
+
+            @Override public boolean areContentsTheSame(GameCharacter oldCharacter, GameCharacter newCharacter) {
+                return false;
+            }
+
+            @Override public boolean areItemsTheSame(GameCharacter item1, GameCharacter item2) {
+                return item1.getEntityId().equals(item2.getEntityId());
+            }
+        });
+
         //SavedData.CHARACTERS.getCharacters(getActivity());
 
         recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        MainRecyclerViewAdapter recyclerViewAdapter = new MainRecyclerViewAdapter(getActivity());
-        recyclerView.setAdapter(recyclerViewAdapter);
+        MainRVAdapter adapter = new MainRVAdapter(getActivity(), characters);
+        recyclerView.setAdapter(adapter);
 
         NoSQL.with(getActivity()).using(GameCharacter.class).bucketId("bucket").retrieve(new RetrievalCallback<GameCharacter>() {
             @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
-                Log.i(null, "Retrieved results = " + entities.toString());
                 for(int i = 0; i<entities.size(); i++){
                     Log.i(null, entities.get(i).getData().getName()+" retrieved");
+                    characters.add(entities.get(i).getData());
                 }
             }
         });

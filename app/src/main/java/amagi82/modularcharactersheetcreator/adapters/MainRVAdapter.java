@@ -2,14 +2,12 @@ package amagi82.modularcharactersheetcreator.adapters;
 
 
 import android.content.Context;
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
@@ -18,27 +16,21 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder> {
+public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.ViewHolder> {
 
-    private List<GameCharacter> gameCharacters;
+    private SortedList<GameCharacter> gameCharacters;
     private DefaultIconFactory iconFactory;
     private Context context;
 
-    public MainRecyclerViewAdapter(Context context, List<GameCharacter> gameCharacters) {
+    public MainRVAdapter(Context context, SortedList<GameCharacter> gameCharacters) {
         this.context = context;
         this.gameCharacters = gameCharacters;
         iconFactory = new DefaultIconFactory(context);
     }
 
-    public MainRecyclerViewAdapter(Context context) {
-        this.context = context;
-        gameCharacters = new ArrayList<>();
-        iconFactory = new DefaultIconFactory(context);
-    }
-
     // Create new views (invoked by the layout manager)
     @Override
-    public MainRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MainRVAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_character, parent, false);
         return new ViewHolder(v);
     }

@@ -37,7 +37,7 @@ public class CharacterSheetFragment extends Fragment {
         recyclerView.setLayoutManager(characterSheetLayoutManager);
 
         // specify an adapter (see also next example)
-//        RecyclerView.Adapter characterRecyclerViewAdapter = new CharacterSheetRecyclerViewAdapter(character.getModuleList(), getActivity());
+//        RecyclerView.Adapter characterRecyclerViewAdapter = new CharacterSheetRVAdapter(character.getModuleList(), getActivity());
 //        recyclerView.setAdapter(characterRecyclerViewAdapter);
 
         //Set up the Floating Action Button

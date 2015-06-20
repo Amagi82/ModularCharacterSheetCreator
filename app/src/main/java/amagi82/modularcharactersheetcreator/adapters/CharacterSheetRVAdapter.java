@@ -15,11 +15,11 @@ import amagi82.modularcharactersheetcreator.adapters.viewholders.TextViewHolder;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.models.modules.TextModule;
 
-public class CharacterSheetRecyclerViewAdapter extends RecyclerView.Adapter<ContainerViewHolder> {
+public class CharacterSheetRVAdapter extends RecyclerView.Adapter<ContainerViewHolder> {
 
     private ArrayList<Module> modules;
 
-    public CharacterSheetRecyclerViewAdapter(ArrayList<Module> modules, Activity activity) {
+    public CharacterSheetRVAdapter(ArrayList<Module> modules, Activity activity) {
         this.modules = modules;
     }
 
