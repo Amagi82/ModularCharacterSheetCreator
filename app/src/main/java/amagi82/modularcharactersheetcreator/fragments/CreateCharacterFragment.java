@@ -16,6 +16,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,7 +25,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -36,6 +36,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import amagi82.modularcharactersheetcreator.CharacterRVAdapter;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import butterknife.ButterKnife;
@@ -47,9 +48,7 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int PICK_FROM_FILE = 2;
     private GameCharacter gameCharacter;
-    private int characterPosition;
     private boolean isEditMode = false;
-    private EditText editText;
     private Uri photoUri;
     private CropImageView cropper;
 //    @InjectView(R.id.color_mask) View colorMask;
@@ -60,15 +59,6 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
     @InjectView(R.id.imagePortrait) ImageView imagePortrait;
     @InjectView(R.id.fab) FloatingActionButton fab;
     @InjectView(R.id.recycler_view) RecyclerView recyclerView;
-//    @InjectView(R.id.spinGameSystem) Spinner spinGameSystem;
-//    @InjectView(R.id.iconRace) ImageView iconRace;
-//    @InjectView(R.id.spinRace) Spinner spinRace;
-//    @InjectView(R.id.iconClass) ImageView iconClass;
-//    @InjectView(R.id.spinClass) Spinner spinClass;
-//    @InjectView(R.id.imagePortrait) ImageButton imagePortrait;
-//    @InjectView(R.id.spinTheme) Spinner spinTheme;
-//    @InjectView(R.id.iconTemplate) ImageView iconTemplate;
-//    @InjectView(R.id.spinTemplate) Spinner spinTemplate;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -87,26 +77,9 @@ public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuI
 
         if(gameCharacter.getPortraitUri() != null) imagePortrait.setImageURI(gameCharacter.getPortraitUri());
 
-//        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-//            @Override
-//            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-//                Log.i(null, "offset == " + i);
-//                if(i > -5){
-//                    etName.setVisibility(View.VISIBLE);
-//                    if(!gameCharacter.getName().equals(etName.getText().toString())) etName.setText(gameCharacter.getName());
-//                    collapsingToolbar.setTitle("");
-//
-//                }else {
-//                    collapsingToolbar.setTitle(etName.getText());
-//                    etName.setVisibility(View.GONE);
-//
-//                }
-//            }
-//        });
-
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        MainRVAdapter recyclerViewAdapter = new MainRVAdapter(getActivity(), MainApplication.getGameCharacters());
-//        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        CharacterRVAdapter recyclerViewAdapter = new CharacterRVAdapter(getActivity(), gameCharacter);
+        recyclerView.setAdapter(recyclerViewAdapter);
 
         //Check if we're editing a character or creating a new one
 //        Bundle args = getArguments();

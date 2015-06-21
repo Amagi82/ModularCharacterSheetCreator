@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.events.CharacterClickedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.utils.DefaultIconFactory;
+import amagi82.modularcharactersheetcreator.utils.Otto;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -63,24 +65,15 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.ViewHolder
         @InjectView(R.id.tvArchetype) TextView tvArchetype;
         @InjectView(R.id.tvGameSystem) TextView tvGameSystem;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.inject(this, itemView);
 
-//            container = itemView;
-//            container.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    listener.onCharacterClicked(getAdapterPosition());
-//                }
-//            });
-//            container.setOnLongClickListener(new View.OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(View v) {
-//                    longClickListener.onCharacterLongClicked(getAdapterPosition());
-//                    return true;
-//                }
-//            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    Otto.BUS.getBus().post(new CharacterClickedEvent(getAdapterPosition()));
+                }
+            });
         }
     }
 }
