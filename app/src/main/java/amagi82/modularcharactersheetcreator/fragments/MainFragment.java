@@ -20,10 +20,6 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.MainRVAdapter;
-import amagi82.modularcharactersheetcreator.events.CharacterChangedEvent;
-import amagi82.modularcharactersheetcreator.events.CharacterInsertedEvent;
-import amagi82.modularcharactersheetcreator.events.CharacterMovedEvent;
-import amagi82.modularcharactersheetcreator.events.CharacterRemovedEvent;
 import amagi82.modularcharactersheetcreator.events.CreateCharacterEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.utils.Otto;
@@ -37,6 +33,7 @@ public class MainFragment extends Fragment{
     @InjectView(R.id.recycler_view) RecyclerView recyclerView;
     @InjectView(R.id.fab) FloatingActionButton fab;
     private SortedList<GameCharacter> characters;
+    private MainRVAdapter adapter;
     //@InjectView(R.id.fab_frame) FrameLayout fab_frame;
 
     @Override
@@ -51,19 +48,19 @@ public class MainFragment extends Fragment{
             }
 
             @Override public void onInserted(int position, int count) {
-                Otto.BUS.getBus().post(new CharacterInsertedEvent(position, count));
+                adapter.notifyItemRangeInserted(position,count);
             }
 
             @Override public void onRemoved(int position, int count) {
-                Otto.BUS.getBus().post(new CharacterRemovedEvent(position, count));
+                adapter.notifyItemRangeRemoved(position, count);
             }
 
             @Override public void onMoved(int fromPosition, int toPosition) {
-                Otto.BUS.getBus().post(new CharacterMovedEvent(fromPosition, toPosition));
+                adapter.notifyItemMoved(fromPosition, toPosition);
             }
 
             @Override public void onChanged(int position, int count) {
-                Otto.BUS.getBus().post(new CharacterChangedEvent(position, count));
+                adapter.notifyItemRangeChanged(position, count);
             }
 
             @Override public boolean areContentsTheSame(GameCharacter oldCharacter, GameCharacter newCharacter) {
@@ -75,11 +72,9 @@ public class MainFragment extends Fragment{
             }
         });
 
-        //SavedData.CHARACTERS.getCharacters(getActivity());
-
         recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        MainRVAdapter adapter = new MainRVAdapter(getActivity(), characters);
+        adapter = new MainRVAdapter(getActivity(), characters);
         recyclerView.setAdapter(adapter);
 
         NoSQL.with(getActivity()).using(GameCharacter.class).bucketId("bucket").retrieve(new RetrievalCallback<GameCharacter>() {
