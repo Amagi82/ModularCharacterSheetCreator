@@ -12,7 +12,7 @@ import android.widget.TextView;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.events.CharacterClickedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
-import amagi82.modularcharactersheetcreator.utils.DefaultIconFactory;
+import amagi82.modularcharactersheetcreator.utils.CircleIcon;
 import amagi82.modularcharactersheetcreator.utils.Otto;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -21,13 +21,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.ViewHolder> {
 
     private SortedList<GameCharacter> gameCharacters;
-    private DefaultIconFactory iconFactory;
+    private CircleIcon iconFactory;
     private Context context;
 
     public MainRVAdapter(Context context, SortedList<GameCharacter> gameCharacters) {
         this.context = context;
         this.gameCharacters = gameCharacters;
-        iconFactory = new DefaultIconFactory(context);
+        iconFactory = new CircleIcon(context);
     }
 
     // Create new views (invoked by the layout manager)

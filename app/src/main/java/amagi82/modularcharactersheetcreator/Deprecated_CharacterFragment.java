@@ -35,7 +35,7 @@ import java.io.InputStream;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class NewCharacterFragment extends Fragment implements View.OnClickListener {
+public class Deprecated_CharacterFragment extends Fragment implements View.OnClickListener {
 
     private static final int PICK_FROM_CAMERA = 1;
     private static final int PICK_FROM_FILE = 2;
@@ -59,7 +59,7 @@ public class NewCharacterFragment extends Fragment implements View.OnClickListen
     private boolean hasCustomCharacterIcon = false;
     private boolean deletingCharacter = false;
 
-    public NewCharacterFragment() {
+    public Deprecated_CharacterFragment() {
     }
 
     @Override

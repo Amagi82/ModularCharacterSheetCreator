@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator;
+package amagi82.modularcharactersheetcreator.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

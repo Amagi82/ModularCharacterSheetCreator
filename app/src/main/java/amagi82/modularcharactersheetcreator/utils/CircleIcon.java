@@ -9,14 +9,14 @@ import android.text.TextPaint;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class DefaultIconFactory {
+public class CircleIcon {
 
     private Context context;
     private int circleImageSize;
     private TextPaint textPaint;
     private int textColor;
 
-    public DefaultIconFactory(Context context) {
+    public CircleIcon(Context context) {
         this.context = context;
         circleImageSize = (int) context.getResources().getDimension(R.dimen.circle_icon_size);
         textPaint = new TextPaint();

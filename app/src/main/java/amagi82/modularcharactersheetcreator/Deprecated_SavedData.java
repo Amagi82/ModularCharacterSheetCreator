@@ -16,7 +16,7 @@ import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.modules.TextModule;
 import amagi82.modularcharactersheetcreator.utils.Otto;
 
-public enum SavedData {
+public enum Deprecated_SavedData {
     CHARACTERS;
 
     private List<GameCharacter> characters = new ArrayList<>();

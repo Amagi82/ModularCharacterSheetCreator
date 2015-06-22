@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.squareup.otto.Subscribe;
 
 import amagi82.modularcharactersheetcreator.events.CreateCharacterEvent;
-import amagi82.modularcharactersheetcreator.fragments.CreateCharacterFragment;
+import amagi82.modularcharactersheetcreator.fragments.CharacterFragment;
 import amagi82.modularcharactersheetcreator.fragments.MainFragment;
 import amagi82.modularcharactersheetcreator.utils.Otto;
 
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Subscribe
     public void onCreateCharacter(CreateCharacterEvent event) {
-        final Fragment fragment = new CreateCharacterFragment();
+        final Fragment fragment = new CharacterFragment();
         fm.beginTransaction()
                 .replace(R.id.container, fragment)
                 .addToBackStack("transaction")
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 //    public void onClick(View v) {
 //        if (v.getId() == R.id.fab) {
 //            //Floating action button clicked - add new character
-//            CreateCharacterFragment fragment = new CreateCharacterFragment();
+//            CharacterFragment fragment = new CharacterFragment();
 //            backListener = fragment;
 //            attachFragment(fragment, MaterialMenuDrawable.IconState.ARROW);
 //        }else {

@@ -36,14 +36,14 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import amagi82.modularcharactersheetcreator.CharacterRVAdapter;
+import amagi82.modularcharactersheetcreator.adapters.CharacterRVAdapter;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class CreateCharacterFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener {
+public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int PICK_FROM_FILE = 2;
