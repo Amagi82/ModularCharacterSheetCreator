@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-
 //    /*
 //        Handle user clicks and interface methods
 //     */
