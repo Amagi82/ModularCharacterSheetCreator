@@ -11,6 +11,13 @@
         <item>Remove</item>
     </string-array>
 
+    <string-array name="game_genre">
+        <item>Game genre</item>
+        <item>Fantasy</item>
+        <item>Cyberpunk</item>
+        <item>Modern</item>
+    </string-array>
+
     <string-array name="game_systems">
         <item>Game system</item>
         <item>Other</item>
