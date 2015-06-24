@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--cWod Vampire -->
+    <string name="ahrimanes">Ahrimanes</string>
+    <string name="anda">Anda</string>
+    <string name="baali">Baali</string>
+    <string name="blood_brothers">Blood Brothers</string>
+    <string name="caitiff">Caitiff</string>
+    <string name="cappadocians">Cappadocians</string>
+    <string name="children_of_osiris">Children of Osiris</string>
+    <string name="daughers_of_cacophony">Daughters of Cacophony</string>
+    <string name="gargoyle">Gargoyle</string>
+    <string name="harbingers_of_skulls">Harbingers of Skulls</string>
+    <string name="kiasyd">Kiasyd</string>
+    <string name="lamia">Lamia</string>
+    <string name="lhiannan">Lhiannan</string>
+    <string name="nagaraja">Nagaraja</string>
+    <string name="noiad">Noiad</string>
+    <string name="panders">Panders</string>
+    <string name="salubri">Salubri</string>
+    <string name="samedi">Samedi</string>
+    <string name="true_brujah">True Brujah</string>
+    <string name="assamite">Assamite</string>
+    <string name="brujah">Brujah</string>
+    <string name="followers_of_set">Followers of Set</string>
+    <string name="gangrel">Gangrel</string>
+    <string name="giovanni">Giovanni</string>
+    <string name="lasombra">Lasombra</string>
+    <string name="malkavian">Malkavian</string>
+    <string name="nosferatu">Nosferatu</string>
+    <string name="ravnos">Ravnos</string>
+    <string name="toreador">Toreador</string>
+    <string name="tremere">Tremere</string>
+    <string name="tzimisce">Tzimisce</string>
+    <string name="ventrue">Ventrue</string>
+    <string name="ghoul">Ghoul</string>
+    <string name="anarchs">Anarchs</string>
+    <string name="camarilla">Camarilla</string>
+    <string name="independent">Independent</string>
+    <string name="sabbat">Sabbat</string>
+    <string name="assamite_antitribu">Assamite antitribu</string>
+    <string name="brujah_antitribu">Brujah antitribu</string>
+    <string name="gangrel_antitribu">Gangrel antitribu</string>
+    <string name="lasombra_antitribu">Lasombra antitribu</string>
+    <string name="malkavian_antitribu">Malkavian antitribu</string>
+    <string name="nosferatu_antitribu">Nosferatu antitribu</string>
+    <string name="ravnos_antitribu">Ravnos antitribu</string>
+    <string name="salubri_antitribu">Salubri antitribu</string>
+    <string name="serpents_of_the_light">Serpents of the Light</string>
+    <string name="toreador_antitribu">Toreador antitribu</string>
+    <string name="tremere_antitribu">Tremere antitribu</string>
+    <string name="ventrue_antitribu">Ventrue antitribu</string>
+
+    <!--cWod Werewolf -->
+    <string name="ahroun">Ahroun</string>
+    <string name="galliard">Galliard</string>
+    <string name="philodox">Philodox</string>
+    <string name="ragabash">Ragabash</string>
+    <string name="theurge">Theurge</string>
+    <string name="ajaba">Ajaba</string>
+    <string name="ananasi">Ananasi</string>
+    <string name="apis">Apis</string>
+    <string name="bastet">Bastet</string>
+    <string name="camazotz">Camazotz</string>
+    <string name="corax">Corax</string>
+    <string name="grondr">Grondr</string>
+    <string name="gurahl">Gurahl</string>
+    <string name="kitsune">Kitsune</string>
+    <string name="mokole">Mokole</string>
+    <string name="nagah">Nagah</string>
+    <string name="nuwisha">Nuwisha</string>
+    <string name="ratkin">Ratkin</string>
+    <string name="rokea">Rokea</string>
+    <string name="black_furies">Black Furies</string>
+    <string name="bone_gnawers">Bone Gnawers</string>
+    <string name="bunyip">Bunyip</string>
+    <string name="children_of_gaia">Children of Gaia</string>
+    <string name="croatan">Croatan</string>
+    <string name="fianna">Fianna</string>
+    <string name="get_of_fenris">Get of Fenris</string>
+    <string name="glass_walkers">Glass Walkers</string>
+    <string name="red_talons">Red Talons</string>
+    <string name="shadow_lords">Shadow Lords</string>
+    <string name="silent_striders">Silent Striders</string>
+    <string name="silver_fangs">Silver Fangs</string>
+    <string name="stargazers">Stargazers</string>
+    <string name="uktena">Uktena</string>
+    <string name="wendigo">Wendigo</string>
+    <string name="white_howlers">White Howlers</string>
+
+    <!--cWod Wraith -->
+    <string name="argos">Argos</string>
+    <string name="castigate">Castigate</string>
+    <string name="embody">Embody</string>
+    <string name="fatalism">Fatalism</string>
+    <string name="flux">Flux</string>
+    <string name="inhabit">Inhabit</string>
+    <string name="intimation">Intimation</string>
+    <string name="keening">Keening</string>
+    <string name="lifeweb">Lifeweb</string>
+    <string name="mnemosynis">Mnemosynis</string>
+    <string name="moliate">Moliate</string>
+    <string name="outrage">Outrage</string>
+    <string name="pandemonium">Pandemonium</string>
+    <string name="phantasm">Phantasm</string>
+    <string name="puppetry">Puppetry</string>
+    <string name="usury">Usury</string>
+
+    <!--cWod Mage -->
+    <string name="iteration_x">Iteration X</string>
+    <string name="new_world_order">New World Order</string>
+    <string name="progenitors">Progenitors</string>
+    <string name="syndicate">Syndicate</string>
+    <string name="void_engineers">Void Engineers</string>
+    <string name="ahl_i_batin">Ahl-i-Batin</string>
+    <string name="bataa">Bataa</string>
+    <string name="children_of_knowledge">Children of Knowledge</string>
+    <string name="knights_templar">Knights Templar</string>
+    <string name="kopa_loei">Kopa Loei</string>
+    <string name="ngoma">Ngoma</string>
+    <string name="orphans">Orphans</string>
+    <string name="sisters_of_hippolyta">Sisters of Hippolyta</string>
+    <string name="taftani">Taftani</string>
+    <string name="wu_lung">Wu Lung</string>
+    <string name="marauders">Marauders</string>
+    <string name="nephandi">Nephandi</string>
+    <string name="technocracy">Technocracy</string>
+    <string name="akashayana">Akashayana</string>
+    <string name="celestial_chorus">Celestial Chorus</string>
+    <string name="cult_of_ecstasy">Cult of Ecstasy</string>
+    <string name="dreamspeakers">Dreamspeakers</string>
+    <string name="euthanatoi">Euthanatoi</string>
+    <string name="hollow_ones">Hollow Ones</string>
+    <string name="order_of_hermes">Order of Hermes</string>
+    <string name="scions_of_ether">Scions of Ether</string>
+    <string name="verbenae">Verbenae</string>
+    <string name="virtual_adepts">Virtual Adepts</string>
+
+    <!--nWod Vampire -->
+    <string name="daeva">Daeva</string>
+    <string name="mekhet">Mekhet</string>
+    <string name="akhud">Akhud</string>
+    <string name="prima_invicta">Prima Invicta</string>
+    <string name="the_commonwealth">The Commonwealth</string>
+    <string name="the_covenant">The Covenant</string>
+    <string name="the_devils_eye">The Devils Eye</string>
+    <string name="the_mothers_army">The Mothers Army</string>
+    <string name="carthian_movement">Carthian Movement</string>
+    <string name="circle_of_the_crone">Circle of the Crone</string>
+    <string name="holy_engineers">Holy Engineers</string>
+    <string name="invictus">Invictus</string>
+    <string name="lancea_et_sanctum">Lancea et Sanctum</string>
+    <string name="ordo_dracul">Ordo Dracul</string>
+    <string name="unaligned">Unaligned</string>
+    <string name="vii">VII</string>
+
+    <!--nWod Werewolf -->
+    <string name="cahalith">Cahalith</string>
+    <string name="elodoth">Elodoth</string>
+    <string name="irraka">Irraka</string>
+    <string name="ithaeur">Ithaeur</string>
+    <string name="rahu">Rahu</string>
+    <string name="blood_talons">Blood Talons</string>
+    <string name="bone_shadows">Bone Shadows</string>
+    <string name="ghost_wolves">Ghost Wolves</string>
+    <string name="hunters_in_darkness">Hunters in Darkness</string>
+    <string name="iron_masters">Iron Masters</string>
+    <string name="storm_lords">Storm Lords</string>
+
+    <!--nWod Mummy -->
+    <string name="bull_headed">Bull-Headed</string>
+    <string name="falcon_headed">Falcon-Headed</string>
+    <string name="jackal_headed">Jackal-Headed</string>
+    <string name="lion_headed">Lion-Headed</string>
+    <string name="srpent_headed">Serpent-Headed</string>
+    <string name="maa_kep">Maa-Kep</string>
+    <string name="mesen_nebu">Mesen-Nebu</string>
+    <string name="sesha_hebsu">Sesha-Hebsu</string>
+    <string name="su_menent">Su-Menent</string>
+    <string name="tef_aabhi">Tef-Aabhi</string>
+
+    <!--nWod Demon -->
+    <string name="inquisitor">Inquisitor</string>
+    <string name="integrator">Integrator</string>
+    <string name="saboteur">Saboteur</string>
+    <string name="tempter">Tempter</string>
+    <string name="destroyer">Destroyer</string>
+    <string name="guardian">Guardian</string>
+    <string name="messenger">Messenger</string>
+    <string name="psychopomp">Psychopomp</string>
+</resources>
