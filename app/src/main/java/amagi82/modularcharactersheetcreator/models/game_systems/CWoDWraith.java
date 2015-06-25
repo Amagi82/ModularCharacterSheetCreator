@@ -4,7 +4,7 @@ import amagi82.modularcharactersheetcreator.R;
 
 public class CWoDWraith extends GameSystem{
 
-    public CWoDWraith(int urlLeft, int categoryLeft, int[] sheetLayouts) {
-        super(System.CWODWRAITH, R.string.url_cwod_wraith_base, urlLeft, categoryLeft, sheetLayouts);
+    public CWoDWraith(int urlLeft, int categoryLeft) {
+        super(System.CWODWRAITH, R.string.url_cwod_wraith_base, urlLeft, categoryLeft);
     }
 }

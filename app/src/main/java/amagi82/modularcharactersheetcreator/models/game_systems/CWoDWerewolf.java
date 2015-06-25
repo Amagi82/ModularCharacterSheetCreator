@@ -4,9 +4,9 @@ import amagi82.modularcharactersheetcreator.R;
 
 public class CWoDWerewolf extends GameSystem{
 
-    public CWoDWerewolf(int urlLeft, int urlRight, int urlLeftPortrait, int urlRightPortrait, int categoryLeft, int categoryRight, int[] sheetLayouts) {
+    public CWoDWerewolf(int urlLeft, int urlRight, int urlLeftPortrait, int urlRightPortrait, int categoryLeft, int categoryRight) {
 
         super(System.CWODWEREWOLF, R.string.url_cwod_werewolf_base, R.string.url_cwod_werewolf_avatar_base, urlLeft, urlRight, urlLeftPortrait,
-                urlRightPortrait, categoryLeft, categoryRight, sheetLayouts);
+                urlRightPortrait, categoryLeft, categoryRight);
     }
 }

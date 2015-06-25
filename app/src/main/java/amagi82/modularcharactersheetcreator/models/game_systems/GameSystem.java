@@ -61,37 +61,36 @@ abstract class GameSystem {
         }
     }
     private System system;
-    private int urlBase;
-    private int urlBasePortrait;
+    private int urlBase; //TODO: Move to enum- models should only be for data that changes
+    private int urlBasePortrait; //TODO: Move to enum- models should only be for data that changes
     private int urlLeft;
     private int urlRight;
     private int urlLeftPortrait;
     private int urlRightPortrait;
-    private int categoryLeft;
+    private int categoryLeft; //TODO: Move the category names to the enum
     private int categoryRight;
-    private int[] sheetLayouts;
 
-    public GameSystem(System system, int[] sheetLayouts) {
-        this(system, 0, 0, 0, 0, 0, 0, 0, 0, sheetLayouts);
+    public GameSystem(System system) {
+        this(system, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 
-    public GameSystem(System system, int categoryLeft, int[] sheetLayouts) {
-        this(system, 0, 0, 0, 0, 0, 0, categoryLeft, 0, sheetLayouts);
+    public GameSystem(System system, int categoryLeft) {
+        this(system, 0, 0, 0, 0, 0, 0, categoryLeft, 0);
     }
 
-    public GameSystem(System system, int categoryLeft, int categoryRight, int[] sheetLayouts) {
-        this(system, 0, 0, 0, 0, 0, 0, categoryLeft, categoryRight, sheetLayouts);
+    public GameSystem(System system, int categoryLeft, int categoryRight) {
+        this(system, 0, 0, 0, 0, 0, 0, categoryLeft, categoryRight);
     }
 
-    public GameSystem(System system, int urlBase, int urlLeft, int categoryLeft, int[] sheetLayouts) {
-        this(system, urlBase, urlBase, urlLeft, 0, urlLeft, 0, categoryLeft, 0, sheetLayouts);
+    public GameSystem(System system, int urlBase, int urlLeft, int categoryLeft) {
+        this(system, urlBase, urlBase, urlLeft, 0, urlLeft, 0, categoryLeft, 0);
     }
 
-    public GameSystem(System system, int urlBase, int urlLeft, int urlRight, int categoryLeft, int categoryRight, int[] sheetLayouts) {
-        this(system, urlBase, urlBase, urlLeft, urlRight, urlLeft, urlRight, categoryLeft, categoryRight, sheetLayouts);
+    public GameSystem(System system, int urlBase, int urlLeft, int urlRight, int categoryLeft, int categoryRight) {
+        this(system, urlBase, urlBase, urlLeft, urlRight, urlLeft, urlRight, categoryLeft, categoryRight);
     }
 
-    public GameSystem(System system, int urlBase, int urlBasePortrait, int urlLeft, int urlRight, int urlLeftPortrait, int urlRightPortrait, int categoryLeft, int categoryRight, int[] sheetLayouts) {
+    public GameSystem(System system, int urlBase, int urlBasePortrait, int urlLeft, int urlRight, int urlLeftPortrait, int urlRightPortrait, int categoryLeft, int categoryRight) {
         this.system = system;
         this.urlBase = urlBase;
         this.urlBasePortrait = urlBasePortrait;
@@ -101,7 +100,6 @@ abstract class GameSystem {
         this.urlRightPortrait = urlRightPortrait;
         this.categoryLeft = categoryLeft;
         this.categoryRight = categoryRight;
-        this.sheetLayouts = sheetLayouts;
     }
 
     public System getSystem() {
@@ -170,13 +168,5 @@ abstract class GameSystem {
 
     public void setCategoryRight(int categoryRight) {
         this.categoryRight = categoryRight;
-    }
-
-    public int[] getSheetLayouts() {
-        return sheetLayouts;
-    }
-
-    public void setSheetLayouts(int[] sheetLayouts) {
-        this.sheetLayouts = sheetLayouts;
     }
 }
