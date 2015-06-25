@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="world_of_darkness">World of Darkness</string>
+    <string name="cwod_vampire">Vampire the Masquerade</string>
+    <string name="cwod_werewolf">Werewolf the Apocalypse</string>
+    <string name="cwod_wraith">Wraith the Oblivion</string>
+    <string name="cwod_mage">Mage the Ascension</string>
+    <string name="nwod_vampire">Vampire the Requiem</string>
+    <string name="nwod_werewolf">Werewolf the Forsaken</string>
+    <string name="nwod_mummy">Mummy the Curse</string>
+    <string name="nwod_demon">Demon the Descent</string>
+    <string name="scion">Scion</string>
+    <string name="trinity">Trinity Continuum</string>
+    <string name="exalted">Exalted</string>
+
     <!--cWod Vampire -->
     <string name="ahrimanes">Ahrimanes</string>
     <string name="anda">Anda</string>
