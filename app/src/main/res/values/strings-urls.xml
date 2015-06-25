@@ -141,6 +141,7 @@
     <string name="url_cwod_mage_tradition_verbenae">Tradition~Verbenae.png</string>
     <string name="url_cwod_mage_tradition_virtual_adepts">Tradition~Virtual Adepts.png</string>
 
+<!-- May not include avatar-specific versions
     <string name="url_cwod_vampire_avatar_clan_ahrimanes">Bloodline~Ahrimanes.png</string>
     <string name="url_cwod_vampire_avatar_clan_anda">Bloodline~Anda.png</string>
     <string name="url_cwod_vampire_avatar_clan_baali">Bloodline~Baali.png</string>
@@ -226,6 +227,7 @@
     <string name="url_cwod_werewolf_avatar_tribe_uktena">Tribe~Uktena.png</string>
     <string name="url_cwod_werewolf_avatar_tribe_wendigo">Tribe~Wendigo.png</string>
     <string name="url_cwod_werewolf_avatar_tribe_white_howlers">Tribe~White Howlers.png</string>
+-->
 
     <string name="url_nwod_vampire_clan_daeva">Clan-Big~Daeva.png</string>
     <string name="url_nwod_vampire_clan_gangrel">Clan-Big~Gangrel (VTR).png</string>
