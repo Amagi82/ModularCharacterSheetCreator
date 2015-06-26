@@ -54,29 +54,29 @@ public class NWoDDemon extends GameSystem {
         }
     }
 
-    private NWoDDemonIncarnation decree;
-    private NWoDDemonAgenda guild;
+    private NWoDDemonIncarnation incarnation;
+    private NWoDDemonAgenda agenda;
 
     public NWoDDemon() {
         super(System.NWODDEMON);
     }
 
-    public NWoDDemonIncarnation getDecree() {
-        return decree;
+    public NWoDDemonIncarnation getIncarnation() {
+        return incarnation;
     }
 
-    public void setDecree(NWoDDemonIncarnation decree) {
-        setLeft(decree);
-        this.decree = decree;
+    public void setIncarnation(NWoDDemonIncarnation incarnation) {
+        setLeft(incarnation);
+        this.incarnation = incarnation;
     }
 
-    public NWoDDemonAgenda getGuild() {
-        return guild;
+    public NWoDDemonAgenda getAgenda() {
+        return agenda;
     }
 
-    public void setGuild(NWoDDemonAgenda guild) {
-        setRight(guild);
-        this.guild = guild;
+    public void setAgenda(NWoDDemonAgenda agenda) {
+        setRight(agenda);
+        this.agenda = agenda;
     }
 
     public List<NWoDDemonIncarnation> getListIncarnation() {

@@ -218,4 +218,34 @@
     <string name="guardian">Guardian</string>
     <string name="messenger">Messenger</string>
     <string name="psychopomp">Psychopomp</string>
+
+    <!--Scion-->
+    <string name="hero">Hero</string>
+    <string name="demigod">Demigod</string>
+    <string name="god">God</string>
+    <string name="pesedjet">Pesedjet</string>
+    <string name="dodekatheon">Dodekatheon</string>
+    <string name="aesir">Aesir</string>
+    <string name="atzlanti">Atzlánti</string>
+    <string name="amatsukami">Amatsukami</string>
+    <string name="loa">Loa</string>
+    <string name="tuatha_de_dadann">Tuatha Dé Danann</string>
+    <string name="celestial_bureaucracy">Celestial Bureaucracy</string>
+    <string name="deva">Deva</string>
+    <string name="yazata">Yazata</string>
+
+    <!--Trinity Continuum -->
+    <string name="adventure">Adventure</string>
+    <string name="aberrant">Aberrant</string>
+    <string name="aeon">Æon</string>
+    <string name="aesculapian_order">The Æsculapian Order</string>
+    <string name="chitra_bhanu">The Chitra Bhanu</string>
+    <string name="isra">ISRA</string>
+    <string name="the_legions">The Legions</string>
+    <string name="the_ministry_of_noetic_affairs">The Ministry of Noetic Affairs</string>
+    <string name="nova_forca_das_nacoes">Nova Força das Nações</string>
+    <string name="orgotek">Orgotek</string>
+    <string name="the_upeo_wa_macho">The Upeo wa Macho</string>
+
+
 </resources>
