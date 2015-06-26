@@ -123,7 +123,7 @@ public class CWoDWerewolf extends GameSystem {
     }
 
     public void setTribe(CWoDWerewolfTribe tribe) {
-        setLeft(fera);
+        setLeft(tribe);
         this.tribe = tribe;
     }
 

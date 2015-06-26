@@ -21,4 +21,17 @@
     <color name="textDisabledMaterialSecondary">@color/secondary_text_disabled_material_light</color>
 
     <color name="darkRed">#CC0000</color>
+
+    <!-- Game theme colors-->
+    <color name="scion">#809CB0</color>
+    <color name="trinity">#D23721</color>
+    <color name="exalted">#F1AD28</color>
+    <color name="cwod_vampire">#7D423E</color>
+    <color name="cwod_werewolf">#EE8937</color>
+    <color name="cwod_wraith">#BBAF29</color>
+    <color name="cwod_mage">#807A50</color>
+    <color name="nwod_vampire">#AA0702</color>
+    <color name="nwod_werewolf">#7B98A6</color>
+    <color name="nwod_mummy">#4F74B8</color>
+    <color name="nwod_demon">#6C728A</color>
 </resources>

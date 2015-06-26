@@ -235,7 +235,6 @@
     <string name="url_nwod_vampire_clan_mekhet">Clan-Big~Mekhet.png</string>
     <string name="url_nwod_vampire_clan_nosferatu">Clan-Big~Nosferatu (VTR).png</string>
     <string name="url_nwod_vampire_clan_ventrue">Clan-Big~Ventrue (VTR).png</string>
-    <string name="url_nwod_vampire_clan_akhud">Clan~Akhud.png</string>
     <string name="url_nwod_vampire_conspiracy_prima_invicta">Conspiracy~Prima Invicta.png</string>
     <string name="url_nwod_vampire_conspiracy_the_commonwealth">Conspiracy~The Commonwealth.png</string>
     <string name="url_nwod_vampire_conspiracy_the_covenant">Conspiracy~The Covenant.png</string>
@@ -266,7 +265,7 @@
     <string name="url_nwod_mummy_decree_falcon_headed">Decree~Falcon-Headed.png</string>
     <string name="url_nwod_mummy_decree_jackal_headed">Decree~Jackal-Headed.png</string>
     <string name="url_nwod_mummy_decree_lion_headed">Decree~Lion-Headed.png</string>
-    <string name="url_nwod_mummy_decree_srpent_headed">Decree~Serpent-Headed.png</string>
+    <string name="url_nwod_mummy_decree_serpent_headed">Decree~Serpent-Headed.png</string>
     <string name="url_nwod_mummy_guild_maa_kep">Guild~Maa-Kep.png</string>
     <string name="url_nwod_mummy_guild_mesen_nebu">Guild~Mesen-Nebu.png</string>
     <string name="url_nwod_mummy_guild_sesha_hebsu">Guild~Sesha-Hebsu.png</string>
