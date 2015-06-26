@@ -1,6 +1,7 @@
 package amagi82.modularcharactersheetcreator.models.game_systems;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -160,7 +161,13 @@ public class CWoDVampire extends GameSystem{
         this.clan = clan;
     }
 
-    public List<CWoDVampireClan> getListDefault(CWoDVampireSect sect){
+    public List<CWoDVampireSect> getSects(){
+        List<CWoDVampireSect> list = new ArrayList<>();
+        Collections.addAll(list, CWoDVampireSect.values());
+        return list;
+    }
+
+    public List<CWoDVampireClan> getClansDefault(CWoDVampireSect sect){
         List<CWoDVampireClan> list = new ArrayList<>();
         for(CWoDVampireClan clan : CWoDVampireClan.values()){
             if(clan.getSectMembership(sect) == Member.YES) list.add(clan);
@@ -168,16 +175,16 @@ public class CWoDVampire extends GameSystem{
         return list;
     }
 
-    public List<CWoDVampireClan> getListOptional(CWoDVampireSect sect){
-        List<CWoDVampireClan> list = new ArrayList<>(getListDefault(sect));
+    public List<CWoDVampireClan> getClansOptional(CWoDVampireSect sect){
+        List<CWoDVampireClan> list = new ArrayList<>(getClansDefault(sect));
         for(CWoDVampireClan clan : CWoDVampireClan.values()){
             if(clan.getSectMembership(sect) == Member.OPTIONAL) list.add(clan);
         }
         return list;
     }
 
-    public List<CWoDVampireClan> getListBloodlines(CWoDVampireSect sect){
-        List<CWoDVampireClan> list = new ArrayList<>(getListDefault(sect));
+    public List<CWoDVampireClan> getClansBloodlines(CWoDVampireSect sect){
+        List<CWoDVampireClan> list = new ArrayList<>(getClansDefault(sect));
         for(CWoDVampireClan clan : CWoDVampireClan.values()){
             if(clan.getSectMembership(sect) == Member.BLOODLINE) list.add(clan);
         }

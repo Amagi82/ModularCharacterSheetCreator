@@ -10,14 +10,14 @@ abstract class GameSystem {
         - Enums passed in are for the left and right image flanking the character portrait
     */
     public enum System{
-        CWODVAMPIRE(R.string.cwod_vampire, R.drawable.title_vampire_masquerade, R.string.url_cwod_vampire_base, true),
-        CWODWEREWOLF(R.string.cwod_werewolf, R.drawable.title_werewolf_apocalypse, R.string.url_cwod_werewolf_base, true),
-        CWODWRAITH(R.string.cwod_wraith, R.drawable.title_wraith_oblivion, R.string.url_cwod_wraith_base, true),
-        CWODMAGE(R.string.cwod_mage, R.drawable.title_mage_ascension, R.string.url_cwod_mage_base, true),
-        NWODVAMPIRE(R.string.nwod_vampire, R.drawable.title_vampire_requiem, R.string.url_nwod_vampire_base, true),
-        NWODWEREWOLF(R.string.nwod_werewolf, R.drawable.title_werewolf_forsaken, R.string.url_nwod_werewolf_base, true),
-        NWODMUMMY(R.string.nwod_mummy, R.drawable.title_mummy_curse, R.string.url_nwod_mummy_base, true),
-        NWODDEMON(R.string.nwod_demon, R.drawable.title_demon_descent, R.string.url_nwod_demon_base, true),
+        CWODVAMPIRE(R.string.cwod_vampire, R.drawable.title_vampire_masquerade, R.string.url_cwod_vampire_base, true, R.string.sect, R.string.clan),
+        CWODWEREWOLF(R.string.cwod_werewolf, R.drawable.title_werewolf_apocalypse, R.string.url_cwod_werewolf_base, true, R.string.fera, R.string.tribe, R.string.auspice),
+        CWODWRAITH(R.string.cwod_wraith, R.drawable.title_wraith_oblivion, R.string.url_cwod_wraith_base, true, R.string.arcanos),
+        CWODMAGE(R.string.cwod_mage, R.drawable.title_mage_ascension, R.string.url_cwod_mage_base, true, R.string.tradition),
+        NWODVAMPIRE(R.string.nwod_vampire, R.drawable.title_vampire_requiem, R.string.url_nwod_vampire_base, true, R.string.clan, R.string.bloodline, R.string.covenant),
+        NWODWEREWOLF(R.string.nwod_werewolf, R.drawable.title_werewolf_forsaken, R.string.url_nwod_werewolf_base, true, R.string.tribe, R.string.auspice),
+        NWODMUMMY(R.string.nwod_mummy, R.drawable.title_mummy_curse, R.string.url_nwod_mummy_base, true, R.string.decree, R.string.guild),
+        NWODDEMON(R.string.nwod_demon, R.drawable.title_demon_descent, R.string.url_nwod_demon_base, true, R.string.incarnation, R.string.agenda),
         SCION(R.string.scion, R.drawable.title_scion),
         TRINITY(R.string.trinity, R.drawable.title_trinity_continuum),
         EXALTED(R.string.exalted, R.drawable.title_exalted);
@@ -26,6 +26,7 @@ abstract class GameSystem {
         private int imageMain;
         private int urlBase;
         private boolean wod;
+        private int[] categoryTitles;
         private int wodName = R.string.world_of_darkness;
         private int wodDrawable = R.drawable.title_wod;
 
@@ -42,6 +43,11 @@ abstract class GameSystem {
             this.imageMain = imageMain;
             this.urlBase = urlBase;
             this.wod = wod;
+        }
+
+        System(int name, int imageMain, int urlBase, boolean wod, int...categoryTitles){
+            this(name, imageMain, urlBase, wod);
+            this.categoryTitles = categoryTitles;
         }
 
         public int getName() {

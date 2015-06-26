@@ -13,8 +13,12 @@
     <string name="scion">Scion</string>
     <string name="trinity">Trinity Continuum</string>
     <string name="exalted">Exalted</string>
+    <string name="Others">Others</string>
 
     <!--cWod Vampire -->
+    <string name="sect">Sect</string>
+    <string name="clan">Clan</string>
+    <string name="bloodline">Bloodline</string>
     <string name="ahrimanes">Ahrimanes</string>
     <string name="anda">Anda</string>
     <string name="baali">Baali</string>
@@ -66,6 +70,9 @@
     <string name="ventrue_antitribu">Ventrue antitribu</string>
 
     <!--cWod Werewolf -->
+    <string name="fera">Fera</string>
+    <string name="tribe">Tribe</string>
+    <string name="auspice">Auspice</string>
     <string name="ahroun">Ahroun</string>
     <string name="galliard">Galliard</string>
     <string name="philodox">Philodox</string>
@@ -77,6 +84,7 @@
     <string name="bastet">Bastet</string>
     <string name="camazotz">Camazotz</string>
     <string name="corax">Corax</string>
+    <string name="garou">Garou</string>
     <string name="grondr">Grondr</string>
     <string name="gurahl">Gurahl</string>
     <string name="kitsune">Kitsune</string>
@@ -103,6 +111,7 @@
     <string name="white_howlers">White Howlers</string>
 
     <!--cWod Wraith -->
+    <string name="arcanos">Arcanos</string>
     <string name="argos">Argos</string>
     <string name="castigate">Castigate</string>
     <string name="embody">Embody</string>
@@ -121,6 +130,8 @@
     <string name="usury">Usury</string>
 
     <!--cWod Mage -->
+    <string name="tradition">Tradition</string>
+    <string name="craft">Craft</string>
     <string name="iteration_x">Iteration X</string>
     <string name="new_world_order">New World Order</string>
     <string name="progenitors">Progenitors</string>
@@ -151,6 +162,7 @@
     <string name="virtual_adepts">Virtual Adepts</string>
 
     <!--nWod Vampire -->
+    <string name="covenant">Covenant</string>
     <string name="daeva">Daeva</string>
     <string name="mekhet">Mekhet</string>
     <string name="akhud">Akhud</string>
@@ -182,6 +194,8 @@
     <string name="storm_lords">Storm Lords</string>
 
     <!--nWod Mummy -->
+    <string name="decree">Decree</string>
+    <string name="guild">Guild</string>
     <string name="bull_headed">Bull-Headed</string>
     <string name="falcon_headed">Falcon-Headed</string>
     <string name="jackal_headed">Jackal-Headed</string>
@@ -194,6 +208,8 @@
     <string name="tef_aabhi">Tef-Aabhi</string>
 
     <!--nWod Demon -->
+    <string name="incarnation">Incarnation</string>
+    <string name="agenda">Agenda</string>
     <string name="inquisitor">Inquisitor</string>
     <string name="integrator">Integrator</string>
     <string name="saboteur">Saboteur</string>
