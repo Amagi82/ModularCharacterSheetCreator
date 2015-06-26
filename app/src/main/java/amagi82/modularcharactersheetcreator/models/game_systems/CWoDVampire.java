@@ -6,9 +6,9 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class CWoDVampire extends GameSystem{
+public class CWoDVampire extends GameSystem {
 
-    public enum CWoDVampireSect{
+    public enum CWoDVampireSect {
         CAMARILLA(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla),
         ANARCH(R.string.anarchs, R.string.url_cwod_vampire_sect_anarchs),
         SABBAT(R.string.sabbat, R.string.url_cwod_vampire_sect_sabbat),
@@ -30,7 +30,8 @@ public class CWoDVampire extends GameSystem{
             return url;
         }
     }
-    public enum CWoDVampireClan{
+
+    public enum CWoDVampireClan {
         AHRIMANES(R.string.ahrimanes, R.string.url_cwod_vampire_clan_ahrimanes, true),
         ANDA(R.string.anda, R.string.url_cwod_vampire_clan_anda, true),
         BAALI(R.string.baali, R.string.url_cwod_vampire_clan_baali, true),
@@ -81,7 +82,7 @@ public class CWoDVampire extends GameSystem{
         private boolean bloodline;
         private Member camarilla, anarch, sabbat, independent;
 
-        CWoDVampireClan(int name, int url, boolean bloodline){
+        CWoDVampireClan(int name, int url, boolean bloodline) {
             this(name, url, bloodline, Member.BLOODLINE, Member.BLOODLINE, Member.BLOODLINE, Member.BLOODLINE);
         }
 
@@ -127,13 +128,14 @@ public class CWoDVampire extends GameSystem{
             return independent;
         }
 
-        public Member getSectMembership(CWoDVampireSect sect){
-            return sect == CWoDVampireSect.CAMARILLA? camarilla : sect == CWoDVampireSect.ANARCH? anarch :
-                    sect == CWoDVampireSect.SABBAT? sabbat : independent;
+        public Member getSectMembership(CWoDVampireSect sect) {
+            return sect == CWoDVampireSect.CAMARILLA ? camarilla : sect == CWoDVampireSect.ANARCH ? anarch :
+                    sect == CWoDVampireSect.SABBAT ? sabbat : independent;
         }
     }
-    private enum Member{
-        YES,OPTIONAL,NO,BLOODLINE;
+
+    private enum Member {
+        YES, OPTIONAL, NO, BLOODLINE;
     }
 
     private CWoDVampireSect sect;
@@ -161,32 +163,32 @@ public class CWoDVampire extends GameSystem{
         this.clan = clan;
     }
 
-    public List<CWoDVampireSect> getSects(){
+    public List<CWoDVampireSect> getListSect() {
         List<CWoDVampireSect> list = new ArrayList<>();
         Collections.addAll(list, CWoDVampireSect.values());
         return list;
     }
 
-    public List<CWoDVampireClan> getClansDefault(CWoDVampireSect sect){
+    public List<CWoDVampireClan> getListClanDefault(CWoDVampireSect sect) {
         List<CWoDVampireClan> list = new ArrayList<>();
-        for(CWoDVampireClan clan : CWoDVampireClan.values()){
-            if(clan.getSectMembership(sect) == Member.YES) list.add(clan);
+        for (CWoDVampireClan clan : CWoDVampireClan.values()) {
+            if (clan.getSectMembership(sect) == Member.YES) list.add(clan);
         }
         return list;
     }
 
-    public List<CWoDVampireClan> getClansOptional(CWoDVampireSect sect){
-        List<CWoDVampireClan> list = new ArrayList<>(getClansDefault(sect));
-        for(CWoDVampireClan clan : CWoDVampireClan.values()){
-            if(clan.getSectMembership(sect) == Member.OPTIONAL) list.add(clan);
+    public List<CWoDVampireClan> getListClanOptional(CWoDVampireSect sect) {
+        List<CWoDVampireClan> list = new ArrayList<>(getListClanDefault(sect));
+        for (CWoDVampireClan clan : CWoDVampireClan.values()) {
+            if (clan.getSectMembership(sect) == Member.OPTIONAL) list.add(clan);
         }
         return list;
     }
 
-    public List<CWoDVampireClan> getClansBloodlines(CWoDVampireSect sect){
-        List<CWoDVampireClan> list = new ArrayList<>(getClansDefault(sect));
-        for(CWoDVampireClan clan : CWoDVampireClan.values()){
-            if(clan.getSectMembership(sect) == Member.BLOODLINE) list.add(clan);
+    public List<CWoDVampireClan> getListClanBloodlines(CWoDVampireSect sect) {
+        List<CWoDVampireClan> list = new ArrayList<>(getListClanDefault(sect));
+        for (CWoDVampireClan clan : CWoDVampireClan.values()) {
+            if (clan.getSectMembership(sect) == Member.BLOODLINE) list.add(clan);
         }
         return list;
     }

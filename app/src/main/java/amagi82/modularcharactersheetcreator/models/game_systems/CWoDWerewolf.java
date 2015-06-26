@@ -6,9 +6,9 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class CWoDWerewolf extends GameSystem{
+public class CWoDWerewolf extends GameSystem {
 
-    public enum CWoDWerewolfFera{
+    public enum CWoDWerewolfFera {
         GAROU(R.string.garou, R.string.url_cwod_werewolf_fera_garou),
         AJABA(R.string.ajaba, R.string.url_cwod_werewolf_fera_ajaba),
         ANANASI(R.string.ananasi, R.string.url_cwod_werewolf_fera_ananasi),
@@ -42,7 +42,7 @@ public class CWoDWerewolf extends GameSystem{
         }
     }
 
-    public enum CWoDWerewolfTribe{
+    public enum CWoDWerewolfTribe {
         BLACKFURIES(R.string.black_furies, R.string.url_cwod_werewolf_tribe_black_furies),
         BONEGNAWERS(R.string.bone_gnawers, R.string.url_cwod_werewolf_tribe_bone_gnawers),
         BUNYIP(R.string.bunyip, R.string.url_cwod_werewolf_tribe_bunyip),
@@ -77,7 +77,7 @@ public class CWoDWerewolf extends GameSystem{
         }
     }
 
-    public enum CWoDWerewolfAuspice{
+    public enum CWoDWerewolfAuspice {
         AHROUN(R.string.ahroun, R.string.url_cwod_werewolf_auspice_ahroun),
         GALLIARD(R.string.galliard, R.string.url_cwod_werewolf_auspice_galliard),
         PHILODOX(R.string.philodox, R.string.url_cwod_werewolf_auspice_philodox),
@@ -136,19 +136,19 @@ public class CWoDWerewolf extends GameSystem{
         this.auspice = auspice;
     }
 
-    public List<CWoDWerewolfFera> getFeras(){
+    public List<CWoDWerewolfFera> getListFera() {
         List<CWoDWerewolfFera> list = new ArrayList<>();
         Collections.addAll(list, CWoDWerewolfFera.values());
         return list;
     }
 
-    public List<CWoDWerewolfTribe> getTribes(){
+    public List<CWoDWerewolfTribe> getListTribe() {
         List<CWoDWerewolfTribe> list = new ArrayList<>();
         Collections.addAll(list, CWoDWerewolfTribe.values());
         return list;
     }
 
-    public List<CWoDWerewolfAuspice> getAuspices(){
+    public List<CWoDWerewolfAuspice> getListAuspice() {
         List<CWoDWerewolfAuspice> list = new ArrayList<>();
         Collections.addAll(list, CWoDWerewolfAuspice.values());
         return list;
