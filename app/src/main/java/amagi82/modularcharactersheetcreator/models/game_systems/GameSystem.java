@@ -73,6 +73,14 @@ abstract class GameSystem {
         public int getWodDrawable() {
             return wodDrawable;
         }
+
+        public int getCategoryCount(){
+            return categoryTitles.length;
+        }
+
+        public int[] getCategoryTitles(){
+            return categoryTitles;
+        }
     }
     private System system;
     private Enum left;
