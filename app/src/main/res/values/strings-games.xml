@@ -247,5 +247,42 @@
     <string name="orgotek">Orgotek</string>
     <string name="the_upeo_wa_macho">The Upeo wa Macho</string>
 
+    <!--Exalted -->
+    <string name="solar_exalted">Solar Exalted</string>
+    <string name="abyssal_exalted">Abyssal Exalted</string>
+    <string name="lunar_exalted">Lunar Exalted</string>
+    <string name="sidereal_exalted">Sidereal Exalted</string>
+    <string name="terrestrial_exalted">Terrestrial Exalted</string>
+    <string name="alchemical_exalted">Alchemical Exalted</string>
+    <string name="infernal_exalted">Infernal Exalted</string>
+    <string name="fair_folk">Fair Folk</string>
+    <string name="dawn">Dawn</string>
+    <string name="zenith">Zenith</string>
+    <string name="twilight">Twilight</string>
+    <string name="night">Night</string>
+    <string name="eclipse">Eclipse</string>
+    <string name="dusk">Dusk</string>
+    <string name="midnight">Midnight</string>
+    <string name="daybreak">Daybreak</string>
+    <string name="day">Day</string>
+    <string name="moonshadow">Moonshadow</string>
+    <string name="air">Air</string>
+    <string name="earth">Earth</string>
+    <string name="fire">Fire</string>
+    <string name="water">Water</string>
+    <string name="wood">Wood</string>
+    <string name="full_moon">Full Moon</string>
+    <string name="changing_moon">Changing Moon</string>
+    <string name="no_moon">No Moon</string>
+    <string name="chosen_of_journeys">Chosen of Journeys</string>
+    <string name="chosen_of_serenity">Chosen of Serenity</string>
+    <string name="chosen_of_battles">Chosen of Battles</string>
+    <string name="chosen_of_secrets">Chosen of Secrets</string>
+    <string name="chosen_of_endings">Chosen of Endings</string>
+    <string name="orichalcum">Orichalcum</string>
+    <string name="moonsilver">Moonsilver</string>
+    <string name="starmetal">Starmetal</string>
+    <string name="jade">Jade</string>
+    <string name="soulsteel">Soulsteel</string>
 
 </resources>
