@@ -10,6 +10,7 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -20,14 +21,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.colintmiller.simplenosql.NoSQL;
+import com.colintmiller.simplenosql.NoSQLEntity;
+import com.colintmiller.simplenosql.RetrievalCallback;
 import com.edmodo.cropper.CropImageView;
 
 import java.io.File;
@@ -35,10 +42,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
-import amagi82.modularcharactersheetcreator.adapters.CharacterRVAdapter;
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.adapters.CharacterRVAdapter;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.widgets.ControllableAppBarLayout;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -53,8 +62,8 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     private CropImageView cropper;
 //    @InjectView(R.id.color_mask) View colorMask;
     @InjectView(R.id.toolbar) Toolbar toolbar;
-    @InjectView(R.id.appbar) AppBarLayout appbar;
-    //@InjectView(R.id.etName) EditText etName;
+    @InjectView(R.id.appbar) ControllableAppBarLayout appbar;
+    @InjectView(R.id.etName) EditText etName;
     @InjectView(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
     @InjectView(R.id.imagePortrait) ImageView imagePortrait;
     @InjectView(R.id.fab) FloatingActionButton fab;
@@ -66,46 +75,69 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         ButterKnife.inject(this, rootView);
         setHasOptionsMenu(true);
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         if(gameCharacter == null) gameCharacter = new GameCharacter();
+
+        if(getArguments() != null && getArguments().getString("entityId") != null){
+            isEditMode = true;
+            etName.setVisibility(View.INVISIBLE);
+
+            NoSQL.with(getActivity()).using(GameCharacter.class).bucketId("bucket").entityId(getArguments().getString("entityId")).
+            retrieve(new RetrievalCallback<GameCharacter>() {
+                @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
+                    if (entities.size() > 0) gameCharacter = entities.get(0).getData();
+                    if (gameCharacter.getPortraitUri() != null) imagePortrait.setImageURI(gameCharacter.getPortraitUri());
+                    recyclerView.setAdapter(new CharacterRVAdapter(getActivity(), gameCharacter));
+                }
+            });
+        }else{
+            recyclerView.setAdapter(new CharacterRVAdapter(getActivity(), gameCharacter));
+        }
+        appbar.setOnClickListener(CharacterFragment.this);
+
+        etName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == 6){
+                    gameCharacter.setName(etName.getText().toString());
+                    new Handler().postDelayed(new Runnable() {
+                        @Override public void run() {
+                            refreshAppBar(false);
+                        }
+                    }, 50);
+
+                }
+                return false;
+            }
+        });
+
+        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+                if(i!=0 && etName.getVisibility() == View.VISIBLE){
+                    gameCharacter.setName(etName.getText().toString());
+                    refreshAppBar(false);
+                }
+            }
+        });
 
         //colorMask.animate().alpha(0).setDuration(300);
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationOnClickListener(this);
-        collapsingToolbar.setTitle(gameCharacter.getName().length() < 1? getString(R.string.new_character) : gameCharacter.getName());
         toolbar.inflateMenu(isEditMode ? R.menu.menu_edit_character : R.menu.menu_new_character);
         toolbar.setOnMenuItemClickListener(this);
 
-        if(gameCharacter.getPortraitUri() != null) imagePortrait.setImageURI(gameCharacter.getPortraitUri());
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        CharacterRVAdapter recyclerViewAdapter = new CharacterRVAdapter(getActivity(), gameCharacter);
-        recyclerView.setAdapter(recyclerViewAdapter);
-
-        //Check if we're editing a character or creating a new one
-//        Bundle args = getArguments();
-//        if(args != null) {
-//            isEditMode = args.getBoolean("edit mode");
-//            characterPosition = args.getInt("character");
-//
-//            if(isEditMode && gameCharacter == null){
-//                gameCharacter = MainApplication.getGameCharacters().get(characterPosition);
-//                etName.setText(gameCharacter.getName());
-//                spinGameSystem.setSelection(getSpinnerIndex(spinGameSystem, gameCharacter.getGameSystem()));
-//                spinRace.setSelection(getSpinnerIndex(spinRace, gameCharacter.getRace()));
-//                spinClass.setSelection(getSpinnerIndex(spinClass, gameCharacter.getArchetype()));
-//                if(gameCharacter.getPortraitUri() != null){
-//                    int thumbSize = (int) getResources().getDimension(R.dimen.portrait_thumbnail_size);
-//                    Bitmap thumbImage = ThumbnailUtils.extractThumbnail(
-//                            BitmapFactory.decodeFile(gameCharacter.getPortraitUri().getPath()), thumbSize, thumbSize);
-//                    imagePortrait.setImageBitmap(thumbImage);
-//                }
-//
-//                //spinTheme.setSelection(getSpinnerIndex(spinTheme, gameCharacter.getTheme()));
-//                //spinTemplate.setSelection(getSpinnerIndex(spinTemplate, gameCharacter.getTemplate()));
-//            }
-//        }
-
         return rootView;
+    }
+
+    private void refreshAppBar(boolean isEditable) {
+        Log.i(null, "refreshing app bar with isEditable "+isEditable);
+        etName.setVisibility(isEditable? View.VISIBLE : View.INVISIBLE);
+
+        if(gameCharacter.getName().length() > 1) etName.setText(gameCharacter.getName());
+        else etName.setHint(getString(R.string.name));
+
+        collapsingToolbar.setTitle(isEditable? "" : gameCharacter.getName());
+        appbar.collapseToolbar(true);
+        appbar.expandToolbar(true);
     }
 
     @OnClick(R.id.fab)
@@ -178,7 +210,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         mediaScanIntent.setData(contentUri);
         getActivity().sendBroadcast(mediaScanIntent);
     }
-
 
     //Called when an image is selected from the camera or the gallery, and lets you crop it into an icon
     @Override
@@ -265,9 +296,13 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                 }).show();
     }
 
-    //Up navigation
+    //Up navigation and appbar refresh
     @Override
     public void onClick(View v) {
+        if(v.getId() == R.id.appbar){
+            Log.i(null, "appbar clicked");
+            refreshAppBar(true);
+        }
     }
 
     @Override
@@ -280,7 +315,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             case R.id.action_save_template:
                 return true;
             case R.id.action_discard:
-                gameCharacter = null;
                 getFragmentManager().popBackStack();
                 return true;
         }

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="url_cwod_vampire_base">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/</string>
-    <string name="url_cwod_werewolf_base">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/</string>
-    <string name="url_cwod_wraith_base">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/</string>
-    <string name="url_cwod_mage_base">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/</string>
-    <string name="url_cwod_vampire_avatar_base">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1991~Vampire%20The%20Masquerade/</string>
-    <string name="url_cwod_werewolf_avatar_base">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1992~Werewolf%20The%20Apocalypse/</string>
-    <string name="url_nwod_vampire_base">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/</string>
-    <string name="url_nwod_werewolf_base">http://theonyxpath.com/avatar/World%20of%20Darkness/2005-0~Werewolf%20The%20Forsaken/</string>
-    <string name="url_nwod_mummy_base">http://theonyxpath.com/avatar/World%20of%20Darkness/2012~Mummy%20The%20Curse/</string>
-    <string name="url_nwod_demon_base">http://theonyxpath.com/avatar/World%20of%20Darkness/2013~Demon%20The%20Descent/</string>
+    <string name="url_cwod_vampire_base">http://theonyxpath.com/avatar/20th Anniversary/2011~Vampire The Masquerade/</string>
+    <string name="url_cwod_werewolf_base">http://theonyxpath.com/avatar/20th Anniversary/2012~Werewolf The Apocalypse/</string>
+    <string name="url_cwod_wraith_base">http://theonyxpath.com/avatar/20th Anniversary/2014~Wraith The Oblivion/</string>
+    <string name="url_cwod_mage_base">http://theonyxpath.com/avatar/Classic World of Darkness/1993~Mage The Ascension/</string>
+    <string name="url_cwod_vampire_avatar_base">http://theonyxpath.com/avatar/Classic World of Darkness/1991~Vampire The Masquerade/</string>
+    <string name="url_cwod_werewolf_avatar_base">http://theonyxpath.com/avatar/Classic World of Darkness/1992~Werewolf The Apocalypse/</string>
+    <string name="url_nwod_vampire_base">http://theonyxpath.com/avatar/World of Darkness/2004~Vampire The Requiem/</string>
+    <string name="url_nwod_werewolf_base">http://theonyxpath.com/avatar/World of Darkness/2005-0~Werewolf The Forsaken/</string>
+    <string name="url_nwod_mummy_base">http://theonyxpath.com/avatar/World of Darkness/2012~Mummy The Curse/</string>
+    <string name="url_nwod_demon_base">http://theonyxpath.com/avatar/World of Darkness/2013~Demon The Descent/</string>
 
     <string name="url_cwod_vampire_clan_ahrimanes">Bloodline~Ahrimanes.png</string>
     <string name="url_cwod_vampire_clan_anda">Bloodline~Anda.png</string>

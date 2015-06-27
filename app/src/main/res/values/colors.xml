@@ -22,6 +22,8 @@
 
     <color name="darkRed">#CC0000</color>
 
+    <color name="grey_700">#616161</color>
+
     <!-- Game theme colors-->
     <color name="scion">#809CB0</color>
     <color name="trinity">#D23721</color>
