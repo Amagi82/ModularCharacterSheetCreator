@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -26,6 +25,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,13 +58,14 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     private CropImageView cropper;
 //    @InjectView(R.id.color_mask) View colorMask;
     @InjectView(R.id.toolbar) Toolbar toolbar;
-    @InjectView(R.id.appbar) AppBarLayout appbar;
+    @InjectView(R.id.appbar) RelativeLayout appbar;
     @InjectView(R.id.imagePortrait) ImageView imagePortrait;
     @InjectView(R.id.etName) EditText etName;
     @InjectView(R.id.iconLeft) ImageView iconLeft;
     @InjectView(R.id.tvIconLeft) TextView tvIconLeft;
     @InjectView(R.id.iconRight) ImageView iconRight;
     @InjectView(R.id.tvIconRight) TextView tvIconRight;
+    @InjectView(R.id.tvGameSystem) TextView tvGameSystem;
     @InjectView(R.id.fab) FloatingActionButton fab;
     @InjectView(R.id.recycler_view) RecyclerView recyclerView;
 
@@ -78,6 +79,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         if(gameCharacter == null) gameCharacter = new GameCharacter();
 
         if(getArguments() != null && getArguments().getString("entityId") != null){
+            Log.i(null, "found character");
             isEditMode = true;
             etName.setVisibility(View.INVISIBLE);
 
