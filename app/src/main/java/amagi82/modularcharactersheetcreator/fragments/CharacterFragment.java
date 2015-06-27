@@ -66,6 +66,10 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @InjectView(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
     @InjectView(R.id.imagePortrait) ImageView imagePortrait;
     @InjectView(R.id.etName) EditText etName;
+    @InjectView(R.id.iconLeft) ImageView iconLeft;
+    @InjectView(R.id.tvIconLeft) TextView tvIconLeft;
+    @InjectView(R.id.iconRight) ImageView iconRight;
+    @InjectView(R.id.tvIconRight) TextView tvIconRight;
     @InjectView(R.id.fab) FloatingActionButton fab;
     @InjectView(R.id.recycler_view) RecyclerView recyclerView;
 
