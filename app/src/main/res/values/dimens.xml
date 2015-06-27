@@ -31,4 +31,6 @@
     <dimen name="divider">0.7dp</dimen>
     <dimen name="toolbar_edittext_indent">44dp</dimen>
     <dimen name="toolbar_edittext_minwidth">180dp</dimen>
+
+    <integer name="character_grid_span_count">3</integer>
 </resources>
