@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:statusBarColor="@android:color/transparent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:statusBarColor="@android:color/transparent">
 
     <amagi82.modularcharactersheetcreator.widgets.ControllableAppBarLayout
         android:id="@+id/appbar"
@@ -39,6 +39,22 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
+            <ImageView
+                android:id="@+id/iconLeft"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="start|bottom"
+                android:layout_marginBottom="25dp"
+                app:layout_collapseMode="parallax"/>
+
+            <ImageView
+                android:id="@+id/iconRight"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end|bottom"
+                android:layout_marginBottom="25dp"
+                app:layout_collapseMode="parallax"/>
+
             <EditText
                 android:id="@+id/etName"
                 style="@style/Widget.AppCompat.EditText"
@@ -46,15 +62,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="2dp"
-                android:layout_marginLeft="@dimen/toolbar_edittext_indent"
-                android:layout_marginStart="@dimen/toolbar_edittext_indent"
-                android:layout_marginRight="@dimen/default_keyline_padded_layout"
                 android:layout_marginEnd="@dimen/default_keyline_padded_layout"
-                android:singleLine="true"
+                android:layout_marginLeft="@dimen/toolbar_edittext_indent"
+                android:layout_marginRight="@dimen/default_keyline_padded_layout"
+                android:layout_marginStart="@dimen/toolbar_edittext_indent"
+                android:hint="@string/name"
                 android:imeOptions="actionDone"
                 android:inputType="textPersonName"
-                android:hint="@string/name"
                 android:minWidth="@dimen/toolbar_edittext_minwidth"
+                android:singleLine="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -74,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_camera_alt_white_24dp"
-        app:borderWidth="0dp"
+        app:borderWidth="2dp"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|right|end"/>
 

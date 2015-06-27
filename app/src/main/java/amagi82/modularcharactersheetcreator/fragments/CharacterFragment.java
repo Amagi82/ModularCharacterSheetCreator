@@ -63,9 +63,9 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 //    @InjectView(R.id.color_mask) View colorMask;
     @InjectView(R.id.toolbar) Toolbar toolbar;
     @InjectView(R.id.appbar) ControllableAppBarLayout appbar;
-    @InjectView(R.id.etName) EditText etName;
     @InjectView(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
     @InjectView(R.id.imagePortrait) ImageView imagePortrait;
+    @InjectView(R.id.etName) EditText etName;
     @InjectView(R.id.fab) FloatingActionButton fab;
     @InjectView(R.id.recycler_view) RecyclerView recyclerView;
 
@@ -128,16 +128,21 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         return rootView;
     }
 
-    private void refreshAppBar(boolean isEditable) {
+    private void refreshAppBar(final boolean isEditable) {
         Log.i(null, "refreshing app bar with isEditable "+isEditable);
-        etName.setVisibility(isEditable? View.VISIBLE : View.INVISIBLE);
 
         if(gameCharacter.getName().length() > 1) etName.setText(gameCharacter.getName());
         else etName.setHint(getString(R.string.name));
 
         collapsingToolbar.setTitle(isEditable? "" : gameCharacter.getName());
-        appbar.collapseToolbar(true);
-        appbar.expandToolbar(true);
+
+        appbar.collapseToolbar(false);
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                appbar.expandToolbar(false);
+                etName.setVisibility(isEditable? View.VISIBLE : View.INVISIBLE);
+            }
+        }, 1);
     }
 
     @OnClick(R.id.fab)
