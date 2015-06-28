@@ -35,6 +35,7 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_person_add_white_24dp"
-        app:borderWidth="0dp"/>
+        app:backgroundTint="@color/accent_dark"
+        app:borderWidth="2dp"/>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -81,7 +81,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         if(getArguments() != null && getArguments().getString("entityId") != null){
             Log.i(null, "found character");
             isEditMode = true;
-            etName.setVisibility(View.INVISIBLE);
 
             NoSQL.with(getActivity()).using(GameCharacter.class).bucketId("bucket").entityId(getArguments().getString("entityId")).
             retrieve(new RetrievalCallback<GameCharacter>() {

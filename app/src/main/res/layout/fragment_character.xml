@@ -4,15 +4,16 @@
     android:id="@+id/appbar"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/extended_appbar_height"
-    android:background="@color/primary"
+    android:layout_height="match_parent"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
         android:id="@+id/imagePortrait"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/image_portrait_height"
+        android:background="@color/primary"
         android:scaleType="centerCrop"/>
 
     <android.support.v7.widget.Toolbar
@@ -23,68 +24,70 @@
 
     <ImageView
         android:id="@+id/iconLeft"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/toolbar"
-        android:layout_marginTop="@dimen/default_small_margin"
-        android:background="@color/primary_dark"/>
+        style="@style/CircleIcon"
+        tools:src="@drawable/clan_icon"/>
 
     <TextView
         android:id="@+id/tvIconLeft"
-        style="@style/TextAppearance.AppCompat.Caption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/iconLeft"
-        android:layout_margin="@dimen/default_small_margin"
-        android:text="Left"/>
+        style="@style/CircleIconCaption"
+        tools:text="Left"/>
 
     <ImageView
         android:id="@+id/iconRight"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        style="@style/CircleIcon"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/toolbar"
-        android:layout_marginTop="@dimen/default_small_margin"
-        android:background="@color/primary_dark"/>
+        tools:src="@drawable/clan_icon"/>
 
     <TextView
         android:id="@+id/tvIconRight"
-        style="@style/TextAppearance.AppCompat.Caption"
+        style="@style/CircleIconCaption"
+        android:layout_alignParentRight="true"
+        tools:text="Right"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:layout_marginLeft="@dimen/default_keyline"
+        android:layout_marginRight="@dimen/default_keyline">
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:hint="@string/character_name"
+            android:minWidth="@dimen/toolbar_edittext_minwidth"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/iconRight"
-        android:layout_margin="@dimen/default_small_margin"
-        android:text="Right"/>
+        android:layout_below="@id/imagePortrait"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginTop="@dimen/fab_anchor_margin"
+        android:src="@drawable/ic_camera_alt_white_24dp"
+        android:tint="@color/primary_dark"
+        app:borderWidth="2dp"/>
 
     <TextView
         android:id="@+id/tvGameSystem"
         style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="@dimen/default_tab_layout_height"
+        android:layout_below="@id/imagePortrait"
         android:background="@color/primary_dark"
         android:gravity="center"
-        android:text="Game System"/>
-
-    <EditText
-        android:id="@+id/etName"
-        style="@style/Widget.AppCompat.EditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/tvGameSystem"
-        android:layout_marginBottom="2dp"
-        android:layout_marginEnd="@dimen/default_keyline_padded_layout"
-        android:layout_marginLeft="@dimen/toolbar_edittext_indent"
-        android:layout_marginRight="@dimen/default_keyline_padded_layout"
-        android:layout_marginStart="@dimen/toolbar_edittext_indent"
-        android:hint="@string/name"
-        android:imeOptions="actionDone"
-        android:inputType="textPersonName"
-        android:minWidth="@dimen/toolbar_edittext_minwidth"
-        android:singleLine="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+        android:visibility="gone"
+        tools:text="Game System"
+        tools:visiblity="visible"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -92,19 +95,6 @@
         android:layout_height="match_parent"
         android:layout_below="@id/tvGameSystem"
         android:scrollbars="vertical"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/tvGameSystem"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="-28dp"
-        android:layout_marginRight="@dimen/fab_margin"
-        android:src="@drawable/ic_camera_alt_white_24dp"
-        android:tint="@color/primary_dark"
-        app:backgroundTint="@color/accent_light"
-        app:borderWidth="2dp"/>
 
 </RelativeLayout>
 
