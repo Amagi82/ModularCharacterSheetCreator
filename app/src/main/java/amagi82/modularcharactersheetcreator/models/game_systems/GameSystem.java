@@ -2,7 +2,7 @@ package amagi82.modularcharactersheetcreator.models.game_systems;
 
 import amagi82.modularcharactersheetcreator.R;
 
-abstract class GameSystem {
+public abstract class GameSystem {
 
     /*
         - System enum includes the name and drawable for each game system, along with the base url,
@@ -89,39 +89,54 @@ abstract class GameSystem {
         }
     }
     private System system;
-    private Enum left;
-    private Enum right;
+    private SubType left;
+    private SubType right;
+    private int title;
 
     public GameSystem(System system) {
-        this(system, null, null);
+        this(system, new SubType(), new SubType(), 0);
     }
 
-    public GameSystem(System system, Enum left){
-        this(system, left, null);
+    public GameSystem(System system, int title) {
+        this(system, new SubType(), new SubType(), title);
     }
-    public GameSystem(System system, Enum left, Enum right){
+
+    public GameSystem(System system, SubType left, int title){
+        this(system, left, new SubType(), title);
+    }
+
+    public GameSystem(System system, SubType left, SubType right, int title){
         this.system = system;
         this.left = left;
         this.right = right;
+        this.title = title;
     }
 
     public System getSystem() {
         return system;
     }
 
-    public Enum getLeft() {
+    public SubType getLeft() {
         return left;
     }
 
-    public void setLeft(Enum left) {
+    public void setLeft(SubType left) {
         this.left = left;
     }
 
-    public Enum getRight() {
+    public SubType getRight() {
         return right;
     }
 
-    public void setRight(Enum right) {
+    public void setRight(SubType right) {
         this.right = right;
+    }
+
+    public int getTitle() {
+        return title;
+    }
+
+    public void setTitle(int title) {
+        this.title = title;
     }
 }

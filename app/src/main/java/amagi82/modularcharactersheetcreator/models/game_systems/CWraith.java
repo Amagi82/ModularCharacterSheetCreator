@@ -6,9 +6,9 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class CWoDWraith extends GameSystem {
+public class CWraith extends GameSystem {
 
-    public enum CWoDWraithArcanos {
+    public enum Arcanos {
         ARGOS(R.string.argos, R.string.url_cwod_wraith_arcanos_argos),
         CASTIGATE(R.string.castigate, R.string.url_cwod_wraith_arcanos_castigate),
         EMBODY(R.string.embody, R.string.url_cwod_wraith_arcanos_embody),
@@ -29,7 +29,7 @@ public class CWoDWraith extends GameSystem {
         private int name;
         private int url;
 
-        CWoDWraithArcanos(int name, int url) {
+        Arcanos(int name, int url) {
             this.name = name;
             this.url = url;
         }
@@ -43,24 +43,25 @@ public class CWoDWraith extends GameSystem {
         }
     }
 
-    private CWoDWraithArcanos arcanos;
+    private Arcanos arcanos;
 
-    public CWoDWraith() {
+    public CWraith() {
         super(System.CWODWRAITH);
     }
 
-    public CWoDWraithArcanos getArcanos() {
+    public Arcanos getArcanos() {
         return arcanos;
     }
 
-    public void setArcanos(CWoDWraithArcanos arcanos) {
-        setLeft(arcanos);
+    public void setArcanos(Arcanos arcanos) {
+        setLeft(new SubType(arcanos.getName(), arcanos.getUrl()));
+        setTitle(arcanos.getName());
         this.arcanos = arcanos;
     }
 
-    public List<CWoDWraithArcanos> getListArcanos() {
-        List<CWoDWraithArcanos> list = new ArrayList<>();
-        Collections.addAll(list, CWoDWraithArcanos.values());
+    public List<Arcanos> getListArcanos() {
+        List<Arcanos> list = new ArrayList<>();
+        Collections.addAll(list, Arcanos.values());
         return list;
     }
 }

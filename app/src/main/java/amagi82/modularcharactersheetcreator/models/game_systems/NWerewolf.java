@@ -6,9 +6,9 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class NWoDWerewolf extends GameSystem {
+public class NWerewolf extends GameSystem {
 
-    public enum NWoDWerewolfTribe {
+    public enum Tribe {
         BLOODTALONS(R.string.blood_talons, R.string.url_nwod_werewolf_tribe_blood_talons),
         BONESHADOWS(R.string.bone_shadows, R.string.url_nwod_werewolf_tribe_bone_shadows),
         GHOSTWOLVES(R.string.ghost_wolves, R.string.url_nwod_werewolf_tribe_ghost_wolves),
@@ -19,7 +19,7 @@ public class NWoDWerewolf extends GameSystem {
         private int name;
         private int url;
 
-        NWoDWerewolfTribe(int name, int url) {
+        Tribe(int name, int url) {
             this.name = name;
             this.url = url;
         }
@@ -33,7 +33,7 @@ public class NWoDWerewolf extends GameSystem {
         }
     }
 
-    public enum NWoDWerewolfAuspice {
+    public enum Auspice {
         CAHALITH(R.string.cahalith, R.string.url_nwod_werewolf_auspice_cahalith),
         ELODOTH(R.string.elodoth, R.string.url_nwod_werewolf_auspice_elodoth),
         IRRAKA(R.string.irraka, R.string.url_nwod_werewolf_auspice_irraka),
@@ -43,7 +43,7 @@ public class NWoDWerewolf extends GameSystem {
         private int name;
         private int url;
 
-        NWoDWerewolfAuspice(int name, int url) {
+        Auspice(int name, int url) {
             this.name = name;
             this.url = url;
         }
@@ -57,40 +57,41 @@ public class NWoDWerewolf extends GameSystem {
         }
     }
 
-    private NWoDWerewolfTribe tribe;
-    private NWoDWerewolfAuspice auspice;
+    private Tribe tribe;
+    private Auspice auspice;
 
-    public NWoDWerewolf() {
+    public NWerewolf() {
         super(System.NWODWEREWOLF);
     }
 
-    public NWoDWerewolfTribe getTribe() {
+    public Tribe getTribe() {
         return tribe;
     }
 
-    public void setTribe(NWoDWerewolfTribe tribe) {
-        setLeft(tribe);
+    public void setTribe(Tribe tribe) {
+        setLeft(new SubType(tribe.getName(), tribe.getUrl()));
+        setTitle(tribe.getName());
         this.tribe = tribe;
     }
 
-    public NWoDWerewolfAuspice getAuspice() {
+    public Auspice getAuspice() {
         return auspice;
     }
 
-    public void setAuspice(NWoDWerewolfAuspice auspice) {
-        setRight(auspice);
+    public void setAuspice(Auspice auspice) {
+        setRight(new SubType(auspice.getName(), auspice.getUrl()));
         this.auspice = auspice;
     }
 
-    public List<NWoDWerewolfTribe> getListTribe() {
-        List<NWoDWerewolfTribe> list = new ArrayList<>();
-        Collections.addAll(list, NWoDWerewolfTribe.values());
+    public List<Tribe> getListTribe() {
+        List<Tribe> list = new ArrayList<>();
+        Collections.addAll(list, Tribe.values());
         return list;
     }
 
-    public List<NWoDWerewolfAuspice> getListAuspice() {
-        List<NWoDWerewolfAuspice> list = new ArrayList<>();
-        Collections.addAll(list, NWoDWerewolfAuspice.values());
+    public List<Auspice> getListAuspice() {
+        List<Auspice> list = new ArrayList<>();
+        Collections.addAll(list, Auspice.values());
         return list;
     }
 }

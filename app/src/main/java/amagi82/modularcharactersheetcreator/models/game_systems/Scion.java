@@ -8,14 +8,14 @@ import amagi82.modularcharactersheetcreator.R;
 
 public class Scion extends GameSystem {
 
-    public enum ScionVolume {
+    public enum Volume {
         HERO(R.string.hero),
         DEMIGOD(R.string.demigod),
         GOD(R.string.god);
 
         private int name;
 
-        ScionVolume(int name) {
+        Volume(int name) {
             this.name = name;
         }
 
@@ -24,7 +24,7 @@ public class Scion extends GameSystem {
         }
     }
 
-    public enum ScionPantheon {
+    public enum Pantheon {
         PESEDJET(R.string.pesedjet),
         DODEKATHEON(R.string.dodekatheon),
         AESIR(R.string.aesir),
@@ -38,7 +38,7 @@ public class Scion extends GameSystem {
 
         private int name;
 
-        ScionPantheon(int name) {
+        Pantheon(int name) {
             this.name = name;
         }
 
@@ -47,40 +47,41 @@ public class Scion extends GameSystem {
         }
     }
 
-    private ScionVolume volume;
-    private ScionPantheon pantheon;
+    private Volume volume;
+    private Pantheon pantheon;
 
     public Scion() {
         super(System.SCION);
     }
 
-    public ScionVolume getVolume() {
+    public Volume getVolume() {
         return volume;
     }
 
-    public void setVolume(ScionVolume volume) {
-        setLeft(volume);
+    public void setVolume(Volume volume) {
+        setLeft(new SubType(volume.getName()));
         this.volume = volume;
     }
 
-    public ScionPantheon getPantheon() {
+    public Pantheon getPantheon() {
         return pantheon;
     }
 
-    public void setPantheon(ScionPantheon pantheon) {
-        setRight(pantheon);
+    public void setPantheon(Pantheon pantheon) {
+        setRight(new SubType(pantheon.getName()));
+        setTitle(pantheon.getName());
         this.pantheon = pantheon;
     }
 
-    public List<ScionVolume> getListVolume() {
-        List<ScionVolume> list = new ArrayList<>();
-        Collections.addAll(list, ScionVolume.values());
+    public List<Volume> getListVolume() {
+        List<Volume> list = new ArrayList<>();
+        Collections.addAll(list, Volume.values());
         return list;
     }
 
-    public List<ScionPantheon> getListPantheon() {
-        List<ScionPantheon> list = new ArrayList<>();
-        Collections.addAll(list, ScionPantheon.values());
+    public List<Pantheon> getListPantheon() {
+        List<Pantheon> list = new ArrayList<>();
+        Collections.addAll(list, Pantheon.values());
         return list;
     }
 }

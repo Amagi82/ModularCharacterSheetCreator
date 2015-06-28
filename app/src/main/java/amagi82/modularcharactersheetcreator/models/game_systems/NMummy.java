@@ -6,9 +6,9 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class NWoDMummy extends GameSystem {
+public class NMummy extends GameSystem {
 
-    public enum NWoDMummyDecree {
+    public enum Decree {
         BULLHEADED(R.string.bull_headed, R.string.url_nwod_mummy_decree_bull_headed),
         FALCONHEADED(R.string.falcon_headed, R.string.url_nwod_mummy_decree_falcon_headed),
         JACKALHEADED(R.string.jackal_headed, R.string.url_nwod_mummy_decree_jackal_headed),
@@ -18,7 +18,7 @@ public class NWoDMummy extends GameSystem {
         private int name;
         private int url;
 
-        NWoDMummyDecree(int name, int url) {
+        Decree(int name, int url) {
             this.name = name;
             this.url = url;
         }
@@ -32,7 +32,7 @@ public class NWoDMummy extends GameSystem {
         }
     }
 
-    public enum NWoDMummyGuild {
+    public enum Guild {
         MAAKEP(R.string.maa_kep, R.string.url_nwod_mummy_guild_maa_kep),
         MESENNEBU(R.string.mesen_nebu, R.string.url_nwod_mummy_guild_mesen_nebu),
         SESHAHEBSU(R.string.sesha_hebsu, R.string.url_nwod_mummy_guild_sesha_hebsu),
@@ -42,7 +42,7 @@ public class NWoDMummy extends GameSystem {
         private int name;
         private int url;
 
-        NWoDMummyGuild(int name, int url) {
+        Guild(int name, int url) {
             this.name = name;
             this.url = url;
         }
@@ -56,40 +56,41 @@ public class NWoDMummy extends GameSystem {
         }
     }
 
-    private NWoDMummyDecree decree;
-    private NWoDMummyGuild guild;
+    private Decree decree;
+    private Guild guild;
 
-    public NWoDMummy() {
+    public NMummy() {
         super(System.NWODMUMMY);
     }
 
-    public NWoDMummyDecree getDecree() {
+    public Decree getDecree() {
         return decree;
     }
 
-    public void setDecree(NWoDMummyDecree decree) {
-        setLeft(decree);
+    public void setDecree(Decree decree) {
+        setLeft(new SubType(decree.getName(), decree.getUrl()));
+        setTitle(decree.getName());
         this.decree = decree;
     }
 
-    public NWoDMummyGuild getGuild() {
+    public Guild getGuild() {
         return guild;
     }
 
-    public void setGuild(NWoDMummyGuild guild) {
-        setRight(guild);
+    public void setGuild(Guild guild) {
+        setRight(new SubType(guild.getName(), guild.getUrl()));
         this.guild = guild;
     }
 
-    public List<NWoDMummyDecree> getListDecree() {
-        List<NWoDMummyDecree> list = new ArrayList<>();
-        Collections.addAll(list, NWoDMummyDecree.values());
+    public List<Decree> getListDecree() {
+        List<Decree> list = new ArrayList<>();
+        Collections.addAll(list, Decree.values());
         return list;
     }
 
-    public List<NWoDMummyGuild> getListGuild() {
-        List<NWoDMummyGuild> list = new ArrayList<>();
-        Collections.addAll(list, NWoDMummyGuild.values());
+    public List<Guild> getListGuild() {
+        List<Guild> list = new ArrayList<>();
+        Collections.addAll(list, Guild.values());
         return list;
     }
 }

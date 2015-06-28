@@ -139,7 +139,7 @@ public class Deprecated_CharacterFragment extends Fragment implements View.OnCli
     @Override
     public void onDestroyView() {
         if (!deletingCharacter && isEditMode) {
-            saveCharacter();
+            //saveCharacter();
         }
         super.onDestroyView();
     }
@@ -173,13 +173,13 @@ public class Deprecated_CharacterFragment extends Fragment implements View.OnCli
         return super.onOptionsItemSelected(item);
     }
 
-    private void saveCharacter() {
-        gameCharacter.setName(etName.getText().toString());
-        gameCharacter.setGameSystem(etGameSystem.getText().toString());
-        gameCharacter.setRace(etRace.getText().toString());
-        gameCharacter.setArchetype(etClass.getText().toString());
-        gameCharacter.setIcon(croppedBitmap);
-    }
+//    private void saveCharacter() {
+//        gameCharacter.setName(etName.getText().toString());
+//        gameCharacter.setGameSystem(etGameSystem.getText().toString());
+//        gameCharacter.setRace(etRace.getText().toString());
+//        gameCharacter.setArchetype(etClass.getText().toString());
+//        gameCharacter.setIcon(croppedBitmap);
+//    }
 
     private Bitmap createDefaultIcon(){
         int textColor = getResources().getColor(R.color.white);

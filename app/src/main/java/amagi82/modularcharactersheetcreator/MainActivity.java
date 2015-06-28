@@ -5,12 +5,24 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
+import com.colintmiller.simplenosql.NoSQL;
+import com.colintmiller.simplenosql.NoSQLEntity;
+import com.colintmiller.simplenosql.RetrievalCallback;
 import com.squareup.otto.Subscribe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import amagi82.modularcharactersheetcreator.events.CreateCharacterEvent;
 import amagi82.modularcharactersheetcreator.fragments.CharacterFragment;
 import amagi82.modularcharactersheetcreator.fragments.MainFragment;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.game_systems.CMage;
+import amagi82.modularcharactersheetcreator.models.game_systems.CVampire;
+import amagi82.modularcharactersheetcreator.models.game_systems.CWerewolf;
+import amagi82.modularcharactersheetcreator.models.modules.TextModule;
 import amagi82.modularcharactersheetcreator.utils.Otto;
 
 
@@ -25,42 +37,71 @@ public class MainActivity extends AppCompatActivity {
 
         //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
 
-//        List<GameCharacter> characters = new ArrayList<>();
-//        if (characters.size() == 0) {
-//            Log.i(null, "Creating data");
-//            List<GameCharacter> sampleData = new ArrayList<>();
-//            sampleData.add(new GameCharacter("Thomas Anstis", "Vampire", "", "Gangrel"));
-//            sampleData.add(new GameCharacter("Tom Lytton", "Vampire", "", "Brujah"));
-//            sampleData.add(new GameCharacter("Georgia Johnson", "Vampire", "", "Tremere"));
-//            sampleData.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "", "Ventrue"));
-//            sampleData.add(new GameCharacter("Dr. Von Natsi", "Mage", "", "Etherite"));
-//            sampleData.add(new GameCharacter("Revin", "Pathfinder", "Tiefling", "Paladin of Glasya"));
-//            sampleData.add(new GameCharacter("Sven", "Shadowrun", "Human", "Shaman of Loki"));
-//            sampleData.add(new GameCharacter("Fir'keelie Selenya'Tala", "Earthdawn", "Windling", "Windmaster"));
-//            sampleData.add(new GameCharacter("Scarlett Lee", "Dungeon World", "Human", "Fighter"));
-//            sampleData.add(new GameCharacter("Raven", "Shadowrun", "Human", "Shaman"));
-//            characters = sampleData;
-//
-//            TextModule module1 = new TextModule();
-//            module1.setText("Test text 1");
-//            TextModule module2 = new TextModule();
-//            module2.setText("This is another module");
-//
-//            for (GameCharacter character : characters) {
-//                character.getModuleList().add(module1);
-//                character.getModuleList().add(module2);
-//            }
-//        }
-//
-//        for (GameCharacter character : characters) {
-//            NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>("bucket", character.getEntityId());
-//            entity.setData(character);
-//            NoSQL.with(this).using(GameCharacter.class).save(entity);
-//        }
+        NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").retrieve(new RetrievalCallback<GameCharacter>() {
+            @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
+                if (entities.size() == 0) {
+                    generateSampleCharacters();
+                }
+            }
+        });
 
         if (fm.getBackStackEntryCount() == 0) {
-            Fragment fragment = new MainFragment();
-            fm.beginTransaction().add(R.id.container, fragment).commit();
+            fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
+        }
+    }
+
+    private void generateSampleCharacters() {
+        List<GameCharacter> characters = new ArrayList<>();
+        if (characters.size() == 0) {
+            Log.i(null, "Creating data");
+            List<GameCharacter> sampleData = new ArrayList<>();
+
+            CVampire vampire1 = new CVampire();
+            vampire1.setSect(CVampire.Sect.CAMARILLA);
+            vampire1.setClan(CVampire.Clan.GANGREL);
+            sampleData.add(new GameCharacter("Thomas Anstis", vampire1));
+
+            CVampire vampire2 = new CVampire();
+            vampire2.setSect(CVampire.Sect.ANARCH);
+            vampire2.setClan(CVampire.Clan.BRUJAH);
+            sampleData.add(new GameCharacter("Tom Lytton", vampire2));
+
+            CVampire vampire3 = new CVampire();
+            vampire3.setSect(CVampire.Sect.CAMARILLA);
+            vampire3.setClan(CVampire.Clan.TREMERE);
+            sampleData.add(new GameCharacter("Georgia Johnson", vampire3));
+
+            CVampire vampire4 = new CVampire();
+            vampire4.setSect(CVampire.Sect.CAMARILLA);
+            vampire4.setClan(CVampire.Clan.VENTRUE);
+            sampleData.add(new GameCharacter("Augustus von Rabenholtz", vampire4));
+
+            CMage mage1 = new CMage();
+            mage1.setFaction(CMage.Faction.SCIONSOFETHER);
+            sampleData.add(new GameCharacter("Dr. Von Natsi", mage1));
+
+            CWerewolf werewolf1 = new CWerewolf();
+            werewolf1.setTribe(CWerewolf.Tribe.GLASSWALKERS);
+            werewolf1.setAuspice(CWerewolf.Auspice.AHROUN);
+            sampleData.add(new GameCharacter("Stormwalker", werewolf1));
+
+            characters = sampleData;
+
+            TextModule module1 = new TextModule();
+            module1.setText("Test text 1");
+            TextModule module2 = new TextModule();
+            module2.setText("This is another module");
+
+            for (GameCharacter character : characters) {
+                character.getModuleList().add(module1);
+                character.getModuleList().add(module2);
+            }
+        }
+
+        for (GameCharacter character : characters) {
+            NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>("bucket", character.getEntityId());
+            entity.setData(character);
+            NoSQL.with(this).using(GameCharacter.class).save(entity);
         }
     }
 
@@ -72,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
     @Override protected void onStop() {
         super.onStop();
         Otto.BUS.getBus().unregister(this);
-        //SavedData.CHARACTERS.saveGameCharacters("Characters");
     }
 
     @Subscribe

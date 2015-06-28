@@ -39,7 +39,7 @@ public class Exalted extends GameSystem {
         }
     }
 
-    public enum ExaltedCaste {
+    public enum Caste {
         DAWN(R.string.dawn,ExaltedType.SOLAR),
         ZENITH(R.string.zenith,ExaltedType.SOLAR),
         TWILIGHT(R.string.twilight,ExaltedType.SOLAR),
@@ -72,7 +72,7 @@ public class Exalted extends GameSystem {
         private int name;
         ExaltedType parent;
 
-        ExaltedCaste(int name, ExaltedType parent) {
+        Caste(int name, ExaltedType parent) {
             this.name = name;
             this.parent = parent;
         }
@@ -87,7 +87,7 @@ public class Exalted extends GameSystem {
     }
 
     private ExaltedType type;
-    private ExaltedCaste caste;
+    private Caste caste;
 
     public Exalted() {
         super(System.EXALTED);
@@ -98,16 +98,17 @@ public class Exalted extends GameSystem {
     }
 
     public void setType(ExaltedType type) {
-        setLeft(type);
+        setLeft(new SubType(type.getName()));
+        setTitle(type.getName());
         this.type = type;
     }
 
-    public ExaltedCaste getCaste() {
+    public Caste getCaste() {
         return caste;
     }
 
-    public void setCaste(ExaltedCaste caste) {
-        setRight(caste);
+    public void setCaste(Caste caste) {
+        setRight(new SubType(caste.getName()));
         this.caste = caste;
     }
 
@@ -117,9 +118,9 @@ public class Exalted extends GameSystem {
         return list;
     }
 
-    public List<ExaltedCaste> getListCaste(ExaltedType type) {
-        List<ExaltedCaste> list = new ArrayList<>();
-        for(ExaltedCaste caste : ExaltedCaste.values()){
+    public List<Caste> getListCaste(ExaltedType type) {
+        List<Caste> list = new ArrayList<>();
+        for(Caste caste : Caste.values()){
             if(caste.getParent() == type) list.add(caste);
         }
         return list;

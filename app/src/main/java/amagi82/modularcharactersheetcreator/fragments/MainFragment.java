@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.colintmiller.simplenosql.NoSQL;
 import com.colintmiller.simplenosql.NoSQLEntity;
+import com.colintmiller.simplenosql.OperationObserver;
 import com.colintmiller.simplenosql.RetrievalCallback;
 
 import java.util.List;
@@ -80,9 +81,15 @@ public class MainFragment extends Fragment{
         NoSQL.with(getActivity()).using(GameCharacter.class).bucketId("bucket").retrieve(new RetrievalCallback<GameCharacter>() {
             @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
                 for(int i = 0; i<entities.size(); i++){
-                    Log.i(null, entities.get(i).getData().getName()+" retrieved");
+                    Log.i(null, entities.get(i).getData().getName() + " retrieved");
                     characters.add(entities.get(i).getData());
                 }
+            }
+        });
+
+        NoSQL.with(getActivity()).using(GameCharacter.class).addObserver(new OperationObserver() {
+            @Override public void hasFinished() {
+
             }
         });
         return rootView;

@@ -13,7 +13,6 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.events.CharactersLoadedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.modules.TextModule;
 import amagi82.modularcharactersheetcreator.utils.Otto;
 
 public enum Deprecated_SavedData {
@@ -26,7 +25,7 @@ public enum Deprecated_SavedData {
         this.context=context;
         if(characters.size() < 1){
             loadGameCharacters("Characters");
-            addSampleCharcters();
+            //addSampleCharcters();
         }
         Log.i(null, "characters on the bus: "+characters.size());
         Otto.BUS.getBus().post(new CharactersLoadedEvent(characters));
@@ -107,33 +106,33 @@ public enum Deprecated_SavedData {
     }
 
     //Populate list if empty - remove for production version
-    private void addSampleCharcters() {
-        if(characters.size() == 0) {
-            Log.i(null, "Data created");
-            List<GameCharacter> sampleData = new ArrayList<>();
-            sampleData.add(new GameCharacter("Thomas Anstis", "Vampire", "", "Gangrel"));
-            sampleData.add(new GameCharacter("Tom Lytton", "Vampire", "", "Brujah"));
-            sampleData.add(new GameCharacter("Georgia Johnson", "Vampire", "", "Tremere"));
-            sampleData.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "", "Ventrue"));
-            sampleData.add(new GameCharacter("Thomas Anstis", "Vampire", "", "Gangrel"));
-            sampleData.add(new GameCharacter("Tom Lytton", "Vampire", "", "Brujah"));
-            sampleData.add(new GameCharacter("Georgia Johnson", "Vampire", "", "Tremere"));
-            sampleData.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "", "Ventrue"));
-            sampleData.add(new GameCharacter("Thomas Anstis", "Vampire", "", "Gangrel"));
-            sampleData.add(new GameCharacter("Tom Lytton", "Vampire", "", "Brujah"));
-            sampleData.add(new GameCharacter("Georgia Johnson", "Vampire", "", "Tremere"));
-            sampleData.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "", "Ventrue"));
-            characters = sampleData;
-
-            TextModule module1 = new TextModule();
-            module1.setText("Test text 1");
-            TextModule module2 = new TextModule();
-            module2.setText("This is another module");
-
-            for(GameCharacter character : characters){
-                character.getModuleList().add(module1);
-                character.getModuleList().add(module2);
-            }
-        }
-    }
+//    private void addSampleCharcters() {
+//        if(characters.size() == 0) {
+//            Log.i(null, "Data created");
+//            List<GameCharacter> sampleData = new ArrayList<>();
+//            sampleData.add(new GameCharacter("Thomas Anstis", "Vampire", "", "Gangrel"));
+//            sampleData.add(new GameCharacter("Tom Lytton", "Vampire", "", "Brujah"));
+//            sampleData.add(new GameCharacter("Georgia Johnson", "Vampire", "", "Tremere"));
+//            sampleData.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "", "Ventrue"));
+//            sampleData.add(new GameCharacter("Thomas Anstis", "Vampire", "", "Gangrel"));
+//            sampleData.add(new GameCharacter("Tom Lytton", "Vampire", "", "Brujah"));
+//            sampleData.add(new GameCharacter("Georgia Johnson", "Vampire", "", "Tremere"));
+//            sampleData.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "", "Ventrue"));
+//            sampleData.add(new GameCharacter("Thomas Anstis", "Vampire", "", "Gangrel"));
+//            sampleData.add(new GameCharacter("Tom Lytton", "Vampire", "", "Brujah"));
+//            sampleData.add(new GameCharacter("Georgia Johnson", "Vampire", "", "Tremere"));
+//            sampleData.add(new GameCharacter("Augustus von Rabenholtz", "Vampire", "", "Ventrue"));
+//            characters = sampleData;
+//
+//            TextModule module1 = new TextModule();
+//            module1.setText("Test text 1");
+//            TextModule module2 = new TextModule();
+//            module2.setText("This is another module");
+//
+//            for(GameCharacter character : characters){
+//                character.getModuleList().add(module1);
+//                character.getModuleList().add(module2);
+//            }
+//        }
+//    }
 }

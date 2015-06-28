@@ -6,9 +6,9 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class CWoDWerewolf extends GameSystem {
+public class CWerewolf extends GameSystem {
 
-    public enum CWoDWerewolfFera {
+    public enum Fera {
         GAROU(R.string.garou, R.string.url_cwod_werewolf_fera_garou),
         AJABA(R.string.ajaba, R.string.url_cwod_werewolf_fera_ajaba),
         ANANASI(R.string.ananasi, R.string.url_cwod_werewolf_fera_ananasi),
@@ -28,7 +28,7 @@ public class CWoDWerewolf extends GameSystem {
         private int name;
         private int url;
 
-        CWoDWerewolfFera(int name, int url) {
+        Fera(int name, int url) {
             this.name = name;
             this.url = url;
         }
@@ -42,7 +42,7 @@ public class CWoDWerewolf extends GameSystem {
         }
     }
 
-    public enum CWoDWerewolfTribe {
+    public enum Tribe {
         BLACKFURIES(R.string.black_furies, R.string.url_cwod_werewolf_tribe_black_furies),
         BONEGNAWERS(R.string.bone_gnawers, R.string.url_cwod_werewolf_tribe_bone_gnawers),
         BUNYIP(R.string.bunyip, R.string.url_cwod_werewolf_tribe_bunyip),
@@ -63,7 +63,7 @@ public class CWoDWerewolf extends GameSystem {
         private int name;
         private int url;
 
-        CWoDWerewolfTribe(int name, int url) {
+        Tribe(int name, int url) {
             this.name = name;
             this.url = url;
         }
@@ -77,7 +77,7 @@ public class CWoDWerewolf extends GameSystem {
         }
     }
 
-    public enum CWoDWerewolfAuspice {
+    public enum Auspice {
         AHROUN(R.string.ahroun, R.string.url_cwod_werewolf_auspice_ahroun),
         GALLIARD(R.string.galliard, R.string.url_cwod_werewolf_auspice_galliard),
         PHILODOX(R.string.philodox, R.string.url_cwod_werewolf_auspice_philodox),
@@ -87,7 +87,7 @@ public class CWoDWerewolf extends GameSystem {
         private int name;
         private int url;
 
-        CWoDWerewolfAuspice(int name, int url) {
+        Auspice(int name, int url) {
             this.name = name;
             this.url = url;
         }
@@ -101,56 +101,58 @@ public class CWoDWerewolf extends GameSystem {
         }
     }
 
-    private CWoDWerewolfFera fera;
-    private CWoDWerewolfTribe tribe;
-    private CWoDWerewolfAuspice auspice;
+    private Fera fera;
+    private Tribe tribe;
+    private Auspice auspice;
 
-    public CWoDWerewolf() {
+    public CWerewolf() {
         super(System.CWODWEREWOLF);
     }
 
-    public CWoDWerewolfFera getFera() {
+    public Fera getFera() {
         return fera;
     }
 
-    public void setFera(CWoDWerewolfFera fera) {
-        setLeft(fera);
+    public void setFera(Fera fera) {
+        setLeft(new SubType(fera.getName(), fera.getUrl()));
+        setTitle(fera.getName());
         this.fera = fera;
     }
 
-    public CWoDWerewolfTribe getTribe() {
+    public Tribe getTribe() {
         return tribe;
     }
 
-    public void setTribe(CWoDWerewolfTribe tribe) {
-        setLeft(tribe);
+    public void setTribe(Tribe tribe) {
+        setLeft(new SubType(tribe.getName(), tribe.getUrl()));
+        setTitle(tribe.getName());
         this.tribe = tribe;
     }
 
-    public CWoDWerewolfAuspice getAuspice() {
+    public Auspice getAuspice() {
         return auspice;
     }
 
-    public void setAuspice(CWoDWerewolfAuspice auspice) {
-        setRight(auspice);
+    public void setAuspice(Auspice auspice) {
+        setRight(new SubType(auspice.getName(), auspice.getUrl()));
         this.auspice = auspice;
     }
 
-    public List<CWoDWerewolfFera> getListFera() {
-        List<CWoDWerewolfFera> list = new ArrayList<>();
-        Collections.addAll(list, CWoDWerewolfFera.values());
+    public List<Fera> getListFera() {
+        List<Fera> list = new ArrayList<>();
+        Collections.addAll(list, Fera.values());
         return list;
     }
 
-    public List<CWoDWerewolfTribe> getListTribe() {
-        List<CWoDWerewolfTribe> list = new ArrayList<>();
-        Collections.addAll(list, CWoDWerewolfTribe.values());
+    public List<Tribe> getListTribe() {
+        List<Tribe> list = new ArrayList<>();
+        Collections.addAll(list, Tribe.values());
         return list;
     }
 
-    public List<CWoDWerewolfAuspice> getListAuspice() {
-        List<CWoDWerewolfAuspice> list = new ArrayList<>();
-        Collections.addAll(list, CWoDWerewolfAuspice.values());
+    public List<Auspice> getListAuspice() {
+        List<Auspice> list = new ArrayList<>();
+        Collections.addAll(list, Auspice.values());
         return list;
     }
 }

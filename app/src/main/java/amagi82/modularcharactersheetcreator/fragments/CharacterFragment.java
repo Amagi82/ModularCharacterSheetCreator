@@ -1,12 +1,8 @@
 package amagi82.modularcharactersheetcreator.fragments;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -22,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -36,7 +31,6 @@ import com.edmodo.cropper.CropImageView;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -175,64 +169,64 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     }
 
     //Called when an image is selected from the camera or the gallery, and lets you crop it into an icon
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != Activity.RESULT_OK) return;
-        if (data != null) photoUri = data.getData();
-
-        try {
-            //Measure the size of the image without loading it into memory
-            InputStream input = getActivity().getContentResolver().openInputStream(photoUri);
-            BitmapFactory.Options bitmapInfo = new BitmapFactory.Options();
-            bitmapInfo.inJustDecodeBounds = true;
-            BitmapFactory.decodeStream(input, null, bitmapInfo);
-            input.close();
-            if ((bitmapInfo.outWidth == -1) || (bitmapInfo.outHeight == -1)) return;
-
-            //Get screen size, and find ratio of image size to screen size
-            WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-            Point size = new Point();
-            wm.getDefaultDisplay().getSize(size);
-            wm = null;
-            double ratio = Math.max(bitmapInfo.outHeight / (size.y), bitmapInfo.outWidth / (size.x));
-
-            //Scale image size down to match screen size
-            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-            bitmapOptions.inSampleSize = (int) ratio;
-            bitmapOptions.inPreferredConfig= Bitmap.Config.ARGB_8888;//optional
-            input = getActivity().getContentResolver().openInputStream(photoUri);
-            final Bitmap bitmap = BitmapFactory.decodeStream(input, null, bitmapOptions);
-            input.close();
-
-            LayoutInflater inflater = getActivity().getLayoutInflater();
-            final View cropImageView = inflater.inflate(R.layout.dialog_crop_image, null);
-            cropper = (CropImageView) cropImageView.findViewById(R.id.cropImageView);
-            cropper.setImageBitmap(bitmap);
-
-            new AlertDialog.Builder(getActivity())
-                    .setTitle(getResources().getString(R.string.crop_image_portrait))
-                    .setView(cropImageView)
-                    .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            imagePortrait.setImageBitmap(cropper.getCroppedImage());
-                            gameCharacter.setPortraitUri(Uri.parse(MediaStore.Images.Media.insertImage(
-                                    getActivity().getContentResolver(), cropper.getCroppedImage(), gameCharacter.getName(), gameCharacter.getGameSystem())));
-                            Log.i(null, "portrait uri == "+gameCharacter.getPortraitUri()+" and as a string: "+gameCharacter.getPortraitUri().toString());
-                            setIcon(bitmap);
-                        }
-                    })
-                    .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            setIcon(bitmap);
-                        }
-                    }).show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (resultCode != Activity.RESULT_OK) return;
+//        if (data != null) photoUri = data.getData();
+//
+//        try {
+//            //Measure the size of the image without loading it into memory
+//            InputStream input = getActivity().getContentResolver().openInputStream(photoUri);
+//            BitmapFactory.Options bitmapInfo = new BitmapFactory.Options();
+//            bitmapInfo.inJustDecodeBounds = true;
+//            BitmapFactory.decodeStream(input, null, bitmapInfo);
+//            input.close();
+//            if ((bitmapInfo.outWidth == -1) || (bitmapInfo.outHeight == -1)) return;
+//
+//            //Get screen size, and find ratio of image size to screen size
+//            WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+//            Point size = new Point();
+//            wm.getDefaultDisplay().getSize(size);
+//            wm = null;
+//            double ratio = Math.max(bitmapInfo.outHeight / (size.y), bitmapInfo.outWidth / (size.x));
+//
+//            //Scale image size down to match screen size
+//            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+//            bitmapOptions.inSampleSize = (int) ratio;
+//            bitmapOptions.inPreferredConfig= Bitmap.Config.ARGB_8888;//optional
+//            input = getActivity().getContentResolver().openInputStream(photoUri);
+//            final Bitmap bitmap = BitmapFactory.decodeStream(input, null, bitmapOptions);
+//            input.close();
+//
+//            LayoutInflater inflater = getActivity().getLayoutInflater();
+//            final View cropImageView = inflater.inflate(R.layout.dialog_crop_image, null);
+//            cropper = (CropImageView) cropImageView.findViewById(R.id.cropImageView);
+//            cropper.setImageBitmap(bitmap);
+//
+//            new AlertDialog.Builder(getActivity())
+//                    .setTitle(getResources().getString(R.string.crop_image_portrait))
+//                    .setView(cropImageView)
+//                    .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            imagePortrait.setImageBitmap(cropper.getCroppedImage());
+//                            gameCharacter.setPortraitUri(Uri.parse(MediaStore.Images.Media.insertImage(
+//                                    getActivity().getContentResolver(), cropper.getCroppedImage(), gameCharacter.getName(), gameCharacter.getGameSystem())));
+//                            Log.i(null, "portrait uri == "+gameCharacter.getPortraitUri()+" and as a string: "+gameCharacter.getPortraitUri().toString());
+//                            setIcon(bitmap);
+//                        }
+//                    })
+//                    .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            setIcon(bitmap);
+//                        }
+//                    }).show();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void setIcon(Bitmap bitmap){
         LayoutInflater inflater = getActivity().getLayoutInflater();

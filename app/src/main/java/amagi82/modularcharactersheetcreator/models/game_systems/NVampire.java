@@ -6,9 +6,9 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class NWoDVampire extends GameSystem {
+public class NVampire extends GameSystem {
 
-    public enum NWoDVampireClan {
+    public enum Clan {
         DAEVA(R.string.daeva, R.string.url_nwod_vampire_clan_daeva),
         GANGREL(R.string.gangrel, R.string.url_nwod_vampire_clan_gangrel),
         MEKHET(R.string.mekhet, R.string.url_nwod_vampire_clan_mekhet),
@@ -18,7 +18,7 @@ public class NWoDVampire extends GameSystem {
         private int name;
         private int url;
 
-        NWoDVampireClan(int name, int url) {
+        Clan(int name, int url) {
             this.name = name;
             this.url = url;
         }
@@ -32,7 +32,7 @@ public class NWoDVampire extends GameSystem {
         }
     }
 
-    public enum NWoDVampireCovenant {
+    public enum Covenant {
         CARTHIANMOVEMENT(R.string.carthian_movement, R.string.url_nwod_vampire_covenant_carthian_movement),
         CIRCLEOFTHECRONE(R.string.circle_of_the_crone, R.string.url_nwod_vampire_covenant_circle_of_the_crone),
         HOLYENGINEERS(R.string.holy_engineers, R.string.url_nwod_vampire_covenant_holy_engineers),
@@ -44,7 +44,7 @@ public class NWoDVampire extends GameSystem {
         private int name;
         private int url;
 
-        NWoDVampireCovenant(int name, int url) {
+        Covenant(int name, int url) {
             this.name = name;
             this.url = url;
         }
@@ -58,40 +58,41 @@ public class NWoDVampire extends GameSystem {
         }
     }
 
-    private NWoDVampireClan clan;
-    private NWoDVampireCovenant covenant;
+    private Clan clan;
+    private Covenant covenant;
 
-    public NWoDVampire() {
+    public NVampire() {
         super(System.NWODVAMPIRE);
     }
 
-    public NWoDVampireClan getClan() {
+    public Clan getClan() {
         return clan;
     }
 
-    public void setClan(NWoDVampireClan clan) {
-        setLeft(clan);
+    public void setClan(Clan clan) {
+        setLeft(new SubType(clan.getName(), clan.getUrl()));
+        setTitle(clan.getName());
         this.clan = clan;
     }
 
-    public NWoDVampireCovenant getCovenant() {
+    public Covenant getCovenant() {
         return covenant;
     }
 
-    public void setCovenant(NWoDVampireCovenant covenant) {
-        setRight(covenant);
+    public void setCovenant(Covenant covenant) {
+        setRight(new SubType(covenant.getName(), covenant.getUrl()));
         this.covenant = covenant;
     }
 
-    public List<NWoDVampireClan> getListClan() {
-        List<NWoDVampireClan> list = new ArrayList<>();
-        Collections.addAll(list, NWoDVampireClan.values());
+    public List<Clan> getListClan() {
+        List<Clan> list = new ArrayList<>();
+        Collections.addAll(list, Clan.values());
         return list;
     }
 
-    public List<NWoDVampireCovenant> getListCovenant() {
-        List<NWoDVampireCovenant> list = new ArrayList<>();
-        Collections.addAll(list, NWoDVampireCovenant.values());
+    public List<Covenant> getListCovenant() {
+        List<Covenant> list = new ArrayList<>();
+        Collections.addAll(list, Covenant.values());
         return list;
     }
 }

@@ -8,14 +8,14 @@ import amagi82.modularcharactersheetcreator.R;
 
 public class Trinity extends GameSystem {
 
-    public enum TrinityVolume {
+    public enum Volume {
         ADVENTURE(R.string.adventure),
         ABERRANT(R.string.aberrant),
         AEON(R.string.aeon);
 
         private int name;
 
-        TrinityVolume(int name) {
+        Volume(int name) {
             this.name = name;
         }
 
@@ -24,7 +24,7 @@ public class Trinity extends GameSystem {
         }
     }
 
-    public enum TrinityOrder {
+    public enum Order {
         AESCULAPIANORDER(R.string.aesculapian_order),
         ISRA(R.string.isra),
         LEGIONS(R.string.the_legions),
@@ -36,7 +36,7 @@ public class Trinity extends GameSystem {
 
         private int name;
 
-        TrinityOrder(int name) {
+        Order(int name) {
             this.name = name;
         }
 
@@ -45,40 +45,41 @@ public class Trinity extends GameSystem {
         }
     }
 
-    private TrinityVolume volume;
-    private TrinityOrder order;
+    private Volume volume;
+    private Order order;
 
     public Trinity() {
         super(System.TRINITY);
     }
 
-    public TrinityVolume getVolume() {
+    public Volume getVolume() {
         return volume;
     }
 
-    public void setVolume(TrinityVolume volume) {
-        setLeft(volume);
+    public void setVolume(Volume volume) {
+        setLeft(new SubType(volume.getName()));
         this.volume = volume;
     }
 
-    public TrinityOrder getOrder() {
+    public Order getOrder() {
         return order;
     }
 
-    public void setOrder(TrinityOrder order) {
-        setRight(order);
+    public void setOrder(Order order) {
+        setRight(new SubType(order.getName()));
+        setTitle(order.getName());
         this.order = order;
     }
 
-    public List<TrinityVolume> getListVolume() {
-        List<TrinityVolume> list = new ArrayList<>();
-        Collections.addAll(list, TrinityVolume.values());
+    public List<Volume> getListVolume() {
+        List<Volume> list = new ArrayList<>();
+        Collections.addAll(list, Volume.values());
         return list;
     }
 
-    public List<TrinityOrder> getListOrder() {
-        List<TrinityOrder> list = new ArrayList<>();
-        Collections.addAll(list, TrinityOrder.values());
+    public List<Order> getListOrder() {
+        List<Order> list = new ArrayList<>();
+        Collections.addAll(list, Order.values());
         return list;
     }
 }
