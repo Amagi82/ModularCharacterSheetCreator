@@ -44,12 +44,12 @@
         android:layout_alignParentRight="true"
         tools:text="Right"/>
 
+    <!--Hint not showing is a bug in the Design Library. Should be fixed soon-->
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
-        android:layout_marginBottom="@dimen/default_margin"
         android:layout_marginLeft="@dimen/default_keyline"
         android:layout_marginRight="@dimen/default_keyline">
 
@@ -59,6 +59,7 @@
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"
             android:inputType="textPersonName"
+            android:ellipsize="end"
             android:hint="@string/character_name"
             android:minWidth="@dimen/toolbar_edittext_minwidth"
             android:singleLine="true"
@@ -83,7 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_tab_layout_height"
         android:layout_below="@id/imagePortrait"
-        android:background="@color/primary_dark"
+        android:background="@color/primary"
         android:gravity="center"
         android:visibility="gone"
         tools:text="Game System"
