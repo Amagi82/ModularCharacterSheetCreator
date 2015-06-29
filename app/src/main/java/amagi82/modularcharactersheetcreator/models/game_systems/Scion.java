@@ -47,30 +47,30 @@ public class Scion extends GameSystem {
         }
     }
 
-    public String volumeName;
-    public String pantheonName;
+    private Volume volume;
+    private Pantheon pantheon;
 
     public Scion() {
         super(System.SCION);
     }
 
     public Volume getVolume() {
-        return Volume.valueOf(volumeName);
+        return volume;
     }
 
     public void setVolume(Volume volume) {
         setLeft(new SubType(volume.getName()));
-        volumeName = volume.name();
+        this.volume = volume;
     }
 
     public Pantheon getPantheon() {
-        return Pantheon.valueOf(pantheonName);
+        return pantheon;
     }
 
     public void setPantheon(Pantheon pantheon) {
         setRight(new SubType(pantheon.getName()));
         setTitle(pantheon.getName());
-        pantheonName = pantheon.name();
+        this.pantheon = pantheon;
     }
 
     public List<Volume> getListVolume() {

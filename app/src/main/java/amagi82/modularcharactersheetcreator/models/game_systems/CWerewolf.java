@@ -101,41 +101,41 @@ public class CWerewolf extends GameSystem {
         }
     }
 
-    public String feraName;
-    public String tribeName;
-    public String auspiceName;
+    private Fera fera;
+    private Tribe tribe;
+    private Auspice auspice;
 
     public CWerewolf() {
         super(System.CWODWEREWOLF);
     }
 
     public Fera getFera() {
-        return Fera.valueOf(feraName);
+        return fera;
     }
 
     public void setFera(Fera fera) {
         setLeft(new SubType(fera.getName(), fera.getUrl()));
         setTitle(fera.getName());
-        feraName = fera.name();
+        this.fera = fera;
     }
 
     public Tribe getTribe() {
-        return Tribe.valueOf(tribeName);
+        return tribe;
     }
 
     public void setTribe(Tribe tribe) {
         setLeft(new SubType(tribe.getName(), tribe.getUrl()));
         setTitle(tribe.getName());
-        tribeName = tribe.name();
+        this.tribe = tribe;
     }
 
     public Auspice getAuspice() {
-        return Auspice.valueOf(auspiceName);
+        return auspice;
     }
 
     public void setAuspice(Auspice auspice) {
         setRight(new SubType(auspice.getName(), auspice.getUrl()));
-        auspiceName = auspice.name();
+        this.auspice = auspice;
     }
 
     public List<Fera> getListFera() {

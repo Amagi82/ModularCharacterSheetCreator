@@ -45,30 +45,30 @@ public class Trinity extends GameSystem {
         }
     }
 
-    public String volumeName;
-    public String orderName;
+    private Volume volume;
+    private Order order;
 
     public Trinity() {
         super(System.TRINITY);
     }
 
     public Volume getVolume() {
-        return Volume.valueOf(volumeName);
+        return volume;
     }
 
     public void setVolume(Volume volume) {
         setLeft(new SubType(volume.getName()));
-        volumeName = volume.name();
+        this.volume = volume;
     }
 
     public Order getOrder() {
-        return Order.valueOf(orderName);
+        return order;
     }
 
     public void setOrder(Order order) {
         setRight(new SubType(order.getName()));
         setTitle(order.getName());
-        orderName = order.name();
+        this.order = order;
     }
 
     public List<Volume> getListVolume() {
