@@ -24,15 +24,18 @@ import com.colintmiller.simplenosql.NoSQL;
 import com.colintmiller.simplenosql.NoSQLEntity;
 import com.colintmiller.simplenosql.RetrievalCallback;
 import com.edmodo.cropper.CropImageView;
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
+import amagi82.modularcharactersheetcreator.events.TileClickedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.game_systems.GameSystem;
 import amagi82.modularcharactersheetcreator.utils.Logan;
+import amagi82.modularcharactersheetcreator.utils.Otto;
 import amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -42,6 +45,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int PICK_FROM_FILE = 2;
     private GameCharacter gameCharacter;
+    private GameSystem gameSystem;
     private boolean isEditMode = false;
     private Uri photoUri;
     private CropImageView cropper;
@@ -108,6 +112,21 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             if(system.isWod()) list.add(system);
         }
         return list;
+    }
+
+    @Subscribe
+    public void onTileClicked(TileClickedEvent event){
+
+    }
+
+    @Override public void onStart() {
+        super.onStart();
+        Otto.BUS.getBus().register(this);
+    }
+
+    @Override public void onStop() {
+        super.onStop();
+        Otto.BUS.getBus().unregister(this);
     }
 
 //    @OnClick(R.id.fab)

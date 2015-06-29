@@ -1,5 +1,7 @@
 package amagi82.modularcharactersheetcreator.models.game_systems;
 
+import java.util.List;
+
 import amagi82.modularcharactersheetcreator.R;
 
 public abstract class GameSystem {
@@ -93,6 +95,12 @@ public abstract class GameSystem {
     private int baseUrl;
     private int archetype;
 
+    public abstract int getName(int position);
+
+    public abstract int getUrl(int position);
+
+    public abstract List getListLeft();
+
     public GameSystem(System system) {
         setSystem(system);
     }
@@ -130,48 +138,24 @@ public abstract class GameSystem {
         return leftCategoryName;
     }
 
-    public void setLeftCategoryName(String leftCategoryName) {
-        this.leftCategoryName = leftCategoryName;
-    }
-
     public String getRightCategoryName() {
         return rightCategoryName;
-    }
-
-    public void setRightCategoryName(String rightCategoryName) {
-        this.rightCategoryName = rightCategoryName;
     }
 
     public int getLeftUrl() {
         return leftUrl;
     }
 
-    public void setLeftUrl(int leftUrl) {
-        this.leftUrl = leftUrl;
-    }
-
     public int getLeftTitle() {
         return leftTitle;
-    }
-
-    public void setLeftTitle(int leftTitle) {
-        this.leftTitle = leftTitle;
     }
 
     public int getRightUrl() {
         return rightUrl;
     }
 
-    public void setRightUrl(int rightUrl) {
-        this.rightUrl = rightUrl;
-    }
-
     public int getRightTitle() {
         return rightTitle;
-    }
-
-    public void setRightTitle(int rightTitle) {
-        this.rightTitle = rightTitle;
     }
 
     public int getBaseUrl() {
