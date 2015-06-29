@@ -10,6 +10,7 @@ public abstract class GameSystem {
         - Urls and titles are for the left and right image flanking the character portrait
     */
     public enum System{
+        WOD(R.string.world_of_darkness, R.drawable.title_wod),
         CWODVAMPIRE(R.string.cwod_vampire, R.drawable.title_vampire_masquerade, R.color.cwod_vampire, R.string.url_cwod_vampire_base, true, R.string.sect, R.string.clan),
         CWODWEREWOLF(R.string.cwod_werewolf, R.drawable.title_werewolf_apocalypse, R.color.cwod_werewolf, R.string.url_cwod_werewolf_base, true, R.string.fera, R.string.tribe, R.string.auspice),
         CWODWRAITH(R.string.cwod_wraith, R.drawable.title_wraith_oblivion, R.color.cwod_wraith, R.string.url_cwod_wraith_base, true, R.string.arcanos),
@@ -28,8 +29,10 @@ public abstract class GameSystem {
         private int color;
         private boolean wod;
         private int[] categoryTitles;
-        private int wodName = R.string.world_of_darkness;
-        private int wodDrawable = R.drawable.title_wod;
+
+        System(int name, int imageMain){
+            this(name, imageMain, 0, 0, false);
+        }
 
         System(int name, int imageMain, int color) {
             this(name, imageMain, color, 0, false);
@@ -70,14 +73,6 @@ public abstract class GameSystem {
 
         public boolean isWod() {
             return wod;
-        }
-
-        public int getWodName() {
-            return wodName;
-        }
-
-        public int getWodDrawable() {
-            return wodDrawable;
         }
 
         public int getCategoryCount(){

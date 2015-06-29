@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,16 +16,24 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.colintmiller.simplenosql.NoSQL;
+import com.colintmiller.simplenosql.NoSQLEntity;
+import com.colintmiller.simplenosql.RetrievalCallback;
 import com.edmodo.cropper.CropImageView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.game_systems.GameSystem;
+import amagi82.modularcharactersheetcreator.utils.Logan;
+import amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -39,8 +48,8 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 //    @InjectView(R.id.color_mask) View colorMask;
     @InjectView(R.id.toolbar) Toolbar toolbar;
     @InjectView(R.id.appbar) RelativeLayout appbar;
-    @InjectView(R.id.imagePortrait) ImageView imagePortrait;
-    @InjectView(R.id.etName) EditText etName;
+    @InjectView(R.id.imagePortrait) AnimatedNetworkImageView imagePortrait;
+    @InjectView(R.id.textInputLayout) TextInputLayout textInputLayout;
     @InjectView(R.id.iconLeft) ImageView iconLeft;
     @InjectView(R.id.tvIconLeft) TextView tvIconLeft;
     @InjectView(R.id.iconRight) ImageView iconRight;
@@ -58,20 +67,22 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),getResources().getInteger(R.integer.character_grid_span_count)));
         if(gameCharacter == null) gameCharacter = new GameCharacter();
 
+
+
         if(getArguments() != null && getArguments().getString("entityId") != null){
             Log.i(null, "found character");
             isEditMode = true;
 
-//            NoSQL.with(getActivity()).using(GameCharacter.class).bucketId("bucket").entityId(getArguments().getString("entityId")).
-//            retrieve(new RetrievalCallback<GameCharacter>() {
-//                @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
-//                    if (entities.size() > 0) gameCharacter = entities.get(0).getData();
-//                    if (gameCharacter.getPortraitUri() != null) imagePortrait.setImageURI(gameCharacter.getPortraitUri());
-//                    recyclerView.setAdapter(new CharacterAdapter(getActivity(), gameCharacter));
-//                }
-//            });
+            NoSQL.with(getActivity()).withDeserializer(new Logan()).using(GameCharacter.class).bucketId("bucket").entityId(getArguments().getString("entityId")).
+            retrieve(new RetrievalCallback<GameCharacter>() {
+                @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
+                    if (entities.size() > 0) gameCharacter = entities.get(0).getData();
+                    if (gameCharacter.getPortraitUri() != null) imagePortrait.setImageURI(gameCharacter.getPortraitUri());
+                    recyclerView.setAdapter(new CharacterAdapter(getInitialList()));
+                }
+            });
         }else{
-            recyclerView.setAdapter(new CharacterAdapter(getActivity(), gameCharacter));
+            recyclerView.setAdapter(new CharacterAdapter(getInitialList()));
         }
 
         //colorMask.animate().alpha(0).setDuration(300);
@@ -81,6 +92,22 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         toolbar.setOnMenuItemClickListener(this);
 
         return rootView;
+    }
+
+    public List<GameSystem.System> getInitialList(){
+        List<GameSystem.System> list = new ArrayList<>();
+        list.add(GameSystem.System.WOD);
+        for(GameSystem.System system : GameSystem.System.values()){
+            if(!system.isWod()) list.add(system);
+        }
+        return list;
+    }
+    public List<GameSystem.System> getWodList(){
+        List<GameSystem.System> list = new ArrayList<>();
+        for(GameSystem.System system : GameSystem.System.values()){
+            if(system.isWod()) list.add(system);
+        }
+        return list;
     }
 
 //    @OnClick(R.id.fab)

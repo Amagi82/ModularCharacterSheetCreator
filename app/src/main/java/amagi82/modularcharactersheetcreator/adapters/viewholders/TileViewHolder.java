@@ -6,6 +6,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.events.TileClickedEvent;
+import amagi82.modularcharactersheetcreator.utils.Otto;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -17,5 +19,11 @@ public class TileViewHolder extends RecyclerView.ViewHolder{
     public TileViewHolder(final View itemView) {
         super(itemView);
         ButterKnife.inject(this, itemView);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                Otto.BUS.getBus().post(new TileClickedEvent(getAdapterPosition()));
+            }
+        });
     }
 }
