@@ -86,30 +86,30 @@ public class Exalted extends GameSystem {
         }
     }
 
-    private ExaltedType type;
-    private Caste caste;
+    public String typeName;
+    public String casteName;
 
     public Exalted() {
         super(System.EXALTED);
     }
 
     public ExaltedType getType() {
-        return type;
+        return ExaltedType.valueOf(typeName);
     }
 
     public void setType(ExaltedType type) {
         setLeft(new SubType(type.getName()));
         setTitle(type.getName());
-        this.type = type;
+        typeName = type.name();
     }
 
     public Caste getCaste() {
-        return caste;
+        return Caste.valueOf(casteName);
     }
 
     public void setCaste(Caste caste) {
         setRight(new SubType(caste.getName()));
-        this.caste = caste;
+        casteName = caste.name();
     }
 
     public List<ExaltedType> getListType() {

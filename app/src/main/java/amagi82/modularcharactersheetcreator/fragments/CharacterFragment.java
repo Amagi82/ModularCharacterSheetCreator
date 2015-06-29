@@ -1,12 +1,9 @@
 package amagi82.modularcharactersheetcreator.fragments;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -22,25 +19,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.colintmiller.simplenosql.NoSQL;
-import com.colintmiller.simplenosql.NoSQLEntity;
-import com.colintmiller.simplenosql.RetrievalCallback;
 import com.edmodo.cropper.CropImageView;
-
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterRVAdapter;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 
 public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener {
 
@@ -76,14 +62,14 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             Log.i(null, "found character");
             isEditMode = true;
 
-            NoSQL.with(getActivity()).using(GameCharacter.class).bucketId("bucket").entityId(getArguments().getString("entityId")).
-            retrieve(new RetrievalCallback<GameCharacter>() {
-                @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
-                    if (entities.size() > 0) gameCharacter = entities.get(0).getData();
-                    if (gameCharacter.getPortraitUri() != null) imagePortrait.setImageURI(gameCharacter.getPortraitUri());
-                    recyclerView.setAdapter(new CharacterRVAdapter(getActivity(), gameCharacter));
-                }
-            });
+//            NoSQL.with(getActivity()).using(GameCharacter.class).bucketId("bucket").entityId(getArguments().getString("entityId")).
+//            retrieve(new RetrievalCallback<GameCharacter>() {
+//                @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
+//                    if (entities.size() > 0) gameCharacter = entities.get(0).getData();
+//                    if (gameCharacter.getPortraitUri() != null) imagePortrait.setImageURI(gameCharacter.getPortraitUri());
+//                    recyclerView.setAdapter(new CharacterRVAdapter(getActivity(), gameCharacter));
+//                }
+//            });
         }else{
             recyclerView.setAdapter(new CharacterRVAdapter(getActivity(), gameCharacter));
         }
@@ -97,76 +83,76 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         return rootView;
     }
 
-    @OnClick(R.id.fab)
-    void getPhoto(){
-        new AlertDialog.Builder(getActivity()).setItems(gameCharacter.getPortraitUri() == null ?
-                R.array.portrait_choices_initial : R.array.portrait_choices, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0:
-                        //Get image from camera. Check to make sure device is equipped with a camera
-                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        // Ensure that there's a camera activity to handle the intent
-                        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                            // Create the File where the photo should go
-                            File photoFile = null;
-                            try {
-                                photoFile = createImageFile("IMG_");
-                            } catch (IOException e) {
-                                // Error occurred while creating the File
-                                e.printStackTrace();
-                            }
-                            // Continue only if the File was successfully created
-                            if (photoFile != null) {
-                                photoUri = Uri.fromFile(photoFile);
-                                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-                                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                            }
-                        } else {
-                            Toast.makeText(getActivity(), "No camera app detected on your device", Toast.LENGTH_SHORT).show();
-                        }
-                        break;
-                    case 1:
-                        //Get image from gallery
-                        Intent intentFromGallery = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
-                        startActivityForResult(Intent.createChooser(intentFromGallery, "Complete action using"), PICK_FROM_FILE);
-                        break;
-                    case 2:
-                        //Just use the default icon
-                        gameCharacter.setPortraitUri(null);
-                        gameCharacter.setIcon(null);
-                        imagePortrait.setImageResource(0);
-                        break;
-                }
-            }
-        }).show();
-    }
+//    @OnClick(R.id.fab)
+//    void getPhoto(){
+//        new AlertDialog.Builder(getActivity()).setItems(gameCharacter.getPortraitUri() == null ?
+//                R.array.portrait_choices_initial : R.array.portrait_choices, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                switch (which) {
+//                    case 0:
+//                        //Get image from camera. Check to make sure device is equipped with a camera
+//                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                        // Ensure that there's a camera activity to handle the intent
+//                        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+//                            // Create the File where the photo should go
+//                            File photoFile = null;
+//                            try {
+//                                photoFile = createImageFile("IMG_");
+//                            } catch (IOException e) {
+//                                // Error occurred while creating the File
+//                                e.printStackTrace();
+//                            }
+//                            // Continue only if the File was successfully created
+//                            if (photoFile != null) {
+//                                photoUri = Uri.fromFile(photoFile);
+//                                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+//                                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+//                            }
+//                        } else {
+//                            Toast.makeText(getActivity(), "No camera app detected on your device", Toast.LENGTH_SHORT).show();
+//                        }
+//                        break;
+//                    case 1:
+//                        //Get image from gallery
+//                        Intent intentFromGallery = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
+//                        startActivityForResult(Intent.createChooser(intentFromGallery, "Complete action using"), PICK_FROM_FILE);
+//                        break;
+//                    case 2:
+//                        //Just use the default icon
+//                        gameCharacter.setPortraitUri(null);
+//                        gameCharacter.setIcon(null);
+//                        imagePortrait.setImageResource(0);
+//                        break;
+//                }
+//            }
+//        }).show();
+//    }
 
-    String mCurrentPhotoPath;
-
-    private File createImageFile(String prefix) throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = prefix + timeStamp;
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)      /* directory */
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
-        return image;
-    }
-
-    private void galleryAddPic() {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = new File(mCurrentPhotoPath);
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        getActivity().sendBroadcast(mediaScanIntent);
-    }
+//    String mCurrentPhotoPath;
+//
+//    private File createImageFile(String prefix) throws IOException {
+//        // Create an image file name
+//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//        String imageFileName = prefix + timeStamp;
+//        File image = File.createTempFile(
+//                imageFileName,  /* prefix */
+//                ".jpg",         /* suffix */
+//                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)      /* directory */
+//        );
+//
+//        // Save a file: path for use with ACTION_VIEW intents
+//        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+//        return image;
+//    }
+//
+//    private void galleryAddPic() {
+//        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//        File f = new File(mCurrentPhotoPath);
+//        Uri contentUri = Uri.fromFile(f);
+//        mediaScanIntent.setData(contentUri);
+//        getActivity().sendBroadcast(mediaScanIntent);
+//    }
 
     //Called when an image is selected from the camera or the gallery, and lets you crop it into an icon
 //    @Override

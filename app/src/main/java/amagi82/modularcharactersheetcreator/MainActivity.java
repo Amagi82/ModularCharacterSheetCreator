@@ -23,23 +23,29 @@ import amagi82.modularcharactersheetcreator.models.game_systems.CMage;
 import amagi82.modularcharactersheetcreator.models.game_systems.CVampire;
 import amagi82.modularcharactersheetcreator.models.game_systems.CWerewolf;
 import amagi82.modularcharactersheetcreator.models.modules.TextModule;
+import amagi82.modularcharactersheetcreator.utils.Logan;
 import amagi82.modularcharactersheetcreator.utils.Otto;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fm = getSupportFragmentManager();
+    private Logan logan = new Logan();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
+        NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
 
-        NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").retrieve(new RetrievalCallback<GameCharacter>() {
+        //generateSampleCharacters();
+
+        NoSQL.with(this).withSerializer(logan).using(GameCharacter.class).bucketId("bucket").retrieve(new RetrievalCallback<GameCharacter>() {
             @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
+                Log.i(null, "Found "+entities.size()+" sample characters");
                 if (entities.size() == 0) {
+                    Log.i(null, "generating sample characters");
                     generateSampleCharacters();
                 }
             }
@@ -54,38 +60,35 @@ public class MainActivity extends AppCompatActivity {
         List<GameCharacter> characters = new ArrayList<>();
         if (characters.size() == 0) {
             Log.i(null, "Creating data");
-            List<GameCharacter> sampleData = new ArrayList<>();
 
             CVampire vampire1 = new CVampire();
             vampire1.setSect(CVampire.Sect.CAMARILLA);
             vampire1.setClan(CVampire.Clan.GANGREL);
-            sampleData.add(new GameCharacter("Thomas Anstis", vampire1));
+            characters.add(new GameCharacter("Thomas Anstis", vampire1));
 
             CVampire vampire2 = new CVampire();
             vampire2.setSect(CVampire.Sect.ANARCH);
             vampire2.setClan(CVampire.Clan.BRUJAH);
-            sampleData.add(new GameCharacter("Tom Lytton", vampire2));
+            characters.add(new GameCharacter("Tom Lytton", vampire2));
 
             CVampire vampire3 = new CVampire();
             vampire3.setSect(CVampire.Sect.CAMARILLA);
             vampire3.setClan(CVampire.Clan.TREMERE);
-            sampleData.add(new GameCharacter("Georgia Johnson", vampire3));
+            characters.add(new GameCharacter("Georgia Johnson", vampire3));
 
             CVampire vampire4 = new CVampire();
             vampire4.setSect(CVampire.Sect.CAMARILLA);
             vampire4.setClan(CVampire.Clan.VENTRUE);
-            sampleData.add(new GameCharacter("Augustus von Rabenholtz", vampire4));
+            characters.add(new GameCharacter("Augustus von Rabenholtz", vampire4));
 
             CMage mage1 = new CMage();
             mage1.setFaction(CMage.Faction.SCIONSOFETHER);
-            sampleData.add(new GameCharacter("Dr. Von Natsi", mage1));
+            characters.add(new GameCharacter("Dr. Von Natsi", mage1));
 
             CWerewolf werewolf1 = new CWerewolf();
             werewolf1.setTribe(CWerewolf.Tribe.GLASSWALKERS);
             werewolf1.setAuspice(CWerewolf.Auspice.AHROUN);
-            sampleData.add(new GameCharacter("Stormwalker", werewolf1));
-
-            characters = sampleData;
+            characters.add(new GameCharacter("Stormwalker", werewolf1));
 
             TextModule module1 = new TextModule();
             module1.setText("Test text 1");
@@ -95,13 +98,14 @@ public class MainActivity extends AppCompatActivity {
             for (GameCharacter character : characters) {
                 character.getModuleList().add(module1);
                 character.getModuleList().add(module2);
+                Log.i(null, character.getName() + " contains "+character.getGameSystem().toString());
             }
         }
 
         for (GameCharacter character : characters) {
             NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>("bucket", character.getEntityId());
             entity.setData(character);
-            NoSQL.with(this).using(GameCharacter.class).save(entity);
+            NoSQL.with(this).withSerializer(logan).using(GameCharacter.class).save(entity);
         }
     }
 

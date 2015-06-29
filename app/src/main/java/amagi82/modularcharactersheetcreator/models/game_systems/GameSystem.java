@@ -2,7 +2,7 @@ package amagi82.modularcharactersheetcreator.models.game_systems;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public abstract class GameSystem {
+public abstract class GameSystem{
 
     /*
         - System enum includes the name and drawable for each game system, along with the base url,
@@ -88,10 +88,13 @@ public abstract class GameSystem {
             return categoryTitles;
         }
     }
-    private System system;
+    public String systemName;
     private SubType left;
     private SubType right;
     private int title;
+
+    public GameSystem() {
+    }
 
     public GameSystem(System system) {
         this(system, new SubType(), new SubType(), 0);
@@ -106,14 +109,18 @@ public abstract class GameSystem {
     }
 
     public GameSystem(System system, SubType left, SubType right, int title){
-        this.system = system;
+        systemName = system.name();
         this.left = left;
         this.right = right;
         this.title = title;
     }
 
     public System getSystem() {
-        return system;
+        return System.valueOf(systemName);
+    }
+
+    public void setSystem(System system) {
+        systemName = system.name();
     }
 
     public SubType getLeft() {
@@ -139,4 +146,5 @@ public abstract class GameSystem {
     public void setTitle(int title) {
         this.title = title;
     }
+
 }

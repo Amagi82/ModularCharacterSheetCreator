@@ -4,27 +4,33 @@ package amagi82.modularcharactersheetcreator.models;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
-import java.io.Serializable;
+import com.bluelinelabs.logansquare.annotation.JsonField;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
+
 import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.models.game_systems.GameSystem;
+import amagi82.modularcharactersheetcreator.models.game_systems.SubType;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 
-public class GameCharacter implements Serializable{
+@JsonObject
+public class GameCharacter {
 
-    private Bitmap icon;
-    private String entityId;
-    private String name = "";
-    private GameSystem gameSystem;
-    private Uri portraitUri;
-    private int colorPrimary;
-    private int colorBackground;
-    private int colorText;
-    private int colorTextTitle;
-    private int colorTitles;
-    private long timeStamp;
-
+    @JsonField private Bitmap icon;
+    @JsonField private String name = "";
+    @JsonField public String systemName;
+    @JsonField private SubType left;
+    @JsonField private SubType right;
+    @JsonField private int title;
+    @JsonField private Uri portraitUri;
+    @JsonField private int colorPrimary;
+    @JsonField private int colorBackground;
+    @JsonField private int colorText;
+    @JsonField private int colorTextTitle;
+    @JsonField private int colorTitles;
     private ArrayList<Module> moduleList = new ArrayList<>();
+    @JsonField private String entityId;
+    @JsonField private long timeStamp;
 
     public GameCharacter() {
         timeStamp = System.currentTimeMillis();
@@ -32,8 +38,8 @@ public class GameCharacter implements Serializable{
 
     public GameCharacter(String name, GameSystem gameSystem) {
         this.name = name;
-        this.gameSystem = gameSystem;
-        entityId = name + gameSystem.getLeft() + gameSystem.getRight();
+        systemName = gameSystem.getSystem().name();
+        entityId = name + gameSystem.getLeft().getTitle() + gameSystem.getRight().getTitle();
         timeStamp = System.currentTimeMillis();
     }
 
@@ -77,12 +83,12 @@ public class GameCharacter implements Serializable{
         this.name = name;
     }
 
-    public GameSystem getGameSystem() {
-        return gameSystem;
+    public GameSystem.System getGameSystem() {
+        return GameSystem.System.valueOf(systemName);
     }
 
     public void setGameSystem(GameSystem gameSystem) {
-        this.gameSystem = gameSystem;
+        systemName = gameSystem.getSystem().name();
     }
 
     public ArrayList<Module> getModuleList() {
@@ -142,15 +148,47 @@ public class GameCharacter implements Serializable{
     }
 
     public String getEntityId() {
-        if(entityId == null)entityId = name + gameSystem.getLeft() + gameSystem.getRight();
+        //if (entityId == null) entityId = name + gameSystem.getLeft().getTitle() + gameSystem.getRight().getTitle();
         return entityId;
+    }
+
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
     }
 
     public long getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp() {
+    public void updateTimeStamp() {
         timeStamp = System.currentTimeMillis();
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public SubType getLeft() {
+        return left;
+    }
+
+    public void setLeft(SubType left) {
+        this.left = left;
+    }
+
+    public SubType getRight() {
+        return right;
+    }
+
+    public void setRight(SubType right) {
+        this.right = right;
+    }
+
+    public int getTitle() {
+        return title;
+    }
+
+    public void setTitle(int title) {
+        this.title = title;
     }
 }

@@ -57,30 +57,30 @@ public class NWerewolf extends GameSystem {
         }
     }
 
-    private Tribe tribe;
-    private Auspice auspice;
+    public String tribeName;
+    public String auspiceName;
 
     public NWerewolf() {
         super(System.NWODWEREWOLF);
     }
 
     public Tribe getTribe() {
-        return tribe;
+        return Tribe.valueOf(tribeName);
     }
 
     public void setTribe(Tribe tribe) {
         setLeft(new SubType(tribe.getName(), tribe.getUrl()));
         setTitle(tribe.getName());
-        this.tribe = tribe;
+        tribeName = tribe.name();
     }
 
     public Auspice getAuspice() {
-        return auspice;
+        return Auspice.valueOf(auspiceName);
     }
 
     public void setAuspice(Auspice auspice) {
         setRight(new SubType(auspice.getName(), auspice.getUrl()));
-        this.auspice = auspice;
+        auspiceName = auspice.name();
     }
 
     public List<Tribe> getListTribe() {

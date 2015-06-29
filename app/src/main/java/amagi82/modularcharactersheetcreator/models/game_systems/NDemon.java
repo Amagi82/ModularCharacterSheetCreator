@@ -54,30 +54,30 @@ public class NDemon extends GameSystem {
         }
     }
 
-    private Incarnation incarnation;
-    private Agenda agenda;
+    public String incarnationName;
+    public String agendaName;
 
     public NDemon() {
         super(System.NWODDEMON);
     }
 
     public Incarnation getIncarnation() {
-        return incarnation;
+        return Incarnation.valueOf(incarnationName);
     }
 
     public void setIncarnation(Incarnation incarnation) {
         setLeft(new SubType(incarnation.getName(), incarnation.getUrl()));
-        this.incarnation = incarnation;
+        incarnationName = incarnation.name();
     }
 
     public Agenda getAgenda() {
-        return agenda;
+        return Agenda.valueOf(agendaName);
     }
 
     public void setAgenda(Agenda agenda) {
         setRight(new SubType(agenda.getName(), agenda.getUrl()));
         setTitle(agenda.getName());
-        this.agenda = agenda;
+        agendaName = agenda.name();
     }
 
     public List<Incarnation> getListIncarnation() {

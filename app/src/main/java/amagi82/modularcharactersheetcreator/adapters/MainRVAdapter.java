@@ -47,9 +47,9 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.ViewHolder
         }
         holder.icon.setImageBitmap(gameCharacter.getIcon());
         holder.tvName.setText(gameCharacter.getName());
-        holder.tvArchetype.setText(gameCharacter.getGameSystem().getTitle());
-        holder.tvGameSystem.setText(gameCharacter.getGameSystem().getSystem().getName());
-        holder.tvGameSystem.setTextColor(gameCharacter.getGameSystem().getSystem().getColor());
+        //holder.tvArchetype.setText(gameCharacter.getTitle());
+        //holder.tvGameSystem.setText(gameCharacter.getGameSystem().getName());
+        //holder.tvGameSystem.setTextColor(gameCharacter.getGameSystem().getColor());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

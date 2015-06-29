@@ -58,30 +58,30 @@ public class NVampire extends GameSystem {
         }
     }
 
-    private Clan clan;
-    private Covenant covenant;
+    public String clanName;
+    public String covenantName;
 
     public NVampire() {
         super(System.NWODVAMPIRE);
     }
 
     public Clan getClan() {
-        return clan;
+        return Clan.valueOf(clanName);
     }
 
     public void setClan(Clan clan) {
         setLeft(new SubType(clan.getName(), clan.getUrl()));
         setTitle(clan.getName());
-        this.clan = clan;
+        clanName = clan.name();
     }
 
     public Covenant getCovenant() {
-        return covenant;
+        return Covenant.valueOf(covenantName);
     }
 
     public void setCovenant(Covenant covenant) {
         setRight(new SubType(covenant.getName(), covenant.getUrl()));
-        this.covenant = covenant;
+        covenantName = covenant.name();
     }
 
     public List<Clan> getListClan() {

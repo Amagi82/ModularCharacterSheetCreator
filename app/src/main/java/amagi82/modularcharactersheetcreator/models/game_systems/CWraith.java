@@ -1,11 +1,14 @@
 package amagi82.modularcharactersheetcreator.models.game_systems;
 
+import com.bluelinelabs.logansquare.annotation.JsonObject;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
+@JsonObject
 public class CWraith extends GameSystem {
 
     public enum Arcanos {
@@ -43,20 +46,20 @@ public class CWraith extends GameSystem {
         }
     }
 
-    private Arcanos arcanos;
+    public String arcanosName;
 
     public CWraith() {
         super(System.CWODWRAITH);
     }
 
     public Arcanos getArcanos() {
-        return arcanos;
+        return Arcanos.valueOf(arcanosName);
     }
 
     public void setArcanos(Arcanos arcanos) {
         setLeft(new SubType(arcanos.getName(), arcanos.getUrl()));
         setTitle(arcanos.getName());
-        this.arcanos = arcanos;
+        arcanosName = arcanos.name();
     }
 
     public List<Arcanos> getListArcanos() {

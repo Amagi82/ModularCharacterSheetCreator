@@ -61,20 +61,20 @@ public class CMage extends GameSystem{
         TRADITIONS, TECHNOCRACY, CRAFTS
     }
 
-    private Faction faction;
+    public String factionName;
 
     public CMage() {
         super(System.CWODMAGE);
     }
 
     public Faction getFaction() {
-        return faction;
+        return Faction.valueOf(factionName);
     }
 
     public void setFaction(Faction faction) {
         setLeft(new SubType(faction.getName(), faction.getUrl()));
         setTitle(faction.getName());
-        this.faction = faction;
+        factionName = faction.toString();
     }
 
     public List<Faction> getListFactions(Group group){

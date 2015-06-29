@@ -138,30 +138,30 @@ public class CVampire extends GameSystem{
         YES, OPTIONAL, NO, BLOODLINE;
     }
 
-    private Sect sect;
-    private Clan clan;
+    public String sectName;
+    public String clanName;
 
     public CVampire() {
         super(System.CWODVAMPIRE);
     }
 
     public Sect getSect() {
-        return sect;
+        return Sect.valueOf(sectName);
     }
 
     public void setSect(Sect sect) {
         setLeft(new SubType(sect.getName(), sect.getUrl()));
-        this.sect = sect;
+        sectName = sect.name();
     }
 
     public Clan getClan() {
-        return clan;
+        return Clan.valueOf(clanName);
     }
 
     public void setClan(Clan clan) {
         setRight(new SubType(clan.getName(), clan.getUrl()));
         setTitle(clan.getName());
-        this.clan = clan;
+        clanName = clan.name();
     }
 
     public List<Sect> getListSect() {

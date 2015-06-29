@@ -1,9 +1,13 @@
 package amagi82.modularcharactersheetcreator.models.game_systems;
 
+import com.bluelinelabs.logansquare.annotation.JsonField;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
+
+@JsonObject
 public class SubType {
 
-    private int url;
-    private int title;
+    @JsonField private int url;
+    @JsonField private int title;
 
     public SubType() {
     }

@@ -56,30 +56,30 @@ public class NMummy extends GameSystem {
         }
     }
 
-    private Decree decree;
-    private Guild guild;
+    public String decreeName;
+    public String guildName;
 
     public NMummy() {
         super(System.NWODMUMMY);
     }
 
     public Decree getDecree() {
-        return decree;
+        return Decree.valueOf(decreeName);
     }
 
     public void setDecree(Decree decree) {
         setLeft(new SubType(decree.getName(), decree.getUrl()));
         setTitle(decree.getName());
-        this.decree = decree;
+        decreeName = decree.name();
     }
 
     public Guild getGuild() {
-        return guild;
+        return Guild.valueOf(guildName);
     }
 
     public void setGuild(Guild guild) {
         setRight(new SubType(guild.getName(), guild.getUrl()));
-        this.guild = guild;
+        guildName = guild.name();
     }
 
     public List<Decree> getListDecree() {
