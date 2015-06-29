@@ -18,13 +18,13 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.ViewHolder> {
+public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     private SortedList<GameCharacter> gameCharacters;
     private CircleIcon iconFactory;
     private Context context;
 
-    public MainRVAdapter(Context context, SortedList<GameCharacter> gameCharacters) {
+    public MainAdapter(Context context, SortedList<GameCharacter> gameCharacters) {
         this.context = context;
         this.gameCharacters = gameCharacters;
         iconFactory = new CircleIcon(context);
@@ -32,7 +32,7 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.ViewHolder
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MainRVAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MainAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_character, parent, false);
         return new ViewHolder(v);
     }

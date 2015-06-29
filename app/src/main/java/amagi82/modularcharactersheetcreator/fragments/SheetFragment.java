@@ -14,7 +14,7 @@ import amagi82.modularcharactersheetcreator.R;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class CharacterSheetFragment extends Fragment {
+public class SheetFragment extends Fragment {
 
     @InjectView(R.id.recycler_view) RecyclerView recyclerView;
     @InjectView(R.id.fab) FloatingActionButton fab;
@@ -37,7 +37,7 @@ public class CharacterSheetFragment extends Fragment {
         recyclerView.setLayoutManager(characterSheetLayoutManager);
 
         // specify an adapter (see also next example)
-//        RecyclerView.Adapter characterRecyclerViewAdapter = new CharacterSheetRVAdapter(character.getModuleList(), getActivity());
+//        RecyclerView.Adapter characterRecyclerViewAdapter = new SheetAdapter(character.getModuleList(), getActivity());
 //        recyclerView.setAdapter(characterRecyclerViewAdapter);
 
         //Set up the Floating Action Button

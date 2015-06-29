@@ -19,7 +19,7 @@ import com.colintmiller.simplenosql.RetrievalCallback;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.adapters.MainRVAdapter;
+import amagi82.modularcharactersheetcreator.adapters.MainAdapter;
 import amagi82.modularcharactersheetcreator.events.CreateCharacterEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.utils.Logan;
@@ -34,7 +34,7 @@ public class MainFragment extends Fragment{
     @InjectView(R.id.recycler_view) RecyclerView recyclerView;
     @InjectView(R.id.fab) FloatingActionButton fab;
     private SortedList<GameCharacter> characters;
-    private MainRVAdapter adapter;
+    private MainAdapter adapter;
     //@InjectView(R.id.fab_frame) FrameLayout fab_frame;
 
     @Override
@@ -75,7 +75,7 @@ public class MainFragment extends Fragment{
 
         recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new MainRVAdapter(getActivity(), characters);
+        adapter = new MainAdapter(getActivity(), characters);
         recyclerView.setAdapter(adapter);
 
         NoSQL.with(getActivity()).withDeserializer(new Logan()).using(GameCharacter.class).bucketId("bucket").retrieve(new RetrievalCallback<GameCharacter>() {

@@ -23,7 +23,7 @@ import android.widget.TextView;
 import com.edmodo.cropper.CropImageView;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.adapters.CharacterRVAdapter;
+import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -67,11 +67,11 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 //                @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
 //                    if (entities.size() > 0) gameCharacter = entities.get(0).getData();
 //                    if (gameCharacter.getPortraitUri() != null) imagePortrait.setImageURI(gameCharacter.getPortraitUri());
-//                    recyclerView.setAdapter(new CharacterRVAdapter(getActivity(), gameCharacter));
+//                    recyclerView.setAdapter(new CharacterAdapter(getActivity(), gameCharacter));
 //                }
 //            });
         }else{
-            recyclerView.setAdapter(new CharacterRVAdapter(getActivity(), gameCharacter));
+            recyclerView.setAdapter(new CharacterAdapter(getActivity(), gameCharacter));
         }
 
         //colorMask.animate().alpha(0).setDuration(300);

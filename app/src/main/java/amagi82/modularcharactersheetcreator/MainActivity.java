@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //    @Override
 //    public void onCharacterClicked(int position) {
-//        CharacterSheetFragment fragment = new CharacterSheetFragment();
+//        SheetFragment fragment = new SheetFragment();
 //        Bundle bundle = new Bundle();
 //        bundle.putInt("character", position);
 //        fragment.setArguments(bundle);
