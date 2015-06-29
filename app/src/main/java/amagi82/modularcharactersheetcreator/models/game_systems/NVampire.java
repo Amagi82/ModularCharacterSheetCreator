@@ -65,13 +65,19 @@ public class NVampire extends GameSystem {
         super(System.NWODVAMPIRE);
     }
 
+    public NVampire(String clanName, String covenantName) {
+        super(System.NWODVAMPIRE);
+        clan = Clan.valueOf(clanName);
+        covenant = Covenant.valueOf(covenantName);
+    }
+
     public Clan getClan() {
         return clan;
     }
 
     public void setClan(Clan clan) {
-        setLeft(new SubType(clan.getName(), clan.getUrl()));
-        setTitle(clan.getName());
+        setLeft(clan.name(), clan.getName(), clan.getUrl());
+        setArchetype(clan.getName());
         this.clan = clan;
     }
 
@@ -80,7 +86,7 @@ public class NVampire extends GameSystem {
     }
 
     public void setCovenant(Covenant covenant) {
-        setRight(new SubType(covenant.getName(), covenant.getUrl()));
+        setRight(covenant.name(), covenant.getName(), covenant.getUrl());
         this.covenant = covenant;
     }
 

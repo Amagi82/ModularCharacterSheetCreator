@@ -61,12 +61,18 @@ public class NDemon extends GameSystem {
         super(System.NWODDEMON);
     }
 
+    public NDemon(String incarnationName, String agendaName) {
+        super(System.NWODDEMON);
+        incarnation = Incarnation.valueOf(incarnationName);
+        agenda = Agenda.valueOf(agendaName);
+    }
+
     public Incarnation getIncarnation() {
         return incarnation;
     }
 
     public void setIncarnation(Incarnation incarnation) {
-        setLeft(new SubType(incarnation.getName(), incarnation.getUrl()));
+        setLeft(incarnation.name(),incarnation.getName(),incarnation.getUrl());
         this.incarnation = incarnation;
     }
 
@@ -75,8 +81,8 @@ public class NDemon extends GameSystem {
     }
 
     public void setAgenda(Agenda agenda) {
-        setRight(new SubType(agenda.getName(), agenda.getUrl()));
-        setTitle(agenda.getName());
+        setRight(agenda.name(),agenda.getName(),agenda.getUrl());
+        setArchetype(agenda.getName());
         this.agenda = agenda;
     }
 

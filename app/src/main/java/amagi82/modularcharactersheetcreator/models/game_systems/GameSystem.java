@@ -7,7 +7,7 @@ public abstract class GameSystem {
     /*
         - System enum includes the name and drawable for each game system, along with the base url,
         and whether or not it's part of the World of Darkness
-        - Enums passed in are for the left and right image flanking the character portrait
+        - Urls and titles are for the left and right image flanking the character portrait
     */
     public enum System{
         CWODVAMPIRE(R.string.cwod_vampire, R.drawable.title_vampire_masquerade, R.color.cwod_vampire, R.string.url_cwod_vampire_base, true, R.string.sect, R.string.clan),
@@ -89,54 +89,122 @@ public abstract class GameSystem {
         }
     }
     private System system;
-    private SubType left;
-    private SubType right;
-    private String title;
+    private String leftCategoryName;
+    private String rightCategoryName;
+    private int leftUrl;
+    private int leftTitle;
+    private int rightUrl;
+    private int rightTitle;
+    private int baseUrl;
+    private int archetype;
 
     public GameSystem(System system) {
-        this(system, new SubType(), new SubType(), "");
-    }
-
-    public GameSystem(System system, String title) {
-        this(system, new SubType(), new SubType(), title);
-    }
-
-    public GameSystem(System system, SubType left, String title){
-        this(system, left, new SubType(), title);
-    }
-
-    public GameSystem(System system, SubType left, SubType right, String title){
-        this.system = system;
-        this.left = left;
-        this.right = right;
-        this.title = title;
+        setSystem(system);
     }
 
     public System getSystem() {
         return system;
     }
 
-    public SubType getLeft() {
-        return left;
+    public void setSystem(System system) {
+        this.system = system;
+        baseUrl = system.getUrlBase();
     }
 
-    public void setLeft(SubType left) {
-        this.left = left;
+    public void setLeft(String leftCategoryName, int leftTitle){
+        this.setLeft(leftCategoryName, leftTitle, 0);
     }
 
-    public SubType getRight() {
-        return right;
+    public void setLeft(String leftCategoryName, int leftTitle, int leftUrl){
+        this.leftCategoryName = leftCategoryName;
+        this.leftTitle = leftTitle;
+        this.leftUrl = leftUrl;
     }
 
-    public void setRight(SubType right) {
-        this.right = right;
+    public void setRight(String rightCategoryName, int rightTitle){
+        this.setRight(rightCategoryName, rightTitle, 0);
     }
 
-    public String getTitle() {
-        return title;
+    public void setRight(String rightCategoryName, int rightTitle, int rightUrl){
+        this.rightCategoryName = rightCategoryName;
+        this.rightTitle = leftTitle;
+        this.rightUrl = leftUrl;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getLeftCategoryName() {
+        return leftCategoryName;
     }
+
+    public void setLeftCategoryName(String leftCategoryName) {
+        this.leftCategoryName = leftCategoryName;
+    }
+
+    public String getRightCategoryName() {
+        return rightCategoryName;
+    }
+
+    public void setRightCategoryName(String rightCategoryName) {
+        this.rightCategoryName = rightCategoryName;
+    }
+
+    public int getLeftUrl() {
+        return leftUrl;
+    }
+
+    public void setLeftUrl(int leftUrl) {
+        this.leftUrl = leftUrl;
+    }
+
+    public int getLeftTitle() {
+        return leftTitle;
+    }
+
+    public void setLeftTitle(int leftTitle) {
+        this.leftTitle = leftTitle;
+    }
+
+    public int getRightUrl() {
+        return rightUrl;
+    }
+
+    public void setRightUrl(int rightUrl) {
+        this.rightUrl = rightUrl;
+    }
+
+    public int getRightTitle() {
+        return rightTitle;
+    }
+
+    public void setRightTitle(int rightTitle) {
+        this.rightTitle = rightTitle;
+    }
+
+    public int getBaseUrl() {
+        return baseUrl;
+    }
+
+    public int getArchetype() {
+        return archetype;
+    }
+
+    public void setArchetype(int archetype) {
+        this.archetype = archetype;
+    }
+
+//    public static GameSystem getGameSystem(String system, String leftCategoryName, String rightCategoryName){
+//        switch (System.valueOf(system)){
+//            case CWODMAGE: return new CMage(leftCategoryName);
+//            case CWODVAMPIRE: return new CVampire(leftCategoryName, rightCategoryName);
+//            case CWODWEREWOLF: return new CWerewolf(leftCategoryName,rightCategoryName);
+//            case CWODWRAITH: return new CWraith(leftCategoryName);
+//            case EXALTED: return new Exalted(leftCategoryName,rightCategoryName);
+//            case NWODDEMON: return new NDemon(leftCategoryName,rightCategoryName);
+//            case NWODMUMMY: return new NMummy(leftCategoryName,rightCategoryName);
+//            case NWODVAMPIRE: return new NVampire(leftCategoryName, rightCategoryName);
+//            case NWODWEREWOLF: return new NWerewolf(leftCategoryName, rightCategoryName);
+//            case SCION: return new Scion(leftCategoryName, rightCategoryName);
+//            case TRINITY: return new Trinity(leftCategoryName, rightCategoryName);
+//            default: return null;
+//        }
+//    }
 }

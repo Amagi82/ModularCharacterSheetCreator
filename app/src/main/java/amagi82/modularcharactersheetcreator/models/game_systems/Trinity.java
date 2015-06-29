@@ -52,12 +52,18 @@ public class Trinity extends GameSystem {
         super(System.TRINITY);
     }
 
+    public Trinity(String volumeName, String orderName) {
+        super(System.TRINITY);
+        volume = Volume.valueOf(volumeName);
+        order = Order.valueOf(orderName);
+    }
+
     public Volume getVolume() {
         return volume;
     }
 
     public void setVolume(Volume volume) {
-        setLeft(new SubType(volume.getName()));
+        setLeft(volume.name(), volume.getName());
         this.volume = volume;
     }
 
@@ -66,8 +72,8 @@ public class Trinity extends GameSystem {
     }
 
     public void setOrder(Order order) {
-        setRight(new SubType(order.getName()));
-        setTitle(order.getName());
+        setRight(order.name(), order.getName());
+        setArchetype(order.getName());
         this.order = order;
     }
 

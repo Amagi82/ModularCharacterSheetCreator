@@ -63,13 +63,19 @@ public class NMummy extends GameSystem {
         super(System.NWODMUMMY);
     }
 
+    public NMummy(String decreeName, String guildName) {
+        super(System.NWODMUMMY);
+        decree = Decree.valueOf(decreeName);
+        guild = Guild.valueOf(guildName);
+    }
+
     public Decree getDecree() {
         return decree;
     }
 
     public void setDecree(Decree decree) {
-        setLeft(new SubType(decree.getName(), decree.getUrl()));
-        setTitle(decree.getName());
+        setLeft(decree.name(), decree.getName(), decree.getUrl());
+        setArchetype(decree.getName());
         this.decree = decree;
     }
 
@@ -78,7 +84,7 @@ public class NMummy extends GameSystem {
     }
 
     public void setGuild(Guild guild) {
-        setRight(new SubType(guild.getName(), guild.getUrl()));
+        setRight(guild.name(), guild.getName(), guild.getUrl());
         this.guild = guild;
     }
 

@@ -145,12 +145,18 @@ public class CVampire extends GameSystem{
         super(System.CWODVAMPIRE);
     }
 
+    public CVampire(String sectName, String clanName){
+        super(System.CWODVAMPIRE);
+        sect = Sect.valueOf(sectName);
+        clan = Clan.valueOf(clanName);
+    }
+
     public Sect getSect() {
         return sect;
     }
 
     public void setSect(Sect sect) {
-        setLeft(new SubType(sect.getName(), sect.getUrl()));
+        setLeft(sect.name(), sect.getName(), sect.getUrl());
         this.sect = sect;
     }
 
@@ -159,8 +165,8 @@ public class CVampire extends GameSystem{
     }
 
     public void setClan(Clan clan) {
-        setRight(new SubType(clan.getName(), clan.getUrl()));
-        setTitle(clan.getName());
+        setRight(clan.name(), clan.getName(), clan.getUrl());
+        setArchetype(clan.getName());
         this.clan = clan;
     }
 

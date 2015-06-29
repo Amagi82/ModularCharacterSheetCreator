@@ -67,13 +67,18 @@ public class CMage extends GameSystem{
         super(System.CWODMAGE);
     }
 
+    public CMage(String factionName){
+        super(System.CWODMAGE);
+        faction = Faction.valueOf(factionName);
+    }
+
     public Faction getFaction() {
         return faction;
     }
 
     public void setFaction(Faction faction) {
-        setLeft(new SubType(faction.getName(), faction.getUrl()));
-        setTitle(faction.getName());
+        setLeft(faction.name(), faction.getName(), faction.getUrl());
+        setArchetype(faction.getName());
         this.faction = faction;
     }
 

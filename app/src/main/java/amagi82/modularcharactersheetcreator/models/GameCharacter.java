@@ -10,27 +10,31 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
 import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.models.game_systems.GameSystem;
-import amagi82.modularcharactersheetcreator.models.game_systems.SubType;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 
 @JsonObject
 public class GameCharacter {
 
-    @JsonField private Bitmap icon;
     @JsonField private String name = "";
-    @JsonField public String systemName;
-    @JsonField private SubType left;
-    @JsonField private SubType right;
-    @JsonField private int title;
-    @JsonField private Uri portraitUri;
+    @JsonField private String systemName;
+    @JsonField private String leftCategoryName;
+    @JsonField private String rightCategoryName;
+    @JsonField private int leftUrl;
+    @JsonField private int leftTitle;
+    @JsonField private int rightUrl;
+    @JsonField private int rightTitle;
+    @JsonField private int baseUrl;
+    @JsonField private int archetype;
     @JsonField private int colorPrimary;
     @JsonField private int colorBackground;
     @JsonField private int colorText;
     @JsonField private int colorTextTitle;
     @JsonField private int colorTitles;
-    private ArrayList<Module> moduleList = new ArrayList<>();
     @JsonField private String entityId;
     @JsonField private long timeStamp;
+    private Bitmap icon;
+    private Uri portraitUri;
+    private ArrayList<Module> moduleList = new ArrayList<>();
 
     public GameCharacter() {
         timeStamp = System.currentTimeMillis();
@@ -38,8 +42,7 @@ public class GameCharacter {
 
     public GameCharacter(String name, GameSystem gameSystem) {
         this.name = name;
-        systemName = gameSystem.getSystem().name();
-        entityId = name + gameSystem.getLeft().getTitle() + gameSystem.getRight().getTitle();
+        setGameSystem(gameSystem);
         timeStamp = System.currentTimeMillis();
     }
 
@@ -89,6 +92,15 @@ public class GameCharacter {
 
     public void setGameSystem(GameSystem gameSystem) {
         systemName = gameSystem.getSystem().name();
+        leftCategoryName = gameSystem.getLeftCategoryName();
+        rightCategoryName = gameSystem.getRightCategoryName();
+        leftUrl = gameSystem.getLeftUrl();
+        leftTitle = gameSystem.getLeftTitle();
+        rightUrl = gameSystem.getRightUrl();
+        rightTitle = gameSystem.getRightTitle();
+        baseUrl = gameSystem.getBaseUrl();
+        archetype = gameSystem.getArchetype();
+        entityId = name + gameSystem.getLeftTitle() + gameSystem.getRightTitle();
     }
 
     public ArrayList<Module> getModuleList() {
@@ -148,7 +160,6 @@ public class GameCharacter {
     }
 
     public String getEntityId() {
-        //if (entityId == null) entityId = name + gameSystem.getLeft().getTitle() + gameSystem.getRight().getTitle();
         return entityId;
     }
 
@@ -168,27 +179,75 @@ public class GameCharacter {
         this.timeStamp = timeStamp;
     }
 
-    public SubType getLeft() {
-        return left;
+    public int getArchetype() {
+        return archetype;
     }
 
-    public void setLeft(SubType left) {
-        this.left = left;
+    public void setArchetype(int archetype) {
+        this.archetype = archetype;
     }
 
-    public SubType getRight() {
-        return right;
+    public String getSystemName() {
+        return systemName;
     }
 
-    public void setRight(SubType right) {
-        this.right = right;
+    public void setSystemName(String systemName) {
+        this.systemName = systemName;
     }
 
-    public int getTitle() {
-        return title;
+    public String getLeftCategoryName() {
+        return leftCategoryName;
     }
 
-    public void setTitle(int title) {
-        this.title = title;
+    public void setLeftCategoryName(String leftCategoryName) {
+        this.leftCategoryName = leftCategoryName;
+    }
+
+    public String getRightCategoryName() {
+        return rightCategoryName;
+    }
+
+    public void setRightCategoryName(String rightCategoryName) {
+        this.rightCategoryName = rightCategoryName;
+    }
+
+    public int getLeftUrl() {
+        return leftUrl;
+    }
+
+    public void setLeftUrl(int leftUrl) {
+        this.leftUrl = leftUrl;
+    }
+
+    public int getLeftTitle() {
+        return leftTitle;
+    }
+
+    public void setLeftTitle(int leftTitle) {
+        this.leftTitle = leftTitle;
+    }
+
+    public int getRightUrl() {
+        return rightUrl;
+    }
+
+    public void setRightUrl(int rightUrl) {
+        this.rightUrl = rightUrl;
+    }
+
+    public int getRightTitle() {
+        return rightTitle;
+    }
+
+    public void setRightTitle(int rightTitle) {
+        this.rightTitle = rightTitle;
+    }
+
+    public int getBaseUrl() {
+        return baseUrl;
+    }
+
+    public void setBaseUrl(int baseUrl) {
+        this.baseUrl = baseUrl;
     }
 }

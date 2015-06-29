@@ -52,13 +52,18 @@ public class CWraith extends GameSystem {
         super(System.CWODWRAITH);
     }
 
+    public CWraith(String arcanosName) {
+        super(System.CWODWRAITH);
+        arcanos = Arcanos.valueOf(arcanosName);
+    }
+
     public Arcanos getArcanos() {
         return arcanos;
     }
 
     public void setArcanos(Arcanos arcanos) {
-        setLeft(new SubType(arcanos.getName(), arcanos.getUrl()));
-        setTitle(arcanos.getName());
+        setLeft(arcanos.name(), arcanos.getName(), arcanos.getUrl());
+        setArchetype(arcanos.getName());
         this.arcanos = arcanos;
     }
 

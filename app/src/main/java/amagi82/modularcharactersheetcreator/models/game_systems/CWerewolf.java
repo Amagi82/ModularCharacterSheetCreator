@@ -109,13 +109,22 @@ public class CWerewolf extends GameSystem {
         super(System.CWODWEREWOLF);
     }
 
+    public CWerewolf(String tribeName, String auspiceName){
+        super(System.CWODWEREWOLF);
+        if(Tribe.valueOf(tribeName) != null) {
+            fera = Fera.GAROU;
+            tribe = Tribe.valueOf(tribeName);
+        }else fera = Fera.valueOf(tribeName);
+        auspice = Auspice.valueOf(auspiceName);
+    }
+
     public Fera getFera() {
         return fera;
     }
 
     public void setFera(Fera fera) {
-        setLeft(new SubType(fera.getName(), fera.getUrl()));
-        setTitle(fera.getName());
+        setLeft(fera.name(), fera.getName(), fera.getUrl());
+        setArchetype(fera.getName());
         this.fera = fera;
     }
 
@@ -124,8 +133,8 @@ public class CWerewolf extends GameSystem {
     }
 
     public void setTribe(Tribe tribe) {
-        setLeft(new SubType(tribe.getName(), tribe.getUrl()));
-        setTitle(tribe.getName());
+        setLeft(tribe.name(), tribe.getName(), tribe.getUrl());
+        setArchetype(tribe.getName());
         this.tribe = tribe;
     }
 
@@ -134,7 +143,7 @@ public class CWerewolf extends GameSystem {
     }
 
     public void setAuspice(Auspice auspice) {
-        setRight(new SubType(auspice.getName(), auspice.getUrl()));
+        setRight(auspice.name(), auspice.getName(), auspice.getUrl());
         this.auspice = auspice;
     }
 
