@@ -2,6 +2,7 @@ package amagi82.modularcharactersheetcreator.adapters;
 
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,10 +23,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     private SortedList<GameCharacter> gameCharacters;
     private CircleIcon iconFactory;
-    private Context context;
+    private Resources res;
 
     public MainAdapter(Context context, SortedList<GameCharacter> gameCharacters) {
-        this.context = context;
+        res = context.getResources();
         this.gameCharacters = gameCharacters;
         iconFactory = new CircleIcon(context);
     }
@@ -42,14 +43,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final GameCharacter gameCharacter = gameCharacters.get(position);
         if(gameCharacter.getIcon() == null){
-            int color = gameCharacter.getColorPrimary() < 1? context.getResources().getColor(R.color.primary) : gameCharacter.getColorPrimary();
+            int color = gameCharacter.getColorPrimary() < 1? res.getColor(R.color.primary) : gameCharacter.getColorPrimary();
             gameCharacter.setIcon(iconFactory.createIcon(gameCharacter.getName(), color));
         }
         holder.icon.setImageBitmap(gameCharacter.getIcon());
         holder.tvName.setText(gameCharacter.getName());
-        //holder.tvArchetype.setText(gameCharacter.getTitle());
-        //holder.tvGameSystem.setText(gameCharacter.getGameSystem().getName());
-        //holder.tvGameSystem.setTextColor(gameCharacter.getGameSystem().getColor());
+        holder.tvArchetype.setText(gameCharacter.getArchetype());
+        holder.tvGameSystem.setTextColor(res.getColor(gameCharacter.getGameSystem().getColor()));
+        holder.tvGameSystem.setText(gameCharacter.getGameSystem().getName());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

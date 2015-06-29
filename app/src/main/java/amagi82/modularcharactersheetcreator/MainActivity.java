@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
+        //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
 
         //generateSampleCharacters();
 
