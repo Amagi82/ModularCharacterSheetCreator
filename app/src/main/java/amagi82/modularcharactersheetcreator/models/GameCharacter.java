@@ -9,7 +9,8 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
 
 import java.util.ArrayList;
 
-import amagi82.modularcharactersheetcreator.models.game_systems.OnyxGame;
+import amagi82.modularcharactersheetcreator.models.game_systems.Game;
+import amagi82.modularcharactersheetcreator.models.game_systems.Onyx;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 
 @JsonObject
@@ -40,9 +41,9 @@ public class GameCharacter {
         timeStamp = System.currentTimeMillis();
     }
 
-    public GameCharacter(String name, OnyxGame onyxGame) {
+    public GameCharacter(String name, Onyx onyx) {
         this.name = name;
-        setGameSystem(onyxGame);
+        setOnyx(onyx);
         timeStamp = System.currentTimeMillis();
     }
 
@@ -86,21 +87,21 @@ public class GameCharacter {
         this.name = name;
     }
 
-    public OnyxGame.System getGameSystem() {
-        return OnyxGame.System.valueOf(systemName);
+    public Game.System getGameSystem() {
+        return Game.System.valueOf(systemName);
     }
 
-    public void setGameSystem(OnyxGame onyxGame) {
-        systemName = onyxGame.getSystem().name();
-        leftCategoryName = onyxGame.getLeftCategoryName();
-        rightCategoryName = onyxGame.getRightCategoryName();
-        leftUrl = onyxGame.getLeftUrl();
-        leftTitle = onyxGame.getLeftTitle();
-        rightUrl = onyxGame.getRightUrl();
-        rightTitle = onyxGame.getRightTitle();
-        baseUrl = onyxGame.getBaseUrl();
-        archetype = onyxGame.getArchetype();
-        entityId = name + onyxGame.getLeftTitle() + onyxGame.getRightTitle();
+    public void setOnyx(Onyx onyx) {
+        systemName = onyx.getSystemName();
+        leftCategoryName = onyx.getLeft().geteName();
+        rightCategoryName = onyx.getRight().geteName();
+        leftUrl = onyx.getLeft().getUrl();
+        leftTitle = onyx.getLeft().getTitle();
+        rightUrl = onyx.getRight().getUrl();
+        rightTitle = onyx.getRight().getTitle();
+        baseUrl = onyx.getLeft().getBaseUrl();
+        archetype = onyx.getArchetype();
+        entityId = name + onyx.getLeft().geteName();
     }
 
     public ArrayList<Module> getModuleList() {

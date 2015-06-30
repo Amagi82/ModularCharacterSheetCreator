@@ -24,7 +24,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<TileViewHolder> {
         this.choices = choices;
     }
 
-    public void setGameSystemList(final List<Choice> choices){
+    public void setList(final List<Choice> choices){
         notifyItemRangeRemoved(0, choices.size());
         choices.clear();
         new Handler().postDelayed(new Runnable() {
@@ -46,7 +46,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<TileViewHolder> {
         Choice choice = choices.get(position);
         if(choice.hasDrawable()) holder.imageTitle.setImageResource(choice.getDrawable());
         else holder.imageTitle.setImageUrl(getString(choice.getBaseUrl())+getString(choice.getUrl()), VolleySingleton.INSTANCE.getImageLoader());
-        holder.tvTitle.setText(choice.getName());
+        holder.tvTitle.setText(choice.getTitle());
     }
 
     @Override

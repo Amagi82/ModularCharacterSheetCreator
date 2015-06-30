@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class Scion extends OnyxGame {
+public class Scion extends Onyx {
 
     public enum Volume {
         HERO(R.string.hero),
@@ -51,11 +51,9 @@ public class Scion extends OnyxGame {
     private Pantheon pantheon;
 
     public Scion() {
-        super(System.SCION);
     }
 
     public Scion(String volumeName, String pantheonName) {
-        super(System.SCION);
         volume = Volume.valueOf(volumeName);
         pantheon = Pantheon.valueOf(pantheonName);
     }

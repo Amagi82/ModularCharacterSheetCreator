@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class CVampire extends CWorldofDarkness {
+public class CVampire extends Onyx {
 
     public enum Sect {
         CAMARILLA(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla),
@@ -141,12 +141,7 @@ public class CVampire extends CWorldofDarkness {
     private Sect sect;
     private Clan clan;
 
-    public CVampire() {
-        super(System.CWODVAMPIRE);
-    }
-
     public CVampire(String sectName, String clanName){
-        super(System.CWODVAMPIRE);
         sect = Sect.valueOf(sectName);
         clan = Clan.valueOf(clanName);
     }

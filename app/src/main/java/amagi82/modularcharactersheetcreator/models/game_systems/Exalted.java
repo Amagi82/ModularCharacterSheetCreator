@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class Exalted extends OnyxGame {
+public class Exalted extends Onyx {
 
     public enum ExaltedType {
         SOLAR(R.string.solar_exalted),
@@ -90,11 +90,9 @@ public class Exalted extends OnyxGame {
     private Caste caste;
 
     public Exalted() {
-        super(System.EXALTED);
     }
 
     public Exalted(String typeName, String casteName) {
-        super(System.EXALTED);
         exaltedType = ExaltedType.valueOf(typeName);
         caste = Caste.valueOf(casteName);
     }

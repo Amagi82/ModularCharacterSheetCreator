@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class NVampire extends NWorldofDarkness {
+public class NVampire extends Onyx {
 
     public enum Clan {
         DAEVA(R.string.daeva, R.string.url_nwod_vampire_clan_daeva),
@@ -62,11 +62,9 @@ public class NVampire extends NWorldofDarkness {
     private Covenant covenant;
 
     public NVampire() {
-        super(System.NWODVAMPIRE);
     }
 
     public NVampire(String clanName, String covenantName) {
-        super(System.NWODVAMPIRE);
         clan = Clan.valueOf(clanName);
         covenant = Covenant.valueOf(covenantName);
     }

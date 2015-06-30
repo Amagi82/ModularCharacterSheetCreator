@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class NDemon extends NWorldofDarkness {
+public class NDemon extends Onyx {
 
     public enum Incarnation {
         DESTROYER(R.string.destroyer, R.string.url_nwod_demon_incarnation_destroyer),
@@ -58,11 +58,9 @@ public class NDemon extends NWorldofDarkness {
     private Agenda agenda;
 
     public NDemon() {
-        super(System.NWODDEMON);
     }
 
     public NDemon(String incarnationName, String agendaName) {
-        super(System.NWODDEMON);
         incarnation = Incarnation.valueOf(incarnationName);
         agenda = Agenda.valueOf(agendaName);
     }

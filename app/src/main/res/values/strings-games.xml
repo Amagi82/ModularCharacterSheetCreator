@@ -2,6 +2,8 @@
 <resources>
 
     <string name="world_of_darkness">World of Darkness</string>
+    <string name="cwod">Classic World of Darkness</string>
+    <string name="nwod">New World of Darkness</string>
     <string name="cwod_vampire">Vampire the Masquerade</string>
     <string name="cwod_werewolf">Werewolf the Apocalypse</string>
     <string name="cwod_wraith">Wraith the Oblivion</string>

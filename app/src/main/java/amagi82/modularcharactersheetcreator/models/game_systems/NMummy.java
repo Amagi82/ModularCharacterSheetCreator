@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class NMummy extends NWorldofDarkness {
+public class NMummy extends Onyx {
 
     public enum Decree {
         BULLHEADED(R.string.bull_headed, R.string.url_nwod_mummy_decree_bull_headed),
@@ -60,11 +60,9 @@ public class NMummy extends NWorldofDarkness {
     private Guild guild;
 
     public NMummy() {
-        super(System.NWODMUMMY);
     }
 
     public NMummy(String decreeName, String guildName) {
-        super(System.NWODMUMMY);
         decree = Decree.valueOf(decreeName);
         guild = Guild.valueOf(guildName);
     }

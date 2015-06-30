@@ -5,7 +5,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class CMage extends CWorldofDarkness {
+public class CMage extends Onyx {
 
     public enum Faction {
         AKASHAYANA(R.string.akashayana, R.string.url_cwod_mage_tradition_akashayana, Group.TRADITIONS),
@@ -64,11 +64,9 @@ public class CMage extends CWorldofDarkness {
     private Faction faction;
 
     public CMage() {
-        super(System.CWODMAGE);
     }
 
     public CMage(String factionName){
-        super(System.CWODMAGE);
         faction = Faction.valueOf(factionName);
     }
 
@@ -89,4 +87,5 @@ public class CMage extends CWorldofDarkness {
         }
         return list;
     }
+
 }

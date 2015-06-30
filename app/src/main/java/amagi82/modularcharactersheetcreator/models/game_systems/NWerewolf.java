@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class NWerewolf extends NWorldofDarkness {
+public class NWerewolf extends Onyx {
 
     public enum Tribe {
         BLOODTALONS(R.string.blood_talons, R.string.url_nwod_werewolf_tribe_blood_talons),
@@ -61,11 +61,9 @@ public class NWerewolf extends NWorldofDarkness {
     private Auspice auspice;
 
     public NWerewolf() {
-        super(System.NWODWEREWOLF);
     }
 
     public NWerewolf(String tribeName, String auspiceName) {
-        super(System.NWODWEREWOLF);
         tribe = Tribe.valueOf(tribeName);
         auspice = Auspice.valueOf(auspiceName);
     }

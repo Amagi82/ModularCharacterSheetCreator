@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class CWerewolf extends CWorldofDarkness {
+public class CWerewolf extends Onyx {
 
     public enum Fera {
         GAROU(R.string.garou, R.string.url_cwod_werewolf_fera_garou),
@@ -106,11 +106,9 @@ public class CWerewolf extends CWorldofDarkness {
     private Auspice auspice;
 
     public CWerewolf() {
-        super(System.CWODWEREWOLF);
     }
 
     public CWerewolf(String tribeName, String auspiceName){
-        super(System.CWODWEREWOLF);
         if(Tribe.valueOf(tribeName) != null) {
             fera = Fera.GAROU;
             tribe = Tribe.valueOf(tribeName);

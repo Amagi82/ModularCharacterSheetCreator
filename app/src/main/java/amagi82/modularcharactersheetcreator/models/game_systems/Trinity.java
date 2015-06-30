@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class Trinity extends OnyxGame {
+public class Trinity extends Onyx {
 
     public enum Volume {
         ADVENTURE(R.string.adventure),
@@ -49,11 +49,9 @@ public class Trinity extends OnyxGame {
     private Order order;
 
     public Trinity() {
-        super(System.TRINITY);
     }
 
     public Trinity(String volumeName, String orderName) {
-        super(System.TRINITY);
         volume = Volume.valueOf(volumeName);
         order = Order.valueOf(orderName);
     }
