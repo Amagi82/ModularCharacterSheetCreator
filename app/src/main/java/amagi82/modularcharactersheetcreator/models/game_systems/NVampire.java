@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class NVampire extends GameSystem {
+public class NVampire extends NWorldofDarkness {
 
     public enum Clan {
         DAEVA(R.string.daeva, R.string.url_nwod_vampire_clan_daeva),

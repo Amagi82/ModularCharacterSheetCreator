@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class NWerewolf extends GameSystem {
+public class NWerewolf extends NWorldofDarkness {
 
     public enum Tribe {
         BLOODTALONS(R.string.blood_talons, R.string.url_nwod_werewolf_tribe_blood_talons),

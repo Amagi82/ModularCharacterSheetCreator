@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class Exalted extends GameSystem {
+public class Exalted extends OnyxGame {
 
     public enum ExaltedType {
         SOLAR(R.string.solar_exalted),

@@ -4,7 +4,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public abstract class GameSystem {
+public abstract class OnyxGame {
 
     /*
         - System enum includes the name and drawable for each game system, along with the base url,
@@ -101,7 +101,7 @@ public abstract class GameSystem {
 
     public abstract List getListLeft();
 
-    public GameSystem(System system) {
+    public OnyxGame(System system) {
         setSystem(system);
     }
 
@@ -170,7 +170,7 @@ public abstract class GameSystem {
         this.archetype = archetype;
     }
 
-//    public static GameSystem getGameSystem(String system, String leftCategoryName, String rightCategoryName){
+//    public static OnyxGame getGameSystem(String system, String leftCategoryName, String rightCategoryName){
 //        switch (System.valueOf(system)){
 //            case CWODMAGE: return new CMage(leftCategoryName);
 //            case CWODVAMPIRE: return new CVampire(leftCategoryName, rightCategoryName);

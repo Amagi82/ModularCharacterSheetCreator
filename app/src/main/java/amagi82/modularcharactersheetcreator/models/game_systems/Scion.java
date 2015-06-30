@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class Scion extends GameSystem {
+public class Scion extends OnyxGame {
 
     public enum Volume {
         HERO(R.string.hero),

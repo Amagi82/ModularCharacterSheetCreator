@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.adapters;
 
+import android.content.Context;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,33 +11,28 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.TileViewHolder;
-import amagi82.modularcharactersheetcreator.models.game_systems.GameSystem;
+import amagi82.modularcharactersheetcreator.models.Choice;
+import amagi82.modularcharactersheetcreator.network.VolleySingleton;
 
 public class CharacterAdapter extends RecyclerView.Adapter<TileViewHolder> {
 
-    private GameSystem system;
-    boolean isMainSystemSelected = false;
-    private List<GameSystem.System> gameSystemList;
+    private Context context;
+    private List<Choice> choices;
 
-    public CharacterAdapter(List<GameSystem.System> gameSystemList) {
-        this.gameSystemList = gameSystemList;
+    public CharacterAdapter(Context context, List<Choice> choices) {
+        this.context = context;
+        this.choices = choices;
     }
 
-    public void setGameSystemList(final List<GameSystem.System> gameSystemList){
-        isMainSystemSelected = false;
-        notifyItemRangeRemoved(0, gameSystemList.size());
-        gameSystemList.clear();
+    public void setGameSystemList(final List<Choice> choices){
+        notifyItemRangeRemoved(0, choices.size());
+        choices.clear();
         new Handler().postDelayed(new Runnable() {
             @Override public void run() {
-                CharacterAdapter.this.gameSystemList = gameSystemList;
-                notifyItemRangeInserted(0, gameSystemList.size());
+                CharacterAdapter.this.choices = choices;
+                notifyItemRangeInserted(0, choices.size());
             }
         }, 250);
-    }
-
-    public void setGameSystem(GameSystem system){
-        this.system = system;
-        isMainSystemSelected = true;
     }
 
     @Override
@@ -47,12 +43,18 @@ public class CharacterAdapter extends RecyclerView.Adapter<TileViewHolder> {
 
     @Override
     public void onBindViewHolder(TileViewHolder holder, int position) {
-        holder.imageTitle.setImageResource(isMainSystemSelected? system.getUrl(position) : gameSystemList.get(position).getImageMain());
-        holder.tvTitle.setText(isMainSystemSelected ? system.getName(position) : gameSystemList.get(position).getName());
+        Choice choice = choices.get(position);
+        if(choice.hasDrawable()) holder.imageTitle.setImageResource(choice.getDrawable());
+        else holder.imageTitle.setImageUrl(getString(choice.getBaseUrl())+getString(choice.getUrl()), VolleySingleton.INSTANCE.getImageLoader());
+        holder.tvTitle.setText(choice.getName());
     }
 
     @Override
     public int getItemCount() {
-        return gameSystemList.size();
+        return choices.size();
+    }
+
+    private String getString(int resId){
+        return context.getResources().getString(resId);
     }
 }

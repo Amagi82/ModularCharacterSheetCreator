@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class NMummy extends GameSystem {
+public class NMummy extends NWorldofDarkness {
 
     public enum Decree {
         BULLHEADED(R.string.bull_headed, R.string.url_nwod_mummy_decree_bull_headed),

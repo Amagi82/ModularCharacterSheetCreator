@@ -5,7 +5,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class CMage extends GameSystem{
+public class CMage extends CWorldofDarkness {
 
     public enum Faction {
         AKASHAYANA(R.string.akashayana, R.string.url_cwod_mage_tradition_akashayana, Group.TRADITIONS),

@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class CVampire extends GameSystem{
+public class CVampire extends CWorldofDarkness {
 
     public enum Sect {
         CAMARILLA(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla),

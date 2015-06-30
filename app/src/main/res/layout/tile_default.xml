@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:layout_width="150dp">
 
-    <ImageView
+    <amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView
         android:id="@+id/imageTitle"
         android:layout_width="match_parent"
         android:layout_height="175dp"

@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class NDemon extends GameSystem {
+public class NDemon extends NWorldofDarkness {
 
     public enum Incarnation {
         DESTROYER(R.string.destroyer, R.string.url_nwod_demon_incarnation_destroyer),

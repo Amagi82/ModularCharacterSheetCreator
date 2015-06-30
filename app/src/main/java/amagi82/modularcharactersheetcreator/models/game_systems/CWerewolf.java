@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class CWerewolf extends GameSystem {
+public class CWerewolf extends CWorldofDarkness {
 
     public enum Fera {
         GAROU(R.string.garou, R.string.url_cwod_werewolf_fera_garou),

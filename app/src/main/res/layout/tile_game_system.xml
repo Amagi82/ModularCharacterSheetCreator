@@ -15,7 +15,7 @@
         android:textColor="@color/white"
         tools:text="Header"/>
 
-    <ImageView
+    <amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView
         android:id="@+id/imageTitle"
         android:layout_width="match_parent"
         android:layout_height="75dp"

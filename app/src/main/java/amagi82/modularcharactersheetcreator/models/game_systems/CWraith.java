@@ -9,7 +9,7 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.R;
 
 @JsonObject
-public class CWraith extends GameSystem {
+public class CWraith extends CWorldofDarkness {
 
     public enum Arcanos {
         ARGOS(R.string.argos, R.string.url_cwod_wraith_arcanos_argos),

@@ -6,7 +6,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class Trinity extends GameSystem {
+public class Trinity extends OnyxGame {
 
     public enum Volume {
         ADVENTURE(R.string.adventure),

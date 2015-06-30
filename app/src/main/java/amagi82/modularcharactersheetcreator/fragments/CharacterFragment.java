@@ -33,7 +33,7 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
 import amagi82.modularcharactersheetcreator.events.TileClickedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.game_systems.GameSystem;
+import amagi82.modularcharactersheetcreator.models.game_systems.OnyxGame;
 import amagi82.modularcharactersheetcreator.utils.Logan;
 import amagi82.modularcharactersheetcreator.utils.Otto;
 import amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView;
@@ -45,7 +45,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int PICK_FROM_FILE = 2;
     private GameCharacter gameCharacter;
-    private GameSystem gameSystem;
+    private OnyxGame onyxGame;
     private boolean isEditMode = false;
     private Uri photoUri;
     private CropImageView cropper;
@@ -98,17 +98,17 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         return rootView;
     }
 
-    public List<GameSystem.System> getInitialList(){
-        List<GameSystem.System> list = new ArrayList<>();
-        list.add(GameSystem.System.WOD);
-        for(GameSystem.System system : GameSystem.System.values()){
+    public List<OnyxGame.System> getInitialList(){
+        List<OnyxGame.System> list = new ArrayList<>();
+        list.add(OnyxGame.System.WOD);
+        for(OnyxGame.System system : OnyxGame.System.values()){
             if(!system.isWod()) list.add(system);
         }
         return list;
     }
-    public List<GameSystem.System> getWodList(){
-        List<GameSystem.System> list = new ArrayList<>();
-        for(GameSystem.System system : GameSystem.System.values()){
+    public List<OnyxGame.System> getWodList(){
+        List<OnyxGame.System> list = new ArrayList<>();
+        for(OnyxGame.System system : OnyxGame.System.values()){
             if(system.isWod()) list.add(system);
         }
         return list;
