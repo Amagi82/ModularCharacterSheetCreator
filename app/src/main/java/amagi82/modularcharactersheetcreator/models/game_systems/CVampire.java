@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.Choice;
 
 public class CVampire extends Onyx {
 
@@ -140,11 +141,55 @@ public class CVampire extends Onyx {
 
     private Sect sect;
     private Clan clan;
+    private Choice choiceLeft;
+    private Choice choiceRight;
+    private List<Choice> list = new ArrayList<>();
 
     public CVampire(String sectName, String clanName){
         sect = Sect.valueOf(sectName);
         clan = Clan.valueOf(clanName);
     }
+
+    @Override public String getSystemName() {
+        return Game.System.CWEREWOLF.name();
+    }
+
+    @Override public int getArchetype() {
+        return clan.getName();
+    }
+
+    @Override public Choice getLeft() {
+        return choiceLeft;
+    }
+
+    @Override public Choice getRight() {
+        return choiceRight;
+    }
+
+    @Override public List<Choice> getList(String eName) {
+        list.clear();
+        if (eName == null) {
+            for (Sect sect : Sect.values()){
+                list.add(new Choice(sect.name(), sect.getName(), Game.System.CVAMPIRE.getUrlBase(), sect.getUrl()));
+            }
+            return list;
+        }
+        if(sect == null) {
+            sect = Sect.valueOf(eName);
+            choiceLeft = new Choice(sect.name(), sect.getName(), Game.System.CVAMPIRE.getUrlBase(), sect.getUrl());
+
+            for (Clan clan : Clan.values()) {
+                list.add(new Choice(clan.name(), clan.getName(), Game.System.CVAMPIRE.getUrlBase(), clan.getUrl()));
+            }
+            return list;
+        }
+        clan = Clan.valueOf(eName);
+        choiceRight = new Choice(clan.name(), clan.getName(), Game.System.CVAMPIRE.getUrlBase(), clan.getUrl());
+        return null;
+    }
+
+
+
 
     public Sect getSect() {
         return sect;

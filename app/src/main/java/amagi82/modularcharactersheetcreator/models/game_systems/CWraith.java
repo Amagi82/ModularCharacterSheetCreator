@@ -3,13 +3,13 @@ package amagi82.modularcharactersheetcreator.models.game_systems;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.Choice;
 
 @JsonObject
-public class CWraith extends CWorldofDarkness {
+public class CWraith extends Onyx {
 
     public enum Arcanos {
         ARGOS(R.string.argos, R.string.url_cwod_wraith_arcanos_argos),
@@ -47,29 +47,42 @@ public class CWraith extends CWorldofDarkness {
     }
 
     private Arcanos arcanos;
+    private Choice choiceLeft;
+    private List<Choice> list = new ArrayList<>();
 
     public CWraith() {
-        super(System.CWODWRAITH);
     }
 
     public CWraith(String arcanosName) {
-        super(System.CWODWRAITH);
         arcanos = Arcanos.valueOf(arcanosName);
     }
 
-    public Arcanos getArcanos() {
-        return arcanos;
+    @Override public String getSystemName() {
+        return Game.System.CWRAITH.name();
     }
 
-    public void setArcanos(Arcanos arcanos) {
-        setLeft(arcanos.name(), arcanos.getName(), arcanos.getUrl());
-        setArchetype(arcanos.getName());
-        this.arcanos = arcanos;
+    @Override public int getArchetype() {
+        return arcanos.getName();
     }
 
-    public List<Arcanos> getListArcanos() {
-        List<Arcanos> list = new ArrayList<>();
-        Collections.addAll(list, Arcanos.values());
-        return list;
+    @Override public Choice getLeft() {
+        return choiceLeft;
+    }
+
+    @Override public Choice getRight() {
+        return null;
+    }
+
+    @Override public List<Choice> getList(String eName) {
+        list.clear();
+        if (eName == null) {
+            for (Arcanos type : Arcanos.values()) {
+                list.add(new Choice(type.name(), type.getName()));
+            }
+            return list;
+        }
+        arcanos = Arcanos.valueOf(eName);
+        choiceLeft = new Choice(arcanos.name(), arcanos.getName(), Game.System.CWRAITH.getUrlBase(), arcanos.getUrl());
+        return null;
     }
 }

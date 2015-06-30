@@ -9,6 +9,10 @@ public class Choice {
     private int url;
     private boolean hasDrawable;
 
+    public Choice(String eName, int title){
+        this(eName, title, 0, 0);
+    }
+
     public Choice(String eName, int title, int drawable) {
         this.eName = eName;
         this.title = title;

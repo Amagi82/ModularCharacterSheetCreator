@@ -1,10 +1,10 @@
 package amagi82.modularcharactersheetcreator.models.game_systems;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.Choice;
 
 public class Exalted extends Onyx {
 
@@ -25,7 +25,7 @@ public class Exalted extends Onyx {
             this(name, true);
         }
 
-        ExaltedType(int name, boolean hasCastes){
+        ExaltedType(int name, boolean hasCastes) {
             this.name = name;
             this.hasCastes = hasCastes;
         }
@@ -40,34 +40,34 @@ public class Exalted extends Onyx {
     }
 
     public enum Caste {
-        DAWN(R.string.dawn,ExaltedType.SOLAR),
-        ZENITH(R.string.zenith,ExaltedType.SOLAR),
-        TWILIGHT(R.string.twilight,ExaltedType.SOLAR),
-        NIGHT(R.string.night,ExaltedType.SOLAR),
-        ECLIPSE(R.string.eclipse,ExaltedType.SOLAR),
-        DUSK(R.string.dusk,ExaltedType.ABYSSAL),
-        MIDNIGHT(R.string.midnight,ExaltedType.ABYSSAL),
-        DAYBREAK(R.string.daybreak,ExaltedType.ABYSSAL),
-        DAY(R.string.day,ExaltedType.ABYSSAL),
-        MOONSHADOW(R.string.midnight,ExaltedType.ABYSSAL),
-        AIR(R.string.air,ExaltedType.TERRESTRIAL),
-        EARTH(R.string.earth,ExaltedType.TERRESTRIAL),
-        FIRE(R.string.fire,ExaltedType.TERRESTRIAL),
-        WATER(R.string.water,ExaltedType.TERRESTRIAL),
-        WOOD(R.string.wood,ExaltedType.TERRESTRIAL),
-        FULLMOON(R.string.full_moon,ExaltedType.LUNAR),
-        CHANGINGMOON(R.string.changing_moon,ExaltedType.LUNAR),
-        NOMOON(R.string.no_moon,ExaltedType.LUNAR),
-        CHOSENOFJOURNEYS(R.string.chosen_of_journeys,ExaltedType.SIDEREAL),
-        CHOSENOFSERENITY(R.string.chosen_of_serenity,ExaltedType.SIDEREAL),
-        CHOSENOFBATTLES(R.string.chosen_of_battles,ExaltedType.SIDEREAL),
-        CHOSENOFSECRETS(R.string.chosen_of_secrets,ExaltedType.SIDEREAL),
-        CHOSENOFENDINGS(R.string.chosen_of_endings,ExaltedType.SIDEREAL),
-        ORICHALCUM(R.string.orichalcum,ExaltedType.ALCHEMICAL),
-        MOONSILVER(R.string.moonsilver,ExaltedType.ALCHEMICAL),
-        STARMETAL(R.string.starmetal,ExaltedType.ALCHEMICAL),
-        JADE(R.string.jade,ExaltedType.ALCHEMICAL),
-        SOULSTEEL(R.string.soulsteel,ExaltedType.ALCHEMICAL);
+        DAWN(R.string.dawn, ExaltedType.SOLAR),
+        ZENITH(R.string.zenith, ExaltedType.SOLAR),
+        TWILIGHT(R.string.twilight, ExaltedType.SOLAR),
+        NIGHT(R.string.night, ExaltedType.SOLAR),
+        ECLIPSE(R.string.eclipse, ExaltedType.SOLAR),
+        DUSK(R.string.dusk, ExaltedType.ABYSSAL),
+        MIDNIGHT(R.string.midnight, ExaltedType.ABYSSAL),
+        DAYBREAK(R.string.daybreak, ExaltedType.ABYSSAL),
+        DAY(R.string.day, ExaltedType.ABYSSAL),
+        MOONSHADOW(R.string.midnight, ExaltedType.ABYSSAL),
+        AIR(R.string.air, ExaltedType.TERRESTRIAL),
+        EARTH(R.string.earth, ExaltedType.TERRESTRIAL),
+        FIRE(R.string.fire, ExaltedType.TERRESTRIAL),
+        WATER(R.string.water, ExaltedType.TERRESTRIAL),
+        WOOD(R.string.wood, ExaltedType.TERRESTRIAL),
+        FULLMOON(R.string.full_moon, ExaltedType.LUNAR),
+        CHANGINGMOON(R.string.changing_moon, ExaltedType.LUNAR),
+        NOMOON(R.string.no_moon, ExaltedType.LUNAR),
+        CHOSENOFJOURNEYS(R.string.chosen_of_journeys, ExaltedType.SIDEREAL),
+        CHOSENOFSERENITY(R.string.chosen_of_serenity, ExaltedType.SIDEREAL),
+        CHOSENOFBATTLES(R.string.chosen_of_battles, ExaltedType.SIDEREAL),
+        CHOSENOFSECRETS(R.string.chosen_of_secrets, ExaltedType.SIDEREAL),
+        CHOSENOFENDINGS(R.string.chosen_of_endings, ExaltedType.SIDEREAL),
+        ORICHALCUM(R.string.orichalcum, ExaltedType.ALCHEMICAL),
+        MOONSILVER(R.string.moonsilver, ExaltedType.ALCHEMICAL),
+        STARMETAL(R.string.starmetal, ExaltedType.ALCHEMICAL),
+        JADE(R.string.jade, ExaltedType.ALCHEMICAL),
+        SOULSTEEL(R.string.soulsteel, ExaltedType.ALCHEMICAL);
 
         private int name;
         ExaltedType parent;
@@ -88,6 +88,9 @@ public class Exalted extends Onyx {
 
     private ExaltedType exaltedType;
     private Caste caste;
+    private Choice choiceLeft;
+    private Choice choiceRight;
+    private List<Choice> list = new ArrayList<>();
 
     public Exalted() {
     }
@@ -97,35 +100,40 @@ public class Exalted extends Onyx {
         caste = Caste.valueOf(casteName);
     }
 
-    public ExaltedType getType() {
-        return exaltedType;
+    @Override public String getSystemName() {
+        return Game.System.EXALTED.name();
     }
 
-    public void setType(ExaltedType exaltedType) {
-        setLeft(exaltedType.name(), exaltedType.getName());
-        this.exaltedType = exaltedType;
+    @Override public int getArchetype() {
+        return exaltedType.getName();
     }
 
-    public Caste getCaste() {
-        return caste;
+    @Override public Choice getLeft() {
+        return choiceLeft;
     }
 
-    public void setCaste(Caste caste) {
-        setRight(caste.name(), caste.getName());
-        this.caste = caste;
+    @Override public Choice getRight() {
+        return choiceRight;
     }
 
-    public List<ExaltedType> getListType() {
-        List<ExaltedType> list = new ArrayList<>();
-        Collections.addAll(list, ExaltedType.values());
-        return list;
-    }
-
-    public List<Caste> getListCaste(ExaltedType type) {
-        List<Caste> list = new ArrayList<>();
-        for(Caste caste : Caste.values()){
-            if(caste.getParent() == type) list.add(caste);
+    @Override public List<Choice> getList(String eName) {
+        list.clear();
+        if (eName == null) {
+            for (ExaltedType type : ExaltedType.values()) {
+                list.add(new Choice(type.name(), type.getName()));
+            }
+            return list;
         }
-        return list;
+        if(choiceLeft == null) {
+            exaltedType = ExaltedType.valueOf(eName);
+            choiceLeft = new Choice(exaltedType.name(), exaltedType.getName());
+            for (Caste caste : Caste.values()) {
+                if (caste.getParent().equals(ExaltedType.valueOf(eName))) list.add(new Choice(caste.name(), caste.getName()));
+            }
+            return list.size() > 0 ? list : null;
+        }
+        caste = Caste.valueOf(eName);
+        choiceRight = new Choice(caste.name(), caste.getName());
+        return null;
     }
 }
