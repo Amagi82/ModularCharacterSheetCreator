@@ -1,10 +1,10 @@
 package amagi82.modularcharactersheetcreator.models.game_systems;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.Choice;
 
 public class NWerewolf extends Onyx {
 
@@ -59,6 +59,9 @@ public class NWerewolf extends Onyx {
 
     private Tribe tribe;
     private Auspice auspice;
+    private Choice choiceLeft;
+    private Choice choiceRight;
+    private List<Choice> list = new ArrayList<>();
 
     public NWerewolf() {
     }
@@ -68,34 +71,41 @@ public class NWerewolf extends Onyx {
         auspice = Auspice.valueOf(auspiceName);
     }
 
-    public Tribe getTribe() {
-        return tribe;
+    @Override public String getSystemName() {
+        return Game.System.NWEREWOLF.name();
     }
 
-    public void setTribe(Tribe tribe) {
-        setLeft(tribe.name(), tribe.getName(), tribe.getUrl());
-        setArchetype(tribe.getName());
-        this.tribe = tribe;
+    @Override public int getArchetype() {
+        return tribe.getName();
     }
 
-    public Auspice getAuspice() {
-        return auspice;
+    @Override public Choice getLeft() {
+        return choiceLeft;
     }
 
-    public void setAuspice(Auspice auspice) {
-        setRight(auspice.name(), auspice.getName(), auspice.getUrl());
-        this.auspice = auspice;
+    @Override public Choice getRight() {
+        return choiceRight;
     }
 
-    public List<Tribe> getListTribe() {
-        List<Tribe> list = new ArrayList<>();
-        Collections.addAll(list, Tribe.values());
-        return list;
-    }
+    @Override public List<Choice> getList(String eName) {
+        list.clear();
+        if (eName == null) {
+            for (Tribe tribe : Tribe.values()){
+                list.add(new Choice(tribe.name(), tribe.getName(), Game.System.NWEREWOLF.getUrlBase(), tribe.getUrl()));
+            }
+            return list;
+        }
+        if(tribe == null) {
+            tribe = Tribe.valueOf(eName);
+            choiceLeft = new Choice(tribe.name(), tribe.getName(), Game.System.NWEREWOLF.getUrlBase(), tribe.getUrl());
 
-    public List<Auspice> getListAuspice() {
-        List<Auspice> list = new ArrayList<>();
-        Collections.addAll(list, Auspice.values());
-        return list;
+            for (Auspice auspice : Auspice.values()) {
+                list.add(new Choice(auspice.name(), auspice.getName(), Game.System.NWEREWOLF.getUrlBase(), auspice.getUrl()));
+            }
+            return list;
+        }
+        auspice = Auspice.valueOf(eName);
+        choiceRight = new Choice(auspice.name(), auspice.getName(), Game.System.NWEREWOLF.getUrlBase(), auspice.getUrl());
+        return null;
     }
 }

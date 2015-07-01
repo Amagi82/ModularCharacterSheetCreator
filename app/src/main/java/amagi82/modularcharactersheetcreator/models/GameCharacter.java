@@ -17,14 +17,9 @@ import amagi82.modularcharactersheetcreator.models.modules.Module;
 public class GameCharacter {
 
     @JsonField private String name = "";
-    @JsonField private String systemName;
-    @JsonField private String leftCategoryName;
-    @JsonField private String rightCategoryName;
-    @JsonField private int leftUrl;
-    @JsonField private int leftTitle;
-    @JsonField private int rightUrl;
-    @JsonField private int rightTitle;
-    @JsonField private int baseUrl;
+    @JsonField private String gameEName;
+    @JsonField private Choice left;
+    @JsonField private Choice right;
     @JsonField private int archetype;
     @JsonField private int colorPrimary;
     @JsonField private int colorBackground;
@@ -88,18 +83,13 @@ public class GameCharacter {
     }
 
     public Game.System getGameSystem() {
-        return Game.System.valueOf(systemName);
+        return Game.System.valueOf(gameEName);
     }
 
     public void setOnyx(Onyx onyx) {
-        systemName = onyx.getSystemName();
-        leftCategoryName = onyx.getLeft().geteName();
-        rightCategoryName = onyx.getRight().geteName();
-        leftUrl = onyx.getLeft().getUrl();
-        leftTitle = onyx.getLeft().getTitle();
-        rightUrl = onyx.getRight().getUrl();
-        rightTitle = onyx.getRight().getTitle();
-        baseUrl = onyx.getLeft().getBaseUrl();
+        gameEName = onyx.getSystemName();
+        left = onyx.getLeft();
+        right = onyx.getRight();
         archetype = onyx.getArchetype();
         entityId = name + onyx.getLeft().geteName();
     }
@@ -188,67 +178,27 @@ public class GameCharacter {
         this.archetype = archetype;
     }
 
-    public String getSystemName() {
-        return systemName;
+    public String getGameEName() {
+        return gameEName;
     }
 
-    public void setSystemName(String systemName) {
-        this.systemName = systemName;
+    public void setGameEName(String gameEName) {
+        this.gameEName = gameEName;
     }
 
-    public String getLeftCategoryName() {
-        return leftCategoryName;
+    public Choice getLeft() {
+        return left;
     }
 
-    public void setLeftCategoryName(String leftCategoryName) {
-        this.leftCategoryName = leftCategoryName;
+    public void setLeft(Choice left) {
+        this.left = left;
     }
 
-    public String getRightCategoryName() {
-        return rightCategoryName;
+    public Choice getRight() {
+        return right;
     }
 
-    public void setRightCategoryName(String rightCategoryName) {
-        this.rightCategoryName = rightCategoryName;
-    }
-
-    public int getLeftUrl() {
-        return leftUrl;
-    }
-
-    public void setLeftUrl(int leftUrl) {
-        this.leftUrl = leftUrl;
-    }
-
-    public int getLeftTitle() {
-        return leftTitle;
-    }
-
-    public void setLeftTitle(int leftTitle) {
-        this.leftTitle = leftTitle;
-    }
-
-    public int getRightUrl() {
-        return rightUrl;
-    }
-
-    public void setRightUrl(int rightUrl) {
-        this.rightUrl = rightUrl;
-    }
-
-    public int getRightTitle() {
-        return rightTitle;
-    }
-
-    public void setRightTitle(int rightTitle) {
-        this.rightTitle = rightTitle;
-    }
-
-    public int getBaseUrl() {
-        return baseUrl;
-    }
-
-    public void setBaseUrl(int baseUrl) {
-        this.baseUrl = baseUrl;
+    public void setRight(Choice right) {
+        this.right = right;
     }
 }

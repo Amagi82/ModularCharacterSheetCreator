@@ -1,10 +1,10 @@
 package amagi82.modularcharactersheetcreator.models.game_systems;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.Choice;
 
 public class NVampire extends Onyx {
 
@@ -60,6 +60,9 @@ public class NVampire extends Onyx {
 
     private Clan clan;
     private Covenant covenant;
+    private Choice choiceLeft;
+    private Choice choiceRight;
+    private List<Choice> list = new ArrayList<>();
 
     public NVampire() {
     }
@@ -69,34 +72,41 @@ public class NVampire extends Onyx {
         covenant = Covenant.valueOf(covenantName);
     }
 
-    public Clan getClan() {
-        return clan;
+    @Override public String getSystemName() {
+        return Game.System.NVAMPIRE.name();
     }
 
-    public void setClan(Clan clan) {
-        setLeft(clan.name(), clan.getName(), clan.getUrl());
-        setArchetype(clan.getName());
-        this.clan = clan;
+    @Override public int getArchetype() {
+        return clan.getName();
     }
 
-    public Covenant getCovenant() {
-        return covenant;
+    @Override public Choice getLeft() {
+        return choiceLeft;
     }
 
-    public void setCovenant(Covenant covenant) {
-        setRight(covenant.name(), covenant.getName(), covenant.getUrl());
-        this.covenant = covenant;
+    @Override public Choice getRight() {
+        return choiceRight;
     }
 
-    public List<Clan> getListClan() {
-        List<Clan> list = new ArrayList<>();
-        Collections.addAll(list, Clan.values());
-        return list;
-    }
+    @Override public List<Choice> getList(String eName) {
+        list.clear();
+        if (eName == null) {
+            for (Clan clan : Clan.values()){
+                list.add(new Choice(clan.name(), clan.getName(), Game.System.NVAMPIRE.getUrlBase(), clan.getUrl()));
+            }
+            return list;
+        }
+        if(clan == null) {
+            clan = Clan.valueOf(eName);
+            choiceLeft = new Choice(clan.name(), clan.getName(), Game.System.NVAMPIRE.getUrlBase(), clan.getUrl());
 
-    public List<Covenant> getListCovenant() {
-        List<Covenant> list = new ArrayList<>();
-        Collections.addAll(list, Covenant.values());
-        return list;
+            for (Covenant covenant : Covenant.values()) {
+                list.add(new Choice(covenant.name(), covenant.getName(), Game.System.NVAMPIRE.getUrlBase(), covenant.getUrl()));
+            }
+            return list;
+        }
+        covenant = Covenant.valueOf(eName);
+        choiceRight = new Choice(covenant.name(), covenant.getName(), Game.System.NVAMPIRE.getUrlBase(), covenant.getUrl());
+        return null;
     }
 }

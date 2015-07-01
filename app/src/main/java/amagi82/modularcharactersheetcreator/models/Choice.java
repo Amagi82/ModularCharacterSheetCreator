@@ -1,13 +1,17 @@
 package amagi82.modularcharactersheetcreator.models;
 
+import com.bluelinelabs.logansquare.annotation.JsonField;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
+
+@JsonObject
 public class Choice {
 
-    private String eName;
-    private int title;
-    private int drawable;
-    private int baseUrl;
-    private int url;
-    private boolean hasDrawable;
+    @JsonField private String eName;
+    @JsonField private int title;
+    @JsonField private int drawable;
+    @JsonField private int baseUrl;
+    @JsonField private int url;
+    @JsonField private boolean hasDrawable;
 
     public Choice(String eName, int title){
         this(eName, title, 0, 0);
@@ -50,5 +54,33 @@ public class Choice {
 
     public boolean hasDrawable() {
         return hasDrawable;
+    }
+
+    public void seteName(String eName) {
+        this.eName = eName;
+    }
+
+    public void setTitle(int title) {
+        this.title = title;
+    }
+
+    public void setDrawable(int drawable) {
+        this.drawable = drawable;
+    }
+
+    public void setBaseUrl(int baseUrl) {
+        this.baseUrl = baseUrl;
+    }
+
+    public void setUrl(int url) {
+        this.url = url;
+    }
+
+    public boolean isHasDrawable() {
+        return hasDrawable;
+    }
+
+    public void setHasDrawable(boolean hasDrawable) {
+        this.hasDrawable = hasDrawable;
     }
 }

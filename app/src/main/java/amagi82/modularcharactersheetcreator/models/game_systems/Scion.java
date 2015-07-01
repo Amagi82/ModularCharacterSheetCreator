@@ -1,10 +1,10 @@
 package amagi82.modularcharactersheetcreator.models.game_systems;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.Choice;
 
 public class Scion extends Onyx {
 
@@ -49,6 +49,9 @@ public class Scion extends Onyx {
 
     private Volume volume;
     private Pantheon pantheon;
+    private Choice choiceLeft;
+    private Choice choiceRight;
+    private List<Choice> list = new ArrayList<>();
 
     public Scion() {
     }
@@ -58,34 +61,41 @@ public class Scion extends Onyx {
         pantheon = Pantheon.valueOf(pantheonName);
     }
 
-    public Volume getVolume() {
-        return volume;
+    @Override public String getSystemName() {
+        return Game.System.SCION.name();
     }
 
-    public void setVolume(Volume volume) {
-        setLeft(volume.name(), volume.getName());
-        this.volume = volume;
+    @Override public int getArchetype() {
+        return pantheon.getName();
     }
 
-    public Pantheon getPantheon() {
-        return pantheon;
+    @Override public Choice getLeft() {
+        return choiceLeft;
     }
 
-    public void setPantheon(Pantheon pantheon) {
-        setRight(pantheon.name(), pantheon.getName());
-        setArchetype(pantheon.getName());
-        this.pantheon = pantheon;
+    @Override public Choice getRight() {
+        return choiceRight;
     }
 
-    public List<Volume> getListVolume() {
-        List<Volume> list = new ArrayList<>();
-        Collections.addAll(list, Volume.values());
-        return list;
-    }
+    @Override public List<Choice> getList(String eName) {
+        list.clear();
+        if (eName == null) {
+            for (Volume volume : Volume.values()){
+                list.add(new Choice(volume.name(), volume.getName()));
+            }
+            return list;
+        }
+        if(volume == null) {
+            volume = Volume.valueOf(eName);
+            choiceLeft = new Choice(volume.name(), volume.getName());
 
-    public List<Pantheon> getListPantheon() {
-        List<Pantheon> list = new ArrayList<>();
-        Collections.addAll(list, Pantheon.values());
-        return list;
+            for (Pantheon pantheon : Pantheon.values()) {
+                list.add(new Choice(pantheon.name(), pantheon.getName()));
+            }
+            return list;
+        }
+        pantheon = Pantheon.valueOf(eName);
+        choiceRight = new Choice(pantheon.name(), pantheon.getName());
+        return null;
     }
 }

@@ -18,13 +18,15 @@ public class CharacterAdapter extends RecyclerView.Adapter<TileViewHolder> {
 
     private Context context;
     private List<Choice> choices;
+    private boolean isGrid = false;
 
     public CharacterAdapter(Context context, List<Choice> choices) {
         this.context = context;
         this.choices = choices;
     }
 
-    public void setList(final List<Choice> choices){
+    public void setList(final List<Choice> choices, boolean isGrid){
+        this.isGrid = isGrid;
         notifyItemRangeRemoved(0, choices.size());
         choices.clear();
         new Handler().postDelayed(new Runnable() {
@@ -37,7 +39,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<TileViewHolder> {
 
     @Override
     public TileViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_game_system, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(isGrid? R.layout.tile_default : R.layout.tile_game_system, parent, false);
         return new TileViewHolder(v);
     }
 
@@ -47,6 +49,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<TileViewHolder> {
         if(choice.hasDrawable()) holder.imageTitle.setImageResource(choice.getDrawable());
         else holder.imageTitle.setImageUrl(getString(choice.getBaseUrl())+getString(choice.getUrl()), VolleySingleton.INSTANCE.getImageLoader());
         holder.tvTitle.setText(choice.getTitle());
+        holder.eName = choices.get(position).geteName();
     }
 
     @Override

@@ -1,10 +1,10 @@
 package amagi82.modularcharactersheetcreator.models.game_systems;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.Choice;
 
 public class NMummy extends Onyx {
 
@@ -58,6 +58,9 @@ public class NMummy extends Onyx {
 
     private Decree decree;
     private Guild guild;
+    private Choice choiceLeft;
+    private Choice choiceRight;
+    private List<Choice> list = new ArrayList<>();
 
     public NMummy() {
     }
@@ -67,34 +70,41 @@ public class NMummy extends Onyx {
         guild = Guild.valueOf(guildName);
     }
 
-    public Decree getDecree() {
-        return decree;
+    @Override public String getSystemName() {
+        return Game.System.NMUMMY.name();
     }
 
-    public void setDecree(Decree decree) {
-        setLeft(decree.name(), decree.getName(), decree.getUrl());
-        setArchetype(decree.getName());
-        this.decree = decree;
+    @Override public int getArchetype() {
+        return decree.getName();
     }
 
-    public Guild getGuild() {
-        return guild;
+    @Override public Choice getLeft() {
+        return choiceLeft;
     }
 
-    public void setGuild(Guild guild) {
-        setRight(guild.name(), guild.getName(), guild.getUrl());
-        this.guild = guild;
+    @Override public Choice getRight() {
+        return choiceRight;
     }
 
-    public List<Decree> getListDecree() {
-        List<Decree> list = new ArrayList<>();
-        Collections.addAll(list, Decree.values());
-        return list;
-    }
+    @Override public List<Choice> getList(String eName) {
+        list.clear();
+        if (eName == null) {
+            for (Decree decree : Decree.values()){
+                list.add(new Choice(decree.name(), decree.getName(), Game.System.NMUMMY.getUrlBase(), decree.getUrl()));
+            }
+            return list;
+        }
+        if(decree == null) {
+            decree = Decree.valueOf(eName);
+            choiceLeft = new Choice(decree.name(), decree.getName(), Game.System.NMUMMY.getUrlBase(), decree.getUrl());
 
-    public List<Guild> getListGuild() {
-        List<Guild> list = new ArrayList<>();
-        Collections.addAll(list, Guild.values());
-        return list;
+            for (Guild guild : Guild.values()) {
+                list.add(new Choice(guild.name(), guild.getName(), Game.System.NMUMMY.getUrlBase(), guild.getUrl()));
+            }
+            return list;
+        }
+        guild = Guild.valueOf(eName);
+        choiceRight = new Choice(guild.name(), guild.getName(), Game.System.NMUMMY.getUrlBase(), guild.getUrl());
+        return null;
     }
 }

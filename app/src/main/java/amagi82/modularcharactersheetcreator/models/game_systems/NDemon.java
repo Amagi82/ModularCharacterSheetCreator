@@ -1,10 +1,10 @@
 package amagi82.modularcharactersheetcreator.models.game_systems;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.Choice;
 
 public class NDemon extends Onyx {
 
@@ -56,6 +56,9 @@ public class NDemon extends Onyx {
 
     private Incarnation incarnation;
     private Agenda agenda;
+    private Choice choiceLeft;
+    private Choice choiceRight;
+    private List<Choice> list = new ArrayList<>();
 
     public NDemon() {
     }
@@ -65,34 +68,41 @@ public class NDemon extends Onyx {
         agenda = Agenda.valueOf(agendaName);
     }
 
-    public Incarnation getIncarnation() {
-        return incarnation;
+    @Override public String getSystemName() {
+        return Game.System.NDEMON.name();
     }
 
-    public void setIncarnation(Incarnation incarnation) {
-        setLeft(incarnation.name(),incarnation.getName(),incarnation.getUrl());
-        this.incarnation = incarnation;
+    @Override public int getArchetype() {
+        return incarnation.getName();
     }
 
-    public Agenda getAgenda() {
-        return agenda;
+    @Override public Choice getLeft() {
+        return choiceLeft;
     }
 
-    public void setAgenda(Agenda agenda) {
-        setRight(agenda.name(),agenda.getName(),agenda.getUrl());
-        setArchetype(agenda.getName());
-        this.agenda = agenda;
+    @Override public Choice getRight() {
+        return choiceRight;
     }
 
-    public List<Incarnation> getListIncarnation() {
-        List<Incarnation> list = new ArrayList<>();
-        Collections.addAll(list, Incarnation.values());
-        return list;
-    }
+    @Override public List<Choice> getList(String eName) {
+        list.clear();
+        if (eName == null) {
+            for (Incarnation incarnation : Incarnation.values()){
+                list.add(new Choice(incarnation.name(), incarnation.getName(), Game.System.NDEMON.getUrlBase(), incarnation.getUrl()));
+            }
+            return list;
+        }
+        if(incarnation == null) {
+            incarnation = Incarnation.valueOf(eName);
+            choiceLeft = new Choice(incarnation.name(), incarnation.getName(), Game.System.NDEMON.getUrlBase(), incarnation.getUrl());
 
-    public List<Agenda> getListAgenda() {
-        List<Agenda> list = new ArrayList<>();
-        Collections.addAll(list, Agenda.values());
-        return list;
+            for (Agenda agenda : Agenda.values()) {
+                list.add(new Choice(agenda.name(), agenda.getName(), Game.System.NDEMON.getUrlBase(), agenda.getUrl()));
+            }
+            return list;
+        }
+        agenda = Agenda.valueOf(eName);
+        choiceRight = new Choice(agenda.name(), agenda.getName(), Game.System.NDEMON.getUrlBase(), agenda.getUrl());
+        return null;
     }
 }

@@ -15,6 +15,7 @@ public class TileViewHolder extends RecyclerView.ViewHolder{
 
     @InjectView(R.id.imageTitle) public AnimatedNetworkImageView imageTitle;
     @InjectView(R.id.tvTitle) public TextView tvTitle;
+    public String eName;
 
     public TileViewHolder(final View itemView) {
         super(itemView);
@@ -22,7 +23,7 @@ public class TileViewHolder extends RecyclerView.ViewHolder{
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                Otto.BUS.getBus().post(new TileClickedEvent(getAdapterPosition()));
+                Otto.BUS.getBus().post(new TileClickedEvent(eName));
             }
         });
     }

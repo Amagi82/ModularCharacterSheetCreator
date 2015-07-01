@@ -9,6 +9,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -26,14 +26,16 @@ import com.colintmiller.simplenosql.RetrievalCallback;
 import com.edmodo.cropper.CropImageView;
 import com.squareup.otto.Subscribe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
 import amagi82.modularcharactersheetcreator.events.TileClickedEvent;
+import amagi82.modularcharactersheetcreator.models.Choice;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.game_systems.Game;
+import amagi82.modularcharactersheetcreator.models.game_systems.Onyx;
+import amagi82.modularcharactersheetcreator.network.VolleySingleton;
 import amagi82.modularcharactersheetcreator.utils.Logan;
 import amagi82.modularcharactersheetcreator.utils.Otto;
 import amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView;
@@ -46,6 +48,10 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     private static final int PICK_FROM_FILE = 2;
     private GameCharacter gameCharacter;
     private Game game;
+    private Onyx onyx;
+    private CharacterAdapter characterAdapter;
+    private LinearLayoutManager linearLayoutManager;
+    private GridLayoutManager gridLayoutManager;
     private boolean isEditMode = false;
     private Uri photoUri;
     private CropImageView cropper;
@@ -54,9 +60,9 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @InjectView(R.id.appbar) RelativeLayout appbar;
     @InjectView(R.id.imagePortrait) AnimatedNetworkImageView imagePortrait;
     @InjectView(R.id.textInputLayout) TextInputLayout textInputLayout;
-    @InjectView(R.id.iconLeft) ImageView iconLeft;
+    @InjectView(R.id.iconLeft) AnimatedNetworkImageView iconLeft;
     @InjectView(R.id.tvIconLeft) TextView tvIconLeft;
-    @InjectView(R.id.iconRight) ImageView iconRight;
+    @InjectView(R.id.iconRight) AnimatedNetworkImageView iconRight;
     @InjectView(R.id.tvIconRight) TextView tvIconRight;
     @InjectView(R.id.tvGameSystem) TextView tvGameSystem;
     @InjectView(R.id.fab) FloatingActionButton fab;
@@ -68,10 +74,10 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         ButterKnife.inject(this, rootView);
         setHasOptionsMenu(true);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),getResources().getInteger(R.integer.character_grid_span_count)));
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        gridLayoutManager = new GridLayoutManager(getActivity(),getResources().getInteger(R.integer.character_grid_span_count));
+        recyclerView.setLayoutManager(linearLayoutManager);
         if(gameCharacter == null) gameCharacter = new GameCharacter();
-
-
 
         if(getArguments() != null && getArguments().getString("entityId") != null){
             Log.i(null, "found character");
@@ -82,12 +88,16 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                 @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
                     if (entities.size() > 0) gameCharacter = entities.get(0).getData();
                     if (gameCharacter.getPortraitUri() != null) imagePortrait.setImageURI(gameCharacter.getPortraitUri());
-                    recyclerView.setAdapter(new CharacterAdapter(getInitialList()));
+                    //recyclerView.setAdapter(new CharacterAdapter(getActivity(), );
                 }
             });
         }else{
-            recyclerView.setAdapter(new CharacterAdapter(getInitialList()));
+            game = new Game();
+            characterAdapter = new CharacterAdapter(getActivity(), game.getList(null));
+            recyclerView.setAdapter(characterAdapter);
         }
+
+
 
         //colorMask.animate().alpha(0).setDuration(300);
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
@@ -98,25 +108,40 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         return rootView;
     }
 
-    public List<Game.System> getInitialList(){
-        List<Game.System> list = new ArrayList<>();
-        list.add(Game.System.WOD);
-        for(Game.System system : Game.System.values()){
-            if(!system.isWod()) list.add(system);
-        }
-        return list;
-    }
-    public List<Game.System> getWodList(){
-        List<Game.System> list = new ArrayList<>();
-        for(Game.System system : Game.System.values()){
-            if(system.isWod()) list.add(system);
-        }
-        return list;
+    private String getUrl(Choice choice){
+        return getString(choice.getBaseUrl())+getString(choice.getUrl());
     }
 
     @Subscribe
     public void onTileClicked(TileClickedEvent event){
+        String eName = event.eName;
 
+        if(onyx == null && game.getList(eName) != null){
+            characterAdapter.setList(game.getList(eName), false);
+        }else if(onyx == null){
+            onyx = Game.System.valueOf(eName).getOnyx();
+            tvGameSystem.setText(Game.System.valueOf(eName).getName());
+            tvGameSystem.setVisibility(View.VISIBLE);
+            recyclerView.setLayoutManager(gridLayoutManager);
+            characterAdapter.setList(onyx.getList(null), true);
+        }else if(onyx.getList(eName) != null){
+            characterAdapter.setList(onyx.getList(eName), true);
+            if(onyx.getLeft() != null) {
+                tvIconLeft.setText(onyx.getLeft().getTitle());
+                iconLeft.setImageUrl(getUrl(onyx.getLeft()), VolleySingleton.INSTANCE.getImageLoader());
+            }
+        }else{
+            tvIconLeft.setText(onyx.getLeft().getTitle());
+            iconLeft.setImageUrl(getUrl(onyx.getLeft()), VolleySingleton.INSTANCE.getImageLoader());
+            if(onyx.getRight() != null) {
+                tvIconRight.setText(onyx.getRight().getTitle());
+                iconRight.setImageUrl(getUrl(onyx.getRight()), VolleySingleton.INSTANCE.getImageLoader());
+            }
+            gameCharacter.setGameEName(onyx.getSystemName());
+            gameCharacter.setArchetype(onyx.getArchetype());
+            gameCharacter.setLeft(onyx.getLeft());
+            gameCharacter.setRight(onyx.getRight());
+        }
     }
 
     @Override public void onStart() {

@@ -1,9 +1,9 @@
 package amagi82.modularcharactersheetcreator.events;
 
 public class TileClickedEvent {
-    public final int position;
+    public final String eName;
 
-    public TileClickedEvent(int position) {
-        this.position = position;
+    public TileClickedEvent(String eName) {
+        this.eName = eName;
     }
 }

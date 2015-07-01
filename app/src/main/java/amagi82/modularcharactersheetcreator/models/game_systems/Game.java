@@ -11,47 +11,57 @@ public class Game {
     public enum System {
         CWOD(R.string.cwod, R.drawable.title_wod),
         NWOD(R.string.nwod, R.drawable.title_wod),
-        CVAMPIRE(R.string.cwod_vampire, R.drawable.title_vampire_masquerade, R.color.cwod_vampire, R.string.url_cwod_vampire_base, Category.CWOD, R.string.sect, R.string.clan),
-        CWEREWOLF(R.string.cwod_werewolf, R.drawable.title_werewolf_apocalypse, R.color.cwod_werewolf, R.string.url_cwod_werewolf_base, Category.CWOD, R.string.fera, R.string.tribe, R.string.auspice),
-        CWRAITH(R.string.cwod_wraith, R.drawable.title_wraith_oblivion, R.color.cwod_wraith, R.string.url_cwod_wraith_base, Category.CWOD, R.string.arcanos),
-        CMAGE(R.string.cwod_mage, R.drawable.title_mage_ascension, R.color.cwod_mage, R.string.url_cwod_mage_base, Category.CWOD, R.string.tradition),
-        NVAMPIRE(R.string.nwod_vampire, R.drawable.title_vampire_requiem, R.color.nwod_vampire, R.string.url_nwod_vampire_base, Category.NWOD, R.string.clan, R.string.bloodline, R.string.covenant),
-        NWEREWOLF(R.string.nwod_werewolf, R.drawable.title_werewolf_forsaken, R.color.nwod_werewolf, R.string.url_nwod_werewolf_base, Category.NWOD, R.string.tribe, R.string.auspice),
-        NMUMMY(R.string.nwod_mummy, R.drawable.title_mummy_curse, R.color.nwod_mummy, R.string.url_nwod_mummy_base, Category.NWOD, R.string.decree, R.string.guild),
-        NDEMON(R.string.nwod_demon, R.drawable.title_demon_descent, R.color.nwod_demon, R.string.url_nwod_demon_base, Category.NWOD, R.string.incarnation, R.string.agenda),
-        SCION(R.string.scion, R.drawable.title_scion, R.color.scion),
-        TRINITY(R.string.trinity, R.drawable.title_trinity_continuum, R.color.trinity),
-        EXALTED(R.string.exalted, R.drawable.title_exalted, R.color.exalted);
+        CVAMPIRE(R.string.cwod_vampire, R.drawable.title_vampire_masquerade, new CVampire(), R.color.cwod_vampire,
+                R.string.url_cwod_vampire_base, Category.CWOD, R.string.sect, R.string.clan),
+        CWEREWOLF(R.string.cwod_werewolf, R.drawable.title_werewolf_apocalypse, new CWerewolf(), R.color.cwod_werewolf,
+                R.string.url_cwod_werewolf_base, Category.CWOD, R.string.fera, R.string.tribe, R.string.auspice),
+        CWRAITH(R.string.cwod_wraith, R.drawable.title_wraith_oblivion, new CWraith(), R.color.cwod_wraith,
+                R.string.url_cwod_wraith_base, Category.CWOD, R.string.arcanos),
+        CMAGE(R.string.cwod_mage, R.drawable.title_mage_ascension, new CMage(), R.color.cwod_mage,
+                R.string.url_cwod_mage_base, Category.CWOD, R.string.tradition),
+        NVAMPIRE(R.string.nwod_vampire, R.drawable.title_vampire_requiem, new NVampire(), R.color.nwod_vampire,
+                R.string.url_nwod_vampire_base, Category.NWOD, R.string.clan, R.string.bloodline, R.string.covenant),
+        NWEREWOLF(R.string.nwod_werewolf, R.drawable.title_werewolf_forsaken, new NWerewolf(), R.color.nwod_werewolf,
+                R.string.url_nwod_werewolf_base, Category.NWOD, R.string.tribe, R.string.auspice),
+        NMUMMY(R.string.nwod_mummy, R.drawable.title_mummy_curse, new NMummy(), R.color.nwod_mummy,
+                R.string.url_nwod_mummy_base, Category.NWOD, R.string.decree, R.string.guild),
+        NDEMON(R.string.nwod_demon, R.drawable.title_demon_descent, new NDemon(), R.color.nwod_demon,
+                R.string.url_nwod_demon_base, Category.NWOD, R.string.incarnation, R.string.agenda),
+        SCION(R.string.scion, R.drawable.title_scion, new Scion(), R.color.scion),
+        TRINITY(R.string.trinity, R.drawable.title_trinity_continuum, new Trinity(), R.color.trinity),
+        EXALTED(R.string.exalted, R.drawable.title_exalted, new Exalted(), R.color.exalted);
 
         private int name;
         private int drawable;
         private int urlBase;
         private int color;
+        private Onyx onyx;
         private Category category;
         private int[] categoryTitles;
 
         System(int name, int drawable) {
-            this(name, drawable, 0, 0, Category.DEFAULT);
+            this(name, drawable, null, 0, 0, Category.DEFAULT);
         }
 
-        System(int name, int drawable, int color) {
-            this(name, drawable, color, 0, Category.DEFAULT);
+        System(int name, int drawable, Onyx onyx, int color) {
+            this(name, drawable, onyx, color, 0, Category.DEFAULT);
         }
 
-        System(int name, int drawable, int color, Category category) {
-            this(name, drawable, color, 0, category);
+        System(int name, int drawable, Onyx onyx, int color, Category category) {
+            this(name, drawable, onyx, color, 0, category);
         }
 
-        System(int name, int drawable, int color, int urlBase, Category category) {
+        System(int name, int drawable, Onyx onyx, int color, int urlBase, Category category) {
             this.name = name;
             this.drawable = drawable;
+            this.onyx = onyx;
             this.color = color;
             this.urlBase = urlBase;
             this.category = category;
         }
 
-        System(int name, int drawable, int color, int urlBase, Category category, int... categoryTitles) {
-            this(name, drawable, color, urlBase, category);
+        System(int name, int drawable, Onyx onyx, int color, int urlBase, Category category, int... categoryTitles) {
+            this(name, drawable, onyx, color, urlBase, category);
             this.categoryTitles = categoryTitles;
         }
 
@@ -82,6 +92,10 @@ public class Game {
         public int[] getCategoryTitles() {
             return categoryTitles;
         }
+
+        public Onyx getOnyx() {
+            return onyx;
+        }
     }
 
     private enum Category {
@@ -103,7 +117,7 @@ public class Game {
     }
 
     public List<Choice> getList(String eName) {
-        Category category = eName == null ? Category.DEFAULT : eName.equals("CWOD") ? Category.CWOD : eName.equals("NWOD") ? Category.NWOD : null;
+        Category category = (eName == null) ? Category.DEFAULT : eName.equals("CWOD") ? Category.CWOD : eName.equals("NWOD") ? Category.NWOD : null;
         choices.clear();
         if (category == null) return null;
         for (System system : System.values()) {

@@ -15,12 +15,12 @@
     <string name="scion">Scion</string>
     <string name="trinity">Trinity Continuum</string>
     <string name="exalted">Exalted</string>
-    <string name="Others">Others</string>
+    <string name="others">Others</string>
 
     <!--cWod Vampire -->
     <string name="sect">Sect</string>
     <string name="clan">Clan</string>
-    <string name="bloodline">Bloodline</string>
+    <string name="bloodlines">Bloodlines</string>
     <string name="ahrimanes">Ahrimanes</string>
     <string name="anda">Anda</string>
     <string name="baali">Baali</string>
@@ -132,8 +132,8 @@
     <string name="usury">Usury</string>
 
     <!--cWod Mage -->
-    <string name="tradition">Tradition</string>
-    <string name="craft">Craft</string>
+    <string name="traditions">Traditions</string>
+    <string name="crafts">Crafts</string>
     <string name="iteration_x">Iteration X</string>
     <string name="new_world_order">New World Order</string>
     <string name="progenitors">Progenitors</string>

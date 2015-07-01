@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.Choice;
 
 public class CMage extends Onyx {
 
@@ -62,6 +63,8 @@ public class CMage extends Onyx {
     }
 
     private Faction faction;
+    private Choice choiceLeft;
+    private List<Choice> list = new ArrayList<>();
 
     public CMage() {
     }
@@ -70,22 +73,46 @@ public class CMage extends Onyx {
         faction = Faction.valueOf(factionName);
     }
 
-    public Faction getFaction() {
-        return faction;
+    @Override public String getSystemName() {
+        return Game.System.CMAGE.name();
     }
 
-    public void setFaction(Faction faction) {
-        setLeft(faction.name(), faction.getName(), faction.getUrl());
-        setArchetype(faction.getName());
-        this.faction = faction;
+    @Override public int getArchetype() {
+        return faction.getName();
     }
 
-    public List<Faction> getListFactions(Group group){
-        List<Faction> list = new ArrayList<>();
-        for(Faction f : Faction.values()){
-            if(f.group == group) list.add(f);
+    @Override public Choice getLeft() {
+        return choiceLeft;
+    }
+
+    @Override public Choice getRight() {
+        return null;
+    }
+
+    @Override public List<Choice> getList(String eName) {
+        list.clear();
+        if (eName == null) {
+            for (Faction faction : Faction.values()) {
+                if(faction.getGroup() == Group.TRADITIONS) list.add(new Choice(faction.name(), faction.getName()));
+            }
+            list.add(new Choice("TECHNOCRACY", R.string.technocracy, Game.System.CMAGE.getUrlBase(), R.string.url_cwod_mage_sect_technocracy));
+            list.add(new Choice("CRAFTS", R.string.crafts));
+            return list;
         }
-        return list;
+        if(eName.equals("TECHNOCRACY")){
+            for (Faction faction : Faction.values()) {
+                if(faction.getGroup() == Group.TECHNOCRACY) list.add(new Choice(faction.name(), faction.getName()));
+            }
+            return list;
+        }
+        if(eName.equals("CRAFTS")){
+            for (Faction faction : Faction.values()) {
+                if(faction.getGroup() == Group.CRAFTS) list.add(new Choice(faction.name(), faction.getName()));
+            }
+            return list;
+        }
+        faction = Faction.valueOf(eName);
+        choiceLeft = new Choice(faction.name(), faction.getName(), Game.System.CMAGE.getUrlBase(), faction.getUrl());
+        return null;
     }
-
 }

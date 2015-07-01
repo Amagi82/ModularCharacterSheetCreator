@@ -1,10 +1,10 @@
 package amagi82.modularcharactersheetcreator.models.game_systems;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.Choice;
 
 public class Trinity extends Onyx {
 
@@ -47,6 +47,9 @@ public class Trinity extends Onyx {
 
     private Volume volume;
     private Order order;
+    private Choice choiceLeft;
+    private Choice choiceRight;
+    private List<Choice> list = new ArrayList<>();
 
     public Trinity() {
     }
@@ -56,34 +59,41 @@ public class Trinity extends Onyx {
         order = Order.valueOf(orderName);
     }
 
-    public Volume getVolume() {
-        return volume;
+    @Override public String getSystemName() {
+        return Game.System.TRINITY.name();
     }
 
-    public void setVolume(Volume volume) {
-        setLeft(volume.name(), volume.getName());
-        this.volume = volume;
+    @Override public int getArchetype() {
+        return order.getName();
     }
 
-    public Order getOrder() {
-        return order;
+    @Override public Choice getLeft() {
+        return choiceLeft;
     }
 
-    public void setOrder(Order order) {
-        setRight(order.name(), order.getName());
-        setArchetype(order.getName());
-        this.order = order;
+    @Override public Choice getRight() {
+        return choiceRight;
     }
 
-    public List<Volume> getListVolume() {
-        List<Volume> list = new ArrayList<>();
-        Collections.addAll(list, Volume.values());
-        return list;
-    }
+    @Override public List<Choice> getList(String eName) {
+        list.clear();
+        if (eName == null) {
+            for (Volume volume : Volume.values()){
+                list.add(new Choice(volume.name(), volume.getName()));
+            }
+            return list;
+        }
+        if(volume == null) {
+            volume = Volume.valueOf(eName);
+            choiceLeft = new Choice(volume.name(), volume.getName());
 
-    public List<Order> getListOrder() {
-        List<Order> list = new ArrayList<>();
-        Collections.addAll(list, Order.values());
-        return list;
+            for (Order order : Order.values()) {
+                list.add(new Choice(order.name(), order.getName()));
+            }
+            return list;
+        }
+        order = Order.valueOf(eName);
+        choiceRight = new Choice(order.name(), order.getName());
+        return null;
     }
 }
