@@ -64,8 +64,21 @@ public class NDemon extends Onyx {
     }
 
     public NDemon(String incarnationName, String agendaName) {
-        incarnation = Incarnation.valueOf(incarnationName);
-        agenda = Agenda.valueOf(agendaName);
+        this(Incarnation.valueOf(incarnationName), Agenda.valueOf(agendaName));
+    }
+
+    public NDemon(Incarnation incarnation, Agenda agenda) {
+        this.incarnation = incarnation;
+        this.agenda = agenda;
+        choiceLeft = getChoice(incarnation);
+        choiceRight = getChoice(agenda);
+    }
+    private Choice getChoice(Incarnation incarnation){
+        return new Choice(incarnation.name(), incarnation.getName(), Game.System.NDEMON.getUrlBase(), incarnation.getUrl());
+    }
+
+    private Choice getChoice(Agenda agenda){
+        return new Choice(agenda.name(), agenda.getName(), Game.System.NDEMON.getUrlBase(), agenda.getUrl());
     }
 
     @Override public String getSystemName() {
@@ -88,21 +101,21 @@ public class NDemon extends Onyx {
         list.clear();
         if (eName == null) {
             for (Incarnation incarnation : Incarnation.values()){
-                list.add(new Choice(incarnation.name(), incarnation.getName(), Game.System.NDEMON.getUrlBase(), incarnation.getUrl()));
+                list.add(getChoice(incarnation));
             }
             return list;
         }
         if(incarnation == null) {
             incarnation = Incarnation.valueOf(eName);
-            choiceLeft = new Choice(incarnation.name(), incarnation.getName(), Game.System.NDEMON.getUrlBase(), incarnation.getUrl());
+            choiceLeft = getChoice(incarnation);
 
             for (Agenda agenda : Agenda.values()) {
-                list.add(new Choice(agenda.name(), agenda.getName(), Game.System.NDEMON.getUrlBase(), agenda.getUrl()));
+                list.add(getChoice(agenda));
             }
             return list;
         }
         agenda = Agenda.valueOf(eName);
-        choiceRight = new Choice(agenda.name(), agenda.getName(), Game.System.NDEMON.getUrlBase(), agenda.getUrl());
+        choiceRight = getChoice(agenda);
         return null;
     }
 }

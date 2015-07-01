@@ -61,34 +61,12 @@ public class MainActivity extends AppCompatActivity {
         if (characters.size() == 0) {
             Log.i(null, "Creating data");
 
-            CVampire vampire1 = new CVampire(CVampire.Sect.CAMARILLA, CVampire.Clan.GANGREL);
-            vampire1.setSect(CVampire.Sect.CAMARILLA);
-            vampire1.setClan(CVampire.Clan.GANGREL);
-            characters.add(new GameCharacter("Thomas Anstis", vampire1));
-
-            CVampire vampire2 = new CVampire();
-            vampire2.setSect(CVampire.Sect.ANARCH);
-            vampire2.setClan(CVampire.Clan.BRUJAH);
-            characters.add(new GameCharacter("Tom Lytton", vampire2));
-
-            CVampire vampire3 = new CVampire();
-            vampire3.setSect(CVampire.Sect.CAMARILLA);
-            vampire3.setClan(CVampire.Clan.TREMERE);
-            characters.add(new GameCharacter("Georgia Johnson", vampire3));
-
-            CVampire vampire4 = new CVampire();
-            vampire4.setSect(CVampire.Sect.CAMARILLA);
-            vampire4.setClan(CVampire.Clan.VENTRUE);
-            characters.add(new GameCharacter("Augustus von Rabenholtz", vampire4));
-
-            CMage mage1 = new CMage();
-            mage1.setFaction(CMage.Faction.SCIONSOFETHER);
-            characters.add(new GameCharacter("Dr. Von Natsi", mage1));
-
-            CWerewolf werewolf1 = new CWerewolf();
-            werewolf1.setTribe(CWerewolf.Tribe.GLASSWALKERS);
-            werewolf1.setAuspice(CWerewolf.Auspice.AHROUN);
-            characters.add(new GameCharacter("Stormwalker", werewolf1));
+            characters.add(new GameCharacter("Thomas Anstis", new CVampire(CVampire.Sect.CAMARILLA, CVampire.Clan.GANGREL)));
+            characters.add(new GameCharacter("Tom Lytton", new CVampire(CVampire.Sect.ANARCH, CVampire.Clan.BRUJAH)));
+            characters.add(new GameCharacter("Georgia Johnson", new CVampire(CVampire.Sect.CAMARILLA, CVampire.Clan.TREMERE)));
+            characters.add(new GameCharacter("Augustus von Rabenholtz", new CVampire(CVampire.Sect.CAMARILLA, CVampire.Clan.VENTRUE)));
+            characters.add(new GameCharacter("Dr. Von Natsi", new CMage(CMage.Faction.SCIONSOFETHER)));
+            characters.add(new GameCharacter("Stormwalker", new CWerewolf(CWerewolf.Tribe.GLASSWALKERS, CWerewolf.Auspice.AHROUN)));
 
             TextModule module1 = new TextModule();
             module1.setText("Test text 1");

@@ -57,8 +57,22 @@ public class Scion extends Onyx {
     }
 
     public Scion(String volumeName, String pantheonName) {
-        volume = Volume.valueOf(volumeName);
-        pantheon = Pantheon.valueOf(pantheonName);
+        this(Volume.valueOf(volumeName), Pantheon.valueOf(pantheonName));
+    }
+
+    public Scion(Volume volume, Pantheon pantheon){
+        this.volume = volume;
+        this.pantheon = pantheon;
+        choiceLeft = getChoice(volume);
+        choiceRight = getChoice(pantheon);
+    }
+
+    private Choice getChoice(Volume volume){
+        return new Choice(volume.name(), volume.getName());
+    }
+
+    private Choice getChoice(Pantheon pantheon){
+        return new Choice(pantheon.name(), pantheon.getName());
     }
 
     @Override public String getSystemName() {
@@ -81,21 +95,21 @@ public class Scion extends Onyx {
         list.clear();
         if (eName == null) {
             for (Volume volume : Volume.values()){
-                list.add(new Choice(volume.name(), volume.getName()));
+                list.add(getChoice(volume));
             }
             return list;
         }
         if(volume == null) {
             volume = Volume.valueOf(eName);
-            choiceLeft = new Choice(volume.name(), volume.getName());
+            choiceLeft = getChoice(volume);
 
             for (Pantheon pantheon : Pantheon.values()) {
-                list.add(new Choice(pantheon.name(), pantheon.getName()));
+                list.add(getChoice(pantheon));
             }
             return list;
         }
         pantheon = Pantheon.valueOf(eName);
-        choiceRight = new Choice(pantheon.name(), pantheon.getName());
+        choiceRight = getChoice(pantheon);
         return null;
     }
 }

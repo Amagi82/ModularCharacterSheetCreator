@@ -66,8 +66,22 @@ public class NMummy extends Onyx {
     }
 
     public NMummy(String decreeName, String guildName) {
-        decree = Decree.valueOf(decreeName);
-        guild = Guild.valueOf(guildName);
+        this(Decree.valueOf(decreeName), Guild.valueOf(guildName));
+    }
+
+    public NMummy(Decree decree, Guild guild) {
+        this.decree = decree;
+        this.guild = guild;
+        choiceLeft = getChoice(decree);
+        choiceRight = getChoice(guild);
+    }
+
+    private Choice getChoice(Decree decree){
+        return new Choice(decree.name(), decree.getName(), Game.System.NMUMMY.getUrlBase(), decree.getUrl());
+    }
+
+    private Choice getChoice(Guild guild){
+        return new Choice(guild.name(), guild.getName(), Game.System.NMUMMY.getUrlBase(), guild.getUrl());
     }
 
     @Override public String getSystemName() {
@@ -90,21 +104,21 @@ public class NMummy extends Onyx {
         list.clear();
         if (eName == null) {
             for (Decree decree : Decree.values()){
-                list.add(new Choice(decree.name(), decree.getName(), Game.System.NMUMMY.getUrlBase(), decree.getUrl()));
+                list.add(getChoice(decree));
             }
             return list;
         }
         if(decree == null) {
             decree = Decree.valueOf(eName);
-            choiceLeft = new Choice(decree.name(), decree.getName(), Game.System.NMUMMY.getUrlBase(), decree.getUrl());
+            choiceLeft = getChoice(decree);
 
             for (Guild guild : Guild.values()) {
-                list.add(new Choice(guild.name(), guild.getName(), Game.System.NMUMMY.getUrlBase(), guild.getUrl()));
+                list.add(getChoice(guild));
             }
             return list;
         }
         guild = Guild.valueOf(eName);
-        choiceRight = new Choice(guild.name(), guild.getName(), Game.System.NMUMMY.getUrlBase(), guild.getUrl());
+        choiceRight = getChoice(guild);
         return null;
     }
 }

@@ -68,8 +68,22 @@ public class NVampire extends Onyx {
     }
 
     public NVampire(String clanName, String covenantName) {
-        clan = Clan.valueOf(clanName);
-        covenant = Covenant.valueOf(covenantName);
+        this(Clan.valueOf(clanName),Covenant.valueOf(covenantName));
+    }
+
+    public NVampire(Clan clan, Covenant covenant){
+        this.clan = clan;
+        this.covenant = covenant;
+        choiceLeft = getChoice(clan);
+        choiceRight = getChoice(covenant);
+    }
+
+    private Choice getChoice(Clan clan) {
+        return new Choice(clan.name(), clan.getName(), Game.System.NVAMPIRE.getUrlBase(), clan.getUrl());
+    }
+
+    private Choice getChoice(Covenant covenant) {
+        return new Choice(covenant.name(), covenant.getName(), Game.System.NVAMPIRE.getUrlBase(), covenant.getUrl());
     }
 
     @Override public String getSystemName() {
@@ -92,21 +106,21 @@ public class NVampire extends Onyx {
         list.clear();
         if (eName == null) {
             for (Clan clan : Clan.values()){
-                list.add(new Choice(clan.name(), clan.getName(), Game.System.NVAMPIRE.getUrlBase(), clan.getUrl()));
+                list.add(getChoice(clan));
             }
             return list;
         }
         if(clan == null) {
             clan = Clan.valueOf(eName);
-            choiceLeft = new Choice(clan.name(), clan.getName(), Game.System.NVAMPIRE.getUrlBase(), clan.getUrl());
+            choiceLeft = getChoice(clan);
 
             for (Covenant covenant : Covenant.values()) {
-                list.add(new Choice(covenant.name(), covenant.getName(), Game.System.NVAMPIRE.getUrlBase(), covenant.getUrl()));
+                list.add(getChoice(covenant));
             }
             return list;
         }
         covenant = Covenant.valueOf(eName);
-        choiceRight = new Choice(covenant.name(), covenant.getName(), Game.System.NVAMPIRE.getUrlBase(), covenant.getUrl());
+        choiceRight = getChoice(covenant);
         return null;
     }
 }

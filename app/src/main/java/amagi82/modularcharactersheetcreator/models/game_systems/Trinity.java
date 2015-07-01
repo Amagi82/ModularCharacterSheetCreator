@@ -55,8 +55,21 @@ public class Trinity extends Onyx {
     }
 
     public Trinity(String volumeName, String orderName) {
-        volume = Volume.valueOf(volumeName);
-        order = Order.valueOf(orderName);
+        this(Volume.valueOf(volumeName), Order.valueOf(orderName));
+    }
+
+    public Trinity(Volume volume, Order order){
+        this.volume = volume;
+        this.order = order;
+        choiceLeft = getChoice(volume);
+        choiceRight = getChoice(order);
+    }
+    private Choice getChoice(Volume volume){
+        return new Choice(volume.name(), volume.getName());
+    }
+
+    private Choice getChoice(Order order){
+        return new Choice(order.name(), order.getName());
     }
 
     @Override public String getSystemName() {
@@ -79,21 +92,21 @@ public class Trinity extends Onyx {
         list.clear();
         if (eName == null) {
             for (Volume volume : Volume.values()){
-                list.add(new Choice(volume.name(), volume.getName()));
+                list.add(getChoice(volume));
             }
             return list;
         }
         if(volume == null) {
             volume = Volume.valueOf(eName);
-            choiceLeft = new Choice(volume.name(), volume.getName());
+            choiceLeft = getChoice(volume);
 
             for (Order order : Order.values()) {
-                list.add(new Choice(order.name(), order.getName()));
+                list.add(getChoice(order));
             }
             return list;
         }
         order = Order.valueOf(eName);
-        choiceRight = new Choice(order.name(), order.getName());
+        choiceRight = getChoice(order);
         return null;
     }
 }

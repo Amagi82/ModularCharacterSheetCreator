@@ -107,10 +107,10 @@ public class Exalted extends Onyx {
     }
 
     private Choice getChoice(ExaltedType exaltedType){
-
+        return new Choice(exaltedType.name(), exaltedType.getName());
     }
     private Choice getChoice(Caste caste){
-
+        return new Choice(caste.name(), caste.getName());
     }
 
 
@@ -133,21 +133,21 @@ public class Exalted extends Onyx {
     @Override public List<Choice> getList(String eName) {
         list.clear();
         if (eName == null) {
-            for (ExaltedType type : ExaltedType.values()) {
-                list.add(new Choice(type.name(), type.getName()));
+            for (ExaltedType exaltedType : ExaltedType.values()) {
+                list.add(getChoice(exaltedType));
             }
             return list;
         }
         if(choiceLeft == null) {
             exaltedType = ExaltedType.valueOf(eName);
-            choiceLeft = new Choice(exaltedType.name(), exaltedType.getName());
+            choiceLeft = getChoice(exaltedType);
             for (Caste caste : Caste.values()) {
-                if (caste.getParent().equals(ExaltedType.valueOf(eName))) list.add(new Choice(caste.name(), caste.getName()));
+                if (caste.getParent().equals(ExaltedType.valueOf(eName))) list.add(getChoice(caste));
             }
             return list.size() > 0 ? list : null;
         }
         caste = Caste.valueOf(eName);
-        choiceRight = new Choice(caste.name(), caste.getName());
+        choiceRight = getChoice(caste);
         return null;
     }
 }

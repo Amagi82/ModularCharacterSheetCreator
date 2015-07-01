@@ -67,8 +67,22 @@ public class NWerewolf extends Onyx {
     }
 
     public NWerewolf(String tribeName, String auspiceName) {
-        tribe = Tribe.valueOf(tribeName);
-        auspice = Auspice.valueOf(auspiceName);
+        this(Tribe.valueOf(tribeName), Auspice.valueOf(auspiceName));
+    }
+
+    public NWerewolf(Tribe tribe, Auspice auspice){
+        this.tribe = tribe;
+        this.auspice = auspice;
+        choiceLeft = getChoice(tribe);
+        choiceRight = getChoice(auspice);
+    }
+
+    private Choice getChoice(Tribe tribe){
+        return new Choice(tribe.name(), tribe.getName(), Game.System.NWEREWOLF.getUrlBase(), tribe.getUrl());
+    }
+
+    private Choice getChoice(Auspice auspice){
+        return new Choice(auspice.name(), auspice.getName(), Game.System.NWEREWOLF.getUrlBase(), auspice.getUrl());
     }
 
     @Override public String getSystemName() {
@@ -91,21 +105,21 @@ public class NWerewolf extends Onyx {
         list.clear();
         if (eName == null) {
             for (Tribe tribe : Tribe.values()){
-                list.add(new Choice(tribe.name(), tribe.getName(), Game.System.NWEREWOLF.getUrlBase(), tribe.getUrl()));
+                list.add(getChoice(tribe));
             }
             return list;
         }
         if(tribe == null) {
             tribe = Tribe.valueOf(eName);
-            choiceLeft = new Choice(tribe.name(), tribe.getName(), Game.System.NWEREWOLF.getUrlBase(), tribe.getUrl());
+            choiceLeft = getChoice(tribe);
 
             for (Auspice auspice : Auspice.values()) {
-                list.add(new Choice(auspice.name(), auspice.getName(), Game.System.NWEREWOLF.getUrlBase(), auspice.getUrl()));
+                list.add(getChoice(auspice));
             }
             return list;
         }
         auspice = Auspice.valueOf(eName);
-        choiceRight = new Choice(auspice.name(), auspice.getName(), Game.System.NWEREWOLF.getUrlBase(), auspice.getUrl());
+        choiceRight = getChoice(auspice);
         return null;
     }
 }
