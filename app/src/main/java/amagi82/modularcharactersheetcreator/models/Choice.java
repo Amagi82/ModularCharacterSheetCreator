@@ -8,23 +8,22 @@ public class Choice {
 
     @JsonField private String eName;
     @JsonField private int title;
-    @JsonField private int drawable;
-    @JsonField private int baseUrl;
-    @JsonField private int url;
-    @JsonField private boolean hasDrawable;
+    @JsonField private int drawable = -1;
+    @JsonField private int baseUrl = -1;
+    @JsonField private int url = -1;
 
     public Choice() {
     }
 
     public Choice(String eName, int title){
-        this(eName, title, 0, 0);
+        this.eName = eName;
+        this.title = title;
     }
 
     public Choice(String eName, int title, int drawable) {
         this.eName = eName;
         this.title = title;
         this.drawable = drawable;
-        hasDrawable = true;
     }
 
     public Choice(String eName, int title, int baseUrl, int url) {
@@ -32,7 +31,6 @@ public class Choice {
         this.title = title;
         this.baseUrl = baseUrl;
         this.url = url;
-        hasDrawable = false;
     }
 
     public String geteName() {
@@ -55,10 +53,6 @@ public class Choice {
         return url;
     }
 
-    public boolean hasDrawable() {
-        return hasDrawable;
-    }
-
     public void seteName(String eName) {
         this.eName = eName;
     }
@@ -79,11 +73,4 @@ public class Choice {
         this.url = url;
     }
 
-    public boolean isHasDrawable() {
-        return hasDrawable;
-    }
-
-    public void setHasDrawable(boolean hasDrawable) {
-        this.hasDrawable = hasDrawable;
-    }
 }

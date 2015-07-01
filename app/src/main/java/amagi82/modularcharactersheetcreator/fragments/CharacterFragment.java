@@ -93,7 +93,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             });
         }else{
             game = new Game();
-            characterAdapter = new CharacterAdapter(getActivity(), game.getList(null));
+            characterAdapter = new CharacterAdapter(getActivity(), game.getList(null), R.layout.tile_game_system);
             recyclerView.setAdapter(characterAdapter);
         }
 
@@ -117,31 +117,38 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         String eName = event.eName;
 
         if(onyx == null && game.getList(eName) != null){
-            characterAdapter.setList(game.getList(eName), false);
+            Log.i(null, "game list = "+game.getList(eName).toString());
+            characterAdapter.setList(game.getList(eName));
         }else if(onyx == null){
             onyx = Game.System.valueOf(eName).getOnyx();
             tvGameSystem.setText(Game.System.valueOf(eName).getName());
             tvGameSystem.setVisibility(View.VISIBLE);
             recyclerView.setLayoutManager(gridLayoutManager);
-            characterAdapter.setList(onyx.getList(null), true);
-        }else if(onyx.getList(eName) != null){
-            characterAdapter.setList(onyx.getList(eName), true);
-            if(onyx.getLeft() != null) {
+            characterAdapter = new CharacterAdapter(getActivity(), onyx.getList(null),R.layout.tile_default);
+            recyclerView.setAdapter(characterAdapter);
+            //characterAdapter.setList(onyx.getList(null));
+        }else{
+            List<Choice> list = onyx.getList(eName);
+            if(list != null){
+                characterAdapter.setList(list);
+                if(onyx.getLeft() != null) {
+                    tvIconLeft.setText(onyx.getLeft().getTitle());
+                    iconLeft.setImageUrl(getUrl(onyx.getLeft()), VolleySingleton.INSTANCE.getImageLoader());
+                }
+            }else{
                 tvIconLeft.setText(onyx.getLeft().getTitle());
                 iconLeft.setImageUrl(getUrl(onyx.getLeft()), VolleySingleton.INSTANCE.getImageLoader());
+                if(onyx.getRight() != null) {
+                    tvIconRight.setText(onyx.getRight().getTitle());
+                    iconRight.setImageUrl(getUrl(onyx.getRight()), VolleySingleton.INSTANCE.getImageLoader());
+                }
+                gameCharacter.setGameEName(onyx.getSystemName());
+                gameCharacter.setArchetype(onyx.getArchetype());
+                gameCharacter.setLeft(onyx.getLeft());
+                gameCharacter.setRight(onyx.getRight());
             }
-        }else{
-            tvIconLeft.setText(onyx.getLeft().getTitle());
-            iconLeft.setImageUrl(getUrl(onyx.getLeft()), VolleySingleton.INSTANCE.getImageLoader());
-            if(onyx.getRight() != null) {
-                tvIconRight.setText(onyx.getRight().getTitle());
-                iconRight.setImageUrl(getUrl(onyx.getRight()), VolleySingleton.INSTANCE.getImageLoader());
-            }
-            gameCharacter.setGameEName(onyx.getSystemName());
-            gameCharacter.setArchetype(onyx.getArchetype());
-            gameCharacter.setLeft(onyx.getLeft());
-            gameCharacter.setRight(onyx.getRight());
         }
+
     }
 
     @Override public void onStart() {

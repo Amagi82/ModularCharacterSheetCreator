@@ -1,5 +1,7 @@
 package amagi82.modularcharactersheetcreator.models.game_systems;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,6 @@ public class CVampire extends Onyx {
     }
 
     public enum Clan {
-
         ASSAMITE(R.string.assamite, R.string.url_cwod_vampire_clan_assamite, Member.OPTIONAL, Member.OPTIONAL, Member.NO, Member.YES),
         BRUJAH(R.string.brujah, R.string.url_cwod_vampire_clan_brujah, Member.YES, Member.YES, Member.NO, Member.OPTIONAL),
         FOLLOWERSOFSET(R.string.followers_of_set, R.string.url_cwod_vampire_clan_followers_of_set, Member.OPTIONAL, Member.OPTIONAL, Member.NO, Member.YES),
@@ -129,6 +130,13 @@ public class CVampire extends Onyx {
         choiceRight = getChoice(clan);
     }
 
+    public boolean isSect(String eName){
+        for(Sect sect : Sect.values()){
+            if(sect.name().equals(eName)) return true;
+        }
+        return false;
+    }
+
     private Choice getChoice(Sect sect){
         return new Choice(sect.name(), sect.getName(), Game.System.CVAMPIRE.getUrlBase(), sect.getUrl());
     }
@@ -155,18 +163,22 @@ public class CVampire extends Onyx {
 
     @Override public List<Choice> getList(String eName) {
         list.clear();
-        if (eName == null) {
+        Log.i(null, "getList eName = "+eName);
+        if(eName == null) {
             for (Sect sect : Sect.values()){
                 list.add(getChoice(sect));
             }
             return list;
         }
-        if(sect == null) {
+        if(isSect(eName)) {
             sect = Sect.valueOf(eName);
             choiceLeft = getChoice(sect);
 
             for (Clan clan : Clan.values()) {
-                if(clan.getSectMembership(sect) == Member.YES ) list.add(getChoice(clan));
+                if(clan.getSectMembership(sect) == Member.YES ){
+                    Log.i(null, "added "+getChoice(clan).geteName());
+                    list.add(getChoice(clan));
+                }
             }
             list.add(new Choice("OTHERS", R.string.others));
             list.add(new Choice("BLOODLINES", R.string.bloodlines));
@@ -183,8 +195,7 @@ public class CVampire extends Onyx {
         }
         if(eName.equals("BLOODLINES")) {
             for (Clan clan : Clan.values()) {
-                if(clan.getSectMembership(sect) == Member.YES ||clan.getSectMembership(sect) == Member.BLOODLINE)
-                    list.add(getChoice(clan));
+                if(clan.getSectMembership(sect) == Member.YES ||clan.getSectMembership(sect) == Member.BLOODLINE) list.add(getChoice(clan));
             }
             return list;
         }
