@@ -163,7 +163,6 @@ public class CVampire extends Onyx {
 
     @Override public List<Choice> getList(String eName) {
         list.clear();
-        Log.i(null, "getList eName = "+eName);
         if(eName == null) {
             for (Sect sect : Sect.values()){
                 list.add(getChoice(sect));

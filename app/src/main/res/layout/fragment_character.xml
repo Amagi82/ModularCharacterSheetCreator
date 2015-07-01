@@ -84,9 +84,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_tab_layout_height"
         android:layout_below="@id/imagePortrait"
-        android:background="@color/primary"
+        android:background="@color/primary_dark"
         android:gravity="center"
         android:visibility="gone"
+        android:textColor="@color/secondary_text_default_material_dark"
         tools:text="Game System"
         tools:visiblity="visible"/>
 

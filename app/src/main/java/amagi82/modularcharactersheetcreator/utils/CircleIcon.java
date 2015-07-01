@@ -32,7 +32,7 @@ public class CircleIcon {
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setLinearText(true);
         textPaint.setColor(textColor);
-        textPaint.setTextSize(context.getResources().getDimension(R.dimen.text_size_circle_icon));
+        textPaint.setTextSize(context.getResources().getDimension(R.dimen.circle_icon_text_size));
 
         Rect rect = new Rect();
         rect.set(0, 0, circleImageSize, circleImageSize);

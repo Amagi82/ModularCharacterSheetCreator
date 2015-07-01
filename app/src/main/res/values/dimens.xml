@@ -15,18 +15,16 @@
     <dimen name="card_margin">4dp</dimen>
     <dimen name="card_corner_radius">2dp</dimen>
 
-    <dimen name="elevation_fab_pressed">12dp</dimen>
-    <dimen name="elevation_fab_resting">6dp</dimen>
-    <dimen name="elevation_app_bar">4dp</dimen>
-
     <dimen name="portrait_thumbnail_size">88dp</dimen>
     <dimen name="circle_icon_size">40dp</dimen>
-    <dimen name="text_size_circle_icon">24sp</dimen>
+    <dimen name="circle_icon_text_size">24sp</dimen>
 
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="fab_anchor_margin">-28dp</dimen>
 
-    <dimen name="image_portrait_height">160dp</dimen>
+    <dimen name="image_portrait_height">175dp</dimen>
+    <dimen name="character_choice_caption_size">64dp</dimen>
+    <dimen name="character_choice_icon_size">56dp</dimen>
 
     <dimen name="extended_appbar_height_min">138dp</dimen>
     <dimen name="extended_appbar_height">240dp</dimen>

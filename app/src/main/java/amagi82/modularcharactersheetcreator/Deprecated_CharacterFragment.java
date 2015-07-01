@@ -191,7 +191,7 @@ public class Deprecated_CharacterFragment extends Fragment implements View.OnCli
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setLinearText(true);
         textPaint.setColor(textColor);
-        textPaint.setTextSize(getResources().getDimension(R.dimen.text_size_circle_icon));
+        textPaint.setTextSize(getResources().getDimension(R.dimen.circle_icon_text_size));
 
         Rect rect = new Rect();
         rect.set(0, 0, circleImageSize, circleImageSize);

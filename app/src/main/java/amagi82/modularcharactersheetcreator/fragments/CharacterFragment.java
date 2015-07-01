@@ -50,12 +50,9 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     private Game game;
     private Onyx onyx;
     private CharacterAdapter characterAdapter;
-    private LinearLayoutManager linearLayoutManager;
-    private GridLayoutManager gridLayoutManager;
     private boolean isEditMode = false;
     private Uri photoUri;
     private CropImageView cropper;
-//    @InjectView(R.id.color_mask) View colorMask;
     @InjectView(R.id.toolbar) Toolbar toolbar;
     @InjectView(R.id.appbar) RelativeLayout appbar;
     @InjectView(R.id.imagePortrait) AnimatedNetworkImageView imagePortrait;
@@ -74,9 +71,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         ButterKnife.inject(this, rootView);
         setHasOptionsMenu(true);
 
-        linearLayoutManager = new LinearLayoutManager(getActivity());
-        gridLayoutManager = new GridLayoutManager(getActivity(),getResources().getInteger(R.integer.character_grid_span_count));
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         if(gameCharacter == null) gameCharacter = new GameCharacter();
 
         if(getArguments() != null && getArguments().getString("entityId") != null){
@@ -117,16 +112,14 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         String eName = event.eName;
 
         if(onyx == null && game.getList(eName) != null){
-            Log.i(null, "game list = "+game.getList(eName).toString());
             characterAdapter.setList(game.getList(eName));
         }else if(onyx == null){
             onyx = Game.System.valueOf(eName).getOnyx();
             tvGameSystem.setText(Game.System.valueOf(eName).getName());
             tvGameSystem.setVisibility(View.VISIBLE);
-            recyclerView.setLayoutManager(gridLayoutManager);
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),getResources().getInteger(R.integer.character_grid_span_count)));
             characterAdapter = new CharacterAdapter(getActivity(), onyx.getList(null),R.layout.tile_default);
             recyclerView.setAdapter(characterAdapter);
-            //characterAdapter.setList(onyx.getList(null));
         }else{
             List<Choice> list = onyx.getList(eName);
             if(list != null){

@@ -167,21 +167,21 @@
     </style>
 
     <style name="CircleIcon">
-        <item name="android:layout_width">@dimen/circle_icon_size</item>
-        <item name="android:layout_height">@dimen/circle_icon_size</item>
+        <item name="android:layout_width">@dimen/character_choice_icon_size</item>
+        <item name="android:layout_height">@dimen/character_choice_icon_size</item>
         <item name="android:layout_below">@id/toolbar</item>
         <item name="android:layout_marginLeft">@dimen/default_small_margin</item>
         <item name="android:layout_marginRight">@dimen/default_small_margin</item>
-        <item name="android:layout_marginTop">@dimen/default_tiny_margin</item>
-        <item name="android:layout_marginBottom">@dimen/default_tiny_margin</item>
     </style>
 
     <style name="CircleIconCaption" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">@dimen/character_choice_caption_size</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_below">@id/iconLeft</item>
-        <item name="android:layout_marginLeft">@dimen/default_small_margin</item>
-        <item name="android:layout_marginRight">@dimen/default_small_margin</item>
+        <item name="android:layout_marginLeft">@dimen/default_tiny_margin</item>
+        <item name="android:layout_marginRight">@dimen/default_tiny_margin</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">10sp</item>
     </style>
 
 </resources>
