@@ -96,9 +96,23 @@ public class Exalted extends Onyx {
     }
 
     public Exalted(String typeName, String casteName) {
-        exaltedType = ExaltedType.valueOf(typeName);
-        caste = Caste.valueOf(casteName);
+        this(ExaltedType.valueOf(typeName), Caste.valueOf(casteName));
     }
+
+    public Exalted(ExaltedType exaltedType, Caste caste){
+        this.exaltedType = exaltedType;
+        this.caste = caste;
+        choiceLeft = getChoice(exaltedType);
+        choiceRight = getChoice(caste);
+    }
+
+    private Choice getChoice(ExaltedType exaltedType){
+
+    }
+    private Choice getChoice(Caste caste){
+
+    }
+
 
     @Override public String getSystemName() {
         return Game.System.EXALTED.name();

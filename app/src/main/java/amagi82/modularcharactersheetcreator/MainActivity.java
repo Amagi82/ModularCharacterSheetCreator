@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
+        NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
 
         //generateSampleCharacters();
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         if (characters.size() == 0) {
             Log.i(null, "Creating data");
 
-            CVampire vampire1 = new CVampire();
+            CVampire vampire1 = new CVampire(CVampire.Sect.CAMARILLA, CVampire.Clan.GANGREL);
             vampire1.setSect(CVampire.Sect.CAMARILLA);
             vampire1.setClan(CVampire.Clan.GANGREL);
             characters.add(new GameCharacter("Thomas Anstis", vampire1));

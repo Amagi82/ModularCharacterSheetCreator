@@ -13,6 +13,9 @@ public class Choice {
     @JsonField private int url;
     @JsonField private boolean hasDrawable;
 
+    public Choice() {
+    }
+
     public Choice(String eName, int title){
         this(eName, title, 0, 0);
     }

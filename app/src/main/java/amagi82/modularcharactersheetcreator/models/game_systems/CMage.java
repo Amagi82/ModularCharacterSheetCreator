@@ -70,7 +70,16 @@ public class CMage extends Onyx {
     }
 
     public CMage(String factionName){
-        faction = Faction.valueOf(factionName);
+        this(Faction.valueOf(factionName));
+    }
+
+    public CMage(Faction faction){
+        this.faction = faction;
+        choiceLeft = getChoice(faction);
+    }
+
+    private Choice getChoice(Faction faction){
+        return new Choice(faction.name(), faction.getName(), Game.System.CMAGE.getUrlBase(), faction.getUrl());
     }
 
     @Override public String getSystemName() {
@@ -93,7 +102,7 @@ public class CMage extends Onyx {
         list.clear();
         if (eName == null) {
             for (Faction faction : Faction.values()) {
-                if(faction.getGroup() == Group.TRADITIONS) list.add(new Choice(faction.name(), faction.getName()));
+                if(faction.getGroup() == Group.TRADITIONS) list.add(getChoice(faction));
             }
             list.add(new Choice("TECHNOCRACY", R.string.technocracy, Game.System.CMAGE.getUrlBase(), R.string.url_cwod_mage_sect_technocracy));
             list.add(new Choice("CRAFTS", R.string.crafts));
@@ -101,18 +110,18 @@ public class CMage extends Onyx {
         }
         if(eName.equals("TECHNOCRACY")){
             for (Faction faction : Faction.values()) {
-                if(faction.getGroup() == Group.TECHNOCRACY) list.add(new Choice(faction.name(), faction.getName()));
+                if(faction.getGroup() == Group.TECHNOCRACY) list.add(getChoice(faction));
             }
             return list;
         }
         if(eName.equals("CRAFTS")){
             for (Faction faction : Faction.values()) {
-                if(faction.getGroup() == Group.CRAFTS) list.add(new Choice(faction.name(), faction.getName()));
+                if(faction.getGroup() == Group.CRAFTS) list.add(getChoice(faction));
             }
             return list;
         }
         faction = Faction.valueOf(eName);
-        choiceLeft = new Choice(faction.name(), faction.getName(), Game.System.CMAGE.getUrlBase(), faction.getUrl());
+        choiceLeft = getChoice(faction);
         return null;
     }
 }

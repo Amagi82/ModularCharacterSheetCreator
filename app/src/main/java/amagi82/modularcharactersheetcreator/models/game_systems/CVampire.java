@@ -119,8 +119,22 @@ public class CVampire extends Onyx {
     }
 
     public CVampire(String sectName, String clanName){
-        sect = Sect.valueOf(sectName);
-        clan = Clan.valueOf(clanName);
+        this(Sect.valueOf(sectName),Clan.valueOf(clanName));
+    }
+
+    public CVampire(Sect sect, Clan clan){
+        this.sect = sect;
+        this.clan = clan;
+        choiceLeft = getChoice(sect);
+        choiceRight = getChoice(clan);
+    }
+
+    private Choice getChoice(Sect sect){
+        return new Choice(sect.name(), sect.getName(), Game.System.CVAMPIRE.getUrlBase(), sect.getUrl());
+    }
+
+    private Choice getChoice(Clan clan){
+        return new Choice(clan.name(), clan.getName(), Game.System.CVAMPIRE.getUrlBase(), clan.getUrl());
     }
 
     @Override public String getSystemName() {
@@ -143,16 +157,16 @@ public class CVampire extends Onyx {
         list.clear();
         if (eName == null) {
             for (Sect sect : Sect.values()){
-                list.add(new Choice(sect.name(), sect.getName(), Game.System.CVAMPIRE.getUrlBase(), sect.getUrl()));
+                list.add(getChoice(sect));
             }
             return list;
         }
         if(sect == null) {
             sect = Sect.valueOf(eName);
-            choiceLeft = new Choice(sect.name(), sect.getName(), Game.System.CVAMPIRE.getUrlBase(), sect.getUrl());
+            choiceLeft = getChoice(sect);
 
             for (Clan clan : Clan.values()) {
-                if(clan.getSectMembership(sect) == Member.YES ) list.add(new Choice(clan.name(), clan.getName(), Game.System.CVAMPIRE.getUrlBase(), clan.getUrl()));
+                if(clan.getSectMembership(sect) == Member.YES ) list.add(getChoice(clan));
             }
             list.add(new Choice("OTHERS", R.string.others));
             list.add(new Choice("BLOODLINES", R.string.bloodlines));
@@ -160,22 +174,22 @@ public class CVampire extends Onyx {
         }
         if(eName.equals("OTHERS")) {
             for (Clan clan : Clan.values()) {
-                if(clan.getSectMembership(sect) == Member.YES ) list.add(new Choice(clan.name(), clan.getName(), Game.System.CVAMPIRE.getUrlBase(), clan.getUrl()));
+                if(clan.getSectMembership(sect) == Member.YES ) list.add(getChoice(clan));
             }
             for (Clan clan : Clan.values()) {
-                if(clan.getSectMembership(sect) == Member.OPTIONAL ) list.add(new Choice(clan.name(), clan.getName(), Game.System.CVAMPIRE.getUrlBase(), clan.getUrl()));
+                if(clan.getSectMembership(sect) == Member.OPTIONAL ) list.add(getChoice(clan));
             }
             return list;
         }
         if(eName.equals("BLOODLINES")) {
             for (Clan clan : Clan.values()) {
                 if(clan.getSectMembership(sect) == Member.YES ||clan.getSectMembership(sect) == Member.BLOODLINE)
-                    list.add(new Choice(clan.name(), clan.getName(), Game.System.CVAMPIRE.getUrlBase(), clan.getUrl()));
+                    list.add(getChoice(clan));
             }
             return list;
         }
         clan = Clan.valueOf(eName);
-        choiceRight = new Choice(clan.name(), clan.getName(), Game.System.CVAMPIRE.getUrlBase(), clan.getUrl());
+        choiceRight = getChoice(clan);
         return null;
     }
 }

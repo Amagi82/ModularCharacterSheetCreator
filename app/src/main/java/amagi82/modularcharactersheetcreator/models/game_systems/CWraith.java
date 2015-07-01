@@ -57,6 +57,15 @@ public class CWraith extends Onyx {
         arcanos = Arcanos.valueOf(arcanosName);
     }
 
+    public CWraith(Arcanos arcanos){
+        this.arcanos = arcanos;
+        choiceLeft = getChoice(arcanos);
+    }
+
+    private Choice getChoice(Arcanos arcanos){
+        return new Choice(arcanos.name(), arcanos.getName(), Game.System.CWRAITH.getUrlBase(), arcanos.getUrl());
+    }
+
     @Override public String getSystemName() {
         return Game.System.CWRAITH.name();
     }
@@ -76,13 +85,13 @@ public class CWraith extends Onyx {
     @Override public List<Choice> getList(String eName) {
         list.clear();
         if (eName == null) {
-            for (Arcanos type : Arcanos.values()) {
-                list.add(new Choice(type.name(), type.getName()));
+            for (Arcanos arcanos : Arcanos.values()) {
+                list.add(getChoice(arcanos));
             }
             return list;
         }
         arcanos = Arcanos.valueOf(eName);
-        choiceLeft = new Choice(arcanos.name(), arcanos.getName(), Game.System.CWRAITH.getUrlBase(), arcanos.getUrl());
+        choiceLeft = getChoice(arcanos);
         return null;
     }
 }
