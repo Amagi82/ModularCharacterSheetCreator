@@ -39,8 +39,8 @@ import amagi82.modularcharactersheetcreator.network.VolleySingleton;
 import amagi82.modularcharactersheetcreator.utils.Logan;
 import amagi82.modularcharactersheetcreator.utils.Otto;
 import amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener {
 
@@ -53,22 +53,22 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     private boolean isEditMode = false;
     private Uri photoUri;
     private CropImageView cropper;
-    @InjectView(R.id.toolbar) Toolbar toolbar;
-    @InjectView(R.id.appbar) RelativeLayout appbar;
-    @InjectView(R.id.imagePortrait) AnimatedNetworkImageView imagePortrait;
-    @InjectView(R.id.textInputLayout) TextInputLayout textInputLayout;
-    @InjectView(R.id.iconLeft) AnimatedNetworkImageView iconLeft;
-    @InjectView(R.id.tvIconLeft) TextView tvIconLeft;
-    @InjectView(R.id.iconRight) AnimatedNetworkImageView iconRight;
-    @InjectView(R.id.tvIconRight) TextView tvIconRight;
-    @InjectView(R.id.tvGameSystem) TextView tvGameSystem;
-    @InjectView(R.id.fab) FloatingActionButton fab;
-    @InjectView(R.id.recycler_view) RecyclerView recyclerView;
+    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.appbar) RelativeLayout appbar;
+    @Bind(R.id.imagePortrait) AnimatedNetworkImageView imagePortrait;
+    @Bind(R.id.textInputLayout) TextInputLayout textInputLayout;
+    @Bind(R.id.iconLeft) AnimatedNetworkImageView iconLeft;
+    @Bind(R.id.tvIconLeft) TextView tvIconLeft;
+    @Bind(R.id.iconRight) AnimatedNetworkImageView iconRight;
+    @Bind(R.id.tvIconRight) TextView tvIconRight;
+    @Bind(R.id.tvGameSystem) TextView tvGameSystem;
+    @Bind(R.id.fab) FloatingActionButton fab;
+    @Bind(R.id.recycler_view) RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_character, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
         setHasOptionsMenu(true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -333,6 +333,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
     }
 }

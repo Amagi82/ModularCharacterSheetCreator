@@ -15,8 +15,8 @@ import amagi82.modularcharactersheetcreator.events.CharacterClickedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.utils.CircleIcon;
 import amagi82.modularcharactersheetcreator.utils.Otto;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
@@ -62,14 +62,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     // Provide a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder {
         //View container;
-        @InjectView(R.id.icon) CircleImageView icon;
-        @InjectView(R.id.tvName) TextView tvName;
-        @InjectView(R.id.tvArchetype) TextView tvArchetype;
-        @InjectView(R.id.tvGameSystem) TextView tvGameSystem;
+        @Bind(R.id.icon) CircleImageView icon;
+        @Bind(R.id.tvName) TextView tvName;
+        @Bind(R.id.tvArchetype) TextView tvArchetype;
+        @Bind(R.id.tvGameSystem) TextView tvGameSystem;
 
         public ViewHolder(final View itemView) {
             super(itemView);
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {

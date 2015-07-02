@@ -11,18 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import amagi82.modularcharactersheetcreator.R;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class SheetFragment extends Fragment {
 
-    @InjectView(R.id.recycler_view) RecyclerView recyclerView;
-    @InjectView(R.id.fab) FloatingActionButton fab;
+    @Bind(R.id.recycler_view) RecyclerView recyclerView;
+    @Bind(R.id.fab) FloatingActionButton fab;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
 
 //        GameCharacter character = MainApplication.getGameCharacters().get(getArguments().getInt("character"));
 //        getActivity().setTitle(character.getName());

@@ -38,8 +38,9 @@ public class CharacterAdapter extends RecyclerView.Adapter<TileViewHolder> {
     @Override
     public void onBindViewHolder(TileViewHolder holder, int position) {
         Choice choice = choices.get(position);
-        if(choice.getDrawable() != -1) holder.imageTitle.setDefaultImageResId(choice.getDrawable());
-        else if(choice.getUrl() != -1) holder.imageTitle.setImageUrl(getString(choice.getBaseUrl()) + getString(choice.getUrl()), VolleySingleton.INSTANCE.getImageLoader());
+        if(choice.getDrawable() != -1 && holder.imageView != null) holder.imageView.setImageResource(choice.getDrawable());
+        else if(choice.getUrl() != -1 && holder.imageViewNetwork != null)
+            holder.imageViewNetwork.setImageUrl(getString(choice.getBaseUrl()) + getString(choice.getUrl()), VolleySingleton.INSTANCE.getImageLoader());
         holder.tvTitle.setText(choice.getTitle());
         holder.eName = choices.get(position).geteName();
     }

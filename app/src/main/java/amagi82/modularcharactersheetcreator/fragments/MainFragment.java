@@ -24,15 +24,15 @@ import amagi82.modularcharactersheetcreator.events.CreateCharacterEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.utils.Logan;
 import amagi82.modularcharactersheetcreator.utils.Otto;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 public class MainFragment extends Fragment{
 
-    @InjectView(R.id.toolbar) Toolbar toolbar;
-    @InjectView(R.id.recycler_view) RecyclerView recyclerView;
-    @InjectView(R.id.fab) FloatingActionButton fab;
+    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.recycler_view) RecyclerView recyclerView;
+    @Bind(R.id.fab) FloatingActionButton fab;
     private SortedList<GameCharacter> characters;
     private MainAdapter adapter;
     //@InjectView(R.id.fab_frame) FrameLayout fab_frame;
@@ -40,7 +40,7 @@ public class MainFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
         toolbar.setTitle(getString(R.string.characters));
 
         characters = new SortedList<>(GameCharacter.class, new SortedList.Callback<GameCharacter>() {
@@ -122,6 +122,6 @@ public class MainFragment extends Fragment{
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
     }
 }
