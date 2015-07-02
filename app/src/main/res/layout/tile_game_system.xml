@@ -13,9 +13,10 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:textColor="@color/white"
+        android:visibility="invisible"
         tools:text="Header"/>
 
-    <amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView
+    <ImageView
         android:id="@+id/imageTitle"
         android:layout_width="match_parent"
         android:layout_height="75dp"
