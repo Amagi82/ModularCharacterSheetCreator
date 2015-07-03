@@ -1,5 +1,7 @@
 package amagi82.modularcharactersheetcreator.fragments;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -17,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -65,6 +68,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @Bind(R.id.tvGameSystem) TextView tvGameSystem;
     @Bind(R.id.fab) FloatingActionButton fab;
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
+    @Bind(R.id.imageOnyxLogo) ImageView imageOnyxLogo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -110,7 +114,20 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             setLeftResources();
             //See if we need the right choice
             if (onyx.hasRight()) setRightResources();
+            setLogoVisible();
         }
+    }
+
+    private void setLogoVisible() {
+        recyclerView.animate().alpha(0f).setDuration(200).setListener(new AnimatorListenerAdapter() {
+            @Override public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                recyclerView.setVisibility(View.GONE);
+                imageOnyxLogo.setVisibility(View.VISIBLE);
+                imageOnyxLogo.setAlpha(0f);
+                imageOnyxLogo.animate().alpha(1).setDuration(1000);
+            }
+        });
     }
 
     private void chooseNewGameSystem() {
@@ -192,6 +209,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                 Log.i(null, "setting right resources and onyx");
                 setRightResources();
                 gameCharacter.setOnyx(onyx);
+                setLogoVisible();
             }
         }
     }
