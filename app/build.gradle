@@ -36,11 +36,11 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.android.support:cardview-v7:22.2.0'
     compile 'com.android.support:design:22.2.0'
-    compile 'de.hdodenhof:circleimageview:1.2.2'
+    compile 'de.hdodenhof:circleimageview:1.3.0'
     compile 'com.edmodo:cropper:1.0.1' //Photo cropping
     compile 'com.github.lzyzsd:circleprogress:1.1.0' //Circle progress bar- used for blood pools or health bars
-    compile 'com.akexorcist:RoundCornerProgressBar:1.1.0' //Usable for health bars
-    compile 'com.squareup:otto:1.3.7' //Event Bus for easy & reliable communication between classes
+    compile 'com.akexorcist:RoundCornerProgressBar:1.2.0' //Usable for health bars
+    compile 'com.squareup:otto:1.3.8' //Event Bus for easy & reliable communication between classes
     compile 'com.jakewharton:butterknife:7.0.1' //Dependency injection for views
     compile 'com.colintmiller:simplenosql:0.5' //NoSQL database
     compile 'com.mcxiaoke.volley:library:1.0.16'
