@@ -70,7 +70,7 @@ public class Exalted extends Onyx {
         SOULSTEEL(R.string.soulsteel, ExaltedType.ALCHEMICAL);
 
         private int name;
-        ExaltedType parent;
+        private ExaltedType parent;
 
         Caste(int name, ExaltedType parent) {
             this.name = name;
@@ -90,7 +90,6 @@ public class Exalted extends Onyx {
     private Caste caste;
     private Choice choiceLeft;
     private Choice choiceRight;
-    private List<Choice> list = new ArrayList<>();
 
     public Exalted() {
     }
@@ -99,20 +98,20 @@ public class Exalted extends Onyx {
         this(ExaltedType.valueOf(typeName), Caste.valueOf(casteName));
     }
 
-    public Exalted(ExaltedType exaltedType, Caste caste){
+    public Exalted(ExaltedType exaltedType, Caste caste) {
         this.exaltedType = exaltedType;
         this.caste = caste;
         choiceLeft = getChoice(exaltedType);
         choiceRight = getChoice(caste);
     }
 
-    private Choice getChoice(ExaltedType exaltedType){
+    private Choice getChoice(ExaltedType exaltedType) {
         return new Choice(exaltedType.name(), exaltedType.getName());
     }
-    private Choice getChoice(Caste caste){
+
+    private Choice getChoice(Caste caste) {
         return new Choice(caste.name(), caste.getName());
     }
-
 
     @Override public String getSystemName() {
         return Game.System.EXALTED.name();
@@ -130,24 +129,29 @@ public class Exalted extends Onyx {
         return choiceRight;
     }
 
-    @Override public List<Choice> getList(String eName) {
-        list.clear();
+    @Override public boolean hasRight() {
+        return true;
+    }
+
+    @Override public List<Choice> getListLeft(String eName) {
+        List<Choice> list = new ArrayList<>();
         if (eName == null) {
-            for (ExaltedType exaltedType : ExaltedType.values()) {
-                list.add(getChoice(exaltedType));
-            }
-            return list;
-        }
-        if(choiceLeft == null) {
+            for (ExaltedType exaltedType : ExaltedType.values()) list.add(getChoice(exaltedType));
+        } else {
             exaltedType = ExaltedType.valueOf(eName);
             choiceLeft = getChoice(exaltedType);
-            for (Caste caste : Caste.values()) {
-                if (caste.getParent().equals(ExaltedType.valueOf(eName))) list.add(getChoice(caste));
-            }
-            return list.size() > 0 ? list : null;
         }
-        caste = Caste.valueOf(eName);
-        choiceRight = getChoice(caste);
-        return null;
+        return list;
+    }
+
+    @Override public List<Choice> getListRight(String eName) {
+        List<Choice> list = new ArrayList<>();
+        if (eName == null) {
+            for (Caste caste : Caste.values()) if (caste.getParent().equals(exaltedType)) list.add(getChoice(caste));
+        } else {
+            caste = Caste.valueOf(eName);
+            choiceRight = getChoice(caste);
+        }
+        return list;
     }
 }

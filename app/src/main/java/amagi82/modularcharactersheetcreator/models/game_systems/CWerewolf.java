@@ -71,26 +71,26 @@ public class CWerewolf extends Onyx {
     private Auspice auspice;
     private Choice choiceLeft;
     private Choice choiceRight;
-    private List<Choice> list = new ArrayList<>();
 
     public CWerewolf() {
     }
 
-    public CWerewolf(String tribeName, String auspiceName){
-        this(Tribe.valueOf(tribeName),Auspice.valueOf(auspiceName));
+    public CWerewolf(String tribeName, String auspiceName) {
+        this(Tribe.valueOf(tribeName), Auspice.valueOf(auspiceName));
     }
 
-    public CWerewolf(Tribe tribe, Auspice auspice){
+    public CWerewolf(Tribe tribe, Auspice auspice) {
         this.tribe = tribe;
         this.auspice = auspice;
         choiceLeft = getChoice(tribe);
         choiceRight = getChoice(auspice);
     }
 
-    private Choice getChoice(Tribe tribe){
+    private Choice getChoice(Tribe tribe) {
         return new Choice(tribe.name(), tribe.getName(), Game.System.CWEREWOLF.getUrlBase(), tribe.getUrl());
     }
-    private Choice getChoice(Auspice auspice){
+
+    private Choice getChoice(Auspice auspice) {
         return new Choice(auspice.name(), auspice.getName(), Game.System.CWEREWOLF.getUrlBase(), auspice.getUrl());
     }
 
@@ -110,25 +110,29 @@ public class CWerewolf extends Onyx {
         return choiceRight;
     }
 
-    @Override public List<Choice> getList(String eName) {
-        list.clear();
+    @Override public boolean hasRight() {
+        return true;
+    }
+
+    @Override public List<Choice> getListLeft(String eName) {
+        List<Choice> list = new ArrayList<>();
         if (eName == null) {
-            for (Tribe tribe : Tribe.values()){
-                list.add(getChoice(tribe));
-            }
-            return list;
-        }
-        if(tribe == null) {
+            for (Tribe tribe : Tribe.values()) list.add(getChoice(tribe));
+        } else {
             tribe = Tribe.valueOf(eName);
             choiceLeft = getChoice(tribe);
-
-            for (Auspice auspice : Auspice.values()) {
-                list.add(getChoice(auspice));
-            }
-            return list;
         }
-        auspice = Auspice.valueOf(eName);
-        choiceRight = getChoice(auspice);
-        return null;
+        return list;
+    }
+
+    @Override public List<Choice> getListRight(String eName) {
+        List<Choice> list = new ArrayList<>();
+        if (eName == null) {
+            for (Auspice auspice : Auspice.values()) list.add(getChoice(auspice));
+        } else {
+            auspice = Auspice.valueOf(eName);
+            choiceRight = getChoice(auspice);
+        }
+        return list;
     }
 }

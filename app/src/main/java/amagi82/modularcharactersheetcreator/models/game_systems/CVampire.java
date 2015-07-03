@@ -1,7 +1,5 @@
 package amagi82.modularcharactersheetcreator.models.game_systems;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,7 +112,6 @@ public class CVampire extends Onyx {
     private Clan clan;
     private Choice choiceLeft;
     private Choice choiceRight;
-    private List<Choice> list = new ArrayList<>();
 
     public CVampire() {
     }
@@ -161,45 +158,38 @@ public class CVampire extends Onyx {
         return choiceRight;
     }
 
-    @Override public List<Choice> getList(String eName) {
-        list.clear();
+    @Override public boolean hasRight() {
+        return true;
+    }
+
+    @Override public List<Choice> getListLeft(String eName) {
+        List<Choice> list = new ArrayList<>();
         if(eName == null) {
-            for (Sect sect : Sect.values()){
-                list.add(getChoice(sect));
-            }
-            return list;
-        }
-        if(isSect(eName)) {
+            for (Sect sect : Sect.values()) list.add(getChoice(sect));
+        }else{
             sect = Sect.valueOf(eName);
             choiceLeft = getChoice(sect);
+        }
+        return list;
+    }
 
-            for (Clan clan : Clan.values()) {
-                if(clan.getSectMembership(sect) == Member.YES ){
-                    Log.i(null, "added "+getChoice(clan).geteName());
-                    list.add(getChoice(clan));
-                }
-            }
+    @Override public List<Choice> getListRight(String eName) {
+        List<Choice> list = new ArrayList<>();
+        if(eName == null) {
+            for (Clan clan : Clan.values()) if (clan.getSectMembership(sect) == Member.YES) list.add(getChoice(clan));
             list.add(new Choice("OTHERS", R.string.others));
             list.add(new Choice("BLOODLINES", R.string.bloodlines));
-            return list;
-        }
-        if(eName.equals("OTHERS")) {
-            for (Clan clan : Clan.values()) {
-                if(clan.getSectMembership(sect) == Member.YES ) list.add(getChoice(clan));
-            }
-            for (Clan clan : Clan.values()) {
-                if(clan.getSectMembership(sect) == Member.OPTIONAL ) list.add(getChoice(clan));
-            }
-            return list;
-        }
-        if(eName.equals("BLOODLINES")) {
+        }else if(eName.equals("OTHERS")) {
+            for (Clan clan : Clan.values()) if(clan.getSectMembership(sect) == Member.YES ) list.add(getChoice(clan));
+            for (Clan clan : Clan.values()) if(clan.getSectMembership(sect) == Member.OPTIONAL ) list.add(getChoice(clan));
+        }else if(eName.equals("BLOODLINES")) {
             for (Clan clan : Clan.values()) {
                 if(clan.getSectMembership(sect) == Member.YES ||clan.getSectMembership(sect) == Member.BLOODLINE) list.add(getChoice(clan));
             }
-            return list;
+        }else{
+            clan = Clan.valueOf(eName);
+            choiceRight = getChoice(clan);
         }
-        clan = Clan.valueOf(eName);
-        choiceRight = getChoice(clan);
-        return null;
+        return list;
     }
 }

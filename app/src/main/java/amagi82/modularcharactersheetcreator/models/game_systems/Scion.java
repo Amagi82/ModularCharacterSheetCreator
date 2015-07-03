@@ -51,7 +51,6 @@ public class Scion extends Onyx {
     private Pantheon pantheon;
     private Choice choiceLeft;
     private Choice choiceRight;
-    private List<Choice> list = new ArrayList<>();
 
     public Scion() {
     }
@@ -91,25 +90,29 @@ public class Scion extends Onyx {
         return choiceRight;
     }
 
-    @Override public List<Choice> getList(String eName) {
-        list.clear();
+    @Override public boolean hasRight() {
+        return true;
+    }
+
+    @Override public List<Choice> getListLeft(String eName) {
+        List<Choice> list = new ArrayList<>();
         if (eName == null) {
-            for (Volume volume : Volume.values()){
-                list.add(getChoice(volume));
-            }
-            return list;
-        }
-        if(volume == null) {
+            for (Volume volume : Volume.values()) list.add(getChoice(volume));
+        } else {
             volume = Volume.valueOf(eName);
             choiceLeft = getChoice(volume);
-
-            for (Pantheon pantheon : Pantheon.values()) {
-                list.add(getChoice(pantheon));
-            }
-            return list;
         }
-        pantheon = Pantheon.valueOf(eName);
-        choiceRight = getChoice(pantheon);
-        return null;
+        return list;
+    }
+
+    @Override public List<Choice> getListRight(String eName) {
+        List<Choice> list = new ArrayList<>();
+        if (eName == null) {
+            for (Pantheon pantheon : Pantheon.values()) list.add(getChoice(pantheon));
+        } else {
+            pantheon = Pantheon.valueOf(eName);
+            choiceRight = getChoice(pantheon);
+        }
+        return list;
     }
 }

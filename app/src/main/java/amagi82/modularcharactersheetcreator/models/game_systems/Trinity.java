@@ -49,7 +49,6 @@ public class Trinity extends Onyx {
     private Order order;
     private Choice choiceLeft;
     private Choice choiceRight;
-    private List<Choice> list = new ArrayList<>();
 
     public Trinity() {
     }
@@ -88,25 +87,29 @@ public class Trinity extends Onyx {
         return choiceRight;
     }
 
-    @Override public List<Choice> getList(String eName) {
-        list.clear();
+    @Override public boolean hasRight() {
+        return true;
+    }
+
+    @Override public List<Choice> getListLeft(String eName) {
+        List<Choice> list = new ArrayList<>();
         if (eName == null) {
-            for (Volume volume : Volume.values()){
-                list.add(getChoice(volume));
-            }
-            return list;
-        }
-        if(volume == null) {
+            for (Volume volume : Volume.values()) list.add(getChoice(volume));
+        }else {
             volume = Volume.valueOf(eName);
             choiceLeft = getChoice(volume);
-
-            for (Order order : Order.values()) {
-                list.add(getChoice(order));
-            }
-            return list;
         }
-        order = Order.valueOf(eName);
-        choiceRight = getChoice(order);
-        return null;
+        return list;
+    }
+
+    @Override public List<Choice> getListRight(String eName) {
+        List<Choice> list = new ArrayList<>();
+        if(eName == null){
+            for (Order order : Order.values()) list.add(getChoice(order));
+        }else{
+            order = Order.valueOf(eName);
+            choiceRight = getChoice(order);
+        }
+        return list;
     }
 }

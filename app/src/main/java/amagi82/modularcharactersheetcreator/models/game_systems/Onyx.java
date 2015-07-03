@@ -10,9 +10,13 @@ public abstract class Onyx {
 
     public abstract int getArchetype();
 
+    public abstract boolean hasRight();
+
     public abstract Choice getLeft();
 
     public abstract Choice getRight();
 
-    public abstract List<Choice> getList(String eName);
+    public abstract List<Choice> getListLeft(String eName);
+
+    public abstract List<Choice> getListRight(String eName);
 }

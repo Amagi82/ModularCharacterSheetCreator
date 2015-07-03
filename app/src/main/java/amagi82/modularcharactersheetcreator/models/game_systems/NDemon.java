@@ -58,7 +58,6 @@ public class NDemon extends Onyx {
     private Agenda agenda;
     private Choice choiceLeft;
     private Choice choiceRight;
-    private List<Choice> list = new ArrayList<>();
 
     public NDemon() {
     }
@@ -73,6 +72,7 @@ public class NDemon extends Onyx {
         choiceLeft = getChoice(incarnation);
         choiceRight = getChoice(agenda);
     }
+    
     private Choice getChoice(Incarnation incarnation){
         return new Choice(incarnation.name(), incarnation.getName(), Game.System.NDEMON.getUrlBase(), incarnation.getUrl());
     }
@@ -97,25 +97,29 @@ public class NDemon extends Onyx {
         return choiceRight;
     }
 
-    @Override public List<Choice> getList(String eName) {
-        list.clear();
+    @Override public boolean hasRight() {
+        return true;
+    }
+
+    @Override public List<Choice> getListLeft(String eName) {
+        List<Choice> list = new ArrayList<>();
         if (eName == null) {
-            for (Incarnation incarnation : Incarnation.values()){
-                list.add(getChoice(incarnation));
-            }
-            return list;
-        }
-        if(incarnation == null) {
+            for (Incarnation incarnation : Incarnation.values()) list.add(getChoice(incarnation));
+        } else {
             incarnation = Incarnation.valueOf(eName);
             choiceLeft = getChoice(incarnation);
-
-            for (Agenda agenda : Agenda.values()) {
-                list.add(getChoice(agenda));
-            }
-            return list;
         }
-        agenda = Agenda.valueOf(eName);
-        choiceRight = getChoice(agenda);
-        return null;
+        return list;
+    }
+
+    @Override public List<Choice> getListRight(String eName) {
+        List<Choice> list = new ArrayList<>();
+        if (eName == null) {
+            for (Agenda agenda : Agenda.values()) list.add(getChoice(agenda));
+        } else {
+            agenda = Agenda.valueOf(eName);
+            choiceRight = getChoice(agenda);
+        }
+        return list;
     }
 }

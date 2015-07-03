@@ -102,25 +102,31 @@ public class NVampire extends Onyx {
         return choiceRight;
     }
 
-    @Override public List<Choice> getList(String eName) {
-        list.clear();
+    @Override public boolean hasRight() {
+        return true;
+    }
+
+    @Override public List<Choice> getListLeft(String eName) {
+        List<Choice> list = new ArrayList<>();
         if (eName == null) {
-            for (Clan clan : Clan.values()){
-                list.add(getChoice(clan));
-            }
-            return list;
-        }
-        if(clan == null) {
+            for (Clan clan : Clan.values()) list.add(getChoice(clan));
+        } else {
             clan = Clan.valueOf(eName);
             choiceLeft = getChoice(clan);
-
-            for (Covenant covenant : Covenant.values()) {
-                list.add(getChoice(covenant));
-            }
-            return list;
         }
-        covenant = Covenant.valueOf(eName);
-        choiceRight = getChoice(covenant);
-        return null;
+        return list;
+    }
+
+    @Override public List<Choice> getListRight(String eName) {
+        List<Choice> list = new ArrayList<>();
+        if (clan == null) clan = Clan.valueOf(eName);
+
+        if (eName == null) {
+            for (Covenant covenant : Covenant.values()) list.add(getChoice(covenant));
+        } else {
+            covenant = Covenant.valueOf(eName);
+            choiceRight = getChoice(covenant);
+        }
+        return list;
     }
 }

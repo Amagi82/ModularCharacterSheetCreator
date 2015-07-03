@@ -30,7 +30,8 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
-import amagi82.modularcharactersheetcreator.events.TileClickedEvent;
+import amagi82.modularcharactersheetcreator.events.TileGridItemClickedEvent;
+import amagi82.modularcharactersheetcreator.events.TileItemClickedEvent;
 import amagi82.modularcharactersheetcreator.models.Choice;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.game_systems.Game;
@@ -47,7 +48,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int PICK_FROM_FILE = 2;
     private GameCharacter gameCharacter;
-    private Game game;
+    private Game game = new Game();
     private Onyx onyx;
     private CharacterAdapter characterAdapter;
     private boolean isEditMode = false;
@@ -71,28 +72,23 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         ButterKnife.bind(this, rootView);
         setHasOptionsMenu(true);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        if(gameCharacter == null) gameCharacter = new GameCharacter();
+        if (gameCharacter == null) gameCharacter = new GameCharacter();
 
-        if(getArguments() != null && getArguments().getString("entityId") != null){
+        if (getArguments() != null && getArguments().getString("entityId") != null) {
             Log.i(null, "found character");
             isEditMode = true;
 
             NoSQL.with(getActivity()).withDeserializer(new Logan()).using(GameCharacter.class).bucketId("bucket").entityId(getArguments().getString("entityId")).
-            retrieve(new RetrievalCallback<GameCharacter>() {
-                @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
-                    if (entities.size() > 0) gameCharacter = entities.get(0).getData();
-                    if (gameCharacter.getPortraitUri() != null) imagePortrait.setImageURI(gameCharacter.getPortraitUri());
-                    //recyclerView.setAdapter(new CharacterAdapter(getActivity(), );
-                }
-            });
-        }else{
-            game = new Game();
-            characterAdapter = new CharacterAdapter(getActivity(), game.getList(null), R.layout.tile_game_system);
-            recyclerView.setAdapter(characterAdapter);
+                    retrieve(new RetrievalCallback<GameCharacter>() {
+                        @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
+                            if (entities.size() > 0) gameCharacter = entities.get(0).getData();
+                            if (gameCharacter.getPortraitUri() != null) imagePortrait.setImageURI(gameCharacter.getPortraitUri());
+                            //recyclerView.setAdapter(new CharacterAdapter(getActivity(), );
+                        }
+                    });
+        } else {
+            initiateGameSystemChoices();
         }
-
-
 
         //colorMask.animate().alpha(0).setDuration(300);
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
@@ -103,45 +99,92 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         return rootView;
     }
 
-    private String getUrl(Choice choice){
-        return getString(choice.getBaseUrl())+getString(choice.getUrl());
+    private void initiateGameSystemChoices() {
+        if (gameCharacter.getGameEName() == null) {
+            //If we have no game system set, get the list of game systems
+            chooseNewGameSystem();
+        } else {
+            //We have a game system, use a grid layout for the sub-lists. Display the game system.
+            displayGameSystem();
+            onyx = gameCharacter.getGameSystem().getOnyx();
+            setLeftResources();
+            //See if we need the right choice
+            if (onyx.hasRight()) setRightResources();
+        }
     }
 
-    @Subscribe
-    public void onTileClicked(TileClickedEvent event){
-        String eName = event.eName;
+    private void chooseNewGameSystem() {
+        tvGameSystem.setVisibility(View.INVISIBLE);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        characterAdapter = new CharacterAdapter(getResources(), game.getList(Game.Category.DEFAULT), false);
+        recyclerView.setAdapter(characterAdapter);
+    }
 
-        if(onyx == null && game.getList(eName) != null){
-            characterAdapter.setList(game.getList(eName));
-        }else if(onyx == null){
-            onyx = Game.System.valueOf(eName).getOnyx();
-            tvGameSystem.setText(Game.System.valueOf(eName).getName());
-            tvGameSystem.setVisibility(View.VISIBLE);
-            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),getResources().getInteger(R.integer.character_grid_span_count)));
-            characterAdapter = new CharacterAdapter(getActivity(), onyx.getList(null),R.layout.tile_default);
+    private void displayGameSystem() {
+        tvGameSystem.setText(onyx.getSystemName());
+        tvGameSystem.setVisibility(View.VISIBLE);
+    }
+
+    private void clearIcons() {
+        tvIconLeft.setVisibility(View.INVISIBLE);
+        tvIconRight.setVisibility(View.INVISIBLE);
+        iconLeft.setVisibility(View.INVISIBLE);
+        iconRight.setVisibility(View.INVISIBLE);
+    }
+
+    private void setLeftResources() {
+        tvIconLeft.setText(gameCharacter.getLeft().getTitle());
+        iconLeft.setImageUrl(getUrl(gameCharacter.getLeft()), VolleySingleton.INSTANCE.getImageLoader());
+        tvIconLeft.setVisibility(View.VISIBLE);
+        iconLeft.setVisibility(View.VISIBLE);
+    }
+
+    private void setRightResources() {
+        tvIconRight.setText(gameCharacter.getRight().getTitle());
+        iconRight.setImageUrl(getUrl(gameCharacter.getRight()), VolleySingleton.INSTANCE.getImageLoader());
+        tvIconRight.setVisibility(View.VISIBLE);
+        iconRight.setVisibility(View.VISIBLE);
+    }
+
+    private String getUrl(Choice choice) {
+        return getString(choice.getBaseUrl()) + getString(choice.getUrl());
+    }
+
+    //Game System selected
+    @Subscribe public void onTileClicked(TileItemClickedEvent event) {
+        if(event.system == Game.System.CWOD) characterAdapter.setList(game.getList(Game.Category.CWOD));
+        else if(event.system == Game.System.NWOD) characterAdapter.setList(game.getList(Game.Category.NWOD));
+        else {
+            onyx = event.system.getOnyx();
+            clearIcons();
+            displayGameSystem();
+
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
+            characterAdapter = new CharacterAdapter(getResources(), onyx.getListLeft(null), true);
             recyclerView.setAdapter(characterAdapter);
-        }else{
-            List<Choice> list = onyx.getList(eName);
-            if(list != null){
-                characterAdapter.setList(list);
-                if(onyx.getLeft() != null) {
-                    tvIconLeft.setText(onyx.getLeft().getTitle());
-                    iconLeft.setImageUrl(getUrl(onyx.getLeft()), VolleySingleton.INSTANCE.getImageLoader());
-                }
-            }else{
-                tvIconLeft.setText(onyx.getLeft().getTitle());
-                iconLeft.setImageUrl(getUrl(onyx.getLeft()), VolleySingleton.INSTANCE.getImageLoader());
-                if(onyx.getRight() != null) {
-                    tvIconRight.setText(onyx.getRight().getTitle());
-                    iconRight.setImageUrl(getUrl(onyx.getRight()), VolleySingleton.INSTANCE.getImageLoader());
-                }
-                gameCharacter.setGameEName(onyx.getSystemName());
-                gameCharacter.setArchetype(onyx.getArchetype());
-                gameCharacter.setLeft(onyx.getLeft());
-                gameCharacter.setRight(onyx.getRight());
-            }
         }
+    }
 
+    //Game-specific subcategory selected
+    @Subscribe
+    public void onGridTileClicked(TileGridItemClickedEvent event) {
+        String eName = event.eName;
+        Log.i(null, "eName == "+eName);
+        if(onyx.getLeft() == null){
+            if(onyx.getListLeft(eName) != null) characterAdapter.setList(onyx.getListLeft(eName));
+            else{
+                setLeftResources();
+                if(onyx.hasRight()) characterAdapter.setList(onyx.getListRight(null));
+            }
+        }else if(onyx.hasRight() && onyx.getRight() == null){
+            if(onyx.getListRight(eName) != null) {
+                characterAdapter.setList(onyx.getListRight(eName));
+            }else{
+                setRightResources();
+            }
+        }else{
+            gameCharacter.setOnyx(onyx);
+        }
     }
 
     @Override public void onStart() {
@@ -285,7 +328,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 //        }
 //    }
 
-    private void setIcon(Bitmap bitmap){
+    private void setIcon(Bitmap bitmap) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View cropImageView = inflater.inflate(R.layout.dialog_crop_image, null);
         cropper = (CropImageView) cropImageView.findViewById(R.id.cropImageView);
@@ -317,7 +360,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_delete:
                 getFragmentManager().popBackStack();
                 return true;

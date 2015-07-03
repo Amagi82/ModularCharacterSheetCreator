@@ -40,17 +40,17 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder vh, final int position) {
         final GameCharacter gameCharacter = gameCharacters.get(position);
         if(gameCharacter.getIcon() == null){
             int color = gameCharacter.getColorPrimary() < 1? res.getColor(R.color.primary) : gameCharacter.getColorPrimary();
             gameCharacter.setIcon(iconFactory.createIcon(gameCharacter.getName(), color));
         }
-        holder.icon.setImageBitmap(gameCharacter.getIcon());
-        holder.tvName.setText(gameCharacter.getName());
-        holder.tvArchetype.setText(gameCharacter.getArchetype());
-        holder.tvGameSystem.setTextColor(res.getColor(gameCharacter.getGameSystem().getColor()));
-        holder.tvGameSystem.setText(gameCharacter.getGameSystem().getName());
+        vh.icon.setImageBitmap(gameCharacter.getIcon());
+        vh.tvName.setText(gameCharacter.getName());
+        vh.tvArchetype.setText(gameCharacter.getArchetype());
+        vh.tvGameSystem.setTextColor(res.getColor(gameCharacter.getGameSystem().getColor()));
+        vh.tvGameSystem.setText(gameCharacter.getGameSystem().getName());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

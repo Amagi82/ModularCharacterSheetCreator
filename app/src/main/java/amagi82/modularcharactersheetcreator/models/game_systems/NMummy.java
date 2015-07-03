@@ -60,7 +60,6 @@ public class NMummy extends Onyx {
     private Guild guild;
     private Choice choiceLeft;
     private Choice choiceRight;
-    private List<Choice> list = new ArrayList<>();
 
     public NMummy() {
     }
@@ -100,25 +99,29 @@ public class NMummy extends Onyx {
         return choiceRight;
     }
 
-    @Override public List<Choice> getList(String eName) {
-        list.clear();
+    @Override public boolean hasRight() {
+        return true;
+    }
+
+    @Override public List<Choice> getListLeft(String eName) {
+        List<Choice> list = new ArrayList<>();
         if (eName == null) {
-            for (Decree decree : Decree.values()){
-                list.add(getChoice(decree));
-            }
-            return list;
-        }
-        if(decree == null) {
+            for (Decree decree : Decree.values()) list.add(getChoice(decree));
+        } else {
             decree = Decree.valueOf(eName);
             choiceLeft = getChoice(decree);
-
-            for (Guild guild : Guild.values()) {
-                list.add(getChoice(guild));
-            }
-            return list;
         }
-        guild = Guild.valueOf(eName);
-        choiceRight = getChoice(guild);
-        return null;
+        return list;
+    }
+
+    @Override public List<Choice> getListRight(String eName) {
+        List<Choice> list = new ArrayList<>();
+        if (eName == null) {
+            for (Guild guild : Guild.values()) list.add(getChoice(guild));
+        } else {
+            guild = Guild.valueOf(eName);
+            choiceRight = getChoice(guild);
+        }
+        return list;
     }
 }

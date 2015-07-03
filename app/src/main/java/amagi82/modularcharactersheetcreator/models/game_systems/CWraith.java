@@ -48,7 +48,6 @@ public class CWraith extends Onyx {
 
     private Arcanos arcanos;
     private Choice choiceLeft;
-    private List<Choice> list = new ArrayList<>();
 
     public CWraith() {
     }
@@ -82,16 +81,22 @@ public class CWraith extends Onyx {
         return null;
     }
 
-    @Override public List<Choice> getList(String eName) {
-        list.clear();
+    @Override public boolean hasRight() {
+        return false;
+    }
+
+    @Override public List<Choice> getListLeft(String eName) {
+        List<Choice> list = new ArrayList<>();
         if (eName == null) {
-            for (Arcanos arcanos : Arcanos.values()) {
-                list.add(getChoice(arcanos));
-            }
-            return list;
+            for (Arcanos arcanos : Arcanos.values()) list.add(getChoice(arcanos));
+        }else{
+            arcanos = Arcanos.valueOf(eName);
+            choiceLeft = getChoice(arcanos);
         }
-        arcanos = Arcanos.valueOf(eName);
-        choiceLeft = getChoice(arcanos);
+        return list;
+    }
+
+    @Override public List<Choice> getListRight(String eName) {
         return null;
     }
 }

@@ -98,36 +98,18 @@ public class Game {
         }
     }
 
-    private enum Category {
+    public enum Category {
         CWOD, NWOD, DEFAULT;
     }
-
-    private Choice choice;
-    private List<Choice> choices = new ArrayList<>();
 
     public Game() {
     }
 
-    public Game(Onyx game) {
-        setChoice(game.getSystemName());
-    }
-
-    public Choice getChoice() {
-        return choice;
-    }
-
-    public List<Choice> getList(String eName) {
-        Category category = (eName == null) ? Category.DEFAULT : eName.equals("CWOD") ? Category.CWOD : eName.equals("NWOD") ? Category.NWOD : null;
-        choices.clear();
-        if (category == null) return null;
+    public List<Choice> getList(Category category) {
+        List<Choice> choices = new ArrayList<>();
         for (System system : System.values()) {
             if (system.getCategory() == category) choices.add(new Choice(system.name(), system.getName(), system.getDrawable()));
         }
         return choices;
-    }
-
-    private void setChoice(String eName) {
-        System system = System.valueOf(eName);
-        choice = new Choice(eName, system.getName(), system.getDrawable());
     }
 }

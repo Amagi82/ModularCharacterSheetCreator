@@ -58,27 +58,26 @@ public class CMage extends Onyx {
         }
     }
 
-    public enum Group {
+    private enum Group {
         TRADITIONS, TECHNOCRACY, CRAFTS
     }
 
     private Faction faction;
     private Choice choiceLeft;
-    private List<Choice> list = new ArrayList<>();
 
     public CMage() {
     }
 
-    public CMage(String factionName){
-        this(Faction.valueOf(factionName));
+    public CMage(String eName){
+        this(Faction.valueOf(eName));
     }
 
-    public CMage(Faction faction){
+    public CMage(Faction faction) {
         this.faction = faction;
         choiceLeft = getChoice(faction);
     }
 
-    private Choice getChoice(Faction faction){
+    private Choice getChoice(Faction faction) {
         return new Choice(faction.name(), faction.getName(), Game.System.CMAGE.getUrlBase(), faction.getUrl());
     }
 
@@ -98,30 +97,28 @@ public class CMage extends Onyx {
         return null;
     }
 
-    @Override public List<Choice> getList(String eName) {
-        list.clear();
+    @Override public boolean hasRight() {
+        return false;
+    }
+
+    @Override public List<Choice> getListLeft(String eName) {
+        List<Choice> list = new ArrayList<>();
         if (eName == null) {
-            for (Faction faction : Faction.values()) {
-                if(faction.getGroup() == Group.TRADITIONS) list.add(getChoice(faction));
-            }
+            for (Faction faction : Faction.values()) if (faction.getGroup() == Group.TRADITIONS) list.add(getChoice(faction));
             list.add(new Choice("TECHNOCRACY", R.string.technocracy, Game.System.CMAGE.getUrlBase(), R.string.url_cwod_mage_sect_technocracy));
             list.add(new Choice("CRAFTS", R.string.crafts));
-            return list;
+        }else if (eName.equals("TECHNOCRACY")) {
+            for (Faction faction : Faction.values()) if (faction.getGroup() == Group.TECHNOCRACY) list.add(getChoice(faction));
+        }else if (eName.equals("CRAFTS")) {
+            for (Faction faction : Faction.values()) if (faction.getGroup() == Group.CRAFTS) list.add(getChoice(faction));
+        }else{
+            faction = Faction.valueOf(eName);
+            choiceLeft = getChoice(faction);
         }
-        if(eName.equals("TECHNOCRACY")){
-            for (Faction faction : Faction.values()) {
-                if(faction.getGroup() == Group.TECHNOCRACY) list.add(getChoice(faction));
-            }
-            return list;
-        }
-        if(eName.equals("CRAFTS")){
-            for (Faction faction : Faction.values()) {
-                if(faction.getGroup() == Group.CRAFTS) list.add(getChoice(faction));
-            }
-            return list;
-        }
-        faction = Faction.valueOf(eName);
-        choiceLeft = getChoice(faction);
+        return list;
+    }
+
+    @Override public List<Choice> getListRight(String eName) {
         return null;
     }
 }

@@ -1,56 +1,64 @@
 package amagi82.modularcharactersheetcreator.adapters;
 
-import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
 
+import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.adapters.viewholders.TileGridViewHolder;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.TileViewHolder;
 import amagi82.modularcharactersheetcreator.models.Choice;
+import amagi82.modularcharactersheetcreator.models.game_systems.Game;
 import amagi82.modularcharactersheetcreator.network.VolleySingleton;
 
-public class CharacterAdapter extends RecyclerView.Adapter<TileViewHolder> {
+public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context context;
+    private Resources resources;
     private List<Choice> choices;
-    private int layoutId;
+    private boolean grid;
 
-    public CharacterAdapter(Context context, List<Choice> choices, int layoutId) {
-        this.context = context;
+    public CharacterAdapter(Resources resources, List<Choice> choices, boolean grid) {
+        this.resources = resources;
         this.choices = choices;
-        this.layoutId = layoutId;
+        this.grid = grid;
     }
 
-    public void setList(final List<Choice> newChoices){
+    public void setList(List<Choice> newChoices){
         choices = newChoices;
         notifyDataSetChanged();
     }
 
     @Override
-    public TileViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
-        return new TileViewHolder(v);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if(grid) return new TileGridViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_grid, parent, false));
+        else return new TileViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_game_system, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(TileViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder vh, int position) {
         Choice choice = choices.get(position);
-        if(choice.getDrawable() != -1 && holder.imageView != null) holder.imageView.setImageResource(choice.getDrawable());
-        else if(choice.getUrl() != -1 && holder.imageViewNetwork != null)
-            holder.imageViewNetwork.setImageUrl(getString(choice.getBaseUrl()) + getString(choice.getUrl()), VolleySingleton.INSTANCE.getImageLoader());
-        holder.tvTitle.setText(choice.getTitle());
-        holder.eName = choices.get(position).geteName();
+        if(grid) bind((TileGridViewHolder) vh, choice);
+        else bind((TileViewHolder) vh, choice);
+    }
+
+    private void bind(TileGridViewHolder vh, Choice choice){
+        if(choice.getUrl() != -1) vh.imageViewNetwork.setImageUrl(
+                resources.getString(choice.getBaseUrl()) + resources.getString(choice.getUrl()), VolleySingleton.INSTANCE.getImageLoader());
+        vh.tvTitle.setText(choice.getTitle());
+        vh.eName = choice.geteName();
+    }
+
+    private void bind(TileViewHolder vh, Choice choice){
+        vh.imageView.setImageResource(choice.getDrawable());
+        vh.tvTitle.setText(choice.getTitle());
+        vh.system = Game.System.valueOf(choice.geteName());
     }
 
     @Override
     public int getItemCount() {
         return choices.size();
-    }
-
-    private String getString(int resId){
-        return context.getResources().getString(resId);
     }
 }
