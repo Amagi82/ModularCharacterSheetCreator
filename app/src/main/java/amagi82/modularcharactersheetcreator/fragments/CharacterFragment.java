@@ -121,7 +121,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     }
 
     private void displayGameSystem() {
-        tvGameSystem.setText(onyx.getSystemName());
+        tvGameSystem.setText(Game.System.valueOf(onyx.getSystemName()).getName());
         tvGameSystem.setVisibility(View.VISIBLE);
     }
 
@@ -133,15 +133,15 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     }
 
     private void setLeftResources() {
-        tvIconLeft.setText(gameCharacter.getLeft().getTitle());
-        iconLeft.setImageUrl(getUrl(gameCharacter.getLeft()), VolleySingleton.INSTANCE.getImageLoader());
+        tvIconLeft.setText(onyx.getLeft().getTitle());
+        if(onyx.getLeft().getUrl() != -1) iconLeft.setImageUrl(getUrl(onyx.getLeft()), VolleySingleton.INSTANCE.getImageLoader());
         tvIconLeft.setVisibility(View.VISIBLE);
         iconLeft.setVisibility(View.VISIBLE);
     }
 
     private void setRightResources() {
-        tvIconRight.setText(gameCharacter.getRight().getTitle());
-        iconRight.setImageUrl(getUrl(gameCharacter.getRight()), VolleySingleton.INSTANCE.getImageLoader());
+        tvIconRight.setText(onyx.getRight().getTitle());
+        if(onyx.getRight().getUrl() != -1) iconRight.setImageUrl(getUrl(onyx.getRight()), VolleySingleton.INSTANCE.getImageLoader());
         tvIconRight.setVisibility(View.VISIBLE);
         iconRight.setVisibility(View.VISIBLE);
     }
@@ -152,8 +152,8 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
     //Game System selected
     @Subscribe public void onTileClicked(TileItemClickedEvent event) {
-        if(event.system == Game.System.CWOD) characterAdapter.setList(game.getList(Game.Category.CWOD));
-        else if(event.system == Game.System.NWOD) characterAdapter.setList(game.getList(Game.Category.NWOD));
+        if (event.system == Game.System.CWOD) characterAdapter.setList(game.getList(Game.Category.CWOD));
+        else if (event.system == Game.System.NWOD) characterAdapter.setList(game.getList(Game.Category.NWOD));
         else {
             onyx = event.system.getOnyx();
             clearIcons();
@@ -169,21 +169,30 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @Subscribe
     public void onGridTileClicked(TileGridItemClickedEvent event) {
         String eName = event.eName;
-        Log.i(null, "eName == "+eName);
-        if(onyx.getLeft() == null){
-            if(onyx.getListLeft(eName) != null) characterAdapter.setList(onyx.getListLeft(eName));
-            else{
-                setLeftResources();
-                if(onyx.hasRight()) characterAdapter.setList(onyx.getListRight(null));
+        Log.i(null, "eName == " + eName);
+        if (onyx.getLeft() == null && onyx.getListLeft(eName).size() > 0) {
+            Log.i(null, "left is null, loading left list");
+            characterAdapter.setList(onyx.getListLeft(eName));
+        } else if (iconLeft.getVisibility() == View.INVISIBLE) {
+            Log.i(null, "iconLeft invisible");
+            setLeftResources();
+            if (onyx.hasRight()) {
+                Log.i(null, "left resources set, setting list right");
+                characterAdapter.setList(onyx.getListRight(null));
+            } else {
+                Log.i(null, "setting onyx, no right");
+                gameCharacter.setOnyx(onyx);
             }
-        }else if(onyx.hasRight() && onyx.getRight() == null){
-            if(onyx.getListRight(eName) != null) {
+        } else if (onyx.hasRight()) {
+            Log.i(null, "has right");
+            if (onyx.getListRight(eName).size() > 0) {
+                Log.i(null, "right is null, setting list right");
                 characterAdapter.setList(onyx.getListRight(eName));
-            }else{
+            } else {
+                Log.i(null, "setting right resources and onyx");
                 setRightResources();
+                gameCharacter.setOnyx(onyx);
             }
-        }else{
-            gameCharacter.setOnyx(onyx);
         }
     }
 
