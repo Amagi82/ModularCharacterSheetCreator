@@ -281,4 +281,6 @@
     <string formatted="false" name="url_nwod_demon_incarnation_messenger">Incarnation~Messenger.png</string>
     <string formatted="false" name="url_nwod_demon_incarnation_psychopomp">Incarnation~Psychopomp.png</string>
 
+    <string formatted="false" name="url_default">http://theonyxpath.com/avatar/1~General/1~d10.png</string>
+
 </resources>

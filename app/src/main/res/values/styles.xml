@@ -182,6 +182,7 @@
         <item name="android:layout_marginRight">@dimen/default_tiny_margin</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textSize">10sp</item>
+        <item name="android:clickable">true</item>
     </style>
 
 </resources>

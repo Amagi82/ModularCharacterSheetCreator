@@ -45,7 +45,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void bind(TileGridViewHolder vh, Choice choice){
-        if(choice.getUrl() != -1) vh.imageViewNetwork.setImageUrl(
+        vh.imageViewNetwork.setImageUrl(choice.getUrl() == -1? resources.getString(R.string.url_default) :
                 resources.getString(choice.getBaseUrl()) + resources.getString(choice.getUrl()), VolleySingleton.INSTANCE.getImageLoader());
         vh.tvTitle.setText(choice.getTitle());
         vh.eName = choice.geteName();

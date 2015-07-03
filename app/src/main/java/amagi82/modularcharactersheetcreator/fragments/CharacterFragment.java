@@ -151,14 +151,14 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
     private void setLeftResources() {
         tvIconLeft.setText(onyx.getLeft().getTitle());
-        if(onyx.getLeft().getUrl() != -1) iconLeft.setImageUrl(getUrl(onyx.getLeft()), VolleySingleton.INSTANCE.getImageLoader());
+        iconLeft.setImageUrl((onyx.getLeft().getUrl() != -1)? getUrl(onyx.getLeft()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
         tvIconLeft.setVisibility(View.VISIBLE);
         iconLeft.setVisibility(View.VISIBLE);
     }
 
     private void setRightResources() {
         tvIconRight.setText(onyx.getRight().getTitle());
-        if(onyx.getRight().getUrl() != -1) iconRight.setImageUrl(getUrl(onyx.getRight()), VolleySingleton.INSTANCE.getImageLoader());
+        iconRight.setImageUrl((onyx.getRight().getUrl() != -1)? getUrl(onyx.getRight()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
         tvIconRight.setVisibility(View.VISIBLE);
         iconRight.setVisibility(View.VISIBLE);
     }
