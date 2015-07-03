@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
@@ -19,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -131,15 +133,23 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     }
 
     private void chooseNewGameSystem() {
-        tvGameSystem.setVisibility(View.INVISIBLE);
+        tvGameSystem.setVisibility(View.GONE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         characterAdapter = new CharacterAdapter(getResources(), game.getList(Game.Category.DEFAULT), false);
         recyclerView.setAdapter(characterAdapter);
     }
 
     private void displayGameSystem() {
-        tvGameSystem.setText(Game.System.valueOf(onyx.getSystemName()).getName());
         tvGameSystem.setVisibility(View.VISIBLE);
+        tvGameSystem.setTranslationY(-150);
+        if(Build.VERSION.SDK_INT >= 21) tvGameSystem.setTranslationZ(-2);
+        tvGameSystem.setText(Game.System.valueOf(onyx.getSystemName()).getName());
+        tvGameSystem.animate().setInterpolator(new DecelerateInterpolator()).translationY(0).setDuration(300).setListener(new AnimatorListenerAdapter() {
+            @Override public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                if(Build.VERSION.SDK_INT >= 21) tvGameSystem.animate().translationZ(8).setInterpolator(new DecelerateInterpolator()).setDuration(250);
+            }
+        });
     }
 
     private void clearIcons() {
@@ -212,6 +222,11 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                 setLogoVisible();
             }
         }
+    }
+
+    @Override public void onPause() {
+        tvGameSystem.animate().cancel();
+        super.onPause();
     }
 
     @Override public void onStart() {
