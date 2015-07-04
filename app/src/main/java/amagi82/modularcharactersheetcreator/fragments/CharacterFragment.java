@@ -180,9 +180,11 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
     //Game System selected
     @Subscribe public void onTileClicked(TileItemClickedEvent event) {
+        //If a system with subcategories has been selected, show them
         if (event.system == Game.System.CWOD) characterAdapter.setList(game.getList(Game.Category.CWOD));
         else if (event.system == Game.System.NWOD) characterAdapter.setList(game.getList(Game.Category.NWOD));
         else {
+            //System selected. Choose the character categories.
             onyx = event.system.getOnyx();
             clearIcons();
             displayGameSystem();
@@ -197,31 +199,31 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @Subscribe
     public void onGridTileClicked(TileGridItemClickedEvent event) {
         String eName = event.eName;
-        boolean left = event.left;
-        Log.i(null, "eName == " + eName);
-        if (left) {
+        if (event.left) {
+            //Choose the left category
             if (onyx.getListLeft(eName).size() > 0) {
-                Log.i(null, "left has more values, loading left list");
+                //If there are additional choices available, present them
                 characterAdapter.setList(onyx.getListLeft(eName));
             } else {
-                Log.i(null, "setting left resources");
+                //An option has been selected. Set the image and load the right side if needed
                 setLeftResources();
                 if (onyx.hasRight() && onyx.getListRight(null).size() > 0) {
-                    Log.i(null, "left resources set, setting list right");
+                    //Choose the right category
                     characterAdapter.setLeft(false);
                     characterAdapter.setList(onyx.getListRight(null));
                 } else {
-                    Log.i(null, "setting onyx, no right");
+                    //There is no right side, so finalize the game character and show the Onyx Path logo
                     gameCharacter.setOnyx(onyx);
                     setLogoVisible();
                 }
             }
         } else {
+            //Choose the right category
             if (onyx.getListRight(eName).size() > 0) {
-                Log.i(null, "right has more values- setting list right");
+                //If there are additional options available, present them
                 characterAdapter.setList(onyx.getListRight(eName));
             } else {
-                Log.i(null, "setting right resources and onyx");
+                //Finished. Set our images and finalize the game character
                 setRightResources();
                 gameCharacter.setOnyx(onyx);
                 setLogoVisible();
