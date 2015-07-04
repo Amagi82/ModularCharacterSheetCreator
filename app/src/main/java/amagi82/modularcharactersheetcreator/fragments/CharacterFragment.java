@@ -1,12 +1,11 @@
 package amagi82.modularcharactersheetcreator.fragments;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -47,6 +46,7 @@ import amagi82.modularcharactersheetcreator.utils.Otto;
 import amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener {
 
@@ -106,6 +106,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     }
 
     private void initiateGameSystemChoices() {
+        Log.i(null, "initiateGameSystemChoices");
         if (gameCharacter.getGameEName() == null) {
             //If we have no game system set, get the list of game systems
             chooseNewGameSystem();
@@ -116,62 +117,110 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             setLeftResources();
             //See if we need the right choice
             if (onyx.hasRight()) setRightResources();
-            setLogoVisible();
+            displayLogo();
         }
     }
 
-    private void setLogoVisible() {
-        recyclerView.animate().alpha(0f).setDuration(200).setListener(new AnimatorListenerAdapter() {
-            @Override public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                recyclerView.setVisibility(View.GONE);
-                imageOnyxLogo.setVisibility(View.VISIBLE);
-                imageOnyxLogo.setAlpha(0f);
-                imageOnyxLogo.animate().alpha(1).setDuration(1000);
-            }
-        });
+    private void displayLogo() {
+        Log.i(null, "displayLogo");
+        if (imageOnyxLogo.getVisibility() != View.VISIBLE || imageOnyxLogo.getAlpha() < 1f) {
+            recyclerView.animate().alpha(0f).setDuration(200).start();
+            //recyclerView.setVisibility(View.INVISIBLE);
+
+            imageOnyxLogo.setVisibility(View.VISIBLE);
+            imageOnyxLogo.setAlpha(0f);
+            imageOnyxLogo.animate().alpha(1f).setDuration(800).setStartDelay(100).start();
+        }
     }
 
-    private void chooseNewGameSystem() {
-        tvGameSystem.setVisibility(View.GONE);
+    private void removeLogo() {
+        Log.i(null, "removeLogo");
+        if (recyclerView.getVisibility() != View.VISIBLE || recyclerView.getAlpha() < 1f) {
+            imageOnyxLogo.animate().alpha(0f).setDuration(300).start();
+            //imageOnyxLogo.setVisibility(View.GONE);
+
+            recyclerView.setVisibility(View.VISIBLE);
+            recyclerView.setAlpha(0f);
+            recyclerView.animate().alpha(1f).setDuration(1200).setStartDelay(200).start();
+        }
+    }
+
+    @OnClick(R.id.tvGameSystem)
+    public void chooseNewGameSystem() {
+        Log.i(null, "chooseNewGameSystem");
+        removeLogo();
+        removeGameSystem();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         characterAdapter = new CharacterAdapter(getResources(), game.getList(Game.Category.DEFAULT), false);
         recyclerView.setAdapter(characterAdapter);
     }
 
+    @OnClick({R.id.iconLeft, R.id.tvIconLeft})
+    public void chooseLeftCategory() {
+        Log.i(null, "chooseLeftCategory");
+        removeLogo();
+        clearIcons();
+        if (tvGameSystem.getVisibility() != View.VISIBLE) displayGameSystem();
+
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
+        characterAdapter = new CharacterAdapter(getResources(), onyx.getListLeft(null), true);
+        recyclerView.setAdapter(characterAdapter);
+    }
+
+    @OnClick({R.id.iconRight, R.id.tvIconRight})
+    public void chooseRightCategory() {
+        Log.i(null, "chooseRightCategory");
+        removeLogo();
+
+        characterAdapter.setLeft(false);
+        characterAdapter.setList(onyx.getListRight(null));
+    }
+
     private void displayGameSystem() {
+        Log.i(null, "displayGameSystem");
         tvGameSystem.setVisibility(View.VISIBLE);
-        tvGameSystem.setTranslationY(-150);
-        if (Build.VERSION.SDK_INT >= 21) tvGameSystem.setTranslationZ(-2);
+        if (Build.VERSION.SDK_INT >= 21) {
+            tvGameSystem.setTranslationZ(-4);
+            tvGameSystem.animate().translationZ(8).setInterpolator(new DecelerateInterpolator()).setDuration(250).setStartDelay(400).start();
+        }
+        tvGameSystem.setTranslationY(-250);
         tvGameSystem.setText(Game.System.valueOf(onyx.getSystemName()).getName());
-        tvGameSystem.animate().setInterpolator(new DecelerateInterpolator()).translationY(0).setDuration(300).setListener(new AnimatorListenerAdapter() {
-            @Override public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                if (Build.VERSION.SDK_INT >= 21)
-                    tvGameSystem.animate().translationZ(8).setInterpolator(new DecelerateInterpolator()).setDuration(250);
+        tvGameSystem.animate().setInterpolator(new DecelerateInterpolator()).translationY(0).setDuration(400).start();
+    }
+
+    private void removeGameSystem() {
+        Log.i(null, "removeGameSystem");
+        if (Build.VERSION.SDK_INT >= 21) {
+            tvGameSystem.setTranslationZ(8);
+            tvGameSystem.animate().translationZ(-4).setInterpolator(new DecelerateInterpolator()).setDuration(250).start();
+        }
+        tvGameSystem.animate().setInterpolator(new DecelerateInterpolator()).translationY(-250).setDuration(400).setStartDelay(250).start();
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                tvGameSystem.setVisibility(View.GONE);
             }
-        });
+        }, 650);
     }
 
     private void clearIcons() {
-        tvIconLeft.setVisibility(View.INVISIBLE);
-        tvIconRight.setVisibility(View.INVISIBLE);
-        iconLeft.setVisibility(View.INVISIBLE);
-        iconRight.setVisibility(View.INVISIBLE);
+        tvIconLeft.setVisibility(View.GONE);
+        tvIconRight.setVisibility(View.GONE);
+        iconLeft.setVisibility(View.GONE);
+        iconRight.setVisibility(View.GONE);
     }
 
     private void setLeftResources() {
-        tvIconLeft.setText(onyx.getLeft().getTitle());
-        iconLeft.setImageUrl((onyx.getLeft().getUrl() != -1) ? getUrl(onyx.getLeft()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
         tvIconLeft.setVisibility(View.VISIBLE);
         iconLeft.setVisibility(View.VISIBLE);
+        tvIconLeft.setText(onyx.getLeft().getTitle());
+        iconLeft.setImageUrl((onyx.getLeft().getUrl() != -1) ? getUrl(onyx.getLeft()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
     }
 
     private void setRightResources() {
-        tvIconRight.setText(onyx.getRight().getTitle());
-        iconRight.setImageUrl((onyx.getRight().getUrl() != -1) ? getUrl(onyx.getRight()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
         tvIconRight.setVisibility(View.VISIBLE);
         iconRight.setVisibility(View.VISIBLE);
+        tvIconRight.setText(onyx.getRight().getTitle());
+        iconRight.setImageUrl((onyx.getRight().getUrl() != -1) ? getUrl(onyx.getRight()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
     }
 
     private String getUrl(Choice choice) {
@@ -181,23 +230,20 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     //Game System selected
     @Subscribe public void onTileClicked(TileItemClickedEvent event) {
         //If a system with subcategories has been selected, show them
+        Log.i(null, "onTileClicked");
         if (event.system == Game.System.CWOD) characterAdapter.setList(game.getList(Game.Category.CWOD));
         else if (event.system == Game.System.NWOD) characterAdapter.setList(game.getList(Game.Category.NWOD));
         else {
-            //System selected. Choose the character categories.
+            //System selected. Choose categories.
             onyx = event.system.getOnyx();
-            clearIcons();
-            displayGameSystem();
-
-            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
-            characterAdapter = new CharacterAdapter(getResources(), onyx.getListLeft(null), true);
-            recyclerView.setAdapter(characterAdapter);
+            chooseLeftCategory();
         }
     }
 
     //Game-specific subcategory selected
     @Subscribe
     public void onGridTileClicked(TileGridItemClickedEvent event) {
+        Log.i(null, "onGridTileClicked");
         String eName = event.eName;
         if (event.left) {
             //Choose the left category
@@ -208,13 +254,11 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                 //An option has been selected. Set the image and load the right side if needed
                 setLeftResources();
                 if (onyx.hasRight() && onyx.getListRight(null).size() > 0) {
-                    //Choose the right category
-                    characterAdapter.setLeft(false);
-                    characterAdapter.setList(onyx.getListRight(null));
+                    chooseRightCategory();
                 } else {
                     //There is no right side, so finalize the game character and show the Onyx Path logo
                     gameCharacter.setOnyx(onyx);
-                    setLogoVisible();
+                    displayLogo();
                 }
             }
         } else {
@@ -226,10 +270,11 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                 //Finished. Set our images and finalize the game character
                 setRightResources();
                 gameCharacter.setOnyx(onyx);
-                setLogoVisible();
+                displayLogo();
             }
         }
     }
+
 
     @Override public void onPause() {
         tvGameSystem.animate().cancel();
