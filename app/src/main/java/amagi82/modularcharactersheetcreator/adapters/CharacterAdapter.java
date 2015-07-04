@@ -19,6 +19,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private Resources resources;
     private List<Choice> choices;
     private boolean grid;
+    private boolean left = true;
 
     public CharacterAdapter(Resources resources, List<Choice> choices, boolean grid) {
         this.resources = resources;
@@ -49,6 +50,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 resources.getString(choice.getBaseUrl()) + resources.getString(choice.getUrl()), VolleySingleton.INSTANCE.getImageLoader());
         vh.tvTitle.setText(choice.getTitle());
         vh.eName = choice.geteName();
+        vh.left = left;
     }
 
     private void bind(TileViewHolder vh, Choice choice){
@@ -60,5 +62,13 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public int getItemCount() {
         return choices.size();
+    }
+
+    public boolean isLeft() {
+        return left;
+    }
+
+    public void setLeft(boolean left) {
+        this.left = left;
     }
 }

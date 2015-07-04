@@ -1,5 +1,7 @@
 package amagi82.modularcharactersheetcreator.models.game_systems;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,12 +142,14 @@ public class Exalted extends Onyx {
         } else {
             exaltedType = ExaltedType.valueOf(eName);
             choiceLeft = getChoice(exaltedType);
+            Log.i(null, "exaltedType set to "+exaltedType.name());
         }
         return list;
     }
 
     @Override public List<Choice> getListRight(String eName) {
         List<Choice> list = new ArrayList<>();
+        Log.i(null, "exaltedType = "+exaltedType.name());
         if (eName == null) {
             for (Caste caste : Caste.values()) if (caste.getParent().equals(exaltedType)) list.add(getChoice(caste));
         } else {

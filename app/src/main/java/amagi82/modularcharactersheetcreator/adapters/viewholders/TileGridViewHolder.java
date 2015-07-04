@@ -16,6 +16,7 @@ public class TileGridViewHolder extends RecyclerView.ViewHolder{
     @Bind(R.id.imageViewNetwork) public AnimatedNetworkImageView imageViewNetwork;
     @Bind(R.id.tvTitle) public TextView tvTitle;
     public String eName;
+    public boolean left;
 
     public TileGridViewHolder(final View itemView) {
         super(itemView);
@@ -23,7 +24,7 @@ public class TileGridViewHolder extends RecyclerView.ViewHolder{
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                Otto.BUS.getBus().post(new TileGridItemClickedEvent(eName));
+                Otto.BUS.getBus().post(new TileGridItemClickedEvent(eName, left));
             }
         });
     }

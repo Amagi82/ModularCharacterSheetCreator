@@ -142,12 +142,13 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     private void displayGameSystem() {
         tvGameSystem.setVisibility(View.VISIBLE);
         tvGameSystem.setTranslationY(-150);
-        if(Build.VERSION.SDK_INT >= 21) tvGameSystem.setTranslationZ(-2);
+        if (Build.VERSION.SDK_INT >= 21) tvGameSystem.setTranslationZ(-2);
         tvGameSystem.setText(Game.System.valueOf(onyx.getSystemName()).getName());
         tvGameSystem.animate().setInterpolator(new DecelerateInterpolator()).translationY(0).setDuration(300).setListener(new AnimatorListenerAdapter() {
             @Override public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                if(Build.VERSION.SDK_INT >= 21) tvGameSystem.animate().translationZ(8).setInterpolator(new DecelerateInterpolator()).setDuration(250);
+                if (Build.VERSION.SDK_INT >= 21)
+                    tvGameSystem.animate().translationZ(8).setInterpolator(new DecelerateInterpolator()).setDuration(250);
             }
         });
     }
@@ -161,14 +162,14 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
     private void setLeftResources() {
         tvIconLeft.setText(onyx.getLeft().getTitle());
-        iconLeft.setImageUrl((onyx.getLeft().getUrl() != -1)? getUrl(onyx.getLeft()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
+        iconLeft.setImageUrl((onyx.getLeft().getUrl() != -1) ? getUrl(onyx.getLeft()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
         tvIconLeft.setVisibility(View.VISIBLE);
         iconLeft.setVisibility(View.VISIBLE);
     }
 
     private void setRightResources() {
         tvIconRight.setText(onyx.getRight().getTitle());
-        iconRight.setImageUrl((onyx.getRight().getUrl() != -1)? getUrl(onyx.getRight()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
+        iconRight.setImageUrl((onyx.getRight().getUrl() != -1) ? getUrl(onyx.getRight()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
         tvIconRight.setVisibility(View.VISIBLE);
         iconRight.setVisibility(View.VISIBLE);
     }
@@ -196,24 +197,28 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @Subscribe
     public void onGridTileClicked(TileGridItemClickedEvent event) {
         String eName = event.eName;
+        boolean left = event.left;
         Log.i(null, "eName == " + eName);
-        if (onyx.getLeft() == null && onyx.getListLeft(eName).size() > 0) {
-            Log.i(null, "left is null, loading left list");
-            characterAdapter.setList(onyx.getListLeft(eName));
-        } else if (iconLeft.getVisibility() == View.INVISIBLE) {
-            Log.i(null, "iconLeft invisible");
-            setLeftResources();
-            if (onyx.hasRight()) {
-                Log.i(null, "left resources set, setting list right");
-                characterAdapter.setList(onyx.getListRight(null));
+        if (left) {
+            if (onyx.getListLeft(eName).size() > 0) {
+                Log.i(null, "left has more values, loading left list");
+                characterAdapter.setList(onyx.getListLeft(eName));
             } else {
-                Log.i(null, "setting onyx, no right");
-                gameCharacter.setOnyx(onyx);
+                Log.i(null, "setting left resources");
+                setLeftResources();
+                if (onyx.hasRight() && onyx.getListRight(null).size() > 0) {
+                    Log.i(null, "left resources set, setting list right");
+                    characterAdapter.setLeft(false);
+                    characterAdapter.setList(onyx.getListRight(null));
+                } else {
+                    Log.i(null, "setting onyx, no right");
+                    gameCharacter.setOnyx(onyx);
+                    setLogoVisible();
+                }
             }
-        } else if (onyx.hasRight()) {
-            Log.i(null, "has right");
+        } else {
             if (onyx.getListRight(eName).size() > 0) {
-                Log.i(null, "right is null, setting list right");
+                Log.i(null, "right has more values- setting list right");
                 characterAdapter.setList(onyx.getListRight(eName));
             } else {
                 Log.i(null, "setting right resources and onyx");
