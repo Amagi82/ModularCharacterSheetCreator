@@ -23,6 +23,7 @@
     <dimen name="fab_anchor_margin">-28dp</dimen>
 
     <dimen name="image_portrait_height">200dp</dimen>
+    <dimen name="character_name_keyline">72dp</dimen>
     <dimen name="character_choice_caption_size">64dp</dimen>
     <dimen name="character_choice_icon_size">56dp</dimen>
 

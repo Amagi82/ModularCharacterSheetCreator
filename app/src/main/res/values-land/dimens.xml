@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="extended_appbar_height_min">122dp</dimen>
+    <dimen name="image_portrait_height">136dp</dimen>
+    <dimen name="character_name_keyline">88dp</dimen>
+    <dimen name="character_name_keyline_right">160dp</dimen>
+    <dimen name="character_icon_keyline_right">80dp</dimen>
+    <dimen name="character_icon_text_keyline_right">76dp</dimen>
+    <dimen name="default_tab_layout_height">40dp</dimen>
 
-    <integer name="character_grid_span_count">4</integer>
+    <integer name="character_grid_span_count">5</integer>
 </resources>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout
     android:id="@+id/appbar"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -36,11 +35,13 @@
         android:id="@+id/iconRight"
         style="@style/CircleIcon"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/character_icon_keyline_right"
         tools:src="@drawable/clan_icon"/>
 
     <TextView
         android:id="@+id/tvIconRight"
         style="@style/CircleIconCaption"
+        android:layout_marginRight="@dimen/character_icon_text_keyline_right"
         android:layout_alignParentRight="true"
         tools:text="Right"/>
 
@@ -50,9 +51,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
-        android:layout_marginTop="@dimen/default_extra_large_margin"
         android:layout_marginLeft="@dimen/character_name_keyline"
-        android:layout_marginRight="@dimen/character_name_keyline">
+        android:layout_marginRight="@dimen/character_name_keyline_right">
 
         <EditText
             android:id="@+id/etName"
@@ -104,7 +104,7 @@
         android:id="@+id/imageOnyxLogo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/default_extra_large_margin"
+        android:padding="@dimen/default_margin"
         android:background="@color/primary"
         android:layout_below="@id/tvGameSystem"
         android:scaleType="centerInside"
@@ -112,6 +112,3 @@
         android:src="@drawable/logo_onyx_path"/>
 
 </RelativeLayout>
-
-
-
