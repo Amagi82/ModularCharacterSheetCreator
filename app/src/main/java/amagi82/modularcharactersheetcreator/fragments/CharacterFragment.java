@@ -31,6 +31,7 @@ import com.colintmiller.simplenosql.RetrievalCallback;
 import com.edmodo.cropper.CropImageView;
 import com.squareup.otto.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -82,6 +83,10 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
         if (gameCharacter == null) gameCharacter = new GameCharacter();
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        characterAdapter = new CharacterAdapter(getResources(), updateSortedList(new ArrayList<Choice>(), true));
+        recyclerView.setAdapter(characterAdapter);
+
         if (getArguments() != null && getArguments().getString("entityId") != null) {
             Log.i(null, "found character");
             isEditMode = true;
@@ -91,7 +96,8 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                         @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
                             if (entities.size() > 0) gameCharacter = entities.get(0).getData();
                             if (gameCharacter.getPortraitUri() != null) imagePortrait.setImageURI(gameCharacter.getPortraitUri());
-                            //recyclerView.setAdapter(new CharacterAdapter(getActivity(), );
+                            //onyx = gameCharacter.getGameSystem().getOnyx(gameCharacter.getLeft().geteName(), gameCharacter.getRight().geteName());
+                            //TODO: add set methods to Onyx games and set them up
                         }
                     });
         } else {
@@ -119,12 +125,12 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             setLeftResources();
             //See if we need the right choice
             if (onyx.hasRight()) setRightResources();
-            displayLogo();
+            displayOnyxPathLogo();
         }
     }
 
-    private void displayLogo() {
-        Log.i(null, "displayLogo");
+    private void displayOnyxPathLogo() {
+        Log.i(null, "displayOnyxPathLogo");
         if (imageOnyxLogo.getVisibility() != View.VISIBLE || imageOnyxLogo.getAlpha() < 1f) {
             recyclerView.animate().alpha(0f).setDuration(200).start();
             //recyclerView.setVisibility(View.INVISIBLE);
@@ -135,8 +141,8 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         }
     }
 
-    private void removeLogo() {
-        Log.i(null, "removeLogo");
+    private void removeOnyxPathLogo() {
+        Log.i(null, "removeOnyxPathLogo");
         if (recyclerView.getVisibility() != View.VISIBLE || recyclerView.getAlpha() < 1f) {
             imageOnyxLogo.animate().alpha(0f).setDuration(300).start();
             //imageOnyxLogo.setVisibility(View.GONE);
@@ -150,35 +156,35 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @OnClick(R.id.tvGameSystem)
     public void chooseNewGameSystem() {
         Log.i(null, "chooseNewGameSystem");
-        removeLogo();
+        removeOnyxPathLogo();
         removeGameSystem();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        characterAdapter = new CharacterAdapter(getResources(), getSortedList(game.getList(Game.Category.DEFAULT), true), false);
-        recyclerView.setAdapter(characterAdapter);
+        characterAdapter.setGridLayout(false);
+        updateSortedList(game.getList(Game.Category.DEFAULT), true);
     }
 
     @OnClick({R.id.iconLeft, R.id.tvIconLeft})
     public void chooseLeftCategory() {
         Log.i(null, "chooseLeftCategory");
-        removeLogo();
+        removeOnyxPathLogo();
         clearIcons();
         if (tvGameSystem.getVisibility() != View.VISIBLE) displayGameSystem();
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
-        characterAdapter = new CharacterAdapter(getResources(), getSortedList(onyx.getListLeft(null), true), true);
-        recyclerView.setAdapter(characterAdapter);
+        characterAdapter.setGridLayout(true);
+        updateSortedList(onyx.getListLeft(null), true);
     }
 
     @OnClick({R.id.iconRight, R.id.tvIconRight})
     public void chooseRightCategory() {
         Log.i(null, "chooseRightCategory");
-        removeLogo();
+        removeOnyxPathLogo();
 
         characterAdapter.setLeft(false);
-        getSortedList(onyx.getListRight(null), true);
+        updateSortedList(onyx.getListRight(null), true);
     }
 
-    private SortedList<Choice> getSortedList(List<Choice> list, boolean clearList){
+    private SortedList<Choice> updateSortedList(List<Choice> list, boolean clearList){
         if(sortedList == null) sortedList = new SortedList<>(Choice.class, new SortedList.Callback<Choice>() {
             @Override public int compare(Choice o1, Choice o2) {
                 return 0;
@@ -273,8 +279,8 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @Subscribe public void onTileClicked(TileItemClickedEvent event) {
         //If a system with subcategories has been selected, show them
         Log.i(null, "onTileClicked");
-        if (event.system == Game.System.CWOD) getSortedList(game.getList(Game.Category.CWOD), true);
-        else if (event.system == Game.System.NWOD) getSortedList(game.getList(Game.Category.NWOD), true);
+        if (event.system == Game.System.CWOD) updateSortedList(game.getList(Game.Category.CWOD), true);
+        else if (event.system == Game.System.NWOD) updateSortedList(game.getList(Game.Category.NWOD), true);
         else {
             //System selected. Choose categories.
             onyx = event.system.getOnyx();
@@ -291,7 +297,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             //Choose the left category
             if (onyx.getListLeft(eName).size() > 0) {
                 //If there are additional choices available, present them
-                getSortedList(onyx.getListLeft(eName), false);
+                updateSortedList(onyx.getListLeft(eName), false);
             } else {
                 //An option has been selected. Set the image and load the right side if needed
                 setLeftResources();
@@ -300,19 +306,19 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                 } else {
                     //There is no right side, so finalize the game character and show the Onyx Path logo
                     gameCharacter.setOnyx(onyx);
-                    displayLogo();
+                    displayOnyxPathLogo();
                 }
             }
         } else {
             //Choose the right category
             if (onyx.getListRight(eName).size() > 0) {
                 //If there are additional options available, present them
-                getSortedList(onyx.getListRight(eName), false);
+                updateSortedList(onyx.getListRight(eName), false);
             } else {
                 //Finished. Set our images and finalize the game character
                 setRightResources();
                 gameCharacter.setOnyx(onyx);
-                displayLogo();
+                displayOnyxPathLogo();
             }
         }
     }

@@ -17,25 +17,24 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private Resources resources;
     private SortedList<Choice> choices;
-    private boolean grid;
+    private boolean isGridLayout = false;
     private boolean left = true;
 
-    public CharacterAdapter(Resources resources, SortedList<Choice> choices, boolean grid) {
+    public CharacterAdapter(Resources resources, SortedList<Choice> choices) {
         this.resources = resources;
         this.choices = choices;
-        this.grid = grid;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(grid) return new TileGridViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_grid, parent, false));
+        if(isGridLayout) return new TileGridViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_grid, parent, false));
         else return new TileViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_game_system, parent, false));
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder vh, int position) {
         Choice choice = choices.get(position);
-        if(grid) bind((TileGridViewHolder) vh, choice);
+        if(isGridLayout) bind((TileGridViewHolder) vh, choice);
         else bind((TileViewHolder) vh, choice);
     }
 
@@ -56,6 +55,10 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public int getItemCount() {
         return choices.size();
+    }
+
+    public void setGridLayout(boolean isGridLayout) {
+        this.isGridLayout = isGridLayout;
     }
 
     public boolean isLeft() {
