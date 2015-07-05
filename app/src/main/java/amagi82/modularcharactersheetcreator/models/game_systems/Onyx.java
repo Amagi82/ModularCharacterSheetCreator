@@ -4,6 +4,9 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.models.Choice;
 
+/*
+    Onyx is the base class for all Onyx Path games.
+ */
 public abstract class Onyx {
 
     public abstract String getSystemName();

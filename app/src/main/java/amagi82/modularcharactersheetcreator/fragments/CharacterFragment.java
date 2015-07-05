@@ -81,11 +81,10 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         setHasOptionsMenu(true);
 
         if (gameCharacter == null) gameCharacter = new GameCharacter();
-
         if (sortedList == null) sortedList = new SortedList<>(Choice.class, new SortedList.Callback<Choice>() {
             @Override public int compare(Choice o1, Choice o2) {
-                if(o1.getPosition() > o2.getPosition()) return 1;
-                if(o1.getPosition() < o2.getPosition()) return -1;
+                if (o1.getPosition() > o2.getPosition()) return 1;
+                if (o1.getPosition() < o2.getPosition()) return -1;
                 return 0;
             }
 
@@ -118,10 +117,10 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         characterAdapter = new CharacterAdapter(getResources(), sortedList);
         recyclerView.setAdapter(characterAdapter);
 
+        //Check if we're editing a character or creating a new one
         if (getArguments() != null && getArguments().getString("entityId") != null) {
             Log.i(null, "found character");
             isEditMode = true;
-
             NoSQL.with(getActivity()).withDeserializer(new Logan()).using(GameCharacter.class).bucketId("bucket").entityId(getArguments().getString("entityId")).
                     retrieve(new RetrievalCallback<GameCharacter>() {
                         @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
@@ -160,11 +159,8 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     }
 
     private void displayOnyxPathLogo() {
-        Log.i(null, "displayOnyxPathLogo");
         if (imageOnyxLogo.getVisibility() != View.VISIBLE || imageOnyxLogo.getAlpha() < 1f) {
             recyclerView.animate().alpha(0f).setDuration(200).start();
-            //recyclerView.setVisibility(View.INVISIBLE);
-
             imageOnyxLogo.setVisibility(View.VISIBLE);
             imageOnyxLogo.setAlpha(0f);
             imageOnyxLogo.animate().alpha(1f).setDuration(800).setStartDelay(100).start();
@@ -172,20 +168,16 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     }
 
     private void removeOnyxPathLogo() {
-        Log.i(null, "removeOnyxPathLogo");
         if (recyclerView.getVisibility() != View.VISIBLE || recyclerView.getAlpha() < 1f) {
             imageOnyxLogo.animate().alpha(0f).setDuration(300).start();
-            //imageOnyxLogo.setVisibility(View.GONE);
-
             recyclerView.setVisibility(View.VISIBLE);
             recyclerView.setAlpha(0f);
-            recyclerView.animate().alpha(1f).setDuration(1200).setStartDelay(200).start();
+            recyclerView.animate().alpha(1f).setDuration(200).setStartDelay(200).start();
         }
     }
 
     @OnClick(R.id.tvGameSystem)
     public void chooseNewGameSystem() {
-        Log.i(null, "chooseNewGameSystem");
         removeOnyxPathLogo();
         clearIcons();
         removeGameSystem();
@@ -195,7 +187,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
     @OnClick({R.id.iconLeft, R.id.tvIconLeft})
     public void chooseLeftCategory() {
-        Log.i(null, "chooseLeftCategory");
         removeOnyxPathLogo();
         clearIcons();
         if (tvGameSystem.getVisibility() != View.VISIBLE) displayGameSystem();
@@ -207,7 +198,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
     @OnClick({R.id.iconRight, R.id.tvIconRight})
     public void chooseRightCategory() {
-        Log.i(null, "chooseRightCategory");
         removeOnyxPathLogo();
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
@@ -220,13 +210,14 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             characterAdapter.notifyItemRangeRemoved(0, sortedList.size());
             sortedList.clear();
         } else {
-            for (int i = sortedList.size()-1; i >= 0; i--) {
+            for (int i = sortedList.size() - 1; i >= 0; i--) {
                 if (sortedList.get(i).geteName().equals("BLOODLINES") || sortedList.get(i).geteName().equals("OTHERS")) sortedList.removeItemAt(i);
             }
         }
         sortedList.beginBatchedUpdates();
+        //SortedList screws up the order of the ArrayList, so save the position in each Choice to keep everything in check
         int size = sortedList.size();
-        for (int i = 0; i<list.size();i++) {
+        for (int i = 0; i < list.size(); i++) {
             list.get(i).setPosition(i + size);
             sortedList.add(list.get(i));
         }
@@ -234,7 +225,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     }
 
     private void displayGameSystem() {
-        Log.i(null, "displayGameSystem");
         tvGameSystem.setVisibility(View.VISIBLE);
         if (Build.VERSION.SDK_INT >= 21) {
             tvGameSystem.setTranslationZ(-4);
@@ -246,7 +236,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     }
 
     private void removeGameSystem() {
-        Log.i(null, "removeGameSystem");
         if (Build.VERSION.SDK_INT >= 21) {
             tvGameSystem.setTranslationZ(8);
             tvGameSystem.animate().translationZ(-4).setInterpolator(new DecelerateInterpolator()).setDuration(250).start();
@@ -287,12 +276,10 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     //Game System selected
     @Subscribe public void onTileClicked(TileItemClickedEvent event) {
         //If a system with subcategories has been selected, show them
-        Log.i(null, "onTileClicked");
         if (event.system == Game.System.CWOD) updateSortedList(game.getList(Game.Category.CWOD), true);
         else if (event.system == Game.System.NWOD) updateSortedList(game.getList(Game.Category.NWOD), true);
         else {
-            Log.i(null, "onTileClicked else- event == " + event.system.name());
-            //System selected. Choose categories.
+            //System selected. Update onyx and choose archetype.
             onyx = event.system.getOnyx();
             chooseLeftCategory();
         }
@@ -301,7 +288,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     //Game-specific subcategory selected
     @Subscribe
     public void onGridTileClicked(TileGridItemClickedEvent event) {
-        Log.i(null, "onGridTileClicked");
         String eName = event.eName;
         if (event.left) {
             //Choose the left category
@@ -332,7 +318,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             }
         }
     }
-
 
     @Override public void onPause() {
         tvGameSystem.animate().cancel();
