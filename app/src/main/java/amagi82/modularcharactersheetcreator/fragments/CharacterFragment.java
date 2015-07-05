@@ -31,7 +31,6 @@ import com.colintmiller.simplenosql.RetrievalCallback;
 import com.edmodo.cropper.CropImageView;
 import com.squareup.otto.Subscribe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -83,8 +82,38 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
         if (gameCharacter == null) gameCharacter = new GameCharacter();
 
+        if (sortedList == null) sortedList = new SortedList<>(Choice.class, new SortedList.Callback<Choice>() {
+            @Override public int compare(Choice o1, Choice o2) {
+                return 0;
+            }
+
+            @Override public void onInserted(int position, int count) {
+                characterAdapter.notifyItemRangeInserted(position, count);
+            }
+
+            @Override public void onRemoved(int position, int count) {
+                characterAdapter.notifyItemRangeRemoved(position, count);
+            }
+
+            @Override public void onMoved(int fromPosition, int toPosition) {
+                characterAdapter.notifyItemMoved(fromPosition, toPosition);
+            }
+
+            @Override public void onChanged(int position, int count) {
+                characterAdapter.notifyItemRangeChanged(position, count);
+            }
+
+            @Override public boolean areContentsTheSame(Choice oldItem, Choice newItem) {
+                return false;
+            }
+
+            @Override public boolean areItemsTheSame(Choice item1, Choice item2) {
+                return item1.geteName().equals(item2.geteName());
+            }
+        });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        characterAdapter = new CharacterAdapter(getResources(), updateSortedList(new ArrayList<Choice>(), true));
+        characterAdapter = new CharacterAdapter(getResources(), sortedList);
         recyclerView.setAdapter(characterAdapter);
 
         if (getArguments() != null && getArguments().getString("entityId") != null) {
@@ -105,10 +134,10 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                         }
                     });
         } else {
-            if(onyx == null) chooseNewGameSystem();
-            else{
+            if (onyx == null) chooseNewGameSystem();
+            else {
                 displayGameSystem();
-                if(onyx.getLeft() == null) chooseLeftCategory();
+                if (onyx.getLeft() == null) chooseLeftCategory();
                 else {
                     setLeftResources();
                     if (onyx.hasRight() && onyx.getRight() == null) chooseRightCategory();
@@ -119,7 +148,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                 }
             }
         }
-
         //colorMask.animate().alpha(0).setDuration(300);
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationOnClickListener(this);
@@ -157,9 +185,9 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     public void chooseNewGameSystem() {
         Log.i(null, "chooseNewGameSystem");
         removeOnyxPathLogo();
+        clearIcons();
         removeGameSystem();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        characterAdapter.setGridLayout(false);
         updateSortedList(game.getList(Game.Category.DEFAULT), true);
     }
 
@@ -171,7 +199,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         if (tvGameSystem.getVisibility() != View.VISIBLE) displayGameSystem();
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
-        characterAdapter.setGridLayout(true);
         characterAdapter.setLeft(true);
         updateSortedList(onyx.getListLeft(null), true);
     }
@@ -182,48 +209,20 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         removeOnyxPathLogo();
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
-        characterAdapter.setGridLayout(true);
         characterAdapter.setLeft(false);
         updateSortedList(onyx.getListRight(null), true);
     }
 
-    private SortedList<Choice> updateSortedList(List<Choice> list, boolean clearList){
-        if(sortedList == null) sortedList = new SortedList<>(Choice.class, new SortedList.Callback<Choice>() {
-            @Override public int compare(Choice o1, Choice o2) {
-                return 0;
-            }
-
-            @Override public void onInserted(int position, int count) {
-                characterAdapter.notifyItemRangeInserted(position, count);
-            }
-
-            @Override public void onRemoved(int position, int count) {
-                characterAdapter.notifyItemRangeRemoved(position, count);
-            }
-
-            @Override public void onMoved(int fromPosition, int toPosition) {
-                characterAdapter.notifyItemMoved(fromPosition, toPosition);
-            }
-
-            @Override public void onChanged(int position, int count) {
-                characterAdapter.notifyItemRangeChanged(position, count);
-            }
-
-            @Override public boolean areContentsTheSame(Choice oldItem, Choice newItem) {
-                return false;
-            }
-
-            @Override public boolean areItemsTheSame(Choice item1, Choice item2) {
-                return item1.geteName().equals(item2.geteName());
-            }
-        });
-        if(clearList) sortedList.clear();
-
+    private void updateSortedList(final List<Choice> list, boolean clearList) {
+        if (clearList) {
+            Log.i(null, "clearing sortedlist");
+            characterAdapter.notifyItemRangeRemoved(0, sortedList.size());
+            sortedList.clear();
+            Log.i(null, "sortedlist should be clear");
+        }
         sortedList.beginBatchedUpdates();
-        for(Choice choice : list) sortedList.add(choice);
+        for (Choice choice : list) sortedList.add(choice);
         sortedList.endBatchedUpdates();
-
-        return sortedList;
     }
 
     private void displayGameSystem() {
@@ -284,6 +283,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         if (event.system == Game.System.CWOD) updateSortedList(game.getList(Game.Category.CWOD), true);
         else if (event.system == Game.System.NWOD) updateSortedList(game.getList(Game.Category.NWOD), true);
         else {
+            Log.i(null, "onTileClicked else- event == " + event.system.name());
             //System selected. Choose categories.
             onyx = event.system.getOnyx();
             chooseLeftCategory();

@@ -17,7 +17,6 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private Resources resources;
     private SortedList<Choice> choices;
-    private boolean isGridLayout = false;
     private boolean left = true;
 
     public CharacterAdapter(Resources resources, SortedList<Choice> choices) {
@@ -25,28 +24,35 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.choices = choices;
     }
 
+    @Override public int getItemViewType(int position) {
+        for (Game.System system : Game.System.values()) {
+            if (choices.get(position).geteName().equals(system.name())) return 0;
+        }
+        return 1;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(isGridLayout) return new TileGridViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_grid, parent, false));
+        if (viewType == 1) return new TileGridViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_grid, parent, false));
         else return new TileViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_game_system, parent, false));
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder vh, int position) {
         Choice choice = choices.get(position);
-        if(isGridLayout) bind((TileGridViewHolder) vh, choice);
+        if (getItemViewType(position) == 1) bind((TileGridViewHolder) vh, choice);
         else bind((TileViewHolder) vh, choice);
     }
 
-    private void bind(TileGridViewHolder vh, Choice choice){
-        vh.imageViewNetwork.setImageUrl(choice.getUrl() == -1? resources.getString(R.string.url_default) :
+    private void bind(TileGridViewHolder vh, Choice choice) {
+        vh.imageViewNetwork.setImageUrl(choice.getUrl() == -1 ? resources.getString(R.string.url_default) :
                 resources.getString(choice.getBaseUrl()) + resources.getString(choice.getUrl()), VolleySingleton.INSTANCE.getImageLoader());
         vh.tvTitle.setText(choice.getTitle());
         vh.eName = choice.geteName();
         vh.left = left;
     }
 
-    private void bind(TileViewHolder vh, Choice choice){
+    private void bind(TileViewHolder vh, Choice choice) {
         vh.imageView.setImageResource(choice.getDrawable());
         vh.tvTitle.setText(choice.getTitle());
         vh.system = Game.System.valueOf(choice.geteName());
@@ -55,10 +61,6 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public int getItemCount() {
         return choices.size();
-    }
-
-    public void setGridLayout(boolean isGridLayout) {
-        this.isGridLayout = isGridLayout;
     }
 
     public boolean isLeft() {
