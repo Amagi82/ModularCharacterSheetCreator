@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -59,6 +60,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     private boolean isEditMode = false;
     private Uri photoUri;
     private CropImageView cropper;
+    private SortedList<Choice> sortedList;
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.appbar) RelativeLayout appbar;
     @Bind(R.id.imagePortrait) AnimatedNetworkImageView imagePortrait;
@@ -151,7 +153,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         removeLogo();
         removeGameSystem();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        characterAdapter = new CharacterAdapter(getResources(), game.getList(Game.Category.DEFAULT), false);
+        characterAdapter = new CharacterAdapter(getResources(), getSortedList(game.getList(Game.Category.DEFAULT), true), false);
         recyclerView.setAdapter(characterAdapter);
     }
 
@@ -163,7 +165,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         if (tvGameSystem.getVisibility() != View.VISIBLE) displayGameSystem();
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
-        characterAdapter = new CharacterAdapter(getResources(), onyx.getListLeft(null), true);
+        characterAdapter = new CharacterAdapter(getResources(), getSortedList(onyx.getListLeft(null), true), true);
         recyclerView.setAdapter(characterAdapter);
     }
 
@@ -173,7 +175,47 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         removeLogo();
 
         characterAdapter.setLeft(false);
-        characterAdapter.setList(onyx.getListRight(null));
+        getSortedList(onyx.getListRight(null), true);
+    }
+
+    private SortedList<Choice> getSortedList(List<Choice> list, boolean clearList){
+        if(sortedList == null) sortedList = new SortedList<>(Choice.class, new SortedList.Callback<Choice>() {
+            @Override public int compare(Choice o1, Choice o2) {
+                return 0;
+            }
+
+            @Override public void onInserted(int position, int count) {
+                characterAdapter.notifyItemRangeInserted(position, count);
+            }
+
+            @Override public void onRemoved(int position, int count) {
+                characterAdapter.notifyItemRangeRemoved(position, count);
+            }
+
+            @Override public void onMoved(int fromPosition, int toPosition) {
+                characterAdapter.notifyItemMoved(fromPosition, toPosition);
+            }
+
+            @Override public void onChanged(int position, int count) {
+                characterAdapter.notifyItemRangeChanged(position, count);
+            }
+
+            @Override public boolean areContentsTheSame(Choice oldItem, Choice newItem) {
+                return false;
+            }
+
+            @Override public boolean areItemsTheSame(Choice item1, Choice item2) {
+                return item1.geteName().equals(item2.geteName());
+            }
+        });
+        if(clearList) sortedList.clear();
+
+        sortedList.beginBatchedUpdates();
+        for(Choice choice : list) sortedList.add(choice);
+        sortedList.endBatchedUpdates();
+
+
+        return sortedList;
     }
 
     private void displayGameSystem() {
@@ -231,8 +273,8 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @Subscribe public void onTileClicked(TileItemClickedEvent event) {
         //If a system with subcategories has been selected, show them
         Log.i(null, "onTileClicked");
-        if (event.system == Game.System.CWOD) characterAdapter.setList(game.getList(Game.Category.CWOD));
-        else if (event.system == Game.System.NWOD) characterAdapter.setList(game.getList(Game.Category.NWOD));
+        if (event.system == Game.System.CWOD) getSortedList(game.getList(Game.Category.CWOD), true);
+        else if (event.system == Game.System.NWOD) getSortedList(game.getList(Game.Category.NWOD), true);
         else {
             //System selected. Choose categories.
             onyx = event.system.getOnyx();
@@ -249,7 +291,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             //Choose the left category
             if (onyx.getListLeft(eName).size() > 0) {
                 //If there are additional choices available, present them
-                characterAdapter.setList(onyx.getListLeft(eName));
+                getSortedList(onyx.getListLeft(eName), false);
             } else {
                 //An option has been selected. Set the image and load the right side if needed
                 setLeftResources();
@@ -265,7 +307,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             //Choose the right category
             if (onyx.getListRight(eName).size() > 0) {
                 //If there are additional options available, present them
-                characterAdapter.setList(onyx.getListRight(eName));
+                getSortedList(onyx.getListRight(eName), false);
             } else {
                 //Finished. Set our images and finalize the game character
                 setRightResources();

@@ -1,11 +1,10 @@
 package amagi82.modularcharactersheetcreator.adapters;
 
 import android.content.res.Resources;
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
-import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.TileGridViewHolder;
@@ -17,19 +16,14 @@ import amagi82.modularcharactersheetcreator.network.VolleySingleton;
 public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Resources resources;
-    private List<Choice> choices;
+    private SortedList<Choice> choices;
     private boolean grid;
     private boolean left = true;
 
-    public CharacterAdapter(Resources resources, List<Choice> choices, boolean grid) {
+    public CharacterAdapter(Resources resources, SortedList<Choice> choices, boolean grid) {
         this.resources = resources;
         this.choices = choices;
         this.grid = grid;
-    }
-
-    public void setList(List<Choice> newChoices){
-        choices = newChoices;
-        notifyDataSetChanged();
     }
 
     @Override
