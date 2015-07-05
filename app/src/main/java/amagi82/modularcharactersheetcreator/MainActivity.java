@@ -2,7 +2,6 @@ package amagi82.modularcharactersheetcreator;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -30,7 +29,6 @@ import amagi82.modularcharactersheetcreator.utils.Otto;
 public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fm = getSupportFragmentManager();
-    private Logan logan = new Logan();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
 
-        //generateSampleCharacters();
-
-        NoSQL.with(this).withSerializer(logan).using(GameCharacter.class).bucketId("bucket").retrieve(new RetrievalCallback<GameCharacter>() {
+        NoSQL.with(this).withSerializer(new Logan()).using(GameCharacter.class).bucketId("bucket").retrieve(new RetrievalCallback<GameCharacter>() {
             @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
                 Log.i(null, "Found "+entities.size()+" sample characters");
                 if (entities.size() == 0) {
@@ -51,9 +47,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (fm.getBackStackEntryCount() == 0) {
-            fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
-        }
+        if (savedInstanceState == null) fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
     }
 
     private void generateSampleCharacters() {
@@ -83,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         for (GameCharacter character : characters) {
             NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>("bucket", character.getEntityId());
             entity.setData(character);
-            NoSQL.with(this).withSerializer(logan).using(GameCharacter.class).save(entity);
+            NoSQL.with(this).withSerializer(new Logan()).using(GameCharacter.class).save(entity);
         }
     }
 
@@ -99,11 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Subscribe
     public void onCreateCharacter(CreateCharacterEvent event) {
-        final Fragment fragment = new CharacterFragment();
-        fm.beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack("transaction")
-                .commit();
+        fm.beginTransaction().replace(R.id.container, new CharacterFragment()).addToBackStack(null).commit();
     }
 
 //    /*
