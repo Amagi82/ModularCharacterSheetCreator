@@ -128,7 +128,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                             if (gameCharacter.getPortraitUri() != null) imagePortrait.setImageURI(gameCharacter.getPortraitUri());
                             onyx = gameCharacter.getGameSystem().getOnyx();
                             onyx.setLeft(gameCharacter.getLeft().geteName());
-                            onyx.setRight(gameCharacter.getRight().geteName());
+                            if(onyx.hasRight()) onyx.setRight(gameCharacter.getRight().geteName());
                             displayGameSystem();
                             setLeftResources();
                             setRightResources();
@@ -494,17 +494,26 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     //Up navigation
     @Override
     public void onClick(View v) {
+        getFragmentManager().popBackStack();
     }
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete:
-                getFragmentManager().popBackStack();
+                new AlertDialog.Builder(getActivity()).setMessage("Delete this character?").setNegativeButton(R.string.cancel, null)
+                        .setPositiveButton(R.string.action_delete, new DialogInterface.OnClickListener() {
+                            @Override public void onClick(DialogInterface dialog, int which) {
+                                NoSQL.with(getActivity()).using(GameCharacter.class).bucketId("bucket").entityId(gameCharacter.getEntityId()).delete();
+                                gameCharacter = null;
+                                getFragmentManager().popBackStack();
+                            }
+                        }).show();
                 return true;
             case R.id.action_save_template:
                 return true;
             case R.id.action_discard:
+                gameCharacter = null;
                 getFragmentManager().popBackStack();
                 return true;
         }
@@ -513,6 +522,16 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
     @Override
     public void onDestroyView() {
+        Log.i(null, "destroyingView");
+        if(gameCharacter != null) {
+            gameCharacter.setName(textInputLayout.getEditText().getText().toString());
+            if (gameCharacter.isComplete()) {
+                Log.i(null, "saving " + gameCharacter.getName());
+                NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>("bucket", gameCharacter.getEntityId());
+                entity.setData(gameCharacter);
+                NoSQL.with(getActivity()).withSerializer(new Logan()).using(GameCharacter.class).save(entity);
+            }
+        }
         super.onDestroyView();
         ButterKnife.unbind(this);
     }

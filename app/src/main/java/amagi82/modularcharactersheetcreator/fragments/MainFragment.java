@@ -1,6 +1,7 @@
 package amagi82.modularcharactersheetcreator.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.util.SortedList;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.colintmiller.simplenosql.DataComparator;
 import com.colintmiller.simplenosql.NoSQL;
 import com.colintmiller.simplenosql.NoSQLEntity;
 import com.colintmiller.simplenosql.RetrievalCallback;
@@ -43,9 +45,9 @@ public class MainFragment extends Fragment{
         ButterKnife.bind(this, rootView);
         toolbar.setTitle(getString(R.string.characters));
 
-        characters = new SortedList<>(GameCharacter.class, new SortedList.Callback<GameCharacter>() {
+        if(characters == null) characters = new SortedList<>(GameCharacter.class, new SortedList.Callback<GameCharacter>() {
             @Override public int compare(GameCharacter o1, GameCharacter o2) {
-                return o1.getTimeStamp() < o2.getTimeStamp()? -1 : 1;
+                return o1.getTimeStamp() > o2.getTimeStamp()? -1 : o1.getTimeStamp() < o2.getTimeStamp()? 1 : 0;
             }
 
             @Override public void onInserted(int position, int count) {
@@ -78,15 +80,29 @@ public class MainFragment extends Fragment{
         adapter = new MainAdapter(getActivity(), characters);
         recyclerView.setAdapter(adapter);
 
-        NoSQL.with(getActivity()).withDeserializer(new Logan()).using(GameCharacter.class).bucketId("bucket").retrieve(new RetrievalCallback<GameCharacter>() {
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                loadSavedCharacters();
+            }
+        }, 100);
+        return rootView;
+    }
+
+    private void loadSavedCharacters() {
+        NoSQL.with(getActivity()).withDeserializer(new Logan()).using(GameCharacter.class).bucketId("bucket").orderBy(new DataComparator<GameCharacter>() {
+            @Override public int compare(NoSQLEntity<GameCharacter> o1, NoSQLEntity<GameCharacter> o2) {
+                return o1.getData().getTimeStamp() > o2.getData().getTimeStamp()? -1 : o1.getData().getTimeStamp() < o2.getData().getTimeStamp()? 1 : 0;
+            }
+        }).retrieve(new RetrievalCallback<GameCharacter>() {
             @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
-                for(int i = 0; i<entities.size(); i++){
+                characters.beginBatchedUpdates();
+                for (int i = 0; i < entities.size(); i++) {
                     Log.i(null, entities.get(i).getData().getName() + " retrieved");
                     characters.add(entities.get(i).getData());
                 }
+                characters.endBatchedUpdates();
             }
         });
-        return rootView;
     }
 
     @OnClick(R.id.fab)
@@ -121,6 +137,7 @@ public class MainFragment extends Fragment{
 
     @Override
     public void onDestroyView() {
+        Log.i(null, "MainFragment destroyed");
         super.onDestroyView();
         ButterKnife.unbind(this);
     }

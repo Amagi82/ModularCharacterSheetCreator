@@ -8,6 +8,7 @@ import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import amagi82.modularcharactersheetcreator.models.game_systems.Game;
 import amagi82.modularcharactersheetcreator.models.game_systems.Onyx;
@@ -26,7 +27,7 @@ public class GameCharacter {
     @JsonField private int colorText;
     @JsonField private int colorTextTitle;
     @JsonField private int colorTitles;
-    @JsonField private String entityId;
+    @JsonField private String entityId = UUID.randomUUID().toString();
     @JsonField private long timeStamp;
     private Bitmap icon;
     private Uri portraitUri;
@@ -91,7 +92,6 @@ public class GameCharacter {
         left = onyx.getLeft();
         right = onyx.getRight();
         archetype = onyx.getArchetype();
-        entityId = name + onyx.getLeft().geteName();
     }
 
     public ArrayList<Module> getModuleList() {
@@ -200,5 +200,9 @@ public class GameCharacter {
 
     public void setRight(Choice right) {
         this.right = right;
+    }
+
+    public boolean isComplete() {
+        return name.length() > 0 && left != null && gameEName != null && (!getGameSystem().getOnyx().hasRight() || right != null);
     }
 }
