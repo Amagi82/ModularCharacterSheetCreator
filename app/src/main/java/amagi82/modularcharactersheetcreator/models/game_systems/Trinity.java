@@ -57,17 +57,18 @@ public class Trinity extends Onyx {
         this(Volume.valueOf(volumeName), Order.valueOf(orderName));
     }
 
-    public Trinity(Volume volume, Order order){
+    public Trinity(Volume volume, Order order) {
         this.volume = volume;
         this.order = order;
         choiceLeft = getChoice(volume);
         choiceRight = getChoice(order);
     }
-    private Choice getChoice(Volume volume){
+
+    private Choice getChoice(Volume volume) {
         return new Choice(volume.name(), volume.getName());
     }
 
-    private Choice getChoice(Order order){
+    private Choice getChoice(Order order) {
         return new Choice(order.name(), order.getName());
     }
 
@@ -83,8 +84,18 @@ public class Trinity extends Onyx {
         return choiceLeft;
     }
 
+    @Override public void setLeft(String eName) {
+        volume = Volume.valueOf(eName);
+        choiceLeft = getChoice(volume);
+    }
+
     @Override public Choice getRight() {
         return choiceRight;
+    }
+
+    @Override public void setRight(String eName) {
+        order = Order.valueOf(eName);
+        choiceRight = getChoice(order);
     }
 
     @Override public boolean hasRight() {
@@ -93,23 +104,15 @@ public class Trinity extends Onyx {
 
     @Override public List<Choice> getListLeft(String eName) {
         List<Choice> list = new ArrayList<>();
-        if (eName == null) {
-            for (Volume volume : Volume.values()) list.add(getChoice(volume));
-        }else {
-            volume = Volume.valueOf(eName);
-            choiceLeft = getChoice(volume);
-        }
+        if (eName == null) for (Volume volume : Volume.values()) list.add(getChoice(volume));
+        else setLeft(eName);
         return list;
     }
 
     @Override public List<Choice> getListRight(String eName) {
         List<Choice> list = new ArrayList<>();
-        if(eName == null){
-            for (Order order : Order.values()) list.add(getChoice(order));
-        }else{
-            order = Order.valueOf(eName);
-            choiceRight = getChoice(order);
-        }
+        if (eName == null) for (Order order : Order.values()) list.add(getChoice(order));
+        else setRight(eName);
         return list;
     }
 }

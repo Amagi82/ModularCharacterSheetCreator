@@ -56,12 +56,12 @@ public class CWraith extends Onyx {
         arcanos = Arcanos.valueOf(arcanosName);
     }
 
-    public CWraith(Arcanos arcanos){
+    public CWraith(Arcanos arcanos) {
         this.arcanos = arcanos;
         choiceLeft = getChoice(arcanos);
     }
 
-    private Choice getChoice(Arcanos arcanos){
+    private Choice getChoice(Arcanos arcanos) {
         return new Choice(arcanos.name(), arcanos.getName(), Game.System.CWRAITH.getUrlBase(), arcanos.getUrl());
     }
 
@@ -77,8 +77,17 @@ public class CWraith extends Onyx {
         return choiceLeft;
     }
 
+    @Override public void setLeft(String eName) {
+        arcanos = Arcanos.valueOf(eName);
+        choiceLeft = getChoice(arcanos);
+    }
+
     @Override public Choice getRight() {
         return null;
+    }
+
+    @Override public void setRight(String eName) {
+
     }
 
     @Override public boolean hasRight() {
@@ -87,12 +96,8 @@ public class CWraith extends Onyx {
 
     @Override public List<Choice> getListLeft(String eName) {
         List<Choice> list = new ArrayList<>();
-        if (eName == null) {
-            for (Arcanos arcanos : Arcanos.values()) list.add(getChoice(arcanos));
-        }else{
-            arcanos = Arcanos.valueOf(eName);
-            choiceLeft = getChoice(arcanos);
-        }
+        if (eName == null) for (Arcanos arcanos : Arcanos.values()) list.add(getChoice(arcanos));
+        else setLeft(eName);
         return list;
     }
 

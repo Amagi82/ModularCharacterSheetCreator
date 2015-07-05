@@ -96,12 +96,28 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                         @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
                             if (entities.size() > 0) gameCharacter = entities.get(0).getData();
                             if (gameCharacter.getPortraitUri() != null) imagePortrait.setImageURI(gameCharacter.getPortraitUri());
-                            //onyx = gameCharacter.getGameSystem().getOnyx(gameCharacter.getLeft().geteName(), gameCharacter.getRight().geteName());
-                            //TODO: add set methods to Onyx games and set them up
+                            onyx = gameCharacter.getGameSystem().getOnyx();
+                            onyx.setLeft(gameCharacter.getLeft().geteName());
+                            onyx.setRight(gameCharacter.getRight().geteName());
+                            displayGameSystem();
+                            setLeftResources();
+                            setRightResources();
                         }
                     });
         } else {
-            initiateGameSystemChoices();
+            if(onyx == null) chooseNewGameSystem();
+            else{
+                displayGameSystem();
+                if(onyx.getLeft() == null) chooseLeftCategory();
+                else {
+                    setLeftResources();
+                    if (onyx.hasRight() && onyx.getRight() == null) chooseRightCategory();
+                    else {
+                        setRightResources();
+                        displayOnyxPathLogo();
+                    }
+                }
+            }
         }
 
         //colorMask.animate().alpha(0).setDuration(300);
@@ -111,22 +127,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         toolbar.setOnMenuItemClickListener(this);
 
         return rootView;
-    }
-
-    private void initiateGameSystemChoices() {
-        Log.i(null, "initiateGameSystemChoices");
-        if (gameCharacter.getGameEName() == null) {
-            //If we have no game system set, get the list of game systems
-            chooseNewGameSystem();
-        } else {
-            //We have a game system, use a grid layout for the sub-lists. Display the game system.
-            displayGameSystem();
-            onyx = gameCharacter.getGameSystem().getOnyx();
-            setLeftResources();
-            //See if we need the right choice
-            if (onyx.hasRight()) setRightResources();
-            displayOnyxPathLogo();
-        }
     }
 
     private void displayOnyxPathLogo() {
@@ -172,6 +172,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
         characterAdapter.setGridLayout(true);
+        characterAdapter.setLeft(true);
         updateSortedList(onyx.getListLeft(null), true);
     }
 
@@ -180,6 +181,8 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         Log.i(null, "chooseRightCategory");
         removeOnyxPathLogo();
 
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
+        characterAdapter.setGridLayout(true);
         characterAdapter.setLeft(false);
         updateSortedList(onyx.getListRight(null), true);
     }
@@ -219,7 +222,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         sortedList.beginBatchedUpdates();
         for(Choice choice : list) sortedList.add(choice);
         sortedList.endBatchedUpdates();
-
 
         return sortedList;
     }
@@ -326,6 +328,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
     @Override public void onPause() {
         tvGameSystem.animate().cancel();
+        imageOnyxLogo.animate().cancel();
         super.onPause();
     }
 

@@ -69,18 +69,18 @@ public class NWerewolf extends Onyx {
         this(Tribe.valueOf(tribeName), Auspice.valueOf(auspiceName));
     }
 
-    public NWerewolf(Tribe tribe, Auspice auspice){
+    public NWerewolf(Tribe tribe, Auspice auspice) {
         this.tribe = tribe;
         this.auspice = auspice;
         choiceLeft = getChoice(tribe);
         choiceRight = getChoice(auspice);
     }
 
-    private Choice getChoice(Tribe tribe){
+    private Choice getChoice(Tribe tribe) {
         return new Choice(tribe.name(), tribe.getName(), Game.System.NWEREWOLF.getUrlBase(), tribe.getUrl());
     }
 
-    private Choice getChoice(Auspice auspice){
+    private Choice getChoice(Auspice auspice) {
         return new Choice(auspice.name(), auspice.getName(), Game.System.NWEREWOLF.getUrlBase(), auspice.getUrl());
     }
 
@@ -96,8 +96,18 @@ public class NWerewolf extends Onyx {
         return choiceLeft;
     }
 
+    @Override public void setLeft(String eName) {
+        tribe = Tribe.valueOf(eName);
+        choiceLeft = getChoice(tribe);
+    }
+
     @Override public Choice getRight() {
         return choiceRight;
+    }
+
+    @Override public void setRight(String eName) {
+        auspice = Auspice.valueOf(eName);
+        choiceRight = getChoice(auspice);
     }
 
     @Override public boolean hasRight() {
@@ -106,23 +116,15 @@ public class NWerewolf extends Onyx {
 
     @Override public List<Choice> getListLeft(String eName) {
         List<Choice> list = new ArrayList<>();
-        if (eName == null) {
-            for (Tribe tribe : Tribe.values()) list.add(getChoice(tribe));
-        } else {
-            tribe = Tribe.valueOf(eName);
-            choiceLeft = getChoice(tribe);
-        }
+        if (eName == null) for (Tribe tribe : Tribe.values()) list.add(getChoice(tribe));
+        else setLeft(eName);
         return list;
     }
 
     @Override public List<Choice> getListRight(String eName) {
         List<Choice> list = new ArrayList<>();
-        if (eName == null) {
-            for (Auspice auspice : Auspice.values()) list.add(getChoice(auspice));
-        } else {
-            auspice = Auspice.valueOf(eName);
-            choiceRight = getChoice(auspice);
-        }
+        if (eName == null) for (Auspice auspice : Auspice.values()) list.add(getChoice(auspice));
+        else setRight(eName);
         return list;
     }
 }

@@ -68,7 +68,7 @@ public class CMage extends Onyx {
     public CMage() {
     }
 
-    public CMage(String eName){
+    public CMage(String eName) {
         this(Faction.valueOf(eName));
     }
 
@@ -93,8 +93,16 @@ public class CMage extends Onyx {
         return choiceLeft;
     }
 
+    @Override public void setLeft(String eName) {
+        faction = Faction.valueOf(eName);
+        choiceLeft = getChoice(faction);
+    }
+
     @Override public Choice getRight() {
         return null;
+    }
+
+    @Override public void setRight(String eName) {
     }
 
     @Override public boolean hasRight() {
@@ -107,14 +115,11 @@ public class CMage extends Onyx {
             for (Faction faction : Faction.values()) if (faction.getGroup() == Group.TRADITIONS) list.add(getChoice(faction));
             list.add(new Choice("TECHNOCRACY", R.string.technocracy, Game.System.CMAGE.getUrlBase(), R.string.url_cwod_mage_sect_technocracy));
             list.add(new Choice("CRAFTS", R.string.crafts));
-        }else if (eName.equals("TECHNOCRACY")) {
+        } else if (eName.equals("TECHNOCRACY")) {
             for (Faction faction : Faction.values()) if (faction.getGroup() == Group.TECHNOCRACY) list.add(getChoice(faction));
-        }else if (eName.equals("CRAFTS")) {
+        } else if (eName.equals("CRAFTS")) {
             for (Faction faction : Faction.values()) if (faction.getGroup() == Group.CRAFTS) list.add(getChoice(faction));
-        }else{
-            faction = Faction.valueOf(eName);
-            choiceLeft = getChoice(faction);
-        }
+        } else setLeft(eName);
         return list;
     }
 

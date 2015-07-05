@@ -93,8 +93,18 @@ public class NDemon extends Onyx {
         return choiceLeft;
     }
 
+    @Override public void setLeft(String eName) {
+        incarnation = Incarnation.valueOf(eName);
+        choiceLeft = getChoice(incarnation);
+    }
+
     @Override public Choice getRight() {
         return choiceRight;
+    }
+
+    @Override public void setRight(String eName) {
+        agenda = Agenda.valueOf(eName);
+        choiceRight = getChoice(agenda);
     }
 
     @Override public boolean hasRight() {
@@ -103,23 +113,15 @@ public class NDemon extends Onyx {
 
     @Override public List<Choice> getListLeft(String eName) {
         List<Choice> list = new ArrayList<>();
-        if (eName == null) {
-            for (Incarnation incarnation : Incarnation.values()) list.add(getChoice(incarnation));
-        } else {
-            incarnation = Incarnation.valueOf(eName);
-            choiceLeft = getChoice(incarnation);
-        }
+        if (eName == null) for (Incarnation incarnation : Incarnation.values()) list.add(getChoice(incarnation));
+        else setLeft(eName);
         return list;
     }
 
     @Override public List<Choice> getListRight(String eName) {
         List<Choice> list = new ArrayList<>();
-        if (eName == null) {
-            for (Agenda agenda : Agenda.values()) list.add(getChoice(agenda));
-        } else {
-            agenda = Agenda.valueOf(eName);
-            choiceRight = getChoice(agenda);
-        }
+        if (eName == null) for (Agenda agenda : Agenda.values()) list.add(getChoice(agenda));
+        else setRight(eName);
         return list;
     }
 }

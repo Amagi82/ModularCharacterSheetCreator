@@ -95,8 +95,18 @@ public class NMummy extends Onyx {
         return choiceLeft;
     }
 
+    @Override public void setLeft(String eName) {
+        decree = Decree.valueOf(eName);
+        choiceLeft = getChoice(decree);
+    }
+
     @Override public Choice getRight() {
         return choiceRight;
+    }
+
+    @Override public void setRight(String eName) {
+        guild = Guild.valueOf(eName);
+        choiceRight = getChoice(guild);
     }
 
     @Override public boolean hasRight() {
@@ -105,23 +115,15 @@ public class NMummy extends Onyx {
 
     @Override public List<Choice> getListLeft(String eName) {
         List<Choice> list = new ArrayList<>();
-        if (eName == null) {
-            for (Decree decree : Decree.values()) list.add(getChoice(decree));
-        } else {
-            decree = Decree.valueOf(eName);
-            choiceLeft = getChoice(decree);
-        }
+        if (eName == null) for (Decree decree : Decree.values()) list.add(getChoice(decree));
+        else setLeft(eName);
         return list;
     }
 
     @Override public List<Choice> getListRight(String eName) {
         List<Choice> list = new ArrayList<>();
-        if (eName == null) {
-            for (Guild guild : Guild.values()) list.add(getChoice(guild));
-        } else {
-            guild = Guild.valueOf(eName);
-            choiceRight = getChoice(guild);
-        }
+        if (eName == null) for (Guild guild : Guild.values()) list.add(getChoice(guild));
+        else setRight(eName);
         return list;
     }
 }

@@ -116,29 +116,29 @@ public class CVampire extends Onyx {
     public CVampire() {
     }
 
-    public CVampire(String sectName, String clanName){
-        this(Sect.valueOf(sectName),Clan.valueOf(clanName));
+    public CVampire(String sectName, String clanName) {
+        this(Sect.valueOf(sectName), Clan.valueOf(clanName));
     }
 
-    public CVampire(Sect sect, Clan clan){
+    public CVampire(Sect sect, Clan clan) {
         this.sect = sect;
         this.clan = clan;
         choiceLeft = getChoice(sect);
         choiceRight = getChoice(clan);
     }
 
-    public boolean isSect(String eName){
-        for(Sect sect : Sect.values()){
-            if(sect.name().equals(eName)) return true;
+    public boolean isSect(String eName) {
+        for (Sect sect : Sect.values()) {
+            if (sect.name().equals(eName)) return true;
         }
         return false;
     }
 
-    private Choice getChoice(Sect sect){
+    private Choice getChoice(Sect sect) {
         return new Choice(sect.name(), sect.getName(), Game.System.CVAMPIRE.getUrlBase(), sect.getUrl());
     }
 
-    private Choice getChoice(Clan clan){
+    private Choice getChoice(Clan clan) {
         return new Choice(clan.name(), clan.getName(), Game.System.CVAMPIRE.getUrlBase(), clan.getUrl());
     }
 
@@ -154,8 +154,18 @@ public class CVampire extends Onyx {
         return choiceLeft;
     }
 
+    @Override public void setLeft(String eName) {
+        sect = Sect.valueOf(eName);
+        choiceLeft = getChoice(sect);
+    }
+
     @Override public Choice getRight() {
         return choiceRight;
+    }
+
+    @Override public void setRight(String eName) {
+        clan = Clan.valueOf(eName);
+        choiceRight = getChoice(clan);
     }
 
     @Override public boolean hasRight() {
@@ -164,32 +174,25 @@ public class CVampire extends Onyx {
 
     @Override public List<Choice> getListLeft(String eName) {
         List<Choice> list = new ArrayList<>();
-        if(eName == null) {
-            for (Sect sect : Sect.values()) list.add(getChoice(sect));
-        }else{
-            sect = Sect.valueOf(eName);
-            choiceLeft = getChoice(sect);
-        }
+        if (eName == null) for (Sect sect : Sect.values()) list.add(getChoice(sect));
+        else setLeft(eName);
         return list;
     }
 
     @Override public List<Choice> getListRight(String eName) {
         List<Choice> list = new ArrayList<>();
-        if(eName == null) {
+        if (eName == null) {
             for (Clan clan : Clan.values()) if (clan.getSectMembership(sect) == Member.YES) list.add(getChoice(clan));
             list.add(new Choice("OTHERS", R.string.others));
             list.add(new Choice("BLOODLINES", R.string.bloodlines));
-        }else if(eName.equals("OTHERS")) {
-            for (Clan clan : Clan.values()) if(clan.getSectMembership(sect) == Member.YES ) list.add(getChoice(clan));
-            for (Clan clan : Clan.values()) if(clan.getSectMembership(sect) == Member.OPTIONAL ) list.add(getChoice(clan));
-        }else if(eName.equals("BLOODLINES")) {
+        } else if (eName.equals("OTHERS")) {
+            for (Clan clan : Clan.values()) if (clan.getSectMembership(sect) == Member.YES) list.add(getChoice(clan));
+            for (Clan clan : Clan.values()) if (clan.getSectMembership(sect) == Member.OPTIONAL) list.add(getChoice(clan));
+        } else if (eName.equals("BLOODLINES")) {
             for (Clan clan : Clan.values()) {
-                if(clan.getSectMembership(sect) == Member.YES ||clan.getSectMembership(sect) == Member.BLOODLINE) list.add(getChoice(clan));
+                if (clan.getSectMembership(sect) == Member.YES || clan.getSectMembership(sect) == Member.BLOODLINE) list.add(getChoice(clan));
             }
-        }else{
-            clan = Clan.valueOf(eName);
-            choiceRight = getChoice(clan);
-        }
+        } else setRight(eName);
         return list;
     }
 }

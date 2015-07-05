@@ -14,7 +14,11 @@ public abstract class Onyx {
 
     public abstract Choice getLeft();
 
+    public abstract void setLeft(String eName);
+
     public abstract Choice getRight();
+
+    public abstract void setRight(String eName);
 
     public abstract List<Choice> getListLeft(String eName);
 

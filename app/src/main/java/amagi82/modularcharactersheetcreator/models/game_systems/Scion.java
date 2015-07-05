@@ -59,18 +59,18 @@ public class Scion extends Onyx {
         this(Volume.valueOf(volumeName), Pantheon.valueOf(pantheonName));
     }
 
-    public Scion(Volume volume, Pantheon pantheon){
+    public Scion(Volume volume, Pantheon pantheon) {
         this.volume = volume;
         this.pantheon = pantheon;
         choiceLeft = getChoice(volume);
         choiceRight = getChoice(pantheon);
     }
 
-    private Choice getChoice(Volume volume){
+    private Choice getChoice(Volume volume) {
         return new Choice(volume.name(), volume.getName());
     }
 
-    private Choice getChoice(Pantheon pantheon){
+    private Choice getChoice(Pantheon pantheon) {
         return new Choice(pantheon.name(), pantheon.getName());
     }
 
@@ -86,8 +86,18 @@ public class Scion extends Onyx {
         return choiceLeft;
     }
 
+    @Override public void setLeft(String eName) {
+        volume = Volume.valueOf(eName);
+        choiceLeft = getChoice(volume);
+    }
+
     @Override public Choice getRight() {
         return choiceRight;
+    }
+
+    @Override public void setRight(String eName) {
+        pantheon = Pantheon.valueOf(eName);
+        choiceRight = getChoice(pantheon);
     }
 
     @Override public boolean hasRight() {
@@ -96,23 +106,15 @@ public class Scion extends Onyx {
 
     @Override public List<Choice> getListLeft(String eName) {
         List<Choice> list = new ArrayList<>();
-        if (eName == null) {
-            for (Volume volume : Volume.values()) list.add(getChoice(volume));
-        } else {
-            volume = Volume.valueOf(eName);
-            choiceLeft = getChoice(volume);
-        }
+        if (eName == null) for (Volume volume : Volume.values()) list.add(getChoice(volume));
+        else setLeft(eName);
         return list;
     }
 
     @Override public List<Choice> getListRight(String eName) {
         List<Choice> list = new ArrayList<>();
-        if (eName == null) {
-            for (Pantheon pantheon : Pantheon.values()) list.add(getChoice(pantheon));
-        } else {
-            pantheon = Pantheon.valueOf(eName);
-            choiceRight = getChoice(pantheon);
-        }
+        if (eName == null) for (Pantheon pantheon : Pantheon.values()) list.add(getChoice(pantheon));
+        else setRight(eName);
         return list;
     }
 }

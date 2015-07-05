@@ -98,8 +98,18 @@ public class NVampire extends Onyx {
         return choiceLeft;
     }
 
+    @Override public void setLeft(String eName) {
+        clan = Clan.valueOf(eName);
+        choiceLeft = getChoice(clan);
+    }
+
     @Override public Choice getRight() {
         return choiceRight;
+    }
+
+    @Override public void setRight(String eName) {
+        covenant = Covenant.valueOf(eName);
+        choiceRight = getChoice(covenant);
     }
 
     @Override public boolean hasRight() {
@@ -108,25 +118,15 @@ public class NVampire extends Onyx {
 
     @Override public List<Choice> getListLeft(String eName) {
         List<Choice> list = new ArrayList<>();
-        if (eName == null) {
-            for (Clan clan : Clan.values()) list.add(getChoice(clan));
-        } else {
-            clan = Clan.valueOf(eName);
-            choiceLeft = getChoice(clan);
-        }
+        if (eName == null) for (Clan clan : Clan.values()) list.add(getChoice(clan));
+        else setLeft(eName);
         return list;
     }
 
     @Override public List<Choice> getListRight(String eName) {
         List<Choice> list = new ArrayList<>();
-        if (clan == null) clan = Clan.valueOf(eName);
-
-        if (eName == null) {
-            for (Covenant covenant : Covenant.values()) list.add(getChoice(covenant));
-        } else {
-            covenant = Covenant.valueOf(eName);
-            choiceRight = getChoice(covenant);
-        }
+        if (eName == null) for (Covenant covenant : Covenant.values()) list.add(getChoice(covenant));
+        else setRight(eName);
         return list;
     }
 }
