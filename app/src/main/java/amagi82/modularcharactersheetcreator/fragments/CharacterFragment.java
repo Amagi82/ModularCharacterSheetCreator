@@ -84,6 +84,8 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
         if (sortedList == null) sortedList = new SortedList<>(Choice.class, new SortedList.Callback<Choice>() {
             @Override public int compare(Choice o1, Choice o2) {
+                if(o1.getPosition() > o2.getPosition()) return 1;
+                if(o1.getPosition() < o2.getPosition()) return -1;
                 return 0;
             }
 
@@ -215,13 +217,19 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
     private void updateSortedList(final List<Choice> list, boolean clearList) {
         if (clearList) {
-            Log.i(null, "clearing sortedlist");
             characterAdapter.notifyItemRangeRemoved(0, sortedList.size());
             sortedList.clear();
-            Log.i(null, "sortedlist should be clear");
+        } else {
+            for (int i = sortedList.size()-1; i >= 0; i--) {
+                if (sortedList.get(i).geteName().equals("BLOODLINES") || sortedList.get(i).geteName().equals("OTHERS")) sortedList.removeItemAt(i);
+            }
         }
         sortedList.beginBatchedUpdates();
-        for (Choice choice : list) sortedList.add(choice);
+        int size = sortedList.size();
+        for (int i = 0; i<list.size();i++) {
+            list.get(i).setPosition(i + size);
+            sortedList.add(list.get(i));
+        }
         sortedList.endBatchedUpdates();
     }
 

@@ -11,6 +11,7 @@ public class Choice {
     @JsonField private int drawable = -1;
     @JsonField private int baseUrl = -1;
     @JsonField private int url = -1;
+    private int position;
 
     public Choice() {
     }
@@ -73,4 +74,11 @@ public class Choice {
         this.url = url;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 }

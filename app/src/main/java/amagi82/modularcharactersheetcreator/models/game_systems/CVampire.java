@@ -186,12 +186,9 @@ public class CVampire extends Onyx {
             list.add(new Choice("OTHERS", R.string.others));
             list.add(new Choice("BLOODLINES", R.string.bloodlines));
         } else if (eName.equals("OTHERS")) {
-            for (Clan clan : Clan.values()) if (clan.getSectMembership(sect) == Member.YES) list.add(getChoice(clan));
             for (Clan clan : Clan.values()) if (clan.getSectMembership(sect) == Member.OPTIONAL) list.add(getChoice(clan));
         } else if (eName.equals("BLOODLINES")) {
-            for (Clan clan : Clan.values()) {
-                if (clan.getSectMembership(sect) == Member.YES || clan.getSectMembership(sect) == Member.BLOODLINE) list.add(getChoice(clan));
-            }
+            for (Clan clan : Clan.values()) if (clan.getSectMembership(sect) == Member.BLOODLINE) list.add(getChoice(clan));
         } else setRight(eName);
         return list;
     }
