@@ -3,14 +3,21 @@
     style="@style/LinearLayoutWodRow"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tvText"
-        style="@style/TextBody_Column"
+        android:id="@+id/tvCategory"
+        style="@style/TextBody"
+        android:singleLine="true"
         tools:text="Intelligence"/>
+
+    <TextView
+        android:id="@+id/tvSpecialty"
+        style="@style/TextCaption"
+        android:paddingTop="@dimen/default_small_margin"
+        tools:text="Problem Solver"/>
 
     <amagi82.modularcharactersheetcreator.widgets.StatRatingBar
         android:id="@+id/statRatingBar"
-        style="@style/StatRatingBar_Column"/>
+        style="@style/StatRatingBar"/>
 </LinearLayout>

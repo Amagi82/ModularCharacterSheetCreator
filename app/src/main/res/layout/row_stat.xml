@@ -3,23 +3,12 @@
     style="@style/LinearLayoutWodRow"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:orientation="horizontal"
-    android:weightSum="4">
+    android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/tvText"
+        android:id="@+id/tvCategory"
         style="@style/TextBody_Column"
-        android:layout_width="wrap_content"
-        android:layout_weight="0"
         tools:text="Intelligence"/>
-
-    <TextView
-        android:id="@+id/tvSpecialty"
-        style="@style/TextCaption_Column"
-        android:layout_width="wrap_content"
-        android:layout_weight="0"
-        tools:text="Problem Solver"/>
 
     <amagi82.modularcharactersheetcreator.widgets.StatRatingBar
         android:id="@+id/statRatingBar"

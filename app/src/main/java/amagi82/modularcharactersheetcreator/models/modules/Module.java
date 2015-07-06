@@ -1,44 +1,89 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
 
-import java.io.Serializable;
+import amagi82.modularcharactersheetcreator.R;
 
-/*
-    Base class for all card modules
- */
+public class Module {
 
-public abstract class Module implements Serializable{
+    public enum Type {
+        DEFAULT,
+        HEADER(new HeaderModule()),
+        HEALTH(new HealthModule()),
+        STATBLOCK(new StatBlockModule()),
+        STATUS(new StatusModule()),
+        TITLETEXTBLOCK(new TitleTextBlockModule()),
+        BLOODPOOL(new BloodPoolModule());
 
-    public enum ViewType {TEXT, HEADER, TEXTTITLE, WODSTATBLOCK, WODSTATBLOCKWITHSPECIALTIES, TITLETEXTBLOCK, WODTITLESTAT, WODBLOODGRADIENT}
-    private ViewType viewType;
-    private int desiredWidth;
-    private int desiredHeight;
+        Module module;
 
-    public Module(ViewType viewType) {
-        this.viewType = viewType;
+        Type() {
+        }
+
+        Type(Module module) {
+            this.module = module;
+        }
+
+        public Module getModule() {
+            return module;
+        }
     }
 
-    public int getDesiredWidth() {
-        return desiredWidth;
+    private Type type;
+    private int spanCount;
+    private String title;
+    private String text;
+    private int layoutId;
+
+    public Module() {
+        this(Type.DEFAULT);
     }
 
-    public void setDesiredWidth(int desiredWidth) {
-        this.desiredWidth = desiredWidth;
+    public Module(Type type) {
+        this(type, R.layout.module_text);
     }
 
-    public int getDesiredHeight() {
-        return desiredHeight;
+    public Module(Type type, int layoutId) {
+        this.type = type;
+        this.layoutId = layoutId;
     }
 
-    public void setDesiredHeight(int desiredHeight) {
-        this.desiredHeight = desiredHeight;
+    public Type getType() {
+        return type;
     }
 
-    public ViewType getViewType() {
-        return viewType;
+    public void setType(Type type) {
+        this.type = type;
     }
 
-    public void setViewType(ViewType viewType) {
-        this.viewType = viewType;
+    public int getSpanCount() {
+        return spanCount;
+    }
+
+    public void setSpanCount(int spanCount) {
+        this.spanCount = spanCount;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public int getLayoutId() {
+        return layoutId;
+    }
+
+    public void setLayoutId(int layoutId) {
+        this.layoutId = layoutId;
     }
 }

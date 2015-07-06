@@ -25,15 +25,15 @@ public class SheetAdapter extends RecyclerView.Adapter<ContainerViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        return modules.get(position).getViewType().ordinal();
+        return modules.get(position).getType().ordinal();
     }
 
-    // Create new views (invoked by the layout manager). ViewType from getItemViewType above.
+    // Create new views (invoked by the layout manager). Type from getItemViewType above.
     @Override
     public ContainerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        Module.ViewType viewTypeEnums[] = Module.ViewType.values();
-        switch (viewTypeEnums[viewType]) {
+        Module.Type typeEnums[] = Module.Type.values();
+        switch (typeEnums[viewType]) {
             case TEXT:
                 return new TextViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_text, parent, false));
 
@@ -46,7 +46,7 @@ public class SheetAdapter extends RecyclerView.Adapter<ContainerViewHolder> {
     @Override
     public void onBindViewHolder(ContainerViewHolder holder, final int position) {
 
-        switch(modules.get(position).getViewType()){
+        switch(modules.get(position).getType()){
             case TEXT:
                 TextModule module = (TextModule) modules.get(position);
                 TextViewHolder hold = (TextViewHolder) holder;

@@ -26,7 +26,7 @@ public class StatRatingBar extends RatingBar {
     private int healthLethal = 0;
     private int healthAgg = 0;
     private enum Healthbox {EMPTY, CHECK, X}
-    private enum BarType {CIRCLE, SQUARE, HEALTHBAR}
+    public enum BarType {CIRCLE, SQUARE, HEALTHBAR}
     private BarType barType;
     private Paint paintInside = new Paint();
     private Paint paintOutline = new Paint();
@@ -213,5 +213,10 @@ public class StatRatingBar extends RatingBar {
 
     public void setHealthAgg(int healthAgg) {
         this.healthAgg = healthAgg;
+    }
+
+    public void setBarType(BarType barType) {
+        this.barType = barType;
+        invalidate();
     }
 }

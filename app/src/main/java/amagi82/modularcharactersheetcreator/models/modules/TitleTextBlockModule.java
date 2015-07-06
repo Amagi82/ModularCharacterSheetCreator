@@ -1,47 +1,31 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+
+import amagi82.modularcharactersheetcreator.R;
 
 /*
-    Module with bold title on the left and normal text beside it. Text can be immediately beside it or right-aligned. Used for basic character
-    info, like "Name: Black Widow"
+    Module with bold title on the left and normal text beside it. Used for basic character info, like "Name: Black Widow"
  */
 
-public class TitleTextBlockModule extends Module implements Serializable {
+public class TitleTextBlockModule extends Module {
 
-
-    ArrayList<String> titles;
-    HashMap<String, String> textMap;
-    boolean rightAlign;
+    private List<Stat> stats;
 
     public TitleTextBlockModule() {
-        super(ViewType.TITLETEXTBLOCK);
+        super(Type.TITLETEXTBLOCK, R.layout.module_block);
     }
 
-    public ArrayList<String> getTitles() {
-        return titles;
+    public List<Stat> getStats() {
+        return stats;
     }
 
-    public void setTitles(ArrayList<String> titles) {
-        this.titles = titles;
+    public void setStats(List<Stat> stats) {
+        this.stats = stats;
     }
 
-    public HashMap<String, String> getTextMap() {
-        return textMap;
-    }
-
-    public void setTextMap(HashMap<String, String> textMap) {
-        this.textMap = textMap;
-    }
-
-    public boolean isRightAlign() {
-        return rightAlign;
-    }
-
-    public void setRightAlign(boolean rightAlign) {
-        this.rightAlign = rightAlign;
+    public int getRowLayoutId() {
+        return R.layout.row_boldtext_text;
     }
 }

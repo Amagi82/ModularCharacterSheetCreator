@@ -6,9 +6,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     card_view:cardCornerRadius="@dimen/card_corner_radius">
 
-    <TextView
-        android:id="@+id/tvHeader"
-        style="@style/TextHeader"
-        tools:text="Header"/>
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        style="@style/LinearLayoutWodCardBlock">
 
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/TextTitle"
+            android:paddingBottom="@dimen/default_small_margin"
+            tools:text="Title"/>
+    </LinearLayout>
 </android.support.v7.widget.CardView>

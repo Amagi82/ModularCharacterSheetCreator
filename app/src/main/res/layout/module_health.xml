@@ -7,7 +7,6 @@
     card_view:cardCornerRadius="@dimen/card_corner_radius">
 
     <RelativeLayout
-        android:id="@+id/card_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -28,7 +27,7 @@
             card_view:barType="healthbox"/>
 
         <TextView
-            android:id="@+id/tvText"
+            android:id="@+id/tvDamageLevel"
             style="@style/TextBody"
             android:layout_below="@id/statRatingBar"
             android:paddingBottom="@dimen/default_margin"
@@ -48,14 +47,14 @@
 
         <View
             style="@style/Divider"
-            android:layout_below="@id/tvText"/>
+            android:layout_below="@id/tvDamageLevel"/>
 
         <ImageView
             android:id="@+id/bHealDamage"
             style="@style/Icon"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@id/tvText"
+            android:layout_below="@id/tvDamageLevel"
             android:layout_marginBottom="@dimen/default_small_margin"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginStart="@dimen/default_margin"
@@ -67,7 +66,7 @@
             style="@style/Icon"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/tvText"
+            android:layout_below="@id/tvDamageLevel"
             android:layout_marginEnd="@dimen/default_margin"
             android:layout_marginRight="@dimen/default_margin"
             android:contentDescription="@string/take_agg_damage"
@@ -76,7 +75,7 @@
         <ImageView
             android:id="@+id/bAddDamageLethal"
             style="@style/Icon"
-            android:layout_below="@id/tvText"
+            android:layout_below="@id/tvDamageLevel"
             android:layout_toLeftOf="@id/bAddDamageAgg"
             android:layout_toStartOf="@id/bAddDamageAgg"
             android:contentDescription="@string/take_lethal_damage"
@@ -85,7 +84,7 @@
         <ImageView
             android:id="@+id/bAddDamageBashing"
             style="@style/Icon"
-            android:layout_below="@id/tvText"
+            android:layout_below="@id/tvDamageLevel"
             android:layout_toLeftOf="@id/bAddDamageLethal"
             android:layout_toStartOf="@id/bAddDamageLethal"
             android:contentDescription="@string/take_bashing_damage"

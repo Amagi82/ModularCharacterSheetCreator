@@ -9,10 +9,9 @@
     android:paddingTop="@dimen/default_small_margin">
 
     <TextView
-        android:id="@+id/tvBoldText"
+        android:id="@+id/tvCategory"
         style="@style/TextBody"
-        android:paddingEnd="@dimen/default_small_margin"
-        android:paddingRight="@dimen/default_small_margin"
+        android:layout_marginRight="@dimen/default_small_margin"
         android:textStyle="bold"
         tools:text="Name:"/>
 

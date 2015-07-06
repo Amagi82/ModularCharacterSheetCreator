@@ -7,7 +7,7 @@
     card_view:cardCornerRadius="@dimen/card_corner_radius">
 
     <LinearLayout
-        android:id="@+id/card_linear_layout"
+        android:id="@+id/linearLayout"
         style="@style/LinearLayoutWodCardBlock">
 
         <TextView
@@ -24,14 +24,14 @@
             android:paddingBottom="@dimen/default_small_margin">
 
             <ImageView
-                android:id="@+id/bBloodLeft"
+                android:id="@+id/bBloodDecrease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/spend_blood"
                 android:src="@drawable/ic_chevron_left_grey600_48dp"/>
 
             <com.github.lzyzsd.circleprogress.CircleProgress
-                android:id="@+id/circle_progress"
+                android:id="@+id/circleProgress"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 card_view:circle_finished_color="@color/darkRed"
@@ -41,7 +41,7 @@
                 card_view:circle_text_size="@dimen/abc_text_size_display_1_material"/>
 
             <ImageView
-                android:id="@+id/bBloodRight"
+                android:id="@+id/bBloodIncrease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/gain_blood"
@@ -49,7 +49,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvText"
+            android:id="@+id/tvBloodPerTurn"
             style="@style/TextBody"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/default_small_margin"

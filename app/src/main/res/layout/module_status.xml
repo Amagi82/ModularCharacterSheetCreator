@@ -3,21 +3,28 @@
     style="@style/Card"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     card_view:cardCornerRadius="@dimen/card_corner_radius">
 
     <LinearLayout
-        android:id="@+id/card_linear_layout"
+        android:id="@+id/linearLayout"
         style="@style/LinearLayoutWodCardBlock">
 
         <TextView
             android:id="@+id/tvTitle"
             style="@style/TextTitle"
             android:paddingBottom="@dimen/default_margin"
-            android:text="@string/willpower"/>
+            tools:text="Humanity"/>
+
+        <TextView
+            android:id="@+id/tvPath"
+            style="@style/TextBody"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="@dimen/default_margin"
+            tools:text="Path of Humanity"/>
 
         <amagi82.modularcharactersheetcreator.widgets.StatRatingBar
             android:id="@+id/statRatingBar"
-            style="@style/StatRatingBarTen"
-            card_view:barType="square"/>
+            style="@style/StatRatingBarTen"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>

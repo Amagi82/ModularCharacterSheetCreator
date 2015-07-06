@@ -20,7 +20,6 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.events.CharacterClickedEvent;
 import amagi82.modularcharactersheetcreator.events.CreateCharacterEvent;
 import amagi82.modularcharactersheetcreator.fragments.CharacterFragment;
-import amagi82.modularcharactersheetcreator.fragments.MainFragment;
 import amagi82.modularcharactersheetcreator.fragments.SheetFragment;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
+        NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
 
         NoSQL.with(this).withSerializer(new Logan()).using(GameCharacter.class).bucketId("bucket").retrieve(new RetrievalCallback<GameCharacter>() {
             @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (savedInstanceState == null) fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
+        //if (savedInstanceState == null) fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
     }
 
     private void generateSampleCharacters() {
