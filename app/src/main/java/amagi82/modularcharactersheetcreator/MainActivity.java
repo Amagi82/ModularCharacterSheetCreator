@@ -2,21 +2,26 @@ package amagi82.modularcharactersheetcreator;
 
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.bluelinelabs.logansquare.LoganSquare;
 import com.colintmiller.simplenosql.NoSQL;
 import com.colintmiller.simplenosql.NoSQLEntity;
 import com.colintmiller.simplenosql.RetrievalCallback;
 import com.squareup.otto.Subscribe;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import amagi82.modularcharactersheetcreator.events.CharacterClickedEvent;
 import amagi82.modularcharactersheetcreator.events.CreateCharacterEvent;
 import amagi82.modularcharactersheetcreator.fragments.CharacterFragment;
 import amagi82.modularcharactersheetcreator.fragments.MainFragment;
+import amagi82.modularcharactersheetcreator.fragments.SheetFragment;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.game_systems.CMage;
 import amagi82.modularcharactersheetcreator.models.game_systems.CVampire;
@@ -94,6 +99,19 @@ public class MainActivity extends AppCompatActivity {
     @Subscribe
     public void onCreateCharacter(CreateCharacterEvent event) {
         fm.beginTransaction().replace(R.id.container, new CharacterFragment()).addToBackStack(null).commit();
+    }
+
+    @Subscribe
+    public void onCharacterClicked(CharacterClickedEvent event){
+        Fragment fragment = new SheetFragment();
+        Bundle bundle = new Bundle();
+        try {
+            bundle.putString("Character", LoganSquare.serialize(event.gameCharacter));
+            fragment.setArguments(bundle);
+            fm.beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 //    /*

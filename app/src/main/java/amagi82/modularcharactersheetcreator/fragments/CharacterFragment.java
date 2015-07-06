@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.colintmiller.simplenosql.NoSQL;
@@ -62,7 +61,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     private CropImageView cropper;
     private SortedList<Choice> sortedList;
     @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.appbar) RelativeLayout appbar;
     @Bind(R.id.imagePortrait) AnimatedNetworkImageView imagePortrait;
     @Bind(R.id.textInputLayout) TextInputLayout textInputLayout;
     @Bind(R.id.iconLeft) AnimatedNetworkImageView iconLeft;
