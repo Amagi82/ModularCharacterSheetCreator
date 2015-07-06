@@ -78,9 +78,10 @@ public class MainActivity extends AppCompatActivity {
                 sheet.setTitle("Sheet 1");
                 sheet.getModules().add(module1);
                 sheet.getModules().add(module2);
+                character.getSheets().add(sheet);
 
                 Sheet sheet2 = new Sheet();
-                sheet2.setTitle("Sheet 1");
+                sheet2.setTitle("Sheet 2");
                 sheet2.getModules().add(module1);
                 sheet2.getModules().add(module2);
                 character.getSheets().add(sheet2);
