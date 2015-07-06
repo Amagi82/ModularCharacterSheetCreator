@@ -50,7 +50,6 @@ public class SheetFragment extends Fragment {
 
         toolbar.setTitle(gameCharacter.getName());
 
-
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager(), gameCharacter.getSheets());
         viewPager.setAdapter(adapter);
         tabLayout.setTabsFromPagerAdapter(adapter);

@@ -1,8 +1,12 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
 
-import amagi82.modularcharactersheetcreator.R;
+import com.bluelinelabs.logansquare.annotation.JsonField;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+import amagi82.modularcharactersheetcreator.utils.EnumTypeConverter;
+
+@JsonObject
 public class Module {
 
     public enum Type {
@@ -28,23 +32,17 @@ public class Module {
         }
     }
 
-    private Type type;
-    private int spanCount;
-    private String title;
-    private String text;
-    private int layoutId;
+    @JsonField(typeConverter = EnumTypeConverter.class) private Type type;
+    @JsonField private int spanCount;
+    @JsonField private String title;
+    @JsonField private String text;
 
     public Module() {
         this(Type.DEFAULT);
     }
 
     public Module(Type type) {
-        this(type, R.layout.module_text);
-    }
-
-    public Module(Type type, int layoutId) {
         this.type = type;
-        this.layoutId = layoutId;
     }
 
     public Type getType() {
@@ -77,13 +75,5 @@ public class Module {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public int getLayoutId() {
-        return layoutId;
-    }
-
-    public void setLayoutId(int layoutId) {
-        this.layoutId = layoutId;
     }
 }

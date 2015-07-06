@@ -5,6 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.bluelinelabs.logansquare.LoganSquare;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +28,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     public void addFragment(Sheet sheet){
         sheets.add(sheet);
-
     }
 
     public void deleteFragment(int position){
@@ -38,8 +40,13 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         if(map.get(sheet)==null) {
             TabFragment tabFragment = new TabFragment();
             Bundle bundle = new Bundle();
-            //TODO: serialize Module list and send to fragment
-            map.put(sheet, tabFragment);
+            try {
+                bundle.putString("Sheet", LoganSquare.serialize(sheet));
+                tabFragment.setArguments(bundle);
+                map.put(sheet, tabFragment);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return map.get(sheet);
     }

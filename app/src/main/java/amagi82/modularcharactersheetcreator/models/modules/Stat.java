@@ -1,13 +1,17 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
+import com.bluelinelabs.logansquare.annotation.JsonField;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
+
 /*
     Used to fill a single row of a stat block
  */
+@JsonObject
 public class Stat {
 
-    private String category = "";
-    private String specialty;
-    private int value;
+    @JsonField private String category = "";
+    @JsonField private String specialty;
+    @JsonField private int value;
 
     public Stat() {
     }

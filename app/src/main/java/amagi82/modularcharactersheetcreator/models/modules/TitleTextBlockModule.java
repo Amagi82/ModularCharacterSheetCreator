@@ -1,6 +1,9 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
 
+import com.bluelinelabs.logansquare.annotation.JsonField;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
+
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -8,13 +11,13 @@ import amagi82.modularcharactersheetcreator.R;
 /*
     Module with bold title on the left and normal text beside it. Used for basic character info, like "Name: Black Widow"
  */
-
+@JsonObject
 public class TitleTextBlockModule extends Module {
 
-    private List<Stat> stats;
+    @JsonField private List<Stat> stats;
 
     public TitleTextBlockModule() {
-        super(Type.TITLETEXTBLOCK, R.layout.module_block);
+        super(Type.TITLETEXTBLOCK);
     }
 
     public List<Stat> getStats() {

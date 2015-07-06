@@ -7,7 +7,6 @@
     card_view:cardCornerRadius="@dimen/card_corner_radius">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         style="@style/LinearLayoutWodCardBlock">
 
         <TextView

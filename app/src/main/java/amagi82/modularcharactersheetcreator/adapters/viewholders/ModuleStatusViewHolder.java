@@ -1,19 +1,17 @@
 package amagi82.modularcharactersheetcreator.adapters.viewholders;
 
-
 import android.view.View;
-import android.widget.TextView;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.widgets.StatRatingBar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TitleTextBlockViewHolder extends ContainerViewHolder {
+public class ModuleStatusViewHolder extends ModuleViewHolder {
 
-    @Bind(R.id.tvText) public TextView tvText;
-    @Bind(R.id.tvTitle) public TextView tvTitle;
+    @Bind(R.id.statRatingBar) public StatRatingBar statRatingBar;
 
-    public TitleTextBlockViewHolder(final View itemView) {
+    public ModuleStatusViewHolder(final View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }

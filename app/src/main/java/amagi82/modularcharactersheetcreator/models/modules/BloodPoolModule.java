@@ -1,15 +1,17 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
-import amagi82.modularcharactersheetcreator.R;
+import com.bluelinelabs.logansquare.annotation.JsonField;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+@JsonObject
 public class BloodPoolModule extends Module {
 
-    private int bloodCurrent;
-    private int bloodMax;
-    private int bloodPerTurn;
+    @JsonField private int bloodCurrent;
+    @JsonField private int bloodMax;
+    @JsonField private int bloodPerTurn;
 
     public BloodPoolModule() {
-        super(Type.BLOODPOOL, R.layout.module_bloodpool);
+        super(Type.BLOODPOOL);
     }
 
     public int getBloodCurrent() {

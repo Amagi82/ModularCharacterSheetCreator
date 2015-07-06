@@ -1,18 +1,20 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
+import com.bluelinelabs.logansquare.annotation.JsonField;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
+
 import java.util.List;
 
-import amagi82.modularcharactersheetcreator.R;
-
+@JsonObject
 public class HealthModule extends Module {
 
-    private List<Stat> healthLevels;
-    private int damageBashing;
-    private int damageLethal;
-    private int damageAgg;
+    @JsonField private List<Stat> healthLevels;
+    @JsonField private int damageBashing;
+    @JsonField private int damageLethal;
+    @JsonField private int damageAgg;
 
     public HealthModule() {
-        super(Type.HEALTH, R.layout.module_health);
+        super(Type.HEALTH);
     }
 
     public List<Stat> getHealthLevels() {
@@ -48,6 +50,10 @@ public class HealthModule extends Module {
     public void setDamageAgg(int damageAgg) {
         this.damageAgg = damageAgg;
         reviewDamage();
+    }
+
+    public Stat getCurrentHealth(){
+        return healthLevels.get(damageAgg+damageBashing+damageLethal -1);
     }
 
     public void addDamageBashing() {

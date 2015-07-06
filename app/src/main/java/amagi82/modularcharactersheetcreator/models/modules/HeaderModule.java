@@ -1,10 +1,11 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
-import amagi82.modularcharactersheetcreator.R;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+@JsonObject
 public class HeaderModule extends Module {
 
     public HeaderModule() {
-        super(Type.HEADER, R.layout.module_header);
+        super(Type.HEADER);
     }
 }

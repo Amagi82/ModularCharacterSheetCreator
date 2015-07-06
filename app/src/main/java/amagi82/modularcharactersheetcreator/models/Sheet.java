@@ -1,15 +1,19 @@
 package amagi82.modularcharactersheetcreator.models;
 
+import com.bluelinelabs.logansquare.annotation.JsonField;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 
+@JsonObject
 public class Sheet {
 
-    private String title = "";
-    private int numColumns = 3;
-    private List<Module> modules = new ArrayList<>();
+    @JsonField private String title = "";
+    @JsonField private int numColumns = 3;
+    @JsonField private List<Module> modules = new ArrayList<>();
 
     public Sheet() {
     }

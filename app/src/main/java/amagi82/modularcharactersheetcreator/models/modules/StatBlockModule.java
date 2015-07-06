@@ -1,17 +1,21 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
 
+import com.bluelinelabs.logansquare.annotation.JsonField;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
+
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
+@JsonObject
 public class StatBlockModule extends Module {
 
-    private List<Stat> stats;
-    private boolean compact = false;
+    @JsonField private List<Stat> stats;
+    @JsonField private boolean compact = false;
 
     public StatBlockModule() {
-        super(Type.STATBLOCK, R.layout.module_block);
+        super(Type.STATBLOCK);
     }
 
     public List<Stat> getStats() {

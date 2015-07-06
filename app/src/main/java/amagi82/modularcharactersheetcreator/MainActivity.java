@@ -20,13 +20,14 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.events.CharacterClickedEvent;
 import amagi82.modularcharactersheetcreator.events.CreateCharacterEvent;
 import amagi82.modularcharactersheetcreator.fragments.CharacterFragment;
+import amagi82.modularcharactersheetcreator.fragments.MainFragment;
 import amagi82.modularcharactersheetcreator.fragments.SheetFragment;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.game_systems.CMage;
 import amagi82.modularcharactersheetcreator.models.game_systems.CVampire;
 import amagi82.modularcharactersheetcreator.models.game_systems.CWerewolf;
-import amagi82.modularcharactersheetcreator.models.modules.TextModule;
+import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.utils.Logan;
 import amagi82.modularcharactersheetcreator.utils.Otto;
 
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
+        //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
 
         NoSQL.with(this).withSerializer(new Logan()).using(GameCharacter.class).bucketId("bucket").retrieve(new RetrievalCallback<GameCharacter>() {
             @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //if (savedInstanceState == null) fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
+        if (savedInstanceState == null) fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
     }
 
     private void generateSampleCharacters() {
@@ -67,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
             characters.add(new GameCharacter("Dr. Von Natsi", new CMage(CMage.Faction.SCIONSOFETHER)));
             characters.add(new GameCharacter("Stormwalker", new CWerewolf(CWerewolf.Tribe.GLASSWALKERS, CWerewolf.Auspice.AHROUN)));
 
-            TextModule module1 = new TextModule();
+            Module module1 = new Module();
             module1.setText("Test text 1");
-            TextModule module2 = new TextModule();
+            Module module2 = new Module();
             module2.setText("This is another module");
 
             for (GameCharacter character : characters) {

@@ -1,25 +1,35 @@
 package amagi82.modularcharactersheetcreator.adapters;
 
 
-import android.app.Activity;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.adapters.viewholders.ContainerViewHolder;
-import amagi82.modularcharactersheetcreator.adapters.viewholders.TextViewHolder;
+import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleBlockViewHolder;
+import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleBloodPoolViewHolder;
+import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleHealthViewHolder;
+import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleStatusViewHolder;
+import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleViewHolder;
+import amagi82.modularcharactersheetcreator.models.modules.BloodPoolModule;
+import amagi82.modularcharactersheetcreator.models.modules.HealthModule;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
-import amagi82.modularcharactersheetcreator.models.modules.TextModule;
+import amagi82.modularcharactersheetcreator.models.modules.Stat;
+import amagi82.modularcharactersheetcreator.models.modules.StatBlockModule;
+import amagi82.modularcharactersheetcreator.models.modules.StatusModule;
+import amagi82.modularcharactersheetcreator.models.modules.TitleTextBlockModule;
+import amagi82.modularcharactersheetcreator.widgets.StatRatingBar;
 
-public class SheetAdapter extends RecyclerView.Adapter<ContainerViewHolder> {
+public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
 
-    private ArrayList<Module> modules;
+    private Resources res;
+    private List<Module> modules;
 
-    public SheetAdapter(ArrayList<Module> modules, Activity activity) {
+    public SheetAdapter(Resources res, List<Module> modules) {
+        this.res = res;
         this.modules = modules;
     }
 
@@ -30,37 +40,82 @@ public class SheetAdapter extends RecyclerView.Adapter<ContainerViewHolder> {
 
     // Create new views (invoked by the layout manager). Type from getItemViewType above.
     @Override
-    public ContainerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        Module.Type typeEnums[] = Module.Type.values();
-        switch (typeEnums[viewType]) {
-            case TEXT:
-                return new TextViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_text, parent, false));
-
+    public ModuleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Module.Type types[] = Module.Type.values();
+        switch (types[viewType]) {
+            case HEADER:
+                return new ModuleViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.module_header, parent, false));
+            case HEALTH:
+                return new ModuleHealthViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.module_health, parent, false));
+            case STATBLOCK:
+                return new ModuleBlockViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.module_block, parent, false));
+            case STATUS:
+                return new ModuleStatusViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.module_status, parent, false));
+            case TITLETEXTBLOCK:
+                return new ModuleBlockViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.module_block, parent, false));
+            case BLOODPOOL:
+                return new ModuleBloodPoolViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.module_bloodpool, parent, false));
             default:
-                return new TextViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_text, parent, false));
+                return new ModuleViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.module_text, parent, false));
         }
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ContainerViewHolder holder, final int position) {
+    public void onBindViewHolder(ModuleViewHolder vh, final int position) {
+        Module module = modules.get(position);
+        if (vh.tvTitle != null) vh.tvTitle.setText(module.getTitle());
+        if(vh.tvText != null) vh.tvText.setText(module.getText());
 
-        switch(modules.get(position).getType()){
-            case TEXT:
-                TextModule module = (TextModule) modules.get(position);
-                TextViewHolder hold = (TextViewHolder) holder;
-                hold.tvText.setText(module.getText());
+        switch (module.getType()) {
+            case HEALTH:
+                bind((ModuleHealthViewHolder) vh, (HealthModule)module);
                 break;
-
+            case STATBLOCK:
+                bind((ModuleBlockViewHolder) vh, (StatBlockModule)module);
+                break;
+            case STATUS:
+                bind((ModuleStatusViewHolder) vh, (StatusModule)module);
+                break;
+            case TITLETEXTBLOCK:
+                bind((ModuleBlockViewHolder) vh, (TitleTextBlockModule)module);
+                break;
+            case BLOODPOOL:
+                bind((ModuleBloodPoolViewHolder) vh, (BloodPoolModule)module);
+                break;
         }
+    }
 
-        holder.container.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    private void bind(ModuleHealthViewHolder vh, HealthModule module) {
+        vh.tvDamageLevel.setText(module.getCurrentHealth().getCategory());
+        vh.tvPenalty.setText(module.getCurrentHealth().getValue());
+        vh.statRatingBar.setMaxRating(module.getHealthLevels().size());
+        vh.statRatingBar.setHealthAgg(module.getDamageAgg());
+        vh.statRatingBar.setHealthLethal(module.getDamageLethal());
+        vh.statRatingBar.setHealthBashing(module.getDamageBashing());
+    }
 
-            }
-        });
+    private void bind(ModuleBlockViewHolder vh, StatBlockModule module) {
+        for(Stat stat : module.getStats()){
+            //TODO: figure out how best to add blocks of views
+            //vh.linearLayout.addView(LayoutInflater.from(vh.linearLayout.getContext()).inflate(module.getRowLayoutId(), vh.linearLayout, true));
+        }
+    }
+
+    private void bind(ModuleStatusViewHolder vh, StatusModule module) {
+        vh.statRatingBar.setBarType(module.isCircle()? StatRatingBar.BarType.CIRCLE : StatRatingBar.BarType.SQUARE);
+        vh.statRatingBar.setNumStars(module.getNumStars());
+        vh.statRatingBar.setMaxRating(module.getValueMax());
+        vh.statRatingBar.setRating(module.getValue());
+    }
+    private void bind(ModuleBlockViewHolder vh, TitleTextBlockModule module) {
+
+    }
+
+    private void bind(ModuleBloodPoolViewHolder vh, BloodPoolModule module) {
+        vh.tvBloodPerTurn.setText(res.getString(R.string.blood_per_turn)+" "+module.getBloodPerTurn());
+        vh.circleProgress.setMax(module.getBloodMax());
+        vh.circleProgress.setProgress(module.getBloodCurrent());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

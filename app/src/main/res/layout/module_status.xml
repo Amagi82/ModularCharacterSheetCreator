@@ -7,7 +7,6 @@
     card_view:cardCornerRadius="@dimen/card_corner_radius">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         style="@style/LinearLayoutWodCardBlock">
 
         <TextView
@@ -17,7 +16,7 @@
             tools:text="Humanity"/>
 
         <TextView
-            android:id="@+id/tvPath"
+            android:id="@+id/tvText"
             style="@style/TextBody"
             android:layout_gravity="center_horizontal"
             android:paddingBottom="@dimen/default_margin"

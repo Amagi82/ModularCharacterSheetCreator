@@ -1,17 +1,19 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
 
-import amagi82.modularcharactersheetcreator.R;
+import com.bluelinelabs.logansquare.annotation.JsonField;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+@JsonObject
 public class StatusModule extends Module {
 
-    private int value;
-    private int valueMax;
-    private int numStars;
-    private boolean isCircle;
+    @JsonField private int value;
+    @JsonField private int valueMax;
+    @JsonField private int numStars;
+    @JsonField private boolean circle;
 
     public StatusModule() {
-        super(Type.STATUS, R.layout.module_status);
+        super(Type.STATUS);
     }
 
     public int getValue() {
@@ -39,10 +41,13 @@ public class StatusModule extends Module {
     }
 
     public boolean isCircle() {
-        return isCircle;
+        return circle;
+    }
+    public boolean getCircle(){
+        return circle;
     }
 
-    public void setIsCircle(boolean isCircle) {
-        this.isCircle = isCircle;
+    public void setCircle(boolean circle) {
+        this.circle = circle;
     }
 }

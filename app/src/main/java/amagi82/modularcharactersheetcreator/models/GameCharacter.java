@@ -31,7 +31,7 @@ public class GameCharacter {
     @JsonField private long timeStamp;
     private Bitmap icon;
     private Uri portraitUri;
-    private List<Sheet> sheets = new ArrayList<>();
+    @JsonField private List<Sheet> sheets = new ArrayList<>();
 
     public GameCharacter() {
         timeStamp = System.currentTimeMillis();

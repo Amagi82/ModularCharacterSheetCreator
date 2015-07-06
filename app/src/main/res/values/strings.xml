@@ -36,6 +36,7 @@
     <string name="skip">Skip</string>
 
     <!--Modules-->
+    <string name="blood_per_turn">Blood Per Turn:</string>
     <string name="blood_pool">Blood Pool</string>
     <string name="color">Color</string>
     <string name="gain_blood">Gain blood</string>
