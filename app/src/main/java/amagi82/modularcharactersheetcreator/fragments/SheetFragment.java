@@ -6,6 +6,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.bluelinelabs.logansquare.LoganSquare;
 import java.io.IOException;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.adapters.ViewPagerAdapter;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView;
 import butterknife.Bind;
@@ -30,6 +32,7 @@ public class SheetFragment extends Fragment {
     @Bind(R.id.iconRight) AnimatedNetworkImageView iconRight;
     @Bind(R.id.tvIconRight) TextView tvIconRight;
     @Bind(R.id.tabs) TabLayout tabLayout;
+    @Bind(R.id.viewpager) ViewPager viewPager;
     @Bind(R.id.fab) FloatingActionButton fab;
     private GameCharacter gameCharacter;
 
@@ -47,23 +50,24 @@ public class SheetFragment extends Fragment {
 
         toolbar.setTitle(gameCharacter.getName());
 
-        //tabLayout.addTab();
 
-        //int padding = getResources().getDimensionPixelSize(R.dimen.card_margin);
-        //recyclerView.setPadding(padding,padding,padding,padding);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager(), gameCharacter.getSheets());
+        viewPager.setAdapter(adapter);
+        tabLayout.setTabsFromPagerAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override public void onTabSelected(TabLayout.Tab tab) {
 
-        //characterSheetRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), null));
+            }
 
-        // use a staggered grid layout manager
-        //RecyclerView.LayoutManager characterSheetLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL); //columns,orientation
-        //recyclerView.setLayoutManager(characterSheetLayoutManager);
+            @Override public void onTabUnselected(TabLayout.Tab tab) {
 
-        // specify an adapter (see also next example)
-//        RecyclerView.Adapter characterRecyclerViewAdapter = new SheetAdapter(character.getModuleList(), getActivity());
-//        recyclerView.setAdapter(characterRecyclerViewAdapter);
+            }
 
-        //Set up the Floating Action Button
-        fab.setImageResource(R.drawable.ic_add_white_24dp);
+            @Override public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         return rootView;
     }

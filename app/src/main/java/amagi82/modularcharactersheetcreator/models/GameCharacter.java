@@ -8,11 +8,11 @@ import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import amagi82.modularcharactersheetcreator.models.game_systems.Game;
 import amagi82.modularcharactersheetcreator.models.game_systems.Onyx;
-import amagi82.modularcharactersheetcreator.models.modules.Module;
 
 @JsonObject
 public class GameCharacter {
@@ -31,7 +31,7 @@ public class GameCharacter {
     @JsonField private long timeStamp;
     private Bitmap icon;
     private Uri portraitUri;
-    private ArrayList<Module> moduleList = new ArrayList<>();
+    private List<Sheet> sheets = new ArrayList<>();
 
     public GameCharacter() {
         timeStamp = System.currentTimeMillis();
@@ -92,14 +92,6 @@ public class GameCharacter {
         left = onyx.getLeft();
         right = onyx.getRight();
         archetype = onyx.getArchetype();
-    }
-
-    public ArrayList<Module> getModuleList() {
-        return moduleList;
-    }
-
-    public void setModuleList(ArrayList<Module> moduleList) {
-        this.moduleList = moduleList;
     }
 
     public int getColorPrimary() {
@@ -204,5 +196,13 @@ public class GameCharacter {
 
     public boolean isComplete() {
         return name.length() > 0 && left != null && gameEName != null && (!getGameSystem().getOnyx().hasRight() || right != null);
+    }
+
+    public List<Sheet> getSheets() {
+        return sheets;
+    }
+
+    public void setSheets(List<Sheet> sheets) {
+        this.sheets = sheets;
     }
 }

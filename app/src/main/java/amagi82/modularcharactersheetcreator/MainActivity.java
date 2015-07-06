@@ -23,6 +23,7 @@ import amagi82.modularcharactersheetcreator.fragments.CharacterFragment;
 import amagi82.modularcharactersheetcreator.fragments.MainFragment;
 import amagi82.modularcharactersheetcreator.fragments.SheetFragment;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.game_systems.CMage;
 import amagi82.modularcharactersheetcreator.models.game_systems.CVampire;
 import amagi82.modularcharactersheetcreator.models.game_systems.CWerewolf;
@@ -73,8 +74,17 @@ public class MainActivity extends AppCompatActivity {
             module2.setText("This is another module");
 
             for (GameCharacter character : characters) {
-                character.getModuleList().add(module1);
-                character.getModuleList().add(module2);
+                Sheet sheet = new Sheet();
+                sheet.setTitle("Sheet 1");
+                sheet.getModules().add(module1);
+                sheet.getModules().add(module2);
+
+                Sheet sheet2 = new Sheet();
+                sheet2.setTitle("Sheet 1");
+                sheet2.getModules().add(module1);
+                sheet2.getModules().add(module2);
+                character.getSheets().add(sheet2);
+
                 Log.i(null, character.getName() + " contains "+character.getGameSystem().toString());
             }
         }
