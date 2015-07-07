@@ -15,7 +15,7 @@
         tools:text="Intelligence"/>
 
     <TextView
-        android:id="@+id/tvSpecialty"
+        android:id="@+id/tvText"
         style="@style/TextCaption_Column"
         android:layout_width="wrap_content"
         android:layout_weight="0"

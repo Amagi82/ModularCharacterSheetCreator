@@ -12,7 +12,7 @@
         tools:text="Intelligence"/>
 
     <TextView
-        android:id="@+id/tvSpecialty"
+        android:id="@+id/tvText"
         style="@style/TextCaption"
         android:paddingTop="@dimen/default_small_margin"
         tools:text="Problem Solver"/>

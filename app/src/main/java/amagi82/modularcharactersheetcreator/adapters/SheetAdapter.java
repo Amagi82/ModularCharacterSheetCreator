@@ -14,6 +14,8 @@ import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleBloodPool
 import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleHealthViewHolder;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleStatusViewHolder;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleViewHolder;
+import amagi82.modularcharactersheetcreator.adapters.viewholders.RowStatViewHolder;
+import amagi82.modularcharactersheetcreator.adapters.viewholders.RowViewHolder;
 import amagi82.modularcharactersheetcreator.models.modules.BloodPoolModule;
 import amagi82.modularcharactersheetcreator.models.modules.HealthModule;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
@@ -31,6 +33,23 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     public SheetAdapter(Resources res, List<Module> modules) {
         this.res = res;
         this.modules = modules;
+    }
+
+    private int getChildItemViewType(int parentPosition, int childPosition){
+        return modules.get(parentPosition).getType() == Module.Type.TITLETEXTBLOCK?  0 : 1;
+    }
+
+    private int getRowStatLayoutId(int parentPosition){
+        return getRowStatLayoutId((StatBlockModule) modules.get(parentPosition));
+    }
+
+    private int getRowStatLayoutId(StatBlockModule module){
+        return module.getRowLayoutId();
+    }
+
+    private RowViewHolder onCreateChildViewHolder(ViewGroup parent, int viewType, int parentPosition){
+        if(viewType == 0) return new RowViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_boldtext_text, parent, false));
+        else return new RowStatViewHolder(LayoutInflater.from(parent.getContext()).inflate(getRowStatLayoutId(parentPosition), parent, false));
     }
 
     @Override
@@ -98,7 +117,8 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     private void bind(ModuleBlockViewHolder vh, StatBlockModule module) {
         for(Stat stat : module.getStats()){
             //TODO: figure out how best to add blocks of views
-            //vh.linearLayout.addView(LayoutInflater.from(vh.linearLayout.getContext()).inflate(module.getRowLayoutId(), vh.linearLayout, true));
+            vh.linearLayout.addView(LayoutInflater.from(vh.linearLayout.getContext()).inflate(module.getRowLayoutId(), vh.linearLayout, true));
+            //vh.linearLayout.view
         }
     }
 
