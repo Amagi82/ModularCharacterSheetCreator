@@ -24,7 +24,6 @@ public class StatBlockModule extends Module {
 
     public void setStats(List<Stat> stats) {
         this.stats = stats;
-
     }
 
     public boolean isCompact() {

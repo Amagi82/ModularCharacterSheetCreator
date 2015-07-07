@@ -20,7 +20,9 @@ public class StatRatingBar extends RatingBar {
     private int colorOutlinePressed;
     private int colorOutlineInactive = Color.rgb(220,220,220);
     private int colorFill;
+    private int colorFillTempValue = Color.rgb(200, 40, 40);
     private int colorFillPressed;
+    private float tempRating = getRating();
     private int maxRating = getNumStars();
     private int healthBashing = 0;
     private int healthLethal = 0;
@@ -28,6 +30,7 @@ public class StatRatingBar extends RatingBar {
     private enum Healthbox {EMPTY, CHECK, X}
     public enum BarType {CIRCLE, SQUARE, HEALTHBAR}
     private BarType barType;
+    private Paint paintTemp = new Paint();
     private Paint paintInside = new Paint();
     private Paint paintOutline = new Paint();
     private Path path = new Path();
@@ -123,6 +126,7 @@ public class StatRatingBar extends RatingBar {
         paintOutline.setAntiAlias(true);
 
         paintInside.setStyle(Paint.Style.FILL);
+        paintTemp.setStyle(Paint.Style.FILL);
 
         path.rewind();
         if(barType != BarType.HEALTHBAR) path = barType == BarType.SQUARE? createPathSquare(shapeSize) : createPathCircle(shapeSize);
@@ -136,6 +140,7 @@ public class StatRatingBar extends RatingBar {
 
             paintOutline.setColor(isPressed() ? colorOutlinePressed : i >= maxRating ? colorOutlineInactive : i < getRating()? colorOutlineOn : colorOutlineOff);
             paintInside.setColor(isPressed()? colorFillPressed : colorFill);
+            paintTemp.setColor(colorFillTempValue);
 
             if(barType == BarType.HEALTHBAR){
                 boolean agg = i<healthAgg;
@@ -152,7 +157,8 @@ public class StatRatingBar extends RatingBar {
                 if(agg) canvas.drawPath(path, paintInside);
                 canvas.drawPath(path, paintOutline);
             }else {
-                if (i < getRating()) canvas.drawPath(path, paintInside);
+                if(i<tempRating && i >= getRating()) canvas.drawPath(path, paintTemp);
+                else if (i < getRating()) canvas.drawPath(path, paintInside);
                 canvas.drawPath(path, paintOutline);
             }
         }
@@ -218,5 +224,13 @@ public class StatRatingBar extends RatingBar {
     public void setBarType(BarType barType) {
         this.barType = barType;
         invalidate();
+    }
+
+    public void setColorFillTempValue(int colorFillTempValue) {
+        this.colorFillTempValue = colorFillTempValue;
+    }
+
+    public void setTempRating(float tempRating) {
+        this.tempRating = tempRating;
     }
 }

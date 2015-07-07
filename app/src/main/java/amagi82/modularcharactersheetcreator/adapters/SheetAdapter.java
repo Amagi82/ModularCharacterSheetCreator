@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import java.util.List;
 
@@ -35,23 +36,6 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
         this.modules = modules;
     }
 
-    private int getChildItemViewType(int parentPosition, int childPosition){
-        return modules.get(parentPosition).getType() == Module.Type.TITLETEXTBLOCK?  0 : 1;
-    }
-
-    private int getRowStatLayoutId(int parentPosition){
-        return getRowStatLayoutId((StatBlockModule) modules.get(parentPosition));
-    }
-
-    private int getRowStatLayoutId(StatBlockModule module){
-        return module.getRowLayoutId();
-    }
-
-    private RowViewHolder onCreateChildViewHolder(ViewGroup parent, int viewType, int parentPosition){
-        if(viewType == 0) return new RowViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_boldtext_text, parent, false));
-        else return new RowStatViewHolder(LayoutInflater.from(parent.getContext()).inflate(getRowStatLayoutId(parentPosition), parent, false));
-    }
-
     @Override
     public int getItemViewType(int position) {
         return modules.get(position).getType().ordinal();
@@ -77,6 +61,13 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
             default:
                 return new ModuleViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.module_text, parent, false));
         }
+    }
+
+    private RowViewHolder createChildViewHolder(LinearLayout layout){
+        return new RowViewHolder(LayoutInflater.from(layout.getContext()).inflate(R.layout.row_boldtext_text, layout, false));
+    }
+    private RowStatViewHolder createChildViewHolder(LinearLayout layout, int layoutId){
+        return new RowStatViewHolder(LayoutInflater.from(layout.getContext()).inflate(layoutId, layout, false));
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -116,9 +107,8 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
 
     private void bind(ModuleBlockViewHolder vh, StatBlockModule module) {
         for(Stat stat : module.getStats()){
-            //TODO: figure out how best to add blocks of views
-            vh.linearLayout.addView(LayoutInflater.from(vh.linearLayout.getContext()).inflate(module.getRowLayoutId(), vh.linearLayout, true));
-            //vh.linearLayout.view
+            RowStatViewHolder rowStatViewHolder = createChildViewHolder(vh.linearLayout, module.getRowLayoutId());
+            bindChild(rowStatViewHolder, stat);
         }
     }
 
@@ -128,14 +118,31 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
         vh.statRatingBar.setMaxRating(module.getValueMax());
         vh.statRatingBar.setRating(module.getValue());
     }
-    private void bind(ModuleBlockViewHolder vh, TitleTextBlockModule module) {
 
+    private void bind(ModuleBlockViewHolder vh, TitleTextBlockModule module) {
+        for(Stat stat : module.getStats()){
+            RowViewHolder rowViewHolder = createChildViewHolder(vh.linearLayout);
+            bindChild(rowViewHolder, stat);
+        }
     }
 
     private void bind(ModuleBloodPoolViewHolder vh, BloodPoolModule module) {
         vh.tvBloodPerTurn.setText(res.getString(R.string.blood_per_turn)+" "+module.getBloodPerTurn());
         vh.circleProgress.setMax(module.getBloodMax());
         vh.circleProgress.setProgress(module.getBloodCurrent());
+    }
+
+    private void bindChild(RowStatViewHolder vh, Stat stat){
+        vh.tvCategory.setText(stat.getCategory());
+        if(vh.tvText != null) vh.tvText.setText(stat.getSpecialty());
+        vh.statRatingBar.setNumStars(stat.getValueMax());
+        vh.statRatingBar.setRating(stat.getValue());
+        vh.statRatingBar.setTempRating(stat.getValueTemporary());
+    }
+
+    private void bindChild(RowViewHolder vh, Stat stat){
+        vh.tvCategory.setText(stat.getCategory());
+        if(vh.tvText != null) vh.tvText.setText(stat.getSpecialty());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
