@@ -1,6 +1,6 @@
 <resources>
     <item name="container_id" type="id">12345</item>
-    <string name="app_name">Modular Character Sheet Creator</string>
+    <string name="app_name">Onyx Path</string>
     <string name="deleted_count">%1$s deleted</string>
     <string name="selected_count">%1$s selected</string>
 

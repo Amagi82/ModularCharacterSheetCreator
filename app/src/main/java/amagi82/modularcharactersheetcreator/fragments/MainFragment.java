@@ -43,7 +43,7 @@ public class MainFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, rootView);
-        toolbar.setTitle(getString(R.string.characters));
+        toolbar.setLogo(R.drawable.title_onyx);
 
         if(characters == null) characters = new SortedList<>(GameCharacter.class, new SortedList.Callback<GameCharacter>() {
             @Override public int compare(GameCharacter o1, GameCharacter o2) {
