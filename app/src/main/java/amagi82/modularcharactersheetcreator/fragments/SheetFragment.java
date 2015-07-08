@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,13 +19,17 @@ import android.widget.TextView;
 import amagi82.modularcharactersheetcreator.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.ViewPagerAdapter;
+import amagi82.modularcharactersheetcreator.events.ModuleAddedEvent;
 import amagi82.modularcharactersheetcreator.models.Choice;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
+import amagi82.modularcharactersheetcreator.models.modules.HeaderModule;
 import amagi82.modularcharactersheetcreator.network.VolleySingleton;
+import amagi82.modularcharactersheetcreator.utils.Otto;
 import amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener{
 
@@ -84,6 +89,14 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         toolbar.setOnMenuItemClickListener(this);
 
         return rootView;
+    }
+
+    @OnClick(R.id.fab)
+    public void onClickFab(){
+        Log.i(null, "adding new module");
+        HeaderModule module = new HeaderModule();
+        module.setTitle("New Module");
+        Otto.BUS.getBus().post(new ModuleAddedEvent(module));
     }
 
     private String getUrl(Choice choice){
