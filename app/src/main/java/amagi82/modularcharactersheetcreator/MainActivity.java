@@ -2,7 +2,6 @@ package amagi82.modularcharactersheetcreator;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -38,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fm = getSupportFragmentManager();
     private List<GameCharacter> characters;
+    private GameCharacter currentCharacter;
     private Logan logan = new Logan();
 
     @Override
@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         return characters;
     }
 
-    public GameCharacter getCharacter(int position){
-        return characters.get(position);
+    public GameCharacter getCurrentCharacter(){
+        return currentCharacter;
     }
 
     private void loadSavedCharacters(final Bundle savedInstanceState) {
@@ -160,11 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Subscribe
     public void onCharacterClicked(CharacterClickedEvent event) {
-        Fragment fragment = new SheetFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt("position", characters.indexOf(event.character));
-        fragment.setArguments(bundle);
-        fm.beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
-
+        currentCharacter = event.character;
+        fm.beginTransaction().replace(R.id.container, new SheetFragment()).addToBackStack(null).commit();
     }
 }

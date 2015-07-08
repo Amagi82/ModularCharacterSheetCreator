@@ -80,7 +80,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         ButterKnife.bind(this, rootView);
         setHasOptionsMenu(true);
 
-        if (character == null) character = new GameCharacter();
         if (sortedList == null) sortedList = new SortedList<>(Choice.class, new SortedList.Callback<Choice>() {
             @Override public int compare(Choice o1, Choice o2) {
                 if (o1.getPosition() > o2.getPosition()) return 1;
@@ -118,10 +117,10 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         recyclerView.setAdapter(characterAdapter);
 
         //Check if we're editing a character or creating a new one
-        if (getArguments() != null) {
-            Log.i(null, "found character");
-            isEditMode = true;
-            character = ((MainActivity) getActivity()).getCharacter(getArguments().getInt("position"));
+        isEditMode = getArguments() != null && getArguments().getBoolean("isEditMode", false);
+        if (isEditMode) {
+            Log.i(null, "edit mode");
+            character = ((MainActivity) getActivity()).getCurrentCharacter();
             if (character.getPortraitUri() != null) imagePortrait.setImageURI(character.getPortraitUri());
             onyx = character.getGameSystem().getOnyx();
             onyx.setLeft(character.getLeft().geteName());
@@ -130,7 +129,8 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             setLeftResources();
             setRightResources();
         } else {
-            if (onyx == null) chooseNewGameSystem();
+            if (character == null) character = new GameCharacter();
+            else if (onyx == null) chooseNewGameSystem();
             else {
                 displayGameSystem();
                 if (onyx.getLeft() == null) chooseLeftCategory();

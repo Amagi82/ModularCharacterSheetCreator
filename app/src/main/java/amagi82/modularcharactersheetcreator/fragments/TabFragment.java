@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import amagi82.modularcharactersheetcreator.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.SheetAdapter;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
@@ -26,8 +27,8 @@ public class TabFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_tab, container, false);
         ButterKnife.bind(this, rootView);
 
-        GameCharacter character = ((SheetFragment) getParentFragment()).getCharacter();
-        Sheet sheet = character.getSheets().get(getArguments().getInt("sheet"));
+        GameCharacter character = ((MainActivity) getActivity()).getCurrentCharacter();
+        Sheet sheet = character.getSheets().get(getArguments().getInt("position"));
         int spanCount = sheet.getNumColumns();
         List<Module> modules = sheet.getModules();
 

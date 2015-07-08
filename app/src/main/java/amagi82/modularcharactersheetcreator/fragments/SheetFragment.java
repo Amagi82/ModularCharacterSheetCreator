@@ -47,7 +47,7 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         ButterKnife.bind(this, rootView);
 
         fm = getFragmentManager();
-        character = ((MainActivity) getActivity()).getCharacter(getArguments().getInt("position"));
+        character = ((MainActivity) getActivity()).getCurrentCharacter();
 
         collapsingToolbar.setTitle(character.getName());
         iconLeft.setImageUrl(getString(character.getLeft().getBaseUrl())+getString(character.getLeft().getUrl()), VolleySingleton.INSTANCE.getImageLoader());
