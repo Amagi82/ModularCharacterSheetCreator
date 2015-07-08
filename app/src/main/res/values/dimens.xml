@@ -25,14 +25,16 @@
     <dimen name="image_portrait_height">200dp</dimen>
     <dimen name="character_name_keyline">72dp</dimen>
     <dimen name="character_choice_caption_size">64dp</dimen>
+    <dimen name="character_choice_caption_size_small">56dp</dimen>
     <dimen name="character_choice_icon_size">56dp</dimen>
+    <dimen name="character_choice_icon_size_small">48dp</dimen>
 
     <dimen name="extended_appbar_height_min">138dp</dimen>
     <dimen name="extended_appbar_height">266dp</dimen>
     <dimen name="toolbar_text_indent">48dp</dimen>
 
-    <dimen name="sheet_icon_margin_top">72dp</dimen>
-    <dimen name="sheet_text_margin_top">130dp</dimen>
+    <dimen name="sheet_icon_margin_top">76dp</dimen>
+    <dimen name="sheet_text_margin_top">126dp</dimen>
     <dimen name="sheet_expanded_title_margin">64dp</dimen>
 
     <dimen name="divider">0.7dp</dimen>

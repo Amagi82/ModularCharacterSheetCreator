@@ -169,9 +169,17 @@
     <style name="CircleIcon">
         <item name="android:layout_width">@dimen/character_choice_icon_size</item>
         <item name="android:layout_height">@dimen/character_choice_icon_size</item>
-        <item name="android:layout_below">@id/toolbar</item>
         <item name="android:layout_marginLeft">@dimen/default_small_margin</item>
         <item name="android:layout_marginRight">@dimen/default_small_margin</item>
+    </style>
+
+    <style name="CircleIcon.CharacterFragment">
+        <item name="android:layout_below">@id/toolbar</item>
+    </style>
+
+    <style name="CircleIcon.Small">
+        <item name="android:layout_width">@dimen/character_choice_icon_size_small</item>
+        <item name="android:layout_height">@dimen/character_choice_icon_size_small</item>
     </style>
 
     <style name="CircleIconCaption" parent="TextAppearance.AppCompat.Caption">
@@ -183,6 +191,10 @@
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textSize">10sp</item>
         <item name="android:clickable">true</item>
+    </style>
+
+    <style name="CircleIconCaption.Small">
+        <item name="android:layout_width">@dimen/character_choice_caption_size_small</item>
     </style>
 
 </resources>

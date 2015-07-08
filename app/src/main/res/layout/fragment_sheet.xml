@@ -35,37 +35,42 @@
 
             <amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView
                 android:id="@+id/iconLeft"
-                style="@style/CircleIcon"
+                style="@style/CircleIcon.Small"
                 android:layout_marginTop="@dimen/sheet_icon_margin_top"
                 app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.6"
                 tools:src="@drawable/clan_icon"/>
 
             <TextView
                 android:id="@+id/tvIconLeft"
-                style="@style/CircleIconCaption"
+                style="@style/CircleIconCaption.Small"
                 android:layout_marginTop="@dimen/sheet_text_margin_top"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.6"
                 tools:text="Left"/>
 
             <amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView
                 android:id="@+id/iconRight"
-                style="@style/CircleIcon"
+                style="@style/CircleIcon.Small"
                 android:layout_gravity="right"
                 android:layout_marginTop="@dimen/sheet_icon_margin_top"
                 app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.6"
                 tools:src="@drawable/clan_icon"/>
 
             <TextView
                 android:id="@+id/tvIconRight"
-                style="@style/CircleIconCaption"
+                style="@style/CircleIconCaption.Small"
                 android:layout_gravity="right"
                 android:layout_marginTop="@dimen/sheet_text_margin_top"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.6"
                 tools:text="Right"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                android:layout_height="108dp"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
             <android.support.design.widget.TabLayout
