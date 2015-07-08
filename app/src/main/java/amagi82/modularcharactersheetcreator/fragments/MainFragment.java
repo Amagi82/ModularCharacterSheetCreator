@@ -1,7 +1,6 @@
 package amagi82.modularcharactersheetcreator.fragments;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.util.SortedList;
@@ -13,18 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.colintmiller.simplenosql.DataComparator;
-import com.colintmiller.simplenosql.NoSQL;
-import com.colintmiller.simplenosql.NoSQLEntity;
-import com.colintmiller.simplenosql.RetrievalCallback;
-
-import java.util.List;
-
+import amagi82.modularcharactersheetcreator.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.MainAdapter;
-import amagi82.modularcharactersheetcreator.events.CreateCharacterEvent;
+import amagi82.modularcharactersheetcreator.events.CreateNewCharacterEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
-import amagi82.modularcharactersheetcreator.utils.Logan;
 import amagi82.modularcharactersheetcreator.utils.Otto;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -77,36 +69,22 @@ public class MainFragment extends Fragment{
 
         recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new MainAdapter(getActivity(), characters);
+        if(adapter == null) adapter = new MainAdapter(getActivity(), characters);
+        else Log.i(null, "Adapter was not null");
         recyclerView.setAdapter(adapter);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override public void run() {
-                loadSavedCharacters();
-            }
-        }, 100);
-        return rootView;
-    }
+        //Get characters from MainActivity and add to SortedList
+        characters.beginBatchedUpdates();
+        for(GameCharacter character : ((MainActivity) getActivity()).getCharacters()) characters.add(character);
+        characters.endBatchedUpdates();
 
-    private void loadSavedCharacters() {
-        NoSQL.with(getActivity()).withDeserializer(new Logan()).using(GameCharacter.class).bucketId("bucket").orderBy(new DataComparator<GameCharacter>() {
-            @Override public int compare(NoSQLEntity<GameCharacter> o1, NoSQLEntity<GameCharacter> o2) {
-                return o1.getData().getTimeStamp() > o2.getData().getTimeStamp()? -1 : o1.getData().getTimeStamp() < o2.getData().getTimeStamp()? 1 : 0;
-            }
-        }).retrieve(new RetrievalCallback<GameCharacter>() {
-            @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
-                characters.beginBatchedUpdates();
-                for (int i = 0; i < entities.size(); i++) {
-                    Log.i(null, entities.get(i).getData().getName() + " retrieved");
-                    characters.add(entities.get(i).getData());
-                }
-                characters.endBatchedUpdates();
-            }
-        });
+        return rootView;
     }
 
     @OnClick(R.id.fab)
     public void onFabClicked() {
+        Otto.BUS.getBus().post(new CreateNewCharacterEvent());
+
 //        float scale = (float) (2* Math.hypot(fab_frame.getWidth(), fab_frame.getHeight()) / fab.getHeight());
 //        fab.setImageResource(0);
 //        fab.animate()
@@ -118,7 +96,7 @@ public class MainFragment extends Fragment{
 //                    @Override
 //                    public void onAnimationEnd(Animator animation) {
 //                        super.onAnimationEnd(animation);
-                        Otto.BUS.getBus().post(new CreateCharacterEvent());
+//                        Otto.BUS.getBus().post(new CharacterAddedEvent());
 //                    }
 //                });
 //

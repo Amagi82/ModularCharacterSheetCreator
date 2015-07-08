@@ -2,10 +2,10 @@ package amagi82.modularcharactersheetcreator.events;
 
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 
-public class CharacterClickedEvent {
+public class CharacterChangedEvent {
     public final GameCharacter character;
 
-    public CharacterClickedEvent(GameCharacter gameCharacter) {
-        this.character = gameCharacter;
+    public CharacterChangedEvent(GameCharacter character) {
+        this.character = character;
     }
 }

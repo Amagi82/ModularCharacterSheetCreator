@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.GridLayoutManager;
@@ -24,16 +25,17 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.colintmiller.simplenosql.NoSQL;
-import com.colintmiller.simplenosql.NoSQLEntity;
-import com.colintmiller.simplenosql.RetrievalCallback;
 import com.edmodo.cropper.CropImageView;
 import com.squareup.otto.Subscribe;
 
 import java.util.List;
 
+import amagi82.modularcharactersheetcreator.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
+import amagi82.modularcharactersheetcreator.events.CharacterAddedEvent;
+import amagi82.modularcharactersheetcreator.events.CharacterChangedEvent;
+import amagi82.modularcharactersheetcreator.events.CharacterDeletedEvent;
 import amagi82.modularcharactersheetcreator.events.TileGridItemClickedEvent;
 import amagi82.modularcharactersheetcreator.events.TileItemClickedEvent;
 import amagi82.modularcharactersheetcreator.models.Choice;
@@ -41,7 +43,6 @@ import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.game_systems.Game;
 import amagi82.modularcharactersheetcreator.models.game_systems.Onyx;
 import amagi82.modularcharactersheetcreator.network.VolleySingleton;
-import amagi82.modularcharactersheetcreator.utils.Logan;
 import amagi82.modularcharactersheetcreator.utils.Otto;
 import amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView;
 import butterknife.Bind;
@@ -50,16 +51,6 @@ import butterknife.OnClick;
 
 public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener {
 
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
-    private static final int PICK_FROM_FILE = 2;
-    private GameCharacter gameCharacter;
-    private Game game = new Game();
-    private Onyx onyx;
-    private CharacterAdapter characterAdapter;
-    private boolean isEditMode = false;
-    private Uri photoUri;
-    private CropImageView cropper;
-    private SortedList<Choice> sortedList;
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.imagePortrait) AnimatedNetworkImageView imagePortrait;
     @Bind(R.id.textInputLayout) TextInputLayout textInputLayout;
@@ -71,6 +62,17 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @Bind(R.id.fab) FloatingActionButton fab;
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
     @Bind(R.id.imageOnyxLogo) ImageView imageOnyxLogo;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int PICK_FROM_FILE = 2;
+    private GameCharacter character;
+    private Game game = new Game();
+    private Onyx onyx;
+    private CharacterAdapter characterAdapter;
+    private boolean isEditMode = false;
+    private Uri photoUri;
+    private CropImageView cropper;
+    private SortedList<Choice> sortedList;
+    private FragmentManager fm = getFragmentManager();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -78,7 +80,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         ButterKnife.bind(this, rootView);
         setHasOptionsMenu(true);
 
-        if (gameCharacter == null) gameCharacter = new GameCharacter();
+        if (character == null) character = new GameCharacter();
         if (sortedList == null) sortedList = new SortedList<>(Choice.class, new SortedList.Callback<Choice>() {
             @Override public int compare(Choice o1, Choice o2) {
                 if (o1.getPosition() > o2.getPosition()) return 1;
@@ -116,22 +118,17 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         recyclerView.setAdapter(characterAdapter);
 
         //Check if we're editing a character or creating a new one
-        if (getArguments() != null && getArguments().getString("entityId") != null) {
+        if (getArguments() != null) {
             Log.i(null, "found character");
             isEditMode = true;
-            NoSQL.with(getActivity()).withDeserializer(new Logan()).using(GameCharacter.class).bucketId("bucket").entityId(getArguments().getString("entityId")).
-                    retrieve(new RetrievalCallback<GameCharacter>() {
-                        @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
-                            if (entities.size() > 0) gameCharacter = entities.get(0).getData();
-                            if (gameCharacter.getPortraitUri() != null) imagePortrait.setImageURI(gameCharacter.getPortraitUri());
-                            onyx = gameCharacter.getGameSystem().getOnyx();
-                            onyx.setLeft(gameCharacter.getLeft().geteName());
-                            if(onyx.hasRight()) onyx.setRight(gameCharacter.getRight().geteName());
-                            displayGameSystem();
-                            setLeftResources();
-                            setRightResources();
-                        }
-                    });
+            character = ((MainActivity) getActivity()).getCharacter(getArguments().getInt("position"));
+            if (character.getPortraitUri() != null) imagePortrait.setImageURI(character.getPortraitUri());
+            onyx = character.getGameSystem().getOnyx();
+            onyx.setLeft(character.getLeft().geteName());
+            if (onyx.hasRight()) onyx.setRight(character.getRight().geteName());
+            displayGameSystem();
+            setLeftResources();
+            setRightResources();
         } else {
             if (onyx == null) chooseNewGameSystem();
             else {
@@ -299,7 +296,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                     chooseRightCategory();
                 } else {
                     //There is no right side, so finalize the game character and show the Onyx Path logo
-                    gameCharacter.setOnyx(onyx);
+                    character.setOnyx(onyx);
                     displayOnyxPathLogo();
                 }
             }
@@ -311,7 +308,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             } else {
                 //Finished. Set our images and finalize the game character
                 setRightResources();
-                gameCharacter.setOnyx(onyx);
+                character.setOnyx(onyx);
                 displayOnyxPathLogo();
             }
         }
@@ -335,7 +332,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
 //    @OnClick(R.id.fab)
 //    void getPhoto(){
-//        new AlertDialog.Builder(getActivity()).setItems(gameCharacter.getPortraitUri() == null ?
+//        new AlertDialog.Builder(getActivity()).setItems(character.getPortraitUri() == null ?
 //                R.array.portrait_choices_initial : R.array.portrait_choices, new DialogInterface.OnClickListener() {
 //            @Override
 //            public void onClick(DialogInterface dialog, int which) {
@@ -370,8 +367,8 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 //                        break;
 //                    case 2:
 //                        //Just use the default icon
-//                        gameCharacter.setPortraitUri(null);
-//                        gameCharacter.setIcon(null);
+//                        character.setPortraitUri(null);
+//                        character.setIcon(null);
 //                        imagePortrait.setImageResource(0);
 //                        break;
 //                }
@@ -446,9 +443,9 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 //                        @Override
 //                        public void onClick(DialogInterface dialog, int which) {
 //                            imagePortrait.setImageBitmap(cropper.getCroppedImage());
-//                            gameCharacter.setPortraitUri(Uri.parse(MediaStore.Images.Media.insertImage(
-//                                    getActivity().getContentResolver(), cropper.getCroppedImage(), gameCharacter.getName(), gameCharacter.getGameSystem())));
-//                            Log.i(null, "portrait uri == "+gameCharacter.getPortraitUri()+" and as a string: "+gameCharacter.getPortraitUri().toString());
+//                            character.setPortraitUri(Uri.parse(MediaStore.Images.Media.insertImage(
+//                                    getActivity().getContentResolver(), cropper.getCroppedImage(), character.getName(), character.getGameSystem())));
+//                            Log.i(null, "portrait uri == "+character.getPortraitUri()+" and as a string: "+character.getPortraitUri().toString());
 //                            setIcon(bitmap);
 //                        }
 //                    })
@@ -479,7 +476,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                         Bitmap croppedBitmap = cropper.getCroppedImage();
                         int circleImageSize = (int) getResources().getDimension(R.dimen.circle_icon_size);
                         croppedBitmap = Bitmap.createScaledBitmap(croppedBitmap, circleImageSize, circleImageSize, true);
-                        gameCharacter.setIcon(croppedBitmap);
+                        character.setIcon(croppedBitmap);
                     }
                 })
                 .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -492,7 +489,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     //Up navigation
     @Override
     public void onClick(View v) {
-        getFragmentManager().popBackStack();
+        fm.popBackStack();
     }
 
     @Override
@@ -502,17 +499,17 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                 new AlertDialog.Builder(getActivity()).setMessage("Delete this character?").setNegativeButton(R.string.cancel, null)
                         .setPositiveButton(R.string.action_delete, new DialogInterface.OnClickListener() {
                             @Override public void onClick(DialogInterface dialog, int which) {
-                                NoSQL.with(getActivity()).using(GameCharacter.class).bucketId("bucket").entityId(gameCharacter.getEntityId()).delete();
-                                gameCharacter = null;
-                                getFragmentManager().popBackStack();
+                                Otto.BUS.getBus().post(new CharacterDeletedEvent(character));
+                                character = null;
+                                fm.popBackStack();
                             }
                         }).show();
                 return true;
             case R.id.action_save_template:
                 return true;
             case R.id.action_discard:
-                gameCharacter = null;
-                getFragmentManager().popBackStack();
+                character = null;
+                fm.popBackStack();
                 return true;
         }
         return false;
@@ -521,13 +518,11 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @Override
     public void onDestroyView() {
         Log.i(null, "destroyingView");
-        if(gameCharacter != null) {
-            gameCharacter.setName(textInputLayout.getEditText().getText().toString());
-            if (gameCharacter.isComplete()) {
-                Log.i(null, "saving " + gameCharacter.getName());
-                NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>("bucket", gameCharacter.getEntityId());
-                entity.setData(gameCharacter);
-                NoSQL.with(getActivity()).withSerializer(new Logan()).using(GameCharacter.class).save(entity);
+        if (character != null) {
+            character.setName(textInputLayout.getEditText().getText().toString());
+            if (character.isComplete()) {
+                Log.i(null, "saving " + character.getName());
+                Otto.BUS.getBus().post(isEditMode? new CharacterChangedEvent(character) : new CharacterAddedEvent(character));
             }
         }
         super.onDestroyView();

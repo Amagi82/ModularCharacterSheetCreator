@@ -15,10 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bluelinelabs.logansquare.LoganSquare;
-
-import java.io.IOException;
-
+import amagi82.modularcharactersheetcreator.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.ViewPagerAdapter;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
@@ -40,7 +37,7 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
     @Bind(R.id.tabs) TabLayout tabLayout;
     @Bind(R.id.viewpager) ViewPager viewPager;
     @Bind(R.id.fab) FloatingActionButton fab;
-    private GameCharacter gameCharacter;
+    private GameCharacter character;
     private ViewPagerAdapter adapter;
     private FragmentManager fm;
 
@@ -50,24 +47,18 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         ButterKnife.bind(this, rootView);
 
         fm = getFragmentManager();
+        character = ((MainActivity) getActivity()).getCharacter(getArguments().getInt("position"));
 
-        try {
-            gameCharacter = LoganSquare.parse(getArguments().getString("Character"), GameCharacter.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (gameCharacter == null) fm.popBackStack();
+        collapsingToolbar.setTitle(character.getName());
+        iconLeft.setImageUrl(getString(character.getLeft().getBaseUrl())+getString(character.getLeft().getUrl()), VolleySingleton.INSTANCE.getImageLoader());
+        tvIconLeft.setText(character.getLeft().getTitle());
 
-        collapsingToolbar.setTitle(gameCharacter.getName());
-        iconLeft.setImageUrl(getString(gameCharacter.getLeft().getBaseUrl())+getString(gameCharacter.getLeft().getUrl()), VolleySingleton.INSTANCE.getImageLoader());
-        tvIconLeft.setText(gameCharacter.getLeft().getTitle());
-
-        if(gameCharacter.getGameSystem().getOnyx().hasRight()) {
-            tvIconRight.setText(gameCharacter.getRight().getTitle());
-            iconRight.setImageUrl(getString(gameCharacter.getRight().getBaseUrl()) + getString(gameCharacter.getRight().getUrl()), VolleySingleton.INSTANCE.getImageLoader());
+        if(character.getGameSystem().getOnyx().hasRight()) {
+            tvIconRight.setText(character.getRight().getTitle());
+            iconRight.setImageUrl(getString(character.getRight().getBaseUrl()) + getString(character.getRight().getUrl()), VolleySingleton.INSTANCE.getImageLoader());
         }
 
-        adapter = new ViewPagerAdapter(fm, gameCharacter.getSheets());
+        adapter = new ViewPagerAdapter(fm, character.getSheets());
         viewPager.setAdapter(adapter);
         tabLayout.setTabsFromPagerAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -92,6 +83,10 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         toolbar.setOnMenuItemClickListener(this);
 
         return rootView;
+    }
+
+    public GameCharacter getCharacter(){
+        return character;
     }
 
     //Up navigation
