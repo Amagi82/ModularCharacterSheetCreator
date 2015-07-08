@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
         //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
         if(characters == null) characters = new ArrayList<>();
-        if (characters.size() == 0) loadSavedCharacters();
-        if (savedInstanceState == null) fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
+        if (characters.size() == 0) loadSavedCharacters(savedInstanceState);
+        else if (savedInstanceState == null) fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
     }
 
     public List<GameCharacter> getCharacters(){
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         return characters.get(position);
     }
 
-    private void loadSavedCharacters() {
+    private void loadSavedCharacters(final Bundle savedInstanceState) {
         NoSQL.with(this).withDeserializer(logan).using(GameCharacter.class).bucketId("bucket").orderBy(new DataComparator<GameCharacter>() {
             @Override public int compare(NoSQLEntity<GameCharacter> o1, NoSQLEntity<GameCharacter> o2) {
                 return o1.getData().getTimeStamp() > o2.getData().getTimeStamp() ? -1 : o1.getData().getTimeStamp() < o2.getData().getTimeStamp() ? 1 : 0;
@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
                     Log.i(null, "generating sample characters");
                     generateSampleCharacters();
                 } else for (NoSQLEntity<GameCharacter> entity : entities) characters.add(entity.getData());
+
+                if (savedInstanceState == null) fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
             }
         });
     }
