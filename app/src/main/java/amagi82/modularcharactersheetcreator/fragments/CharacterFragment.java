@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.GridLayoutManager;
@@ -72,7 +71,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     private Uri photoUri;
     private CropImageView cropper;
     private SortedList<Choice> sortedList;
-    private FragmentManager fm = getFragmentManager();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -130,7 +128,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             setRightResources();
         } else {
             if (character == null) character = new GameCharacter();
-            else if (onyx == null) chooseNewGameSystem();
+            if (onyx == null) chooseNewGameSystem();
             else {
                 displayGameSystem();
                 if (onyx.getLeft() == null) chooseLeftCategory();
@@ -489,7 +487,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     //Up navigation
     @Override
     public void onClick(View v) {
-        fm.popBackStack();
+        finish();
     }
 
     @Override
@@ -501,7 +499,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                             @Override public void onClick(DialogInterface dialog, int which) {
                                 Otto.BUS.getBus().post(new CharacterDeletedEvent(character));
                                 character = null;
-                                fm.popBackStack();
+                                finish();
                             }
                         }).show();
                 return true;
@@ -509,7 +507,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                 return true;
             case R.id.action_discard:
                 character = null;
-                fm.popBackStack();
+                finish();
                 return true;
         }
         return false;
@@ -527,5 +525,9 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         }
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    private void finish(){
+        getFragmentManager().popBackStack();
     }
 }
