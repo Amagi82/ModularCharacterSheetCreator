@@ -6,12 +6,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.bluelinelabs.logansquare.LoganSquare;
 import com.colintmiller.simplenosql.DataComparator;
 import com.colintmiller.simplenosql.NoSQL;
 import com.colintmiller.simplenosql.NoSQLEntity;
 import com.colintmiller.simplenosql.RetrievalCallback;
 import com.squareup.otto.Subscribe;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,20 +48,38 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
-        if(characters == null) characters = new ArrayList<>();
-        if (characters.size() == 0) loadSavedCharacters(savedInstanceState);
-        else if (savedInstanceState == null) fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
+        if (savedInstanceState != null) {
+            try {
+                if(savedInstanceState.getString("currentCharacter") != null) {
+                    currentCharacter = LoganSquare.parse(savedInstanceState.getString("currentCharacter"), GameCharacter.class);
+                }
+                characters = LoganSquare.parseList(savedInstanceState.getString("characters"), GameCharacter.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else loadSavedCharacters();
     }
 
-    public List<GameCharacter> getCharacters(){
+    @Override protected void onSaveInstanceState(Bundle outState) {
+        try {
+            if (currentCharacter != null) outState.putString("currentCharacter", LoganSquare.serialize(currentCharacter));
+            outState.putString("characters", LoganSquare.serialize(characters, GameCharacter.class));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        super.onSaveInstanceState(outState);
+    }
+
+    public List<GameCharacter> getCharacters() {
         return characters;
     }
 
-    public GameCharacter getCurrentCharacter(){
+    public GameCharacter getCurrentCharacter() {
         return currentCharacter;
     }
 
-    private void loadSavedCharacters(final Bundle savedInstanceState) {
+    private void loadSavedCharacters() {
+        characters = new ArrayList<>();
         NoSQL.with(this).withDeserializer(logan).using(GameCharacter.class).bucketId("bucket").orderBy(new DataComparator<GameCharacter>() {
             @Override public int compare(NoSQLEntity<GameCharacter> o1, NoSQLEntity<GameCharacter> o2) {
                 return o1.getData().getTimeStamp() > o2.getData().getTimeStamp() ? -1 : o1.getData().getTimeStamp() < o2.getData().getTimeStamp() ? 1 : 0;
@@ -72,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     generateSampleCharacters();
                 } else for (NoSQLEntity<GameCharacter> entity : entities) characters.add(entity.getData());
 
-                if (savedInstanceState == null) fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
+                fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
             }
         });
     }
@@ -109,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         for (GameCharacter character : characters) saveCharacter(character);
     }
 
-    private void saveCharacter(GameCharacter character){
+    private void saveCharacter(GameCharacter character) {
         NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>("bucket", character.getEntityId());
         entity.setData(character);
         NoSQL.with(this).withSerializer(logan).using(GameCharacter.class).save(entity);
@@ -138,12 +158,12 @@ public class MainActivity extends AppCompatActivity {
                 character = event.character;
                 saveCharacter(character);
                 Log.i(null, character.getName() + " has been updated");
-            }else Log.i(null, "Character failed to update");
+            } else Log.i(null, "Character failed to update");
         }
     }
 
     @Subscribe
-    public void onCharacterDeleted(CharacterDeletedEvent event){
+    public void onCharacterDeleted(CharacterDeletedEvent event) {
         for (GameCharacter character : characters) {
             if (character.getEntityId().equals(event.character.getEntityId())) {
                 NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").entityId(character.getEntityId()).delete();
@@ -154,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void onCreateNewCharacter(CreateNewCharacterEvent event){
+    public void onCreateNewCharacter(CreateNewCharacterEvent event) {
         fm.beginTransaction().replace(R.id.container, new CharacterFragment()).addToBackStack(null).commit();
     }
 

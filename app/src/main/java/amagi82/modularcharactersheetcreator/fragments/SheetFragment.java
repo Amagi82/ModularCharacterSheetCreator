@@ -18,6 +18,7 @@ import android.widget.TextView;
 import amagi82.modularcharactersheetcreator.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.ViewPagerAdapter;
+import amagi82.modularcharactersheetcreator.models.Choice;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.network.VolleySingleton;
@@ -50,12 +51,12 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         character = ((MainActivity) getActivity()).getCurrentCharacter();
 
         collapsingToolbar.setTitle(character.getName());
-        iconLeft.setImageUrl(getString(character.getLeft().getBaseUrl())+getString(character.getLeft().getUrl()), VolleySingleton.INSTANCE.getImageLoader());
+        iconLeft.setImageUrl(getUrl(character.getLeft()), VolleySingleton.INSTANCE.getImageLoader());
         tvIconLeft.setText(character.getLeft().getTitle());
 
         if(character.getGameSystem().getOnyx().hasRight()) {
             tvIconRight.setText(character.getRight().getTitle());
-            iconRight.setImageUrl(getString(character.getRight().getBaseUrl()) + getString(character.getRight().getUrl()), VolleySingleton.INSTANCE.getImageLoader());
+            iconRight.setImageUrl(getUrl(character.getRight()), VolleySingleton.INSTANCE.getImageLoader());
         }
 
         adapter = new ViewPagerAdapter(fm, character.getSheets());
@@ -83,6 +84,10 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         toolbar.setOnMenuItemClickListener(this);
 
         return rootView;
+    }
+
+    private String getUrl(Choice choice){
+        return choice.getUrl() == -1? getString(R.string.url_default) : getString(choice.getBaseUrl()) + getString(choice.getUrl());
     }
 
     public GameCharacter getCharacter(){
