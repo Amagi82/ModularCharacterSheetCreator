@@ -63,10 +63,11 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
         }
     }
 
-    private RowViewHolder createChildViewHolder(LinearLayout layout){
+    private RowViewHolder createChildViewHolder(LinearLayout layout) {
         return new RowViewHolder(LayoutInflater.from(layout.getContext()).inflate(R.layout.row_boldtext_text, layout, false));
     }
-    private RowStatViewHolder createChildViewHolder(LinearLayout layout, int layoutId){
+
+    private RowStatViewHolder createChildViewHolder(LinearLayout layout, int layoutId) {
         return new RowStatViewHolder(LayoutInflater.from(layout.getContext()).inflate(layoutId, layout, false));
     }
 
@@ -75,30 +76,37 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     public void onBindViewHolder(ModuleViewHolder vh, final int position) {
         Module module = modules.get(position);
         if (vh.tvTitle != null) vh.tvTitle.setText(module.getTitle());
-        if(vh.tvText != null) vh.tvText.setText(module.getText());
+        if (vh.tvText != null) vh.tvText.setText(module.getText());
 
         switch (module.getType()) {
+            case BLOODPOOL:
+                bind((ModuleBloodPoolViewHolder) vh, (BloodPoolModule) module);
+                break;
             case HEALTH:
-                bind((ModuleHealthViewHolder) vh, (HealthModule)module);
+                bind((ModuleHealthViewHolder) vh, (HealthModule) module);
                 break;
             case STATBLOCK:
-                bind((ModuleBlockViewHolder) vh, (StatBlockModule)module);
+                bind((ModuleBlockViewHolder) vh, (StatBlockModule) module);
                 break;
             case STATUS:
-                bind((ModuleStatusViewHolder) vh, (StatusModule)module);
+                bind((ModuleStatusViewHolder) vh, (StatusModule) module);
                 break;
             case TITLETEXTBLOCK:
-                bind((ModuleBlockViewHolder) vh, (TitleTextBlockModule)module);
-                break;
-            case BLOODPOOL:
-                bind((ModuleBloodPoolViewHolder) vh, (BloodPoolModule)module);
+                bind((ModuleBlockViewHolder) vh, (TitleTextBlockModule) module);
                 break;
         }
     }
 
+    private void bind(ModuleBloodPoolViewHolder vh, BloodPoolModule module) {
+        vh.tvBloodPerTurn.setText(res.getString(R.string.blood_per_turn) + " " + module.getBloodPerTurn());
+        vh.circleProgress.setMax(module.getBloodMax());
+        vh.circleProgress.setProgress(module.getBloodCurrent());
+    }
+
     private void bind(ModuleHealthViewHolder vh, HealthModule module) {
+        if(module.isDamaged())
         vh.tvDamageLevel.setText(module.getCurrentHealth().getCategory());
-        vh.tvPenalty.setText(module.getCurrentHealth().getValue());
+        vh.tvPenalty.setText((module.isDamaged()? module.getCurrentHealth().getValue() + " "+res.getString(R.string.dice) : ""));
         vh.statRatingBar.setMaxRating(module.getHealthLevels().size());
         vh.statRatingBar.setHealthAgg(module.getDamageAgg());
         vh.statRatingBar.setHealthLethal(module.getDamageLethal());
@@ -106,43 +114,37 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     }
 
     private void bind(ModuleBlockViewHolder vh, StatBlockModule module) {
-        for(Stat stat : module.getStats()){
+        for (Stat stat : module.getStats()) {
             RowStatViewHolder rowStatViewHolder = createChildViewHolder(vh.linearLayout, module.getRowLayoutId());
             bindChild(rowStatViewHolder, stat);
         }
     }
 
     private void bind(ModuleStatusViewHolder vh, StatusModule module) {
-        vh.statRatingBar.setBarType(module.isCircle()? StatRatingBar.BarType.CIRCLE : StatRatingBar.BarType.SQUARE);
+        vh.statRatingBar.setBarType(module.isCircle() ? StatRatingBar.BarType.CIRCLE : StatRatingBar.BarType.SQUARE);
         vh.statRatingBar.setNumStars(module.getNumStars());
         vh.statRatingBar.setMaxRating(module.getValueMax());
         vh.statRatingBar.setRating(module.getValue());
     }
 
     private void bind(ModuleBlockViewHolder vh, TitleTextBlockModule module) {
-        for(Stat stat : module.getStats()){
+        for (Stat stat : module.getStats()) {
             RowViewHolder rowViewHolder = createChildViewHolder(vh.linearLayout);
             bindChild(rowViewHolder, stat);
         }
     }
 
-    private void bind(ModuleBloodPoolViewHolder vh, BloodPoolModule module) {
-        vh.tvBloodPerTurn.setText(res.getString(R.string.blood_per_turn)+" "+module.getBloodPerTurn());
-        vh.circleProgress.setMax(module.getBloodMax());
-        vh.circleProgress.setProgress(module.getBloodCurrent());
-    }
-
-    private void bindChild(RowStatViewHolder vh, Stat stat){
+    private void bindChild(RowStatViewHolder vh, Stat stat) {
         vh.tvCategory.setText(stat.getCategory());
-        if(vh.tvText != null) vh.tvText.setText(stat.getSpecialty());
+        if (vh.tvText != null) vh.tvText.setText(stat.getSpecialty());
         vh.statRatingBar.setNumStars(stat.getValueMax());
         vh.statRatingBar.setRating(stat.getValue());
         vh.statRatingBar.setTempRating(stat.getValueTemporary());
     }
 
-    private void bindChild(RowViewHolder vh, Stat stat){
+    private void bindChild(RowViewHolder vh, Stat stat) {
         vh.tvCategory.setText(stat.getCategory());
-        if(vh.tvText != null) vh.tvText.setText(stat.getSpecialty());
+        if (vh.tvText != null) vh.tvText.setText(stat.getSpecialty());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

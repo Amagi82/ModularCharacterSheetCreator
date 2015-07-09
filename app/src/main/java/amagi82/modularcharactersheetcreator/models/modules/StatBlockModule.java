@@ -18,6 +18,13 @@ public class StatBlockModule extends Module {
         super(Type.STATBLOCK);
     }
 
+    public StatBlockModule(List<Stat> stats, String title, boolean compact) {
+        super(Type.STATBLOCK);
+        setTitle(title);
+        this.stats = stats;
+        this.compact = compact;
+    }
+
     public List<Stat> getStats() {
         return stats;
     }

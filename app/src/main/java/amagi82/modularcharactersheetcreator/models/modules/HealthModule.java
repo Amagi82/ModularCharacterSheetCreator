@@ -17,6 +17,11 @@ public class HealthModule extends Module {
         super(Type.HEALTH);
     }
 
+    public HealthModule(List<Stat> healthLevels){
+        super(Type.HEALTH);
+        this.healthLevels = healthLevels;
+    }
+
     public List<Stat> getHealthLevels() {
         return healthLevels;
     }
@@ -50,6 +55,14 @@ public class HealthModule extends Module {
     public void setDamageAgg(int damageAgg) {
         this.damageAgg = damageAgg;
         reviewDamage();
+    }
+
+    public int getTotalDamage(){
+        return damageAgg + damageBashing + damageLethal;
+    }
+
+    public boolean isDamaged(){
+        return getTotalDamage() != 0;
     }
 
     public Stat getCurrentHealth(){

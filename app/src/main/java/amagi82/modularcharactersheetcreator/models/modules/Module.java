@@ -38,11 +38,22 @@ public class Module {
     @JsonField private String text;
 
     public Module() {
-        this(Type.DEFAULT);
+        this(null, null, 1);
     }
 
     public Module(Type type) {
         this.type = type;
+    }
+
+    public Module(String title, String text){
+        this(title, text, 1);
+    }
+
+    public Module(String title, String text, int spanCount){
+        this.type = Type.DEFAULT;
+        this.title = title;
+        this.text = text;
+        this.spanCount = spanCount;
     }
 
     public Type getType() {
