@@ -12,12 +12,11 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.RatingBar;
 
 import amagi82.modularcharactersheetcreator.R;
 
-public class RoundedRatingBar extends RatingBar {
+public class RoundedStatBar extends RatingBar {
 
     private String title;
     private String specialty;
@@ -31,24 +30,25 @@ public class RoundedRatingBar extends RatingBar {
     private int colorBorderInactive;
     private int textColor;
     private float textSize;
-//    private int healthBashing = 0;
+    //    private int healthBashing = 0;
 //    private int healthLethal = 0;
 //    private int healthAgg = 0;
     private float gap;
     private float cornerRadius;
     private float xPos;
-    private float yPos;
+    private float yPosTitle;
+    private float yPosSpecialty;
     private Paint paintFill = new Paint();
     private Paint paintBorder = new Paint();
     private Path path = new Path();
     private RectF rect = new RectF();
     private TextPaint textPaint = new TextPaint();
 
-    public RoundedRatingBar(Context context) {
+    public RoundedStatBar(Context context) {
         this(context, null);
     }
 
-    public RoundedRatingBar(Context context, AttributeSet attrs) {
+    public RoundedStatBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         getXmlAttrs(context, attrs);
 
@@ -58,20 +58,22 @@ public class RoundedRatingBar extends RatingBar {
         paintBorder.setAntiAlias(true);
         paintBorder.setStrokeWidth(2);
 
-        textPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        textPaint.setLinearText(true);
-        textPaint.setColor(textColor);
-        textPaint.setTextSize(textSize);
-        textPaint.setTypeface(Typeface.DEFAULT_BOLD);
+        if (title != null) {
+            textPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+            textPaint.setLinearText(true);
+            textPaint.setColor(textColor);
+            textPaint.setTextSize(textSize);
+            textPaint.setTypeface(Typeface.DEFAULT_BOLD);
+        }
 
-        if(getRating() < ratingMin) setRating(ratingMin);
+        if (getRating() < ratingMin) setRating(ratingMin);
 
         GradientDrawable gradient = new GradientDrawable();
         gradient.setShape(GradientDrawable.RECTANGLE);
         gradient.setColor(colorBackground);
-        gradient.setCornerRadius(cornerRadius);
+        gradient.setCornerRadius(cornerRadius + (gap + getPaddingTop()) / 2);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) setBackground(gradient);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) setBackground(gradient);
         else //noinspection deprecation
             setBackgroundDrawable(gradient);
 
@@ -81,7 +83,7 @@ public class RoundedRatingBar extends RatingBar {
     protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height;
-        int desiredHeight = getResources().getDimensionPixelSize(specialty == null? R.dimen.round_rating_bar_height : R.dimen.round_rating_bar_extended_height);
+        int desiredHeight = getResources().getDimensionPixelSize(R.dimen.round_stat_bar_height) + (specialty == null ? 0 : (int) textSize + getPaddingBottom());
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
@@ -89,11 +91,13 @@ public class RoundedRatingBar extends RatingBar {
         else if (heightMode == MeasureSpec.AT_MOST) height = Math.min(heightSize, desiredHeight);
         else height = desiredHeight;
 
-        float averagePadding = (getPaddingLeft()+getPaddingRight())/getNumStars();
-        rect.set(gap + averagePadding, getPaddingTop(), (width / getNumStars()) - (gap + averagePadding), height - getPaddingBottom());
+        float averagePadding = (getPaddingLeft() + getPaddingRight()) / getNumStars();
+        rect.set(gap, getPaddingTop(), (width / getNumStars()) - (gap + averagePadding), height - getPaddingBottom() -
+                (specialty == null ? 0 : textSize + getPaddingBottom()));
 
-        xPos = rect.centerX() * 0.5f;
-        yPos = rect.centerY() - (textPaint.descent() + textPaint.ascent()) * .5f;
+        xPos = rect.centerX() * .5f;
+        yPosTitle = rect.centerY() + textPaint.descent();
+        if (specialty != null) yPosSpecialty = height - textPaint.descent() - getPaddingBottom();
 
         setMeasuredDimension(width, height);
     }
@@ -103,16 +107,15 @@ public class RoundedRatingBar extends RatingBar {
         path.rewind();
         path.addRoundRect(rect, cornerRadius, cornerRadius, Path.Direction.CW);
 
-        float offset = (getWidth() - getPaddingLeft() - getPaddingRight()) / getNumStars();
-        path.offset(getPaddingLeft() -gap, 0);
+        path.offset(getPaddingLeft() - gap, 0);
+        float offset = (getWidth() - getPaddingRight()) / getNumStars();
 
-        for (int i=0;i<getNumStars();i++) {
-            //path.offset((i + .5F) * getWidth() / getNumStars() - rect.centerX(), 0);
-            if(i < getRating()) {
-                paintFill.setColor(i <= ratingBase? colorFill : colorFillSecondary);
+        for (int i = 0; i < getNumStars(); i++) {
+            if (i < getRating()) {
+                paintFill.setColor(i < ratingBase ? colorFill : colorFillSecondary);
                 canvas.drawPath(path, paintFill);
             }
-            paintBorder.setColor(i <= ratingMax? colorBorder : colorBorderInactive);
+            paintBorder.setColor(i < ratingMax ? colorBorder : colorBorderInactive);
             canvas.drawPath(path, paintBorder);
 
             path.offset(offset, 0);
@@ -133,27 +136,33 @@ public class RoundedRatingBar extends RatingBar {
 //                canvas.drawPath(path, paintOutline);
 //            }else {
         }
-        if(title != null) canvas.drawText(title, xPos, yPos, textPaint);
+        if (title != null) {
+            canvas.drawText(title, xPos, yPosTitle, textPaint);
+            if (specialty != null) {
+                textPaint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
+                canvas.drawText(specialty, xPos, yPosSpecialty, textPaint);
+            }
+        }
     }
 
     //Set any XML attributes that may have been specified
     private void getXmlAttrs(Context context, AttributeSet attrs) {
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RoundedRatingBar, 0, 0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RoundedStatBar, 0, 0);
         try {
-            title = a.getString(R.styleable.RoundedRatingBar_rrb_title);
-            specialty = a.getString(R.styleable.RoundedRatingBar_rrb_specialty);
-            ratingMin = a.getInt(R.styleable.RoundedRatingBar_rrb_ratingMin, 1);
-            ratingBase = a.getInt(R.styleable.RoundedRatingBar_rrb_ratingBase, (int) getRating());
-            ratingMax = a.getInt(R.styleable.RoundedRatingBar_rrb_ratingMax, getNumStars());
-            colorBackground = a.getColor(R.styleable.RoundedRatingBar_rrb_colorBackground, getResources().getColor(R.color.round_rating_bar_background));
-            colorFill = a.getColor(R.styleable.RoundedRatingBar_rrb_colorFill, getResources().getColor(R.color.round_rating_bar_fill));
-            colorFillSecondary = a.getColor(R.styleable.RoundedRatingBar_rrb_colorFillSecondary, getResources().getColor(R.color.round_rating_bar_secondary));
-            colorBorder = a.getColor(R.styleable.RoundedRatingBar_rrb_colorBorder, getResources().getColor(R.color.round_rating_bar_border));
-            colorBorderInactive = a.getColor(R.styleable.RoundedRatingBar_rrb_colorBorderInactive, getResources().getColor(R.color.round_rating_bar_border_inactive));
-            textColor = a.getColor(R.styleable.RoundedRatingBar_rrb_textColor, getResources().getColor(R.color.white));
-            textSize = a.getDimension(R.styleable.RoundedRatingBar_rrb_textSize, getResources().getDimension(R.dimen.round_rating_bar_text_size));
-            gap = a.getDimension(R.styleable.RoundedRatingBar_rrb_gap, getResources().getDimension(R.dimen.round_rating_bar_gap));
-            cornerRadius = a.getDimension(R.styleable.RoundedRatingBar_rrb_cornerRadius, getResources().getDimension(R.dimen.round_rating_bar_corner_radius));
+            title = a.getString(R.styleable.RoundedStatBar_rsb_title);
+            specialty = a.getString(R.styleable.RoundedStatBar_rsb_specialty);
+            ratingMin = a.getInt(R.styleable.RoundedStatBar_rsb_ratingMin, 1);
+            ratingBase = a.getInt(R.styleable.RoundedStatBar_rsb_ratingBase, (int) getRating());
+            ratingMax = a.getInt(R.styleable.RoundedStatBar_rsb_ratingMax, getNumStars());
+            colorBackground = a.getColor(R.styleable.RoundedStatBar_rsb_colorBackground, getResources().getColor(R.color.round_stat_bar_background));
+            colorFill = a.getColor(R.styleable.RoundedStatBar_rsb_colorFill, getResources().getColor(R.color.round_stat_bar_fill));
+            colorFillSecondary = a.getColor(R.styleable.RoundedStatBar_rsb_colorFillSecondary, getResources().getColor(R.color.round_stat_bar_secondary));
+            colorBorder = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorder, getResources().getColor(R.color.round_stat_bar_border));
+            colorBorderInactive = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorderInactive, getResources().getColor(R.color.round_stat_bar_border_inactive));
+            textColor = a.getColor(R.styleable.RoundedStatBar_rsb_textColor, getResources().getColor(R.color.white));
+            textSize = a.getDimension(R.styleable.RoundedStatBar_rsb_textSize, getResources().getDimension(R.dimen.round_stat_bar_text_size));
+            gap = a.getDimension(R.styleable.RoundedStatBar_rsb_gap, getResources().getDimension(R.dimen.round_stat_bar_gap));
+            cornerRadius = a.getDimension(R.styleable.RoundedStatBar_rsb_cornerRadius, getResources().getDimension(R.dimen.round_stat_bar_corner_radius));
         } finally {
             a.recycle();
         }

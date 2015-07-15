@@ -13,20 +13,20 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="RoundedRatingBar">
-        <attr name="rrb_colorBackground" format="color" />
-        <attr name="rrb_colorFill" format="color" />
-        <attr name="rrb_colorFillSecondary" format="color" />
-        <attr name="rrb_colorBorder" format="color" />
-        <attr name="rrb_colorBorderInactive" format="color" />
-        <attr name="rrb_textColor" format="color" />
-        <attr name="rrb_textSize" format="dimension" />
-        <attr name="rrb_ratingMin" format="float" />
-        <attr name="rrb_ratingBase" format="float" />
-        <attr name="rrb_ratingMax" format="float" />
-        <attr name="rrb_gap" format="float" />
-        <attr name="rrb_cornerRadius" format="float" />
-        <attr name="rrb_title" format="string" />
-        <attr name="rrb_specialty" format="string" />
+    <declare-styleable name="RoundedStatBar">
+        <attr name="rsb_colorBackground" format="color" />
+        <attr name="rsb_colorFill" format="color" />
+        <attr name="rsb_colorFillSecondary" format="color" />
+        <attr name="rsb_colorBorder" format="color" />
+        <attr name="rsb_colorBorderInactive" format="color" />
+        <attr name="rsb_textColor" format="color" />
+        <attr name="rsb_textSize" format="dimension" />
+        <attr name="rsb_ratingMin" format="integer" />
+        <attr name="rsb_ratingBase" format="integer" />
+        <attr name="rsb_ratingMax" format="integer" />
+        <attr name="rsb_gap" format="float" />
+        <attr name="rsb_cornerRadius" format="float" />
+        <attr name="rsb_title" format="string" />
+        <attr name="rsb_specialty" format="string" />
     </declare-styleable>
 </resources>

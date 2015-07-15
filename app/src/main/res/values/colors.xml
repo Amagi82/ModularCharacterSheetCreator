@@ -29,11 +29,11 @@
     <color name="translucent_grey">#aa959595</color>
     <color name="translucent_light_grey">#aad1d1d1</color>
 
-    <color name="round_rating_bar_background">#D1D1D1</color>
-    <color name="round_rating_bar_fill">#959595</color>
-    <color name="round_rating_bar_secondary">#AAAAAA</color>
-    <color name="round_rating_bar_border">#33000000</color>
-    <color name="round_rating_bar_border_inactive">#22000000</color>
+    <color name="round_stat_bar_background">#D1D1D1</color>
+    <color name="round_stat_bar_fill">#959595</color>
+    <color name="round_stat_bar_secondary">#AAAAAA</color>
+    <color name="round_stat_bar_border">#33000000</color>
+    <color name="round_stat_bar_border_inactive">#22000000</color>
 
     <!-- Game theme colors-->
     <color name="scion">#809CB0</color>

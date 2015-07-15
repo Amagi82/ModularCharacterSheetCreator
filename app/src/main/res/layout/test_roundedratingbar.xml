@@ -6,12 +6,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <amagi82.modularcharactersheetcreator.widgets.RoundedRatingBar
+    <amagi82.modularcharactersheetcreator.widgets.RoundedStatBar
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:padding="2dp"
         android:rating="3"
-        app:rrb_title="Category" />
+        app:rsb_title="Category" />
+
+    <amagi82.modularcharactersheetcreator.widgets.RoundedStatBar
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:padding="2dp"
+        android:rating="3"
+        app:rsb_ratingMax="4"
+        app:rsb_title="Category"
+        app:rsb_specialty="Specialty"/>
 
 </FrameLayout>
