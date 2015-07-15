@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         FrameLayout container = (FrameLayout) findViewById(R.id.container);
         LayoutInflater inflater = getLayoutInflater();
 
-        inflater.inflate(R.layout.test_roundcornerprogressbar_trans, container, true);
+        inflater.inflate(R.layout.test_roundedratingbar, container, true);
 
         //long time = System.currentTimeMillis();
 

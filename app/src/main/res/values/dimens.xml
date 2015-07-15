@@ -11,6 +11,12 @@
     <dimen name="default_small_margin">8dp</dimen>
     <dimen name="default_tiny_margin">4dp</dimen>
 
+    <dimen name="round_rating_bar_gap">1dp</dimen>
+    <dimen name="round_rating_bar_corner_radius">4dp</dimen>
+    <dimen name="round_rating_bar_text_size">16sp</dimen>
+    <dimen name="round_rating_bar_height">22dp</dimen>
+    <dimen name="round_rating_bar_extended_height">28dp</dimen>
+
     <dimen name="card_padding">16dp</dimen>
     <dimen name="card_margin">4dp</dimen>
     <dimen name="card_corner_radius">2dp</dimen>
