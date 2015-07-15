@@ -12,4 +12,18 @@
             <enum name="healthbox" value="2" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="RoundedRatingBar">
+        <attr name="colorBackground" format="color" />
+        <attr name="colorFill" format="color" />
+        <attr name="colorFillSecondary" format="color" />
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="ratingMin" format="float" />
+        <attr name="ratingBase" format="float" />
+        <attr name="padding" format="float" />
+        <attr name="cornerRadius" format="float" />
+        <attr name="title" format="string" />
+        <attr name="specialty" format="string" />
+    </declare-styleable>
 </resources>

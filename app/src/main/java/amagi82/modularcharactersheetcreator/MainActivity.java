@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.widget.FrameLayout;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 import com.colintmiller.simplenosql.DataComparator;
@@ -46,18 +48,47 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FrameLayout container = (FrameLayout) findViewById(R.id.container);
+        LayoutInflater inflater = getLayoutInflater();
+
+        inflater.inflate(R.layout.test_roundcornerprogressbar_trans, container, true);
+
+        //long time = System.currentTimeMillis();
+
+//        for(int i = 0; i<300; i++){
+//            inflater.inflate(R.layout.test_roundcornerprogressbar_trans, container, true);
+//        }
+//        Log.i(null, "RoundCornerProgressBar with translucency took "+(System.currentTimeMillis()-time)+ "ms");
+//        time = System.currentTimeMillis();
+//
+//        for(int i = 0; i<300; i++){
+//            inflater.inflate(R.layout.test_statratingbar_trans, container, true);
+//        }
+//        Log.i(null, "StatRatingBar with translucency took took "+(System.currentTimeMillis()-time)+ "ms");
+//        time = System.currentTimeMillis();
+//
+//        for(int i = 0; i<300; i++){
+//            inflater.inflate(R.layout.test_statratingbar, container, true);
+//        }
+//        Log.i(null, "StatRatingBar took "+(System.currentTimeMillis()-time)+ "ms");
+//
+//        time = System.currentTimeMillis();
+//        for(int i = 0; i<300; i++){
+//            inflater.inflate(R.layout.test_roundcornerprogressbar, container, true);
+//        }
+//        Log.i(null, "RoundCornerProgressBar took "+(System.currentTimeMillis()-time)+ "ms");
 
         //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
-        if (savedInstanceState != null) {
-            try {
-                if(savedInstanceState.getString("currentCharacter") != null) {
-                    currentCharacter = LoganSquare.parse(savedInstanceState.getString("currentCharacter"), GameCharacter.class);
-                }
-                characters = LoganSquare.parseList(savedInstanceState.getString("characters"), GameCharacter.class);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else loadSavedCharacters();
+//        if (savedInstanceState != null) {
+//            try {
+//                if(savedInstanceState.getString("currentCharacter") != null) {
+//                    currentCharacter = LoganSquare.parse(savedInstanceState.getString("currentCharacter"), GameCharacter.class);
+//                }
+//                characters = LoganSquare.parseList(savedInstanceState.getString("characters"), GameCharacter.class);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        } else loadSavedCharacters();
     }
 
     @Override protected void onSaveInstanceState(Bundle outState) {

@@ -24,6 +24,10 @@
     <color name="darkRed">#CC0000</color>
 
     <color name="grey_700">#616161</color>
+    <color name="grey">#959595</color>
+    <color name="light_grey">#d1d1d1</color>
+    <color name="translucent_grey">#aa959595</color>
+    <color name="translucent_light_grey">#aad1d1d1</color>
 
     <!-- Game theme colors-->
     <color name="scion">#809CB0</color>
