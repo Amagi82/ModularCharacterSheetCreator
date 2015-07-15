@@ -76,7 +76,6 @@ public class RoundedStatBar extends RatingBar {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) setBackground(gradient);
         else //noinspection deprecation
             setBackgroundDrawable(gradient);
-
     }
 
     @Override
@@ -95,9 +94,11 @@ public class RoundedStatBar extends RatingBar {
         rect.set(gap, getPaddingTop(), (width / getNumStars()) - (gap + averagePadding), height - getPaddingBottom() -
                 (specialty == null ? 0 : textSize + getPaddingBottom()));
 
-        xPos = rect.centerX() * .5f;
-        yPosTitle = rect.centerY() + textPaint.descent();
-        if (specialty != null) yPosSpecialty = height - textPaint.descent() - getPaddingBottom();
+        if(title != null){
+            xPos = rect.centerX() * .5f;
+            yPosTitle = rect.centerY() + textPaint.descent();
+            if (specialty != null) yPosSpecialty = height - textPaint.descent() - getPaddingBottom();
+        }
 
         setMeasuredDimension(width, height);
     }
@@ -210,5 +211,17 @@ public class RoundedStatBar extends RatingBar {
 
     public void setCornerRadius(float cornerRadius) {
         this.cornerRadius = cornerRadius;
+    }
+
+    public void setRatingMax(int ratingMax) {
+        this.ratingMax = ratingMax;
+    }
+
+    public void setColorBorder(int colorBorder) {
+        this.colorBorder = colorBorder;
+    }
+
+    public void setColorBorderInactive(int colorBorderInactive) {
+        this.colorBorderInactive = colorBorderInactive;
     }
 }

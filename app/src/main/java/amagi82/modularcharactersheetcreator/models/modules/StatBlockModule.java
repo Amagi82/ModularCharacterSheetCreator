@@ -46,6 +46,6 @@ public class StatBlockModule extends Module {
             if(stat.getSpecialty() != null && stat.getSpecialty().length() > 0)
                 return compact? R.layout.row_stat_compact_specialties : R.layout.row_stat_specialties;
         }
-        return compact? R.layout.row_stat_compact : R.layout.row_stat;
+        return compact? R.layout.row_stat_compact : R.layout.row_stat_compact;
     }
 }
