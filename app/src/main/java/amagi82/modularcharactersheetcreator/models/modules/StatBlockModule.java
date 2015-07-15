@@ -42,10 +42,6 @@ public class StatBlockModule extends Module {
     }
 
     public int getRowLayoutId(){
-        for(Stat stat : stats){
-            if(stat.getSpecialty() != null && stat.getSpecialty().length() > 0)
-                return compact? R.layout.row_stat_compact_specialties : R.layout.row_stat_specialties;
-        }
         return compact? R.layout.row_stat_compact : R.layout.row_stat_compact;
     }
 }

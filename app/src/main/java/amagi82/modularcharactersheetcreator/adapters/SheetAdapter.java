@@ -104,9 +104,9 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     }
 
     private void bind(ModuleHealthViewHolder vh, HealthModule module) {
-        if(module.isDamaged())
-        vh.tvDamageLevel.setText(module.getCurrentHealth().getCategory());
-        vh.tvPenalty.setText((module.isDamaged()? module.getCurrentHealth().getValue() + " "+res.getString(R.string.dice) : ""));
+        if (module.isDamaged())
+            vh.tvDamageLevel.setText(module.getCurrentHealth().getCategory());
+        vh.tvPenalty.setText((module.isDamaged() ? module.getCurrentHealth().getValue() + " " + res.getString(R.string.dice) : ""));
         vh.statRatingBar.setMaxRating(module.getHealthLevels().size());
         vh.statRatingBar.setHealthAgg(module.getDamageAgg());
         vh.statRatingBar.setHealthLethal(module.getDamageLethal());
@@ -135,11 +135,18 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     }
 
     private void bindChild(RowStatViewHolder vh, Stat stat) {
-        vh.tvCategory.setText(stat.getCategory());
-        if (vh.tvText != null) vh.tvText.setText(stat.getSpecialty());
-        vh.statRatingBar.setNumStars(stat.getValueMax());
-        vh.statRatingBar.setRating(stat.getValue());
-        vh.statRatingBar.setTempRating(stat.getValueTemporary());
+        if (vh.tvCategory != null) {
+            vh.tvCategory.setText(stat.getCategory());
+            if (vh.tvText != null) vh.tvText.setText(stat.getSpecialty());
+        } else {
+            vh.statBar.setTitle(stat.getCategory());
+            vh.statBar.setSpecialty(stat.getSpecialty());
+        }
+        vh.statBar.setNumStars(stat.getNumStars());
+        vh.statBar.setRatingMax(stat.getValueMax());
+        vh.statBar.setRating(stat.getValueTemporary());
+        vh.statBar.setRatingBase(stat.getValue());
+        vh.statBar.setRatingMin(stat.getValueMin());
     }
 
     private void bindChild(RowViewHolder vh, Stat stat) {

@@ -15,6 +15,7 @@ public class Stat {
     @JsonField private int value;
     @JsonField private int valueTemporary;
     @JsonField private int valueMax;
+    @JsonField private int numStars;
 
     public Stat() {
     }
@@ -32,12 +33,17 @@ public class Stat {
     }
 
     public Stat(String category, String specialty, int valueMin, int value, int valueTemporary, int valueMax){
+        this(category, specialty, valueMin, value, valueTemporary, valueMax, valueMax);
+    }
+
+    public Stat(String category, String specialty, int valueMin, int value, int valueTemporary, int valueMax, int numStars){
         this.category = category;
         this.specialty = specialty;
         this.valueMin = valueMin;
         this.value = value;
         this.valueTemporary = valueTemporary;
         this.valueMax = valueMax;
+        this.numStars = numStars;
     }
 
     public String getCategory() {
@@ -87,6 +93,15 @@ public class Stat {
     }
 
     public void setValueTemporary(int valueTemporary) {
+        if(valueTemporary < value) valueTemporary = value;
         this.valueTemporary = valueTemporary;
+    }
+
+    public int getNumStars() {
+        return numStars;
+    }
+
+    public void setNumStars(int numStars) {
+        this.numStars = numStars;
     }
 }
