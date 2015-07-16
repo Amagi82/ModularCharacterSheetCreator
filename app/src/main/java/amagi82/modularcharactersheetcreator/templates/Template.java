@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.game_systems.Game;
 import amagi82.modularcharactersheetcreator.models.modules.BloodPoolModule;
@@ -19,99 +20,138 @@ import amagi82.modularcharactersheetcreator.models.modules.StatusModule;
 public class Template {
 
     private Context context;
+    private GameCharacter character;
     private Game.System system;
-    private int spanCount;
+    private List<Module> modules;
+    private int spanCount = 3;
 
-    public Template(Context context, Game.System system, int spanCount) {
-        this.system = system;
+    public Template(Context context, GameCharacter character) {
         this.context = context;
-        this.spanCount = spanCount;
+        system = character.getGameSystem();
     }
 
-    public List<Sheet> create(){
-        List<Sheet> sheets = new ArrayList<>();
+    public Sheet createDefaultSheet(){
+        modules = new ArrayList<>();
         switch(system){
             case CMAGE:
-                return createCMage(sheets);
+                return createCMage();
             case CVAMPIRE:
-                return createCVampire(sheets);
+                return createCVampire();
             case CWEREWOLF:
-                return createCWerewolf(sheets);
+                return createCWerewolf();
             case CWRAITH:
-                return createCWraith(sheets);
+                return createCWraith();
             case NVAMPIRE:
-                return createNVampire(sheets);
+                return createNVampire();
             case NWEREWOLF:
-                return createNWerewolf(sheets);
+                return createNWerewolf();
             case NMUMMY:
-                return createNMummy(sheets);
+                return createNMummy();
             case NDEMON:
-                return createNDemon(sheets);
+                return createNDemon();
             case SCION:
-                return createScion(sheets);
+                return createScion();
             case TRINITY:
-                return createTrinity(sheets);
+                return createTrinity();
             case EXALTED:
-                return createExalted(sheets);
+                return createExalted();
         }
         return null;
     }
 
-    private List<Sheet> createCMage(List<Sheet> sheets){
-        List<Module> modules = new ArrayList<>();
-        modules.add(new StatBlockModule(getArray(R.array.CWod_Physical), 1, 5, getString(R.string.physical)));
+    private Sheet createCMage(){
+        addCWodAttributes();
+        addCWodAbilities(R.array.CMage_Talents, R.array.CMage_Skills, R.array.CMage_Knowledges);
+        modules.add(new HeaderModule(getString(R.string.spheres), spanCount));
+        modules.add(new StatBlockModule(getArray(R.array.CMage_Spheres_Left), 0, 5, null));
+        modules.add(new StatBlockModule(getArray(R.array.CMage_Spheres_Center), 0, 5, null));
+        modules.add(new StatBlockModule(getArray(R.array.CMage_Spheres_Right), 0, 5, null));
+        modules.add(new HeaderModule(getString(R.string.advantages), spanCount));
+        modules.add(new StatBlockModule(null, 0, 5, getString(R.string.backgrounds)));
+        modules.add(new StatusModule(getString(R.string.arete), 1, 10));
+        modules.add(new HealthModule(getCWodHealthLevels()));
+        modules.add(new StatusModule(getString(R.string.willpower), 0, 10));
+        //TODO: create and add Quintessence wheel and experience counter
 
-
-
-        sheets.add(createCharacterSheet(modules));
-        return sheets;
+        return createCharacterSheet(modules);
     }
 
-    private List<Sheet> createCVampire(List<Sheet> sheets) {
-        return null;
+    private Sheet createCVampire() {
+        addCWodAttributes();
+        addCWodAbilities(R.array.CVampire_Talents, R.array.CVampire_Skills, R.array.CVampire_Knowledges);
+        modules.add(new HeaderModule(getString(R.string.advantages), spanCount));
+
+
+
+        return createCharacterSheet(modules);
     }
 
-    private List<Sheet> createCWerewolf(List<Sheet> sheets) {
-        return null;
+    private Sheet createCWerewolf() {
+        return createCharacterSheet(modules);
     }
 
-    private List<Sheet> createCWraith(List<Sheet> sheets) {
-        return null;
+    private Sheet createCWraith() {
+        return createCharacterSheet(modules);
     }
 
-    private List<Sheet> createNVampire(List<Sheet> sheets) {
-        return null;
+    private Sheet createNVampire() {
+        return createCharacterSheet(modules);
     }
 
-    private List<Sheet> createNWerewolf(List<Sheet> sheets) {
-        return null;
+    private Sheet createNWerewolf() {
+        return createCharacterSheet(modules);
     }
 
-    private List<Sheet> createNMummy(List<Sheet> sheets) {
-        return null;
+    private Sheet createNMummy() {
+        return createCharacterSheet(modules);
     }
 
-    private List<Sheet> createNDemon(List<Sheet> sheets) {
-        return null;
+    private Sheet createNDemon() {
+        return createCharacterSheet(modules);
     }
 
-    private List<Sheet> createScion(List<Sheet> sheets) {
-        return null;
+    private Sheet createScion() {
+        return createCharacterSheet(modules);
     }
 
-    private List<Sheet> createTrinity(List<Sheet> sheets) {
-        return null;
+    private Sheet createTrinity() {
+        return createCharacterSheet(modules);
     }
 
-    private List<Sheet> createExalted(List<Sheet> sheets) {
-        return null;
+    private Sheet createExalted() {
+        return createCharacterSheet(modules);
     }
+
+
+
 
     private Sheet createCharacterSheet(List<Module> modules){
         Sheet sheet = new Sheet();
         sheet.setTitle(getString(R.string.character_sheet));
         sheet.setModules(modules);
         return sheet;
+    }
+
+    private void addCWodAttributes(){
+        modules.add(new HeaderModule(getString(R.string.attributes), spanCount));
+        modules.add(new StatBlockModule(getArray(R.array.CWod_Physical), 1, 5, getString(R.string.physical)));
+        modules.add(new StatBlockModule(getArray(R.array.CWod_Social), 1, 5, getString(R.string.social)));
+        modules.add(new StatBlockModule(getArray(R.array.CWod_Mental), 1, 5, getString(R.string.mental)));
+    }
+
+    private void addCWodAbilities(int talents, int skills, int knowledges){
+        modules.add(new HeaderModule(getString(R.string.abilities), spanCount));
+        modules.add(new StatBlockModule(getArray(talents), 0, 5, getString(R.string.talents)));
+        modules.add(new StatBlockModule(getArray(skills), 0, 5, getString(R.string.skills)));
+        modules.add(new StatBlockModule(getArray(knowledges), 0, 5, getString(R.string.knowledges)));
+    }
+
+    private List<Stat> getCWodHealthLevels(){
+        List<Stat> stats = new ArrayList<>();
+        String[] injuries = getArray(R.array.CWod_Health_Levels);
+        int[] levels = context.getResources().getIntArray(R.array.CWod_Health_Penalties);
+        for(int i = 0; i< injuries.length; i++) stats.add(new Stat(injuries[i], levels[i]));
+        return stats;
     }
 
 

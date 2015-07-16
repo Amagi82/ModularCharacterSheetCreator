@@ -272,13 +272,17 @@
         <item>Politics</item>
         <item>Science</item>
     </string-array>
-    <string-array name="CMage_Spheres">
+    <string-array name="CMage_Spheres_Left">
         <item>Correspondence</item>
         <item>Entropy</item>
         <item>Forces</item>
+    </string-array>
+    <string-array name="CMage_Spheres_Center">
         <item>Life</item>
         <item>Matter</item>
         <item>Mind</item>
+    </string-array>
+    <string-array name="CMage_Spheres_Right">
         <item>Prime</item>
         <item>Spirit</item>
         <item>Time</item>
