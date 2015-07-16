@@ -24,7 +24,6 @@ import amagi82.modularcharactersheetcreator.models.modules.Stat;
 import amagi82.modularcharactersheetcreator.models.modules.StatBlockModule;
 import amagi82.modularcharactersheetcreator.models.modules.StatusModule;
 import amagi82.modularcharactersheetcreator.models.modules.TitleTextBlockModule;
-import amagi82.modularcharactersheetcreator.widgets.StatRatingBar;
 
 public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
 
@@ -106,11 +105,11 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     private void bind(ModuleHealthViewHolder vh, HealthModule module) {
         if (module.isDamaged())
             vh.tvDamageLevel.setText(module.getCurrentHealth().getCategory());
-        vh.tvPenalty.setText((module.isDamaged() ? module.getCurrentHealth().getValue() + " " + res.getString(R.string.dice) : ""));
-        vh.statBar.setMaxRating(module.getHealthLevels().size());
-        vh.statBar.setHealthAgg(module.getDamageAgg());
-        vh.statBar.setHealthLethal(module.getDamageLethal());
-        vh.statBar.setHealthBashing(module.getDamageBashing());
+        vh.tvPenalty.setText(res.getQuantityString(R.plurals.dice_penalty, module.getCurrentHealth().getValue()));
+        vh.statBar.setNumStars(module.getHealthLevels().size());
+//        vh.statBar.setHealthAgg(module.getDamageAgg());
+//        vh.statBar.setHealthLethal(module.getDamageLethal());
+//        vh.statBar.setHealthBashing(module.getDamageBashing());
     }
 
     private void bind(ModuleBlockViewHolder vh, StatBlockModule module) {
@@ -121,10 +120,9 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     }
 
     private void bind(ModuleStatusViewHolder vh, StatusModule module) {
-        vh.statRatingBar.setBarType(module.isCircle() ? StatRatingBar.BarType.CIRCLE : StatRatingBar.BarType.SQUARE);
-        vh.statRatingBar.setNumStars(module.getNumStars());
-        vh.statRatingBar.setMaxRating(module.getValueMax());
-        vh.statRatingBar.setRating(module.getValue());
+        vh.statBar.setNumStars(module.getNumStars());
+        vh.statBar.setRatingMax(module.getValueMax());
+        vh.statBar.setRating(module.getValue());
     }
 
     private void bind(ModuleBlockViewHolder vh, TitleTextBlockModule module) {

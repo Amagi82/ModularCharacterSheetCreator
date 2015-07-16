@@ -10,7 +10,6 @@ public class StatusModule extends Module {
     @JsonField private int value;
     @JsonField private int valueMax;
     @JsonField private int numStars;
-    @JsonField private boolean circle;
 
     public StatusModule() {
         super(Type.STATUS);
@@ -61,14 +60,4 @@ public class StatusModule extends Module {
         this.numStars = numStars;
     }
 
-    public boolean isCircle() {
-        return circle;
-    }
-    public boolean getCircle(){
-        return circle;
-    }
-
-    public void setCircle(boolean circle) {
-        this.circle = circle;
-    }
 }

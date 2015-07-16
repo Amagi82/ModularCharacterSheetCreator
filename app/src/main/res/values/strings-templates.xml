@@ -6,7 +6,6 @@
     <string name="demeanor">Demeanor</string>
     <string name="essence">Essence</string>
     <string name="affiliation">Affiliation</string>
-    <string name="clan">Clan</string>
     <string name="generation">Generation</string>
     <string name="sire">Sire</string>
     <string name="breed">Breed</string>
@@ -84,11 +83,6 @@
     <string name="pathos">Pathos</string>
     <string name="fetters">Fetters</string>
     <!--Exalted-specific-->
-    <string name="dawn">Dawn</string>
-    <string name="zenith">Zenith</string>
-    <string name="twilight">Twilight</string>
-    <string name="night">Night</string>
-    <string name="eclipse">Eclipse</string>
     <string name="specialties">Specialties</string>
     <string name="charms">Charms</string>
     <string name="weapons">Weapons</string>
@@ -101,6 +95,9 @@
     <string name="personal">Personal</string>
     <string name="peripheral">Peripheral</string>
     <string name="committed">Committed</string>
+    <string name="incapacitated">Incapacitated</string>
+    <string name="evade">Evade</string>
+    <string name="parry">Parry</string>
     <!--NDemon-specific-->
     <string name="merits">Merits</string>
     <string name="cover">Cover</string>
@@ -172,15 +169,15 @@
         <item>Crippled</item>
         <item>Incapacitated</item>
     </string-array>
-    <string-array name="CWod_Health_Penalties">
-        <item>null</item>
-        <item>-1 Die</item>
-        <item>-1 Die</item>
-        <item>-2 Dice</item>
-        <item>-2 Dice</item>
-        <item>-5 Dice</item>
-        <item>null</item>
-    </string-array>
+    <integer-array name="CWod_Health_Penalties">
+        <item>0</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-2</item>
+        <item>-2</item>
+        <item>-5</item>
+        <item>0</item>
+    </integer-array>
 
     <!--Generic NWod-->
     <string-array name="NWod_Attribute_Titles">
@@ -455,12 +452,15 @@
         <item>Medicine</item>
         <item>Occult</item>
     </string-array>
-    <string-array name="Exalted_Health">
-        <item>Incapacitated</item>
-        <item>Evade</item>
-        <item>Parry</item>
-        <item>Mental</item>
-    </string-array>
+    <integer-array name="Exalted_Health_Penalties">
+        <item>0</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-2</item>
+        <item>-2</item>
+        <item>-4</item>
+        <item>0</item>
+    </integer-array>
 
 
 
@@ -835,13 +835,13 @@
         <item>Crippled</item>
         <item>Incapacitated</item>
     </string-array>
-    <string-array name="Trinity_Health_Penalties">
-        <item>null</item>
-        <item>-1 Die</item>
-        <item>-1 Die</item>
-        <item>-2 Dice</item>
-        <item>-3 Dice</item>
-        <item>-4 Dice</item>
-        <item>null</item>
-    </string-array>
+    <integer-array name="Trinity_Health_Penalties">
+        <item>0</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-2</item>
+        <item>-3</item>
+        <item>-4</item>
+        <item>0</item>
+    </integer-array>
 </resources>

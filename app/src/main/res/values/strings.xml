@@ -1,8 +1,11 @@
 <resources>
     <item name="container_id" type="id">12345</item>
     <string name="app_name">Onyx Path</string>
-    <string name="deleted_count">%1$s deleted</string>
-    <string name="selected_count">%1$s selected</string>
+    <plurals name="dice_penalty">
+        <item quantity="zero"> </item>
+        <item quantity="one">%d Die</item>
+        <item quantity="other">%d Dice</item>
+    </plurals>
 
     <!--Action menu-->
     <string name="action_delete">Delete</string>
@@ -36,18 +39,14 @@
     <string name="skip">Skip</string>
 
     <!--Modules-->
-    <string name="blood_per_turn">Blood Per Turn:</string>
-    <string name="blood_pool">Blood Pool</string>
     <string name="color">Color</string>
     <string name="gain_blood">Gain blood</string>
     <string name="heal_damage">Heal damage</string>
-    <string name="health">Health</string>
     <string name="spend_blood">Spend blood</string>
     <string name="take_agg_damage">Take agg damage</string>
     <string name="take_bashing_damage">Take bashing damage</string>
     <string name="take_lethal_damage">Take lethal damage</string>
     <string name="width">Width</string>
-    <string name="willpower">Willpower</string>
 
     <!--Sheet titles-->
     <string name="character_sheet">Character Sheet</string>
@@ -57,6 +56,5 @@
     <string name="choose_width">Choose module width</string>
     <string name="templates">Templates</string>
     <string name="action_save_template">Save template</string>
-    <string name="bloodpool">Blood Pool</string>
 
 </resources>

@@ -59,7 +59,7 @@ public class Template {
 
     private List<Sheet> createCMage(List<Sheet> sheets){
         List<Module> modules = new ArrayList<>();
-        modules.add(new StatBlockModule(getArray(R.array.CMage_Physical), 1, 5, getString(R.string.physical), true));
+        modules.add(new StatBlockModule(getArray(R.array.CWod_Physical), 1, 5, getString(R.string.physical), true));
 
 
         sheets.add(createCharacterSheet(modules));
