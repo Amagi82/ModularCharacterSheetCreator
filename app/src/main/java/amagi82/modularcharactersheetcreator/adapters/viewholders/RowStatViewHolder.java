@@ -4,7 +4,6 @@ import android.view.View;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.widgets.RoundedStatBar;
-import amagi82.modularcharactersheetcreator.widgets.StatRatingBar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 

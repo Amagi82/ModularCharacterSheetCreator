@@ -1,38 +1,5 @@
 <resources>
 
-    <!--Sections below used in GameCharactersFragment -->
-    <style name="IconNewCharacter" parent="IconNewCharacter_Base"/>
-
-    <style name="IconNewCharacter_Base">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">@dimen/default_icon_padding</item>
-    </style>
-
-    <style name="EditTextNewCharacter" parent="EditTextNewCharacter_Base"/>
-
-    <style name="EditTextNewCharacter_Base" parent="Widget.AppCompat.EditText">
-        <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_marginLeft">@dimen/default_keyline_padded_layout</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:inputType">textNoSuggestions</item>
-        <item name="android:paddingBottom">@dimen/default_margin</item>
-        <item name="android:paddingTop">@dimen/default_margin</item>
-    </style>
-
-    <style name="SpinnerNewCharacter" parent="SpinnerNewCharacter_Base"/>
-
-    <style name="SpinnerNewCharacter_Base" parent="Widget.AppCompat.Spinner.Underlined">
-        <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_marginLeft">@dimen/default_keyline_padded_layout</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingBottom">@dimen/default_margin</item>
-        <item name="android:paddingTop">@dimen/default_margin</item>
-        <item name="android:layout_marginBottom">@dimen/default_small_margin</item>
-    </style>
-
     <style name="Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/divider</item>
@@ -46,16 +13,6 @@
         <item name="android:layout_alignParentBottom">true</item>
     </style>
 
-    <style name="ActionButton" parent="ActionButton_Base"/>
-
-    <style name="ActionButton_Base" parent="Widget.AppCompat.ActionButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingRight">@dimen/default_large_margin</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <!--Sections below used for Cards -->
     <style name="Card">
         <item name="android:layout_margin">@dimen/card_margin</item>
         <item name="android:layout_width">match_parent</item>
@@ -78,7 +35,7 @@
         <item name="android:gravity">center_horizontal</item>
     </style>
 
-    <style name="TextTitle_Padded" parent="TextTitle">
+    <style name="TextTitle.Padded">
         <item name="android:paddingTop">@dimen/default_large_margin</item>
         <item name="android:paddingLeft">@dimen/default_margin</item>
         <item name="android:paddingRight">@dimen/default_margin</item>
@@ -90,27 +47,7 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="TextBody_Column" parent="TextBody">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">3</item>
-        <item name="android:singleLine">true</item>
-    </style>
-
-    <style name="TextCaption" parent="Base.TextAppearance.AppCompat.Caption">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textStyle">italic</item>
-    </style>
-
-    <style name="TextCaption_Column" parent="TextCaption">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">2</item>
-        <item name="android:paddingLeft">@dimen/default_small_margin</item>
-        <item name="android:paddingRight">@dimen/default_small_margin</item>
-        <item name="android:singleLine">true</item>
-    </style>
-
-    <style name="TextBody_Padded" parent="TextBody">
+    <style name="TextBody.Padded">
         <item name="android:layout_width">match_parent</item>
         <item name="android:paddingTop">@dimen/default_small_margin</item>
         <item name="android:paddingLeft">@dimen/default_margin</item>
@@ -118,34 +55,11 @@
         <item name="android:paddingBottom">@dimen/default_large_margin</item>
     </style>
 
-    <style name="LinearLayoutWodRow">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:paddingBottom">@dimen/default_tiny_margin</item>
-        <item name="android:paddingTop">@dimen/default_tiny_margin</item>
-    </style>
-
-    <style name="StatRatingBar_Column" parent="StatRatingBar">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">2</item>
-        <item name="android:paddingTop">0dp</item>
-    </style>
-
-    <style name="StatRatingBar">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:isIndicator">true</item>
-        <item name="android:paddingTop">@dimen/default_small_margin</item>
-    </style>
-
     <style name="StatRatingBarTen">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:numStars">10</item>
-        <item name="android:paddingBottom">@dimen/default_margin</item>
     </style>
 
     <style name="LinearLayoutWodCardBlock">
@@ -156,15 +70,6 @@
         <item name="android:paddingLeft">@dimen/default_margin</item>
         <item name="android:paddingRight">@dimen/default_margin</item>
         <item name="android:paddingBottom">@dimen/default_margin</item>
-    </style>
-
-    <style name="Icon">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">@dimen/default_icon_padding</item>
-        <item name="android:layout_marginLeft">@dimen/default_small_margin</item>
-        <item name="android:layout_marginRight">@dimen/default_small_margin</item>
-        <item name="android:layout_marginTop">@dimen/default_small_margin</item>
     </style>
 
     <style name="CircleIcon">
@@ -196,6 +101,56 @@
 
     <style name="CircleIconCaption.Small">
         <item name="android:layout_width">@dimen/character_choice_caption_size_small</item>
+    </style>
+
+    <style name="Fab">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">end|bottom</item>
+        <item name="android:layout_margin">@dimen/fab_margin</item>
+    </style>
+
+    <style name="CircleIcon.Small.Sheet">
+        <item name="android:layout_marginTop">@dimen/sheet_icon_margin_top</item>
+    </style>
+
+    <style name="CircleIconCaption.Small.Sheet">
+        <item name="android:layout_marginTop">@dimen/sheet_text_margin_top</item>
+    </style>
+
+    <style name="RecyclerView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
+    <style name="CharacterItemText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">@dimen/default_margin</item>
+    </style>
+
+    <style name="CharacterItemText.Right">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginLeft">@dimen/default_margin</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="HealthModuleText" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/statBar</item>
+        <item name="android:layout_marginBottom">@dimen/default_margin</item>
+        <item name="android:layout_marginLeft">@dimen/default_margin</item>
+        <item name="android:layout_marginRight">@dimen/default_margin</item>
+    </style>
+
+    <style name="HealthModuleIcon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/default_icon_padding</item>
+        <item name="android:layout_margin">@dimen/default_small_margin</item>
+        <item name="android:layout_below">@id/tvDamageLevel</item>
     </style>
 
 </resources>

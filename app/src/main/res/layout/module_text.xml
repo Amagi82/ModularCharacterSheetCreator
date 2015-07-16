@@ -13,12 +13,12 @@
 
         <TextView
             android:id="@+id/tvTitle"
-            style="@style/TextTitle_Padded"
+            style="@style/TextTitle.Padded"
             tools:text="Title"/>
 
         <TextView
             android:id="@+id/tvText"
-            style="@style/TextBody_Padded"
+            style="@style/TextBody.Padded"
             tools:text="Description"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>

@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.widget.FrameLayout;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 import com.colintmiller.simplenosql.DataComparator;

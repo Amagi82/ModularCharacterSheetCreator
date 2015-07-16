@@ -6,8 +6,6 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
 
 import java.util.List;
 
-import amagi82.modularcharactersheetcreator.R;
-
 /*
     Module with bold title on the left and normal text beside it. Used for basic character info, like "Name: Black Widow"
  */
@@ -26,9 +24,5 @@ public class TitleTextBlockModule extends Module {
 
     public void setStats(List<Stat> stats) {
         this.stats = stats;
-    }
-
-    public int getRowLayoutId() {
-        return R.layout.row_boldtext_text;
     }
 }

@@ -99,7 +99,7 @@ public class Game {
     }
 
     public enum Category {
-        CWOD, NWOD, DEFAULT;
+        CWOD, NWOD, DEFAULT
     }
 
     public Game() {

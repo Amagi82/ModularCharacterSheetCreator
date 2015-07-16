@@ -105,7 +105,7 @@ public class CVampire extends Onyx {
     }
 
     private enum Member {
-        YES, OPTIONAL, NO, BLOODLINE;
+        YES, OPTIONAL, NO, BLOODLINE
     }
 
     private Sect sect;
