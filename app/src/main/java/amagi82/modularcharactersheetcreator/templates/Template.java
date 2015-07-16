@@ -59,7 +59,8 @@ public class Template {
 
     private List<Sheet> createCMage(List<Sheet> sheets){
         List<Module> modules = new ArrayList<>();
-        modules.add(new StatBlockModule(getArray(R.array.CWod_Physical), 1, 5, getString(R.string.physical), true));
+        modules.add(new StatBlockModule(getArray(R.array.CWod_Physical), 1, 5, getString(R.string.physical)));
+
 
 
         sheets.add(createCharacterSheet(modules));
@@ -110,6 +111,7 @@ public class Template {
         Sheet sheet = new Sheet();
         sheet.setTitle(getString(R.string.character_sheet));
         sheet.setModules(modules);
+        sheet.setCompact(isCompactRequired());
         return sheet;
     }
 
@@ -131,11 +133,15 @@ public class Template {
     }
 
     private StatBlockModule addStatBlock(List<Stat> stats, String category, boolean compact){
-        return new StatBlockModule(stats, category, compact);
+        return new StatBlockModule(stats, category);
     }
 
     private StatusModule addStatus(String title){
         return new StatusModule(title);
+    }
+
+    private boolean isCompactRequired(){
+        return context.getResources().getConfiguration().smallestScreenWidthDp < 200;
     }
 
     private String getString(int id){
@@ -145,5 +151,4 @@ public class Template {
     private String[] getArray(int id){
         return context.getResources().getStringArray(id);
     }
-
 }

@@ -30,6 +30,7 @@ public class RoundedStatBar extends RatingBar {
     private int colorBorderInactive;
     private int textColor;
     private float textSize;
+    private float textSizeSpecialty;
     //    private int healthBashing = 0;
 //    private int healthLethal = 0;
 //    private int healthAgg = 0;
@@ -80,15 +81,22 @@ public class RoundedStatBar extends RatingBar {
 
     @Override
     protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int width = MeasureSpec.getSize(widthMeasureSpec);
-        int height;
-        int desiredHeight = getResources().getDimensionPixelSize(R.dimen.round_stat_bar_height) + (specialty == null ? 0 : (int) textSize + getPaddingBottom());
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
 
+        int height;
+        int desiredHeight = getResources().getDimensionPixelSize(R.dimen.round_stat_bar_height) + (specialty == null ? 0 : (int) textSize + getPaddingBottom());
         if (heightMode == MeasureSpec.EXACTLY) height = heightSize;
         else if (heightMode == MeasureSpec.AT_MOST) height = Math.min(heightSize, desiredHeight);
         else height = desiredHeight;
+
+        int width;
+        int desiredWidth = height * getNumStars();
+        if (widthMode == MeasureSpec.EXACTLY) width = widthSize;
+        else if (widthMode == MeasureSpec.AT_MOST) width = Math.min(widthSize, desiredWidth);
+        else width = desiredWidth;
 
         float averagePadding = (getPaddingLeft() + getPaddingRight()) / getNumStars();
         rect.set(gap, getPaddingTop(), (width / getNumStars()) - (gap + averagePadding), height - getPaddingBottom() -
@@ -99,7 +107,6 @@ public class RoundedStatBar extends RatingBar {
             yPosTitle = rect.centerY() + textPaint.descent();
             if (specialty != null) yPosSpecialty = height - textPaint.descent() - getPaddingBottom();
         }
-
         setMeasuredDimension(width, height);
     }
 
@@ -162,6 +169,7 @@ public class RoundedStatBar extends RatingBar {
             colorBorderInactive = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorderInactive, getResources().getColor(R.color.round_stat_bar_border_inactive));
             textColor = a.getColor(R.styleable.RoundedStatBar_rsb_textColor, getResources().getColor(R.color.white));
             textSize = a.getDimension(R.styleable.RoundedStatBar_rsb_textSize, getResources().getDimension(R.dimen.round_stat_bar_text_size));
+            textSizeSpecialty = a.getDimension(R.styleable.RoundedStatBar_rsb_textSizeSpecialty, getResources().getDimension(R.dimen.round_stat_bar_specialty_text_size));
             gap = a.getDimension(R.styleable.RoundedStatBar_rsb_gap, getResources().getDimension(R.dimen.round_stat_bar_gap));
             cornerRadius = a.getDimension(R.styleable.RoundedStatBar_rsb_cornerRadius, getResources().getDimension(R.dimen.round_stat_bar_corner_radius));
         } finally {
@@ -203,6 +211,10 @@ public class RoundedStatBar extends RatingBar {
 
     public void setTextSize(float textSize) {
         this.textSize = textSize;
+    }
+
+    public void setTextSizeSpecialty(float textSizeSpecialty) {
+        this.textSizeSpecialty = textSizeSpecialty;
     }
 
     public void setGap(float gap) {

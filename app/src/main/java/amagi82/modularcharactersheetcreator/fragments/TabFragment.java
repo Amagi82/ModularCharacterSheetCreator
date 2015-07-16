@@ -43,7 +43,7 @@ public class TabFragment extends Fragment {
         StaggeredGridLayoutManager staggeredGrid = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
         staggeredGrid.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         recyclerView.setLayoutManager(staggeredGrid);
-        adapter = new SheetAdapter(getResources(), modules);
+        adapter = new SheetAdapter(getResources(), sheet);
         recyclerView.setAdapter(adapter);
         return rootView;
     }

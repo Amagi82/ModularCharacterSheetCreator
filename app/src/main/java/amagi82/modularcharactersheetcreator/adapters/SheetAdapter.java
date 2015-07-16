@@ -17,6 +17,7 @@ import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleStatusVie
 import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleViewHolder;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.RowStatViewHolder;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.RowViewHolder;
+import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.modules.BloodPoolModule;
 import amagi82.modularcharactersheetcreator.models.modules.HealthModule;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
@@ -28,11 +29,13 @@ import amagi82.modularcharactersheetcreator.models.modules.TitleTextBlockModule;
 public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
 
     private Resources res;
+    private Sheet sheet;
     private List<Module> modules;
 
-    public SheetAdapter(Resources res, List<Module> modules) {
+    public SheetAdapter(Resources res, Sheet sheet) {
         this.res = res;
-        this.modules = modules;
+        this.sheet = sheet;
+        modules = sheet.getModules();
     }
 
     @Override
@@ -114,7 +117,8 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
 
     private void bind(ModuleBlockViewHolder vh, StatBlockModule module) {
         for (Stat stat : module.getStats()) {
-            RowStatViewHolder rowStatViewHolder = createChildViewHolder(vh.linearLayout, module.getRowLayoutId());
+            RowStatViewHolder rowStatViewHolder = createChildViewHolder(vh.linearLayout, sheet.isCompact()?
+                    R.layout.row_stat_compact : R.layout.row_stat_compact);
             bindChild(rowStatViewHolder, stat);
         }
     }
