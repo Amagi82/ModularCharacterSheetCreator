@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<amagi82.modularcharactersheetcreator.widgets.RoundedStatBar
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/statBar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/default_tiny_margin"
-    android:layout_marginTop="@dimen/default_tiny_margin" />

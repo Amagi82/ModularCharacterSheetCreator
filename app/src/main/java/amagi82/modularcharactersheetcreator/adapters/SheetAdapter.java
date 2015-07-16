@@ -4,6 +4,7 @@ package amagi82.modularcharactersheetcreator.adapters;
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -17,7 +18,6 @@ import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleStatusVie
 import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleViewHolder;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.RowStatViewHolder;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.RowViewHolder;
-import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.modules.BloodPoolModule;
 import amagi82.modularcharactersheetcreator.models.modules.HealthModule;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
@@ -29,13 +29,11 @@ import amagi82.modularcharactersheetcreator.models.modules.TitleTextBlockModule;
 public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
 
     private Resources res;
-    private Sheet sheet;
     private List<Module> modules;
 
-    public SheetAdapter(Resources res, Sheet sheet) {
+    public SheetAdapter(Resources res, List<Module> modules) {
         this.res = res;
-        this.sheet = sheet;
-        modules = sheet.getModules();
+        this.modules = modules;
     }
 
     @Override
@@ -117,8 +115,7 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
 
     private void bind(ModuleBlockViewHolder vh, StatBlockModule module) {
         for (Stat stat : module.getStats()) {
-            RowStatViewHolder rowStatViewHolder = createChildViewHolder(vh.linearLayout, sheet.isCompact()?
-                    R.layout.row_stat_compact : R.layout.row_stat_compact);
+            RowStatViewHolder rowStatViewHolder = createChildViewHolder(vh.linearLayout, R.layout.row_stat);
             bindChild(rowStatViewHolder, stat);
         }
     }
@@ -139,7 +136,10 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     private void bindChild(RowStatViewHolder vh, Stat stat) {
         if (vh.tvCategory != null) {
             vh.tvCategory.setText(stat.getCategory());
-            if (vh.tvText != null) vh.tvText.setText(stat.getSpecialty());
+            if (vh.tvText != null) {
+                vh.tvText.setVisibility(View.VISIBLE);
+                vh.tvText.setText(stat.getSpecialty());
+            }
         } else {
             vh.statBar.setTitle(stat.getCategory());
             vh.statBar.setSpecialty(stat.getSpecialty());

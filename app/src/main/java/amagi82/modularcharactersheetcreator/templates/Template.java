@@ -111,7 +111,6 @@ public class Template {
         Sheet sheet = new Sheet();
         sheet.setTitle(getString(R.string.character_sheet));
         sheet.setModules(modules);
-        sheet.setCompact(isCompactRequired());
         return sheet;
     }
 
@@ -138,10 +137,6 @@ public class Template {
 
     private StatusModule addStatus(String title){
         return new StatusModule(title);
-    }
-
-    private boolean isCompactRequired(){
-        return context.getResources().getConfiguration().smallestScreenWidthDp < 200;
     }
 
     private String getString(int id){

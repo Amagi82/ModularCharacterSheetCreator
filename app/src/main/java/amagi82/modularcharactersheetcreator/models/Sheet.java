@@ -14,7 +14,6 @@ public class Sheet {
     @JsonField private String title = "";
     @JsonField private int numColumns = 3;
     @JsonField private List<Module> modules = new ArrayList<>();
-    @JsonField private boolean compact = false;
 
     public Sheet() {
     }
@@ -41,13 +40,5 @@ public class Sheet {
 
     public void setNumColumns(int numColumns) {
         this.numColumns = numColumns;
-    }
-
-    public boolean isCompact() {
-        return compact;
-    }
-
-    public void setCompact(boolean compact) {
-        this.compact = compact;
     }
 }
