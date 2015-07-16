@@ -1,51 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="dice">dice</string>
+
+    <!--Top-->
+    <string name="nature">Nature</string>
+    <string name="demeanor">Demeanor</string>
+    <string name="essence">Essence</string>
+    <string name="affiliation">Affiliation</string>
+    <string name="clan">Clan</string>
+    <string name="generation">Generation</string>
+    <string name="sire">Sire</string>
+    <string name="breed">Breed</string>
+    <string name="pack_name">Pack Name</string>
+    <string name="pack_totem">Pack Totem</string>
+    <string name="shadow">Shadow</string>
+    <string name="life">Life</string>
+    <string name="death">Death</string>
+    <string name="regret">Regret</string>
+    <string name="motivation">Motivation</string>
+    <string name="anima">Anima</string>
+    <string name="virtue">Virtue</string>
+    <string name="vice">Vice</string>
+    <string name="catalyst">Catalyst</string>
+    <string name="judge">Judge</string>
+    <string name="mask">Mask</string>
+    <string name="dirge">Dirge</string>
+    <string name="bloodline">Bloodline</string>
+    <string name="blood">Blood</string>
+    <string name="bone">Bone</string>
+    <string name="lodge">Lodge</string>
+    <string name="calling">Calling</string>
+    <string name="birth_name">Birth Name</string>
+    <string name="nova_name">Nova Name</string>
+    <string name="allegiance">Allegiance</string>
+    <string name="eruption">Eruption</string>
+    <string name="series">Series</string>
+    <string name="inspiration">Inspiration</string>
+    <string name="origin">Origin</string>
+    <string name="aptitude">Aptitude</string>
+
+    <!--Headers-->
+    <string name="attributes">Attributes</string>
+    <string name="abilities">Abilities</string>
+    <string name="advantages">Advantages</string>
+    <string name="spheres">Spheres</string>
+    <string name="other_merits">Other Merits</string>
+    <string name="attributes_and_abilities">Attributes &amp; Abilities</string>
+
+    <!--Titles-->
+    <string name="physical">Physical</string>
+    <string name="social">Social</string>
+    <string name="mental">Mental</string>
+    <string name="talents">Talents</string>
+    <string name="skills">Skills</string>
+    <string name="knowledges">Knowledges</string>
+    <string name="backgrounds">Backgroudns</string>
+    <string name="willpower">Willpower</string>
+    <string name="health">Health</string>
+    <string name="experience">Experience</string>
+    <!--CMage-specific-->
+    <string name="arete">Arete</string>
+    <string name="quintessence">Quintessence</string>
+    <string name="paradox">Paradox</string>
+    <!--CVampire-specific-->
+    <string name="virtues">Virtues</string>
+    <string name="humanity">Humanity</string>
+    <string name="path">Path</string>
+    <string name="blood_pool">Blood Pool</string>
+    <string name="weakness">Weakness</string>
+    <string name="blood_per_turn">Blood Per Turn:</string>
+    <!--CWerewolf-specific-->
+    <string name="gifts">Gifts</string>
+    <string name="renown">Renown</string>
+    <string name="glory">Glory</string>
+    <string name="honor">Honor</string>
+    <string name="wisdom">Wisdom</string>
+    <string name="rank">Rank</string>
+    <string name="rage">Rage</string>
+    <string name="gnosis">Gnosis</string>
+    <!--CWraith-specific-->
+    <string name="passions">Passions</string>
+    <string name="arcanoi">Arcanoi</string>
+    <string name="corpus">Corpus</string>
+    <string name="pathos">Pathos</string>
+    <string name="fetters">Fetters</string>
+    <!--Exalted-specific-->
+    <string name="dawn">Dawn</string>
+    <string name="zenith">Zenith</string>
+    <string name="twilight">Twilight</string>
+    <string name="night">Night</string>
+    <string name="eclipse">Eclipse</string>
+    <string name="specialties">Specialties</string>
+    <string name="charms">Charms</string>
+    <string name="weapons">Weapons</string>
+    <string name="limit_break">Limit Break</string>
+    <string name="virtue_flaw">Virtue Flaw</string>
+    <string name="compassion">Compassion</string>
+    <string name="temperance">Temperance</string>
+    <string name="conviction">Conviction</string>
+    <string name="valor">Valor</string>
+    <string name="personal">Personal</string>
+    <string name="peripheral">Peripheral</string>
+    <string name="committed">Committed</string>
+    <!--NDemon-specific-->
+    <string name="merits">Merits</string>
+    <string name="cover">Cover</string>
+    <string name="primum">Primum</string>
+    <string name="aether">Aether</string>
+    <string name="conditions">Conditions</string>
+    <string name="aspirations">Aspirations</string>
+    <!--NMummy-specific-->
+    <string name="flaws">Flaws</string>
+    <string name="pillars">Pillars</string>
+    <string name="affinities">Affinities</string>
+    <string name="sekhem">Sekhem</string>
+    <string name="memory">Memory</string>
+    <string name="utterances">Utterances</string>
+    <!--NVampire-specific-->
+    <string name="banes">Banes</string>
+    <string name="blood_potency">Blood Potency</string>
+    <string name="vitae">Vitae</string>
+    <!--NWerewolf-specific-->
+    <string name="primal_urge">Primal Urge</string>
+    <string name="flesh_touchstone">Flesh Touchstone</string>
+    <string name="harmony">Harmony</string>
+    <string name="spirit_touchstone">Spirit Touchstone</string>
+    <string name="kuruth_triggers">Kuruth Triggers</string>
+    <!--Scion-specific-->
+    <string name="birthrights">Birthrights</string>
+    <string name="boons">Boons</string>
+    <string name="combat">Combat</string>
+    <string name="knacks">Knacks</string>
+    <string name="soak">Soak</string>
+    <string name="armor">Armor</string>
+    <string name="legend">Legend</string>
+    <!--Trinity-specific-->
+    <string name="quantum_powers">Quantum Powers</string>
+    <string name="taint">Taint</string>
+    <string name="quantum">Quantum</string>
+    <string name="quantum_pool">Quantum Pool</string>
+    <string name="extra">Extra</string>
+    <string name="level">Level</string>
+    <string name="movement">Movement</string>
+    <string name="psi">Psi</string>
+    <string name="possessions">Possessions</string>
+    <string name="initiative">Initiative</string>
+    <string name="background_info">Background Information</string>
 
 
-    <string-array name="CMage_Top">
-        <item>Nature</item>
-        <item>Demeanor</item>
-        <item>Essence</item>
-        <item>Affiliation</item>
-    </string-array>
-    <string-array name="CMage_Headers">
-        <item>Attributes</item>
-        <item>Abilities</item>
-        <item>Spheres</item>
-        <item>Advantages</item>
-    </string-array>
-    <string-array name="CMage_Titles">
-        <item>Physical</item>
-        <item>Social</item>
-        <item>Mental</item>
-        <item>Talents</item>
-        <item>Skills</item>
-        <item>Knowledges</item>
-        <item>Backgrounds</item>
-        <item>Other Traits</item>
-        <item>Arete</item>
-        <item>Willpower</item>
-        <item>Quintessence</item>
-        <item>Paradox</item>
-        <item>Health</item>
-        <item>Experience</item>
-    </string-array>
-    <string-array name="CMage_Physical">
+    <!--Generic CWoD-->
+    <string-array name="CWod_Physical">
         <item>Strength</item>
         <item>Dexterity</item>
         <item>Stamina</item>
     </string-array>
-    <string-array name="CMage_Social">
+    <string-array name="CWod_Social">
         <item>Charisma</item>
         <item>Manipulation</item>
         <item>Appearance</item>
     </string-array>
-    <string-array name="CMage_Mental">
+    <string-array name="CWod_Mental">
         <item>Perception</item>
         <item>Intelligence</item>
         <item>Wits</item>
     </string-array>
+    <string-array name="CWod_Health_Levels">
+        <item>Bruised</item>
+        <item>Hurt</item>
+        <item>Injured</item>
+        <item>Wounded</item>
+        <item>Mauled</item>
+        <item>Crippled</item>
+        <item>Incapacitated</item>
+    </string-array>
+    <string-array name="CWod_Health_Penalties">
+        <item>null</item>
+        <item>-1 Die</item>
+        <item>-1 Die</item>
+        <item>-2 Dice</item>
+        <item>-2 Dice</item>
+        <item>-5 Dice</item>
+        <item>null</item>
+    </string-array>
+
+    <!--Generic NWod-->
+    <string-array name="NWod_Attribute_Titles">
+        <item>Power</item>
+        <item>Finesse</item>
+        <item>Resistance</item>
+    </string-array>
+    <string-array name="NWod_Attributes_Left">
+        <item>Intelligence</item>
+        <item>Wits</item>
+        <item>Resolve</item>
+    </string-array>
+    <string-array name="NWod_Attributes_Center">
+        <item>Strength</item>
+        <item>Dexterity</item>
+        <item>Stamina</item>
+    </string-array>
+    <string-array name="NWod_Attributes_Right">
+        <item>Presence</item>
+        <item>Manipulation</item>
+        <item>Composure</item>
+    </string-array>
+    <string-array name="NWod_Mental">
+        <item>Academics</item>
+        <item>Computer</item>
+        <item>Crafts</item>
+        <item>Investigation</item>
+        <item>Medicine</item>
+        <item>Occult</item>
+        <item>Politics</item>
+        <item>Science</item>
+    </string-array>
+    <string-array name="NWod_Physical">
+        <item>Athletics</item>
+        <item>Brawl</item>
+        <item>Drive</item>
+        <item>Firearms</item>
+        <item>Larceny</item>
+        <item>Stealth</item>
+        <item>Survival</item>
+        <item>Weaponry</item>
+    </string-array>
+    <string-array name="NWod_Social">
+        <item>Animal Ken</item>
+        <item>Empathy</item>
+        <item>Expression</item>
+        <item>Intimidation</item>
+        <item>Persuasion</item>
+        <item>Socialize</item>
+        <item>Streetwise</item>
+        <item>Subterfuge</item>
+    </string-array>
+
+
+
     <string-array name="CMage_Talents">
         <item>Alertness</item>
         <item>Art</item>
@@ -96,61 +286,9 @@
         <item>Spirit</item>
         <item>Time</item>
     </string-array>
-    <string-array name="CMage_Health_Levels">
-        <item>Bruised</item>
-        <item>Hurt</item>
-        <item>Injured</item>
-        <item>Wounded</item>
-        <item>Mauled</item>
-        <item>Crippled</item>
-        <item>Incapacitated</item>
-    </string-array>
 
-    <string-array name="CVampire_Top">
-        <item>Nature</item>
-        <item>Demeanor</item>
-        <item>Clan</item>
-        <item>Generation</item>
-        <item>Sire</item>
-    </string-array>
-    <string-array name="CVampire_Headers">
-        <item>Attributes</item>
-        <item>Abilities</item>
-        <item>Advantages</item>
-    </string-array>
-    <string-array name="CVampire_Titles">
-        <item>Physical</item>
-        <item>Social</item>
-        <item>Mental</item>
-        <item>Talents</item>
-        <item>Skills</item>
-        <item>Knowledges</item>
-        <item>Disciplines</item>
-        <item>Backgrounds</item>
-        <item>Virtues</item>
-        <item>Humanity</item>
-        <item>Path</item>
-        <item>Willpower</item>
-        <item>Blood Pool</item>
-        <item>Health</item>
-        <item>Weakness</item>
-        <item>Experience</item>
-    </string-array>
-    <string-array name="CVampire_Physical">
-        <item>Strength</item>
-        <item>Dexterity</item>
-        <item>Stamina</item>
-    </string-array>
-    <string-array name="CVampire_Social">
-        <item>Charisma</item>
-        <item>Manipulation</item>
-        <item>Appearance</item>
-    </string-array>
-    <string-array name="CVampire_Mental">
-        <item>Perception</item>
-        <item>Intelligence</item>
-        <item>Wits</item>
-    </string-array>
+
+
     <string-array name="CVampire_Talents">
         <item>Alertness</item>
         <item>Athletics</item>
@@ -191,72 +329,18 @@
     <string-array name="CVampire_Backgrounds"></string-array>
     <string-array name="CVampire_Virtues">
         <item>Conscience</item>
-        <item>Conviction</item>
         <item>Self-Control</item>
-        <item>Instinct</item>
         <item>Courage</item>
     </string-array>
-    <string-array name="CVampire_Health_Levels">
-        <item>Bruised</item>
-        <item>Hurt</item>
-        <item>Injured</item>
-        <item>Wounded</item>
-        <item>Mauled</item>
-        <item>Crippled</item>
-        <item>Incapacitated</item>
-    </string-array>
 
-    <string-array name="CWerewolf_Top">
-        <item>Breed</item>
-        <item>Pack Name</item>
-        <item>Pack Totem</item>
-    </string-array>
-    <string-array name="CWerewolf_Headers">
-        <item>Attributes</item>
-        <item>Abilities</item>
-        <item>Advantages</item>
-    </string-array>
-    <string-array name="CWerewolf_Titles">
-        <item>Physical</item>
-        <item>Social</item>
-        <item>Mental</item>
-        <item>Talents</item>
-        <item>Skills</item>
-        <item>Knowledges</item>
-        <item>Backgrounds</item>
-        <item>Gifts</item>
-        <item>Renown</item>
-        <item>Glory</item>
-        <item>Honor</item>
-        <item>Wisdom</item>
-        <item>Rank</item>
-        <item>Rage</item>
-        <item>Gnosis</item>
-        <item>Willpower</item>
-        <item>Health</item>
-        <item>Experience</item>
-    </string-array>
+
+
     <string-array name="CWerewolf_Forms">
         <item>Homid</item>
         <item>Glabro</item>
         <item>Crinos</item>
         <item>Hispo</item>
         <item>Lupus</item>
-    </string-array>
-    <string-array name="CWerewolf_Physical">
-        <item>Strength</item>
-        <item>Dexterity</item>
-        <item>Stamina</item>
-    </string-array>
-    <string-array name="CWerewolf_Social">
-        <item>Charisma</item>
-        <item>Manipulation</item>
-        <item>Appearance</item>
-    </string-array>
-    <string-array name="CWerewolf_Mental">
-        <item>Perception</item>
-        <item>Intelligence</item>
-        <item>Wits</item>
     </string-array>
     <string-array name="CWerewolf_Talents">
         <item>Alertness</item>
@@ -294,60 +378,9 @@
         <item>Science</item>
         <item>Technology</item>
     </string-array>
-    <string-array name="CWerewolf_Health_Levels">
-        <item>Bruised</item>
-        <item>Hurt</item>
-        <item>Injured</item>
-        <item>Wounded</item>
-        <item>Mauled</item>
-        <item>Crippled</item>
-        <item>Incapacitated</item>
-    </string-array>
 
-    <string-array name="CWraith_Top">
-        <item>Nature</item>
-        <item>Demeanor</item>
-        <item>Shadow</item>
-        <item>Life</item>
-        <item>Death</item>
-        <item>Regret</item>
-    </string-array>
-    <string-array name="CWraith_Headers">
-        <item>Attributes</item>
-        <item>Abilities</item>
-        <item>Advantages</item>
-    </string-array>
-    <string-array name="CWraith_Titles">
-        <item>Physical</item>
-        <item>Social</item>
-        <item>Mental</item>
-        <item>Talents</item>
-        <item>Skills</item>
-        <item>Knowledges</item>
-        <item>Backgrounds</item>
-        <item>Passions</item>
-        <item>Arcanoi</item>
-        <item>Corpus</item>
-        <item>Willpower</item>
-        <item>Pathos</item>
-        <item>Fetters</item>
-        <item>Experience</item>
-    </string-array>
-    <string-array name="CWraith_Physical">
-        <item>Strength</item>
-        <item>Dexterity</item>
-        <item>Stamina</item>
-    </string-array>
-    <string-array name="CWraith_Social">
-        <item>Charisma</item>
-        <item>Manipulation</item>
-        <item>Appearance</item>
-    </string-array>
-    <string-array name="CWraith_Mental">
-        <item>Perception</item>
-        <item>Intelligence</item>
-        <item>Wits</item>
-    </string-array>
+
+
     <string-array name="CWraith_Talents">
         <item>Alertness</item>
         <item>Athletics</item>
@@ -385,52 +418,8 @@
         <item>Science</item>
     </string-array>
 
-    <string-array name="Exalted_Top">
-        <item>Motivation</item>
-        <item>Anima</item>
-    </string-array>
-    <string-array name="Exalted_Headers">
-        <item>Attributes</item>
-        <item>Abilities</item>
-        <item>Advantages</item>
-    </string-array>
-    <string-array name="Exalted_Titles">
-        <item>Dawn</item>
-        <item>Night</item>
-        <item>Zenith</item>
-        <item>Eclipse</item>
-        <item>Twilight</item>
-        <item>Specialties</item>
-        <item>Backgrounds</item>
-        <item>Charms</item>
-        <item>Weapons</item>
-        <item>Anima</item>
-        <item>Limit Break</item>
-        <item>Virtue Flaw</item>
-        <item>Willpower</item>
-        <item>Health</item>
-        <item>Virtues</item>
-        <item>Compassion</item>
-        <item>Conviction</item>
-        <item>Temperance</item>
-        <item>Valor</item>
-        <item>Essence</item>
-        <item>Personal</item>
-        <item>Peripheral</item>
-        <item>Committed</item>
-        <item>Experience</item>
-    </string-array>
-    <string-array name="Exalted_Attributes">
-        <item>Strength</item>
-        <item>Dexterity</item>
-        <item>Stamina</item>
-        <item>Charisma</item>
-        <item>Manipulation</item>
-        <item>Appearance</item>
-        <item>Perception</item>
-        <item>Intelligence</item>
-        <item>Wits</item>
-    </string-array>
+
+
     <string-array name="Exalted_Dawn">
         <item>Archery</item>
         <item>Martial Arts</item>
@@ -473,73 +462,8 @@
         <item>Mental</item>
     </string-array>
 
-    <string-array name="NDemon_Top">
-        <item>Virtue</item>
-        <item>Vice</item>
-        <item>Catalyst</item>
-    </string-array>
-    <string-array name="NDemon_Headers">
-        <item>Attributes</item>
-        <item>Skills</item>
-        <item>Other Merits</item>
-    </string-array>
-    <string-array name="NDemon_Titles">
-        <item>Power</item>
-        <item>Finesse</item>
-        <item>Resistance</item>
-        <item>Mental</item>
-        <item>Physical</item>
-        <item>Social</item>
-        <item>Merits</item>
-        <item>Health</item>
-        <item>Willpower</item>
-        <item>Cover</item>
-        <item>Primum</item>
-        <item>Aether</item>
-        <item>Conditions</item>
-        <item>Aspirations</item>
-    </string-array>
-    <string-array name="NDemon_Attributes">
-        <item>Intelligence</item>
-        <item>Strength</item>
-        <item>Presence</item>
-        <item>Wits</item>
-        <item>Dexterity</item>
-        <item>Manipulation</item>
-        <item>Resolve</item>
-        <item>Stamina</item>
-        <item>Composure</item>
-    </string-array>
-    <string-array name="NDemon_Mental">
-        <item>Academics</item>
-        <item>Computer</item>
-        <item>Crafts</item>
-        <item>Investigation</item>
-        <item>Medicine</item>
-        <item>Occult</item>
-        <item>Politics</item>
-        <item>Science</item>
-    </string-array>
-    <string-array name="NDemon_Physical">
-        <item>Athletics</item>
-        <item>Brawl</item>
-        <item>Drive</item>
-        <item>Firearms</item>
-        <item>Larceny</item>
-        <item>Stealth</item>
-        <item>Survival</item>
-        <item>Weaponry</item>
-    </string-array>
-    <string-array name="NDemon_Social">
-        <item>Animal Ken</item>
-        <item>Empathy</item>
-        <item>Expression</item>
-        <item>Intimidation</item>
-        <item>Persuasion</item>
-        <item>Socialize</item>
-        <item>Streetwise</item>
-        <item>Subterfuge</item>
-    </string-array>
+
+
     <string-array name="NDemon_Stats">
         <item>Size</item>
         <item>Speed</item>
@@ -552,74 +476,8 @@
         <item>Cover Experiences</item>
     </string-array>
 
-    <string-array name="NMummy_Top">
-        <item>Virtue</item>
-        <item>Vice</item>
-        <item>Judge</item>
-    </string-array>
-    <string-array name="NMummy_Headers">
-        <item>Attributes</item>
-        <item>Skills</item>
-        <item>Other Traits</item>
-    </string-array>
-    <string-array name="NMummy_Titles">
-        <item>Power</item>
-        <item>Finesse</item>
-        <item>Resistance</item>
-        <item>Mental</item>
-        <item>Physical</item>
-        <item>Social</item>
-        <item>Merits</item>
-        <item>Flaws</item>
-        <item>Pillars</item>
-        <item>Affinities</item>
-        <item>Health</item>
-        <item>Willpower</item>
-        <item>Sekhem</item>
-        <item>Memory</item>
-        <item>Utterances</item>
-    </string-array>
-    <string-array name="NMummy_Attributes">
-        <item>Intelligence</item>
-        <item>Strength</item>
-        <item>Presence</item>
-        <item>Wits</item>
-        <item>Dexterity</item>
-        <item>Manipulation</item>
-        <item>Resolve</item>
-        <item>Stamina</item>
-        <item>Composure</item>
-    </string-array>
-    <string-array name="NMummy_Mental">
-        <item>Academics</item>
-        <item>Computer</item>
-        <item>Crafts</item>
-        <item>Investigation</item>
-        <item>Medicine</item>
-        <item>Occult</item>
-        <item>Politics</item>
-        <item>Science</item>
-    </string-array>
-    <string-array name="NMummy_Physical">
-        <item>Athletics</item>
-        <item>Brawl</item>
-        <item>Drive</item>
-        <item>Firearms</item>
-        <item>Larceny</item>
-        <item>Stealth</item>
-        <item>Survival</item>
-        <item>Weaponry</item>
-    </string-array>
-    <string-array name="NMummy_Social">
-        <item>Animal Ken</item>
-        <item>Empathy</item>
-        <item>Expression</item>
-        <item>Intimidation</item>
-        <item>Persuasion</item>
-        <item>Socialize</item>
-        <item>Streetwise</item>
-        <item>Subterfuge</item>
-    </string-array>
+
+
     <string-array name="NMummy_Stats">
         <item>Size</item>
         <item>Speed</item>
@@ -628,8 +486,7 @@
         <item>Initiative Mod</item>
         <item>Experience</item>
     </string-array>
-
-    <!--TODO: check spelling -->
+    <!--Ab=heart, Ba=spirit, Ka=essence, Ren=name, Sheut=shadow-->
     <string-array name="NMummy_Pillars">
         <item>Ab</item>
         <item>Ba</item>
@@ -638,74 +495,8 @@
         <item>Sheut</item>
     </string-array>
 
-    <string-array name="NVampire_Top">
-        <item>Mask</item>
-        <item>Dirge</item>
-        <item>Bloodline</item>
-    </string-array>
-    <string-array name="NVampire_Headers">
-        <item>Attributes</item>
-        <item>Skills</item>
-        <item>Other Traits</item>
-    </string-array>
-    <string-array name="NVampire_Titles">
-        <item>Power</item>
-        <item>Finesse</item>
-        <item>Resistance</item>
-        <item>Mental</item>
-        <item>Physical</item>
-        <item>Social</item>
-        <item>Disciplines</item>
-        <item>Merits</item>
-        <item>Aspirations</item>
-        <item>Banes</item>
-        <item>Health</item>
-        <item>Willpower</item>
-        <item>Blood Potency</item>
-        <item>Vitae</item>
-        <item>Humanity</item>
-    </string-array>
-    <string-array name="NVampire_Attributes">
-        <item>Intelligence</item>
-        <item>Strength</item>
-        <item>Presence</item>
-        <item>Wits</item>
-        <item>Dexterity</item>
-        <item>Manipulation</item>
-        <item>Resolve</item>
-        <item>Stamina</item>
-        <item>Composure</item>
-    </string-array>
-    <string-array name="NVampire_Mental">
-        <item>Academics</item>
-        <item>Computer</item>
-        <item>Crafts</item>
-        <item>Investigation</item>
-        <item>Medicine</item>
-        <item>Occult</item>
-        <item>Politics</item>
-        <item>Science</item>
-    </string-array>
-    <string-array name="NVampire_Physical">
-        <item>Athletics</item>
-        <item>Brawl</item>
-        <item>Drive</item>
-        <item>Firearms</item>
-        <item>Larceny</item>
-        <item>Stealth</item>
-        <item>Survival</item>
-        <item>Weaponry</item>
-    </string-array>
-    <string-array name="NVampire_Social">
-        <item>Animal Ken</item>
-        <item>Empathy</item>
-        <item>Expression</item>
-        <item>Intimidation</item>
-        <item>Persuasion</item>
-        <item>Socialize</item>
-        <item>Streetwise</item>
-        <item>Subterfuge</item>
-    </string-array>
+
+
     <string-array name="NVampire_Stats">
         <item>Size</item>
         <item>Speed</item>
@@ -715,78 +506,8 @@
         <item>Experience</item>
     </string-array>
 
-    <string-array name="NWerewolf_Top">
-        <item>Blood</item>
-        <item>Bone</item>
-        <item>Lodge</item>
-    </string-array>
-    <string-array name="NWerewolf_Headers">
-        <item>Attributes</item>
-        <item>Skills</item>
-        <item>Other Traits</item>
-    </string-array>
-    <string-array name="NWerewolf_Titles">
-        <item>Power</item>
-        <item>Finesse</item>
-        <item>Resistance</item>
-        <item>Mental</item>
-        <item>Physical</item>
-        <item>Social</item>
-        <item>Disciplines</item>
-        <item>Merits</item>
-        <item>Renown</item>
-        <item>Aspirations</item>
-        <item>Conditions</item>
-        <item>Health</item>
-        <item>Willpower</item>
-        <item>Primal Urge</item>
-        <item>Essence</item>
-        <item>Flesh Touchstone</item>
-        <item>Harmony</item>
-        <item>Spirit Touchstone</item>
-        <item>Kuruth Triggers //Check spelling</item>
-    </string-array>
-    <string-array name="NWerewolf_Attributes">
-        <item>Intelligence</item>
-        <item>Strength</item>
-        <item>Presence</item>
-        <item>Wits</item>
-        <item>Dexterity</item>
-        <item>Manipulation</item>
-        <item>Resolve</item>
-        <item>Stamina</item>
-        <item>Composure</item>
-    </string-array>
-    <string-array name="NWerewolf_Mental">
-        <item>Academics</item>
-        <item>Computer</item>
-        <item>Crafts</item>
-        <item>Investigation</item>
-        <item>Medicine</item>
-        <item>Occult</item>
-        <item>Politics</item>
-        <item>Science</item>
-    </string-array>
-    <string-array name="NWerewolf_Physical">
-        <item>Athletics</item>
-        <item>Brawl</item>
-        <item>Drive</item>
-        <item>Firearms</item>
-        <item>Larceny</item>
-        <item>Stealth</item>
-        <item>Survival</item>
-        <item>Weaponry</item>
-    </string-array>
-    <string-array name="NWerewolf_Social">
-        <item>Animal Ken</item>
-        <item>Empathy</item>
-        <item>Expression</item>
-        <item>Intimidation</item>
-        <item>Persuasion</item>
-        <item>Socialize</item>
-        <item>Streetwise</item>
-        <item>Subterfuge</item>
-    </string-array>
+
+
     <string-array name="NWerewolf_Renown">
         <item>Purity</item>
         <item>Glory</item>
@@ -794,8 +515,13 @@
         <item>Wisdom</item>
         <item>Cunning</item>
     </string-array>
+    <!--Hishu=human, Dalu=near-human, Gauru=wolf-man or war form, Urshul=near-wolf, Urhan=wolf-->
     <string-array name="NWerewolf_Forms">
-        (look up spelling)
+        <item>Hishu</item>
+        <item>Dalu</item>
+        <item>Gauru</item>
+        <item>Urshul</item>
+        <item>Urhan</item>
     </string-array>
     <string-array name="NWerewolf_Kuruth">
         <item>Passive</item>
@@ -807,48 +533,8 @@
         <item>Experiences</item>
     </string-array>
 
-    <string-array name="Scion_Top">
-        <item>Calling</item>
-        <item>Nature</item>
-    </string-array>
-    <string-array name="Scion_Headers">
-        <item>Attributes</item>
-        <item>Abilities</item>
-        <item>Birthrights</item>
-        <item>Weapons</item>
-        <item>Boons</item>
-        <item>Willpower</item>
-        <item>Virtues</item>
-        <item>Combat</item>
-        <item>Knacks</item>
-        <item>Movement</item>
-        <item>Soak</item>
-        <item>Armor</item>
-        <item>Health</item>
-        <item>Virtues</item>
-        <item>Legend</item>
-        <item>Experience</item>
-    </string-array>
-    <string-array name="Scion_Titles">
-        <item>Physical</item>
-        <item>Social</item>
-        <item>Mental</item>
-    </string-array>
-    <string-array name="Scion_Physical">
-        <item>Strength</item>
-        <item>Dexterity</item>
-        <item>Stamina</item>
-    </string-array>
-    <string-array name="Scion_Social">
-        <item>Charisma</item>
-        <item>Manipulation</item>
-        <item>Appearance</item>
-    </string-array>
-    <string-array name="Scion_Mental">
-        <item>Perception</item>
-        <item>Intelligence</item>
-        <item>Wits</item>
-    </string-array>
+
+
     <string-array name="Scion_Abilities_Left">
         <item>Academics</item>
         <item>Animal Ken</item>
@@ -889,52 +575,17 @@
         <item>Dash</item>
         <item>Jump</item>
     </string-array>
-    <string-array name="Scion_Experience">
-        <item>Total</item>
-        <item>Spent</item>
-        <item>Remaining</item>
-    </string-array>
 
-    <string-array name="Trinity_Aberrant_Top">
-        <item>Birth Name</item>
-        <item>Nova Name</item>
-        <item>Nature</item>
-        <item>Allegiance</item>
-        <item>Eruption</item>
-        <item>Series</item>
-    </string-array>
-    <string-array name="Trinity_Aberrant_Headers">
-        <item>Attributes &amp; Abilities</item>
-        <item>Quantum Powers</item>
-        <item>Backgrounds</item>
-        <item>Willpower</item>
-        <item>Taint</item>
-        <item>Quantum</item>
-        <item>Health</item>
-        <item>Quantum Pool</item>
-    </string-array>
-    <string-array name="Trinity_Aberrant_Titles">
-        <item>Physical</item>
-        <item>Mental</item>
-        <item>Social</item>
-    </string-array>
-    <string-array name="Trinity_Aberrant_Subtitles">
-        <item>Strength</item>
-        <item>Dexterity</item>
-        <item>Stamina</item>
-        <item>Perception</item>
-        <item>Intelligence</item>
-        <item>Wits</item>
-        <item>Appearance</item>
-        <item>Manipulation</item>
-        <item>Charisma</item>
-    </string-array>
+
+
     <string-array name="Trinity_Aberrant_Strength">
+        <item>Strength</item>
         <item>Mega-Strength</item>
         <item>Brawl</item>
         <item>Might</item>
     </string-array>
     <string-array name="Trinity_Aberrant_Dexterity">
+        <item>Dexterity</item>
         <item>Mega-Dexterity</item>
         <item>Athletics</item>
         <item>Drive</item>
@@ -946,16 +597,19 @@
         <item>Stealth</item>
     </string-array>
     <string-array name="Trinity_Aberrant_Stamina">
+        <item>Stamina</item>
         <item>Mega-Stamina</item>
         <item>Endurance</item>
         <item>Resistance</item>
     </string-array>
     <string-array name="Trinity_Aberrant_Perception">
+        <item>Perception</item>
         <item>Mega-Perception</item>
         <item>Awareness</item>
         <item>Investigation</item>
     </string-array>
     <string-array name="Trinity_Aberrant_Intelligence">
+        <item>Intelligence</item>
         <item>Mega-Intelligence</item>
         <item>Academics</item>
         <item>Bureaucracy</item>
@@ -968,81 +622,43 @@
         <item>Survival</item>
     </string-array>
     <string-array name="Trinity_Aberrant_Wits">
+        <item>Wits</item>
         <item>Mega-Wits</item>
         <item>Arts</item>
         <item>Biz</item>
         <item>Rapport</item>
     </string-array>
     <string-array name="Trinity_Aberrant_Appearance">
+        <item>Appearance</item>
         <item>Mega-Appearance</item>
         <item>Intimidation</item>
         <item>Style</item>
     </string-array>
     <string-array name="Trinity_Aberrant_Manipulation">
+        <item>Manipulation</item>
         <item>Mega-Manipulation</item>
         <item>Interrogation</item>
         <item>Streetwise</item>
         <item>Subterfuge</item>
     </string-array>
     <string-array name="Trinity_Aberrant_Charisma">
+        <item>Charisma</item>
         <item>Mega-Charisma</item>
         <item>Command</item>
         <item>Etiquette</item>
         <item>Perform</item>
     </string-array>
-    <string-array name="Trinity_Aberrant_Quantum_Powers">
-        <item>Extra</item>
-        <item>Level</item>
-    </string-array>
-    <string-array name="Trinity_Aberrant_Health">
-        <item>Bruised</item>
-        <item>Incapacitated</item>
-        <item>Dead</item>
-    </string-array>
 
-    <string-array name="Trinity_Adventure_Top">
-        <item>Nature</item>
-        <item>Virtue</item>
-        <item>Vice</item>
-        <item>Inspiration</item>
-        <item>Allegiance</item>
-        <item>Origin</item>
-        <item>Series</item>
-        <item>Experience</item>
-    </string-array>
-    <string-array name="Trinity_Adventure_Headers">
-        <item>Attributes &amp; Abilities</item>
-        <item>Advantages</item>
-    </string-array>
-    <string-array name="Trinity_Adventure_Titles">
-        <item>Physical</item>
-        <item>Mental</item>
-        <item>Social</item>
-        <item>Knacks</item>
-        <item>Backgrounds</item>
-        <item>Willpower</item>
-        <item>Inspiration</item>
-        <item>Health</item>
-        <item>Soak</item>
-        <item>Movement</item>
-    </string-array>
-    <string-array name="Trinity_Adventure_Subtitles">
-        <item>Strength</item>
-        <item>Dexterity</item>
-        <item>Stamina</item>
-        <item>Perception</item>
-        <item>Intelligence</item>
-        <item>Wits</item>
-        <item>Appearance</item>
-        <item>Manipulation</item>
-        <item>Charisma</item>
-    </string-array>
+
+
     <string-array name="Trinity_Adventure_Strength">
+        <item>Strength</item>
         <item>Archery</item>
         <item>Brawl</item>
         <item>Might</item>
     </string-array>
     <string-array name="Trinity_Adventure_Dexterity">
+        <item>Dexterity</item>
         <item>Athletics</item>
         <item>Firearms</item>
         <item>Legerdemain</item>
@@ -1051,16 +667,18 @@
         <item>Stealth</item>
     </string-array>
     <string-array name="Trinity_Adventure_Stamina">
-        <item>Mega-Stamina</item>
+        <item>Stamina</item>
         <item>Endurance</item>
         <item>Resistance</item>
     </string-array>
     <string-array name="Trinity_Adventure_Perception">
+        <item>Perception</item>
         <item>Awareness</item>
         <item>Investigation</item>
         <item>Navigation</item>
     </string-array>
     <string-array name="Trinity_Adventure_Intelligence">
+        <item>Intelligence</item>
         <item>Academics</item>
         <item>Bureaucracy</item>
         <item>Engineering</item>
@@ -1070,22 +688,26 @@
         <item>Survival</item>
     </string-array>
     <string-array name="Trinity_Adventure_Wits">
+        <item>Wits</item>
         <item>Arts</item>
         <item>Drive</item>
         <item>Pilot</item>
     </string-array>
     <string-array name="Trinity_Adventure_Appearance">
+        <item>Appearance</item>
         <item>Disguise</item>
         <item>Intimidation</item>
         <item>Style</item>
     </string-array>
     <string-array name="Trinity_Adventure_Manipulation">
+        <item>Manipulation</item>
         <item>Animal Handling</item>
         <item>Interrogation</item>
         <item>Savvy</item>
         <item>Subterfuge</item>
     </string-array>
     <string-array name="Trinity_Adventure_Charisma">
+        <item>Charisma</item>
         <item>Command</item>
         <item>Etiquette</item>
         <item>Perform</item>
@@ -1095,15 +717,6 @@
         <item>Intuitive Facet</item>
         <item>Reflective Facet</item>
         <item>Destructive Facet</item>
-    </string-array>
-    <string-array name="Trinity_Adventure_Health">
-        <item>Bruised</item>
-        <item>Hurt</item>
-        <item>Injured</item>
-        <item>Wounded</item>
-        <item>Maimed</item>
-        <item>Crippled</item>
-        <item>Incapacitated</item>
     </string-array>
     <string-array name="Trinity_Adventure_Soak">
         <item>Armor</item>
@@ -1117,48 +730,15 @@
         <item>Initiative</item>
     </string-array>
 
-    <string-array name="Trinity_Top">
-        <item>Series</item>
-        <item>Origin</item>
-        <item>Nature</item>
-        <item>Aptitude</item>
-        <item>Allegiance</item>
-    </string-array>
-    <string-array name="Trinity_Headers">
-        <item>Attributes and Abilities</item>
-    </string-array>
-    <string-array name="Trinity_Titles">
-        <item>Physical</item>
-        <item>Mental</item>
-        <item>Social</item>
-        <item>Combat</item>
-        <item>Experience</item>
-        <item>Health</item>
-        <item>Willpower</item>
-        <item>Psi</item>
-        <item>Possessions</item>
-        <item>Initiative</item>
-        <item>Aptitude</item>
-        <item>Background Information</item>
-        <item>Merits</item>
-        <item>Flaws</item>
-    </string-array>
-    <string-array name="Trinity_Subtitles">
-        <item>Strength</item>
-        <item>Dexterity</item>
-        <item>Stamina</item>
-        <item>Perception</item>
-        <item>Intelligence</item>
-        <item>Wits</item>
-        <item>Appearance</item>
-        <item>Manipulation</item>
-        <item>Charisma</item>
-    </string-array>
+
+
     <string-array name="Trinity_Strength">
+        <item>Strength</item>
         <item>Brawl</item>
         <item>Might</item>
     </string-array>
     <string-array name="Trinity_Dexterity">
+        <item>Dexterity</item>
         <item>Athletics</item>
         <item>Drive</item>
         <item>Firearms</item>
@@ -1169,14 +749,17 @@
         <item>Stealth</item>
     </string-array>
     <string-array name="Trinity_Stamina">
+        <item>Stamina</item>
         <item>Endurance</item>
         <item>Resistance</item>
     </string-array>
     <string-array name="Trinity_Perception">
+        <item>Perception</item>
         <item>Awareness</item>
         <item>Investigation</item>
     </string-array>
     <string-array name="Trinity_Intelligence">
+        <item>Intelligence</item>
         <item>Academics</item>
         <item>Bureaucracy</item>
         <item>Engineering</item>
@@ -1187,20 +770,24 @@
         <item>Survival</item>
     </string-array>
     <string-array name="Trinity_Wits">
+        <item>Wits</item>
         <item>Arts</item>
         <item>Meditation</item>
         <item>Rapport</item>
     </string-array>
     <string-array name="Trinity_Appearance">
+        <item>Appearance</item>
         <item>Intimidation</item>
         <item>Style</item>
     </string-array>
     <string-array name="Trinity_Manipulation">
+        <item>Manipulation</item>
         <item>Command</item>
         <item>Interrogation</item>
         <item>Subterfuge</item>
     </string-array>
     <string-array name="Trinity_Charisma">
+        <item>Charisma</item>
         <item>Etiquette</item>
         <item>Perform</item>
         <item>Savvy</item>
@@ -1215,16 +802,6 @@
         <item>Rtg</item>
         <item>Bulk</item>
         <item>Ft</item>
-    </string-array>
-    <string-array name="Trinity_Health">
-        <item>Bruised</item>
-        <item>Hurt</item>
-        <item>Injured</item>
-        <item>Wounded</item>
-        <item>Maimed</item>
-        <item>Crippled</item>
-        <item>Incapacitated</item>
-        <item>Dead</item>
     </string-array>
     <string-array name="Trinity_Initiative">
         <item>Movement</item>
@@ -1249,5 +826,22 @@
         <item>Resources</item>
         <item>Status</item>
     </string-array>
-
+    <string-array name="Trinity_Health">
+        <item>Bruised</item>
+        <item>Hurt</item>
+        <item>Injured</item>
+        <item>Wounded</item>
+        <item>Maimed</item>
+        <item>Crippled</item>
+        <item>Incapacitated</item>
+    </string-array>
+    <string-array name="Trinity_Health_Penalties">
+        <item>null</item>
+        <item>-1 Die</item>
+        <item>-1 Die</item>
+        <item>-2 Dice</item>
+        <item>-3 Dice</item>
+        <item>-4 Dice</item>
+        <item>null</item>
+    </string-array>
 </resources>

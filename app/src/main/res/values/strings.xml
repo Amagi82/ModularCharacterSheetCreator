@@ -49,6 +49,9 @@
     <string name="width">Width</string>
     <string name="willpower">Willpower</string>
 
+    <!--Sheet titles-->
+    <string name="character_sheet">Character Sheet</string>
+
     <!--Content descriptions-->
     <string name="choose_color">Choose module color</string>
     <string name="choose_width">Choose module width</string>
