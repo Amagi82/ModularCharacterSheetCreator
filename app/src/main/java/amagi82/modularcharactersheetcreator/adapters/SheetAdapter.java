@@ -107,10 +107,10 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
         if (module.isDamaged())
             vh.tvDamageLevel.setText(module.getCurrentHealth().getCategory());
         vh.tvPenalty.setText((module.isDamaged() ? module.getCurrentHealth().getValue() + " " + res.getString(R.string.dice) : ""));
-        vh.statRatingBar.setMaxRating(module.getHealthLevels().size());
-        vh.statRatingBar.setHealthAgg(module.getDamageAgg());
-        vh.statRatingBar.setHealthLethal(module.getDamageLethal());
-        vh.statRatingBar.setHealthBashing(module.getDamageBashing());
+        vh.statBar.setMaxRating(module.getHealthLevels().size());
+        vh.statBar.setHealthAgg(module.getDamageAgg());
+        vh.statBar.setHealthLethal(module.getDamageLethal());
+        vh.statBar.setHealthBashing(module.getDamageBashing());
     }
 
     private void bind(ModuleBlockViewHolder vh, StatBlockModule module) {
