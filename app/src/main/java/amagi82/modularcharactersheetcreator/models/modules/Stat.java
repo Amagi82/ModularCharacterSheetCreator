@@ -32,6 +32,11 @@ public class Stat {
         this(category, specialty, 0, value, value, 5);
     }
 
+    public Stat(String category, int valueMin, int valueMax){
+        //Used for template generation
+        this(category, null, valueMin, valueMin, valueMin, valueMax);
+    }
+
     public Stat(String category, String specialty, int valueMin, int value, int valueTemporary, int valueMax){
         this(category, specialty, valueMin, value, valueTemporary, valueMax, valueMax);
     }

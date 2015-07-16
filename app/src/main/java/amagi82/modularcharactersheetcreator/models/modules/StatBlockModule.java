@@ -18,6 +18,16 @@ public class StatBlockModule extends Module {
         super(Type.STATBLOCK);
     }
 
+    public StatBlockModule(String[] array, int valueMin, int valueMax, String title, boolean compact){
+        //Used for template generation
+        super(Type.STATBLOCK);
+        for (String category : array) {
+            stats.add(new Stat(category, valueMin, valueMax));
+        }
+        setTitle(title);
+        this.compact = compact;
+    }
+
     public StatBlockModule(List<Stat> stats, String title, boolean compact) {
         super(Type.STATBLOCK);
         setTitle(title);
