@@ -73,59 +73,69 @@ public class Template {
         modules.add(new StatusModule(getString(R.string.willpower), 0, 10));
         //TODO: create and add Quintessence wheel and experience counter
 
-        return createCharacterSheet(modules);
+        return createCharacterSheet();
     }
 
     private Sheet createCVampire() {
         addCWodAttributes();
         addCWodAbilities(R.array.CVampire_Talents, R.array.CVampire_Skills, R.array.CVampire_Knowledges);
         modules.add(new HeaderModule(getString(R.string.advantages), spanCount));
+        modules.add(new StatusModule(getString(R.string.backgrounds)));
 
 
-
-        return createCharacterSheet(modules);
+        return createCharacterSheet();
     }
 
     private Sheet createCWerewolf() {
-        return createCharacterSheet(modules);
+        addCWodAttributes();
+        addCWodAbilities(R.array.CWerewolf_Talents, R.array.CWerewolf_Skills, R.array.CWerewolf_Knowledges);
+        modules.add(new HeaderModule(getString(R.string.advantages), spanCount));
+
+
+        return createCharacterSheet();
     }
 
     private Sheet createCWraith() {
-        return createCharacterSheet(modules);
+        addCWodAttributes();
+        addCWodAbilities(R.array.CWraith_Talents, R.array.CWraith_Skills, R.array.CWraith_Knowledges);
+        modules.add(new HeaderModule(getString(R.string.advantages), spanCount));
+
+
+        return createCharacterSheet();
     }
 
     private Sheet createNVampire() {
-        return createCharacterSheet(modules);
+        return createCharacterSheet();
     }
 
     private Sheet createNWerewolf() {
-        return createCharacterSheet(modules);
+        return createCharacterSheet();
     }
 
     private Sheet createNMummy() {
-        return createCharacterSheet(modules);
+        return createCharacterSheet();
     }
 
     private Sheet createNDemon() {
-        return createCharacterSheet(modules);
+        return createCharacterSheet();
     }
 
     private Sheet createScion() {
-        return createCharacterSheet(modules);
+        return createCharacterSheet();
     }
 
     private Sheet createTrinity() {
-        return createCharacterSheet(modules);
+        return createCharacterSheet();
     }
 
     private Sheet createExalted() {
-        return createCharacterSheet(modules);
+        return createCharacterSheet();
     }
 
 
 
 
-    private Sheet createCharacterSheet(List<Module> modules){
+    private Sheet createCharacterSheet(){
         Sheet sheet = new Sheet();
         sheet.setTitle(getString(R.string.character_sheet));
         sheet.setModules(modules);

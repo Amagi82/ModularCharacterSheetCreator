@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="TypographyDashes">
     <string formatted="false" name="url_cwod_vampire_base">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/</string>
     <string formatted="false" name="url_cwod_werewolf_base">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/</string>
     <string formatted="false" name="url_cwod_wraith_base">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/</string>

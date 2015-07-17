@@ -67,8 +67,8 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
         return new RowViewHolder(LayoutInflater.from(layout.getContext()).inflate(R.layout.row_boldtext_text, layout, false));
     }
 
-    private RowStatViewHolder createChildViewHolder(LinearLayout layout, int layoutId) {
-        return new RowStatViewHolder(LayoutInflater.from(layout.getContext()).inflate(layoutId, layout, false));
+    private RowStatViewHolder createChildStatViewHolder(LinearLayout layout) {
+        return new RowStatViewHolder(LayoutInflater.from(layout.getContext()).inflate(R.layout.row_stat, layout, false));
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -115,7 +115,7 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
 
     private void bind(ModuleBlockViewHolder vh, StatBlockModule module) {
         for (Stat stat : module.getStats()) {
-            RowStatViewHolder rowStatViewHolder = createChildViewHolder(vh.linearLayout, R.layout.row_stat);
+            RowStatViewHolder rowStatViewHolder = createChildStatViewHolder(vh.linearLayout);
             bindChild(rowStatViewHolder, stat);
         }
     }

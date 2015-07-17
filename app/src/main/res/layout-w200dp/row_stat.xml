@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:layout_width="200dp">
+    tools:layout_width="200dp"
+    tools:ignore="InconsistentLayout">
 
     <amagi82.modularcharactersheetcreator.widgets.RoundedStatBar
         android:id="@+id/statBar"
@@ -30,6 +31,6 @@
         android:textStyle="italic"
         android:visibility="gone"
         tools:text="Specialty"
-        tools:visibility="visible" />
+        tools:visibility="visible"/>
 
 </FrameLayout>

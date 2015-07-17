@@ -1,7 +1,6 @@
 package amagi82.modularcharactersheetcreator.fragments;
 
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -459,30 +458,30 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 //        }
 //    }
 
-    private void setIcon(Bitmap bitmap) {
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        final View cropImageView = inflater.inflate(R.layout.dialog_crop_image, null);
-        cropper = (CropImageView) cropImageView.findViewById(R.id.cropImageView);
-        cropper.setImageBitmap(bitmap);
-
-        new AlertDialog.Builder(getActivity())
-                .setTitle(getResources().getString(R.string.crop_image_icon))
-                .setView(cropImageView)
-                .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Bitmap croppedBitmap = cropper.getCroppedImage();
-                        int circleImageSize = (int) getResources().getDimension(R.dimen.circle_icon_size);
-                        croppedBitmap = Bitmap.createScaledBitmap(croppedBitmap, circleImageSize, circleImageSize, true);
-                        character.setIcon(croppedBitmap);
-                    }
-                })
-                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                }).show();
-    }
+//    private void setIcon(Bitmap bitmap) {
+//        LayoutInflater inflater = getActivity().getLayoutInflater();
+//        final View cropImageView = inflater.inflate(R.layout.dialog_crop_image, null);
+//        cropper = (CropImageView) cropImageView.findViewById(R.id.cropImageView);
+//        cropper.setImageBitmap(bitmap);
+//
+//        new AlertDialog.Builder(getActivity())
+//                .setTitle(getResources().getString(R.string.crop_image_icon))
+//                .setView(cropImageView)
+//                .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Bitmap croppedBitmap = cropper.getCroppedImage();
+//                        int circleImageSize = (int) getResources().getDimension(R.dimen.circle_icon_size);
+//                        croppedBitmap = Bitmap.createScaledBitmap(croppedBitmap, circleImageSize, circleImageSize, true);
+//                        character.setIcon(croppedBitmap);
+//                    }
+//                })
+//                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                    }
+//                }).show();
+//    }
 
     //Up navigation
     @Override
