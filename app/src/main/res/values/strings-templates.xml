@@ -61,6 +61,7 @@
     <string name="quintessence">Quintessence</string>
     <string name="paradox">Paradox</string>
     <!--CVampire-specific-->
+    <string name="disciplines">Disciplines</string>
     <string name="virtues">Virtues</string>
     <string name="humanity">Humanity</string>
     <string name="path">Path</string>
@@ -326,8 +327,157 @@
         <item>Science</item>
         <item>Technology</item>
     </string-array>
-    <string-array name="CVampire_Disciplines"></string-array>
-    <string-array name="CVampire_Backgrounds"></string-array>
+    <string-array name="CVampire_Disc_Assamite">
+        <item>Celerity</item>
+        <item>Obfuscate</item>
+        <item>Quietus</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Brujah">
+        <item>Celerity</item>
+        <item>Potence</item>
+        <item>Presence</item>
+    </string-array>
+    <string-array name="CVampire_Disc_FollowersOfSet">
+        <item>Obfuscate</item>
+        <item>Presence</item>
+        <item>Serpentis</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Gangrel">
+        <item>Animalism</item>
+        <item>Fortitude</item>
+        <item>Protean</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Giovanni">
+        <item>Dominate</item>
+        <item>Necromancy</item>
+        <item>Potence</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Lasombra">
+        <item>Dominate</item>
+        <item>Obtenebration</item>
+        <item>Potence</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Malkavian">
+        <item>Auspex</item>
+        <item>Dementation</item>
+        <item>Obfuscate</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Nosferatu">
+        <item>Animalism</item>
+        <item>Obfuscate</item>
+        <item>Potence</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Ravnos">
+        <item>Animalism</item>
+        <item>Chimerstry</item>
+        <item>Fortitude</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Toreador">
+        <item>Auspex</item>
+        <item>Celerity</item>
+        <item>Presence</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Tremere">
+        <item>Auspex</item>
+        <item>Dominate</item>
+        <item>Thaumaturgy</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Tzimisce">
+        <item>Animalism</item>
+        <item>Auspex</item>
+        <item>Vicissitude</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Ventrue">
+        <item>Dominate</item>
+        <item>Fortitude</item>
+        <item>Presence</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Baali">
+        <item>Daimoinon</item>
+        <item>Obfuscate</item>
+        <item>Presence</item>
+    </string-array>
+    <string-array name="CVampire_Disc_BloodBrothers">
+        <item>Fortitude</item>
+        <item>Potence</item>
+        <item>Sanguinus</item>
+    </string-array>
+    <string-array name="CVampire_Disc_DaughtersOfCacophony">
+        <item>Fortitude</item>
+        <item>Melpominee</item>
+        <item>Presence</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Gargoyles">
+        <item>Flight</item>
+        <item>Fortitude</item>
+        <item>Potence</item>
+        <item>Visceratika</item>
+    </string-array>
+    <string-array name="CVampire_Disc_HarbingersOfSkulls">
+        <item>Auspex</item>
+        <item>Fortitude</item>
+        <item>Necromancy</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Kiasyd">
+        <item>Dominate</item>
+        <item>Mytherceria</item>
+        <item>Obtenebration</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Nagaraja">
+        <item>Auspex</item>
+        <item>Dominate</item>
+        <item>Necromancy</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Salubri">
+        <item>Auspex</item>
+        <item>Fortitude</item>
+        <item>Obeah</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Samedi">
+        <item>Fortitude</item>
+        <item>Obfuscate</item>
+        <item>Thanatosis</item>
+    </string-array>
+    <string-array name="CVampire_Disc_TrueBrujah">
+        <item>Potence</item>
+        <item>Presence</item>
+        <item>Temporis</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Ahrimanes">
+        <item>Animalism</item>
+        <item>Presence</item>
+        <item>Spiritus</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Anda">
+        <item>Animalism</item>
+        <item>Fortitude</item>
+        <item>Protean</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Cappadocians">
+        <item>Auspex</item>
+        <item>Fortitude</item>
+        <item>Necromancy</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Lamia">
+        <item>Fortitude</item>
+        <item>Necromancy</item>
+        <item>Potence</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Lhiannan">
+        <item>Animalism</item>
+        <item>Ogham</item>
+        <item>Presence</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Noiad">
+        <item>Animalism</item>
+        <item>Auspex</item>
+        <item>Protean</item>
+    </string-array>
+    <string-array name="CVampire_Disc_Valaren">
+        <item>Auspex</item>
+        <item>Fortitude</item>
+        <item>Valeren</item>
+    </string-array>
     <string-array name="CVampire_Virtues">
         <item>Conscience</item>
         <item>Self-Control</item>

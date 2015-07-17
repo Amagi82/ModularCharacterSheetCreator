@@ -8,6 +8,7 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
+import amagi82.modularcharactersheetcreator.models.game_systems.CVampire;
 import amagi82.modularcharactersheetcreator.models.game_systems.Game;
 import amagi82.modularcharactersheetcreator.models.modules.BloodPoolModule;
 import amagi82.modularcharactersheetcreator.models.modules.HeaderModule;
@@ -80,7 +81,12 @@ public class Template {
         addCWodAttributes();
         addCWodAbilities(R.array.CVampire_Talents, R.array.CVampire_Skills, R.array.CVampire_Knowledges);
         modules.add(new HeaderModule(getString(R.string.advantages), spanCount));
-        modules.add(new StatusModule(getString(R.string.backgrounds)));
+        modules.add(new StatBlockModule(getArray(CVampire.Clan.valueOf(
+                character.getGameSystem().getOnyx().getRight().geteName()).getDisciplineArrayId()), 0, 5, getString(R.string.disciplines)));
+        modules.add(new StatBlockModule(null, 0, 5, getString(R.string.backgrounds)));
+        modules.add(new StatBlockModule(getArray(R.array.CVampire_Virtues), 1, 5, getString(R.string.virtues)));
+        modules.add(new HeaderModule(null, spanCount));
+
 
 
         return createCharacterSheet();
@@ -164,6 +170,10 @@ public class Template {
         return stats;
     }
 
+    private String[] getDisciplines(){
+        return getArray(CVampire.Clan.valueOf(character.getGameSystem().getOnyx().getRight().geteName()).getDisciplineArrayId());
+    }
+
 
     private BloodPoolModule addBloodpool(){
         return new BloodPoolModule();
@@ -194,6 +204,7 @@ public class Template {
     }
 
     private String[] getArray(int id){
+        if(id == -1) return null;
         return context.getResources().getStringArray(id);
     }
 }
