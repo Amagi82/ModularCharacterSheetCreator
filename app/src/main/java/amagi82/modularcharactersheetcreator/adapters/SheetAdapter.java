@@ -3,6 +3,7 @@ package amagi82.modularcharactersheetcreator.adapters;
 
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     @Override
     public ModuleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Module.Type types[] = Module.Type.values();
+        Log.i(null, "onCreateViewHolder for "+viewType+", which should be a "+types[viewType]);
         switch (types[viewType]) {
             case HEADER:
                 return new ModuleViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.module_header, parent, false));
@@ -74,6 +76,7 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ModuleViewHolder vh, final int position) {
+        Log.i(null, "binding position "+position+", which is module "+modules.get(position).getType());
         Module module = modules.get(position);
         if (vh.tvTitle != null) vh.tvTitle.setText(module.getTitle());
         if (vh.tvText != null) vh.tvText.setText(module.getText());

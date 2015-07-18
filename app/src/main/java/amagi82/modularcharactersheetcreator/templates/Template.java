@@ -1,6 +1,7 @@
 package amagi82.modularcharactersheetcreator.templates;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class Template {
 
     public Template(Context context, GameCharacter character) {
         this.context = context;
+        this.character = character;
         system = character.getGameSystem();
     }
 
@@ -81,8 +83,14 @@ public class Template {
         addCWodAttributes();
         addCWodAbilities(R.array.CVampire_Talents, R.array.CVampire_Skills, R.array.CVampire_Knowledges);
         modules.add(new HeaderModule(getString(R.string.advantages), spanCount));
+        Log.i(null, "creating Vampire");
+        Log.i(null, "character: "+character.getName());
+        Log.i(null, "system: "+ character.getGameSystem().getOnyx().getSystemName());
+        Log.i(null, "clan: "+character.getRight().geteName());
+        Log.i(null, "array: "+ CVampire.Clan.valueOf(character.getRight().geteName()).getDisciplineArrayId());
+
         modules.add(new StatBlockModule(getArray(CVampire.Clan.valueOf(
-                character.getGameSystem().getOnyx().getRight().geteName()).getDisciplineArrayId()), 0, 5, getString(R.string.disciplines)));
+                character.getRight().geteName()).getDisciplineArrayId()), 0, 5, getString(R.string.disciplines)));
         modules.add(new StatBlockModule(null, 0, 5, getString(R.string.backgrounds)));
         modules.add(new StatBlockModule(getArray(R.array.CVampire_Virtues), 1, 5, getString(R.string.virtues)));
         modules.add(new HeaderModule(null, spanCount));
@@ -130,7 +138,6 @@ public class Template {
         modules.add(new StatusModule(getString(R.string.pathos), 1, 10));
         //Add experience counter
 
-
         return createCharacterSheet();
     }
 
@@ -177,8 +184,6 @@ public class Template {
     }
 
 
-
-
     private Sheet createCharacterSheet(){
         Sheet sheet = new Sheet();
         sheet.setTitle(getString(R.string.character_sheet));
@@ -212,7 +217,6 @@ public class Template {
     private String[] getDisciplines(){
         return getArray(CVampire.Clan.valueOf(character.getGameSystem().getOnyx().getRight().geteName()).getDisciplineArrayId());
     }
-
 
     private BloodPoolModule addBloodpool(){
         return new BloodPoolModule();

@@ -30,7 +30,7 @@ import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.game_systems.CMage;
 import amagi82.modularcharactersheetcreator.models.game_systems.CVampire;
 import amagi82.modularcharactersheetcreator.models.game_systems.CWerewolf;
-import amagi82.modularcharactersheetcreator.models.modules.Module;
+import amagi82.modularcharactersheetcreator.templates.Template;
 import amagi82.modularcharactersheetcreator.utils.Logan;
 import amagi82.modularcharactersheetcreator.utils.Otto;
 
@@ -106,24 +106,18 @@ public class MainActivity extends AppCompatActivity {
         characters.add(new GameCharacter("Dr. Von Natsi", new CMage(CMage.Faction.SCIONSOFETHER)));
         characters.add(new GameCharacter("Stormwalker", new CWerewolf(CWerewolf.Tribe.GLASSWALKERS, CWerewolf.Auspice.AHROUN)));
 
-        Module module1 = new Module();
-        module1.setText("Test text 1");
-        Module module2 = new Module();
-        module2.setText("This is another module");
+//        Module module1 = new Module();
+//        module1.setText("Test text 1");
+//        Module module2 = new Module();
+//        module2.setText("This is another module");
+//
 
         for (GameCharacter character : characters) {
-            Sheet sheet = new Sheet();
-            sheet.setTitle("Sheet 1");
-            sheet.getModules().add(module1);
-            sheet.getModules().add(module2);
+            Log.i(null, "Creating template for "+character.getName());
+            Template template = new Template(this, character);
+            Sheet sheet = template.createDefaultSheet();
             character.getSheets().add(sheet);
-
-            Sheet sheet2 = new Sheet();
-            sheet2.setTitle("Sheet 2");
-            sheet2.getModules().add(module1);
-            sheet2.getModules().add(module2);
-            character.getSheets().add(sheet2);
-
+            character.getSheets().add(sheet);
             Log.i(null, character.getName() + " contains " + character.getGameSystem().toString());
         }
         for (GameCharacter character : characters) saveCharacter(character);

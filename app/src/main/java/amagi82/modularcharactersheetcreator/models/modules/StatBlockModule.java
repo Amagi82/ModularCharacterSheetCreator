@@ -4,6 +4,7 @@ package amagi82.modularcharactersheetcreator.models.modules;
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonObject
@@ -19,6 +20,7 @@ public class StatBlockModule extends Module {
     public StatBlockModule(String[] array, int valueMin, int valueMax, String title) {
         //Used for template generation
         super(Type.STATBLOCK);
+        stats = new ArrayList<>();
         if (array != null) for (String category : array) stats.add(new Stat(category, valueMin, valueMax));
         setTitle(title);
     }

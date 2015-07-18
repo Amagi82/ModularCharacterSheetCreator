@@ -2,8 +2,8 @@ package amagi82.modularcharactersheetcreator.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,16 +34,22 @@ public class TabFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_tab, container, false);
         ButterKnife.bind(this, rootView);
 
+        Log.i(null, "TabFragment onCreateView");
+
         GameCharacter character = ((MainActivity) getActivity()).getCurrentCharacter();
         Log.i(null, "Current character is "+character.getName());
         Sheet sheet = character.getSheets().get(getArguments().getInt("position"));
         int spanCount = sheet.getNumColumns();
         modules = sheet.getModules();
 
-        StaggeredGridLayoutManager staggeredGrid = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
-        staggeredGrid.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-        recyclerView.setLayoutManager(staggeredGrid);
         adapter = new SheetAdapter(getResources(), modules);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), spanCount);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override public int getSpanSize(int position) {
+                return modules.get(position).getSpanCount();
+            }
+        });
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         return rootView;
     }
