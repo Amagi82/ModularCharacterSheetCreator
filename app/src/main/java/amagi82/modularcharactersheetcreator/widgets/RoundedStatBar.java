@@ -31,7 +31,7 @@ public class RoundedStatBar extends RatingBar {
     private int textColor;
     private float textSize;
     private float textSizeSpecialty;
-    //    private int healthBashing = 0;
+//    private int healthBashing = 0;
 //    private int healthLethal = 0;
 //    private int healthAgg = 0;
     private float gap;

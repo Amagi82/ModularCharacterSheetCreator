@@ -71,7 +71,7 @@ public class Template {
         modules.add(new StatBlockModule(null, 0, 5, getString(R.string.backgrounds)));
         modules.add(new StatusModule(getString(R.string.arete), 1, 10));
         modules.add(new HealthModule(getCWodHealthLevels()));
-        modules.add(new StatusModule(getString(R.string.willpower), 0, 10));
+        modules.add(new StatusModule(getString(R.string.willpower), 1, 10));
         //TODO: create and add Quintessence wheel and experience counter
 
         return createCharacterSheet();
@@ -86,8 +86,13 @@ public class Template {
         modules.add(new StatBlockModule(null, 0, 5, getString(R.string.backgrounds)));
         modules.add(new StatBlockModule(getArray(R.array.CVampire_Virtues), 1, 5, getString(R.string.virtues)));
         modules.add(new HeaderModule(null, spanCount));
-
-
+        //Add merits and flaws?
+        modules.add(new StatusModule(getString(R.string.humanity), 1, 10));
+        modules.add(new HealthModule(getCWodHealthLevels()));
+        modules.add(new StatusModule(getString(R.string.willpower), 1, 10));
+        modules.add(new BloodPoolModule());
+        //Add weakness?
+        //Add experience counter
 
         return createCharacterSheet();
     }
@@ -96,7 +101,18 @@ public class Template {
         addCWodAttributes();
         addCWodAbilities(R.array.CWerewolf_Talents, R.array.CWerewolf_Skills, R.array.CWerewolf_Knowledges);
         modules.add(new HeaderModule(getString(R.string.advantages), spanCount));
-
+        modules.add(new StatBlockModule(null, 0, 5, getString(R.string.backgrounds)));
+        //Add gifts lists
+        modules.add(new HeaderModule(getString(R.string.renown), 1));
+        modules.add(new StatusModule(getString(R.string.rage), 1, 10));
+        modules.add(new HealthModule(getCWodHealthLevels()));
+        modules.add(new StatusModule(getString(R.string.glory), 1, 10));
+        modules.add(new StatusModule(getString(R.string.gnosis), 1, 10));
+        modules.add(new StatusModule(getString(R.string.honor), 1, 10));
+        modules.add(new StatusModule(getString(R.string.willpower), 1, 10));
+        modules.add(new StatusModule(getString(R.string.wisdom), 1, 10));
+        //Add experience counter
+        //TODO: Add changer forms and modify stats accordingly
 
         return createCharacterSheet();
     }
@@ -105,24 +121,46 @@ public class Template {
         addCWodAttributes();
         addCWodAbilities(R.array.CWraith_Talents, R.array.CWraith_Skills, R.array.CWraith_Knowledges);
         modules.add(new HeaderModule(getString(R.string.advantages), spanCount));
+        modules.add(new StatBlockModule(null, 0, 5, getString(R.string.backgrounds)));
+        modules.add(new StatBlockModule(null, 0, 5, getString(R.string.passions)));
+        modules.add(new StatBlockModule(null, 0, 5, getString(R.string.arcanoi)));
+        modules.add(new StatusModule(getString(R.string.corpus), 1, 10));
+        modules.add(new StatBlockModule(null, 0, 5, getString(R.string.fetters)));
+        modules.add(new StatusModule(getString(R.string.willpower), 1, 10));
+        modules.add(new StatusModule(getString(R.string.pathos), 1, 10));
+        //Add experience counter
 
 
         return createCharacterSheet();
     }
 
     private Sheet createNVampire() {
+
+
+
         return createCharacterSheet();
     }
 
     private Sheet createNWerewolf() {
+
+
+
+
         return createCharacterSheet();
     }
 
     private Sheet createNMummy() {
+
+
+
+
         return createCharacterSheet();
     }
 
     private Sheet createNDemon() {
+
+
+
         return createCharacterSheet();
     }
 
@@ -162,11 +200,12 @@ public class Template {
         modules.add(new StatBlockModule(getArray(knowledges), 0, 5, getString(R.string.knowledges)));
     }
 
+
     private List<Stat> getCWodHealthLevels(){
         List<Stat> stats = new ArrayList<>();
         String[] injuries = getArray(R.array.CWod_Health_Levels);
         int[] levels = context.getResources().getIntArray(R.array.CWod_Health_Penalties);
-        for(int i = 0; i< injuries.length; i++) stats.add(new Stat(injuries[i], levels[i]));
+        for(int i = 0; i< (injuries != null ? injuries.length : 0); i++) stats.add(new Stat(injuries[i], levels[i]));
         return stats;
     }
 
