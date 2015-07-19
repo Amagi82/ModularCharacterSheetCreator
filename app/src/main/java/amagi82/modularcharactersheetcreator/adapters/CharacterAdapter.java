@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import amagi82.modularcharactersheetcreator.App;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.TileGridViewHolder;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.TileViewHolder;
@@ -45,7 +46,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void bind(TileGridViewHolder vh, Choice choice) {
-        vh.imageViewNetwork.setImageUrl(choice.getUrl() == -1 ? resources.getString(R.string.url_default) :
+        vh.imageViewNetwork.setImageUrl(choice.getUrl() == App.NONE ? resources.getString(R.string.url_default) :
                 resources.getString(choice.getBaseUrl()) + resources.getString(choice.getUrl()), VolleySingleton.INSTANCE.getImageLoader());
         vh.tvTitle.setText(choice.getTitle());
         vh.eName = choice.geteName();

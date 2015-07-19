@@ -3,14 +3,16 @@ package amagi82.modularcharactersheetcreator.models;
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+import amagi82.modularcharactersheetcreator.App;
+
 @JsonObject
 public class Choice {
 
     @JsonField private String eName;
     @JsonField private int title;
-    @JsonField private int drawable = -1;
-    @JsonField private int baseUrl = -1;
-    @JsonField private int url = -1;
+    @JsonField private int drawable = App.NONE;
+    @JsonField private int baseUrl = App.NONE;
+    @JsonField private int url = App.NONE;
     private int position;
 
     public Choice() {

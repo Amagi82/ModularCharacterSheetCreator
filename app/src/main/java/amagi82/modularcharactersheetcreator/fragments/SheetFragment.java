@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import amagi82.modularcharactersheetcreator.App;
 import amagi82.modularcharactersheetcreator.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.ViewPagerAdapter;
@@ -100,7 +101,7 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
     }
 
     private String getUrl(Choice choice){
-        return choice.getUrl() == -1? getString(R.string.url_default) : getString(choice.getBaseUrl()) + getString(choice.getUrl());
+        return choice.getUrl() == App.NONE? getString(R.string.url_default) : getString(choice.getBaseUrl()) + getString(choice.getUrl());
     }
 
     public GameCharacter getCharacter(){

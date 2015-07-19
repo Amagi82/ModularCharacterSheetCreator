@@ -28,6 +28,7 @@ import com.squareup.otto.Subscribe;
 
 import java.util.List;
 
+import amagi82.modularcharactersheetcreator.App;
 import amagi82.modularcharactersheetcreator.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
@@ -251,14 +252,14 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         tvIconLeft.setVisibility(View.VISIBLE);
         iconLeft.setVisibility(View.VISIBLE);
         tvIconLeft.setText(onyx.getLeft().getTitle());
-        iconLeft.setImageUrl((onyx.getLeft().getUrl() != -1) ? getUrl(onyx.getLeft()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
+        iconLeft.setImageUrl((onyx.getLeft().getUrl() != App.NONE) ? getUrl(onyx.getLeft()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
     }
 
     private void setRightResources() {
         tvIconRight.setVisibility(View.VISIBLE);
         iconRight.setVisibility(View.VISIBLE);
         tvIconRight.setText(onyx.getRight().getTitle());
-        iconRight.setImageUrl((onyx.getRight().getUrl() != -1) ? getUrl(onyx.getRight()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
+        iconRight.setImageUrl((onyx.getRight().getUrl() != App.NONE) ? getUrl(onyx.getRight()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
     }
 
     private String getUrl(Choice choice) {

@@ -62,9 +62,9 @@ public class RoundedStatBar extends RatingBar {
 
         textPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         textPaint.setLinearText(true);
-        textPaint.setColor(textColor);
+        //textPaint.setColor(textColor);
         textPaint.setTextSize(textSize);
-        textPaint.setTypeface(Typeface.DEFAULT_BOLD);
+        //textPaint.setTypeface(Typeface.DEFAULT_BOLD);
 
         if (getRating() < ratingMin) setRating(ratingMin);
 
