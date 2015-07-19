@@ -34,8 +34,6 @@ public class TabFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_tab, container, false);
         ButterKnife.bind(this, rootView);
 
-        Log.i(null, "TabFragment onCreateView");
-
         GameCharacter character = ((MainActivity) getActivity()).getCurrentCharacter();
         Log.i(null, "Current character is "+character.getName());
         Sheet sheet = character.getSheets().get(getArguments().getInt("position"));
@@ -43,7 +41,7 @@ public class TabFragment extends Fragment {
         modules = sheet.getModules();
 
         adapter = new SheetAdapter(getResources(), modules);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), spanCount);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override public int getSpanSize(int position) {
                 return modules.get(position).getSpanCount();

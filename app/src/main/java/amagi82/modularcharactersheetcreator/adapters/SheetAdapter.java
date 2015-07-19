@@ -3,11 +3,10 @@ package amagi82.modularcharactersheetcreator.adapters;
 
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -26,11 +25,13 @@ import amagi82.modularcharactersheetcreator.models.modules.Stat;
 import amagi82.modularcharactersheetcreator.models.modules.StatBlockModule;
 import amagi82.modularcharactersheetcreator.models.modules.StatusModule;
 import amagi82.modularcharactersheetcreator.models.modules.TitleTextBlockModule;
+import amagi82.modularcharactersheetcreator.widgets.RoundedStatBar;
 
 public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
 
     private Resources res;
     private List<Module> modules;
+    private Module.Type types[] = Module.Type.values();
 
     public SheetAdapter(Resources res, List<Module> modules) {
         this.res = res;
@@ -45,8 +46,6 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     // Create new views (invoked by the layout manager). Type from getItemViewType above.
     @Override
     public ModuleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Module.Type types[] = Module.Type.values();
-        Log.i(null, "onCreateViewHolder for "+viewType+", which should be a "+types[viewType]);
         switch (types[viewType]) {
             case HEADER:
                 return new ModuleViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.module_header, parent, false));
@@ -65,37 +64,35 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
         }
     }
 
-    private RowViewHolder createChildViewHolder(LinearLayout layout) {
-        return new RowViewHolder(LayoutInflater.from(layout.getContext()).inflate(R.layout.row_boldtext_text, layout, false));
-    }
-
-    private RowStatViewHolder createChildStatViewHolder(LinearLayout layout) {
-        return new RowStatViewHolder(LayoutInflater.from(layout.getContext()).inflate(R.layout.row_stat, layout, false));
-    }
+//    private RowViewHolder createChildViewHolder(LinearLayout layout) {
+//        return new RowViewHolder(LayoutInflater.from(layout.getContext()).inflate(R.layout.row_boldtext_text, layout, true));
+//    }
+//
+//    private RowStatViewHolder createChildStatViewHolder(LinearLayout layout) {
+//        return new RowStatViewHolder(LayoutInflater.from(layout.getContext()).inflate(R.layout.row_stat, layout, true));
+//    }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ModuleViewHolder vh, final int position) {
-        Log.i(null, "binding position "+position+", which is module "+modules.get(position).getType());
-        Module module = modules.get(position);
-        if (vh.tvTitle != null) vh.tvTitle.setText(module.getTitle());
-        if (vh.tvText != null) vh.tvText.setText(module.getText());
+        if (vh.tvTitle != null) vh.tvTitle.setText(modules.get(position).getTitle());
+        if (vh.tvText != null) vh.tvText.setText(modules.get(position).getText());
 
-        switch (module.getType()) {
+        switch (types[vh.getItemViewType()]) {
             case BLOODPOOL:
-                bind((ModuleBloodPoolViewHolder) vh, (BloodPoolModule) module);
+                bind((ModuleBloodPoolViewHolder) vh, (BloodPoolModule) modules.get(position));
                 break;
             case HEALTH:
-                bind((ModuleHealthViewHolder) vh, (HealthModule) module);
+                bind((ModuleHealthViewHolder) vh, (HealthModule) modules.get(position));
                 break;
             case STATBLOCK:
-                bind((ModuleBlockViewHolder) vh, (StatBlockModule) module);
+                bind((ModuleBlockViewHolder) vh, (StatBlockModule) modules.get(position));
                 break;
             case STATUS:
-                bind((ModuleStatusViewHolder) vh, (StatusModule) module);
+                bind((ModuleStatusViewHolder) vh, (StatusModule) modules.get(position));
                 break;
             case TITLETEXTBLOCK:
-                bind((ModuleBlockViewHolder) vh, (TitleTextBlockModule) module);
+                bind((ModuleBlockViewHolder) vh, (TitleTextBlockModule) modules.get(position));
                 break;
         }
     }
@@ -107,8 +104,7 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     }
 
     private void bind(ModuleHealthViewHolder vh, HealthModule module) {
-        if (module.isDamaged())
-            vh.tvDamageLevel.setText(module.getCurrentHealth().getCategory());
+        if (module.isDamaged()) vh.tvDamageLevel.setText(module.getCurrentHealth().getCategory());
         vh.tvPenalty.setText(res.getQuantityString(R.plurals.dice_penalty, module.getCurrentHealth().getValue()));
         vh.statBar.setNumStars(module.getHealthLevels().size());
 //        vh.statBar.setHealthAgg(module.getDamageAgg());
@@ -117,9 +113,20 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     }
 
     private void bind(ModuleBlockViewHolder vh, StatBlockModule module) {
-        for (Stat stat : module.getStats()) {
-            RowStatViewHolder rowStatViewHolder = createChildStatViewHolder(vh.linearLayout);
-            bindChild(rowStatViewHolder, stat);
+        for (int i = 0; i<module.getStats().size(); i++) {
+            Stat stat = module.getStats().get(i);
+            View v = LayoutInflater.from(vh.linearLayout.getContext()).inflate(R.layout.row_stat, vh.linearLayout, true);
+            RoundedStatBar statBar = (RoundedStatBar) v.findViewById(R.id.statBar);
+            statBar.setId(i);
+            statBar.setTitle(stat.getCategory());
+            statBar.setSpecialty(stat.getSpecialty());
+            statBar.setNumStars(stat.getNumStars());
+            statBar.setRatingMax(stat.getValueMax());
+            statBar.setRating(stat.getValueTemporary());
+            statBar.setRatingBase(stat.getValue());
+            statBar.setRatingMin(stat.getValueMin());
+//            RowStatViewHolder rowStatViewHolder = createChildStatViewHolder(vh.linearLayout);
+//            bindChild(rowStatViewHolder, stat);
         }
     }
 
@@ -131,8 +138,14 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
 
     private void bind(ModuleBlockViewHolder vh, TitleTextBlockModule module) {
         for (Stat stat : module.getStats()) {
-            RowViewHolder rowViewHolder = createChildViewHolder(vh.linearLayout);
-            bindChild(rowViewHolder, stat);
+            View v = LayoutInflater.from(vh.linearLayout.getContext()).inflate(R.layout.row_boldtext_text, vh.linearLayout, true);
+            TextView tvCategory = (TextView) v.findViewById(R.id.tvCategory);
+            TextView tvText = (TextView) v.findViewById(R.id.tvText);
+            tvCategory.setText(stat.getCategory());
+            tvText.setText(stat.getSpecialty());
+
+//            RowViewHolder rowViewHolder = createChildViewHolder(vh.linearLayout);
+//            bindChild(rowViewHolder, stat);
         }
     }
 
@@ -156,7 +169,7 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
 
     private void bindChild(RowViewHolder vh, Stat stat) {
         vh.tvCategory.setText(stat.getCategory());
-        if (vh.tvText != null) vh.tvText.setText(stat.getSpecialty());
+        vh.tvText.setText(stat.getSpecialty());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -164,6 +177,4 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     public int getItemCount() {
         return modules.size();
     }
-
-
 }

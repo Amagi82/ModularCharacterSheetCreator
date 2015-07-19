@@ -66,7 +66,7 @@ public class HealthModule extends Module {
     }
 
     public Stat getCurrentHealth(){
-        return healthLevels.get(damageAgg+damageBashing+damageLethal -1);
+        return healthLevels.get(damageAgg+damageBashing+damageLethal);
     }
 
     public void addDamageBashing() {

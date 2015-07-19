@@ -52,8 +52,6 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         View rootView = inflater.inflate(R.layout.fragment_sheet, container, false);
         ButterKnife.bind(this, rootView);
 
-        Log.i(null, "SheetFragment onCreateView");
-
         fm = getFragmentManager();
         character = ((MainActivity) getActivity()).getCurrentCharacter();
 

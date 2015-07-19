@@ -10,30 +10,11 @@ import amagi82.modularcharactersheetcreator.utils.EnumTypeConverter;
 public class Module {
 
     public enum Type {
-        DEFAULT,
-        HEADER(new HeaderModule()),
-        HEALTH(new HealthModule()),
-        STATBLOCK(new StatBlockModule()),
-        STATUS(new StatusModule()),
-        TITLETEXTBLOCK(new TitleTextBlockModule()),
-        BLOODPOOL(new BloodPoolModule());
-
-        Module module;
-
-        Type() {
-        }
-
-        Type(Module module) {
-            this.module = module;
-        }
-
-        public Module getModule() {
-            return module;
-        }
+        DEFAULT, HEADER, HEALTH, STATBLOCK, STATUS, TITLETEXTBLOCK, BLOODPOOL
     }
 
     @JsonField(typeConverter = EnumTypeConverter.class) private Type type;
-    @JsonField private int spanCount;
+    @JsonField private int spanCount = 1;
     @JsonField private String title;
     @JsonField private String text;
 
