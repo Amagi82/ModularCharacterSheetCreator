@@ -41,7 +41,7 @@ public class TabFragment extends Fragment {
         modules = sheet.getModules();
 
         adapter = new SheetAdapter(getResources(), modules);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), spanCount);
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override public int getSpanSize(int position) {
                 return modules.get(position).getSpanCount();
