@@ -102,7 +102,7 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     private void bind(ModuleBlockViewHolder vh, StatBlockModule module) {
         vh.cardRecyclerView.setLayoutManager(new LinearLayoutManager(vh.itemView.getContext()));
         vh.cardRecyclerView.setAdapter(new CardAdapter(module.getStats()));
-        vh.cardRecyclerView.setMinimumHeight(module.getStats().size() * res.getDimensionPixelSize(R.dimen.round_stat_bar_height));
+        vh.cardRecyclerView.setMinimumHeight(module.getStats().size() * res.getDimensionPixelSize(R.dimen.round_stat_bar_extended_height));
     }
 
     private void bind(ModuleStatusViewHolder vh, StatusModule module) {

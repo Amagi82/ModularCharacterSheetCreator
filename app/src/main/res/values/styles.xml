@@ -19,17 +19,16 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="TextHeader" parent="TextAppearance.AppCompat.Headline">
+    <style name="TextHeader" parent="TextAppearance.AppCompat.Title">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingTop">@dimen/default_large_margin</item>
-        <item name="android:paddingLeft">@dimen/default_margin</item>
-        <item name="android:paddingRight">@dimen/default_margin</item>
-        <item name="android:paddingBottom">@dimen/default_large_margin</item>
+        <item name="android:paddingTop">@dimen/default_small_margin</item>
+        <item name="android:paddingBottom">@dimen/default_small_margin</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
 
-    <style name="TextTitle" parent="TextAppearance.AppCompat.Title">
+    <style name="TextTitle" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_horizontal</item>
@@ -66,9 +65,9 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:paddingTop">@dimen/default_large_margin</item>
-        <item name="android:paddingLeft">@dimen/default_margin</item>
-        <item name="android:paddingRight">@dimen/default_margin</item>
+        <item name="android:paddingTop">@dimen/default_margin</item>
+        <item name="android:paddingLeft">@dimen/default_small_margin</item>
+        <item name="android:paddingRight">@dimen/default_small_margin</item>
         <item name="android:paddingBottom">@dimen/default_margin</item>
     </style>
 

@@ -87,7 +87,6 @@ public class Template {
         Log.i(null, "character: "+character.getName());
         Log.i(null, "system: "+ character.getGameSystem().getOnyx().getSystemName());
         Log.i(null, "clan: "+character.getRight().geteName());
-        Log.i(null, "array: "+ CVampire.Clan.valueOf(character.getRight().geteName()).getDisciplineArrayId());
 
         modules.add(new StatBlockModule(getArray(CVampire.Clan.valueOf(
                 character.getRight().geteName()).getDisciplineArrayId()), 0, 5, getString(R.string.disciplines)));
@@ -98,7 +97,7 @@ public class Template {
         modules.add(new StatusModule(getString(R.string.humanity), 1, 10));
         modules.add(new HealthModule(getCWodHealthLevels()));
         modules.add(new StatusModule(getString(R.string.willpower), 1, 10));
-        modules.add(new BloodPoolModule());
+        addBloodpool();
         //Add weakness?
         //Add experience counter
 
@@ -218,8 +217,8 @@ public class Template {
         return getArray(CVampire.Clan.valueOf(character.getGameSystem().getOnyx().getRight().geteName()).getDisciplineArrayId());
     }
 
-    private BloodPoolModule addBloodpool(){
-        return new BloodPoolModule();
+    private void addBloodpool(){
+        modules.add(new BloodPoolModule(getString(R.string.blood_pool)));
     }
 
     private HeaderModule addHeader(String header){

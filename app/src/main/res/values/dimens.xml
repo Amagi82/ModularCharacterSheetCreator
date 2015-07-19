@@ -13,14 +13,14 @@
 
     <dimen name="round_stat_bar_gap">1dp</dimen>
     <dimen name="round_stat_bar_corner_radius">4dp</dimen>
-    <dimen name="round_stat_bar_text_size">16sp</dimen>
-    <dimen name="round_stat_bar_specialty_text_size">14sp</dimen>
-    <dimen name="round_stat_bar_height">22dp</dimen>
-    <dimen name="round_stat_bar_extended_height">30dp</dimen>
+    <dimen name="round_stat_bar_text_size">14sp</dimen>
+    <dimen name="round_stat_bar_specialty_text_size">12sp</dimen>
+    <dimen name="round_stat_bar_height">20dp</dimen>
+    <dimen name="round_stat_bar_extended_height">26dp</dimen>
     <dimen name="row_stat_specialty_margin">20dp</dimen>
 
     <dimen name="card_padding">16dp</dimen>
-    <dimen name="card_margin">4dp</dimen>
+    <dimen name="card_margin">2dp</dimen>
     <dimen name="card_corner_radius">2dp</dimen>
 
     <dimen name="portrait_thumbnail_size">88dp</dimen>

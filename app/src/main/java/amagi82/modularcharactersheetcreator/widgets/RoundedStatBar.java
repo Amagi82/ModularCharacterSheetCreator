@@ -31,7 +31,7 @@ public class RoundedStatBar extends RatingBar {
     private int textColor;
     private float textSize;
     private float textSizeSpecialty;
-//    private int healthBashing = 0;
+    //    private int healthBashing = 0;
 //    private int healthLethal = 0;
 //    private int healthAgg = 0;
     private float gap;
@@ -59,13 +59,11 @@ public class RoundedStatBar extends RatingBar {
         paintBorder.setAntiAlias(true);
         paintBorder.setStrokeWidth(2);
 
-        if (title != null) {
-            textPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-            textPaint.setLinearText(true);
-            textPaint.setColor(textColor);
-            textPaint.setTextSize(textSize);
-            textPaint.setTypeface(Typeface.DEFAULT_BOLD);
-        }
+        textPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        textPaint.setLinearText(true);
+        textPaint.setColor(textColor);
+        textPaint.setTextSize(textSize);
+        textPaint.setTypeface(Typeface.DEFAULT_BOLD);
 
         if (getRating() < ratingMin) setRating(ratingMin);
 
@@ -95,14 +93,14 @@ public class RoundedStatBar extends RatingBar {
         int width;
         int desiredWidth = height * getNumStars();
         if (widthMode == MeasureSpec.EXACTLY) width = widthSize;
-        else if (widthMode == MeasureSpec.AT_MOST) width = Math.min(widthSize, desiredWidth);
+        else if (widthMode == MeasureSpec.AT_MOST) width = widthSize;
         else width = desiredWidth;
 
         float averagePadding = (getPaddingLeft() + getPaddingRight()) / getNumStars();
         rect.set(gap, getPaddingTop(), (width / getNumStars()) - (gap + averagePadding), height - getPaddingBottom() -
                 (specialty == null ? 0 : textSize + getPaddingBottom()));
 
-        if(title != null){
+        if (title != null) {
             xPos = rect.centerX() * .5f;
             yPosTitle = rect.centerY() + textPaint.descent();
             if (specialty != null) yPosSpecialty = height - textPaint.descent() - getPaddingBottom();

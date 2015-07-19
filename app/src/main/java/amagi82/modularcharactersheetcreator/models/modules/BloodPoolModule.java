@@ -11,11 +11,16 @@ public class BloodPoolModule extends Module {
     @JsonField private int bloodPerTurn;
 
     public BloodPoolModule() {
-        this(10,10,1);
+        this(null, 7, 10, 1);
     }
 
-    public BloodPoolModule(int bloodCurrent, int bloodMax, int bloodPerTurn) {
+    public BloodPoolModule(String title) {
+        this(title, 7,10,1);
+    }
+
+    public BloodPoolModule(String title, int bloodCurrent, int bloodMax, int bloodPerTurn) {
         super(Type.BLOODPOOL);
+        setTitle(title);
         this.bloodCurrent = bloodCurrent;
         this.bloodMax = bloodMax;
         this.bloodPerTurn = bloodPerTurn;
