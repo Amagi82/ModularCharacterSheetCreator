@@ -4,9 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:layout_width="120dp"
-
-    card_view:cardCornerRadius="@dimen/card_corner_radius">
+    card_view:cardBackgroundColor="@color/card_background"
+    card_view:cardCornerRadius="@dimen/card_corner_radius"
+    tools:layout_width="120dp">
 
     <RelativeLayout
         style="@style/LinearLayoutWodCardBlock">
@@ -21,9 +21,9 @@
             android:id="@+id/bBloodDecrease"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/spend_blood"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:contentDescription="@string/spend_blood"
             android:paddingTop="@dimen/default_margin"
             android:src="@drawable/ic_chevron_left_grey600_24dp"/>
 
@@ -31,9 +31,9 @@
             android:id="@+id/bBloodIncrease"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/gain_blood"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:contentDescription="@string/gain_blood"
             android:paddingTop="@dimen/default_margin"
             android:src="@drawable/ic_chevron_right_grey600_24dp"/>
 
@@ -53,9 +53,9 @@
         <TextView
             android:id="@+id/tvBloodPerTurn"
             style="@style/TextBody"
-            android:textSize="10sp"
             android:layout_below="@id/circleProgress"
             android:layout_centerHorizontal="true"
+            android:textSize="10sp"
             tools:text="Blood Per Turn: 2"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

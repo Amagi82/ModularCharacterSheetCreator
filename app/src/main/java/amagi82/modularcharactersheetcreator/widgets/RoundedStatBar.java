@@ -14,6 +14,7 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.widget.RatingBar;
 
+import amagi82.modularcharactersheetcreator.App;
 import amagi82.modularcharactersheetcreator.R;
 
 public class RoundedStatBar extends RatingBar {
@@ -67,14 +68,16 @@ public class RoundedStatBar extends RatingBar {
 
         if (getRating() < ratingMin) setRating(ratingMin);
 
-        GradientDrawable gradient = new GradientDrawable();
-        gradient.setShape(GradientDrawable.RECTANGLE);
-        gradient.setColor(colorBackground);
-        gradient.setCornerRadius(cornerRadius + (gap + getPaddingTop()) / 2);
+        if(colorBackground != App.NONE){
+            GradientDrawable gradient = new GradientDrawable();
+            gradient.setShape(GradientDrawable.RECTANGLE);
+            gradient.setColor(colorBackground);
+            gradient.setCornerRadius(cornerRadius + (gap + getPaddingTop()) / 2);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) setBackground(gradient);
-        else //noinspection deprecation
-            setBackgroundDrawable(gradient);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) setBackground(gradient);
+            else //noinspection deprecation
+                setBackgroundDrawable(gradient);
+        }
     }
 
     @Override
@@ -160,7 +163,7 @@ public class RoundedStatBar extends RatingBar {
             ratingMin = a.getInt(R.styleable.RoundedStatBar_rsb_ratingMin, 1);
             ratingBase = a.getInt(R.styleable.RoundedStatBar_rsb_ratingBase, (int) getRating());
             ratingMax = a.getInt(R.styleable.RoundedStatBar_rsb_ratingMax, getNumStars());
-            colorBackground = a.getColor(R.styleable.RoundedStatBar_rsb_colorBackground, getResources().getColor(R.color.round_stat_bar_background));
+            colorBackground = a.getColor(R.styleable.RoundedStatBar_rsb_colorBackground, App.NONE);
             colorFill = a.getColor(R.styleable.RoundedStatBar_rsb_colorFill, getResources().getColor(R.color.round_stat_bar_fill));
             colorFillSecondary = a.getColor(R.styleable.RoundedStatBar_rsb_colorFillSecondary, getResources().getColor(R.color.round_stat_bar_secondary));
             colorBorder = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorder, getResources().getColor(R.color.round_stat_bar_border));
