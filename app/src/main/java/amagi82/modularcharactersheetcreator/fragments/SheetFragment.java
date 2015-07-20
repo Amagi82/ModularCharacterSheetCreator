@@ -14,7 +14,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import amagi82.modularcharactersheetcreator.App;
 import amagi82.modularcharactersheetcreator.MainActivity;
@@ -25,9 +28,7 @@ import amagi82.modularcharactersheetcreator.models.Choice;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.modules.HeaderModule;
-import amagi82.modularcharactersheetcreator.network.VolleySingleton;
 import amagi82.modularcharactersheetcreator.utils.Otto;
-import amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -36,10 +37,10 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
 
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
     @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.imagePortrait) AnimatedNetworkImageView imagePortrait;
-    @Bind(R.id.iconLeft) AnimatedNetworkImageView iconLeft;
+    @Bind(R.id.imagePortrait) ImageView imagePortrait;
+    @Bind(R.id.iconLeft) ImageView iconLeft;
     @Bind(R.id.tvIconLeft) TextView tvIconLeft;
-    @Bind(R.id.iconRight) AnimatedNetworkImageView iconRight;
+    @Bind(R.id.iconRight) ImageView iconRight;
     @Bind(R.id.tvIconRight) TextView tvIconRight;
     @Bind(R.id.tabs) TabLayout tabLayout;
     @Bind(R.id.viewpager) ViewPager viewPager;
@@ -52,17 +53,17 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_sheet, container, false);
         ButterKnife.bind(this, rootView);
-
         fm = getFragmentManager();
         character = ((MainActivity) getActivity()).getCurrentCharacter();
-
         collapsingToolbar.setTitle(character.getName());
-        iconLeft.setImageUrl(getUrl(character.getLeft()), VolleySingleton.INSTANCE.getImageLoader());
+
+        if(character.getPortraitUri() != null) Glide.with(this).load(character.getPortraitUri()).into(imagePortrait);
+        Glide.with(this).load(getUrl(character.getLeft())).into(iconLeft);
         tvIconLeft.setText(character.getLeft().getTitle());
 
         if(character.getGameSystem().getOnyx().hasRight()) {
             tvIconRight.setText(character.getRight().getTitle());
-            iconRight.setImageUrl(getUrl(character.getRight()), VolleySingleton.INSTANCE.getImageLoader());
+            Glide.with(this).load(getUrl(character.getRight())).into(iconRight);
         }
 
         adapter = new ViewPagerAdapter(fm, character.getSheets());

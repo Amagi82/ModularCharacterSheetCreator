@@ -1,7 +1,6 @@
 package amagi82.modularcharactersheetcreator.models;
 
 
-import android.graphics.Bitmap;
 import android.net.Uri;
 
 import com.bluelinelabs.logansquare.annotation.JsonField;
@@ -16,7 +15,6 @@ import amagi82.modularcharactersheetcreator.models.game_systems.Onyx;
 
 @JsonObject
 public class GameCharacter {
-
     @JsonField private String name = "";
     @JsonField private String gameEName;
     @JsonField private Choice left;
@@ -29,9 +27,9 @@ public class GameCharacter {
     @JsonField private int colorTitles;
     @JsonField private String entityId = UUID.randomUUID().toString();
     @JsonField private long timeStamp;
-    private Bitmap icon;
-    private Uri portraitUri;
     @JsonField private List<Sheet> sheets = new ArrayList<>();
+    @JsonField private String portraitUriString;
+    private Uri portraitUri;
 
     public GameCharacter() {
         timeStamp = System.currentTimeMillis();
@@ -41,38 +39,6 @@ public class GameCharacter {
         this.name = name;
         setOnyx(onyx);
         timeStamp = System.currentTimeMillis();
-    }
-
-//    private void writeObject(ObjectOutputStream oos) throws IOException {
-//        // This will serialize all fields that you did not mark with 'transient'
-//        // (Java's default behaviour)
-//        oos.defaultWriteObject();
-//        // Manually serialize all transient fields that you want to be serialized
-//        if(icon !=null){
-//            ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-//            boolean success = icon.compress(Bitmap.CompressFormat.PNG, 100, byteStream);
-//            if(success){
-//                oos.writeObject(byteStream.toByteArray());
-//            }
-//        }
-//    }
-//
-//    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException{
-//        // Deserializing non-transient fields
-//        ois.defaultReadObject();
-//        // All other fields that you serialized
-//        byte[] image = (byte[]) ois.readObject();
-//        if(image != null && image.length > 0){
-//            icon = BitmapFactory.decodeByteArray(image, 0, image.length);
-//        }
-//    }
-
-    public Bitmap getIcon() {
-        return icon;
-    }
-
-    public void setIcon(Bitmap icon) {
-        this.icon = icon;
     }
 
     public String getName() {
@@ -132,14 +98,6 @@ public class GameCharacter {
 
     public void setColorTitles(int colorTitles) {
         this.colorTitles = colorTitles;
-    }
-
-    public Uri getPortraitUri() {
-        return portraitUri;
-    }
-
-    public void setPortraitUri(Uri portraitUri) {
-        this.portraitUri = portraitUri;
     }
 
     public String getEntityId() {
@@ -204,5 +162,23 @@ public class GameCharacter {
 
     public void setSheets(List<Sheet> sheets) {
         this.sheets = sheets;
+    }
+
+    public Uri getPortraitUri() {
+        return portraitUri;
+    }
+
+    public void setPortraitUri(Uri portraitUri) {
+        this.portraitUri = portraitUri;
+        portraitUriString = portraitUri.getEncodedPath();
+    }
+
+    public String getPortraitUriString() {
+        return portraitUriString;
+    }
+
+    public void setPortraitUriString(String portraitUriString) {
+        this.portraitUriString = portraitUriString;
+        portraitUri = Uri.parse(portraitUriString);
     }
 }

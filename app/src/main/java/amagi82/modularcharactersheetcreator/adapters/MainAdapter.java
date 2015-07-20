@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -20,6 +22,7 @@ public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
 
     SortedList<GameCharacter> characters;
     private CircleIcon iconFactory;
+    private Context context;
     private Resources res;
 
     public MainAdapter(Context context) {
@@ -52,6 +55,7 @@ public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
                 return item1.getEntityId().equals(item2.getEntityId());
             }
         });
+        this.context = context;
         res = context.getResources();
         iconFactory = new CircleIcon(context);
     }
@@ -66,16 +70,15 @@ public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final CharacterViewHolder vh, final int position) {
-        final GameCharacter gameCharacter = characters.get(position);
-        if(gameCharacter.getIcon() == null){
-            int color = gameCharacter.getColorPrimary() < 1? res.getColor(R.color.primary) : gameCharacter.getColorPrimary();
-            gameCharacter.setIcon(iconFactory.createIcon(gameCharacter.getName(), color));
-        }
-        vh.icon.setImageBitmap(gameCharacter.getIcon());
-        vh.tvName.setText(gameCharacter.getName());
-        vh.tvArchetype.setText(gameCharacter.getArchetype());
-        vh.tvGameSystem.setTextColor(res.getColor(gameCharacter.getGameSystem().getColor()));
-        vh.tvGameSystem.setText(gameCharacter.getGameSystem().getName());
+        final GameCharacter character = characters.get(position);
+        if(character.getPortraitUri() == null){
+            int color = character.getColorPrimary() < 1? res.getColor(R.color.primary) : character.getColorPrimary();
+            vh.icon.setImageBitmap(iconFactory.createIcon(character.getName(), color));
+        }else Glide.with(context).load(character.getPortraitUri()).into(vh.icon);
+        vh.tvName.setText(character.getName());
+        vh.tvArchetype.setText(character.getArchetype());
+        vh.tvGameSystem.setTextColor(res.getColor(character.getGameSystem().getColor()));
+        vh.tvGameSystem.setText(character.getGameSystem().getName());
         vh.gameCharacter = characters.get(position);
     }
 

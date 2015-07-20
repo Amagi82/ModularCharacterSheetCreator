@@ -1,10 +1,14 @@
 package amagi82.modularcharactersheetcreator.fragments;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -22,10 +26,15 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.edmodo.cropper.CropImageView;
+import com.bumptech.glide.Glide;
 import com.squareup.otto.Subscribe;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.App;
@@ -41,35 +50,32 @@ import amagi82.modularcharactersheetcreator.models.Choice;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.game_systems.Game;
 import amagi82.modularcharactersheetcreator.models.game_systems.Onyx;
-import amagi82.modularcharactersheetcreator.network.VolleySingleton;
 import amagi82.modularcharactersheetcreator.utils.Otto;
-import amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener {
 
+    private static final int REQUEST_IMAGE_CAPTURE = 90;
+    private static final int PICK_FROM_FILE = 91;
     @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.imagePortrait) AnimatedNetworkImageView imagePortrait;
+    @Bind(R.id.imagePortrait) ImageView imagePortrait;
     @Bind(R.id.textInputLayout) TextInputLayout textInputLayout;
-    @Bind(R.id.iconLeft) AnimatedNetworkImageView iconLeft;
+    @Bind(R.id.iconLeft) ImageView iconLeft;
     @Bind(R.id.tvIconLeft) TextView tvIconLeft;
-    @Bind(R.id.iconRight) AnimatedNetworkImageView iconRight;
+    @Bind(R.id.iconRight) ImageView iconRight;
     @Bind(R.id.tvIconRight) TextView tvIconRight;
     @Bind(R.id.tvGameSystem) TextView tvGameSystem;
     @Bind(R.id.fab) FloatingActionButton fab;
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
     @Bind(R.id.imageOnyxLogo) ImageView imageOnyxLogo;
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
-    private static final int PICK_FROM_FILE = 2;
     private GameCharacter character;
     private Game game = new Game();
     private Onyx onyx;
     private CharacterAdapter characterAdapter;
     private boolean isEditMode = false;
     private Uri photoUri;
-    private CropImageView cropper;
     private SortedList<Choice> sortedList;
 
     @Override
@@ -119,7 +125,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         if (isEditMode) {
             Log.i(null, "edit mode");
             character = ((MainActivity) getActivity()).getCurrentCharacter();
-            if (character.getPortraitUri() != null) imagePortrait.setImageURI(character.getPortraitUri());
+            if (character.getPortraitUri() != null) Glide.with(this).load(character.getPortraitUri()).into(imagePortrait);
             onyx = character.getGameSystem().getOnyx();
             onyx.setLeft(character.getLeft().geteName());
             if (onyx.hasRight()) onyx.setRight(character.getRight().geteName());
@@ -183,7 +189,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         removeOnyxPathLogo();
         clearIcons();
         if (tvGameSystem.getVisibility() != View.VISIBLE) displayGameSystem();
-
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
         characterAdapter.setLeft(true);
         updateSortedList(onyx.getListLeft(null), true);
@@ -192,7 +197,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @OnClick({R.id.iconRight, R.id.tvIconRight})
     public void chooseRightCategory() {
         removeOnyxPathLogo();
-
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
         characterAdapter.setLeft(false);
         updateSortedList(onyx.getListRight(null), true);
@@ -252,14 +256,14 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         tvIconLeft.setVisibility(View.VISIBLE);
         iconLeft.setVisibility(View.VISIBLE);
         tvIconLeft.setText(onyx.getLeft().getTitle());
-        iconLeft.setImageUrl((onyx.getLeft().getUrl() != App.NONE) ? getUrl(onyx.getLeft()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
+        Glide.with(this).load((onyx.getLeft().getUrl() != App.NONE) ? getUrl(onyx.getLeft()) : getString(R.string.url_default)).into(iconLeft);
     }
 
     private void setRightResources() {
         tvIconRight.setVisibility(View.VISIBLE);
         iconRight.setVisibility(View.VISIBLE);
         tvIconRight.setText(onyx.getRight().getTitle());
-        iconRight.setImageUrl((onyx.getRight().getUrl() != App.NONE) ? getUrl(onyx.getRight()) : getString(R.string.url_default), VolleySingleton.INSTANCE.getImageLoader());
+        Glide.with(this).load((onyx.getRight().getUrl() != App.NONE) ? getUrl(onyx.getRight()) : getString(R.string.url_default)).into(iconRight);
     }
 
     private String getUrl(Choice choice) {
@@ -328,83 +332,56 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         Otto.BUS.getBus().unregister(this);
     }
 
-//    @OnClick(R.id.fab)
-//    void getPhoto(){
-//        new AlertDialog.Builder(getActivity()).setItems(character.getPortraitUri() == null ?
-//                R.array.portrait_choices_initial : R.array.portrait_choices, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                switch (which) {
-//                    case 0:
-//                        //Get image from camera. Check to make sure device is equipped with a camera
-//                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                        // Ensure that there's a camera activity to handle the intent
-//                        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-//                            // Create the File where the photo should go
-//                            File photoFile = null;
-//                            try {
-//                                photoFile = createImageFile("IMG_");
-//                            } catch (IOException e) {
-//                                // Error occurred while creating the File
-//                                e.printStackTrace();
-//                            }
-//                            // Continue only if the File was successfully created
-//                            if (photoFile != null) {
-//                                photoUri = Uri.fromFile(photoFile);
-//                                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-//                                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//                            }
-//                        } else {
-//                            Toast.makeText(getActivity(), "No camera app detected on your device", Toast.LENGTH_SHORT).show();
-//                        }
-//                        break;
-//                    case 1:
-//                        //Get image from gallery
-//                        Intent intentFromGallery = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
-//                        startActivityForResult(Intent.createChooser(intentFromGallery, "Complete action using"), PICK_FROM_FILE);
-//                        break;
-//                    case 2:
-//                        //Just use the default icon
-//                        character.setPortraitUri(null);
-//                        character.setIcon(null);
-//                        imagePortrait.setImageResource(0);
-//                        break;
-//                }
-//            }
-//        }).show();
-//    }
+    @OnClick(R.id.fab)
+    void getPhoto(){
+        new AlertDialog.Builder(getActivity()).setItems(character.getPortraitUri() == null ?
+                R.array.portrait_choices_initial : R.array.portrait_choices, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        //Get image from camera. Check to make sure device is equipped with a camera
+                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        // Ensure that there's a camera activity to handle the intent
+                        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                            try {
+                                // Create the File where the photo should go
+                                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                                File photoFile = File.createTempFile("IMG_" + timeStamp, ".jpg",
+                                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
+                                photoUri = Uri.fromFile(photoFile);
+                                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
 
-//    String mCurrentPhotoPath;
-//
-//    private File createImageFile(String prefix) throws IOException {
-//        // Create an image file name
-//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//        String imageFileName = prefix + timeStamp;
-//        File image = File.createTempFile(
-//                imageFileName,  /* prefix */
-//                ".jpg",         /* suffix */
-//                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)      /* directory */
-//        );
-//
-//        // Save a file: path for use with ACTION_VIEW intents
-//        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
-//        return image;
-//    }
-//
-//    private void galleryAddPic() {
-//        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-//        File f = new File(mCurrentPhotoPath);
-//        Uri contentUri = Uri.fromFile(f);
-//        mediaScanIntent.setData(contentUri);
-//        getActivity().sendBroadcast(mediaScanIntent);
-//    }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else Toast.makeText(getActivity(), "No camera app detected on your device", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        //Get image from gallery
+                        Intent intentFromGallery = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
+                        startActivityForResult(Intent.createChooser(intentFromGallery, "Complete action using"), PICK_FROM_FILE);
+                        break;
+                    case 2:
+                        //Remove the portrait and use the default icon
+                        character.setPortraitUri(null);
+                        imagePortrait.setImageResource(0);
+                        break;
+                }
+            }
+        }).show();
+    }
 
     //Called when an image is selected from the camera or the gallery, and lets you crop it into an icon
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (resultCode != Activity.RESULT_OK) return;
-//        if (data != null) photoUri = data.getData();
-//
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) return;
+        if (data != null) photoUri = data.getData();
+        character.setPortraitUri(photoUri);
+        Glide.with(this).load(photoUri).into(imagePortrait);
+
+
 //        try {
 //            //Measure the size of the image without loading it into memory
 //            InputStream input = getActivity().getContentResolver().openInputStream(photoUri);
@@ -457,7 +434,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-//    }
+    }
 
 //    private void setIcon(Bitmap bitmap) {
 //        LayoutInflater inflater = getActivity().getLayoutInflater();

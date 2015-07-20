@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView
+    <ImageView
         android:id="@+id/imagePortrait"
         android:layout_width="match_parent"
         android:layout_height="@dimen/image_portrait_height"
@@ -21,7 +21,7 @@
         android:layout_height="?attr/actionBarSize"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView
+    <ImageView
         android:id="@+id/iconLeft"
         style="@style/CircleIcon.CharacterFragment"
         tools:src="@drawable/clan_icon"/>
@@ -31,7 +31,7 @@
         style="@style/CircleIconCaption"
         tools:text="Left"/>
 
-    <amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView
+    <ImageView
         android:id="@+id/iconRight"
         style="@style/CircleIcon.CharacterFragment"
         android:layout_alignParentRight="true"
