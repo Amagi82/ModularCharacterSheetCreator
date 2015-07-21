@@ -123,7 +123,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             if (onyx.hasRight()) onyx.setRight(character.getRight().geteName());
             displayGameSystem();
             setLeftResources();
-            setRightResources();
+            if(onyx.hasRight()) setRightResources();
             displayOnyxPathLogo();
         } else {
             if (character == null) character = new GameCharacter();

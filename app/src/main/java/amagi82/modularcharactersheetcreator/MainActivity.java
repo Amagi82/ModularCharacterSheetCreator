@@ -164,11 +164,11 @@ public class MainActivity extends AppCompatActivity {
     @Subscribe
     public void onCharacterDeleted(CharacterDeletedEvent event) {
         fm.popBackStack();
-        for (GameCharacter character : characters) {
-            if (character.getEntityId().equals(event.character.getEntityId())) {
-                NoSQL.with(this).using(GameCharacter.class).bucketId(BUCKET).entityId(character.getEntityId()).delete();
-                characters.remove(character);
-                Log.i(null, character.getName() + " has been deleted");
+        for (int i = characters.size() - 1; i>= 0; i--) {
+            if (characters.get(i).getEntityId().equals(event.character.getEntityId())) {
+                NoSQL.with(this).using(GameCharacter.class).bucketId(BUCKET).entityId(event.character.getEntityId()).delete();
+                characters.remove(characters.get(i));
+                break;
             }
         }
     }
