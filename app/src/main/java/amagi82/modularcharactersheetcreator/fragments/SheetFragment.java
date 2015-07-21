@@ -2,6 +2,7 @@ package amagi82.modularcharactersheetcreator.fragments;
 
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -37,6 +38,7 @@ import butterknife.OnClick;
 public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener{
 
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
+    @Bind(R.id.appbar) AppBarLayout appBarLayout;
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.imagePortrait) ImageView imagePortrait;
     @Bind(R.id.iconLeft) ImageView iconLeft;
@@ -58,7 +60,17 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         character = ((MainActivity) getActivity()).getCurrentCharacter();
         collapsingToolbar.setTitle(character.getName());
 
+//        if(character.getPortraitUri() != null){
+//            try {
+//                InputStream inputStream = getActivity().getContentResolver().openInputStream(character.getPortraitUri());
+//                appBarLayout.setBackground(Drawable.createFromStream(inputStream, character.getPortraitUri().toString()));
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
         if(character.getPortraitUri() != null) Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
+
         Glide.with(this).load(getUrl(character.getLeft())).centerCrop().into(iconLeft);
         tvIconLeft.setText(character.getLeft().getTitle());
 
