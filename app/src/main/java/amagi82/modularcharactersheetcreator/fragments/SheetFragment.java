@@ -23,6 +23,7 @@ import amagi82.modularcharactersheetcreator.App;
 import amagi82.modularcharactersheetcreator.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.ViewPagerAdapter;
+import amagi82.modularcharactersheetcreator.events.EditCharacterEvent;
 import amagi82.modularcharactersheetcreator.events.ModuleAddedEvent;
 import amagi82.modularcharactersheetcreator.models.Choice;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
@@ -116,6 +117,10 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
 
     @Override public boolean onMenuItemClick(MenuItem item) {
         switch(item.getItemId()){
+            case R.id.action_edit:
+                //Update any character info before editing.
+                Otto.BUS.getBus().post(new EditCharacterEvent(character));
+                return true;
             case R.id.action_tab_add:
                 Sheet sheet = new Sheet();
                 sheet.setTitle("New Sheet");

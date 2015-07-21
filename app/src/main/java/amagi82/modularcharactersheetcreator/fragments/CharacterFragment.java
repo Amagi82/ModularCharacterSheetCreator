@@ -46,6 +46,7 @@ import amagi82.modularcharactersheetcreator.utils.Otto;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import static amagi82.modularcharactersheetcreator.MainActivity.EDIT_MODE;
 
 public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener {
 
@@ -111,10 +112,11 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         recyclerView.setAdapter(characterAdapter);
 
         //Check if we're editing a character or creating a new one
-        isEditMode = getArguments() != null && getArguments().getBoolean("isEditMode", false);
+        isEditMode = getArguments() != null && getArguments().getBoolean(EDIT_MODE, false);
         if (isEditMode) {
             Log.i(null, "edit mode");
             character = ((MainActivity) getActivity()).getCurrentCharacter();
+            textInputLayout.getEditText().setText(character.getName());
             if (character.getPortraitUri() != null) Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
             onyx = character.getGameSystem().getOnyx();
             onyx.setLeft(character.getLeft().geteName());
@@ -122,6 +124,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             displayGameSystem();
             setLeftResources();
             setRightResources();
+            displayOnyxPathLogo();
         } else {
             if (character == null) character = new GameCharacter();
             if (onyx == null) chooseNewGameSystem();
@@ -367,7 +370,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                             @Override public void onClick(DialogInterface dialog, int which) {
                                 Otto.BUS.getBus().post(new CharacterDeletedEvent(character));
                                 character = null;
-                                finish();
                             }
                         }).show();
                 return true;

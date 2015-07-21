@@ -20,6 +20,7 @@ import amagi82.modularcharactersheetcreator.events.CharacterChangedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterClickedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterDeletedEvent;
 import amagi82.modularcharactersheetcreator.events.CreateNewCharacterEvent;
+import amagi82.modularcharactersheetcreator.events.EditCharacterEvent;
 import amagi82.modularcharactersheetcreator.fragments.CharacterFragment;
 import amagi82.modularcharactersheetcreator.fragments.MainFragment;
 import amagi82.modularcharactersheetcreator.fragments.SheetFragment;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String CURRENT_CHARACTER = "currentCharacter";
     public static final String CHARACTERS = "characters";
     public static final String BUCKET = "bucket";
+    public static final String EDIT_MODE = "EditMode";
     private FragmentManager fm = getSupportFragmentManager();
     private List<GameCharacter> characters;
     private GameCharacter currentCharacter;
@@ -161,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Subscribe
     public void onCharacterDeleted(CharacterDeletedEvent event) {
+        fm.popBackStack();
         for (GameCharacter character : characters) {
             if (character.getEntityId().equals(event.character.getEntityId())) {
                 NoSQL.with(this).using(GameCharacter.class).bucketId(BUCKET).entityId(character.getEntityId()).delete();
@@ -173,6 +176,17 @@ public class MainActivity extends AppCompatActivity {
     @Subscribe
     public void onCreateNewCharacter(CreateNewCharacterEvent event) {
         fm.beginTransaction().replace(R.id.container, new CharacterFragment()).addToBackStack(null).commit();
+    }
+
+    @Subscribe
+    public void onEditCharacter(EditCharacterEvent event) {
+        currentCharacter = event.character;
+        fm.popBackStack();
+        CharacterFragment fragment = new CharacterFragment();
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(EDIT_MODE, true);
+        fragment.setArguments(bundle);
+        fm.beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
     }
 
     @Subscribe
