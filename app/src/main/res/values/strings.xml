@@ -57,15 +57,9 @@
     <string name="templates">Templates</string>
     <string name="action_save_template">Save template</string>
 
-    <string-array name="portrait_choices_initial">
-        <item>Take photo</item>
-        <item>Choose photo</item>
-    </string-array>
-
     <string-array name="portrait_choices">
-        <item>Take new photo</item>
-        <item>Choose new photo</item>
         <item>Remove photo</item>
+        <item>Choose new photo</item>
     </string-array>
 
 </resources>

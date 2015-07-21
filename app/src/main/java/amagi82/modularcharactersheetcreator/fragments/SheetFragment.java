@@ -57,13 +57,13 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         character = ((MainActivity) getActivity()).getCurrentCharacter();
         collapsingToolbar.setTitle(character.getName());
 
-        if(character.getPortraitUri() != null) Glide.with(this).load(character.getPortraitUri()).into(imagePortrait);
-        Glide.with(this).load(getUrl(character.getLeft())).into(iconLeft);
+        if(character.getPortraitUri() != null) Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
+        Glide.with(this).load(getUrl(character.getLeft())).centerCrop().into(iconLeft);
         tvIconLeft.setText(character.getLeft().getTitle());
 
         if(character.getGameSystem().getOnyx().hasRight()) {
             tvIconRight.setText(character.getRight().getTitle());
-            Glide.with(this).load(getUrl(character.getRight())).into(iconRight);
+            Glide.with(this).load(getUrl(character.getRight())).centerCrop().into(iconRight);
         }
 
         adapter = new ViewPagerAdapter(fm, character.getSheets());

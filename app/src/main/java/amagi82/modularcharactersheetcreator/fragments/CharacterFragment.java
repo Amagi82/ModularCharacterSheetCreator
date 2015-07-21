@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -26,15 +24,10 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.squareup.otto.Subscribe;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.App;
@@ -125,7 +118,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         if (isEditMode) {
             Log.i(null, "edit mode");
             character = ((MainActivity) getActivity()).getCurrentCharacter();
-            if (character.getPortraitUri() != null) Glide.with(this).load(character.getPortraitUri()).into(imagePortrait);
+            if (character.getPortraitUri() != null) Glide.with(this).load(photoUri).centerCrop().into(imagePortrait);
             onyx = character.getGameSystem().getOnyx();
             onyx.setLeft(character.getLeft().geteName());
             if (onyx.hasRight()) onyx.setRight(character.getRight().geteName());
@@ -256,14 +249,14 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         tvIconLeft.setVisibility(View.VISIBLE);
         iconLeft.setVisibility(View.VISIBLE);
         tvIconLeft.setText(onyx.getLeft().getTitle());
-        Glide.with(this).load((onyx.getLeft().getUrl() != App.NONE) ? getUrl(onyx.getLeft()) : getString(R.string.url_default)).into(iconLeft);
+        Glide.with(this).load((onyx.getLeft().getUrl() != App.NONE) ? getUrl(onyx.getLeft()) : getString(R.string.url_default)).centerCrop().into(iconLeft);
     }
 
     private void setRightResources() {
         tvIconRight.setVisibility(View.VISIBLE);
         iconRight.setVisibility(View.VISIBLE);
         tvIconRight.setText(onyx.getRight().getTitle());
-        Glide.with(this).load((onyx.getRight().getUrl() != App.NONE) ? getUrl(onyx.getRight()) : getString(R.string.url_default)).into(iconRight);
+        Glide.with(this).load((onyx.getRight().getUrl() != App.NONE) ? getUrl(onyx.getRight()) : getString(R.string.url_default)).centerCrop().into(iconRight);
     }
 
     private String getUrl(Choice choice) {
@@ -334,132 +327,35 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
     @OnClick(R.id.fab)
     void getPhoto(){
-        new AlertDialog.Builder(getActivity()).setItems(character.getPortraitUri() == null ?
-                R.array.portrait_choices_initial : R.array.portrait_choices, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0:
-                        //Get image from camera. Check to make sure device is equipped with a camera
-                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        // Ensure that there's a camera activity to handle the intent
-                        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                            try {
-                                // Create the File where the photo should go
-                                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                                File photoFile = File.createTempFile("IMG_" + timeStamp, ".jpg",
-                                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
-                                photoUri = Uri.fromFile(photoFile);
-                                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-                                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        } else Toast.makeText(getActivity(), "No camera app detected on your device", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 1:
-                        //Get image from gallery
-                        Intent intentFromGallery = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
-                        startActivityForResult(Intent.createChooser(intentFromGallery, "Complete action using"), PICK_FROM_FILE);
-                        break;
-                    case 2:
+        if(character.getPortraitUri() == null) getImageFromGallery();
+        else{
+            new AlertDialog.Builder(getActivity()).setItems(R.array.portrait_choices, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if(which == 0){
                         //Remove the portrait and use the default icon
                         character.setPortraitUri(null);
                         imagePortrait.setImageResource(0);
-                        break;
+                    }else getImageFromGallery();
                 }
-            }
-        }).show();
+            }).show();
+        }
+    }
+
+    private void getImageFromGallery() {
+        Intent intentFromGallery = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intentFromGallery, "Complete action using"), PICK_FROM_FILE);
     }
 
     //Called when an image is selected from the camera or the gallery, and lets you crop it into an icon
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != Activity.RESULT_OK) return;
-        if (data != null) photoUri = data.getData();
+        if (resultCode != Activity.RESULT_OK || data == null) return;
+        photoUri = data.getData();
         character.setPortraitUri(photoUri);
-        Glide.with(this).load(photoUri).into(imagePortrait);
 
-
-//        try {
-//            //Measure the size of the image without loading it into memory
-//            InputStream input = getActivity().getContentResolver().openInputStream(photoUri);
-//            BitmapFactory.Options bitmapInfo = new BitmapFactory.Options();
-//            bitmapInfo.inJustDecodeBounds = true;
-//            BitmapFactory.decodeStream(input, null, bitmapInfo);
-//            input.close();
-//            if ((bitmapInfo.outWidth == -1) || (bitmapInfo.outHeight == -1)) return;
-//
-//            //Get screen size, and find ratio of image size to screen size
-//            WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-//            Point size = new Point();
-//            wm.getDefaultDisplay().getSize(size);
-//            wm = null;
-//            double ratio = Math.max(bitmapInfo.outHeight / (size.y), bitmapInfo.outWidth / (size.x));
-//
-//            //Scale image size down to match screen size
-//            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-//            bitmapOptions.inSampleSize = (int) ratio;
-//            bitmapOptions.inPreferredConfig= Bitmap.Config.ARGB_8888;//optional
-//            input = getActivity().getContentResolver().openInputStream(photoUri);
-//            final Bitmap bitmap = BitmapFactory.decodeStream(input, null, bitmapOptions);
-//            input.close();
-//
-//            LayoutInflater inflater = getActivity().getLayoutInflater();
-//            final View cropImageView = inflater.inflate(R.layout.dialog_crop_image, null);
-//            cropper = (CropImageView) cropImageView.findViewById(R.id.cropImageView);
-//            cropper.setImageBitmap(bitmap);
-//
-//            new AlertDialog.Builder(getActivity())
-//                    .setTitle(getResources().getString(R.string.crop_image_portrait))
-//                    .setView(cropImageView)
-//                    .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            imagePortrait.setImageBitmap(cropper.getCroppedImage());
-//                            character.setPortraitUri(Uri.parse(MediaStore.Images.Media.insertImage(
-//                                    getActivity().getContentResolver(), cropper.getCroppedImage(), character.getName(), character.getGameSystem())));
-//                            Log.i(null, "portrait uri == "+character.getPortraitUri()+" and as a string: "+character.getPortraitUri().toString());
-//                            setIcon(bitmap);
-//                        }
-//                    })
-//                    .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            setIcon(bitmap);
-//                        }
-//                    }).show();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        Glide.with(this).load(photoUri).centerCrop().into(imagePortrait);
     }
-
-//    private void setIcon(Bitmap bitmap) {
-//        LayoutInflater inflater = getActivity().getLayoutInflater();
-//        final View cropImageView = inflater.inflate(R.layout.dialog_crop_image, null);
-//        cropper = (CropImageView) cropImageView.findViewById(R.id.cropImageView);
-//        cropper.setImageBitmap(bitmap);
-//
-//        new AlertDialog.Builder(getActivity())
-//                .setTitle(getResources().getString(R.string.crop_image_icon))
-//                .setView(cropImageView)
-//                .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        Bitmap croppedBitmap = cropper.getCroppedImage();
-//                        int circleImageSize = (int) getResources().getDimension(R.dimen.circle_icon_size);
-//                        croppedBitmap = Bitmap.createScaledBitmap(croppedBitmap, circleImageSize, circleImageSize, true);
-//                        character.setIcon(croppedBitmap);
-//                    }
-//                })
-//                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                    }
-//                }).show();
-//    }
 
     //Up navigation
     @Override

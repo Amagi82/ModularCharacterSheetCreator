@@ -170,7 +170,7 @@ public class GameCharacter {
 
     public void setPortraitUri(Uri portraitUri) {
         this.portraitUri = portraitUri;
-        portraitUriString = portraitUri.getEncodedPath();
+        portraitUriString = portraitUri == null? null : portraitUri.getEncodedPath();
     }
 
     public String getPortraitUriString() {
@@ -179,6 +179,6 @@ public class GameCharacter {
 
     public void setPortraitUriString(String portraitUriString) {
         this.portraitUriString = portraitUriString;
-        portraitUri = Uri.parse(portraitUriString);
+        portraitUri = portraitUriString == null? null : Uri.parse(portraitUriString);
     }
 }

@@ -74,7 +74,7 @@ public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
         if(character.getPortraitUri() == null){
             int color = character.getColorPrimary() < 1? res.getColor(R.color.primary) : character.getColorPrimary();
             vh.icon.setImageBitmap(iconFactory.createIcon(character.getName(), color));
-        }else Glide.with(context).load(character.getPortraitUri()).into(vh.icon);
+        }else Glide.with(context).load(character.getPortraitUri()).centerCrop().into(vh.icon);
         vh.tvName.setText(character.getName());
         vh.tvArchetype.setText(character.getArchetype());
         vh.tvGameSystem.setTextColor(res.getColor(character.getGameSystem().getColor()));
