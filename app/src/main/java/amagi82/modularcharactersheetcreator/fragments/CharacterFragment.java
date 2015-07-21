@@ -3,7 +3,6 @@ package amagi82.modularcharactersheetcreator.fragments;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -50,8 +49,7 @@ import butterknife.OnClick;
 
 public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener {
 
-    private static final int REQUEST_IMAGE_CAPTURE = 90;
-    private static final int PICK_FROM_FILE = 91;
+    private static final int PICK_FROM_FILE = 90;
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.imagePortrait) ImageView imagePortrait;
     @Bind(R.id.textInputLayout) TextInputLayout textInputLayout;
@@ -68,7 +66,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     private Onyx onyx;
     private CharacterAdapter characterAdapter;
     private boolean isEditMode = false;
-    private Uri photoUri;
     private SortedList<Choice> sortedList;
 
     @Override
@@ -118,7 +115,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         if (isEditMode) {
             Log.i(null, "edit mode");
             character = ((MainActivity) getActivity()).getCurrentCharacter();
-            if (character.getPortraitUri() != null) Glide.with(this).load(photoUri).centerCrop().into(imagePortrait);
+            if (character.getPortraitUri() != null) Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
             onyx = character.getGameSystem().getOnyx();
             onyx.setLeft(character.getLeft().geteName());
             if (onyx.hasRight()) onyx.setRight(character.getRight().geteName());
@@ -351,10 +348,8 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK || data == null) return;
-        photoUri = data.getData();
-        character.setPortraitUri(photoUri);
-
-        Glide.with(this).load(photoUri).centerCrop().into(imagePortrait);
+        character.setPortraitUri(data.getData());
+        Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
     }
 
     //Up navigation
