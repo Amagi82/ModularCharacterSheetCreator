@@ -38,7 +38,7 @@
 
             <ImageView
                 android:id="@+id/iconLeft"
-                style="@style/CircleIcon.CharacterFragment"
+                style="@style/CircleIcon_CharacterFragment"
                 tools:src="@drawable/clan_icon"/>
 
             <TextView
@@ -48,7 +48,7 @@
 
             <ImageView
                 android:id="@+id/iconRight"
-                style="@style/CircleIcon.CharacterFragment"
+                style="@style/CircleIcon_CharacterFragment"
                 android:layout_gravity="right"
                 tools:src="@drawable/clan_icon"/>
 
@@ -63,9 +63,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/default_extra_large_margin"
+                android:layout_marginBottom="@dimen/character_name_margin_bottom"
                 android:layout_marginLeft="@dimen/character_name_keyline"
-                android:layout_marginRight="@dimen/character_name_keyline">
+                android:layout_marginRight="@dimen/character_name_keyline_right">
 
                 <EditText
                     android:id="@+id/etName"
@@ -117,7 +117,7 @@
         android:id="@+id/imageOnyxLogo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="248dp"
+        android:layout_marginTop="@dimen/character_onyx_logo_margin_top"
         android:background="@color/primary"
         android:padding="@dimen/default_extra_large_margin"
         android:scaleType="centerInside"
