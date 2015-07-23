@@ -61,9 +61,12 @@ public class MainActivity extends AppCompatActivity {
 //                e.printStackTrace();
 //            }
 //        } else
-            loadSavedCharacters();
+        loadSavedCharacters();
         generateSampleCharacters();
-        fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
+        currentCharacter = characters.get(0);
+        if(savedInstanceState == null){
+            fm.beginTransaction().replace(R.id.container, new MainFragment()).commit();
+        }
     }
 
     @Override protected void onSaveInstanceState(Bundle outState) {
