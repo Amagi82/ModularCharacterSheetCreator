@@ -21,14 +21,14 @@
 
     <!--Character creation-->
     <string name="cancel">Cancel</string>
+    <string name="crop">Crop</string>
     <string name="character_name">Character name</string>
     <string name="character_class">Character class</string>
     <string name="character_classes">Character classes</string>
     <string name="character_icon">Character icon</string>
     <string name="character_race">Character race</string>
     <string name="characters">Characters</string>
-    <string name="crop_image_portrait">Crop image for portrait</string>
-    <string name="crop_image_icon">Crop image for icon</string>
+    <string name="crop_image">Crop image</string>
     <string name="edit_character">Edit character</string>
     <string name="edition">Edition</string>
     <string name="game_systems">Game systems</string>

@@ -1,11 +1,16 @@
 package amagi82.modularcharactersheetcreator.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -16,17 +21,21 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.edmodo.cropper.CropImageView;
 import com.squareup.otto.Subscribe;
 
+import java.io.IOException;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.App;
@@ -46,6 +55,7 @@ import amagi82.modularcharactersheetcreator.utils.Otto;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 import static amagi82.modularcharactersheetcreator.MainActivity.EDIT_MODE;
 
 public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener {
@@ -352,7 +362,32 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK || data == null) return;
         character.setPortraitUri(data.getData());
-        Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
+
+        WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = getResources().getDimensionPixelSize(R.dimen.sheet_image_backdrop_height);
+
+        final CropImageView cropper = new CropImageView(getActivity());
+        cropper.setAspectRatio(width, height);
+        cropper.setFixedAspectRatio(true);
+        try {
+            cropper.setImageBitmap(MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        new AlertDialog.Builder(getActivity()).setTitle(R.string.crop_image).setView(cropper).setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.crop, new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface dialog, int which) {
+                        Bitmap croppedImage = cropper.getCroppedImage();
+                        String url = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), croppedImage, "OnyxPathCharacterPortrait", "Portrait used by your character");
+                        character.setPortraitUri(Uri.parse(url));
+
+                        Glide.with(CharacterFragment.this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
+                    }
+                }).show();
     }
 
     //Up navigation
