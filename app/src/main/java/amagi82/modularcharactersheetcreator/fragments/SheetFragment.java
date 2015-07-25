@@ -44,7 +44,6 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
     @Bind(R.id.appbar) AppBarLayout appBarLayout;
     @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.imagePortrait) ImageView imagePortrait;
     @Bind(R.id.iconLeft) ImageView iconLeft;
     @Bind(R.id.tvIconLeft) TextView tvIconLeft;
     @Bind(R.id.iconRight) ImageView iconRight;
