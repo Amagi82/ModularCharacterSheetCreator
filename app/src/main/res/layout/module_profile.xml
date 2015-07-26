@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <ImageView
+        android:id="@+id/imagePortrait"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primary"
+        android:fitsSystemWindows="true"/>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <ImageView
+        android:id="@+id/iconLeft"
+        style="@style/CircleIcon_CharacterFragment"
+        tools:src="@drawable/clan_icon"/>
+
+    <TextView
+        android:id="@+id/tvIconLeft"
+        style="@style/CircleIconCaption"
+        tools:text="Left"/>
+
+    <ImageView
+        android:id="@+id/iconRight"
+        style="@style/CircleIcon_CharacterFragment"
+        android:layout_alignParentRight="true"
+        tools:src="@drawable/clan_icon"/>
+
+    <TextView
+        android:id="@+id/tvIconRight"
+        style="@style/CircleIconCaption"
+        android:layout_alignParentRight="true"
+        tools:text="Right"/>
+
+</RelativeLayout>
