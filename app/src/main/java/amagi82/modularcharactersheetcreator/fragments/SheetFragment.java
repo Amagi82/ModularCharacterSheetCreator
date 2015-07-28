@@ -2,7 +2,6 @@ package amagi82.modularcharactersheetcreator.fragments;
 
 
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,10 +13,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import amagi82.modularcharactersheetcreator.App;
 import amagi82.modularcharactersheetcreator.MainActivity;
@@ -36,12 +31,7 @@ import butterknife.OnClick;
 
 public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener{
 
-    @Bind(R.id.appbar) AppBarLayout appBarLayout;
     @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.iconLeft) ImageView iconLeft;
-    @Bind(R.id.tvIconLeft) TextView tvIconLeft;
-    @Bind(R.id.iconRight) ImageView iconRight;
-    @Bind(R.id.tvIconRight) TextView tvIconRight;
     @Bind(R.id.tabs) TabLayout tabLayout;
     @Bind(R.id.viewpager) ViewPager viewPager;
     @Bind(R.id.fab) FloatingActionButton fab;
@@ -57,34 +47,10 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         character = ((MainActivity) getActivity()).getCurrentCharacter();
         toolbar.setTitle(character.getName());
 
-        //if(character.getPortraitUri() != null) Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
-
-        Glide.with(this).load(getUrl(character.getLeft())).centerCrop().into(iconLeft);
-        tvIconLeft.setText(character.getLeft().getTitle());
-
-        if(character.getGameSystem().getOnyx().hasRight()) {
-            tvIconRight.setText(character.getRight().getTitle());
-            Glide.with(this).load(getUrl(character.getRight())).centerCrop().into(iconRight);
-        }
-
         adapter = new ViewPagerAdapter(fm, character.getSheets());
         viewPager.setAdapter(adapter);
         tabLayout.setTabsFromPagerAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override public void onTabSelected(TabLayout.Tab tab) {
-                toolbar.getMenu().findItem(R.id.action_tab_move_left).setVisible(tab.getPosition() != 0);
-                toolbar.getMenu().findItem(R.id.action_tab_move_right).setVisible(tab.getPosition() != tabLayout.getTabCount()-1);
-            }
-
-            @Override public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
 
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationOnClickListener(this);

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import amagi82.modularcharactersheetcreator.fragments.TabFragment;
+import amagi82.modularcharactersheetcreator.fragments.TabProfileFragment;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
@@ -33,6 +34,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override public Fragment getItem(int position) {
+        if(position == 0) return new TabProfileFragment();
+
         Sheet sheet = sheets.get(position);
         if (map.get(sheet) == null) {
             TabFragment tabFragment = new TabFragment();

@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i(null, "Creating template for "+character.getName());
             Template template = new Template(this, character);
             Sheet sheet = template.createDefaultSheet();
+            character.getSheets().add(new Sheet(getString(R.string.profile)));
             character.getSheets().add(sheet);
             Log.i(null, character.getName() + " contains " + character.getGameSystem().toString());
         }

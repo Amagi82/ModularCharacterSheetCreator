@@ -10,7 +10,8 @@
         android:id="@+id/imagePortrait"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/primary"/>
+        android:background="@color/primary"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/tvIconLeft"
@@ -21,7 +22,6 @@
         android:id="@+id/iconLeft"
         style="@style/CircleIcon_Profile"
         android:layout_above="@id/tvIconLeft"
-        android:layout_marginTop="@dimen/default_keyline"
         tools:src="@drawable/clan_icon"/>
 
     <TextView

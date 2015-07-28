@@ -94,6 +94,7 @@
     <style name="CircleIcon_Profile">
         <item name="android:layout_width">@dimen/character_choice_icon_size_large</item>
         <item name="android:layout_height">@dimen/character_choice_icon_size_large</item>
+        <item name="android:scaleType">centerCrop</item>
         <item name="android:layout_marginLeft">@dimen/default_margin</item>
         <item name="android:layout_marginRight">@dimen/default_margin</item>
     </style>
