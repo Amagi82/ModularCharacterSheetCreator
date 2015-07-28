@@ -1,9 +1,14 @@
 package amagi82.modularcharactersheetcreator;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.bluelinelabs.logansquare.LoganSquare;
@@ -15,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import amagi82.modularcharactersheetcreator.adapters.MainAdapter;
 import amagi82.modularcharactersheetcreator.events.CharacterAddedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterChangedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterClickedEvent;
@@ -22,8 +28,6 @@ import amagi82.modularcharactersheetcreator.events.CharacterDeletedEvent;
 import amagi82.modularcharactersheetcreator.events.CreateNewCharacterEvent;
 import amagi82.modularcharactersheetcreator.events.EditCharacterEvent;
 import amagi82.modularcharactersheetcreator.fragments.CharacterFragment;
-import amagi82.modularcharactersheetcreator.fragments.MainFragment;
-import amagi82.modularcharactersheetcreator.fragments.SheetFragment;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.game_systems.CMage;
@@ -32,14 +36,21 @@ import amagi82.modularcharactersheetcreator.models.game_systems.CWerewolf;
 import amagi82.modularcharactersheetcreator.templates.Template;
 import amagi82.modularcharactersheetcreator.utils.Logan;
 import amagi82.modularcharactersheetcreator.utils.Otto;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static amagi82.modularcharactersheetcreator.App.BUCKET;
+import static amagi82.modularcharactersheetcreator.App.CHARACTER;
+import static amagi82.modularcharactersheetcreator.App.CHARACTERS;
+import static amagi82.modularcharactersheetcreator.App.EDIT_MODE;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String CURRENT_CHARACTER = "currentCharacter";
-    public static final String CHARACTERS = "characters";
-    public static final String BUCKET = "bucket";
-    public static final String EDIT_MODE = "EditMode";
+    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.recycler_view) RecyclerView recyclerView;
+    @Bind(R.id.fab) FloatingActionButton fab;
     private FragmentManager fm = getSupportFragmentManager();
     private List<GameCharacter> characters;
     private GameCharacter currentCharacter;
@@ -48,7 +59,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fragment_main);
+        ButterKnife.bind(this);
+
+        toolbar.setLogo(R.drawable.title_onyx);
 
         //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
 //        if (savedInstanceState != null) {
@@ -63,20 +77,30 @@ public class MainActivity extends AppCompatActivity {
 //        } else
         loadSavedCharacters();
         generateSampleCharacters();
-        currentCharacter = characters.get(0);
-        if(savedInstanceState == null){
-            fm.beginTransaction().replace(R.id.container, new MainFragment()).commit();
-        }
+//        if(savedInstanceState == null){
+//            fm.beginTransaction().replace(R.id.container, new MainFragment()).commit();
+//        }
+
+        recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        MainAdapter adapter = new MainAdapter(this);
+        recyclerView.setAdapter(adapter);
+        adapter.addAll(characters);
     }
 
     @Override protected void onSaveInstanceState(Bundle outState) {
         try {
-            if (currentCharacter != null) outState.putString(CURRENT_CHARACTER, LoganSquare.serialize(currentCharacter));
             outState.putString(CHARACTERS, LoganSquare.serialize(characters, GameCharacter.class));
         } catch (IOException e) {
             e.printStackTrace();
         }
         super.onSaveInstanceState(outState);
+    }
+
+    @OnClick(R.id.fab)
+    public void onFabClicked() {
+        startActivity(new Intent(this, CharacterActivity.class));
+        //Otto.BUS.getBus().post(new CreateNewCharacterEvent());
     }
 
     public List<GameCharacter> getCharacters() {
@@ -142,6 +166,12 @@ public class MainActivity extends AppCompatActivity {
         Otto.BUS.getBus().unregister(this);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
+
     @Subscribe
     public void onCharacterAdded(CharacterAddedEvent event) {
         characters.add(event.character);
@@ -189,7 +219,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Subscribe
     public void onCharacterClicked(CharacterClickedEvent event) {
-        currentCharacter = event.character;
-        fm.beginTransaction().replace(R.id.container, new SheetFragment()).addToBackStack(null).commit();
+        Intent intent = new Intent(this, SheetActivity.class);
+        try {
+            intent.putExtra(CHARACTER, LoganSquare.serialize(event.character));
+            startActivity(intent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        currentCharacter = event.character;
+//        fm.beginTransaction().replace(R.id.container, new SheetFragment()).addToBackStack(null).commit();
     }
 }

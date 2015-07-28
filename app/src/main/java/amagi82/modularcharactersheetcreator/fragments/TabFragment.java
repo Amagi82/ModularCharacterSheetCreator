@@ -13,8 +13,8 @@ import com.squareup.otto.Subscribe;
 
 import java.util.List;
 
-import amagi82.modularcharactersheetcreator.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.SheetActivity;
 import amagi82.modularcharactersheetcreator.adapters.SheetAdapter;
 import amagi82.modularcharactersheetcreator.events.ModuleAddedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
@@ -34,7 +34,7 @@ public class TabFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_tab, container, false);
         ButterKnife.bind(this, rootView);
 
-        GameCharacter character = ((MainActivity) getActivity()).getCurrentCharacter();
+        GameCharacter character = ((SheetActivity) getActivity()).getCharacter();
         Log.i(null, "Current character is "+character.getName());
         Sheet sheet = character.getSheets().get(getArguments().getInt("position"));
         int spanCount = sheet.getNumColumns();

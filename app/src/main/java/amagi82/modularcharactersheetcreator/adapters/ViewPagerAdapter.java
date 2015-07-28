@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     public ViewPagerAdapter(FragmentManager fm, List<Sheet> sheets) {
         super(fm);
+        Log.i(null, "ViewPagerAdapter initialized");
         this.sheets = sheets;
     }
 

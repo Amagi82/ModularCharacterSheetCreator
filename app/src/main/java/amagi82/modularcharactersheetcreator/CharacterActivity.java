@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.fragments;
+package amagi82.modularcharactersheetcreator;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,8 +13,8 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,15 +22,15 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Display;
-import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bluelinelabs.logansquare.LoganSquare;
 import com.bumptech.glide.Glide;
 import com.edmodo.cropper.CropImageView;
 import com.squareup.otto.Subscribe;
@@ -38,9 +38,6 @@ import com.squareup.otto.Subscribe;
 import java.io.IOException;
 import java.util.List;
 
-import amagi82.modularcharactersheetcreator.App;
-import amagi82.modularcharactersheetcreator.MainActivity;
-import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
 import amagi82.modularcharactersheetcreator.events.CharacterAddedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterChangedEvent;
@@ -56,9 +53,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static amagi82.modularcharactersheetcreator.App.CHARACTER;
 import static amagi82.modularcharactersheetcreator.App.EDIT_MODE;
 
-public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener {
+public class CharacterActivity extends AppCompatActivity {
 
     private static final int PICK_FROM_FILE = 90;
     @Bind(R.id.toolbar) Toolbar toolbar;
@@ -80,10 +78,17 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     private SortedList<Choice> sortedList;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_character, container, false);
-        ButterKnife.bind(this, rootView);
-        setHasOptionsMenu(true);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_character);
+        ButterKnife.bind(this);
+
+        isEditMode = getIntent().getBooleanExtra(EDIT_MODE, false);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(null);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         if (sortedList == null) sortedList = new SortedList<>(Choice.class, new SortedList.Callback<Choice>() {
             @Override public int compare(Choice o1, Choice o2) {
@@ -117,15 +122,18 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
             }
         });
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         characterAdapter = new CharacterAdapter(getResources(), sortedList);
         recyclerView.setAdapter(characterAdapter);
 
         //Check if we're editing a character or creating a new one
-        isEditMode = getArguments() != null && getArguments().getBoolean(EDIT_MODE, false);
         if (isEditMode) {
             Log.i(null, "edit mode");
-            character = ((MainActivity) getActivity()).getCurrentCharacter();
+            try {
+                character = LoganSquare.parse(getIntent().getStringExtra(CHARACTER), GameCharacter.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             textInputLayout.getEditText().setText(character.getName());
             if (character.getPortraitUri() != null) Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
             onyx = character.getGameSystem().getOnyx();
@@ -151,13 +159,12 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                 }
             }
         }
-        //colorMask.animate().alpha(0).setDuration(300);
-        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-        toolbar.setNavigationOnClickListener(this);
-        toolbar.inflateMenu(isEditMode ? R.menu.menu_edit_character : R.menu.menu_new_character);
-        toolbar.setOnMenuItemClickListener(this);
+    }
 
-        return rootView;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(isEditMode ? R.menu.menu_edit_character : R.menu.menu_new_character, menu);
+        return true;
     }
 
     private void displayOnyxPathLogo() {
@@ -183,7 +190,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         removeOnyxPathLogo();
         clearIcons();
         removeGameSystem();
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         updateSortedList(game.getList(Game.Category.DEFAULT), true);
     }
 
@@ -192,7 +199,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         removeOnyxPathLogo();
         clearIcons();
         if (tvGameSystem.getVisibility() != View.VISIBLE) displayGameSystem();
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.character_grid_span_count)));
         characterAdapter.setLeft(true);
         updateSortedList(onyx.getListLeft(null), true);
     }
@@ -200,7 +207,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @OnClick({R.id.iconRight, R.id.tvIconRight})
     public void chooseRightCategory() {
         removeOnyxPathLogo();
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.character_grid_span_count)));
         characterAdapter.setLeft(false);
         updateSortedList(onyx.getListRight(null), true);
     }
@@ -339,7 +346,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     void getPhoto(){
         if(character.getPortraitUri() == null) getImageFromGallery();
         else{
-            new AlertDialog.Builder(getActivity()).setItems(R.array.portrait_choices, new DialogInterface.OnClickListener() {
+            new AlertDialog.Builder(this).setItems(R.array.portrait_choices, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if(which == 0){
@@ -363,44 +370,38 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         if (resultCode != Activity.RESULT_OK || data == null) return;
         character.setPortraitUri(data.getData());
 
-        WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
         int width = size.x;
         int height = getResources().getDimensionPixelSize(R.dimen.sheet_image_backdrop_height);
 
-        final CropImageView cropper = new CropImageView(getActivity());
+        final CropImageView cropper = new CropImageView(this);
         cropper.setAspectRatio(width, height);
         cropper.setFixedAspectRatio(true);
         try {
-            cropper.setImageBitmap(MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData()));
+            cropper.setImageBitmap(MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        new AlertDialog.Builder(getActivity()).setTitle(R.string.crop_image).setView(cropper).setNegativeButton(R.string.cancel, null)
+        new AlertDialog.Builder(this).setTitle(R.string.crop_image).setView(cropper).setNegativeButton(R.string.cancel, null)
                 .setPositiveButton(R.string.crop, new DialogInterface.OnClickListener() {
                     @Override public void onClick(DialogInterface dialog, int which) {
                         Bitmap croppedImage = cropper.getCroppedImage();
-                        String url = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), croppedImage, "OnyxPathCharacterPortrait", "Portrait used by your character");
+                        String url = MediaStore.Images.Media.insertImage(getContentResolver(), croppedImage, "OnyxPathCharacterPortrait", "Portrait used by your character");
                         character.setPortraitUri(Uri.parse(url));
 
-                        Glide.with(CharacterFragment.this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
+                        Glide.with(CharacterActivity.this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
                     }
                 }).show();
     }
 
-    //Up navigation
     @Override
-    public void onClick(View v) {
-        finish();
-    }
-
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete:
-                new AlertDialog.Builder(getActivity()).setMessage("Delete this character?").setNegativeButton(R.string.cancel, null)
+                new AlertDialog.Builder(this).setMessage("Delete this character?").setNegativeButton(R.string.cancel, null)
                         .setPositiveButton(R.string.action_delete, new DialogInterface.OnClickListener() {
                             @Override public void onClick(DialogInterface dialog, int which) {
                                 Otto.BUS.getBus().post(new CharacterDeletedEvent(character));
@@ -419,8 +420,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     }
 
     @Override
-    public void onDestroyView() {
-        Log.i(null, "destroyingView");
+    public void onDestroy() {
         if (character != null) {
             character.setName(textInputLayout.getEditText().getText().toString());
             if (character.isComplete()) {
@@ -428,11 +428,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                 Otto.BUS.getBus().post(isEditMode? new CharacterChangedEvent(character) : new CharacterAddedEvent(character));
             }
         }
-        super.onDestroyView();
+        super.onDestroy();
         ButterKnife.unbind(this);
-    }
-
-    private void finish(){
-        getFragmentManager().popBackStack();
     }
 }

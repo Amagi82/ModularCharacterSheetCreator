@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import amagi82.modularcharactersheetcreator.App;
-import amagi82.modularcharactersheetcreator.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.SheetActivity;
 import amagi82.modularcharactersheetcreator.models.Choice;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import butterknife.Bind;
@@ -30,7 +30,7 @@ public class TabProfileFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_tab_profile, container, false);
         ButterKnife.bind(this, rootView);
 
-        GameCharacter character = ((MainActivity) getActivity()).getCurrentCharacter();
+        GameCharacter character = ((SheetActivity) getActivity()).getCharacter();
         Glide.with(this).load(character.getPortraitUri()).into(imagePortrait);
         Glide.with(this).load(getUrl(character.getLeft())).into(iconLeft);
         if(character.getGameSystem().getOnyx().hasRight()) {
