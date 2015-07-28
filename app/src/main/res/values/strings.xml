@@ -49,6 +49,7 @@
     <string name="width">Width</string>
 
     <!--Sheet titles-->
+    <string name="profile">Profile</string>
     <string name="character_sheet">Character Sheet</string>
 
     <!--Content descriptions-->

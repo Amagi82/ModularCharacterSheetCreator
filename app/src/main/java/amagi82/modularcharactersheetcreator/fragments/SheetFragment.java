@@ -1,10 +1,8 @@
 package amagi82.modularcharactersheetcreator.fragments;
 
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -20,9 +18,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 import amagi82.modularcharactersheetcreator.App;
 import amagi82.modularcharactersheetcreator.MainActivity;
@@ -41,7 +36,6 @@ import butterknife.OnClick;
 
 public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener{
 
-    @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
     @Bind(R.id.appbar) AppBarLayout appBarLayout;
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.iconLeft) ImageView iconLeft;
@@ -61,16 +55,7 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         ButterKnife.bind(this, rootView);
         fm = getFragmentManager();
         character = ((MainActivity) getActivity()).getCurrentCharacter();
-        collapsingToolbar.setTitle(character.getName());
-
-        if(character.getPortraitUri() != null){
-            try {
-                InputStream inputStream = getActivity().getContentResolver().openInputStream(character.getPortraitUri());
-                appBarLayout.setBackground(Drawable.createFromStream(inputStream, character.getPortraitUri().toString()));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+        toolbar.setTitle(character.getName());
 
         //if(character.getPortraitUri() != null) Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
 
