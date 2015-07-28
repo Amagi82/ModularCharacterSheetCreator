@@ -115,12 +115,6 @@ public class MainActivity extends AppCompatActivity {
         characters.add(new GameCharacter("Dr. Von Natsi", new CMage(CMage.Faction.SCIONSOFETHER)));
         characters.add(new GameCharacter("Stormwalker", new CWerewolf(CWerewolf.Tribe.GLASSWALKERS, CWerewolf.Auspice.AHROUN)));
 
-//        Module module1 = new Module();
-//        module1.setText("Test text 1");
-//        Module module2 = new Module();
-//        module2.setText("This is another module");
-//
-
         for (GameCharacter character : characters) {
             Log.i(null, "Creating template for "+character.getName());
             Template template = new Template(this, character);

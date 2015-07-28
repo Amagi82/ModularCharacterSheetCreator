@@ -84,8 +84,8 @@ public class Template {
         addCWodAbilities(R.array.CVampire_Talents, R.array.CVampire_Skills, R.array.CVampire_Knowledges);
         modules.add(new HeaderModule(getString(R.string.advantages), spanCount));
         Log.i(null, "creating Vampire");
-        Log.i(null, "character: "+character.getName());
-        Log.i(null, "system: "+ character.getGameSystem().getOnyx().getSystemName());
+        Log.i(null, "character: " + character.getName());
+        Log.i(null, "system: " + character.getGameSystem().getOnyx().getSystemName());
         Log.i(null, "clan: "+character.getRight().geteName());
 
         modules.add(new StatBlockModule(getArray(CVampire.Clan.valueOf(
@@ -100,6 +100,21 @@ public class Template {
         addBloodpool();
         //Add weakness?
         //Add experience counter
+
+        //Tests
+        StatBlockModule modPhys = (StatBlockModule) modules.get(1);
+        List<Stat> statsPhys = modPhys.getStats();
+        statsPhys.get(0).setSpecialty("Big");
+        statsPhys.get(2).setValueMax(3);
+
+
+        StatBlockModule module = (StatBlockModule) modules.get(5);
+        List<Stat> stats = module.getStats();
+        stats.get(1).setSpecialty("Parkour");
+        stats.get(1).setValueTemporary(5);
+        stats.get(1).setValue(4);
+        stats.get(6).setSpecialty("Creepy stare");
+        stats.get(6).setValue(3);
 
         return createCharacterSheet();
     }

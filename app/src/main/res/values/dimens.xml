@@ -12,7 +12,8 @@
     <dimen name="default_tiny_margin">4dp</dimen>
 
     <dimen name="round_stat_bar_gap">1dp</dimen>
-    <dimen name="round_stat_bar_text_spacing">2dp</dimen>
+    <dimen name="round_stat_bar_row_spacing">2dp</dimen>
+    <dimen name="round_stat_bar_text_spacing">4dp</dimen>
     <dimen name="round_stat_bar_corner_radius">4dp</dimen>
     <dimen name="round_stat_bar_text_size">14sp</dimen>
     <dimen name="round_stat_bar_specialty_text_size">12sp</dimen>

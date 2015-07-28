@@ -2,7 +2,6 @@ package amagi82.modularcharactersheetcreator.adapters;
 
 
 import android.content.res.Resources;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -18,6 +17,7 @@ import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleViewHolde
 import amagi82.modularcharactersheetcreator.models.modules.BloodPoolModule;
 import amagi82.modularcharactersheetcreator.models.modules.HealthModule;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
+import amagi82.modularcharactersheetcreator.models.modules.Stat;
 import amagi82.modularcharactersheetcreator.models.modules.StatBlockModule;
 import amagi82.modularcharactersheetcreator.models.modules.StatusModule;
 import amagi82.modularcharactersheetcreator.models.modules.TitleTextBlockModule;
@@ -100,9 +100,10 @@ public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
     }
 
     private void bind(ModuleBlockViewHolder vh, StatBlockModule module) {
-        vh.cardRecyclerView.setLayoutManager(new LinearLayoutManager(vh.itemView.getContext()));
-        vh.cardRecyclerView.setAdapter(new CardAdapter(module.getStats()));
-        vh.cardRecyclerView.setMinimumHeight(module.getStats().size() * res.getDimensionPixelSize(R.dimen.round_stat_bar_extended_height));
+        vh.statBarBlock.setStats(module.getStats());
+        int max = 5;
+        for(Stat stat : module.getStats()) max = Math.max(max, stat.getValueMax());
+        vh.statBarBlock.setMax(max);
     }
 
     private void bind(ModuleStatusViewHolder vh, StatusModule module) {
