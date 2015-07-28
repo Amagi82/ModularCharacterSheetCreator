@@ -30,10 +30,10 @@
     <color name="translucent_light_grey">#aad1d1d1</color>
 
     <color name="round_stat_bar_background">#D1D1D1</color>
-    <color name="round_stat_bar_fill">#959595</color>
-    <color name="round_stat_bar_secondary">#AAAAAA</color>
-    <color name="round_stat_bar_border">#33000000</color>
-    <color name="round_stat_bar_border_inactive">#22000000</color>
+    <color name="round_stat_bar_fill">#A5A5A5</color>
+    <color name="round_stat_bar_secondary">#BABABA</color>
+    <color name="round_stat_bar_border">#38000000</color>
+    <color name="round_stat_bar_border_inactive">#18000000</color>
 
     <color name="card_background">#FFF59D</color>
     <color name="card_header_background">#FFC107</color>
