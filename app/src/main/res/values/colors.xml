@@ -29,7 +29,6 @@
     <color name="translucent_grey">#aa959595</color>
     <color name="translucent_light_grey">#aad1d1d1</color>
 
-    <color name="round_stat_bar_background">#D1D1D1</color>
     <color name="round_stat_bar_fill">#BBBBBB</color>
     <color name="round_stat_bar_secondary">#DDDDDD</color>
     <color name="round_stat_bar_border">#48000000</color>
@@ -37,8 +36,8 @@
     <color name="round_stat_bar_text_color">@color/primary_text_default_material_light</color>
     <color name="round_stat_bar_text_color_specialty">@color/secondary_text_default_material_light</color>
 
-    <color name="card_background">#FFF59D</color>
-    <color name="card_header_background">#FFC107</color>
+    <color name="card_background">#FEF1E0</color>
+    <color name="card_header_background">#F6E6CE</color>
 
     <!-- Game theme colors-->
     <color name="scion">#809CB0</color>

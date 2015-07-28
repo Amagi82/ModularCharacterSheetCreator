@@ -106,8 +106,6 @@ public class Template {
         List<Stat> statsPhys = modPhys.getStats();
         statsPhys.get(0).setSpecialty("Big");
         statsPhys.get(2).setValueMax(3);
-
-
         StatBlockModule module = (StatBlockModule) modules.get(5);
         List<Stat> stats = module.getStats();
         stats.get(1).setSpecialty("Parkour");
