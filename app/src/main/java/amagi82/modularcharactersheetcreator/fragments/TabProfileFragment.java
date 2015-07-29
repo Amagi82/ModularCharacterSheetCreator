@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide;
 
 import amagi82.modularcharactersheetcreator.App;
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.SheetActivity;
+import amagi82.modularcharactersheetcreator.activities.SheetActivity;
 import amagi82.modularcharactersheetcreator.models.Choice;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import butterknife.Bind;

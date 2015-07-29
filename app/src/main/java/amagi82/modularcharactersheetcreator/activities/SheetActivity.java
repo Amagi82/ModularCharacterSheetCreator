@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator;
+package amagi82.modularcharactersheetcreator.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,8 +14,9 @@ import com.bluelinelabs.logansquare.LoganSquare;
 
 import java.io.IOException;
 
+import amagi82.modularcharactersheetcreator.App;
+import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.ViewPagerAdapter;
-import amagi82.modularcharactersheetcreator.events.EditCharacterEvent;
 import amagi82.modularcharactersheetcreator.events.ModuleAddedEvent;
 import amagi82.modularcharactersheetcreator.models.Choice;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
@@ -87,7 +88,7 @@ public class SheetActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.action_edit:
                 //Update any character info before editing.
-                Otto.BUS.getBus().post(new EditCharacterEvent(character));
+                //TODO: open CharacterActivity and pass in character
                 return true;
             case R.id.action_tab_add:
                 Sheet sheet = new Sheet();

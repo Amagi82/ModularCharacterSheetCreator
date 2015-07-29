@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator;
+package amagi82.modularcharactersheetcreator.activities;
 
 
 import android.content.Intent;
@@ -20,14 +20,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.MainAdapter;
 import amagi82.modularcharactersheetcreator.events.CharacterAddedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterChangedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterClickedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterDeletedEvent;
-import amagi82.modularcharactersheetcreator.events.CreateNewCharacterEvent;
-import amagi82.modularcharactersheetcreator.events.EditCharacterEvent;
-import amagi82.modularcharactersheetcreator.fragments.CharacterFragment;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.game_systems.CMage;
@@ -43,7 +41,6 @@ import butterknife.OnClick;
 import static amagi82.modularcharactersheetcreator.App.BUCKET;
 import static amagi82.modularcharactersheetcreator.App.CHARACTER;
 import static amagi82.modularcharactersheetcreator.App.CHARACTERS;
-import static amagi82.modularcharactersheetcreator.App.EDIT_MODE;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -77,9 +74,6 @@ public class MainActivity extends AppCompatActivity {
 //        } else
         loadSavedCharacters();
         generateSampleCharacters();
-//        if(savedInstanceState == null){
-//            fm.beginTransaction().replace(R.id.container, new MainFragment()).commit();
-//        }
 
         recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -100,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.fab)
     public void onFabClicked() {
         startActivity(new Intent(this, CharacterActivity.class));
-        //Otto.BUS.getBus().post(new CreateNewCharacterEvent());
     }
 
     public List<GameCharacter> getCharacters() {
@@ -191,7 +184,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Subscribe
     public void onCharacterDeleted(CharacterDeletedEvent event) {
-        fm.popBackStack();
         for (int i = characters.size() - 1; i>= 0; i--) {
             if (characters.get(i).getEntityId().equals(event.character.getEntityId())) {
                 NoSQL.with(this).using(GameCharacter.class).bucketId(BUCKET).entityId(event.character.getEntityId()).delete();
@@ -199,22 +191,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
         }
-    }
-
-    @Subscribe
-    public void onCreateNewCharacter(CreateNewCharacterEvent event) {
-        fm.beginTransaction().replace(R.id.container, new CharacterFragment()).addToBackStack(null).commit();
-    }
-
-    @Subscribe
-    public void onEditCharacter(EditCharacterEvent event) {
-        currentCharacter = event.character;
-        fm.popBackStack();
-        CharacterFragment fragment = new CharacterFragment();
-        Bundle bundle = new Bundle();
-        bundle.putBoolean(EDIT_MODE, true);
-        fragment.setArguments(bundle);
-        fm.beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
     }
 
     @Subscribe
@@ -226,7 +202,5 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        currentCharacter = event.character;
-//        fm.beginTransaction().replace(R.id.container, new SheetFragment()).addToBackStack(null).commit();
     }
 }
