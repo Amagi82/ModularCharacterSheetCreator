@@ -43,10 +43,10 @@
     <dimen name="character_name_margin_bottom">32dp</dimen>
     <dimen name="character_onyx_logo_margin_top">248dp</dimen>
 
-    <dimen name="character_choice_icon_size">56dp</dimen>
     <dimen name="character_choice_caption_size">64dp</dimen>
-    <dimen name="character_choice_icon_size_large">64dp</dimen>
-    <dimen name="character_choice_caption_size_large">88dp</dimen>
+    <dimen name="character_choice_caption_size_small">56dp</dimen>
+    <dimen name="character_choice_icon_size">56dp</dimen>
+    <dimen name="character_choice_icon_size_small">48dp</dimen>
 
     <dimen name="sheet_collapsingToolbar_height">236dp</dimen>
     <dimen name="sheet_image_backdrop_height">284dp</dimen>

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import amagi82.modularcharactersheetcreator.fragments.TabFragment;
-import amagi82.modularcharactersheetcreator.fragments.TabProfileFragment;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
@@ -22,7 +20,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     public ViewPagerAdapter(FragmentManager fm, List<Sheet> sheets) {
         super(fm);
-        Log.i(null, "ViewPagerAdapter initialized");
         this.sheets = sheets;
     }
 
@@ -36,8 +33,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override public Fragment getItem(int position) {
-        if(position == 0) return new TabProfileFragment();
-
         Sheet sheet = sheets.get(position);
         if (map.get(sheet) == null) {
             TabFragment tabFragment = new TabFragment();
