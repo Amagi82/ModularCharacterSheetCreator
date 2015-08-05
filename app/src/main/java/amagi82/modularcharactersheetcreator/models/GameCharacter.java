@@ -13,6 +13,8 @@ import java.util.UUID;
 import amagi82.modularcharactersheetcreator.models.game_systems.Game;
 import amagi82.modularcharactersheetcreator.models.game_systems.Onyx;
 
+import static amagi82.modularcharactersheetcreator.App.NONE;
+
 @JsonObject
 public class GameCharacter {
     @JsonField private String name = "";
@@ -20,11 +22,9 @@ public class GameCharacter {
     @JsonField private Choice left;
     @JsonField private Choice right;
     @JsonField private int archetype;
-    @JsonField private int colorPrimary;
-    @JsonField private int colorBackground;
-    @JsonField private int colorText;
-    @JsonField private int colorTextTitle;
-    @JsonField private int colorTitles;
+    @JsonField private int colorBackground = NONE;
+    @JsonField private int colorText = NONE;
+    @JsonField private int colorTextDim = NONE;
     @JsonField private String entityId = UUID.randomUUID().toString();
     @JsonField private long timeStamp;
     @JsonField private List<Sheet> sheets = new ArrayList<>();
@@ -58,46 +58,6 @@ public class GameCharacter {
         left = onyx.getLeft();
         right = onyx.getRight();
         archetype = onyx.getArchetype();
-    }
-
-    public int getColorPrimary() {
-        return colorPrimary;
-    }
-
-    public void setColorPrimary(int colorPrimary) {
-        this.colorPrimary = colorPrimary;
-    }
-
-    public int getColorBackground() {
-        return colorBackground;
-    }
-
-    public void setColorBackground(int colorBackground) {
-        this.colorBackground = colorBackground;
-    }
-
-    public int getColorText() {
-        return colorText;
-    }
-
-    public void setColorText(int colorText) {
-        this.colorText = colorText;
-    }
-
-    public int getColorTextTitle() {
-        return colorTextTitle;
-    }
-
-    public void setColorTextTitle(int colorTextTitle) {
-        this.colorTextTitle = colorTextTitle;
-    }
-
-    public int getColorTitles() {
-        return colorTitles;
-    }
-
-    public void setColorTitles(int colorTitles) {
-        this.colorTitles = colorTitles;
     }
 
     public String getEntityId() {
@@ -180,5 +140,29 @@ public class GameCharacter {
     public void setPortraitUriString(String portraitUriString) {
         this.portraitUriString = portraitUriString;
         portraitUri = portraitUriString == null? null : Uri.parse(portraitUriString);
+    }
+
+    public int getColorBackground() {
+        return colorBackground;
+    }
+
+    public void setColorBackground(int colorBackground) {
+        this.colorBackground = colorBackground;
+    }
+
+    public int getColorText() {
+        return colorText;
+    }
+
+    public void setColorText(int colorText) {
+        this.colorText = colorText;
+    }
+
+    public int getColorTextDim() {
+        return colorTextDim;
+    }
+
+    public void setColorTextDim(int colorTextDim) {
+        this.colorTextDim = colorTextDim;
     }
 }

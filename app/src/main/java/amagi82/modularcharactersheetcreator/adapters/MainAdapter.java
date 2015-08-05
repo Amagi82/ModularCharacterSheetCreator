@@ -28,7 +28,7 @@ public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
     public MainAdapter(Context context) {
         characters = new SortedList<>(GameCharacter.class, new SortedList.Callback<GameCharacter>() {
             @Override public int compare(GameCharacter o1, GameCharacter o2) {
-                return o1.getTimeStamp() > o2.getTimeStamp()? -1 : o1.getTimeStamp() < o2.getTimeStamp()? 1 : 0;
+                return o1.getTimeStamp() > o2.getTimeStamp() ? -1 : o1.getTimeStamp() < o2.getTimeStamp() ? 1 : 0;
             }
 
             @Override public void onInserted(int position, int count) {
@@ -71,10 +71,8 @@ public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
     @Override
     public void onBindViewHolder(final CharacterViewHolder vh, final int position) {
         final GameCharacter character = characters.get(position);
-        if(character.getPortraitUri() == null){
-            int color = character.getColorPrimary() < 1? res.getColor(R.color.primary) : character.getColorPrimary();
-            vh.icon.setImageBitmap(iconFactory.createIcon(character.getName(), color));
-        }else Glide.with(context).load(character.getPortraitUri()).centerCrop().into(vh.icon);
+        if (character.getPortraitUri() == null) vh.icon.setImageBitmap(iconFactory.createIcon(character.getName(), res.getColor(R.color.primary)));
+        else Glide.with(context).load(character.getPortraitUri()).centerCrop().into(vh.icon);
         vh.tvName.setText(character.getName());
         vh.tvArchetype.setText(character.getArchetype());
         vh.tvGameSystem.setTextColor(res.getColor(character.getGameSystem().getColor()));

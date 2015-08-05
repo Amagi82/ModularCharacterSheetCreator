@@ -104,7 +104,6 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/logo_onyx_path"
                 android:visibility="gone"/>
-
         </RelativeLayout>
 
     </android.support.design.widget.AppBarLayout>
