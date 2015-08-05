@@ -53,6 +53,8 @@
     <dimen name="sheet_text_margin_top">126dp</dimen>
     <dimen name="sheet_expanded_title_margin_start">64dp</dimen>
     <dimen name="sheet_expanded_title_margin_end">48dp</dimen>
+    <dimen name="sheet_text_scrim_height_top">88dp</dimen>
+    <dimen name="sheet_text_scrim_height_bottom">88dp</dimen>
 
     <dimen name="toolbar_text_indent">48dp</dimen>
 
