@@ -48,13 +48,13 @@
     <dimen name="character_choice_icon_size">56dp</dimen>
     <dimen name="character_choice_icon_size_small">48dp</dimen>
 
-    <dimen name="sheet_collapsingToolbar_height">236dp</dimen>
-    <dimen name="sheet_image_backdrop_height">284dp</dimen>
-    <dimen name="toolbar_text_indent">48dp</dimen>
-
+    <dimen name="sheet_collapsingToolbar_height">276dp</dimen>
     <dimen name="sheet_icon_margin_top">76dp</dimen>
     <dimen name="sheet_text_margin_top">126dp</dimen>
-    <dimen name="sheet_expanded_title_margin">64dp</dimen>
+    <dimen name="sheet_expanded_title_margin_start">64dp</dimen>
+    <dimen name="sheet_expanded_title_margin_end">48dp</dimen>
+
+    <dimen name="toolbar_text_indent">48dp</dimen>
 
     <dimen name="divider">0.7dp</dimen>
     <dimen name="toolbar_edittext_indent">44dp</dimen>

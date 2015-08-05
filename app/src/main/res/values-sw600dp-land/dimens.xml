@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="sheet_collapsingToolbar_height">236dp</dimen>
-    <dimen name="sheet_image_backdrop_height">284dp</dimen>
+    <dimen name="sheet_collapsingToolbar_height">276dp</dimen>
 
     <integer name="character_grid_span_count">6</integer>
 </resources>

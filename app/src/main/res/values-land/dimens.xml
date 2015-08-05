@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="sheet_collapsingToolbar_height">200dp</dimen>
-    <dimen name="sheet_image_backdrop_height">248dp</dimen>
+    <dimen name="sheet_collapsingToolbar_height">240dp</dimen>
 
     <dimen name="image_portrait_height">136dp</dimen>
     <dimen name="character_icon_keyline_right">80dp</dimen>
