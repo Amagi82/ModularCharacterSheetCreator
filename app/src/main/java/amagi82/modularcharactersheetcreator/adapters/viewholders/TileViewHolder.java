@@ -8,9 +8,10 @@ import android.widget.TextView;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.events.TileItemClickedEvent;
 import amagi82.modularcharactersheetcreator.models.game_systems.Game;
-import amagi82.modularcharactersheetcreator.utils.Otto;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 
 public class TileViewHolder extends RecyclerView.ViewHolder{
 
@@ -24,7 +25,7 @@ public class TileViewHolder extends RecyclerView.ViewHolder{
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                Otto.BUS.getBus().post(new TileItemClickedEvent(system));
+                BUS.getBus().post(new TileItemClickedEvent(system));
             }
         });
     }

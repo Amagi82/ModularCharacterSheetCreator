@@ -6,8 +6,8 @@
     android:layout_height="175dp"
     tools:layout_width="150dp">
 
-    <amagi82.modularcharactersheetcreator.widgets.AnimatedNetworkImageView
-        android:id="@+id/imageViewNetwork"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"

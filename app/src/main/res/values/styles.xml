@@ -79,7 +79,7 @@
         <item name="android:layout_marginTop">?actionBarSize</item>
     </style>
 
-    <style name="CircleIcon_Small">
+    <style name="CircleIcon">
         <item name="android:layout_marginTop">@dimen/sheet_icon_margin_top</item>
         <item name="android:layout_marginLeft">@dimen/default_small_margin</item>
         <item name="android:layout_marginRight">@dimen/default_small_margin</item>
@@ -112,11 +112,15 @@
         <item name="android:layout_margin">@dimen/fab_margin</item>
     </style>
 
-
     <style name="RecyclerView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:scrollbars">vertical</item>
+    </style>
+
+    <style name="RecyclerView.Card">
+        <item name="android:layout_marginLeft">@dimen/card_margin</item>
+        <item name="android:layout_marginRight">@dimen/card_margin</item>
     </style>
 
     <style name="CharacterItemText">
