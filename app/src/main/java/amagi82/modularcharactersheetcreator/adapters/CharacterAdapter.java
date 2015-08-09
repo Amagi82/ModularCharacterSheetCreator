@@ -6,7 +6,6 @@ import android.graphics.Point;
 import android.support.v4.app.Fragment;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -20,8 +19,6 @@ import amagi82.modularcharactersheetcreator.adapters.viewholders.TileViewHolder;
 import amagi82.modularcharactersheetcreator.models.Choice;
 import amagi82.modularcharactersheetcreator.models.game_systems.Game;
 import amagi82.modularcharactersheetcreator.network.SizedImage;
-
-import static amagi82.modularcharactersheetcreator.App.NONE;
 
 public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -43,10 +40,6 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         int widthAvail = size.x - (res.getDimensionPixelSize(R.dimen.card_margin) * 2);
         int spanCount = res.getInteger(R.integer.character_grid_span_count);
         gridImageSize = (widthAvail -res.getDimensionPixelSize(R.dimen.card_margin) * 2) /spanCount;
-
-        Log.i(null, "widthAvail = "+widthAvail);
-        Log.i(null, "spanCount = "+spanCount);
-        Log.i(null, "gridImageSize = "+gridImageSize);
     }
 
     @Override public int getItemViewType(int position) {
@@ -68,8 +61,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void bind(TileGridViewHolder vh, Choice choice) {
-        Glide.with(fragment).load(choice.getUrl() == NONE ? new SizedImage(res, gridImageSize).getUrl()
-                : new SizedImage(res, choice.getBaseUrl(), choice.getUrl(), gridImageSize).getUrl()).into(vh.imageView);
+        Glide.with(fragment).load(new SizedImage(res, choice, gridImageSize).getUrl()).into(vh.imageView);
         vh.tvTitle.setText(choice.getTitle());
         vh.eName = choice.geteName();
         vh.left = left;
