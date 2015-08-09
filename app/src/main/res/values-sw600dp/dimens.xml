@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="sheet_collapsingToolbar_height">300dp</dimen>
+    <dimen name="character_collapsing_toolbar_height">280dp</dimen>
+    <dimen name="sheet_collapsing_toolbar_height">380dp</dimen>
 
     <integer name="character_grid_span_count">4</integer>
 </resources>

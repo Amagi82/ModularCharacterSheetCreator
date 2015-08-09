@@ -125,7 +125,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public void addAll(List<Choice> list) {
-        int i = 0;
+        int i = choices.size();
         choices.beginBatchedUpdates();
         for (Choice choice : list) {
             choice.setPosition(i);

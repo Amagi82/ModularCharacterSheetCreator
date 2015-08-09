@@ -28,11 +28,17 @@ import amagi82.modularcharactersheetcreator.fragments.SheetFragment;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.game_systems.CMage;
+import amagi82.modularcharactersheetcreator.models.game_systems.CMage.Faction;
 import amagi82.modularcharactersheetcreator.models.game_systems.CVampire;
+import amagi82.modularcharactersheetcreator.models.game_systems.CVampire.Clan;
+import amagi82.modularcharactersheetcreator.models.game_systems.CVampire.Sect;
 import amagi82.modularcharactersheetcreator.models.game_systems.CWerewolf;
+import amagi82.modularcharactersheetcreator.models.game_systems.CWerewolf.Auspice;
+import amagi82.modularcharactersheetcreator.models.game_systems.CWerewolf.Tribe;
 import amagi82.modularcharactersheetcreator.templates.Template;
 import amagi82.modularcharactersheetcreator.utils.Logan;
-import amagi82.modularcharactersheetcreator.utils.Otto;
+
+import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -109,12 +115,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void generateSampleCharacters() {
         Log.i(null, "Creating data");
-        characters.add(new GameCharacter("Thomas Anstis", new CVampire(CVampire.Sect.CAMARILLA, CVampire.Clan.GANGREL)));
-        characters.add(new GameCharacter("Tom Lytton", new CVampire(CVampire.Sect.ANARCH, CVampire.Clan.BRUJAH)));
-        characters.add(new GameCharacter("Georgia Johnson", new CVampire(CVampire.Sect.CAMARILLA, CVampire.Clan.TREMERE)));
-        characters.add(new GameCharacter("Augustus von Rabenholtz", new CVampire(CVampire.Sect.CAMARILLA, CVampire.Clan.VENTRUE)));
-        characters.add(new GameCharacter("Dr. Von Natsi", new CMage(CMage.Faction.SCIONSOFETHER)));
-        characters.add(new GameCharacter("Stormwalker", new CWerewolf(CWerewolf.Tribe.GLASSWALKERS, CWerewolf.Auspice.AHROUN)));
+        characters.add(new GameCharacter("Thomas Anstis", new CVampire(Sect.CAMARILLA, Clan.GANGREL)));
+        characters.add(new GameCharacter("Tom Lytton", new CVampire(Sect.ANARCH, Clan.BRUJAH)));
+        characters.add(new GameCharacter("Georgia Johnson", new CVampire(Sect.CAMARILLA, Clan.TREMERE)));
+        characters.add(new GameCharacter("Augustus von Rabenholtz", new CVampire(Sect.CAMARILLA, Clan.VENTRUE)));
+        characters.add(new GameCharacter("Dr. Von Natsi", new CMage(Faction.SCIONSOFETHER)));
+        characters.add(new GameCharacter("Stormwalker", new CWerewolf(Tribe.GLASSWALKERS, Auspice.AHROUN)));
 
         for (GameCharacter character : characters) {
             Log.i(null, "Creating template for "+character.getName());
@@ -134,12 +140,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override protected void onStart() {
         super.onStart();
-        Otto.BUS.getBus().register(this);
+        BUS.getBus().register(this);
     }
 
     @Override protected void onStop() {
         super.onStop();
-        Otto.BUS.getBus().unregister(this);
+        BUS.getBus().unregister(this);
     }
 
     @Subscribe

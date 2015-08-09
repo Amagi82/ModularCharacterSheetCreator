@@ -41,15 +41,16 @@
     <dimen name="character_icon_text_keyline_right">4dp</dimen>
     <dimen name="character_name_keyline">72dp</dimen>
     <dimen name="character_name_keyline_right">72dp</dimen>
-    <dimen name="character_name_margin_bottom">32dp</dimen>
+    <dimen name="character_name_margin_bottom">16dp</dimen>
     <dimen name="character_onyx_logo_margin_top">248dp</dimen>
+    <dimen name="character_collapsing_toolbar_height">240dp</dimen>
 
     <dimen name="character_choice_caption_size">64dp</dimen>
     <dimen name="character_choice_caption_size_small">56dp</dimen>
     <dimen name="character_choice_icon_size">56dp</dimen>
     <dimen name="character_choice_icon_size_small">48dp</dimen>
 
-    <dimen name="sheet_collapsingToolbar_height">276dp</dimen>
+    <dimen name="sheet_collapsing_toolbar_height">296dp</dimen>
     <dimen name="sheet_icon_margin_top">76dp</dimen>
     <dimen name="sheet_text_margin_top">126dp</dimen>
     <dimen name="sheet_expanded_title_margin_start">64dp</dimen>

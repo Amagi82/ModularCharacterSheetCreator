@@ -175,8 +175,12 @@
 
     <style name="CollapsingToolbar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/sheet_collapsingToolbar_height</item>
+        <item name="android:layout_height">@dimen/character_collapsing_toolbar_height</item>
         <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="CollapsingToolbar.Sheet">
+        <item name="android:layout_height">@dimen/sheet_collapsing_toolbar_height</item>
     </style>
 
     <style name="Toolbar">

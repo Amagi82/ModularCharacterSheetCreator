@@ -306,7 +306,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         character.setPortraitUri(data.getData());
 
         final CropImageView cropper = new CropImageView(getActivity());
-        cropper.setAspectRatio(new ScreenSize(getActivity()).getWidth(), res.getDimensionPixelSize(R.dimen.sheet_collapsingToolbar_height));
+        cropper.setAspectRatio(new ScreenSize(getActivity()).getWidth(), res.getDimensionPixelSize(R.dimen.sheet_collapsing_toolbar_height));
         cropper.setFixedAspectRatio(true);
         try {
             cropper.setImageBitmap(MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData()));
