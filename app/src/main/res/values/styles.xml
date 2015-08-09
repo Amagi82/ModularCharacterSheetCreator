@@ -108,8 +108,13 @@
     <style name="Fab">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">end|bottom</item>
         <item name="android:layout_margin">@dimen/fab_margin</item>
+        <item name="borderWidth">@dimen/fab_border_width</item>
+    </style>
+
+    <style name="Fab.Bottom">
+        <item name="android:layout_gravity">bottom|end</item>
+        <item name="backgroundTint">@color/accent_dark</item>
     </style>
 
     <style name="RecyclerView">
@@ -150,6 +155,35 @@
         <item name="android:padding">@dimen/default_icon_padding</item>
         <item name="android:layout_margin">@dimen/default_small_margin</item>
         <item name="android:layout_below">@id/tvDamageLevel</item>
+    </style>
+
+    <style name="CoordinatorLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="AppBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="AppBar.Fits">
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="CollapsingToolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/sheet_collapsingToolbar_height</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?actionBarSize</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="layout_collapseMode">pin</item>
     </style>
 
 </resources>

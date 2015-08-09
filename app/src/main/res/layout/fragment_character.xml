@@ -2,67 +2,27 @@
 
 <android.support.design.widget.CoordinatorLayout
     android:id="@+id/coordinatorLayout"
+    style="@style/CoordinatorLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context=".CharacterFragment">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        style="@style/AppBar.Fits">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark">
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            style="@style/CollapsingToolbar">
 
-            <ImageView
-                android:id="@+id/imagePortrait"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/image_portrait_height"
-                android:background="@color/primary"
-                android:fitsSystemWindows="true"/>
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
-            <ImageView
-                android:id="@+id/iconLeft"
-                style="@style/CircleIcon_CharacterFragment"
-                tools:src="@drawable/clan_icon"/>
-
-            <TextView
-                android:id="@+id/tvIconLeft"
-                style="@style/CircleIconCaption"
-                tools:text="Left"/>
-
-            <ImageView
-                android:id="@+id/iconRight"
-                style="@style/CircleIcon_CharacterFragment"
-                android:layout_alignParentRight="true"
-                tools:src="@drawable/clan_icon"/>
-
-            <TextView
-                android:id="@+id/tvIconRight"
-                style="@style/CircleIconCaption"
-                android:layout_alignParentRight="true"
-                tools:text="Right"/>
+            <include layout="@layout/profile"/>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/imagePortrait"
+                android:layout_gravity="bottom"
                 android:layout_marginBottom="@dimen/character_name_margin_bottom"
                 android:layout_marginLeft="@dimen/character_name_keyline"
                 android:layout_marginRight="@dimen/character_name_keyline_right">
@@ -80,31 +40,24 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
             </android.support.design.widget.TextInputLayout>
 
-            <TextView
-                android:id="@+id/tvGameSystem"
-                style="@style/TextAppearance.AppCompat.Subhead"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_tab_layout_height"
-                android:layout_below="@id/imagePortrait"
-                android:background="@color/primary_dark"
-                android:clickable="true"
-                android:gravity="center"
-                android:textColor="@color/secondary_text_default_material_dark"
-                android:visibility="gone"
-                tools:text="Game System"
-                tools:visiblity="visible"/>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/Toolbar"/>
 
-            <ImageView
-                android:id="@+id/imageOnyxLogo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/tvGameSystem"
-                android:background="@color/primary"
-                android:padding="@dimen/default_extra_large_margin"
-                android:scaleType="centerInside"
-                android:src="@drawable/logo_onyx_path"
-                android:visibility="gone"/>
-        </RelativeLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <TextView
+            android:id="@+id/tvGameSystem"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_tab_layout_height"
+            android:background="@color/primary_dark"
+            android:clickable="true"
+            android:gravity="center"
+            android:textColor="@color/secondary_text_default_material_dark"
+            android:visibility="gone"
+            tools:text="Game System"
+            tools:visiblity="visible"/>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -115,14 +68,11 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
+        style="@style/Fab"
         android:src="@drawable/ic_camera_alt_white_24dp"
         android:tint="@color/primary_dark"
-        app:borderWidth="2dp"
-        app:layout_anchor="@id/imagePortrait"
-        app:layout_anchorGravity="bottom|right"/>
+        app:layout_anchor="@id/collapsing_toolbar"
+        app:layout_anchorGravity="bottom|end"/>
 
 </android.support.design.widget.CoordinatorLayout>
 
