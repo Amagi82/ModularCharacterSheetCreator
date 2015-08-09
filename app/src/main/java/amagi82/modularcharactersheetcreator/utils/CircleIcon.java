@@ -1,6 +1,6 @@
 package amagi82.modularcharactersheetcreator.utils;
 
-import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -11,16 +11,20 @@ import amagi82.modularcharactersheetcreator.R;
 
 public class CircleIcon {
 
-    private Context context;
+    private Resources res;
     private int circleImageSize;
     private TextPaint textPaint;
     private int textColor;
 
-    public CircleIcon(Context context) {
-        this.context = context;
-        circleImageSize = (int) context.getResources().getDimension(R.dimen.circle_icon_size);
+    public CircleIcon(Resources res) {
+        this.res = res;
+        circleImageSize = res.getDimensionPixelSize(R.dimen.circle_icon_size);
         textPaint = new TextPaint();
         textColor = getColor(R.color.white);
+    }
+
+    public Bitmap createIcon(String name){
+        return createIcon(name, getColor(R.color.primary));
     }
 
     public Bitmap createIcon(String name, int backgroundColor){
@@ -32,7 +36,7 @@ public class CircleIcon {
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setLinearText(true);
         textPaint.setColor(textColor);
-        textPaint.setTextSize(context.getResources().getDimension(R.dimen.circle_icon_text_size));
+        textPaint.setTextSize(res.getDimension(R.dimen.circle_icon_text_size));
 
         Rect rect = new Rect();
         rect.set(0, 0, circleImageSize, circleImageSize);
@@ -49,11 +53,7 @@ public class CircleIcon {
         return bitmap;
     }
 
-    public  Bitmap createIcon(String name){
-        return createIcon(name, getColor(R.color.primary));
-    }
-
     private int getColor(int colorId){
-        return context.getResources().getColor(colorId);
+        return res.getColor(colorId);
     }
 }

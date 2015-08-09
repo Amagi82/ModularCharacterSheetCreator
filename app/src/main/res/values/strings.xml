@@ -56,6 +56,8 @@
     <string name="choose_width">Choose module width</string>
     <string name="templates">Templates</string>
     <string name="action_save_template">Save template</string>
+    <string name="delete_character_query">Delete this character?</string>
+    <string name="complete_action_using">Complete action using</string>
 
     <string-array name="portrait_choices">
         <item>Remove photo</item>

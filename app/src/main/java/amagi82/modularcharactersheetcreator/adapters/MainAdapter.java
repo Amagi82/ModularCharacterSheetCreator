@@ -21,7 +21,6 @@ import amagi82.modularcharactersheetcreator.utils.CircleIcon;
 public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
 
     SortedList<GameCharacter> characters;
-    private CircleIcon iconFactory;
     private Context context;
     private Resources res;
 
@@ -57,7 +56,6 @@ public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
         });
         this.context = context;
         res = context.getResources();
-        iconFactory = new CircleIcon(context);
     }
 
     // Create new views (invoked by the layout manager)
@@ -71,7 +69,7 @@ public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
     @Override
     public void onBindViewHolder(final CharacterViewHolder vh, final int position) {
         final GameCharacter character = characters.get(position);
-        if (character.getPortraitUri() == null) vh.icon.setImageBitmap(iconFactory.createIcon(character.getName(), res.getColor(R.color.primary)));
+        if (character.getPortraitUri() == null) vh.icon.setImageBitmap(new CircleIcon(res).createIcon(character.getName(), res.getColor(R.color.primary)));
         else Glide.with(context).load(character.getPortraitUri()).centerCrop().into(vh.icon);
         vh.tvName.setText(character.getName());
         vh.tvArchetype.setText(character.getArchetype());

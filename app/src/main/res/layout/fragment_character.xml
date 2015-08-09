@@ -59,6 +59,15 @@
             tools:text="Game System"
             tools:visiblity="visible"/>
 
+        <ImageView
+            android:id="@+id/imageOnyxLogo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/primary"
+            android:padding="@dimen/default_margin"
+            android:src="@drawable/logo_onyx_path"
+            android:visibility="gone"/>
+
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView

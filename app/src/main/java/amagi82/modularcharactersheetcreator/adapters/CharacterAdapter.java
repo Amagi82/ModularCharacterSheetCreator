@@ -1,49 +1,79 @@
 package amagi82.modularcharactersheetcreator.adapters;
 
-import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Point;
 import android.support.v4.app.Fragment;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import com.bumptech.glide.Glide;
+
+import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.TileGridViewHolder;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.TileViewHolder;
 import amagi82.modularcharactersheetcreator.models.Choice;
 import amagi82.modularcharactersheetcreator.models.game_systems.Game;
-import amagi82.modularcharactersheetcreator.network.SizedImage;
+import amagi82.modularcharactersheetcreator.utils.Icon;
+import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 
 public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private static final String LOGO = "Logo";
     private Fragment fragment;
     private Resources res;
     private SortedList<Choice> choices;
     private boolean left = true;
     private int gridImageSize;
 
-    public CharacterAdapter(Fragment fragment, SortedList<Choice> choices) {
+    public CharacterAdapter(Fragment fragment) {
         this.fragment = fragment;
-        this.choices = choices;
         res = fragment.getResources();
+        choices = new SortedList<>(Choice.class, new SortedList.Callback<Choice>() {
+            @Override public int compare(Choice o1, Choice o2) {
+                if (o1.getPosition() > o2.getPosition()) return 1;
+                if (o1.getPosition() < o2.getPosition()) return -1;
+                return 0;
+            }
 
-        WindowManager wm = (WindowManager) fragment.getActivity().getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int widthAvail = size.x - (res.getDimensionPixelSize(R.dimen.card_margin) * 2);
+            @Override public void onInserted(int position, int count) {
+                notifyItemRangeInserted(position, count);
+            }
+
+            @Override public void onRemoved(int position, int count) {
+                notifyItemRangeRemoved(position, count);
+            }
+
+            @Override public void onMoved(int fromPosition, int toPosition) {
+                notifyItemMoved(fromPosition, toPosition);
+            }
+
+            @Override public void onChanged(int position, int count) {
+                notifyItemRangeChanged(position, count);
+            }
+
+            @Override public boolean areContentsTheSame(Choice oldItem, Choice newItem) {
+                return false;
+            }
+
+            @Override public boolean areItemsTheSame(Choice item1, Choice item2) {
+                return item1.geteName().equals(item2.geteName());
+            }
+        });
+
+        int margins = res.getDimensionPixelSize(R.dimen.card_margin) * 2;
         int spanCount = res.getInteger(R.integer.character_grid_span_count);
-        gridImageSize = (widthAvail -res.getDimensionPixelSize(R.dimen.card_margin) * 2) /spanCount;
+        int widthAvail = new ScreenSize(fragment.getActivity()).getWidth() - margins;
+        gridImageSize = (widthAvail - margins) / spanCount;
     }
 
     @Override public int getItemViewType(int position) {
-        for (Game.System system : Game.System.values()) if (choices.get(position).geteName().equals(system.name())) return 0;
+        for (Game.System system : Game.System.values()) {
+            if (choices.get(position).geteName().equals(system.name())) return 0;
+            if (choices.get(position).geteName().equals(LOGO)) return 2;
+        }
         return 1;
     }
 
@@ -61,7 +91,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void bind(TileGridViewHolder vh, Choice choice) {
-        Glide.with(fragment).load(new SizedImage(res, choice, gridImageSize).getUrl()).into(vh.imageView);
+        Glide.with(fragment).load(new Icon(res, choice, gridImageSize).getUrl()).into(vh.imageView);
         vh.tvTitle.setText(choice.getTitle());
         vh.eName = choice.geteName();
         vh.left = left;
@@ -84,5 +114,49 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public void setLeft(boolean left) {
         this.left = left;
+    }
+
+    public Choice get(int position) {
+        return choices.get(position);
+    }
+
+    public int add(Choice choice) {
+        return choices.add(choice);
+    }
+
+    public void addAll(List<Choice> list) {
+        int i = 0;
+        choices.beginBatchedUpdates();
+        for (Choice choice : list) {
+            choice.setPosition(i);
+            i++;
+            choices.add(choice);
+        }
+        choices.endBatchedUpdates();
+    }
+
+    public boolean remove(String eName) {
+        for (int i = choices.size() - 1; i >= 0; i--) {
+            if (choices.get(i).geteName().equals(eName)) {
+                removeItemAt(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Choice removeItemAt(int index) {
+        return choices.removeItemAt(index);
+    }
+
+    public void clear() {
+        choices.beginBatchedUpdates();
+        while (choices.size() > 0) choices.removeItemAt(choices.size() - 1);
+        choices.endBatchedUpdates();
+    }
+
+    public void replaceAll(List<Choice> list) {
+        clear();
+        addAll(list);
     }
 }

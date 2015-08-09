@@ -1,15 +1,12 @@
 package amagi82.modularcharactersheetcreator.fragments;
 
 
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -33,8 +30,7 @@ import amagi82.modularcharactersheetcreator.models.Choice;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.modules.HeaderModule;
-import amagi82.modularcharactersheetcreator.network.SizedImage;
-import amagi82.modularcharactersheetcreator.utils.Otto;
+import amagi82.modularcharactersheetcreator.utils.Icon;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -46,7 +42,6 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
 
     @Bind(R.id.coordinatorLayout) CoordinatorLayout coordinatorLayout;
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
-    @Bind(R.id.appbar) AppBarLayout appbar;
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.imagePortrait) ImageView imagePortrait;
     @Bind(R.id.iconLeft) ImageView iconLeft;
@@ -60,17 +55,11 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
     @Bind(R.id.fab) FloatingActionButton fab;
     private GameCharacter character;
     private ViewPagerAdapter adapter;
-    private FragmentManager fm;
-    private Resources res;
-    private int iconSize;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_sheet, container, false);
         ButterKnife.bind(this, rootView);
-        fm = getFragmentManager();
-        res = getResources();
-        iconSize = res.getDimensionPixelSize(R.dimen.circle_icon_size);
         character = ((MainActivity) getActivity()).getCurrentCharacter();
         setColors();
         collapsingToolbar.setTitle(character.getName());
@@ -87,7 +76,7 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
             Glide.with(this).load(getUrl(character.getRight())).centerCrop().into(iconRight);
         }
 
-        adapter = new ViewPagerAdapter(fm, character.getSheets());
+        adapter = new ViewPagerAdapter(getFragmentManager(), character.getSheets());
         viewPager.setAdapter(adapter);
         tabLayout.setTabsFromPagerAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -119,7 +108,7 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
     }
 
     private void setColors() {
-        int shadow = res.getColor(R.color.black);
+        int shadow = getResources().getColor(R.color.black);
         tvIconLeft.setShadowLayer(3, 0, 0, shadow);
         tvIconRight.setShadowLayer(3, 0, 0, shadow);
         int colorText = character.getColorText();
@@ -134,11 +123,11 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         Log.i(null, "adding new module");
         HeaderModule module = new HeaderModule();
         module.setTitle("New Module");
-        Otto.BUS.getBus().post(new ModuleAddedEvent(module));
+        BUS.getBus().post(new ModuleAddedEvent(module));
     }
 
     private String getUrl(Choice choice){
-        return new SizedImage(res, choice, iconSize).getUrl();
+        return new Icon(getResources(), choice).getUrl();
     }
 
     public GameCharacter getCharacter(){
@@ -154,7 +143,7 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         switch(item.getItemId()){
             case R.id.action_edit:
                 //Update any character info before editing.
-                Otto.BUS.getBus().post(new EditCharacterEvent(character));
+                BUS.getBus().post(new EditCharacterEvent(character));
                 return true;
             case R.id.action_tab_add:
                 Sheet sheet = new Sheet();

@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.network;
+package amagi82.modularcharactersheetcreator.utils;
 
 import android.content.res.Resources;
 
@@ -6,13 +6,17 @@ import amagi82.modularcharactersheetcreator.App;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.Choice;
 
-public class SizedImage {
+public class Icon {
 
     private Resources res;
     private Choice choice;
     private int size;
 
-    public SizedImage(Resources res, Choice choice, int size) {
+    public Icon(Resources res, Choice choice){
+        this(res, choice, res.getDimensionPixelSize(R.dimen.circle_icon_size));
+    }
+
+    public Icon(Resources res, Choice choice, int size) {
         this.res = res;
         this.choice = choice;
         this.size = size;
