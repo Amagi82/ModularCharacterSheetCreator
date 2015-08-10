@@ -100,7 +100,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
         if (isEditMode) {
             Log.i(null, "edit mode");
             character = ((MainActivity) getActivity()).getCurrentCharacter();
-            setTextColors();
+            setTextScrims();
             textInputLayout.getEditText().setText(character.getName());
             if (character.getPortraitUri() != null) Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
             onyx = character.getGameSystem().getOnyx();
@@ -287,7 +287,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                         imagePortrait.setImageResource(0);
                         character.setColorBackground(NONE);
                         character.setColorText(NONE);
-                        setTextColors();
+                        setTextScrims();
                     }else getImageFromGallery();
                 }
             }).show();
@@ -303,7 +303,6 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK || data == null) return;
-        character.setPortraitUri(data.getData());
 
         final CropImageView cropper = new CropImageView(getActivity());
         cropper.setAspectRatio(new ScreenSize(getActivity()).getWidth(), res.getDimensionPixelSize(R.dimen.sheet_collapsing_toolbar_height));
@@ -335,13 +334,12 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
                             character.setColorTextDim(swatch.getTitleTextColor());
                         }
                         Glide.with(CharacterFragment.this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
-                        setTextColors();
-
+                        setTextScrims();
                     }
                 }).show();
     }
 
-    private void setTextColors() {
+    private void setTextScrims() {
         int shadow = res.getColor(R.color.black);
         if(character.getPortraitUri() != null){
             tvIconLeft.setShadowLayer(3, 0, 0, shadow);
