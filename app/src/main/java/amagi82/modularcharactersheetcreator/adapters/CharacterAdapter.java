@@ -135,18 +135,17 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         choices.endBatchedUpdates();
     }
 
-    public boolean remove(String eName) {
+    public void remove(String eName) {
         for (int i = choices.size() - 1; i >= 0; i--) {
             if (choices.get(i).geteName().equals(eName)) {
                 removeItemAt(i);
-                return true;
+                return;
             }
         }
-        return false;
     }
 
-    public Choice removeItemAt(int index) {
-        return choices.removeItemAt(index);
+    public void removeItemAt(int index) {
+        choices.removeItemAt(index);
     }
 
     public void clear() {
