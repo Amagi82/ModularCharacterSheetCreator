@@ -21,7 +21,6 @@ import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 
 public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final String LOGO = "Logo";
     private Fragment fragment;
     private Resources res;
     private SortedList<Choice> choices;
@@ -72,7 +71,6 @@ public class CharacterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override public int getItemViewType(int position) {
         for (Game.System system : Game.System.values()) {
             if (choices.get(position).geteName().equals(system.name())) return 0;
-            if (choices.get(position).geteName().equals(LOGO)) return 2;
         }
         return 1;
     }
