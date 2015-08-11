@@ -11,20 +11,23 @@ import android.view.ViewGroup;
 import com.squareup.otto.Subscribe;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
+import amagi82.modularcharactersheetcreator.adapters.CharacterGameAdapter;
 import amagi82.modularcharactersheetcreator.events.GameSystemEvent;
 import amagi82.modularcharactersheetcreator.events.TileItemClickedEvent;
 import amagi82.modularcharactersheetcreator.models.game_systems.Game;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static amagi82.modularcharactersheetcreator.models.game_systems.Game.Category.*;
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 
 public class CharacterGameFragment extends Fragment {
 
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
     private Game game = new Game();
-    private CharacterAdapter adapter;
+    private CharacterGameAdapter adapter;
+    private boolean cWodDisplayed = false;
+    private boolean nWodDisplayed = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,18 +35,24 @@ public class CharacterGameFragment extends Fragment {
         ButterKnife.bind(this, rootView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new CharacterAdapter(this);
+        adapter = new CharacterGameAdapter();
         recyclerView.setAdapter(adapter);
-
-        adapter.addAll(game.getList(Game.Category.DEFAULT));
+        adapter.addItems(game.getList(DEFAULT));
 
         return rootView;
     }
 
     @Subscribe public void onGameSystemSelected(TileItemClickedEvent event) {
-        //If a system with subcategories has been selected, show them
-        if (event.system == Game.System.CWOD) adapter.replaceAll(game.getList(Game.Category.CWOD));
-        else if (event.system == Game.System.NWOD) adapter.replaceAll(game.getList(Game.Category.NWOD));
+        if (event.system == Game.System.CWOD) {
+            if(!cWodDisplayed) adapter.addItems(game.getList(CWOD));
+            else adapter.removeItems(game.getList(CWOD));
+            cWodDisplayed = !cWodDisplayed;
+        }
+        else if (event.system == Game.System.NWOD) {
+            if(!nWodDisplayed) adapter.addItems(game.getList(NWOD));
+            else adapter.removeItems(game.getList(NWOD));
+            nWodDisplayed = !nWodDisplayed;
+        }
         else BUS.getBus().post(new GameSystemEvent(event.system.getOnyx()));
     }
 

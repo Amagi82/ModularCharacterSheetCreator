@@ -36,6 +36,11 @@ public class Choice {
         this.url = url;
     }
 
+    public Choice(String eName, int title, int baseUrl, int url, int position) {
+        this(eName, title, baseUrl, url);
+        this.position = position;
+    }
+
     public String geteName() {
         return eName;
     }

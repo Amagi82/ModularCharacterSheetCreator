@@ -10,7 +10,6 @@ public class Game {
 
     public enum System {
         CWOD(R.string.cwod, R.drawable.title_wod),
-        NWOD(R.string.nwod, R.drawable.title_wod),
         CVAMPIRE(R.string.cwod_vampire, R.drawable.title_vampire_masquerade, new CVampire(), R.color.cwod_vampire,
                 R.string.url_cwod_vampire_base, Category.CWOD, R.string.sect, R.string.clan),
         CWEREWOLF(R.string.cwod_werewolf, R.drawable.title_werewolf_apocalypse, new CWerewolf(), R.color.cwod_werewolf,
@@ -19,6 +18,7 @@ public class Game {
                 R.string.url_cwod_wraith_base, Category.CWOD, R.string.arcanos),
         CMAGE(R.string.cwod_mage, R.drawable.title_mage_ascension, new CMage(), R.color.cwod_mage,
                 R.string.url_cwod_mage_base, Category.CWOD, R.string.traditions),
+        NWOD(R.string.nwod, R.drawable.title_wod),
         NVAMPIRE(R.string.nwod_vampire, R.drawable.title_vampire_requiem, new NVampire(), R.color.nwod_vampire,
                 R.string.url_nwod_vampire_base, Category.NWOD, R.string.clan, R.string.bloodlines, R.string.covenant),
         NWEREWOLF(R.string.nwod_werewolf, R.drawable.title_werewolf_forsaken, new NWerewolf(), R.color.nwod_werewolf,
@@ -107,8 +107,10 @@ public class Game {
 
     public List<Choice> getList(Category category) {
         List<Choice> choices = new ArrayList<>();
+        int i = 0;
         for (System system : System.values()) {
-            if (system.getCategory() == category) choices.add(new Choice(system.name(), system.getName(), system.getDrawable()));
+            if (system.getCategory() == category) choices.add(new Choice(system.name(), system.getName(), system.getDrawable(), i));
+            i++;
         }
         return choices;
     }
