@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.events.TileItemClickedEvent;
-import amagi82.modularcharactersheetcreator.models.game_systems.Game;
+import amagi82.modularcharactersheetcreator.models.games.Game;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 

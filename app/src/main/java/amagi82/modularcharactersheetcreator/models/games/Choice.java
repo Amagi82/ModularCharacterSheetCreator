@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.models;
+package amagi82.modularcharactersheetcreator.models.games;
 
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;

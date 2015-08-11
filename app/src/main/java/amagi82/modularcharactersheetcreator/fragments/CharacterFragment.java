@@ -33,7 +33,7 @@ import com.squareup.otto.Subscribe;
 
 import java.io.IOException;
 
-import amagi82.modularcharactersheetcreator.MainActivity;
+import amagi82.modularcharactersheetcreator.activities.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
 import amagi82.modularcharactersheetcreator.events.CharacterAddedEvent;
@@ -42,8 +42,8 @@ import amagi82.modularcharactersheetcreator.events.TileGridItemClickedEvent;
 import amagi82.modularcharactersheetcreator.events.TileItemClickedEvent;
 import amagi82.modularcharactersheetcreator.events.UpNavigationEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.game_systems.Game;
-import amagi82.modularcharactersheetcreator.models.game_systems.Onyx;
+import amagi82.modularcharactersheetcreator.models.games.Game;
+import amagi82.modularcharactersheetcreator.models.games.systems.Onyx;
 import amagi82.modularcharactersheetcreator.utils.Icon;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 import butterknife.Bind;
@@ -51,7 +51,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static amagi82.modularcharactersheetcreator.App.NONE;
-import static amagi82.modularcharactersheetcreator.MainActivity.EDIT_MODE;
+import static amagi82.modularcharactersheetcreator.activities.MainActivity.EDIT_MODE;
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 import static android.app.Activity.RESULT_OK;
 import static android.view.View.GONE;

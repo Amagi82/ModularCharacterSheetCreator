@@ -1,6 +1,6 @@
 package amagi82.modularcharactersheetcreator.events;
 
-import amagi82.modularcharactersheetcreator.models.game_systems.Game;
+import amagi82.modularcharactersheetcreator.models.games.Game;
 
 public class TileItemClickedEvent {
     public final Game.System system;

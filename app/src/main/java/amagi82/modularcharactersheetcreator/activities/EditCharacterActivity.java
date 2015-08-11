@@ -38,14 +38,14 @@ import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
 import amagi82.modularcharactersheetcreator.fragments.CharacterAxisFragment;
 import amagi82.modularcharactersheetcreator.fragments.CharacterGameFragment;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.game_systems.Onyx;
+import amagi82.modularcharactersheetcreator.models.games.systems.Onyx;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static amagi82.modularcharactersheetcreator.App.NONE;
-import static amagi82.modularcharactersheetcreator.MainActivity.CHARACTER;
+import static amagi82.modularcharactersheetcreator.activities.MainActivity.CHARACTER;
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;

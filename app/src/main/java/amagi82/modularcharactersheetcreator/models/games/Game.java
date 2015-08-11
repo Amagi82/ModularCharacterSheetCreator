@@ -1,10 +1,21 @@
-package amagi82.modularcharactersheetcreator.models.game_systems;
+package amagi82.modularcharactersheetcreator.models.games;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.Choice;
+import amagi82.modularcharactersheetcreator.models.games.systems.CMage;
+import amagi82.modularcharactersheetcreator.models.games.systems.CVampire;
+import amagi82.modularcharactersheetcreator.models.games.systems.CWerewolf;
+import amagi82.modularcharactersheetcreator.models.games.systems.CWraith;
+import amagi82.modularcharactersheetcreator.models.games.systems.Exalted;
+import amagi82.modularcharactersheetcreator.models.games.systems.NDemon;
+import amagi82.modularcharactersheetcreator.models.games.systems.NMummy;
+import amagi82.modularcharactersheetcreator.models.games.systems.NVampire;
+import amagi82.modularcharactersheetcreator.models.games.systems.NWerewolf;
+import amagi82.modularcharactersheetcreator.models.games.systems.Onyx;
+import amagi82.modularcharactersheetcreator.models.games.systems.Scion;
+import amagi82.modularcharactersheetcreator.models.games.systems.Trinity;
 
 public class Game {
 

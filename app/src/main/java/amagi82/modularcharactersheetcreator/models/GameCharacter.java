@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import amagi82.modularcharactersheetcreator.models.game_systems.Game;
-import amagi82.modularcharactersheetcreator.models.game_systems.Onyx;
+import amagi82.modularcharactersheetcreator.models.games.Choice;
+import amagi82.modularcharactersheetcreator.models.games.Game;
+import amagi82.modularcharactersheetcreator.models.games.systems.Onyx;
 
 import static amagi82.modularcharactersheetcreator.App.NONE;
 

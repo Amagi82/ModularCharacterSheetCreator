@@ -14,11 +14,11 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterGameAdapter;
 import amagi82.modularcharactersheetcreator.events.GameSystemEvent;
 import amagi82.modularcharactersheetcreator.events.TileItemClickedEvent;
-import amagi82.modularcharactersheetcreator.models.game_systems.Game;
+import amagi82.modularcharactersheetcreator.models.games.Game;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static amagi82.modularcharactersheetcreator.models.game_systems.Game.Category.*;
+import static amagi82.modularcharactersheetcreator.models.games.Game.Category.*;
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 
 public class CharacterGameFragment extends Fragment {

@@ -16,7 +16,7 @@ import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
 import amagi82.modularcharactersheetcreator.events.LeftAxisEvent;
 import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
 import amagi82.modularcharactersheetcreator.events.TileGridItemClickedEvent;
-import amagi82.modularcharactersheetcreator.models.game_systems.Onyx;
+import amagi82.modularcharactersheetcreator.models.games.systems.Onyx;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 

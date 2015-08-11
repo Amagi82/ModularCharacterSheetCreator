@@ -1,8 +1,8 @@
-package amagi82.modularcharactersheetcreator.models.game_systems;
+package amagi82.modularcharactersheetcreator.models.games.systems;
 
 import java.util.List;
 
-import amagi82.modularcharactersheetcreator.models.Choice;
+import amagi82.modularcharactersheetcreator.models.games.Choice;
 
 /*
     Onyx is the base class for all Onyx Path games.

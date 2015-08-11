@@ -14,8 +14,8 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.TileGridViewHolder;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.TileViewHolder;
-import amagi82.modularcharactersheetcreator.models.Choice;
-import amagi82.modularcharactersheetcreator.models.game_systems.Game;
+import amagi82.modularcharactersheetcreator.models.games.Choice;
+import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.utils.Icon;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 

@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator;
+package amagi82.modularcharactersheetcreator.activities;
 
 
 import android.content.Intent;
@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import amagi82.modularcharactersheetcreator.activities.EditCharacterActivity;
+import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.events.CharacterAddedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterChangedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterClickedEvent;
@@ -29,14 +29,14 @@ import amagi82.modularcharactersheetcreator.fragments.MainFragment;
 import amagi82.modularcharactersheetcreator.fragments.SheetFragment;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
-import amagi82.modularcharactersheetcreator.models.game_systems.CMage;
-import amagi82.modularcharactersheetcreator.models.game_systems.CMage.Faction;
-import amagi82.modularcharactersheetcreator.models.game_systems.CVampire;
-import amagi82.modularcharactersheetcreator.models.game_systems.CVampire.Clan;
-import amagi82.modularcharactersheetcreator.models.game_systems.CVampire.Sect;
-import amagi82.modularcharactersheetcreator.models.game_systems.CWerewolf;
-import amagi82.modularcharactersheetcreator.models.game_systems.CWerewolf.Auspice;
-import amagi82.modularcharactersheetcreator.models.game_systems.CWerewolf.Tribe;
+import amagi82.modularcharactersheetcreator.models.games.systems.CMage;
+import amagi82.modularcharactersheetcreator.models.games.systems.CMage.Faction;
+import amagi82.modularcharactersheetcreator.models.games.systems.CVampire;
+import amagi82.modularcharactersheetcreator.models.games.systems.CVampire.Clan;
+import amagi82.modularcharactersheetcreator.models.games.systems.CVampire.Sect;
+import amagi82.modularcharactersheetcreator.models.games.systems.CWerewolf;
+import amagi82.modularcharactersheetcreator.models.games.systems.CWerewolf.Auspice;
+import amagi82.modularcharactersheetcreator.models.games.systems.CWerewolf.Tribe;
 import amagi82.modularcharactersheetcreator.templates.Template;
 import amagi82.modularcharactersheetcreator.utils.Logan;
 

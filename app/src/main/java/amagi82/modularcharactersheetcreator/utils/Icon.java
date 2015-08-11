@@ -4,7 +4,7 @@ import android.content.res.Resources;
 
 import amagi82.modularcharactersheetcreator.App;
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.Choice;
+import amagi82.modularcharactersheetcreator.models.games.Choice;
 
 public class Icon {
 

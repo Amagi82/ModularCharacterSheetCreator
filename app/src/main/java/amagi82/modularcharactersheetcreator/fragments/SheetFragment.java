@@ -20,13 +20,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import amagi82.modularcharactersheetcreator.MainActivity;
+import amagi82.modularcharactersheetcreator.activities.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.ViewPagerAdapter;
 import amagi82.modularcharactersheetcreator.events.EditCharacterEvent;
 import amagi82.modularcharactersheetcreator.events.ModuleAddedEvent;
 import amagi82.modularcharactersheetcreator.events.UpNavigationEvent;
-import amagi82.modularcharactersheetcreator.models.Choice;
+import amagi82.modularcharactersheetcreator.models.games.Choice;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.modules.HeaderModule;

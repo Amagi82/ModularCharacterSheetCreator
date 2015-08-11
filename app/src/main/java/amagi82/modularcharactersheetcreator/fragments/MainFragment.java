@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import amagi82.modularcharactersheetcreator.MainActivity;
+import amagi82.modularcharactersheetcreator.activities.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.MainAdapter;
 import amagi82.modularcharactersheetcreator.events.CreateNewCharacterEvent;
