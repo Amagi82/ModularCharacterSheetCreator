@@ -11,19 +11,21 @@ import android.view.ViewGroup;
 import com.squareup.otto.Subscribe;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.activities.EditCharacterActivity;
 import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
+import amagi82.modularcharactersheetcreator.events.LeftAxisEvent;
+import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
 import amagi82.modularcharactersheetcreator.events.TileGridItemClickedEvent;
-import amagi82.modularcharactersheetcreator.models.game_systems.Game;
 import amagi82.modularcharactersheetcreator.models.game_systems.Onyx;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static amagi82.modularcharactersheetcreator.activities.EditCharacterActivity.LEFT;
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 
 public class CharacterAxisFragment extends Fragment{
 
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
-    private Game game = new Game();
     private Onyx onyx;
     private CharacterAdapter adapter;
 
@@ -32,9 +34,14 @@ public class CharacterAxisFragment extends Fragment{
         View rootView = inflater.inflate(R.layout.recycler_view, container, false);
         ButterKnife.bind(this, rootView);
 
+        onyx = ((EditCharacterActivity)getActivity()).getOnyx();
+        boolean isLeft = getArguments().getBoolean(LEFT, true);
+
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
         adapter = new CharacterAdapter(this);
         recyclerView.setAdapter(adapter);
+        adapter.setLeft(isLeft);
+        adapter.addAll(isLeft ? onyx.getListLeft(null) : onyx.getListRight(null));
 
         return rootView;
     }
@@ -45,11 +52,9 @@ public class CharacterAxisFragment extends Fragment{
         if (event.left) {
             //Choose the left category
             if (onyx.getListLeft(eName).size() > 0) {
-                //If there are additional choices available, present them
+                //If there are additional options available, present them
                 adapter.addAll(onyx.getListLeft(eName));
-            } else {
-                //An option has been selected. Set the image and load the right side if needed
-            }
+            } else BUS.getBus().post(new LeftAxisEvent(eName));
         } else {
             //Choose the right category
             if (onyx.getListRight(eName).size() > 0) {
@@ -57,10 +62,7 @@ public class CharacterAxisFragment extends Fragment{
                 adapter.remove("BLOODLINES");
                 adapter.remove("OTHERS");
                 adapter.addAll(onyx.getListRight(eName));
-            } else {
-                //Finished. Set our images and finalize the game character
-                //BUS.getBus().post(new RightAxisEvent(onyx.g));
-            }
+            } else BUS.getBus().post(new RightAxisEvent(eName));
         }
     }
 

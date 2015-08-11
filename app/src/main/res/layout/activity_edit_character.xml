@@ -108,7 +108,7 @@
         style="@style/FlatButton"
         android:layout_gravity="bottom"
         android:visibility="gone"
-        tools:text="Add character"
+        android:text="@string/add_character"
         tools:visibility="visible"/>
 
 </android.support.design.widget.CoordinatorLayout>

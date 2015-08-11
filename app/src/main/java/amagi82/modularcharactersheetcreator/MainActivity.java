@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String CHARACTERS = "characters";
     public static final String BUCKET = "bucket";
     public static final String EDIT_MODE = "EditMode";
+    public static final String CHARACTER = "Character";
     private FragmentManager fm = getSupportFragmentManager();
     private List<GameCharacter> characters;
     private GameCharacter currentCharacter;

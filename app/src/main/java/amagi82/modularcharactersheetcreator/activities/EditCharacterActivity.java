@@ -12,17 +12,19 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.bluelinelabs.logansquare.LoganSquare;
 import com.bumptech.glide.Glide;
 import com.edmodo.cropper.CropImageView;
 import com.squareup.otto.Subscribe;
@@ -33,21 +35,26 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.events.GameSystemEvent;
 import amagi82.modularcharactersheetcreator.events.LeftAxisEvent;
 import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
+import amagi82.modularcharactersheetcreator.fragments.CharacterAxisFragment;
+import amagi82.modularcharactersheetcreator.fragments.CharacterGameFragment;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.game_systems.Onyx;
-import amagi82.modularcharactersheetcreator.utils.Logan;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static amagi82.modularcharactersheetcreator.App.NONE;
+import static amagi82.modularcharactersheetcreator.MainActivity.CHARACTER;
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class EditCharacterActivity extends AppCompatActivity {
 
+    public static final String LEFT = "Left";
+    private static final String FRAG_LEFT = "frag_left";
+    private static final String FRAG_RIGHT = "frag_right";
     private static final int PICK_FROM_FILE = 99;
     @Bind(R.id.coordinatorLayout) CoordinatorLayout coordinatorLayout;
     @Bind(R.id.appbar) AppBarLayout appbar;
@@ -61,14 +68,10 @@ public class EditCharacterActivity extends AppCompatActivity {
     @Bind(R.id.bAddCharacter) Button bAddCharacter;
     @Bind(R.id.imageOnyxLogo) ImageView imageOnyxLogo;
     @Bind(R.id.fab) FloatingActionButton fab;
-    @Bind(R.id.container) FrameLayout container;
     private FragmentManager fm = getSupportFragmentManager();
     private GameCharacter character;
     private Onyx onyx;
-    private Logan logan = new Logan();
     private enum Clear {ALL, LEFTRIGHT, RIGHT}
-    public enum Step {GAMESYSTEM, LEFTAXIS, RIGHTAXIS}
-    private Step step;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,42 +82,33 @@ public class EditCharacterActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        if(savedInstanceState == null){
-//            fm.beginTransaction().replace(R.id.container, new MainFragment()).commit();
-//        }
 
+        if(savedInstanceState == null) fm.beginTransaction().replace(R.id.container, new CharacterGameFragment()).commit();
 
-//        //Check if we're editing a character or creating a new one
-//        isEditMode = getArguments() != null && getArguments().getBoolean(EDIT_MODE, false);
-//        if (isEditMode) {
-//            Log.i(null, "edit mode");
-//            character = ((MainActivity) getActivity()).getCurrentCharacter();
-//            setTextScrims();
-//            textInputLayout.getEditText().setText(character.getName());
-//            if (character.getPortraitUri() != null) Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
-//            onyx = character.getGameSystem().getOnyx();
-//            onyx.setLeft(character.getLeft().geteName());
-//            if (onyx.hasRight()) onyx.setRight(character.getRight().geteName());
-//            displayGameSystem();
-//            setLeftResources();
-//            if(onyx.hasRight()) setRightResources();
-//            displayOnyxLogo();
-//        } else {
-//            if (character == null) character = new GameCharacter();
-//            if (onyx == null) chooseNewGameSystem();
-//            else {
-//                displayGameSystem();
-//                if (onyx.getLeft() == null) chooseLeftCategory();
-//                else {
-//                    setLeftResources();
-//                    if (onyx.hasRight() && onyx.getRight() == null) chooseRightCategory();
-//                    else {
-//                        setRightResources();
-//                        displayOnyxLogo();
-//                    }
-//                }
-//            }
-//        }
+        //Check if we're editing a character or creating a new one
+        boolean isEditMode = getIntent().getStringExtra(CHARACTER) != null;
+        if (isEditMode) {
+            Log.i(null, "edit mode");
+            try {
+                character = LoganSquare.parse(getIntent().getStringExtra(CHARACTER), GameCharacter.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //setTextScrims();
+            textInputLayout.getEditText().setText(character.getName());
+            if (character.getPortraitUri() != null) Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
+            onyx = character.getGameSystem().getOnyx();
+            onyx.setLeft(character.getLeft().geteName());
+            bLeft.setVisibility(VISIBLE);
+            bLeft.setText(onyx.getLeft().getTitle());
+            if (onyx.hasRight()) {
+                onyx.setRight(character.getRight().geteName());
+                bRight.setVisibility(VISIBLE);
+                bRight.setText(onyx.getRight().getTitle());
+            }
+            bAddCharacter.setText(R.string.update_character);
+            finishCharacter();
+        }
     }
 
     @OnClick(R.id.bGameSystem)
@@ -125,11 +119,25 @@ public class EditCharacterActivity extends AppCompatActivity {
     @OnClick(R.id.bLeft)
     public void chooseLeftCategory() {
         clearSelections(Clear.LEFTRIGHT);
+        Fragment fragment = new CharacterAxisFragment();
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(LEFT, true);
+        fragment.setArguments(bundle);
+        fm.beginTransaction().replace(R.id.container, fragment).addToBackStack(FRAG_LEFT).commit();
     }
 
     @OnClick(R.id.bRight)
     public void chooseRightCategory() {
         clearSelections(Clear.RIGHT);
+        Fragment fragment = new CharacterAxisFragment();
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(LEFT, false);
+        fragment.setArguments(bundle);
+        fm.beginTransaction().replace(R.id.container, fragment).addToBackStack(FRAG_RIGHT).commit();
+    }
+
+    public Onyx getOnyx(){
+        return onyx;
     }
 
     private void displayOnyxLogo(){
@@ -154,13 +162,16 @@ public class EditCharacterActivity extends AppCompatActivity {
                 bGameSystem.setVisibility(GONE);
                 bLeft.setVisibility(GONE);
                 bRight.setVisibility(GONE);
+                fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 break;
             case LEFTRIGHT:
                 bLeft.setVisibility(GONE);
                 bRight.setVisibility(GONE);
+                fm.popBackStack(FRAG_LEFT, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 break;
             case RIGHT:
                 bRight.setVisibility(GONE);
+                fm.popBackStack(FRAG_RIGHT, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 break;
         }
     }
@@ -168,28 +179,32 @@ public class EditCharacterActivity extends AppCompatActivity {
     @Subscribe
     public void onGameSystemChosen(GameSystemEvent event){
         onyx = event.onyx;
+        bGameSystem.setVisibility(VISIBLE);
+        bGameSystem.setText(onyx.getSystemName());
+        chooseLeftCategory();
     }
 
     @Subscribe
     public void onLeftAxisChosen(LeftAxisEvent event){
+        onyx.setLeft(event.eName);
         bLeft.setVisibility(VISIBLE);
-        bLeft.setText(event.choice.getTitle());
+        bLeft.setText(onyx.getLeft().getTitle());
         if (onyx.hasRight()) chooseRightCategory();
         else finishCharacter();
     }
 
     @Subscribe
     public void onRightAxisChosen(RightAxisEvent event){
-        if(onyx.getListRight(null).size() > 0) chooseRightCategory();
-        else {
-            bRight.setVisibility(VISIBLE);
-            bRight.setText(event.choice.getTitle());
-            finishCharacter();
-        }
+        onyx.setRight(event.eName);
+        bRight.setVisibility(VISIBLE);
+        bRight.setText(onyx.getRight().getTitle());
+        finishCharacter();
     }
 
     private void finishCharacter(){
         character.setOnyx(onyx);
+        collapsingToolbar.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.sheet_collapsing_toolbar_height));
+        fab.show();
         displayOnyxLogo();
         if(textInputLayout.getEditText().getText().length() > 1) bAddCharacter.setVisibility(VISIBLE);
     }

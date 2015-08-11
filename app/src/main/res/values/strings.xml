@@ -37,6 +37,8 @@
     <string name="ok">OK</string>
     <string name="profession">Profession</string>
     <string name="skip">Skip</string>
+    <string name="add_character">Add character</string>
+    <string name="update_character">Update character</string>
 
     <!--Modules-->
     <string name="color">Color</string>
