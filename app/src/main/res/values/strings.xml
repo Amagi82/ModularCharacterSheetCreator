@@ -63,5 +63,8 @@
         <item>Remove photo</item>
         <item>Choose new photo</item>
     </string-array>
+    <string name="title_activity_edit_character">EditCharacterActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>
