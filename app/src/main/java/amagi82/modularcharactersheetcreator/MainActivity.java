@@ -1,6 +1,7 @@
 package amagi82.modularcharactersheetcreator;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import amagi82.modularcharactersheetcreator.activities.EditCharacterActivity;
 import amagi82.modularcharactersheetcreator.events.CharacterAddedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterChangedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterClickedEvent;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String BUCKET = "bucket";
     public static final String EDIT_MODE = "EditMode";
     public static final String CHARACTER = "Character";
+    public static final int REQUEST_CODE = 50;
     private FragmentManager fm = getSupportFragmentManager();
     private List<GameCharacter> characters;
     private GameCharacter currentCharacter;
@@ -179,7 +182,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Subscribe
     public void onCreateNewCharacter(CreateNewCharacterEvent event) {
-        fm.beginTransaction().replace(R.id.container, new CharacterFragment()).addToBackStack(null).commit();
+        startActivityForResult(new Intent(this, EditCharacterActivity.class), REQUEST_CODE);
+        //fm.beginTransaction().replace(R.id.container, new CharacterFragment()).addToBackStack(null).commit();
     }
 
     @Subscribe

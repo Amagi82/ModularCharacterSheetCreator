@@ -109,7 +109,7 @@ public class Game {
         List<Choice> choices = new ArrayList<>();
         int i = 0;
         for (System system : System.values()) {
-            if (system.getCategory() == category) choices.add(new Choice(system.name(), system.getName(), system.getDrawable(), i));
+            if (system.getCategory() == category) choices.add(new Choice(i, system.name(), system.getName(), system.getDrawable()));
             i++;
         }
         return choices;

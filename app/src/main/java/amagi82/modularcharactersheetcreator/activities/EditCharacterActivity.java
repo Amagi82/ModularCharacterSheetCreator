@@ -108,6 +108,8 @@ public class EditCharacterActivity extends AppCompatActivity {
             }
             bAddCharacter.setText(R.string.update_character);
             finishCharacter();
+        }else{
+            character = new GameCharacter();
         }
     }
 
@@ -218,16 +220,16 @@ public class EditCharacterActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_delete:
-                new AlertDialog.Builder(this).setMessage(R.string.delete_character_query).setNegativeButton(R.string.cancel, null)
-                        .setPositiveButton(R.string.action_delete, new DialogInterface.OnClickListener() {
-                            @Override public void onClick(DialogInterface dialog, int which) {
-                                finish();  //Test??
-                            }
-                        }).show();
-                return true;
-            case R.id.action_save_template:
-                return true;
+//            case R.id.action_delete:
+//                new AlertDialog.Builder(this).setMessage(R.string.delete_character_query).setNegativeButton(R.string.cancel, null)
+//                        .setPositiveButton(R.string.action_delete, new DialogInterface.OnClickListener() {
+//                            @Override public void onClick(DialogInterface dialog, int which) {
+//                                finish();  //Test??
+//                            }
+//                        }).show();
+//                return true;
+//            case R.id.action_save_template:
+//                return true;
             case R.id.action_discard:
                 finish();
                 return true;

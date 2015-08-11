@@ -29,16 +29,16 @@ public class Choice {
         this.drawable = drawable;
     }
 
+    public Choice(int position, String eName, int title, int drawable) {
+        this(eName, title, drawable);
+        this.position = position;
+    }
+
     public Choice(String eName, int title, int baseUrl, int url) {
         this.eName = eName;
         this.title = title;
         this.baseUrl = baseUrl;
         this.url = url;
-    }
-
-    public Choice(String eName, int title, int baseUrl, int url, int position) {
-        this(eName, title, baseUrl, url);
-        this.position = position;
     }
 
     public String geteName() {

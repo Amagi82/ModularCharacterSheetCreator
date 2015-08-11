@@ -38,7 +38,6 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
 import amagi82.modularcharactersheetcreator.events.CharacterAddedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterChangedEvent;
-import amagi82.modularcharactersheetcreator.events.CharacterDeletedEvent;
 import amagi82.modularcharactersheetcreator.events.TileGridItemClickedEvent;
 import amagi82.modularcharactersheetcreator.events.TileItemClickedEvent;
 import amagi82.modularcharactersheetcreator.events.UpNavigationEvent;
@@ -358,17 +357,17 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_delete:
-                new AlertDialog.Builder(getActivity()).setMessage(R.string.delete_character_query).setNegativeButton(R.string.cancel, null)
-                        .setPositiveButton(R.string.action_delete, new DialogInterface.OnClickListener() {
-                            @Override public void onClick(DialogInterface dialog, int which) {
-                                BUS.getBus().post(new CharacterDeletedEvent(character));
-                                character = null;
-                            }
-                        }).show();
-                return true;
-            case R.id.action_save_template:
-                return true;
+//            case R.id.action_delete:
+//                new AlertDialog.Builder(getActivity()).setMessage(R.string.delete_character_query).setNegativeButton(R.string.cancel, null)
+//                        .setPositiveButton(R.string.action_delete, new DialogInterface.OnClickListener() {
+//                            @Override public void onClick(DialogInterface dialog, int which) {
+//                                BUS.getBus().post(new CharacterDeletedEvent(character));
+//                                character = null;
+//                            }
+//                        }).show();
+//                return true;
+//            case R.id.action_save_template:
+//                return true;
             case R.id.action_discard:
                 character = null;
                 getFragmentManager().popBackStack();
