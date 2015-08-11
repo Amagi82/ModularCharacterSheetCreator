@@ -68,6 +68,7 @@ public class EditCharacterActivity extends AppCompatActivity {
     private Logan logan = new Logan();
     private enum Clear {ALL, LEFTRIGHT, RIGHT}
     public enum Step {GAMESYSTEM, LEFTAXIS, RIGHTAXIS}
+    private Step step;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,7 +220,8 @@ public class EditCharacterActivity extends AppCompatActivity {
         return false;
     }
 
-    @Override protected void onSaveInstanceState(Bundle outState) {
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
 //        try {
 //            if (currentCharacter != null) outState.putString(CURRENT_CHARACTER, LoganSquare.serialize(currentCharacter));
 //            outState.putString(CHARACTERS, LoganSquare.serialize(characters, GameCharacter.class));
@@ -229,12 +231,14 @@ public class EditCharacterActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-    @Override protected void onStart() {
+    @Override
+    protected void onStart() {
         super.onStart();
         BUS.getBus().register(this);
     }
 
-    @Override protected void onStop() {
+    @Override
+    protected void onStop() {
         super.onStop();
         BUS.getBus().unregister(this);
     }
