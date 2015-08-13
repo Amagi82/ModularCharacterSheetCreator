@@ -3,12 +3,13 @@ package amagi82.modularcharactersheetcreator.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
@@ -22,14 +23,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.bluelinelabs.logansquare.LoganSquare;
-import com.bumptech.glide.Glide;
 import com.edmodo.cropper.CropImageView;
 import com.squareup.otto.Subscribe;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.events.GameSystemEvent;
@@ -37,6 +38,7 @@ import amagi82.modularcharactersheetcreator.events.LeftAxisEvent;
 import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
 import amagi82.modularcharactersheetcreator.fragments.CharacterAxisFragment;
 import amagi82.modularcharactersheetcreator.fragments.CharacterGameFragment;
+import amagi82.modularcharactersheetcreator.fragments.ImageFragment;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.games.systems.Onyx;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
@@ -58,15 +60,12 @@ public class EditCharacterActivity extends AppCompatActivity {
     private static final int PICK_FROM_FILE = 99;
     @Bind(R.id.coordinatorLayout) CoordinatorLayout coordinatorLayout;
     @Bind(R.id.appbar) AppBarLayout appbar;
-    @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
     @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.imagePortrait) ImageView imagePortrait;
     @Bind(R.id.textInputLayout) TextInputLayout textInputLayout;
     @Bind(R.id.bGameSystem) Button bGameSystem;
     @Bind(R.id.bLeft) Button bLeft;
     @Bind(R.id.bRight) Button bRight;
     @Bind(R.id.bAddCharacter) Button bAddCharacter;
-    @Bind(R.id.imageOnyxLogo) ImageView imageOnyxLogo;
     @Bind(R.id.fab) FloatingActionButton fab;
     private FragmentManager fm = getSupportFragmentManager();
     private GameCharacter character;
@@ -83,7 +82,7 @@ public class EditCharacterActivity extends AppCompatActivity {
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(savedInstanceState == null) fm.beginTransaction().replace(R.id.container, new CharacterGameFragment()).commit();
+        if (savedInstanceState == null) fm.beginTransaction().replace(R.id.container, new CharacterGameFragment()).commit();
 
         //Check if we're editing a character or creating a new one
         boolean isEditMode = getIntent().getStringExtra(CHARACTER) != null;
@@ -96,7 +95,7 @@ public class EditCharacterActivity extends AppCompatActivity {
             }
             //setTextScrims();
             textInputLayout.getEditText().setText(character.getName());
-            if (character.getPortraitUri() != null) Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
+            setPortrait();
             onyx = character.getGameSystem().getOnyx();
             onyx.setLeft(character.getLeft().geteName());
             bLeft.setVisibility(VISIBLE);
@@ -108,9 +107,32 @@ public class EditCharacterActivity extends AppCompatActivity {
             }
             bAddCharacter.setText(R.string.update_character);
             finishCharacter();
-        }else{
+        } else {
             character = new GameCharacter();
         }
+    }
+
+    private void setPortrait() {
+        //Drawable drawable = Drawable.createFromPath(character.getPortraitUri().getPath());
+        Drawable drawable = null;
+        InputStream is = null;
+        try {
+            if(character.getPortraitUri() != null){
+                is = getContentResolver().openInputStream(character.getPortraitUri());
+                drawable = new BitmapDrawable(getResources(), is);
+            }else appbar.setBackgroundColor(getResources().getColor(R.color.primary));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if(is != null) try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (Build.VERSION.SDK_INT >= 16) appbar.setBackground(drawable);
+        else //noinspection deprecation
+            appbar.setBackgroundDrawable(drawable);
     }
 
     @OnClick(R.id.bGameSystem)
@@ -138,28 +160,13 @@ public class EditCharacterActivity extends AppCompatActivity {
         fm.beginTransaction().replace(R.id.container, fragment).addToBackStack(FRAG_RIGHT).commit();
     }
 
-    public Onyx getOnyx(){
+    public Onyx getOnyx() {
         return onyx;
     }
 
-    private void displayOnyxLogo(){
-        imageOnyxLogo.setAlpha(0f);
-        imageOnyxLogo.setVisibility(VISIBLE);
-        imageOnyxLogo.animate().alpha(1).setDuration(800);
-    }
-
-    private void hideOnyxLogo(){
-        imageOnyxLogo.animate().alpha(0).setDuration(240);
-        new Handler().postDelayed(new Runnable() {
-            @Override public void run() {
-                imageOnyxLogo.setVisibility(GONE);
-            }
-        }, 250);
-    }
-
-    private void clearSelections(Clear which){
-        hideOnyxLogo();
-        switch(which){
+    private void clearSelections(Clear which) {
+        appbar.setMinimumHeight(0);
+        switch (which) {
             case ALL:
                 bGameSystem.setVisibility(GONE);
                 bLeft.setVisibility(GONE);
@@ -179,7 +186,7 @@ public class EditCharacterActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void onGameSystemChosen(GameSystemEvent event){
+    public void onGameSystemChosen(GameSystemEvent event) {
         onyx = event.onyx;
         bGameSystem.setVisibility(VISIBLE);
         bGameSystem.setText(onyx.getSystemName());
@@ -187,7 +194,7 @@ public class EditCharacterActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void onLeftAxisChosen(LeftAxisEvent event){
+    public void onLeftAxisChosen(LeftAxisEvent event) {
         onyx.setLeft(event.eName);
         bLeft.setVisibility(VISIBLE);
         bLeft.setText(onyx.getLeft().getTitle());
@@ -196,19 +203,23 @@ public class EditCharacterActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void onRightAxisChosen(RightAxisEvent event){
+    public void onRightAxisChosen(RightAxisEvent event) {
         onyx.setRight(event.eName);
         bRight.setVisibility(VISIBLE);
         bRight.setText(onyx.getRight().getTitle());
         finishCharacter();
     }
 
-    private void finishCharacter(){
+    private void finishCharacter() {
         character.setOnyx(onyx);
-        collapsingToolbar.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.sheet_collapsing_toolbar_height));
+        appbar.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.portrait_height));
         fab.show();
         displayOnyxLogo();
-        if(textInputLayout.getEditText().getText().length() > 1) bAddCharacter.setVisibility(VISIBLE);
+        if (textInputLayout.getEditText().getText().length() > 1) bAddCharacter.setVisibility(VISIBLE);
+    }
+
+    private void displayOnyxLogo(){
+        fm.beginTransaction().replace(R.id.container, new ImageFragment()).addToBackStack(null).commit();
     }
 
     @Override
@@ -260,21 +271,20 @@ public class EditCharacterActivity extends AppCompatActivity {
         BUS.getBus().unregister(this);
     }
 
-    @OnClick(R.id.fab)
-    void getPhoto(){
-        if(character.getPortraitUri() == null) getImageFromGallery();
-        else{
+    @OnClick(R.id.fab) void getPhoto() {
+        if (character.getPortraitUri() == null) getImageFromGallery();
+        else {
             new AlertDialog.Builder(this).setItems(R.array.portrait_choices, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    if(which == 0){
+                    if (which == 0) {
                         //Remove the portrait and use the default icon
                         character.setPortraitUri(null);
-                        imagePortrait.setImageResource(0);
+                        setPortrait();
                         character.setColorBackground(NONE);
                         character.setColorText(NONE);
                         //setTextScrims();
-                    }else getImageFromGallery();
+                    } else getImageFromGallery();
                 }
             }).show();
         }
@@ -288,10 +298,13 @@ public class EditCharacterActivity extends AppCompatActivity {
     //Called when an image is selected from the camera or the gallery, and lets you crop it into an icon
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != RESULT_OK || data == null) return;
+        if (resultCode != RESULT_OK || data == null) {
+            setPortrait();
+            return;
+        }
 
         final CropImageView cropper = new CropImageView(this);
-        cropper.setAspectRatio(new ScreenSize(this).getWidth(), getResources().getDimensionPixelSize(R.dimen.sheet_collapsing_toolbar_height));
+        cropper.setAspectRatio(new ScreenSize(this).getWidth(), getResources().getDimensionPixelSize(R.dimen.portrait_height));
         cropper.setFixedAspectRatio(true);
         try {
             cropper.setImageBitmap(MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData()));
@@ -319,7 +332,7 @@ public class EditCharacterActivity extends AppCompatActivity {
                             character.setColorText(swatch.getBodyTextColor());
                             character.setColorTextDim(swatch.getTitleTextColor());
                         }
-                        Glide.with(EditCharacterActivity.this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
+                        setPortrait();
                         //setTextScrims();
                     }
                 }).show();

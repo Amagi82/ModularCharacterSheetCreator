@@ -173,7 +173,7 @@
     </style>
 
     <style name="CollapsingToolbar.Sheet">
-        <item name="android:layout_height">@dimen/sheet_collapsing_toolbar_height</item>
+        <item name="android:layout_height">@dimen/portrait_height</item>
     </style>
 
     <style name="Toolbar">

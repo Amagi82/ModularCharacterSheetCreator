@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="character_collapsing_toolbar_height">200dp</dimen>
-    <dimen name="sheet_collapsing_toolbar_height">256dp</dimen>
+    <dimen name="portrait_height">256dp</dimen>
 
     <dimen name="image_portrait_height">136dp</dimen>
     <dimen name="character_icon_keyline_right">80dp</dimen>

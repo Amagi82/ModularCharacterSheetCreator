@@ -13,13 +13,11 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.TileGridViewHolder;
-import amagi82.modularcharactersheetcreator.adapters.viewholders.TileViewHolder;
 import amagi82.modularcharactersheetcreator.models.games.Choice;
-import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.utils.Icon;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 
-public class CharacterAxisAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolder> {
 
     private Fragment fragment;
     private Resources res;
@@ -68,37 +66,18 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<RecyclerView.View
         gridImageSize = (widthAvail - margins) / spanCount;
     }
 
-    @Override public int getItemViewType(int position) {
-        for (Game.System system : Game.System.values()) {
-            if (choices.get(position).geteName().equals(system.name())) return 0;
-        }
-        return 1;
+    @Override
+    public TileGridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new TileGridViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_grid, parent, false));
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == 1) return new TileGridViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_grid, parent, false));
-        else return new TileViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_game_system, parent, false));
-    }
-
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder vh, int position) {
+    public void onBindViewHolder(TileGridViewHolder vh, int position) {
         Choice choice = choices.get(position);
-        if (getItemViewType(position) == 1) bind((TileGridViewHolder) vh, choice);
-        else bind((TileViewHolder) vh, choice);
-    }
-
-    private void bind(TileGridViewHolder vh, Choice choice) {
         Glide.with(fragment).load(new Icon(res, choice, gridImageSize).getUrl()).into(vh.imageView);
         vh.tvTitle.setText(choice.getTitle());
         vh.eName = choice.geteName();
         vh.left = left;
-    }
-
-    private void bind(TileViewHolder vh, Choice choice) {
-        vh.imageView.setImageResource(choice.getDrawable());
-        vh.tvTitle.setText(choice.getTitle());
-        vh.system = Game.System.valueOf(choice.geteName());
     }
 
     @Override
@@ -156,5 +135,4 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<RecyclerView.View
         clear();
         addAll(list);
     }
-
 }
