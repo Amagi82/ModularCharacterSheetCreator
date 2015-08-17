@@ -1,12 +1,14 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
 import android.support.annotation.IntDef;
+import android.support.annotation.StringRes;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
+import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.games.systems.CMage;
 import amagi82.modularcharactersheetcreator.models.games.systems.CVampire;
 import amagi82.modularcharactersheetcreator.models.games.systems.CWerewolf;
@@ -24,7 +26,36 @@ import amagi82.modularcharactersheetcreator.models.games.systems.Trinity;
 
 public class Game {
 
-    public List<GameSystem> getGameList(@Category int listType){
+    public GameSystem getSystem(@StringRes int gameTitle){
+        switch (gameTitle){
+            case R.string.cwod_mage:
+                return new CMage();
+            case R.string.cwod_vampire:
+                return new CVampire();
+            case R.string.cwod_werewolf:
+                return new CWerewolf();
+            case R.string.cwod_wraith:
+                return new CWraith();
+            case R.string.exalted:
+                return new Exalted();
+            case R.string.nwod_demon:
+                return new NDemon();
+            case R.string.nwod_mummy:
+                return new NMummy();
+            case R.string.nwod_vampire:
+                return new NVampire();
+            case R.string.nwod_werewolf:
+                return new NWerewolf();
+            case R.string.scion:
+                return new Scion();
+            case R.string.trinity:
+                return new Trinity();
+            default:
+                return null;
+        }
+    }
+
+    public List<GameSystem> getList(@Category int listType){
         List<GameSystem> list = new ArrayList<>();
         switch(listType){
             case CWOD:

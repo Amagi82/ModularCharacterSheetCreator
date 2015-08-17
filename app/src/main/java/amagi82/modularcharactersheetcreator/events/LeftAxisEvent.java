@@ -1,9 +1,11 @@
 package amagi82.modularcharactersheetcreator.events;
 
-public class LeftAxisEvent {
-    public final String eName;
+import amagi82.modularcharactersheetcreator.models.games.Splat;
 
-    public LeftAxisEvent(String eName) {
-        this.eName = eName;
+public class LeftAxisEvent {
+    public final Splat splat;
+
+    public LeftAxisEvent(Splat splat) {
+        this.splat = splat;
     }
 }

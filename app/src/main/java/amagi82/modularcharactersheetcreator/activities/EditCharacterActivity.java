@@ -2,6 +2,7 @@ package amagi82.modularcharactersheetcreator.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -40,7 +41,7 @@ import amagi82.modularcharactersheetcreator.fragments.CharacterAxisFragment;
 import amagi82.modularcharactersheetcreator.fragments.CharacterGameFragment;
 import amagi82.modularcharactersheetcreator.fragments.ImageFragment;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.games.systems.Onyx;
+import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -69,7 +70,8 @@ public class EditCharacterActivity extends AppCompatActivity {
     @Bind(R.id.fab) FloatingActionButton fab;
     private FragmentManager fm = getSupportFragmentManager();
     private GameCharacter character;
-    private Onyx onyx;
+    private GameSystem gameSystem;
+
     private enum Clear {ALL, LEFTRIGHT, RIGHT}
 
     @Override
@@ -95,44 +97,17 @@ public class EditCharacterActivity extends AppCompatActivity {
             }
             //setTextScrims();
             textInputLayout.getEditText().setText(character.getName());
-            setPortrait();
-            onyx = character.getGameSystem().getOnyx();
-            onyx.setLeft(character.getLeft().geteName());
+            setBackground();
+            gameSystem = character.getGameSystem();
             bLeft.setVisibility(VISIBLE);
-            bLeft.setText(onyx.getLeft().getTitle());
-            if (onyx.hasRight()) {
-                onyx.setRight(character.getRight().geteName());
-                bRight.setVisibility(VISIBLE);
-                bRight.setText(onyx.getRight().getTitle());
-            }
+            bLeft.setText(character.getLeft().getTitle());
+            bRight.setVisibility(VISIBLE);
+            bRight.setText(character.getRight().getTitle());
             bAddCharacter.setText(R.string.update_character);
             finishCharacter();
         } else {
             character = new GameCharacter();
         }
-    }
-
-    private void setPortrait() {
-        //Drawable drawable = Drawable.createFromPath(character.getPortraitUri().getPath());
-        Drawable drawable = null;
-        InputStream is = null;
-        try {
-            if(character.getPortraitUri() != null){
-                is = getContentResolver().openInputStream(character.getPortraitUri());
-                drawable = new BitmapDrawable(getResources(), is);
-            }else appbar.setBackgroundColor(getResources().getColor(R.color.primary));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if(is != null) try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        if (Build.VERSION.SDK_INT >= 16) appbar.setBackground(drawable);
-        else //noinspection deprecation
-            appbar.setBackgroundDrawable(drawable);
     }
 
     @OnClick(R.id.bGameSystem)
@@ -160,10 +135,6 @@ public class EditCharacterActivity extends AppCompatActivity {
         fm.beginTransaction().replace(R.id.container, fragment).addToBackStack(FRAG_RIGHT).commit();
     }
 
-    public Onyx getOnyx() {
-        return onyx;
-    }
-
     private void clearSelections(Clear which) {
         appbar.setMinimumHeight(0);
         switch (which) {
@@ -187,38 +158,37 @@ public class EditCharacterActivity extends AppCompatActivity {
 
     @Subscribe
     public void onGameSystemChosen(GameSystemEvent event) {
-        onyx = event.onyx;
+        gameSystem = event.gameSystem;
+        character.setGameTitle(gameSystem.getGameTitle());
         bGameSystem.setVisibility(VISIBLE);
-        bGameSystem.setText(onyx.getSystemName());
+        bGameSystem.setText(gameSystem.getGameTitle());
         chooseLeftCategory();
     }
 
     @Subscribe
     public void onLeftAxisChosen(LeftAxisEvent event) {
-        onyx.setLeft(event.eName);
+        character.setLeft(event.splat);
         bLeft.setVisibility(VISIBLE);
-        bLeft.setText(onyx.getLeft().getTitle());
-        if (onyx.hasRight()) chooseRightCategory();
-        else finishCharacter();
+        bLeft.setText(event.splat.getTitle());
+        chooseRightCategory();
     }
 
     @Subscribe
     public void onRightAxisChosen(RightAxisEvent event) {
-        onyx.setRight(event.eName);
+        character.setRight(event.splat);
         bRight.setVisibility(VISIBLE);
-        bRight.setText(onyx.getRight().getTitle());
+        bRight.setText(event.splat.getTitle());
         finishCharacter();
     }
 
     private void finishCharacter() {
-        character.setOnyx(onyx);
         appbar.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.portrait_height));
         fab.show();
         displayOnyxLogo();
         if (textInputLayout.getEditText().getText().length() > 1) bAddCharacter.setVisibility(VISIBLE);
     }
 
-    private void displayOnyxLogo(){
+    private void displayOnyxLogo() {
         fm.beginTransaction().replace(R.id.container, new ImageFragment()).addToBackStack(null).commit();
     }
 
@@ -272,15 +242,17 @@ public class EditCharacterActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.fab) void getPhoto() {
-        if (character.getPortraitUri() == null) getImageFromGallery();
+        Uri image = getUri();
+        if (image == null) getImageFromGallery();
         else {
             new AlertDialog.Builder(this).setItems(R.array.portrait_choices, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if (which == 0) {
-                        //Remove the portrait and use the default icon
-                        character.setPortraitUri(null);
-                        setPortrait();
+                        //Remove the image and use the default icon
+                        character.setImageUriPort(null);
+                        character.setImageUriLand(null);
+                        setBackground();
                         character.setColorBackground(NONE);
                         character.setColorText(NONE);
                         //setTextScrims();
@@ -299,7 +271,7 @@ public class EditCharacterActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK || data == null) {
-            setPortrait();
+            setBackground();
             return;
         }
 
@@ -315,8 +287,9 @@ public class EditCharacterActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.crop, new DialogInterface.OnClickListener() {
                     @Override public void onClick(DialogInterface dialog, int which) {
                         Bitmap croppedImage = cropper.getCroppedImage();
-                        String url = MediaStore.Images.Media.insertImage(getContentResolver(), croppedImage, "OnyxPathCharacterPortrait", "Portrait used by your character");
-                        character.setPortraitUri(Uri.parse(url));
+                        Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), croppedImage, "OnyxPathCharacterPortrait", "Portrait used by your character"));
+                        if(isOrientationPort()) character.setImageUriPort(uri);
+                        else character.setImageUriLand(uri);
 
                         Palette palette = Palette.from(croppedImage).generate();
                         Palette.Swatch swatch = null;
@@ -332,9 +305,40 @@ public class EditCharacterActivity extends AppCompatActivity {
                             character.setColorText(swatch.getBodyTextColor());
                             character.setColorTextDim(swatch.getTitleTextColor());
                         }
-                        setPortrait();
+                        setBackground();
                         //setTextScrims();
                     }
                 }).show();
+    }
+
+    private void setBackground() {
+        Drawable drawable = null;
+        InputStream is = null;
+        Uri image = getUri();
+        try {
+            if (image != null) {
+                is = getContentResolver().openInputStream(image);
+                drawable = new BitmapDrawable(getResources(), is);
+            } else appbar.setBackgroundColor(getResources().getColor(R.color.primary));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (is != null) try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (Build.VERSION.SDK_INT >= 16) appbar.setBackground(drawable);
+        else //noinspection deprecation
+            appbar.setBackgroundDrawable(drawable);
+    }
+
+    private Uri getUri() {
+        return isOrientationPort()? character.getImageUriPort() : character.getImageUriLand();
+    }
+
+    private boolean isOrientationPort(){
+        return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 }

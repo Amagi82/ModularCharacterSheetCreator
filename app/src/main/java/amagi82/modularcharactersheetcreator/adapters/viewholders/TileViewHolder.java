@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.events.TileItemClickedEvent;
-import amagi82.modularcharactersheetcreator.models.games.Game;
+import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -17,7 +17,7 @@ public class TileViewHolder extends RecyclerView.ViewHolder{
 
     @Bind(R.id.imageView) public ImageView imageView;
     @Bind(R.id.tvTitle) public TextView tvTitle;
-    public Game.System system;
+    public GameSystem system;
 
     public TileViewHolder(final View itemView) {
         super(itemView);

@@ -29,14 +29,10 @@ import amagi82.modularcharactersheetcreator.fragments.MainFragment;
 import amagi82.modularcharactersheetcreator.fragments.SheetFragment;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
+import amagi82.modularcharactersheetcreator.models.games.Splat;
 import amagi82.modularcharactersheetcreator.models.games.systems.CMage;
-import amagi82.modularcharactersheetcreator.models.games.systems.CMage.Faction;
 import amagi82.modularcharactersheetcreator.models.games.systems.CVampire;
-import amagi82.modularcharactersheetcreator.models.games.systems.CVampire.Clan;
-import amagi82.modularcharactersheetcreator.models.games.systems.CVampire.Sect;
 import amagi82.modularcharactersheetcreator.models.games.systems.CWerewolf;
-import amagi82.modularcharactersheetcreator.models.games.systems.CWerewolf.Auspice;
-import amagi82.modularcharactersheetcreator.models.games.systems.CWerewolf.Tribe;
 import amagi82.modularcharactersheetcreator.templates.Template;
 import amagi82.modularcharactersheetcreator.utils.Logan;
 
@@ -119,12 +115,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void generateSampleCharacters() {
         Log.i(null, "Creating data");
-        characters.add(new GameCharacter("Thomas Anstis", new CVampire(Sect.CAMARILLA, Clan.GANGREL)));
-        characters.add(new GameCharacter("Tom Lytton", new CVampire(Sect.ANARCH, Clan.BRUJAH)));
-        characters.add(new GameCharacter("Georgia Johnson", new CVampire(Sect.CAMARILLA, Clan.TREMERE)));
-        characters.add(new GameCharacter("Augustus von Rabenholtz", new CVampire(Sect.CAMARILLA, Clan.VENTRUE)));
-        characters.add(new GameCharacter("Dr. Von Natsi", new CMage(Faction.SCIONSOFETHER)));
-        characters.add(new GameCharacter("Stormwalker", new CWerewolf(Tribe.GLASSWALKERS, Auspice.AHROUN)));
+        characters.add(new GameCharacter("Thomas Anstis", new CVampire(), new Splat(R.string.gangrel, R.string.url_cwod_vampire_clan_gangrel), new Splat(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla)));
+        characters.add(new GameCharacter("Tom Lytton", new CVampire(), new Splat(R.string.brujah_antitribu, R.string.url_cwod_vampire_antitribu_brujah), new Splat(R.string.anarchs, R.string.url_cwod_vampire_sect_anarchs)));
+        characters.add(new GameCharacter("Georgia Johnson", new CVampire(), new Splat(R.string.tremere, R.string.url_cwod_vampire_clan_tremere), new Splat(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla)));
+        characters.add(new GameCharacter("Augustus von Rabenholtz", new CVampire(), new Splat(R.string.ventrue, R.string.url_cwod_vampire_clan_ventrue), new Splat(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla)));
+        characters.add(new GameCharacter("Dr. Von Natsi", new CMage(), new Splat(R.string.traditions, R.string.url_cwod_mage_faction_traditions), new Splat(R.string.scions_of_ether, R.string.url_cwod_mage_tradition_scions_of_ether)));
+        characters.add(new GameCharacter("Stormwalker", new CWerewolf(), new Splat(R.string.glass_walkers, R.string.url_cwod_werewolf_tribe_glass_walkers), new Splat(R.string.ahroun, R.string.url_cwod_werewolf_auspice_ahroun)));
 
         for (GameCharacter character : characters) {
             Log.i(null, "Creating template for "+character.getName());

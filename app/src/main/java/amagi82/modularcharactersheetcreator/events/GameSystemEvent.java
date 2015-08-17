@@ -1,11 +1,11 @@
 package amagi82.modularcharactersheetcreator.events;
 
-import amagi82.modularcharactersheetcreator.models.games.systems.Onyx;
+import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 
 public class GameSystemEvent {
-    public final Onyx onyx;
+    public final GameSystem gameSystem;
 
-    public GameSystemEvent(Onyx onyx) {
-        this.onyx = onyx;
+    public GameSystemEvent(GameSystem gameSystem) {
+        this.gameSystem = gameSystem;
     }
 }

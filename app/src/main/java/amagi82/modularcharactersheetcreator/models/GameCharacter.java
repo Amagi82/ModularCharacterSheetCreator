@@ -2,6 +2,8 @@ package amagi82.modularcharactersheetcreator.models;
 
 
 import android.net.Uri;
+import android.support.annotation.ColorInt;
+import android.support.annotation.StringRes;
 
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
@@ -10,36 +12,43 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import amagi82.modularcharactersheetcreator.models.games.Choice;
 import amagi82.modularcharactersheetcreator.models.games.Game;
-import amagi82.modularcharactersheetcreator.models.games.systems.Onyx;
+import amagi82.modularcharactersheetcreator.models.games.Splat;
+import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 
 import static amagi82.modularcharactersheetcreator.App.NONE;
 
 @JsonObject
 public class GameCharacter {
     @JsonField private String name = "";
-    @JsonField private String gameEName;
-    @JsonField private Choice left;
-    @JsonField private Choice right;
-    @JsonField private int archetype;
-    @JsonField private int colorBackground = NONE;
-    @JsonField private int colorText = NONE;
-    @JsonField private int colorTextDim = NONE;
+    @JsonField private Splat left;
+    @JsonField private Splat right;
+    @JsonField @StringRes private int gameTitle;
+    @JsonField @ColorInt private int colorBackground = NONE;
+    @JsonField @ColorInt private int colorText = NONE;
+    @JsonField @ColorInt private int colorTextDim = NONE;
     @JsonField private String entityId = UUID.randomUUID().toString();
     @JsonField private long timeStamp;
     @JsonField private List<Sheet> sheets = new ArrayList<>();
-    @JsonField private String portraitUriString;
-    private Uri portraitUri;
+    @JsonField private String imageUriPortString;
+    @JsonField private String imageUriLandString;
+    private Uri imageUriPort;
+    private Uri imageUriLand;
 
     public GameCharacter() {
         timeStamp = System.currentTimeMillis();
     }
 
-    public GameCharacter(String name, Onyx onyx) {
+    public GameCharacter(String name, GameSystem system, Splat left, Splat right){
         this.name = name;
-        setOnyx(onyx);
-        timeStamp = System.currentTimeMillis();
+        gameTitle = system.getGameTitle();
+        this.left = left;
+        this.right = right;
+    }
+
+    //Minimum requirements necessary to save the character
+    public boolean isComplete() {
+        return name.length() > 0 && gameTitle != NONE && left != null && right != null;
     }
 
     public String getName() {
@@ -50,97 +59,37 @@ public class GameCharacter {
         this.name = name;
     }
 
-    public Game.System getGameSystem() {
-        return Game.System.valueOf(gameEName);
-    }
-
-    public void setOnyx(Onyx onyx) {
-        gameEName = onyx.getSystemName();
-        left = onyx.getLeft();
-        right = onyx.getRight();
-        archetype = onyx.getArchetype();
-    }
-
-    public String getEntityId() {
-        return entityId;
-    }
-
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-
-    public long getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void updateTimeStamp() {
-        timeStamp = System.currentTimeMillis();
-    }
-
-    public void setTimeStamp(long timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
-    public int getArchetype() {
-        return archetype;
-    }
-
-    public void setArchetype(int archetype) {
-        this.archetype = archetype;
-    }
-
-    public String getGameEName() {
-        return gameEName;
-    }
-
-    public void setGameEName(String gameEName) {
-        this.gameEName = gameEName;
-    }
-
-    public Choice getLeft() {
+    public Splat getLeft() {
         return left;
     }
 
-    public void setLeft(Choice left) {
+    public void setLeft(Splat left) {
         this.left = left;
     }
 
-    public Choice getRight() {
+    public Splat getRight() {
         return right;
     }
 
-    public void setRight(Choice right) {
+    public void setRight(Splat right) {
         this.right = right;
     }
 
-    public boolean isComplete() {
-        return name.length() > 0 && left != null && gameEName != null && (!getGameSystem().getOnyx().hasRight() || right != null);
+    public int getGameTitle() {
+        return gameTitle;
     }
 
-    public List<Sheet> getSheets() {
-        return sheets;
+    public void setGameTitle(int gameTitle) {
+        this.gameTitle = gameTitle;
     }
 
-    public void setSheets(List<Sheet> sheets) {
-        this.sheets = sheets;
+    public GameSystem getGameSystem(){
+        return gameTitle == NONE? null : new Game().getSystem(gameTitle);
     }
 
-    public Uri getPortraitUri() {
-        return portraitUri;
-    }
-
-    public void setPortraitUri(Uri portraitUri) {
-        this.portraitUri = portraitUri;
-        portraitUriString = portraitUri == null? null : portraitUri.getEncodedPath();
-    }
-
-    public String getPortraitUriString() {
-        return portraitUriString;
-    }
-
-    public void setPortraitUriString(String portraitUriString) {
-        this.portraitUriString = portraitUriString;
-        portraitUri = portraitUriString == null? null : Uri.parse(portraitUriString);
+    public int getArchetype() {
+        if(left == null || right == null || gameTitle == NONE) return NONE;
+        return new Game().getSystem(gameTitle).isArchetypeLeft()? left.getTitle() : right.getTitle();
     }
 
     public int getColorBackground() {
@@ -165,5 +114,71 @@ public class GameCharacter {
 
     public void setColorTextDim(int colorTextDim) {
         this.colorTextDim = colorTextDim;
+    }
+
+    public String getEntityId() {
+        return entityId;
+    }
+
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public void updateTimeStamp() {
+        timeStamp = System.currentTimeMillis();
+    }
+
+    public List<Sheet> getSheets() {
+        return sheets;
+    }
+
+    public void setSheets(List<Sheet> sheets) {
+        this.sheets = sheets;
+    }
+
+    public String getImageUriPortString() {
+        return imageUriPortString;
+    }
+
+    public void setImageUriPortString(String imageUriPortString) {
+        this.imageUriPortString = imageUriPortString;
+        if(imageUriPort == null) imageUriPort = Uri.parse(imageUriPortString);
+    }
+
+    public String getImageUriLandString() {
+        return imageUriLandString;
+    }
+
+    public void setImageUriLandString(String imageUriLandString) {
+        this.imageUriLandString = imageUriLandString;
+        if(imageUriLand == null) imageUriLand = Uri.parse(imageUriLandString);
+    }
+
+    public Uri getImageUriPort() {
+        return imageUriPort;
+    }
+
+    public void setImageUriPort(Uri imageUriPort) {
+        this.imageUriPort = imageUriPort;
+        this.imageUriPortString = imageUriPort.toString();
+        if(imageUriLand == null) setImageUriLand(imageUriPort);
+    }
+
+    public Uri getImageUriLand() {
+        return imageUriLand;
+    }
+
+    public void setImageUriLand(Uri imageUriLand) {
+        this.imageUriLand = imageUriLand;
+        this.imageUriLandString = imageUriLand.toString();
+        if(imageUriPort == null) setImageUriPort(imageUriLand);
     }
 }

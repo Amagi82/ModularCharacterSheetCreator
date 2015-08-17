@@ -13,7 +13,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.TileGridViewHolder;
-import amagi82.modularcharactersheetcreator.models.games.Choice;
+import amagi82.modularcharactersheetcreator.models.games.Splat;
 import amagi82.modularcharactersheetcreator.utils.Icon;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 
@@ -21,15 +21,15 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolde
 
     private Fragment fragment;
     private Resources res;
-    private SortedList<Choice> choices;
+    private SortedList<Splat> choices;
     private boolean left = true;
     private int gridImageSize;
 
     public CharacterAxisAdapter(Fragment fragment) {
         this.fragment = fragment;
         res = fragment.getResources();
-        choices = new SortedList<>(Choice.class, new SortedList.Callback<Choice>() {
-            @Override public int compare(Choice o1, Choice o2) {
+        choices = new SortedList<>(Splat.class, new SortedList.Callback<Splat>() {
+            @Override public int compare(Splat o1, Splat o2) {
                 if (o1.getPosition() > o2.getPosition()) return 1;
                 if (o1.getPosition() < o2.getPosition()) return -1;
                 return 0;
@@ -51,11 +51,11 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolde
                 notifyItemRangeChanged(position, count);
             }
 
-            @Override public boolean areContentsTheSame(Choice oldItem, Choice newItem) {
+            @Override public boolean areContentsTheSame(Splat oldItem, Splat newItem) {
                 return false;
             }
 
-            @Override public boolean areItemsTheSame(Choice item1, Choice item2) {
+            @Override public boolean areItemsTheSame(Splat item1, Splat item2) {
                 return item1.geteName().equals(item2.geteName());
             }
         });
@@ -73,7 +73,7 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolde
 
     @Override
     public void onBindViewHolder(TileGridViewHolder vh, int position) {
-        Choice choice = choices.get(position);
+        Splat choice = choices.get(position);
         Glide.with(fragment).load(new Icon(res, choice, gridImageSize).getUrl()).into(vh.imageView);
         vh.tvTitle.setText(choice.getTitle());
         vh.eName = choice.geteName();
@@ -93,18 +93,18 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolde
         this.left = left;
     }
 
-    public Choice get(int position) {
+    public Splat get(int position) {
         return choices.get(position);
     }
 
-    public int add(Choice choice) {
+    public int add(Splat choice) {
         return choices.add(choice);
     }
 
-    public void addAll(List<Choice> list) {
+    public void addAll(List<Splat> list) {
         int i = choices.size();
         choices.beginBatchedUpdates();
-        for (Choice choice : list) {
+        for (Splat choice : list) {
             choice.setPosition(i);
             i++;
             choices.add(choice);
@@ -131,7 +131,7 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolde
         choices.endBatchedUpdates();
     }
 
-    public void replaceAll(List<Choice> list) {
+    public void replaceAll(List<Splat> list) {
         clear();
         addAll(list);
     }

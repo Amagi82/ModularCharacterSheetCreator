@@ -1,34 +1,35 @@
 package amagi82.modularcharactersheetcreator.utils;
 
 import android.content.res.Resources;
+import android.util.Log;
 
-import amagi82.modularcharactersheetcreator.App;
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.games.Choice;
+import amagi82.modularcharactersheetcreator.models.games.Splat;
 
 public class Icon {
 
     private Resources res;
-    private Choice choice;
+    private Splat splat;
     private int size;
 
-    public Icon(Resources res, Choice choice){
-        this(res, choice, res.getDimensionPixelSize(R.dimen.circle_icon_size));
+    public Icon(Resources res, Splat splat){
+        this(res, splat, res.getDimensionPixelSize(R.dimen.circle_icon_size));
     }
 
-    public Icon(Resources res, Choice choice, int size) {
+    public Icon(Resources res, Splat splat, int size) {
         this.res = res;
-        this.choice = choice;
+        this.splat = splat;
         this.size = size;
     }
 
     public String getUrl() {
-        int baseUrl = choice.getBaseUrl() == App.NONE? R.string.url_default_base : choice.getBaseUrl();
-        int imageUrl = choice.getUrl() == App.NONE? R.string.url_default : choice.getUrl();
         //The 20th Anniversary images are 500x500px, and all others are 200x200px. Request smaller images if needed.
-        boolean big = getString(baseUrl).contains("20th");
-        if ((!big && size > 200) || (big && size > 500)) return getString(baseUrl) + getString(imageUrl);
-        return getString(baseUrl) + "img.php?h=" + size + "+&w=" + size + "+&img=" + getString(imageUrl);
+        String url = getString(splat.getUrl());
+        boolean big = url.contains("20th");
+        if ((!big && size > 200) || (big && size > 500)) return url;
+        int pos = url.lastIndexOf("/") + 1;
+        Log.i(null, "Stringbuilder result = "+new StringBuilder(url).insert(pos, ("img.php?h=" + size + "+&w=" + size + "+&img=")).toString());
+        return new StringBuilder(url).insert(pos, ("img.php?h=" + size + "+&w=" + size + "+&img=")).toString();
     }
 
     private String getString(int resId) {

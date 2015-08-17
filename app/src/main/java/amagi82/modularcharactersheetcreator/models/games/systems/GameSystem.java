@@ -11,7 +11,6 @@ import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
 
 import static amagi82.modularcharactersheetcreator.App.NONE;
-import static amagi82.modularcharactersheetcreator.models.games.Game.DEFAULT;
 
 public abstract class GameSystem {
 
@@ -21,7 +20,7 @@ public abstract class GameSystem {
     protected boolean isArchetypeLeft = true;
     @DrawableRes protected int gameDrawable = NONE;
     @ColorRes protected int gameColor = NONE; //Used in the list of characters @MainAdapter now.
-    @Game.Category protected int gameCategory = DEFAULT;
+    @Game.Category protected int gameCategory = Game.DEFAULT;
     protected boolean overrideLeft = false; //With CVampire, Sect must be known to determine if Clan is antitribu.
 
     public abstract List<Splat> getListLeft(@Nullable Splat splat);
