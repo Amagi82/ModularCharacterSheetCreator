@@ -113,27 +113,45 @@
     <string name="white_howlers">White Howlers</string>
 
     <!--cWod Wraith -->
-    <string name="arcanos">Arcanos</string>
-    <string name="argos">Argos</string>
-    <string name="castigate">Castigate</string>
-    <string name="embody">Embody</string>
-    <string name="fatalism">Fatalism</string>
-    <string name="flux">Flux</string>
-    <string name="inhabit">Inhabit</string>
-    <string name="intimation">Intimation</string>
-    <string name="keening">Keening</string>
-    <string name="lifeweb">Lifeweb</string>
-    <string name="mnemosynis">Mnemosynis</string>
-    <string name="moliate">Moliate</string>
-    <string name="outrage">Outrage</string>
-    <string name="pandemonium">Pandemonium</string>
-    <string name="phantasm">Phantasm</string>
-    <string name="puppetry">Puppetry</string>
-    <string name="usury">Usury</string>
+    <string name="legion">Legion</string>
+    <string name="iron_legion">Iron Legion</string>
+    <string name="skeletal_legion">Skeletal Legion</string>
+    <string name="grim_legion">Grim Legion</string>
+    <string name="penitent_legion">Penitent Legion</string>
+    <string name="emerald_legion">Emerald Legion</string>
+    <string name="silent_legion">Silent Legion</string>
+    <string name="legion_of_paupers">Legion of Paupers</string>
+    <string name="legion_of_fate">Legion of Fate</string>
+    <string name="great_guilds">Great Guilds</string>
+    <string name="working_guilds">Working Guilds</string>
+    <string name="criminal_guilds">Criminal Guilds</string>
+    <string name="forbidden_guilds">Forbidden Guilds</string>
+    <string name="artificers">Artificers</string>
+    <string name="masquers">Masquers</string>
+    <string name="pardoners">Pardoners</string>
+    <string name="usurers">Usurers</string>
+    <string name="chanteurs">Chanteurs</string>
+    <string name="harbingers">Harbingers</string>
+    <string name="oracles">Oracles</string>
+    <string name="sandmen">Sandmen</string>
+    <string name="haunters">Haunters</string>
+    <string name="monitors">Monitors</string>
+    <string name="spooks">Spooks</string>
+    <string name="proctors">Proctors</string>
+    <string name="puppeteers">Puppeteers</string>
+    <string name="alchemists">Alchemists</string>
+    <string name="mnemoi">Mnemoi</string>
+    <string name="solicitors">Solicitors</string>
+    <string name="none">None</string>
 
     <!--cWod Mage -->
+    <string name="faction">Faction</string>
     <string name="traditions">Traditions</string>
+    <string name="technocracy">Technocracy</string>
     <string name="crafts">Crafts</string>
+    <string name="tradition">Tradition</string>
+    <string name="convention">Convention</string>
+    <string name="craft">Craft</string>
     <string name="iteration_x">Iteration X</string>
     <string name="new_world_order">New World Order</string>
     <string name="progenitors">Progenitors</string>
@@ -151,7 +169,6 @@
     <string name="wu_lung">Wu Lung</string>
     <string name="marauders">Marauders</string>
     <string name="nephandi">Nephandi</string>
-    <string name="technocracy">Technocracy</string>
     <string name="akashayana">Akashayana</string>
     <string name="celestial_chorus">Celestial Chorus</string>
     <string name="cult_of_ecstasy">Cult of Ecstasy</string>
@@ -269,6 +286,8 @@
     <string name="the_upeo_wa_macho">The Upeo wa Macho</string>
 
     <!--Exalted -->
+    <string name="exalt">Exalt</string>
+    <string name="caste">Caste</string>
     <string name="solar_exalted">Solar Exalted</string>
     <string name="abyssal_exalted">Abyssal Exalted</string>
     <string name="lunar_exalted">Lunar Exalted</string>
@@ -305,5 +324,12 @@
     <string name="starmetal">Starmetal</string>
     <string name="jade">Jade</string>
     <string name="soulsteel">Soulsteel</string>
+    <string name="slayer">Slayer</string>
+    <string name="malefactor">Malefactor</string>
+    <string name="defiler">Defiler</string>
+    <string name="scrourge">Scourge</string>
+    <string name="fiend">Fiend</string>
+    <string name="casteless">Casteless</string>
+    <string name="aspect">Aspect</string>
 
 </resources>

@@ -1,108 +1,80 @@
 package amagi82.modularcharactersheetcreator.models.games.systems;
 
-import com.bluelinelabs.logansquare.annotation.JsonObject;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.games.Choice;
-import amagi82.modularcharactersheetcreator.models.games.Game;
 
-@JsonObject
-public class CWraith extends Onyx {
-
-    public enum Arcanos {
-        ARGOS(R.string.argos, R.string.url_cwod_wraith_arcanos_argos),
-        CASTIGATE(R.string.castigate, R.string.url_cwod_wraith_arcanos_castigate),
-        EMBODY(R.string.embody, R.string.url_cwod_wraith_arcanos_embody),
-        FATALISM(R.string.fatalism, R.string.url_cwod_wraith_arcanos_fatalism),
-        FLUX(R.string.flux, R.string.url_cwod_wraith_arcanos_flux),
-        INHABIT(R.string.inhabit, R.string.url_cwod_wraith_arcanos_inhabit),
-        INTIMATION(R.string.intimation, R.string.url_cwod_wraith_arcanos_intimation),
-        KEENING(R.string.keening, R.string.url_cwod_wraith_arcanos_keening),
-        LIFEWEB(R.string.lifeweb, R.string.url_cwod_wraith_arcanos_lifeweb),
-        MNEMOSYNIS(R.string.mnemosynis, R.string.url_cwod_wraith_arcanos_mnemosynis),
-        MOLIATE(R.string.moliate, R.string.url_cwod_wraith_arcanos_moliate),
-        OUTRAGE(R.string.outrage, R.string.url_cwod_wraith_arcanos_outrage),
-        PANDEMONIUM(R.string.pandemonium, R.string.url_cwod_wraith_arcanos_pandemonium),
-        PHANTASM(R.string.phantasm, R.string.url_cwod_wraith_arcanos_phantasm),
-        PUPPETRY(R.string.puppetry, R.string.url_cwod_wraith_arcanos_puppetry),
-        USURY(R.string.usury, R.string.url_cwod_wraith_arcanos_usury);
-
-        private int name;
-        private int url;
-
-        Arcanos(int name, int url) {
-            this.name = name;
-            this.url = url;
-        }
-
-        public int getName() {
-            return name;
-        }
-
-        public int getUrl() {
-            return url;
-        }
-    }
-
-    private Arcanos arcanos;
-    private Choice choiceLeft;
+public class CWraith extends GameSys {
 
     public CWraith() {
+        super();
+        this.gameTitle = R.string.cwod_wraith;
+        this.leftTitle = R.string.legion;
+        this.rightTitle = R.string.guild;
+        this.gameDrawable = R.drawable.title_wraith_oblivion;
+        this.gameColor = R.color.cwod_wraith;
+        this.gameCategory = CWOD;
     }
 
-    public CWraith(String arcanosName) {
-        arcanos = Arcanos.valueOf(arcanosName);
-    }
-
-    public CWraith(Arcanos arcanos) {
-        this.arcanos = arcanos;
-        choiceLeft = getChoice(arcanos);
-    }
-
-    private Choice getChoice(Arcanos arcanos) {
-        return new Choice(arcanos.name(), arcanos.getName(), Game.System.CWRAITH.getUrlBase(), arcanos.getUrl());
-    }
-
-    @Override public String getSystemName() {
-        return Game.System.CWRAITH.name();
-    }
-
-    @Override public int getArchetype() {
-        return arcanos.getName();
-    }
-
-    @Override public Choice getLeft() {
-        return choiceLeft;
-    }
-
-    @Override public void setLeft(String eName) {
-        arcanos = Arcanos.valueOf(eName);
-        choiceLeft = getChoice(arcanos);
-    }
-
-    @Override public Choice getRight() {
-        return null;
-    }
-
-    @Override public void setRight(String eName) {
-
-    }
-
-    @Override public boolean hasRight() {
-        return false;
-    }
-
-    @Override public List<Choice> getListLeft(String eName) {
-        List<Choice> list = new ArrayList<>();
-        if (eName == null) for (Arcanos arcanos : Arcanos.values()) list.add(getChoice(arcanos));
-        else setLeft(eName);
+    @Override public List<Splat> getListLeft(@Nullable Splat splat) {
+        List<Splat> list = new ArrayList<>();
+        list.add(new Splat(R.string.iron_legion));
+        list.add(new Splat(R.string.skeletal_legion));
+        list.add(new Splat(R.string.grim_legion));
+        list.add(new Splat(R.string.penitent_legion));
+        list.add(new Splat(R.string.emerald_legion));
+        list.add(new Splat(R.string.silent_legion));
+        list.add(new Splat(R.string.legion_of_paupers));
+        list.add(new Splat(R.string.legion_of_fate));
         return list;
     }
 
-    @Override public List<Choice> getListRight(String eName) {
-        return null;
+    @Nullable @Override public List<Splat> getListRight(@Nullable Splat splat) {
+        List<Splat> list = new ArrayList<>();
+        if(splat != null){
+            switch (splat.getTitle()){
+                case R.string.great_guilds:
+                    list.add(new Splat(R.string.artificers));
+                    list.add(new Splat(R.string.masquers));
+                    list.add(new Splat(R.string.pardoners));
+                    list.add(new Splat(R.string.usurers));
+                    break;
+                case R.string.working_guilds:
+                    list.add(new Splat(R.string.chanteurs));
+                    list.add(new Splat(R.string.harbingers));
+                    list.add(new Splat(R.string.oracles));
+                    list.add(new Splat(R.string.sandmen));
+                    break;
+                case R.string.criminal_guilds:
+                    list.add(new Splat(R.string.haunters));
+                    list.add(new Splat(R.string.monitors));
+                    list.add(new Splat(R.string.spooks));
+                    list.add(new Splat(R.string.proctors));
+                    list.add(new Splat(R.string.puppeteers));
+                    break;
+                case R.string.forbidden_guilds:
+                    list.add(new Splat(R.string.alchemists));
+                    list.add(new Splat(R.string.mnemoi));
+                    list.add(new Splat(R.string.solicitors));
+                    break;
+                default:
+                    addDefault(list);
+                    break;
+            }
+        }else{
+            addDefault(list);
+        }
+        return list;
+    }
+
+    private void addDefault(List<Splat> list){
+        list.add(new Splat(R.string.none));
+        list.add(new Splat(R.string.great_guilds, false));
+        list.add(new Splat(R.string.working_guilds, false));
+        list.add(new Splat(R.string.criminal_guilds, false));
+        list.add(new Splat(R.string.forbidden_guilds, false));
     }
 }

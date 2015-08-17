@@ -1,161 +1,96 @@
 package amagi82.modularcharactersheetcreator.models.games.systems;
 
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.games.Choice;
-import amagi82.modularcharactersheetcreator.models.games.Game;
 
-public class Exalted extends Onyx {
+public class Exalted extends GameSys {
 
-    public enum ExaltedType {
-        SOLAR(R.string.solar_exalted),
-        ABYSSAL(R.string.abyssal_exalted),
-        LUNAR(R.string.lunar_exalted),
-        SIDEREAL(R.string.sidereal_exalted),
-        TERRESTRIAL(R.string.terrestrial_exalted),
-        ALCHEMICAL(R.string.alchemical_exalted),
-        INFERNAL(R.string.infernal_exalted, false),
-        FAIRFOLK(R.string.fair_folk, false);
-
-        private int name;
-        boolean hasCastes;
-
-        ExaltedType(int name) {
-            this(name, true);
-        }
-
-        ExaltedType(int name, boolean hasCastes) {
-            this.name = name;
-            this.hasCastes = hasCastes;
-        }
-
-        public int getName() {
-            return name;
-        }
-
-        public boolean isHasCastes() {
-            return hasCastes;
-        }
-    }
-
-    public enum Caste {
-        DAWN(R.string.dawn, ExaltedType.SOLAR),
-        ZENITH(R.string.zenith, ExaltedType.SOLAR),
-        TWILIGHT(R.string.twilight, ExaltedType.SOLAR),
-        NIGHT(R.string.night, ExaltedType.SOLAR),
-        ECLIPSE(R.string.eclipse, ExaltedType.SOLAR),
-        DUSK(R.string.dusk, ExaltedType.ABYSSAL),
-        MIDNIGHT(R.string.midnight, ExaltedType.ABYSSAL),
-        DAYBREAK(R.string.daybreak, ExaltedType.ABYSSAL),
-        DAY(R.string.day, ExaltedType.ABYSSAL),
-        MOONSHADOW(R.string.midnight, ExaltedType.ABYSSAL),
-        AIR(R.string.air, ExaltedType.TERRESTRIAL),
-        EARTH(R.string.earth, ExaltedType.TERRESTRIAL),
-        FIRE(R.string.fire, ExaltedType.TERRESTRIAL),
-        WATER(R.string.water, ExaltedType.TERRESTRIAL),
-        WOOD(R.string.wood, ExaltedType.TERRESTRIAL),
-        FULLMOON(R.string.full_moon, ExaltedType.LUNAR),
-        CHANGINGMOON(R.string.changing_moon, ExaltedType.LUNAR),
-        NOMOON(R.string.no_moon, ExaltedType.LUNAR),
-        CHOSENOFJOURNEYS(R.string.chosen_of_journeys, ExaltedType.SIDEREAL),
-        CHOSENOFSERENITY(R.string.chosen_of_serenity, ExaltedType.SIDEREAL),
-        CHOSENOFBATTLES(R.string.chosen_of_battles, ExaltedType.SIDEREAL),
-        CHOSENOFSECRETS(R.string.chosen_of_secrets, ExaltedType.SIDEREAL),
-        CHOSENOFENDINGS(R.string.chosen_of_endings, ExaltedType.SIDEREAL),
-        ORICHALCUM(R.string.orichalcum, ExaltedType.ALCHEMICAL),
-        MOONSILVER(R.string.moonsilver, ExaltedType.ALCHEMICAL),
-        STARMETAL(R.string.starmetal, ExaltedType.ALCHEMICAL),
-        JADE(R.string.jade, ExaltedType.ALCHEMICAL),
-        SOULSTEEL(R.string.soulsteel, ExaltedType.ALCHEMICAL);
-
-        private int name;
-        private ExaltedType parent;
-
-        Caste(int name, ExaltedType parent) {
-            this.name = name;
-            this.parent = parent;
-        }
-
-        public int getName() {
-            return name;
-        }
-
-        public ExaltedType getParent() {
-            return parent;
-        }
-    }
-
-    private ExaltedType exaltedType;
-    private Caste caste;
-    private Choice choiceLeft;
-    private Choice choiceRight;
+    private boolean isCaste = true;
 
     public Exalted() {
+        super();
+        this.gameTitle = R.string.exalted;
+        this.leftTitle = R.string.exalt;
+        this.rightTitle = R.string.caste;
+        this.gameDrawable = R.drawable.title_exalted;
+        this.gameColor = R.color.exalted;
     }
 
-    public Exalted(String typeName, String casteName) {
-        this(ExaltedType.valueOf(typeName), Caste.valueOf(casteName));
+    @Override public int getRightTitle() {
+        return isCaste? R.string.caste : R.string.aspect;
     }
 
-    public Exalted(ExaltedType exaltedType, Caste caste) {
-        this.exaltedType = exaltedType;
-        this.caste = caste;
-        choiceLeft = getChoice(exaltedType);
-        choiceRight = getChoice(caste);
-    }
-
-    private Choice getChoice(ExaltedType exaltedType) {
-        return new Choice(exaltedType.name(), exaltedType.getName());
-    }
-
-    private Choice getChoice(Caste caste) {
-        return new Choice(caste.name(), caste.getName());
-    }
-
-    @Override public String getSystemName() {
-        return Game.System.EXALTED.name();
-    }
-
-    @Override public int getArchetype() {
-        return exaltedType.getName();
-    }
-
-    @Override public Choice getLeft() {
-        return choiceLeft;
-    }
-
-    @Override public void setLeft(String eName) {
-        exaltedType = ExaltedType.valueOf(eName);
-        choiceLeft = getChoice(exaltedType);
-    }
-
-    @Override public Choice getRight() {
-        return choiceRight;
-    }
-
-    @Override public void setRight(String eName) {
-        caste = Caste.valueOf(eName);
-        choiceRight = getChoice(caste);
-    }
-
-    @Override public boolean hasRight() {
-        return true;
-    }
-
-    @Override public List<Choice> getListLeft(String eName) {
-        List<Choice> list = new ArrayList<>();
-        if (eName == null) for (ExaltedType exaltedType : ExaltedType.values()) list.add(getChoice(exaltedType));
-        else setLeft(eName);
+    @Override public List<Splat> getListLeft(@Nullable Splat splat) {
+        List<Splat> list = new ArrayList<>();
+        list.add(new Splat(R.string.solar_exalted));
+        list.add(new Splat(R.string.abyssal_exalted));
+        list.add(new Splat(R.string.lunar_exalted));
+        list.add(new Splat(R.string.sidereal_exalted));
+        list.add(new Splat(R.string.terrestrial_exalted));
+        list.add(new Splat(R.string.alchemical_exalted));
+        list.add(new Splat(R.string.infernal_exalted));
         return list;
     }
 
-    @Override public List<Choice> getListRight(String eName) {
-        List<Choice> list = new ArrayList<>();
-        if (eName == null) {
-            for (Caste caste : Caste.values()) if (caste.getParent().equals(exaltedType)) list.add(getChoice(caste));
-        } else setRight(eName);
+    @Override public List<Splat> getListRight(Splat splat) {
+        List<Splat> list = new ArrayList<>();
+        switch (splat.getTitle()){
+            case R.string.solar_exalted:
+                list.add(new Splat(R.string.dawn));
+                list.add(new Splat(R.string.zenith));
+                list.add(new Splat(R.string.twilight));
+                list.add(new Splat(R.string.night));
+                list.add(new Splat(R.string.eclipse));
+                break;
+            case R.string.abyssal_exalted:
+                list.add(new Splat(R.string.dusk));
+                list.add(new Splat(R.string.midnight));
+                list.add(new Splat(R.string.daybreak));
+                list.add(new Splat(R.string.day));
+                list.add(new Splat(R.string.moonshadow));
+                break;
+            case R.string.lunar_exalted:
+                list.add(new Splat(R.string.full_moon));
+                list.add(new Splat(R.string.changing_moon));
+                list.add(new Splat(R.string.no_moon));
+                list.add(new Splat(R.string.casteless));
+                break;
+            case R.string.sidereal_exalted:
+                list.add(new Splat(R.string.air));
+                list.add(new Splat(R.string.earth));
+                list.add(new Splat(R.string.fire));
+                list.add(new Splat(R.string.water));
+                list.add(new Splat(R.string.wood));
+                break;
+            case R.string.terrestrial_exalted:
+                isCaste = false;
+                list.add(new Splat(R.string.chosen_of_journeys));
+                list.add(new Splat(R.string.chosen_of_serenity));
+                list.add(new Splat(R.string.chosen_of_battles));
+                list.add(new Splat(R.string.chosen_of_secrets));
+                list.add(new Splat(R.string.chosen_of_endings));
+                break;
+            case R.string.alchemical_exalted:
+                list.add(new Splat(R.string.orichalcum));
+                list.add(new Splat(R.string.moonsilver));
+                list.add(new Splat(R.string.starmetal));
+                list.add(new Splat(R.string.jade));
+                list.add(new Splat(R.string.soulsteel));
+                break;
+            case R.string.infernal_exalted:
+                list.add(new Splat(R.string.slayer));
+                list.add(new Splat(R.string.malefactor));
+                list.add(new Splat(R.string.defiler));
+                list.add(new Splat(R.string.scrourge));
+                list.add(new Splat(R.string.fiend));
+                break;
+            default:
+                return null;
+        }
         return list;
     }
 }

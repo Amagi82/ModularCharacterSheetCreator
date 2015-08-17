@@ -2,288 +2,189 @@
 <resources xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="TypographyDashes">
 
-    <string formatted="false" name="url_default_base">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/</string>
-    <string formatted="false" name="url_default">Dark%20Ages~d10.png</string>
+    <string formatted="false" name="url_default">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/Dark%20Ages~d10.png</string>
 
-    <string formatted="false" name="url_cwod_vampire_base">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/</string>
-    <string formatted="false" name="url_cwod_werewolf_base">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/</string>
-    <string formatted="false" name="url_cwod_wraith_base">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/</string>
-    <string formatted="false" name="url_cwod_mage_base">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_base">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1991~Vampire%20The%20Masquerade/</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_base">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1992~Werewolf%20The%20Apocalypse/</string>
-    <string formatted="false" name="url_nwod_vampire_base">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/</string>
-    <string formatted="false" name="url_nwod_werewolf_base">http://theonyxpath.com/avatar/World%20of%20Darkness/2005-0~Werewolf%20The%20Forsaken/</string>
-    <string formatted="false" name="url_nwod_mummy_base">http://theonyxpath.com/avatar/World%20of%20Darkness/2012~Mummy%20The%20Curse/</string>
-    <string formatted="false" name="url_nwod_demon_base">http://theonyxpath.com/avatar/World%20of%20Darkness/2013~Demon%20The%20Descent/</string>
+    <string formatted="false" name="url_cwod_vampire_clan_ahrimanes">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Ahrimanes.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_anda">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Anda.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_baali">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Baali.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_blood_brothers">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Blood%20Brothers.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_caitiff">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Caitiff.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_cappadocians">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Cappadocians.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_children_of_osiris">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Children%20of%20Osiris.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_daughers_of_cacophony">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Daughters%20of%20Cacophony.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_gargoyle">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Gargoyle%20(VTM).png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_harbingers_of_skulls">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Harbingers%20of%20Skulls.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_kiasyd">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Kiasyd.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_lamia">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Lamia.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_lhiannan">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Lhiannan.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_nagaraja">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Nagaraja.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_noiad">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Noiad.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_panders">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Panders.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_salubri">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Salubri.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_samedi">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Samedi.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_true_brujah">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~True%20Brujah.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_assamite">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Clan~Assamite.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_brujah">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Clan~Brujah.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_followers_of_set">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Clan~Followers%20of%20Set.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_gangrel">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Clan~Gangrel.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_giovanni">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Clan~Giovanni.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_lasombra">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Clan~Lasombra.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_malkavian">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Clan~Malkavian%20(VTM).png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_nosferatu">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Clan~Nosferatu%20(VTM).png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_ravnos">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Clan~Ravnos.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_toreador">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Clan~Toreador%20(VTM).png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_tremere">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Clan~Tremere%20(VTM).png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_tzimisce">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Clan~Tzimisce.png</string>
+    <string formatted="false" name="url_cwod_vampire_clan_ventrue">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Clan~Ventrue%20(VTM).png</string>
+    <string formatted="false" name="url_cwod_vampire_ghoul">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Ghoul%20(VTM).png</string>
+    <string formatted="false" name="url_cwod_vampire_sect_anarchs">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Sect~Anarchs.png</string>
+    <string formatted="false" name="url_cwod_vampire_sect_camarilla">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Sect~Camarilla.png</string>
+    <string formatted="false" name="url_cwod_vampire_sect_independent">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Sect~Independent.png</string>
+    <string formatted="false" name="url_cwod_vampire_sect_sabbat">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Sect~Sabbat.png</string>
+    <string formatted="false" name="url_cwod_vampire_antitribu_assamite">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Variant~Assamite%20antitribu.png</string>
+    <string formatted="false" name="url_cwod_vampire_antitribu_brujah">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Variant~Brujah%20antitribu.png</string>
+    <string formatted="false" name="url_cwod_vampire_antitribu_gangrel">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Variant~Gangrel%20antitribu.png</string>
+    <string formatted="false" name="url_cwod_vampire_antitribu_lasombra">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Variant~Lasombra%20antitribu.png</string>
+    <string formatted="false" name="url_cwod_vampire_antitribu_malkavian">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Variant~Malkavian%20antitribu.png</string>
+    <string formatted="false" name="url_cwod_vampire_antitribu_nosferatu">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Variant~Nosferatu%20antitribu.png</string>
+    <string formatted="false" name="url_cwod_vampire_antitribu_ravnos">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Variant~Ravnos%20antitribu.png</string>
+    <string formatted="false" name="url_cwod_vampire_antitribu_salubri">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Variant~Salubri%20antitribu.png</string>
+    <string formatted="false" name="url_cwod_vampire_antitribu_serpents_of_the_light">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Variant~Serpents%20of%20the%20Light.png</string>
+    <string formatted="false" name="url_cwod_vampire_antitribu_toreador">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Variant~Toreador%20antitribu.png</string>
+    <string formatted="false" name="url_cwod_vampire_antitribu_tremere">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Variant~Tremere%20antitribu.png</string>
+    <string formatted="false" name="url_cwod_vampire_antitribu_ventrue">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Variant~Ventrue%20antitribu.png</string>
 
-    <string formatted="false" name="url_cwod_vampire_clan_ahrimanes">Bloodline~Ahrimanes.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_anda">Bloodline~Anda.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_baali">Bloodline~Baali.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_blood_brothers">Bloodline~Blood%20Brothers.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_caitiff">Bloodline~Caitiff.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_cappadocians">Bloodline~Cappadocians.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_children_of_osiris">Bloodline~Children%20of%20Osiris.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_daughers_of_cacophony">Bloodline~Daughters%20of%20Cacophony.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_gargoyle">Bloodline~Gargoyle%20(VTM).png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_harbingers_of_skulls">Bloodline~Harbingers%20of%20Skulls.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_kiasyd">Bloodline~Kiasyd.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_lamia">Bloodline~Lamia.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_lhiannan">Bloodline~Lhiannan.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_nagaraja">Bloodline~Nagaraja.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_noiad">Bloodline~Noiad.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_panders">Bloodline~Panders.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_salubri">Bloodline~Salubri.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_samedi">Bloodline~Samedi.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_true_brujah">Bloodline~True%20Brujah.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_assamite">Clan~Assamite.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_brujah">Clan~Brujah.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_followers_of_set">Clan~Followers%20of%20Set.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_gangrel">Clan~Gangrel.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_giovanni">Clan~Giovanni.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_lasombra">Clan~Lasombra.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_malkavian">Clan~Malkavian%20(VTM).png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_nosferatu">Clan~Nosferatu%20(VTM).png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_ravnos">Clan~Ravnos.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_toreador">Clan~Toreador%20(VTM).png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_tremere">Clan~Tremere%20(VTM).png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_tzimisce">Clan~Tzimisce.png</string>
-    <string formatted="false" name="url_cwod_vampire_clan_ventrue">Clan~Ventrue%20(VTM).png</string>
-    <string formatted="false" name="url_cwod_vampire_ghoul">Ghoul%20(VTM).png</string>
-    <string formatted="false" name="url_cwod_vampire_sect_anarchs">Sect~Anarchs.png</string>
-    <string formatted="false" name="url_cwod_vampire_sect_camarilla">Sect~Camarilla.png</string>
-    <string formatted="false" name="url_cwod_vampire_sect_independent">Sect~Independent.png</string>
-    <string formatted="false" name="url_cwod_vampire_sect_sabbat">Sect~Sabbat.png</string>
-    <string formatted="false" name="url_cwod_vampire_antitribu_assamite">Variant~Assamite%20antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_antitribu_brujah">Variant~Brujah%20antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_antitribu_gangrel">Variant~Gangrel%20antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_antitribu_lasombra">Variant~Lasombra%20antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_antitribu_malkavian">Variant~Malkavian%20antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_antitribu_nosferatu">Variant~Nosferatu%20antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_antitribu_ravnos">Variant~Ravnos%20antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_antitribu_salubri">Variant~Salubri%20antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_antitribu_serpents_of_the_light">Variant~Serpents%20of%20the%20Light.png</string>
-    <string formatted="false" name="url_cwod_vampire_antitribu_toreador">Variant~Toreador%20antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_antitribu_tremere">Variant~Tremere%20antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_antitribu_ventrue">Variant~Ventrue%20antitribu.png</string>
+    <string formatted="false" name="url_cwod_werewolf_auspice_ahroun">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Auspice~Ahroun.png</string>
+    <string formatted="false" name="url_cwod_werewolf_auspice_galliard">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Auspice~Galliard.png</string>
+    <string formatted="false" name="url_cwod_werewolf_auspice_philodox">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Auspice~Philodox.png</string>
+    <string formatted="false" name="url_cwod_werewolf_auspice_ragabash">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Auspice~Ragabash.png</string>
+    <string formatted="false" name="url_cwod_werewolf_auspice_theurge">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Auspice~Theurge.png</string>
+    <string formatted="false" name="url_cwod_werewolf_fera_garou">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/1~Werewolf%20The%20Apocalypse.png</string>
+    <string formatted="false" name="url_cwod_werewolf_fera_ajaba">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Fera~Ajaba.png</string>
+    <string formatted="false" name="url_cwod_werewolf_fera_ananasi">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Fera~Ananasi.png</string>
+    <string formatted="false" name="url_cwod_werewolf_fera_apis">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Fera~Apis.png</string>
+    <string formatted="false" name="url_cwod_werewolf_fera_bastet">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Fera~Bastet.png</string>
+    <string formatted="false" name="url_cwod_werewolf_fera_camazotz">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Fera~Camazotz.png</string>
+    <string formatted="false" name="url_cwod_werewolf_fera_corax">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Fera~Corax.png</string>
+    <string formatted="false" name="url_cwod_werewolf_fera_grondr">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Fera~Grondr.png</string>
+    <string formatted="false" name="url_cwod_werewolf_fera_gurahl">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Fera~Gurahl.png</string>
+    <string formatted="false" name="url_cwod_werewolf_fera_kitsune">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Fera~Kitsune.png</string>
+    <string formatted="false" name="url_cwod_werewolf_fera_mokole">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Fera~Mokole.png</string>
+    <string formatted="false" name="url_cwod_werewolf_fera_nagah">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Fera~Nagah.png</string>
+    <string formatted="false" name="url_cwod_werewolf_fera_nuwisha">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Fera~Nuwisha.png</string>
+    <string formatted="false" name="url_cwod_werewolf_fera_ratkin">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Fera~Ratkin.png</string>
+    <string formatted="false" name="url_cwod_werewolf_fera_rokea">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Fera~Rokea.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_black_furies">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~Black%20Furies.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_bone_gnawers">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~Bone%20Gnawers.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_bunyip">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~Bunyip.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_children_of_gaia">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~Children%20of%20Gaia.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_croatan">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~Croatan.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_fianna">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~Fianna.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_get_of_fenris">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~Get%20of%20Fenris.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_glass_walkers">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~Glass%20Walkers.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_red_talons">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~Red%20Talons.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_shadow_lords">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~Shadow%20Lords.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_silent_striders">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~Silent%20Striders.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_silver_fangs">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~Silver%20Fangs.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_stargazers">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~Stargazers.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_uktena">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~Uktena.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_wendigo">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~Wendigo.png</string>
+    <string formatted="false" name="url_cwod_werewolf_tribe_white_howlers">http://theonyxpath.com/avatar/20th%20Anniversary/2012~Werewolf%20The%20Apocalypse/Tribe~White%20Howlers.png</string>
 
-    <string formatted="false" name="url_cwod_werewolf_auspice_ahroun">Auspice~Ahroun.png</string>
-    <string formatted="false" name="url_cwod_werewolf_auspice_galliard">Auspice~Galliard.png</string>
-    <string formatted="false" name="url_cwod_werewolf_auspice_philodox">Auspice~Philodox.png</string>
-    <string formatted="false" name="url_cwod_werewolf_auspice_ragabash">Auspice~Ragabash.png</string>
-    <string formatted="false" name="url_cwod_werewolf_auspice_theurge">Auspice~Theurge.png</string>
-    <string formatted="false" name="url_cwod_werewolf_fera_garou">1~Werewolf%20The%20Apocalypse.png</string>
-    <string formatted="false" name="url_cwod_werewolf_fera_ajaba">Fera~Ajaba.png</string>
-    <string formatted="false" name="url_cwod_werewolf_fera_ananasi">Fera~Ananasi.png</string>
-    <string formatted="false" name="url_cwod_werewolf_fera_apis">Fera~Apis.png</string>
-    <string formatted="false" name="url_cwod_werewolf_fera_bastet">Fera~Bastet.png</string>
-    <string formatted="false" name="url_cwod_werewolf_fera_camazotz">Fera~Camazotz.png</string>
-    <string formatted="false" name="url_cwod_werewolf_fera_corax">Fera~Corax.png</string>
-    <string formatted="false" name="url_cwod_werewolf_fera_grondr">Fera~Grondr.png</string>
-    <string formatted="false" name="url_cwod_werewolf_fera_gurahl">Fera~Gurahl.png</string>
-    <string formatted="false" name="url_cwod_werewolf_fera_kitsune">Fera~Kitsune.png</string>
-    <string formatted="false" name="url_cwod_werewolf_fera_mokole">Fera~Mokole.png</string>
-    <string formatted="false" name="url_cwod_werewolf_fera_nagah">Fera~Nagah.png</string>
-    <string formatted="false" name="url_cwod_werewolf_fera_nuwisha">Fera~Nuwisha.png</string>
-    <string formatted="false" name="url_cwod_werewolf_fera_ratkin">Fera~Ratkin.png</string>
-    <string formatted="false" name="url_cwod_werewolf_fera_rokea">Fera~Rokea.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_black_furies">Tribe~Black%20Furies.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_bone_gnawers">Tribe~Bone%20Gnawers.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_bunyip">Tribe~Bunyip.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_children_of_gaia">Tribe~Children%20of%20Gaia.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_croatan">Tribe~Croatan.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_fianna">Tribe~Fianna.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_get_of_fenris">Tribe~Get%20of%20Fenris.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_glass_walkers">Tribe~Glass%20Walkers.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_red_talons">Tribe~Red%20Talons.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_shadow_lords">Tribe~Shadow%20Lords.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_silent_striders">Tribe~Silent%20Striders.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_silver_fangs">Tribe~Silver%20Fangs.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_stargazers">Tribe~Stargazers.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_uktena">Tribe~Uktena.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_wendigo">Tribe~Wendigo.png</string>
-    <string formatted="false" name="url_cwod_werewolf_tribe_white_howlers">Tribe~White%20Howlers.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_argos">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Argos.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_castigate">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Castigate.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_embody">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Embody.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_fatalism">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Fatalism.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_flux">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Flux.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_inhabit">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Inhabit.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_intimation">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Intimation.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_keening">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Keening.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_lifeweb">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Lifeweb.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_mnemosynis">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Mnemosynis.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_moliate">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Moliate.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_outrage">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Outrage.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_pandemonium">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Pandemonium.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_phantasm">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Phantasm.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_puppetry">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Puppetry.png</string>
+    <string formatted="false" name="url_cwod_wraith_arcanos_usury">http://theonyxpath.com/avatar/20th%20Anniversary/2014~Wraith%20The%20Oblivion/Arcanos~Usury.png</string>
 
-    <string formatted="false" name="url_cwod_wraith_arcanos_argos">Arcanos~Argos.png</string>
-    <string formatted="false" name="url_cwod_wraith_arcanos_castigate">Arcanos~Castigate.png</string>
-    <string formatted="false" name="url_cwod_wraith_arcanos_embody">Arcanos~Embody.png</string>
-    <string formatted="false" name="url_cwod_wraith_arcanos_fatalism">Arcanos~Fatalism.png</string>
-    <string formatted="false" name="url_cwod_wraith_arcanos_flux">Arcanos~Flux.png</string>
-    <string formatted="false" name="url_cwod_wraith_arcanos_inhabit">Arcanos~Inhabit.png</string>
-    <string formatted="false" name="url_cwod_wraith_arcanos_intimation">Arcanos~Intimation.png</string>
-    <string formatted="false" name="url_cwod_wraith_arcanos_keening">Arcanos~Keening.png</string>
-    <string formatted="false" name="url_cwod_wraith_arcanos_lifeweb">Arcanos~Lifeweb.png</string>
-    <string formatted="false" name="url_cwod_wraith_arcanos_mnemosynis">Arcanos~Mnemosynis.png</string>
-    <string formatted="false" name="url_cwod_wraith_arcanos_moliate">Arcanos~Moliate.png</string>
-    <string formatted="false" name="url_cwod_wraith_arcanos_outrage">Arcanos~Outrage.png</string>
-    <string formatted="false" name="url_cwod_wraith_arcanos_pandemonium">Arcanos~Pandemonium.png</string>
-    <string formatted="false" name="url_cwod_wraith_arcanos_phantasm">Arcanos~Phantasm.png</string>
-    <string formatted="false" name="url_cwod_wraith_arcanos_puppetry">Arcanos~Puppetry.png</string>
-    <string formatted="false" name="url_cwod_wraith_arcanos_usury">Arcanos~Usury.png</string>
+    <string formatted="false" name="url_cwod_mage_faction_traditions">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/1~d10.png</string>
+    <string formatted="false" name="url_cwod_mage_faction_technocracy">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Sect~Technocracy.png</string>
+    <string formatted="false" name="url_cwod_mage_faction_crafts">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/1~d10.png</string>
+    <string formatted="false" name="url_cwod_mage_tradition_akashayana">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Tradition~Akashayana.png</string>
+    <string formatted="false" name="url_cwod_mage_tradition_celestial_chorus">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Tradition~Celestial%20Chorus.png</string>
+    <string formatted="false" name="url_cwod_mage_tradition_cult_of_ecstasy">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Tradition~Cult%20of%20Ecstasy.png</string>
+    <string formatted="false" name="url_cwod_mage_tradition_dreamspeakers">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Tradition~Dreamspeakers.png</string>
+    <string formatted="false" name="url_cwod_mage_tradition_euthanatoi">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Tradition~Euthanatoi.png</string>
+    <string formatted="false" name="url_cwod_mage_tradition_order_of_hermes">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Tradition~Order%20of%20Hermes.png</string>
+    <string formatted="false" name="url_cwod_mage_tradition_scions_of_ether">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Tradition~Scions%20of%20Ether.png</string>
+    <string formatted="false" name="url_cwod_mage_tradition_verbenae">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Tradition~Verbenae.png</string>
+    <string formatted="false" name="url_cwod_mage_tradition_virtual_adepts">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Tradition~Virtual%20Adepts.png</string>
+    <string formatted="false" name="url_cwod_mage_convention_iteration_x">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Convention~Iteration%20X.png</string>
+    <string formatted="false" name="url_cwod_mage_convention_new_world_order">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Convention~New%20World%20Order.png</string>
+    <string formatted="false" name="url_cwod_mage_convention_progenitors">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Convention~Progenitors.png</string>
+    <string formatted="false" name="url_cwod_mage_convention_syndicate">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Convention~Syndicate.png</string>
+    <string formatted="false" name="url_cwod_mage_convention_void_engineers">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Convention~Void%20Engineers.png</string>
+    <string formatted="false" name="url_cwod_mage_craft_ahl_i_batin">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Craft~Ahl-i-Batin.png</string>
+    <string formatted="false" name="url_cwod_mage_craft_bataa">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Craft~Bataa.png</string>
+    <string formatted="false" name="url_cwod_mage_craft_children_of_knowledge">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Craft~Children%20of%20Knowledge.png</string>
+    <string formatted="false" name="url_cwod_mage_craft_hollow_ones">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Tradition~Hollow%20Ones.png</string>
+    <string formatted="false" name="url_cwod_mage_craft_knights_templar">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Craft~Knights%20Templar.png</string>
+    <string formatted="false" name="url_cwod_mage_craft_kopa_loei">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Craft~Kopa%20Loei.png</string>
+    <string formatted="false" name="url_cwod_mage_craft_ngoma">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Craft~Ngoma.png</string>
+    <string formatted="false" name="url_cwod_mage_craft_sisters_of_hippolyta">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Craft~Sisters%20of%20Hippolyta.png</string>
+    <string formatted="false" name="url_cwod_mage_craft_taftani">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Craft~Taftani.png</string>
+    <string formatted="false" name="url_cwod_mage_craft_wu_lung">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/1993~Mage%20The%20Ascension/Craft~Wu%20Lung.png</string>
 
-    <string formatted="false" name="url_cwod_mage_convention_iteration_x">Convention~Iteration%20X.png</string>
-    <string formatted="false" name="url_cwod_mage_convention_new_world_order">Convention~New%20World%20Order.png</string>
-    <string formatted="false" name="url_cwod_mage_convention_progenitors">Convention~Progenitors.png</string>
-    <string formatted="false" name="url_cwod_mage_convention_syndicate">Convention~Syndicate.png</string>
-    <string formatted="false" name="url_cwod_mage_convention_void_engineers">Convention~Void%20Engineers.png</string>
-    <string formatted="false" name="url_cwod_mage_craft_ahl_i_batin">Craft~Ahl-i-Batin.png</string>
-    <string formatted="false" name="url_cwod_mage_craft_bataa">Craft~Bataa.png</string>
-    <string formatted="false" name="url_cwod_mage_craft_children_of_knowledge">Craft~Children%20of%20Knowledge.png</string>
-    <string formatted="false" name="url_cwod_mage_craft_knights_templar">Craft~Knights%20Templar.png</string>
-    <string formatted="false" name="url_cwod_mage_craft_kopa_loei">Craft~Kopa%20Loei.png</string>
-    <string formatted="false" name="url_cwod_mage_craft_ngoma">Craft~Ngoma.png</string>
-    <string formatted="false" name="url_cwod_mage_craft_orphans">Craft~Orphans.png</string>
-    <string formatted="false" name="url_cwod_mage_craft_sisters_of_hippolyta">Craft~Sisters%20of%20Hippolyta.png</string>
-    <string formatted="false" name="url_cwod_mage_craft_taftani">Craft~Taftani.png</string>
-    <string formatted="false" name="url_cwod_mage_craft_wu_lung">Craft~Wu%20Lung.png</string>
-    <string formatted="false" name="url_cwod_mage_sect_technocracy">Sect~Technocracy.png</string>
-    <string formatted="false" name="url_cwod_mage_tradition_akashayana">Tradition~Akashayana.png</string>
-    <string formatted="false" name="url_cwod_mage_tradition_celestial_chorus">Tradition~Celestial%20Chorus.png</string>
-    <string formatted="false" name="url_cwod_mage_tradition_cult_of_ecstasy">Tradition~Cult%20of%20Ecstasy.png</string>
-    <string formatted="false" name="url_cwod_mage_tradition_dreamspeakers">Tradition~Dreamspeakers.png</string>
-    <string formatted="false" name="url_cwod_mage_tradition_euthanatoi">Tradition~Euthanatoi.png</string>
-    <string formatted="false" name="url_cwod_mage_tradition_hollow_ones">Tradition~Hollow%20Ones.png</string>
-    <string formatted="false" name="url_cwod_mage_tradition_order_of_hermes">Tradition~Order%20of%20Hermes.png</string>
-    <string formatted="false" name="url_cwod_mage_tradition_scions_of_ether">Tradition~Scions%20of%20Ether.png</string>
-    <string formatted="false" name="url_cwod_mage_tradition_verbenae">Tradition~Verbenae.png</string>
-    <string formatted="false" name="url_cwod_mage_tradition_virtual_adepts">Tradition~Virtual%20Adepts.png</string>
+    <string formatted="false" name="url_nwod_vampire_clan_daeva">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Clan-Big~Daeva.png</string>
+    <string formatted="false" name="url_nwod_vampire_clan_gangrel">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Clan-Big~Gangrel%20(VTR).png</string>
+    <string formatted="false" name="url_nwod_vampire_clan_mekhet">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Clan-Big~Mekhet.png</string>
+    <string formatted="false" name="url_nwod_vampire_clan_nosferatu">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Clan-Big~Nosferatu%20(VTR).png</string>
+    <string formatted="false" name="url_nwod_vampire_clan_ventrue">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Clan-Big~Ventrue%20(VTR).png</string>
+    <string formatted="false" name="url_nwod_vampire_conspiracy_prima_invicta">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Conspiracy~Prima%20Invicta.png</string>
+    <string formatted="false" name="url_nwod_vampire_conspiracy_the_commonwealth">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Conspiracy~The%20Commonwealth.png</string>
+    <string formatted="false" name="url_nwod_vampire_conspiracy_the_covenant">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Conspiracy~The%20Covenant.png</string>
+    <string formatted="false" name="url_nwod_vampire_conspiracy_the_devils_eye">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Conspiracy~The%20Devils%20Eye.png</string>
+    <string formatted="false" name="url_nwod_vampire_conspiracy_the_mothers_army">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Conspiracy~The%20Mothers%20Army.png</string>
+    <string formatted="false" name="url_nwod_vampire_covenant_carthian_movement">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Covenant~Carthian%20Movement.png</string>
+    <string formatted="false" name="url_nwod_vampire_covenant_circle_of_the_crone">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Covenant~Circle%20of%20the%20Crone.png</string>
+    <string formatted="false" name="url_nwod_vampire_covenant_holy_engineers">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Covenant~Holy%20Engineers.png</string>
+    <string formatted="false" name="url_nwod_vampire_covenant_invictus">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Covenant~Invictus.png</string>
+    <string formatted="false" name="url_nwod_vampire_covenant_lancea_et_sanctum">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Covenant~Lancea%20et%20Sanctum.png</string>
+    <string formatted="false" name="url_nwod_vampire_covenant_ordo_dracul">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Covenant~Ordo%20Dracul.png</string>
+    <string formatted="false" name="url_nwod_vampire_covenant_unaligned">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Covenant~Unaligned.png</string>
+    <string formatted="false" name="url_nwod_vampire_covenant_vii">http://theonyxpath.com/avatar/World%20of%20Darkness/2004~Vampire%20The%20Requiem/Covenant~VII.png</string>
 
-<!-- May not include avatar-specific versions
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_ahrimanes">Bloodline~Ahrimanes.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_anda">Bloodline~Anda.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_baali">Bloodline~Baali.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_blood_brothers">Bloodline-variant~Blood Brothers.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_caitiff">Bloodline~Caitiff.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_cappadocian">Bloodline~Cappadocian.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_children_of_osiris">Bloodline~Children of Osiris.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_daughters_of_cacophony">Bloodline~Daughters of Cacophony.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_Gargoyle">Bloodline~Gargoyle (VTM).png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_harbingers_of_skulls">Bloodline-variant~Harbingers of Skulls.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_kiasyd">Bloodline~Kiasyd.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_lamia">Bloodline~Lamia.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_lhiannan">Bloodline~Lhiannan.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_nagaraja">Bloodline~Nagaraja.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_noiad">Bloodline~Noiad.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_salubri">Bloodline~Salubri.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_samedi">Bloodline~Samedi.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_assamite">Clan~Assamite.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_brujah">Clan~Brujah.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_followers_of_set">Clan~Followers of Set.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_gangrel">Clan~Gangrel.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_giovanni">Clan~Giovanni.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_lasombra">Clan~Lasombra.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_malkavian">Clan~Malkavian.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_nosferatu">Clan~Nosferatu.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_ravnos">Clan~Ravnos.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_toreador">Clan~Toreador.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_tremere">Clan~Tremere.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_tzimisce">Clan~Tzimisce.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_ventrue">Clan~Ventrue.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_sect_anarchs">Sect~Anarchs.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_sect_camarilla">Sect~Camarilla.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_sect_independent">Sect~Independent.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_sect_sabbat">Sect~Sabbat.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_ghoul">Vampire~Ghoul.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_antitribu_assamite">Variant-Assamite~Assamite antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_antitribu_brujah">Variant-Brujah~Brujah antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_true_brujah">Variant-Brujah~True Brujah.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_clan_caitiff_">Variant-Caitiff~Panders.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_antitribu_serpents_of_the_light">Variant-Followers of Set~Serpents of the Light.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_antitribu_lasombra">Variant-Lasombra~Lasombra antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_antitribu_malkavian">Variant-Malkavian~Malkavian antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_antitribu_nosferatu">Variant-Nosferatu~Nosferatu antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_antitribu_ravnos">Variant-Ravnos~Ravnos antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_antitribu_salubri">Variant-Salubri~Salubri antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_antitribu_toreador">Variant-Toreador~Toreador antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_antitribu_tremere">Variant-Tremere~Tremere antitribu.png</string>
-    <string formatted="false" name="url_cwod_vampire_avatar_antitribu_ventrue">Variant-Ventrue~Ventrue antitribu.png</string>
+    <string formatted="false" name="url_nwod_werewolf_auspice_cahalith">http://theonyxpath.com/avatar/World%20of%20Darkness/2005-0~Werewolf%20The%20Forsaken/Auspice~Cahalith.png</string>
+    <string formatted="false" name="url_nwod_werewolf_auspice_elodoth">http://theonyxpath.com/avatar/World%20of%20Darkness/2005-0~Werewolf%20The%20Forsaken/Auspice~Elodoth.png</string>
+    <string formatted="false" name="url_nwod_werewolf_auspice_irraka">http://theonyxpath.com/avatar/World%20of%20Darkness/2005-0~Werewolf%20The%20Forsaken/Auspice~Irraka.png</string>
+    <string formatted="false" name="url_nwod_werewolf_auspice_ithaeur">http://theonyxpath.com/avatar/World%20of%20Darkness/2005-0~Werewolf%20The%20Forsaken/Auspice~Ithaeur.png</string>
+    <string formatted="false" name="url_nwod_werewolf_auspice_rahu">http://theonyxpath.com/avatar/World%20of%20Darkness/2005-0~Werewolf%20The%20Forsaken/Auspice~Rahu.png</string>
+    <string formatted="false" name="url_nwod_werewolf_tribe_blood_talons">http://theonyxpath.com/avatar/World%20of%20Darkness/2005-0~Werewolf%20The%20Forsaken/Tribe~Blood%20Talons.png</string>
+    <string formatted="false" name="url_nwod_werewolf_tribe_bone_shadows">http://theonyxpath.com/avatar/World%20of%20Darkness/2005-0~Werewolf%20The%20Forsaken/Tribe~Bone%20Shadows.png</string>
+    <string formatted="false" name="url_nwod_werewolf_tribe_ghost_wolves">http://theonyxpath.com/avatar/World%20of%20Darkness/2005-0~Werewolf%20The%20Forsaken/Tribe~Ghost%20Wolves.png</string>
+    <string formatted="false" name="url_nwod_werewolf_tribe_hunters_in_darkness">http://theonyxpath.com/avatar/World%20of%20Darkness/2005-0~Werewolf%20The%20Forsaken/Tribe~Hunters%20in%20Darkness.png</string>
+    <string formatted="false" name="url_nwod_werewolf_tribe_iron_masters">http://theonyxpath.com/avatar/World%20of%20Darkness/2005-0~Werewolf%20The%20Forsaken/Tribe~Iron%20Masters.png</string>
+    <string formatted="false" name="url_nwod_werewolf_tribe_storm_lords">http://theonyxpath.com/avatar/World%20of%20Darkness/2005-0~Werewolf%20The%20Forsaken/Tribe~Storm%20Lords.png</string>
 
-    <string formatted="false" name="url_cwod_werewolf_avatar_auspice_ahroun">Auspice~Ahroun.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_auspice_galliard">Auspice~Galliard.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_auspice_philodox">Auspice~Philodox.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_auspice_ragabash">Auspice~Ragabash.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_auspice_theurge">Auspice~Theurge.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_fera_ajaba">Fera~Ajaba.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_fera_ananasi">Fera~Ananasi.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_fera_apis">Fera~Apis.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_fera_bastet">Fera~Bastet.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_fera_camazotz">Fera~Camazotz.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_fera_corax">Fera~Corax.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_fera_grondr">Fera~Grondr.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_fera_gurahl">Fera~Gurahl.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_fera_kitsune">Fera~Kitsune.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_fera_mokole">Fera~Mokole.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_fera_nagah">Fera~Nagah.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_fera_nuwisha">Fera~Nuwisha.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_fera_ratkin">Fera~Ratkin.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_fera_rokea">Fera~Rokea.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_black_furies">Tribe~Black Furies.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_black_spiral_dancers">Tribe~Black Spiral Dancers.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_bone_gnawers">Tribe~Bone Gnawers.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_bunyip">Tribe~Bunyip.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_children_of_gaia">Tribe~Children of Gaia.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_croatan">Tribe~Croatan.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_fianna">Tribe~Fianna.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_get_of_fenris">Tribe~Get of Fenris.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_glass_walkers">Tribe~Glass Walkers.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_red_talons">Tribe~Red Talons.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_shadow_lords">Tribe~Shadow Lords.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_silent_striders">Tribe~Silent Striders.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_silver_sangs">Tribe~Silver Fangs.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_stargazers">Tribe~Stargazers.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_uktena">Tribe~Uktena.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_wendigo">Tribe~Wendigo.png</string>
-    <string formatted="false" name="url_cwod_werewolf_avatar_tribe_white_howlers">Tribe~White Howlers.png</string>
--->
+    <string formatted="false" name="url_nwod_mummy_decree_bull_headed">http://theonyxpath.com/avatar/World%20of%20Darkness/2012~Mummy%20The%20Curse/Decree~Bull-Headed.png</string>
+    <string formatted="false" name="url_nwod_mummy_decree_falcon_headed">http://theonyxpath.com/avatar/World%20of%20Darkness/2012~Mummy%20The%20Curse/Decree~Falcon-Headed.png</string>
+    <string formatted="false" name="url_nwod_mummy_decree_jackal_headed">http://theonyxpath.com/avatar/World%20of%20Darkness/2012~Mummy%20The%20Curse/Decree~Jackal-Headed.png</string>
+    <string formatted="false" name="url_nwod_mummy_decree_lion_headed">http://theonyxpath.com/avatar/World%20of%20Darkness/2012~Mummy%20The%20Curse/Decree~Lion-Headed.png</string>
+    <string formatted="false" name="url_nwod_mummy_decree_serpent_headed">http://theonyxpath.com/avatar/World%20of%20Darkness/2012~Mummy%20The%20Curse/Decree~Serpent-Headed.png</string>
+    <string formatted="false" name="url_nwod_mummy_guild_maa_kep">http://theonyxpath.com/avatar/World%20of%20Darkness/2012~Mummy%20The%20Curse/Guild~Maa-Kep.png</string>
+    <string formatted="false" name="url_nwod_mummy_guild_mesen_nebu">http://theonyxpath.com/avatar/World%20of%20Darkness/2012~Mummy%20The%20Curse/Guild~Mesen-Nebu.png</string>
+    <string formatted="false" name="url_nwod_mummy_guild_sesha_hebsu">http://theonyxpath.com/avatar/World%20of%20Darkness/2012~Mummy%20The%20Curse/Guild~Sesha-Hebsu.png</string>
+    <string formatted="false" name="url_nwod_mummy_guild_su_menent">http://theonyxpath.com/avatar/World%20of%20Darkness/2012~Mummy%20The%20Curse/Guild~Su-Menent.png</string>
+    <string formatted="false" name="url_nwod_mummy_guild_tef_aabhi">http://theonyxpath.com/avatar/World%20of%20Darkness/2012~Mummy%20The%20Curse/Guild~Tef-Aabhi.png</string>
 
-    <string formatted="false" name="url_nwod_vampire_clan_daeva">Clan-Big~Daeva.png</string>
-    <string formatted="false" name="url_nwod_vampire_clan_gangrel">Clan-Big~Gangrel%20(VTR).png</string>
-    <string formatted="false" name="url_nwod_vampire_clan_mekhet">Clan-Big~Mekhet.png</string>
-    <string formatted="false" name="url_nwod_vampire_clan_nosferatu">Clan-Big~Nosferatu%20(VTR).png</string>
-    <string formatted="false" name="url_nwod_vampire_clan_ventrue">Clan-Big~Ventrue%20(VTR).png</string>
-    <string formatted="false" name="url_nwod_vampire_conspiracy_prima_invicta">Conspiracy~Prima%20Invicta.png</string>
-    <string formatted="false" name="url_nwod_vampire_conspiracy_the_commonwealth">Conspiracy~The%20Commonwealth.png</string>
-    <string formatted="false" name="url_nwod_vampire_conspiracy_the_covenant">Conspiracy~The%20Covenant.png</string>
-    <string formatted="false" name="url_nwod_vampire_conspiracy_the_devils_eye">Conspiracy~The%20Devils%20Eye.png</string>
-    <string formatted="false" name="url_nwod_vampire_conspiracy_the_mothers_army">Conspiracy~The%20Mothers%20Army.png</string>
-    <string formatted="false" name="url_nwod_vampire_covenant_carthian_movement">Covenant~Carthian%20Movement.png</string>
-    <string formatted="false" name="url_nwod_vampire_covenant_circle_of_the_crone">Covenant~Circle%20of%20the%20Crone.png</string>
-    <string formatted="false" name="url_nwod_vampire_covenant_holy_engineers">Covenant~Holy%20Engineers.png</string>
-    <string formatted="false" name="url_nwod_vampire_covenant_invictus">Covenant~Invictus.png</string>
-    <string formatted="false" name="url_nwod_vampire_covenant_lancea_et_sanctum">Covenant~Lancea%20et%20Sanctum.png</string>
-    <string formatted="false" name="url_nwod_vampire_covenant_ordo_dracul">Covenant~Ordo%20Dracul.png</string>
-    <string formatted="false" name="url_nwod_vampire_covenant_unaligned">Covenant~Unaligned.png</string>
-    <string formatted="false" name="url_nwod_vampire_covenant_vii">Covenant~VII.png</string>
-
-    <string formatted="false" name="url_nwod_werewolf_auspice_cahalith">Auspice~Cahalith.png</string>
-    <string formatted="false" name="url_nwod_werewolf_auspice_elodoth">Auspice~Elodoth.png</string>
-    <string formatted="false" name="url_nwod_werewolf_auspice_irraka">Auspice~Irraka.png</string>
-    <string formatted="false" name="url_nwod_werewolf_auspice_ithaeur">Auspice~Ithaeur.png</string>
-    <string formatted="false" name="url_nwod_werewolf_auspice_rahu">Auspice~Rahu.png</string>
-    <string formatted="false" name="url_nwod_werewolf_tribe_blood_talons">Tribe~Blood%20Talons.png</string>
-    <string formatted="false" name="url_nwod_werewolf_tribe_bone_shadows">Tribe~Bone%20Shadows.png</string>
-    <string formatted="false" name="url_nwod_werewolf_tribe_ghost_wolves">Tribe~Ghost%20Wolves.png</string>
-    <string formatted="false" name="url_nwod_werewolf_tribe_hunters_in_darkness">Tribe~Hunters%20in%20Darkness.png</string>
-    <string formatted="false" name="url_nwod_werewolf_tribe_iron_masters">Tribe~Iron%20Masters.png</string>
-    <string formatted="false" name="url_nwod_werewolf_tribe_storm_lords">Tribe~Storm%20Lords.png</string>
-
-    <string formatted="false" name="url_nwod_mummy_decree_bull_headed">Decree~Bull-Headed.png</string>
-    <string formatted="false" name="url_nwod_mummy_decree_falcon_headed">Decree~Falcon-Headed.png</string>
-    <string formatted="false" name="url_nwod_mummy_decree_jackal_headed">Decree~Jackal-Headed.png</string>
-    <string formatted="false" name="url_nwod_mummy_decree_lion_headed">Decree~Lion-Headed.png</string>
-    <string formatted="false" name="url_nwod_mummy_decree_serpent_headed">Decree~Serpent-Headed.png</string>
-    <string formatted="false" name="url_nwod_mummy_guild_maa_kep">Guild~Maa-Kep.png</string>
-    <string formatted="false" name="url_nwod_mummy_guild_mesen_nebu">Guild~Mesen-Nebu.png</string>
-    <string formatted="false" name="url_nwod_mummy_guild_sesha_hebsu">Guild~Sesha-Hebsu.png</string>
-    <string formatted="false" name="url_nwod_mummy_guild_su_menent">Guild~Su-Menent.png</string>
-    <string formatted="false" name="url_nwod_mummy_guild_tef_aabhi">Guild~Tef-Aabhi.png</string>
-
-    <string formatted="false" name="url_nwod_demon_agenda_inquisitor">Agenda~Inquisitor.png</string>
-    <string formatted="false" name="url_nwod_demon_agenda_integrator">Agenda~Integrator.png</string>
-    <string formatted="false" name="url_nwod_demon_agenda_saboteur">Agenda~Saboteur.png</string>
-    <string formatted="false" name="url_nwod_demon_agenda_tempter">Agenda~Tempter.png</string>
-    <string formatted="false" name="url_nwod_demon_incarnation_destroyer">Incarnation~Destroyer.png</string>
-    <string formatted="false" name="url_nwod_demon_incarnation_guardian">Incarnation~Guardian.png</string>
-    <string formatted="false" name="url_nwod_demon_incarnation_messenger">Incarnation~Messenger.png</string>
-    <string formatted="false" name="url_nwod_demon_incarnation_psychopomp">Incarnation~Psychopomp.png</string>
+    <string formatted="false" name="url_nwod_demon_agenda_inquisitor">http://theonyxpath.com/avatar/World%20of%20Darkness/2013~Demon%20The%20Descent/Agenda~Inquisitor.png</string>
+    <string formatted="false" name="url_nwod_demon_agenda_integrator">http://theonyxpath.com/avatar/World%20of%20Darkness/2013~Demon%20The%20Descent/Agenda~Integrator.png</string>
+    <string formatted="false" name="url_nwod_demon_agenda_saboteur">http://theonyxpath.com/avatar/World%20of%20Darkness/2013~Demon%20The%20Descent/Agenda~Saboteur.png</string>
+    <string formatted="false" name="url_nwod_demon_agenda_tempter">http://theonyxpath.com/avatar/World%20of%20Darkness/2013~Demon%20The%20Descent/Agenda~Tempter.png</string>
+    <string formatted="false" name="url_nwod_demon_incarnation_destroyer">http://theonyxpath.com/avatar/World%20of%20Darkness/2013~Demon%20The%20Descent/Incarnation~Destroyer.png</string>
+    <string formatted="false" name="url_nwod_demon_incarnation_guardian">http://theonyxpath.com/avatar/World%20of%20Darkness/2013~Demon%20The%20Descent/Incarnation~Guardian.png</string>
+    <string formatted="false" name="url_nwod_demon_incarnation_messenger">http://theonyxpath.com/avatar/World%20of%20Darkness/2013~Demon%20The%20Descent/Incarnation~Messenger.png</string>
+    <string formatted="false" name="url_nwod_demon_incarnation_psychopomp">http://theonyxpath.com/avatar/World%20of%20Darkness/2013~Demon%20The%20Descent/Incarnation~Psychopomp.png</string>
 
 </resources>

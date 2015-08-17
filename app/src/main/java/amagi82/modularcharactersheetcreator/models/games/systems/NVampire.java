@@ -1,133 +1,43 @@
 package amagi82.modularcharactersheetcreator.models.games.systems;
 
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.games.Choice;
-import amagi82.modularcharactersheetcreator.models.games.Game;
 
-public class NVampire extends Onyx {
-
-    public enum Clan {
-        DAEVA(R.string.daeva, R.string.url_nwod_vampire_clan_daeva),
-        GANGREL(R.string.gangrel, R.string.url_nwod_vampire_clan_gangrel),
-        MEKHET(R.string.mekhet, R.string.url_nwod_vampire_clan_mekhet),
-        NOSFERATU(R.string.nosferatu, R.string.url_nwod_vampire_clan_nosferatu),
-        VENTRUE(R.string.ventrue, R.string.url_nwod_vampire_clan_ventrue);
-
-        private int name;
-        private int url;
-
-        Clan(int name, int url) {
-            this.name = name;
-            this.url = url;
-        }
-
-        public int getName() {
-            return name;
-        }
-
-        public int getUrl() {
-            return url;
-        }
-    }
-
-    public enum Covenant {
-        CARTHIANMOVEMENT(R.string.carthian_movement, R.string.url_nwod_vampire_covenant_carthian_movement),
-        CIRCLEOFTHECRONE(R.string.circle_of_the_crone, R.string.url_nwod_vampire_covenant_circle_of_the_crone),
-        HOLYENGINEERS(R.string.holy_engineers, R.string.url_nwod_vampire_covenant_holy_engineers),
-        INVICTUS(R.string.invictus, R.string.url_nwod_vampire_covenant_invictus),
-        LANCEAETSANCTUM(R.string.lancea_et_sanctum, R.string.url_nwod_vampire_covenant_lancea_et_sanctum),
-        ORDODRACUL(R.string.ordo_dracul, R.string.url_nwod_vampire_covenant_ordo_dracul),
-        UNALIGNED(R.string.unaligned, R.string.url_nwod_vampire_covenant_unaligned);
-
-        private int name;
-        private int url;
-
-        Covenant(int name, int url) {
-            this.name = name;
-            this.url = url;
-        }
-
-        public int getName() {
-            return name;
-        }
-
-        public int getUrl() {
-            return url;
-        }
-    }
-
-    private Clan clan;
-    private Covenant covenant;
-    private Choice choiceLeft;
-    private Choice choiceRight;
-    private List<Choice> list = new ArrayList<>();
+public class NVampire extends GameSys{
 
     public NVampire() {
+        super();
+        this.gameTitle = R.string.nwod_vampire;
+        this.leftTitle = R.string.clan;
+        this.rightTitle = R.string.covenant;
+        this.gameDrawable = R.drawable.title_vampire_requiem;
+        this.gameColor = R.color.nwod_vampire;
+        this.gameCategory = NWOD;
     }
 
-    public NVampire(String clanName, String covenantName) {
-        this(Clan.valueOf(clanName),Covenant.valueOf(covenantName));
-    }
-
-    public NVampire(Clan clan, Covenant covenant){
-        this.clan = clan;
-        this.covenant = covenant;
-        choiceLeft = getChoice(clan);
-        choiceRight = getChoice(covenant);
-    }
-
-    private Choice getChoice(Clan clan) {
-        return new Choice(clan.name(), clan.getName(), Game.System.NVAMPIRE.getUrlBase(), clan.getUrl());
-    }
-
-    private Choice getChoice(Covenant covenant) {
-        return new Choice(covenant.name(), covenant.getName(), Game.System.NVAMPIRE.getUrlBase(), covenant.getUrl());
-    }
-
-    @Override public String getSystemName() {
-        return Game.System.NVAMPIRE.name();
-    }
-
-    @Override public int getArchetype() {
-        return clan.getName();
-    }
-
-    @Override public Choice getLeft() {
-        return choiceLeft;
-    }
-
-    @Override public void setLeft(String eName) {
-        clan = Clan.valueOf(eName);
-        choiceLeft = getChoice(clan);
-    }
-
-    @Override public Choice getRight() {
-        return choiceRight;
-    }
-
-    @Override public void setRight(String eName) {
-        covenant = Covenant.valueOf(eName);
-        choiceRight = getChoice(covenant);
-    }
-
-    @Override public boolean hasRight() {
-        return true;
-    }
-
-    @Override public List<Choice> getListLeft(String eName) {
-        List<Choice> list = new ArrayList<>();
-        if (eName == null) for (Clan clan : Clan.values()) list.add(getChoice(clan));
-        else setLeft(eName);
+    @Override public List<Splat> getListLeft(@Nullable Splat splat) {
+        List<Splat> list = new ArrayList<>();
+        list.add(new Splat(R.string.daeva, R.string.url_nwod_vampire_clan_daeva));
+        list.add(new Splat(R.string.gangrel, R.string.url_nwod_vampire_clan_gangrel));
+        list.add(new Splat(R.string.mekhet, R.string.url_nwod_vampire_clan_mekhet));
+        list.add(new Splat(R.string.nosferatu, R.string.url_nwod_vampire_clan_nosferatu));
+        list.add(new Splat(R.string.ventrue, R.string.url_nwod_vampire_clan_ventrue));
         return list;
     }
 
-    @Override public List<Choice> getListRight(String eName) {
-        List<Choice> list = new ArrayList<>();
-        if (eName == null) for (Covenant covenant : Covenant.values()) list.add(getChoice(covenant));
-        else setRight(eName);
+    @Override public List<Splat> getListRight(@Nullable Splat splat) {
+        List<Splat> list = new ArrayList<>();
+        list.add(new Splat(R.string.carthian_movement, R.string.url_nwod_vampire_covenant_carthian_movement));
+        list.add(new Splat(R.string.circle_of_the_crone, R.string.url_nwod_vampire_covenant_circle_of_the_crone));
+        list.add(new Splat(R.string.holy_engineers, R.string.url_nwod_vampire_covenant_holy_engineers));
+        list.add(new Splat(R.string.invictus, R.string.url_nwod_vampire_covenant_invictus));
+        list.add(new Splat(R.string.lancea_et_sanctum, R.string.url_nwod_vampire_covenant_lancea_et_sanctum));
+        list.add(new Splat(R.string.ordo_dracul, R.string.url_nwod_vampire_covenant_ordo_dracul));
+        list.add(new Splat(R.string.unaligned, R.string.url_nwod_vampire_covenant_unaligned));
         return list;
     }
 }

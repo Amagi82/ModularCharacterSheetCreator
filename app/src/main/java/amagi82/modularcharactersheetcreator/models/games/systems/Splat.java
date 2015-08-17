@@ -1,12 +1,13 @@
-package amagi82.modularcharactersheetcreator.models.games.systems.splats;
+package amagi82.modularcharactersheetcreator.models.games.systems;
 
 import android.support.annotation.StringRes;
+
+import amagi82.modularcharactersheetcreator.R;
 
 import static amagi82.modularcharactersheetcreator.App.NONE;
 
 public class Splat {
     @StringRes private int title;
-    @StringRes private int baseUrl;
     @StringRes private int url;
     private boolean endPoint;
 
@@ -15,16 +16,19 @@ public class Splat {
     }
 
     public Splat(@StringRes int title) {
-        this(title, NONE, NONE);
+        this(title, R.string.url_default);
     }
 
-    public Splat(@StringRes int title, @StringRes int baseUrl, @StringRes int url) {
-        this(title, baseUrl, url, true);
+    public Splat(@StringRes int title, boolean endPoint) {
+        this(title, R.string.url_default, endPoint);
     }
 
-    public Splat(@StringRes int title, @StringRes int baseUrl, @StringRes int url, boolean endPoint) {
+    public Splat(@StringRes int title, @StringRes int url) {
+        this(title, url, true);
+    }
+
+    public Splat(@StringRes int title, @StringRes int url, boolean endPoint) {
         this.title = title;
-        this.baseUrl = baseUrl;
         this.url = url;
         this.endPoint = endPoint;
     }
@@ -35,14 +39,6 @@ public class Splat {
 
     public void setTitle(@StringRes int title) {
         this.title = title;
-    }
-
-    public int getBaseUrl() {
-        return baseUrl;
-    }
-
-    public void setBaseUrl(@StringRes int baseUrl) {
-        this.baseUrl = baseUrl;
     }
 
     public int getUrl() {

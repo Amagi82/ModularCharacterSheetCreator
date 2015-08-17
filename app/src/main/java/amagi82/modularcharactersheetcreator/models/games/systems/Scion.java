@@ -1,121 +1,44 @@
 package amagi82.modularcharactersheetcreator.models.games.systems;
 
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.games.Choice;
-import amagi82.modularcharactersheetcreator.models.games.Game;
 
-public class Scion extends Onyx {
-
-    public enum Volume {
-        HERO(R.string.hero),
-        DEMIGOD(R.string.demigod),
-        GOD(R.string.god);
-
-        private int name;
-
-        Volume(int name) {
-            this.name = name;
-        }
-
-        public int getName() {
-            return name;
-        }
-    }
-
-    public enum Pantheon {
-        PESEDJET(R.string.pesedjet),
-        DODEKATHEON(R.string.dodekatheon),
-        AESIR(R.string.aesir),
-        ATZLANTI(R.string.atzlanti),
-        AMATSUKAMI(R.string.amatsukami),
-        LOA(R.string.loa),
-        TUATHADEDANANN(R.string.tuatha_de_dadann),
-        CELESTIALBUREAUCRACY(R.string.celestial_bureaucracy),
-        DEVA(R.string.deva),
-        YAZATA(R.string.yazata);
-
-        private int name;
-
-        Pantheon(int name) {
-            this.name = name;
-        }
-
-        public int getName() {
-            return name;
-        }
-    }
-
-    private Volume volume;
-    private Pantheon pantheon;
-    private Choice choiceLeft;
-    private Choice choiceRight;
+public class Scion extends GameSys{
 
     public Scion() {
+        super();
+        this.gameTitle = R.string.scion;
+        this.leftTitle = R.string.volume;
+        this.rightTitle = R.string.pantheon;
+        this.isArchetypeLeft = false;
+        this.gameDrawable = R.drawable.title_scion;
+        this.gameColor = R.color.scion;
     }
 
-    public Scion(String volumeName, String pantheonName) {
-        this(Volume.valueOf(volumeName), Pantheon.valueOf(pantheonName));
-    }
-
-    public Scion(Volume volume, Pantheon pantheon) {
-        this.volume = volume;
-        this.pantheon = pantheon;
-        choiceLeft = getChoice(volume);
-        choiceRight = getChoice(pantheon);
-    }
-
-    private Choice getChoice(Volume volume) {
-        return new Choice(volume.name(), volume.getName());
-    }
-
-    private Choice getChoice(Pantheon pantheon) {
-        return new Choice(pantheon.name(), pantheon.getName());
-    }
-
-    @Override public String getSystemName() {
-        return Game.System.SCION.name();
-    }
-
-    @Override public int getArchetype() {
-        return pantheon.getName();
-    }
-
-    @Override public Choice getLeft() {
-        return choiceLeft;
-    }
-
-    @Override public void setLeft(String eName) {
-        volume = Volume.valueOf(eName);
-        choiceLeft = getChoice(volume);
-    }
-
-    @Override public Choice getRight() {
-        return choiceRight;
-    }
-
-    @Override public void setRight(String eName) {
-        pantheon = Pantheon.valueOf(eName);
-        choiceRight = getChoice(pantheon);
-    }
-
-    @Override public boolean hasRight() {
-        return true;
-    }
-
-    @Override public List<Choice> getListLeft(String eName) {
-        List<Choice> list = new ArrayList<>();
-        if (eName == null) for (Volume volume : Volume.values()) list.add(getChoice(volume));
-        else setLeft(eName);
+    @Override public List<Splat> getListLeft(@Nullable Splat splat) {
+        List<Splat> list = new ArrayList<>();
+        list.add(new Splat(R.string.hero));
+        list.add(new Splat(R.string.demigod));
+        list.add(new Splat(R.string.god));
         return list;
     }
 
-    @Override public List<Choice> getListRight(String eName) {
-        List<Choice> list = new ArrayList<>();
-        if (eName == null) for (Pantheon pantheon : Pantheon.values()) list.add(getChoice(pantheon));
-        else setRight(eName);
+    @Override public List<Splat> getListRight(@Nullable Splat splat) {
+        List<Splat> list = new ArrayList<>();
+        list.add(new Splat(R.string.pesedjet));
+        list.add(new Splat(R.string.dodekatheon));
+        list.add(new Splat(R.string.aesir));
+        list.add(new Splat(R.string.atzlanti));
+        list.add(new Splat(R.string.amatsukami));
+        list.add(new Splat(R.string.loa));
+        list.add(new Splat(R.string.tuatha_de_dadann));
+        list.add(new Splat(R.string.celestial_bureaucracy));
+        list.add(new Splat(R.string.deva));
+        list.add(new Splat(R.string.yazata));
         return list;
     }
 }
