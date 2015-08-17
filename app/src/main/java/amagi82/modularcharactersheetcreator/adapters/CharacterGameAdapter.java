@@ -9,17 +9,16 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.TileViewHolder;
-import amagi82.modularcharactersheetcreator.models.games.Game;
-import amagi82.modularcharactersheetcreator.models.games.Splat;
+import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 
 public class CharacterGameAdapter extends RecyclerView.Adapter<TileViewHolder> {
 
-    private SortedList<Splat> choices;
+    private SortedList<GameSystem> systems;
 
     public CharacterGameAdapter() {
 
-        choices = new SortedList<>(Splat.class, new SortedList.Callback<Splat>() {
-            @Override public int compare(Splat o1, Splat o2) {
+        systems = new SortedList<>(GameSystem.class, new SortedList.Callback<GameSystem>() {
+            @Override public int compare(GameSystem o1, GameSystem o2) {
                 if (o1.getPosition() > o2.getPosition()) return 1;
                 if (o1.getPosition() < o2.getPosition()) return -1;
                 return 0;
@@ -41,12 +40,12 @@ public class CharacterGameAdapter extends RecyclerView.Adapter<TileViewHolder> {
                 notifyItemRangeChanged(position, count);
             }
 
-            @Override public boolean areContentsTheSame(Splat oldItem, Splat newItem) {
+            @Override public boolean areContentsTheSame(GameSystem oldItem, GameSystem newItem) {
                 return false;
             }
 
-            @Override public boolean areItemsTheSame(Splat item1, Splat item2) {
-                return item1.geteName().equals(item2.geteName());
+            @Override public boolean areItemsTheSame(GameSystem item1, GameSystem item2) {
+                return item1.getGameTitle() == item2.getGameTitle();
             }
         });
     }
@@ -58,30 +57,30 @@ public class CharacterGameAdapter extends RecyclerView.Adapter<TileViewHolder> {
 
     @Override
     public void onBindViewHolder(TileViewHolder vh, int position) {
-        Splat choice = choices.get(position);
-        vh.imageView.setImageResource(choice.getDrawable());
-        vh.tvTitle.setText(choice.getTitle());
-        vh.system = Game.System.valueOf(choice.geteName());
+        GameSystem choice = systems.get(position);
+        vh.imageView.setImageResource(choice.getGameDrawable());
+        vh.tvTitle.setText(choice.getGameTitle());
+        vh.system = systems.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return choices.size();
+        return systems.size();
     }
 
-    public Splat get(int position) {
-        return choices.get(position);
+    public GameSystem get(int position) {
+        return systems.get(position);
     }
 
-    public void addItems(List<Splat> list) {
-        choices.beginBatchedUpdates();
-        choices.addAll(list);
-        choices.endBatchedUpdates();
+    public void addItems(List<GameSystem> list) {
+        systems.beginBatchedUpdates();
+        systems.addAll(list);
+        systems.endBatchedUpdates();
     }
 
-    public void removeItems(List<Splat> list){
-        choices.beginBatchedUpdates();
-        for(Splat choice : list) choices.remove(choice);
-        choices.endBatchedUpdates();
+    public void removeItems(List<GameSystem> list){
+        systems.beginBatchedUpdates();
+        for(GameSystem system : list) systems.remove(system);
+        systems.endBatchedUpdates();
     }
 }

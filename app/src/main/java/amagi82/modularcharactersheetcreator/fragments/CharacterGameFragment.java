@@ -13,12 +13,14 @@ import com.squareup.otto.Subscribe;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterGameAdapter;
 import amagi82.modularcharactersheetcreator.events.GameSystemEvent;
-import amagi82.modularcharactersheetcreator.events.TileItemClickedEvent;
+import amagi82.modularcharactersheetcreator.events.GameClickedEvent;
 import amagi82.modularcharactersheetcreator.models.games.Game;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static amagi82.modularcharactersheetcreator.models.games.Game.Category.*;
+import static amagi82.modularcharactersheetcreator.models.games.Game.CWOD;
+import static amagi82.modularcharactersheetcreator.models.games.Game.DEFAULT;
+import static amagi82.modularcharactersheetcreator.models.games.Game.NWOD;
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 
 public class CharacterGameFragment extends Fragment {
@@ -42,18 +44,18 @@ public class CharacterGameFragment extends Fragment {
         return rootView;
     }
 
-    @Subscribe public void onGameSystemSelected(TileItemClickedEvent event) {
-        if (event.system == Game.System.CWOD) {
+    @Subscribe public void onGameSystemSelected(GameClickedEvent event) {
+        if (event.system.getGameTitle() == R.string.cwod) {
             if(!cWodDisplayed) adapter.addItems(game.getList(CWOD));
             else adapter.removeItems(game.getList(CWOD));
             cWodDisplayed = !cWodDisplayed;
         }
-        else if (event.system == Game.System.NWOD) {
+        else if (event.system.getGameTitle() == R.string.nwod) {
             if(!nWodDisplayed) adapter.addItems(game.getList(NWOD));
             else adapter.removeItems(game.getList(NWOD));
             nWodDisplayed = !nWodDisplayed;
         }
-        else BUS.getBus().post(new GameSystemEvent(event.system.getOnyx()));
+        else BUS.getBus().post(new GameSystemEvent(event.system));
     }
 
     @Override

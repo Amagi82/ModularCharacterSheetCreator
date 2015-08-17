@@ -6,7 +6,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.events.TileGridItemClickedEvent;
+import amagi82.modularcharactersheetcreator.events.SplatClickedEvent;
+import amagi82.modularcharactersheetcreator.models.games.Splat;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -16,7 +17,7 @@ public class TileGridViewHolder extends RecyclerView.ViewHolder{
 
     @Bind(R.id.imageView) public ImageView imageView;
     @Bind(R.id.tvTitle) public TextView tvTitle;
-    public String eName;
+    public Splat splat;
     public boolean left;
 
     public TileGridViewHolder(final View itemView) {
@@ -25,7 +26,7 @@ public class TileGridViewHolder extends RecyclerView.ViewHolder{
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                BUS.getBus().post(new TileGridItemClickedEvent(eName, left));
+                BUS.getBus().post(new SplatClickedEvent(splat, left));
             }
         });
     }

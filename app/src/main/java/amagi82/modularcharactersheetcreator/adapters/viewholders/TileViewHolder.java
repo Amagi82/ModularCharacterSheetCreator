@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.events.TileItemClickedEvent;
+import amagi82.modularcharactersheetcreator.events.GameClickedEvent;
 import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,7 +25,7 @@ public class TileViewHolder extends RecyclerView.ViewHolder{
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                BUS.getBus().post(new TileItemClickedEvent(system));
+                BUS.getBus().post(new GameClickedEvent(system));
             }
         });
     }

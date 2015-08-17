@@ -12,11 +12,13 @@ import com.squareup.otto.Subscribe;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.activities.EditCharacterActivity;
-import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
+import amagi82.modularcharactersheetcreator.adapters.CharacterAxisAdapter;
 import amagi82.modularcharactersheetcreator.events.LeftAxisEvent;
 import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
-import amagi82.modularcharactersheetcreator.events.TileGridItemClickedEvent;
-import amagi82.modularcharactersheetcreator.models.games.systems.Onyx;
+import amagi82.modularcharactersheetcreator.events.SplatClickedEvent;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.games.Splat;
+import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -26,44 +28,32 @@ import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 public class CharacterAxisFragment extends Fragment{
 
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
-    private Onyx onyx;
-    private CharacterAdapter adapter;
+    private GameSystem system;
+    private CharacterAxisAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.recycler_view, container, false);
         ButterKnife.bind(this, rootView);
 
-        onyx = ((EditCharacterActivity)getActivity()).getOnyx();
+        GameCharacter character = ((EditCharacterActivity) getActivity()).getGameCharacter();
+        system = character.getGameSystem();
         boolean isLeft = getArguments().getBoolean(LEFT, true);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
-        adapter = new CharacterAdapter(this);
+        adapter = new CharacterAxisAdapter(this);
         recyclerView.setAdapter(adapter);
         adapter.setLeft(isLeft);
-        adapter.addAll(isLeft ? onyx.getListLeft(null) : onyx.getListRight(null));
+        adapter.addAll(isLeft ? system.getListLeft(character.getLeft()) : system.getListRight(character.getLeft()));
 
         return rootView;
     }
 
     @Subscribe
-    public void onItemSelected(TileGridItemClickedEvent event) {
-        String eName = event.eName;
-        if (event.left) {
-            //Choose the left category
-            if (onyx.getListLeft(eName).size() > 0) {
-                //If there are additional options available, present them
-                adapter.addAll(onyx.getListLeft(eName));
-            } else BUS.getBus().post(new LeftAxisEvent(eName));
-        } else {
-            //Choose the right category
-            if (onyx.getListRight(eName).size() > 0) {
-                //If there are additional options available, present them
-                adapter.remove("BLOODLINES");
-                adapter.remove("OTHERS");
-                adapter.addAll(onyx.getListRight(eName));
-            } else BUS.getBus().post(new RightAxisEvent(eName));
-        }
+    public void onItemSelected(SplatClickedEvent event) {
+        Splat splat = event.splat;
+        if(splat.isEndPoint()) BUS.getBus().post(event.left? new LeftAxisEvent(splat) : new RightAxisEvent(splat));
+        else adapter.addAll(event.left? system.getListLeft(splat) : system.getListRight(splat));
     }
 
     @Override

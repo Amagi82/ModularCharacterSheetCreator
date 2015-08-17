@@ -21,14 +21,14 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolde
 
     private Fragment fragment;
     private Resources res;
-    private SortedList<Splat> choices;
+    private SortedList<Splat> splats;
     private boolean left = true;
     private int gridImageSize;
 
     public CharacterAxisAdapter(Fragment fragment) {
         this.fragment = fragment;
         res = fragment.getResources();
-        choices = new SortedList<>(Splat.class, new SortedList.Callback<Splat>() {
+        splats = new SortedList<>(Splat.class, new SortedList.Callback<Splat>() {
             @Override public int compare(Splat o1, Splat o2) {
                 if (o1.getPosition() > o2.getPosition()) return 1;
                 if (o1.getPosition() < o2.getPosition()) return -1;
@@ -56,7 +56,7 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolde
             }
 
             @Override public boolean areItemsTheSame(Splat item1, Splat item2) {
-                return item1.geteName().equals(item2.geteName());
+                return item1.getTitle() == item2.getTitle();
             }
         });
 
@@ -73,16 +73,16 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolde
 
     @Override
     public void onBindViewHolder(TileGridViewHolder vh, int position) {
-        Splat choice = choices.get(position);
-        Glide.with(fragment).load(new Icon(res, choice, gridImageSize).getUrl()).into(vh.imageView);
-        vh.tvTitle.setText(choice.getTitle());
-        vh.eName = choice.geteName();
+        Splat splat = splats.get(position);
+        Glide.with(fragment).load(new Icon(res, splat, gridImageSize).getUrl()).into(vh.imageView);
+        vh.tvTitle.setText(splat.getTitle());
+        vh.splat = splat;
         vh.left = left;
     }
 
     @Override
     public int getItemCount() {
-        return choices.size();
+        return splats.size();
     }
 
     public boolean isLeft() {
@@ -94,27 +94,27 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolde
     }
 
     public Splat get(int position) {
-        return choices.get(position);
+        return splats.get(position);
     }
 
     public int add(Splat choice) {
-        return choices.add(choice);
+        return splats.add(choice);
     }
 
     public void addAll(List<Splat> list) {
-        int i = choices.size();
-        choices.beginBatchedUpdates();
-        for (Splat choice : list) {
-            choice.setPosition(i);
+        int i = splats.size();
+        splats.beginBatchedUpdates();
+        for (Splat splat : list) {
+            splat.setPosition(i);
             i++;
-            choices.add(choice);
+            splats.add(splat);
         }
-        choices.endBatchedUpdates();
+        splats.endBatchedUpdates();
     }
 
     public void remove(String eName) {
-        for (int i = choices.size() - 1; i >= 0; i--) {
-            if (choices.get(i).geteName().equals(eName)) {
+        for (int i = splats.size() - 1; i >= 0; i--) {
+            if (splats.get(i).geteName().equals(eName)) {
                 removeItemAt(i);
                 return;
             }
@@ -122,13 +122,13 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolde
     }
 
     public void removeItemAt(int index) {
-        choices.removeItemAt(index);
+        splats.removeItemAt(index);
     }
 
     public void clear() {
-        choices.beginBatchedUpdates();
-        while (choices.size() > 0) choices.removeItemAt(choices.size() - 1);
-        choices.endBatchedUpdates();
+        splats.beginBatchedUpdates();
+        while (splats.size() > 0) splats.removeItemAt(splats.size() - 1);
+        splats.endBatchedUpdates();
     }
 
     public void replaceAll(List<Splat> list) {

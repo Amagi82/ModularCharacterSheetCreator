@@ -41,7 +41,6 @@ import amagi82.modularcharactersheetcreator.fragments.CharacterAxisFragment;
 import amagi82.modularcharactersheetcreator.fragments.CharacterGameFragment;
 import amagi82.modularcharactersheetcreator.fragments.ImageFragment;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -70,7 +69,6 @@ public class EditCharacterActivity extends AppCompatActivity {
     @Bind(R.id.fab) FloatingActionButton fab;
     private FragmentManager fm = getSupportFragmentManager();
     private GameCharacter character;
-    private GameSystem gameSystem;
 
     private enum Clear {ALL, LEFTRIGHT, RIGHT}
 
@@ -98,7 +96,6 @@ public class EditCharacterActivity extends AppCompatActivity {
             //setTextScrims();
             textInputLayout.getEditText().setText(character.getName());
             setBackground();
-            gameSystem = character.getGameSystem();
             bLeft.setVisibility(VISIBLE);
             bLeft.setText(character.getLeft().getTitle());
             bRight.setVisibility(VISIBLE);
@@ -108,6 +105,10 @@ public class EditCharacterActivity extends AppCompatActivity {
         } else {
             character = new GameCharacter();
         }
+    }
+
+    public GameCharacter getGameCharacter(){
+        return character;
     }
 
     @OnClick(R.id.bGameSystem)
@@ -158,10 +159,9 @@ public class EditCharacterActivity extends AppCompatActivity {
 
     @Subscribe
     public void onGameSystemChosen(GameSystemEvent event) {
-        gameSystem = event.gameSystem;
-        character.setGameTitle(gameSystem.getGameTitle());
+        character.setGameTitle(event.gameSystem.getGameTitle());
         bGameSystem.setVisibility(VISIBLE);
-        bGameSystem.setText(gameSystem.getGameTitle());
+        bGameSystem.setText(event.gameSystem.getGameTitle());
         chooseLeftCategory();
     }
 

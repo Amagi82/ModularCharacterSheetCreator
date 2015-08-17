@@ -38,8 +38,8 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterAdapter;
 import amagi82.modularcharactersheetcreator.events.CharacterAddedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterChangedEvent;
-import amagi82.modularcharactersheetcreator.events.TileGridItemClickedEvent;
-import amagi82.modularcharactersheetcreator.events.TileItemClickedEvent;
+import amagi82.modularcharactersheetcreator.events.SplatClickedEvent;
+import amagi82.modularcharactersheetcreator.events.GameClickedEvent;
 import amagi82.modularcharactersheetcreator.events.UpNavigationEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.games.Game;
@@ -216,7 +216,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
     }
 
     //Game System selected
-    @Subscribe public void onTileClicked(TileItemClickedEvent event) {
+    @Subscribe public void onTileClicked(GameClickedEvent event) {
         //If a system with subcategories has been selected, show them
         if (event.system == Game.System.CWOD) adapter.replaceAll(game.getList(Game.Category.CWOD));
         else if (event.system == Game.System.NWOD) adapter.replaceAll(game.getList(Game.Category.NWOD));
@@ -229,7 +229,7 @@ public class CharacterFragment extends Fragment implements Toolbar.OnMenuItemCli
 
     //Game-specific subcategory selected
     @Subscribe
-    public void onGridTileClicked(TileGridItemClickedEvent event) {
+    public void onGridTileClicked(SplatClickedEvent event) {
         String eName = event.eName;
         if (event.left) {
             //Choose the left category
