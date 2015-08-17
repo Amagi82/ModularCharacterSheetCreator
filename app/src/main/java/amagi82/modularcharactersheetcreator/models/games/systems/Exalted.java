@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.games.Splat;
 
-public class Exalted extends GameSys {
+public class Exalted extends GameSystem {
 
     private boolean isCaste = true;
 

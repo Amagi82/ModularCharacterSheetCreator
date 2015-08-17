@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.games.Splat;
 
-public class Trinity extends GameSys{
+public class Trinity extends GameSystem {
     @TrinityAge private int trinityAge;
 
     public Trinity() {

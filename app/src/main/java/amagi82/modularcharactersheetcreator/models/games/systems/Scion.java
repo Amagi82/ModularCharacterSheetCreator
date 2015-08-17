@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.games.Splat;
 
-public class Scion extends GameSys{
+public class Scion extends GameSystem {
 
     public Scion() {
         super();

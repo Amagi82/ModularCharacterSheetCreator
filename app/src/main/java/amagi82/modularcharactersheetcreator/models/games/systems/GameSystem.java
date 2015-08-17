@@ -2,25 +2,27 @@ package amagi82.modularcharactersheetcreator.models.games.systems;
 
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
-import amagi82.modularcharactersheetcreator.App;
+import amagi82.modularcharactersheetcreator.models.games.Game;
+import amagi82.modularcharactersheetcreator.models.games.Splat;
 
-public abstract class GameSys {
+import static amagi82.modularcharactersheetcreator.App.NONE;
+import static amagi82.modularcharactersheetcreator.models.games.Game.DEFAULT;
 
-    @StringRes protected int gameTitle = App.NONE;
-    @StringRes protected int leftTitle = App.NONE;
-    @StringRes protected int rightTitle = App.NONE; //Note: some titles change based on category. Always call rightTitle after listRight.
+public abstract class GameSystem {
+
+    @StringRes protected int gameTitle = NONE;
+    @StringRes protected int leftTitle = NONE;
+    @StringRes protected int rightTitle = NONE; //Note: some titles change based on category. Always call rightTitle after listRight.
     protected boolean isArchetypeLeft = true;
-    @DrawableRes protected int gameDrawable = App.NONE;
-    @ColorRes protected int gameColor = App.NONE; //Used in the list of characters @MainAdapter now.
-    @GameCategory protected int gameCategory = DEFAULT;
+    @DrawableRes protected int gameDrawable = NONE;
+    @ColorRes protected int gameColor = NONE; //Used in the list of characters @MainAdapter now.
+    @Game.Category protected int gameCategory = DEFAULT;
+    protected boolean overrideLeft = false; //With CVampire, Sect must be known to determine if Clan is antitribu.
 
     public abstract List<Splat> getListLeft(@Nullable Splat splat);
 
@@ -84,10 +86,16 @@ public abstract class GameSys {
         this.gameCategory = gameCategory;
     }
 
-    @IntDef({DEFAULT, CWOD, NWOD})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface GameCategory {}
-    public static final int DEFAULT = 0;
-    public static final int CWOD = 1;
-    public static final int NWOD = 2;
+    public boolean isOverrideLeft() {
+        return overrideLeft;
+    }
+
+    public void setOverrideLeft(boolean overrideLeft) {
+        this.overrideLeft = overrideLeft;
+    }
+
+    public Splat getOverriddenLeft(Splat left, Splat right){
+        return null;
+    }
+
 }

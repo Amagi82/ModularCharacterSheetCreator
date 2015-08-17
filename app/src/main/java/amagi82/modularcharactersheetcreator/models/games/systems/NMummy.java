@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.games.Game;
+import amagi82.modularcharactersheetcreator.models.games.Splat;
 
-public class NMummy extends GameSys {
+public class NMummy extends GameSystem {
 
     public NMummy() {
         super();
@@ -16,7 +18,7 @@ public class NMummy extends GameSys {
         this.rightTitle = R.string.guild;
         this.gameDrawable = R.drawable.title_mummy_curse;
         this.gameColor = R.color.nwod_mummy;
-        this.gameCategory = NWOD;
+        this.gameCategory = Game.NWOD;
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {

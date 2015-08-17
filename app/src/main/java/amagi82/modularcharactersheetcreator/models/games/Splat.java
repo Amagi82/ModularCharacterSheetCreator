@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.models.games.systems;
+package amagi82.modularcharactersheetcreator.models.games;
 
 import android.support.annotation.StringRes;
 
@@ -6,6 +6,9 @@ import amagi82.modularcharactersheetcreator.R;
 
 import static amagi82.modularcharactersheetcreator.App.NONE;
 
+/*
+    Splats are a generic term for factions or groups in the Storyteller/Storytelling system. Also known as "character axis".
+ */
 public class Splat {
     @StringRes private int title;
     @StringRes private int url;
