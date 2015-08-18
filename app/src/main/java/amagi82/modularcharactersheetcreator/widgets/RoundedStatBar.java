@@ -14,8 +14,8 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.widget.RatingBar;
 
-import amagi82.modularcharactersheetcreator.App;
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.activities.MainActivity;
 
 public class RoundedStatBar extends RatingBar {
 
@@ -68,7 +68,7 @@ public class RoundedStatBar extends RatingBar {
 
         if (getRating() < ratingMin) setRating(ratingMin);
 
-        if(colorBackground != App.NONE){
+        if(colorBackground != MainActivity.NONE){
             GradientDrawable gradient = new GradientDrawable();
             gradient.setShape(GradientDrawable.RECTANGLE);
             gradient.setColor(colorBackground);
@@ -163,7 +163,7 @@ public class RoundedStatBar extends RatingBar {
             ratingMin = a.getInt(R.styleable.RoundedStatBar_rsb_ratingMin, 1);
             ratingBase = a.getInt(R.styleable.RoundedStatBar_rsb_ratingBase, (int) getRating());
             ratingMax = a.getInt(R.styleable.RoundedStatBar_rsb_ratingMax, getNumStars());
-            colorBackground = a.getColor(R.styleable.RoundedStatBar_rsb_colorBackground, App.NONE);
+            colorBackground = a.getColor(R.styleable.RoundedStatBar_rsb_colorBackground, MainActivity.NONE);
             colorFill = a.getColor(R.styleable.RoundedStatBar_rsb_colorFill, getResources().getColor(R.color.round_stat_bar_fill));
             colorFillSecondary = a.getColor(R.styleable.RoundedStatBar_rsb_colorFillSecondary, getResources().getColor(R.color.round_stat_bar_secondary));
             colorBorder = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorder, getResources().getColor(R.color.round_stat_bar_border));

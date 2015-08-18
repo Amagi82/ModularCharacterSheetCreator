@@ -46,7 +46,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static amagi82.modularcharactersheetcreator.App.NONE;
+import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
 import static amagi82.modularcharactersheetcreator.activities.MainActivity.CHARACTER;
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 import static android.view.View.GONE;

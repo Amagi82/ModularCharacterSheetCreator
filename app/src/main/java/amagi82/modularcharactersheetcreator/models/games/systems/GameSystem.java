@@ -8,7 +8,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.models.games.Splat;
 
-import static amagi82.modularcharactersheetcreator.App.NONE;
+import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
 
 public abstract class GameSystem {
 

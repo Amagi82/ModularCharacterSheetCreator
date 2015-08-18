@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String EDIT_MODE = "EditMode";
     public static final String CHARACTER = "Character";
     public static final int REQUEST_CODE = 50;
+    public static final int NONE = -1;
     private FragmentManager fm = getSupportFragmentManager();
     private List<GameCharacter> characters;
     private GameCharacter currentCharacter;

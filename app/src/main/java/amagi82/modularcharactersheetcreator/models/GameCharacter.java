@@ -16,7 +16,7 @@ import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
 import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 
-import static amagi82.modularcharactersheetcreator.App.NONE;
+import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
 
 @JsonObject
 public class GameCharacter {

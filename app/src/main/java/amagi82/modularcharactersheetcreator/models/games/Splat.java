@@ -7,7 +7,7 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
 
 import amagi82.modularcharactersheetcreator.R;
 
-import static amagi82.modularcharactersheetcreator.App.NONE;
+import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
 
 /*
     Splats are a generic term for factions or groups in the Storyteller/Storytelling system. Also known as "character axis".
