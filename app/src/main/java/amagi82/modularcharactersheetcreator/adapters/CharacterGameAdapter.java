@@ -19,8 +19,8 @@ public class CharacterGameAdapter extends RecyclerView.Adapter<TileViewHolder> {
 
         systems = new SortedList<>(GameSystem.class, new SortedList.Callback<GameSystem>() {
             @Override public int compare(GameSystem o1, GameSystem o2) {
-                if (o1.getPosition() > o2.getPosition()) return 1;
-                if (o1.getPosition() < o2.getPosition()) return -1;
+//                if (o1.getPosition() > o2.getPosition()) return 1;
+//                if (o1.getPosition() < o2.getPosition()) return -1;
                 return 0;
             }
 
@@ -73,9 +73,7 @@ public class CharacterGameAdapter extends RecyclerView.Adapter<TileViewHolder> {
     }
 
     public void addItems(List<GameSystem> list) {
-        systems.beginBatchedUpdates();
         systems.addAll(list);
-        systems.endBatchedUpdates();
     }
 
     public void removeItems(List<GameSystem> list){

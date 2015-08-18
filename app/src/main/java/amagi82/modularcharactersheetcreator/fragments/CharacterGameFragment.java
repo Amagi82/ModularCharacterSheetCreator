@@ -49,13 +49,11 @@ public class CharacterGameFragment extends Fragment {
             if(!cWodDisplayed) adapter.addItems(game.getList(CWOD));
             else adapter.removeItems(game.getList(CWOD));
             cWodDisplayed = !cWodDisplayed;
-        }
-        else if (event.system.getGameTitle() == R.string.nwod) {
+        } else if (event.system.getGameTitle() == R.string.nwod) {
             if(!nWodDisplayed) adapter.addItems(game.getList(NWOD));
             else adapter.removeItems(game.getList(NWOD));
             nWodDisplayed = !nWodDisplayed;
-        }
-        else BUS.getBus().post(new GameSystemEvent(event.system));
+        } else BUS.getBus().post(new GameSystemEvent(event.system));
     }
 
     @Override

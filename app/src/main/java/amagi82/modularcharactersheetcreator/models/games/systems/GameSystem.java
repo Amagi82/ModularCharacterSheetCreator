@@ -17,7 +17,7 @@ public abstract class GameSystem {
     @StringRes protected int gameTitle = NONE;
     @StringRes protected int leftTitle = NONE;
     @StringRes protected int rightTitle = NONE; //Note: some titles change based on category. Always call rightTitle after listRight.
-    protected boolean isArchetypeLeft = true;
+    protected boolean isArchetypeLeft = true; //Archetype is displayed under the game system in the list of characters
     @DrawableRes protected int gameDrawable = NONE;
     @ColorRes protected int gameColor = NONE; //Used in the list of characters @MainAdapter now.
     @Game.Category protected int gameCategory = Game.DEFAULT;

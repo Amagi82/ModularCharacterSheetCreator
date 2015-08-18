@@ -1,6 +1,5 @@
 package amagi82.modularcharactersheetcreator.activities;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -37,7 +36,6 @@ import amagi82.modularcharactersheetcreator.templates.Template;
 import amagi82.modularcharactersheetcreator.utils.Logan;
 
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
-
 
 public class MainActivity extends AppCompatActivity {
 

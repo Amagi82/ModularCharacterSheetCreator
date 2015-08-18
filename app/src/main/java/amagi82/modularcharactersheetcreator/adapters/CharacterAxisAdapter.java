@@ -30,8 +30,6 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolde
         res = fragment.getResources();
         splats = new SortedList<>(Splat.class, new SortedList.Callback<Splat>() {
             @Override public int compare(Splat o1, Splat o2) {
-                if (o1.getPosition() > o2.getPosition()) return 1;
-                if (o1.getPosition() < o2.getPosition()) return -1;
                 return 0;
             }
 
@@ -102,23 +100,7 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolde
     }
 
     public void addAll(List<Splat> list) {
-        int i = splats.size();
-        splats.beginBatchedUpdates();
-        for (Splat splat : list) {
-            splat.setPosition(i);
-            i++;
-            splats.add(splat);
-        }
-        splats.endBatchedUpdates();
-    }
-
-    public void remove(String eName) {
-        for (int i = splats.size() - 1; i >= 0; i--) {
-            if (splats.get(i).geteName().equals(eName)) {
-                removeItemAt(i);
-                return;
-            }
-        }
+        splats.addAll(list);
     }
 
     public void removeItemAt(int index) {
@@ -126,9 +108,7 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolde
     }
 
     public void clear() {
-        splats.beginBatchedUpdates();
-        while (splats.size() > 0) splats.removeItemAt(splats.size() - 1);
-        splats.endBatchedUpdates();
+        splats.clear();
     }
 
     public void replaceAll(List<Splat> list) {
