@@ -19,7 +19,8 @@ public class Trinity extends GameSystem {
         this.gameTitle = R.string.trinity;
         this.leftTitle = R.string.age;
         this.isArchetypeLeft = false;
-        this.gameDrawable = R.drawable.title_trinity_continuum;
+        this.gameUrl = R.string.url_game_trinity;
+        this.splashUrl = R.string.url_splash_trinity;
         this.gameColor = R.color.trinity;
     }
 

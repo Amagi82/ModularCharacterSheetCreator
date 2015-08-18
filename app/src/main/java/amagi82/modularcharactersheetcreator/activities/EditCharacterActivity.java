@@ -34,9 +34,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.events.GameSystemEvent;
 import amagi82.modularcharactersheetcreator.events.LeftAxisEvent;
 import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
+import amagi82.modularcharactersheetcreator.events.TileGameClickedEvent;
 import amagi82.modularcharactersheetcreator.fragments.CharacterAxisFragment;
 import amagi82.modularcharactersheetcreator.fragments.CharacterGameFragment;
 import amagi82.modularcharactersheetcreator.fragments.ImageFragment;
@@ -158,10 +158,10 @@ public class EditCharacterActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void onGameSystemChosen(GameSystemEvent event) {
-        character.setGameTitle(event.gameSystem.getGameTitle());
+    public void onGameSystemSelected(TileGameClickedEvent event) {
+        character.setGameTitle(event.system.getGameTitle());
         bGameSystem.setVisibility(VISIBLE);
-        bGameSystem.setText(event.gameSystem.getGameTitle());
+        bGameSystem.setText(event.system.getGameTitle());
         chooseLeftCategory();
     }
 

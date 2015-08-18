@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
 
 public class CVampire extends GameSystem {
@@ -16,9 +15,9 @@ public class CVampire extends GameSystem {
         this.gameTitle = R.string.cwod_vampire;
         this.leftTitle = R.string.clan;
         this.rightTitle = R.string.sect;
-        this.gameDrawable = R.drawable.title_vampire_masquerade;
+        this.gameUrl = R.string.url_game_cwod_vampire;
+        this.splashUrl = R.string.url_splash_cwod_vampire;
         this.gameColor = R.color.cwod_vampire;
-        this.gameCategory = Game.CWOD;
         this.overrideLeft = true;
     }
 

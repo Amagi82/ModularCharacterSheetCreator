@@ -16,7 +16,8 @@ public class Scion extends GameSystem {
         this.leftTitle = R.string.volume;
         this.rightTitle = R.string.pantheon;
         this.isArchetypeLeft = false;
-        this.gameDrawable = R.drawable.title_scion;
+        this.gameUrl = R.string.url_game_scion;
+        this.splashUrl = R.string.url_splash_scion;
         this.gameColor = R.color.scion;
     }
 

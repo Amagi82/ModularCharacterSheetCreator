@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
 
 public class NWerewolf extends GameSystem {
@@ -16,9 +15,9 @@ public class NWerewolf extends GameSystem {
         this.gameTitle = R.string.nwod_werewolf;
         this.leftTitle = R.string.tribe;
         this.rightTitle = R.string.auspice;
-        this.gameDrawable = R.drawable.title_werewolf_forsaken;
+        this.gameUrl = R.string.url_game_nwod_werewolf;
+        this.splashUrl = R.string.url_splash_nwod_werewolf;
         this.gameColor = R.color.nwod_werewolf;
-        this.gameCategory = Game.NWOD;
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {

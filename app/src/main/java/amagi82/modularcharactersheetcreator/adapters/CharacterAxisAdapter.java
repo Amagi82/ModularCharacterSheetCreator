@@ -12,12 +12,12 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.adapters.viewholders.TileGridViewHolder;
+import amagi82.modularcharactersheetcreator.adapters.viewholders.TileViewHolder;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
 import amagi82.modularcharactersheetcreator.utils.Icon;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 
-public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolder> {
+public class CharacterAxisAdapter extends RecyclerView.Adapter<TileViewHolder> {
 
     private Fragment fragment;
     private Resources res;
@@ -65,12 +65,12 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileGridViewHolde
     }
 
     @Override
-    public TileGridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new TileGridViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_grid, parent, false));
+    public TileViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new TileViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_grid, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(TileGridViewHolder vh, int position) {
+    public void onBindViewHolder(TileViewHolder vh, int position) {
         Splat splat = splats.get(position);
         Glide.with(fragment).load(new Icon(res, splat, gridImageSize).getUrl()).into(vh.imageView);
         vh.tvTitle.setText(splat.getTitle());

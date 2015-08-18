@@ -17,7 +17,8 @@ public class Exalted extends GameSystem {
         this.gameTitle = R.string.exalted;
         this.leftTitle = R.string.exalt;
         this.rightTitle = R.string.caste;
-        this.gameDrawable = R.drawable.title_exalted;
+        this.gameUrl = R.string.url_game_exalted;
+        this.splashUrl = R.string.url_splash_exalted;
         this.gameColor = R.color.exalted;
     }
 

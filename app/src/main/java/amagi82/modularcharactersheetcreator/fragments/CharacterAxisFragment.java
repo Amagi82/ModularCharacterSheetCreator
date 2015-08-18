@@ -13,10 +13,12 @@ import com.squareup.otto.Subscribe;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.activities.EditCharacterActivity;
 import amagi82.modularcharactersheetcreator.adapters.CharacterAxisAdapter;
+import amagi82.modularcharactersheetcreator.adapters.CharacterGameAdapter;
 import amagi82.modularcharactersheetcreator.events.LeftAxisEvent;
 import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
-import amagi82.modularcharactersheetcreator.events.SplatClickedEvent;
+import amagi82.modularcharactersheetcreator.events.TileSplatClickedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
 import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 import butterknife.Bind;
@@ -50,7 +52,7 @@ public class CharacterAxisFragment extends Fragment{
     }
 
     @Subscribe
-    public void onItemSelected(SplatClickedEvent event) {
+    public void onItemSelected(TileSplatClickedEvent event) {
         Splat splat = event.splat;
         if(splat.isEndPoint()) BUS.getBus().post(event.left? new LeftAxisEvent(splat) : new RightAxisEvent(splat));
         else adapter.addAll(event.left? system.getListLeft(splat) : system.getListRight(splat));

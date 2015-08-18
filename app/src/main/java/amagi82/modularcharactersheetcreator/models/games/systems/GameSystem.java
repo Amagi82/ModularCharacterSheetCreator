@@ -1,13 +1,11 @@
 package amagi82.modularcharactersheetcreator.models.games.systems;
 
 import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
 import java.util.List;
 
-import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
 
 import static amagi82.modularcharactersheetcreator.App.NONE;
@@ -17,10 +15,10 @@ public abstract class GameSystem {
     @StringRes protected int gameTitle = NONE;
     @StringRes protected int leftTitle = NONE;
     @StringRes protected int rightTitle = NONE; //Note: some titles change based on category. Always call rightTitle after listRight.
-    protected boolean isArchetypeLeft = true; //Archetype is displayed under the game system in the list of characters
-    @DrawableRes protected int gameDrawable = NONE;
+    @StringRes protected int gameUrl = NONE;
+    @StringRes protected int splashUrl = NONE;
     @ColorRes protected int gameColor = NONE; //Used in the list of characters @MainAdapter now.
-    @Game.Category protected int gameCategory = Game.DEFAULT;
+    protected boolean isArchetypeLeft = true; //Archetype is displayed under the game system in the list of characters
     protected boolean overrideLeft = false; //With CVampire, Sect must be known to determine if Clan is antitribu.
 
     public abstract List<Splat> getListLeft(@Nullable Splat splat);
@@ -61,12 +59,20 @@ public abstract class GameSystem {
         this.isArchetypeLeft = isArchetypeLeft;
     }
 
-    public int getGameDrawable() {
-        return gameDrawable;
+    public int getGameUrl() {
+        return gameUrl;
     }
 
-    public void setGameDrawable(int gameDrawable) {
-        this.gameDrawable = gameDrawable;
+    public void setGameUrl(int gameUrl) {
+        this.gameUrl = gameUrl;
+    }
+
+    public int getSplashUrl() {
+        return splashUrl;
+    }
+
+    public void setSplashUrl(int splashUrl) {
+        this.splashUrl = splashUrl;
     }
 
     public int getGameColor() {
@@ -75,14 +81,6 @@ public abstract class GameSystem {
 
     public void setGameColor(int gameColor) {
         this.gameColor = gameColor;
-    }
-
-    public int getGameCategory() {
-        return gameCategory;
-    }
-
-    public void setGameCategory(int gameCategory) {
-        this.gameCategory = gameCategory;
     }
 
     public boolean isOverrideLeft() {
@@ -96,5 +94,4 @@ public abstract class GameSystem {
     public Splat getOverriddenLeft(Splat left, Splat right){
         return null;
     }
-
 }

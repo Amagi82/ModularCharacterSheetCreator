@@ -1,9 +1,13 @@
 package amagi82.modularcharactersheetcreator.adapters;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -13,9 +17,11 @@ import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 
 public class CharacterGameAdapter extends RecyclerView.Adapter<TileViewHolder> {
 
+    private Fragment fragment;
     private SortedList<GameSystem> systems;
 
-    public CharacterGameAdapter() {
+    public CharacterGameAdapter(Fragment fragment) {
+        this.fragment = fragment;
 
         systems = new SortedList<>(GameSystem.class, new SortedList.Callback<GameSystem>() {
             @Override public int compare(GameSystem o1, GameSystem o2) {
@@ -52,14 +58,14 @@ public class CharacterGameAdapter extends RecyclerView.Adapter<TileViewHolder> {
 
     @Override
     public TileViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new TileViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_game_system, parent, false));
+        return new TileViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_grid, parent, false));
     }
 
     @Override
     public void onBindViewHolder(TileViewHolder vh, int position) {
-        GameSystem choice = systems.get(position);
-        vh.imageView.setImageResource(choice.getGameDrawable());
-        vh.tvTitle.setText(choice.getGameTitle());
+        GameSystem system = systems.get(position);
+        Glide.with(fragment).load(system.getGameUrl()).into(vh.imageView);
+        vh.tvTitle.setVisibility(View.GONE);
         vh.system = systems.get(position);
     }
 
@@ -72,13 +78,7 @@ public class CharacterGameAdapter extends RecyclerView.Adapter<TileViewHolder> {
         return systems.get(position);
     }
 
-    public void addItems(List<GameSystem> list) {
+    public void addAll(List<GameSystem> list) {
         systems.addAll(list);
-    }
-
-    public void removeItems(List<GameSystem> list){
-        systems.beginBatchedUpdates();
-        for(GameSystem system : list) systems.remove(system);
-        systems.endBatchedUpdates();
     }
 }

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
 
 public class CMage extends GameSystem {
@@ -21,9 +20,9 @@ public class CMage extends GameSystem {
         this.gameTitle = R.string.cwod_mage;
         this.leftTitle = R.string.faction;
         this.isArchetypeLeft = false;
-        this.gameDrawable = R.drawable.title_mage_ascension;
+        this.gameUrl = R.string.url_game_cwod_mage;
+        this.splashUrl = R.string.url_splash_cwod_mage;
         this.gameColor = R.color.cwod_mage;
-        this.gameCategory = Game.CWOD;
     }
 
     @Override public int getRightTitle() {

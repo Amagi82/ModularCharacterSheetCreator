@@ -4,17 +4,17 @@
 
     <string formatted="false" name="url_default">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/Dark%20Ages~d10.png</string>
 
-    <string formatted="false" name="url_book_cwod_vampire">http://www.drivethrurpg.com/images/4261/category20632.jpg</string>
-    <string formatted="false" name="url_book_cwod_werewolf">http://www.drivethrurpg.com/images/4261/category20631.jpg</string>
-    <string formatted="false" name="url_book_cwod_mage">http://www.drivethrurpg.com/images/4261/category20635.jpg</string>
-    <string formatted="false" name="url_book_cwod_wraith">http://www.drivethrurpg.com/images/1/category43.jpg</string>
-    <string formatted="false" name="url_book_nwod_vampire">http://www.drivethrurpg.com/images/4261/category20642.jpg</string>
-    <string formatted="false" name="url_book_nwod_werewolf">http://www.drivethrurpg.com/images/4261/category8592.jpg</string>
-    <string formatted="false" name="url_book_nwod_demon">http://www.drivethrurpg.com/images/4261/category20629.jpg</string>
-    <string formatted="false" name="url_book_nwod_mummy">http://www.drivethrurpg.com/images/4261/category20630.jpg</string>
-    <string formatted="false" name="url_book_exalted">http://www.drivethrurpg.com/images/4261/category20637.jpg</string>
-    <string formatted="false" name="url_book_scion">http://www.drivethrurpg.com/images/4261/category8569.jpg</string>
-    <string formatted="false" name="url_book_trinity">http://www.drivethrurpg.com/images/4261/category8567.jpg</string>
+    <string formatted="false" name="url_game_cwod_vampire">http://www.drivethrurpg.com/images/4261/category20632.jpg</string>
+    <string formatted="false" name="url_game_cwod_werewolf">http://www.drivethrurpg.com/images/4261/category20631.jpg</string>
+    <string formatted="false" name="url_game_cwod_mage">http://www.drivethrurpg.com/images/4261/category20635.jpg</string>
+    <string formatted="false" name="url_game_cwod_wraith">http://www.drivethrurpg.com/images/1/category43.jpg</string>
+    <string formatted="false" name="url_game_nwod_vampire">http://www.drivethrurpg.com/images/4261/category20642.jpg</string>
+    <string formatted="false" name="url_game_nwod_werewolf">http://www.drivethrurpg.com/images/4261/category8592.jpg</string>
+    <string formatted="false" name="url_game_nwod_demon">http://www.drivethrurpg.com/images/4261/category20629.jpg</string>
+    <string formatted="false" name="url_game_nwod_mummy">http://www.drivethrurpg.com/images/4261/category20630.jpg</string>
+    <string formatted="false" name="url_game_exalted">http://www.drivethrurpg.com/images/4261/category20637.jpg</string>
+    <string formatted="false" name="url_game_scion">http://www.drivethrurpg.com/images/4261/category8569.jpg</string>
+    <string formatted="false" name="url_game_trinity">http://www.drivethrurpg.com/images/4261/category8567.jpg</string>
 
     <string formatted="false" name="url_splash_cwod_vampire">http://theonyxpath.com/wp-content/uploads/2015/03/LandingPage__0004_V20.jpg</string>
     <string formatted="false" name="url_splash_cwod_werewolf">http://theonyxpath.com/wp-content/uploads/2015/03/LandingPage__0003_W20.jpg</string>

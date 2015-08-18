@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
 
 public class CWraith extends GameSystem {
@@ -16,9 +15,9 @@ public class CWraith extends GameSystem {
         this.gameTitle = R.string.cwod_wraith;
         this.leftTitle = R.string.legion;
         this.rightTitle = R.string.guild;
-        this.gameDrawable = R.drawable.title_wraith_oblivion;
+        this.gameUrl = R.string.url_game_cwod_wraith;
+        this.splashUrl = R.string.url_splash_cwod_wraith;
         this.gameColor = R.color.cwod_wraith;
-        this.gameCategory = Game.CWOD;
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
