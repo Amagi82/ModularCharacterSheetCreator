@@ -4,6 +4,30 @@
 
     <string formatted="false" name="url_default">http://theonyxpath.com/avatar/Classic%20World%20of%20Darkness/Dark%20Ages~d10.png</string>
 
+    <string formatted="false" name="url_book_cwod_vampire">http://www.drivethrurpg.com/images/4261/category20632.jpg</string>
+    <string formatted="false" name="url_book_cwod_werewolf">http://www.drivethrurpg.com/images/4261/category20631.jpg</string>
+    <string formatted="false" name="url_book_cwod_mage">http://www.drivethrurpg.com/images/4261/category20635.jpg</string>
+    <string formatted="false" name="url_book_cwod_wraith">http://www.drivethrurpg.com/images/1/category43.jpg</string>
+    <string formatted="false" name="url_book_nwod_vampire">http://www.drivethrurpg.com/images/4261/category20642.jpg</string>
+    <string formatted="false" name="url_book_nwod_werewolf">http://www.drivethrurpg.com/images/4261/category8592.jpg</string>
+    <string formatted="false" name="url_book_nwod_demon">http://www.drivethrurpg.com/images/4261/category20629.jpg</string>
+    <string formatted="false" name="url_book_nwod_mummy">http://www.drivethrurpg.com/images/4261/category20630.jpg</string>
+    <string formatted="false" name="url_book_exalted">http://www.drivethrurpg.com/images/4261/category20637.jpg</string>
+    <string formatted="false" name="url_book_scion">http://www.drivethrurpg.com/images/4261/category8569.jpg</string>
+    <string formatted="false" name="url_book_trinity">http://www.drivethrurpg.com/images/4261/category8567.jpg</string>
+
+    <string formatted="false" name="url_splash_cwod_vampire">http://theonyxpath.com/wp-content/uploads/2015/03/LandingPage__0004_V20.jpg</string>
+    <string formatted="false" name="url_splash_cwod_werewolf">http://theonyxpath.com/wp-content/uploads/2015/03/LandingPage__0003_W20.jpg</string>
+    <string formatted="false" name="url_splash_cwod_mage">http://theonyxpath.com/wp-content/uploads/2015/02/LandingPage__0002_M20.jpg</string>
+    <string formatted="false" name="url_splash_cwod_wraith">http://theonyxpath.com/wp-content/uploads/2015/03/LandingPage__0001_Wr20.jpg</string>
+    <string formatted="false" name="url_splash_nwod_vampire">http://theonyxpath.com/wp-content/uploads/2015/02/LandingPage__0013_VtR.jpg</string>
+    <string formatted="false" name="url_splash_nwod_werewolf">http://theonyxpath.com/wp-content/uploads/2015/02/LandingPage__0012_WtF.jpg</string>
+    <string formatted="false" name="url_splash_nwod_demon">http://theonyxpath.com/wp-content/uploads/2015/03/LandingPage__0005_DtD.jpg</string>
+    <string formatted="false" name="url_splash_nwod_mummy">http://theonyxpath.com/wp-content/uploads/2015/02/LandingPage__0006_MtC.jpg</string>
+    <string formatted="false" name="url_splash_exalted">http://theonyxpath.com/wp-content/uploads/2015/03/LandingPage__0018_Ex3.jpg</string>
+    <string formatted="false" name="url_splash_scion">http://theonyxpath.com/wp-content/uploads/2015/03/LandingPage__0021_ScionOrigins.jpg</string>
+    <string formatted="false" name="url_splash_trinity">http://theonyxpath.com/wp-content/uploads/2015/05/LandingPage__0015_Trinity.jpg</string>
+
     <string formatted="false" name="url_cwod_vampire_clan_ahrimanes">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Ahrimanes.png</string>
     <string formatted="false" name="url_cwod_vampire_clan_anda">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Anda.png</string>
     <string formatted="false" name="url_cwod_vampire_clan_baali">http://theonyxpath.com/avatar/20th%20Anniversary/2011~Vampire%20The%20Masquerade/Bloodline~Baali.png</string>
