@@ -1,7 +1,6 @@
 package amagi82.modularcharactersheetcreator.templates;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +8,7 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
-import amagi82.modularcharactersheetcreator.models.games.systems.CVampire;
-import amagi82.modularcharactersheetcreator.models.games.Game;
+import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 import amagi82.modularcharactersheetcreator.models.modules.BloodPoolModule;
 import amagi82.modularcharactersheetcreator.models.modules.HeaderModule;
 import amagi82.modularcharactersheetcreator.models.modules.HealthModule;
@@ -23,42 +21,42 @@ public class Template {
 
     private Context context;
     private GameCharacter character;
-    private Game.System system;
+    private GameSystem system;
     private List<Module> modules;
     private int spanCount = 3;
 
     public Template(Context context, GameCharacter character) {
         this.context = context;
         this.character = character;
-        system = character.getGameSystem();
+        //system = character.getGameSystem();
     }
 
     public Sheet createDefaultSheet(){
         modules = new ArrayList<>();
-        switch(system){
-            case CMAGE:
-                return createCMage();
-            case CVAMPIRE:
-                return createCVampire();
-            case CWEREWOLF:
-                return createCWerewolf();
-            case CWRAITH:
-                return createCWraith();
-            case NVAMPIRE:
-                return createNVampire();
-            case NWEREWOLF:
-                return createNWerewolf();
-            case NMUMMY:
-                return createNMummy();
-            case NDEMON:
-                return createNDemon();
-            case SCION:
-                return createScion();
-            case TRINITY:
-                return createTrinity();
-            case EXALTED:
-                return createExalted();
-        }
+//        switch(system){
+//            case CMAGE:
+//                return createCMage();
+//            case CVAMPIRE:
+//                return createCVampire();
+//            case CWEREWOLF:
+//                return createCWerewolf();
+//            case CWRAITH:
+//                return createCWraith();
+//            case NVAMPIRE:
+//                return createNVampire();
+//            case NWEREWOLF:
+//                return createNWerewolf();
+//            case NMUMMY:
+//                return createNMummy();
+//            case NDEMON:
+//                return createNDemon();
+//            case SCION:
+//                return createScion();
+//            case TRINITY:
+//                return createTrinity();
+//            case EXALTED:
+//                return createExalted();
+//        }
         return null;
     }
 
@@ -83,13 +81,13 @@ public class Template {
         addCWodAttributes();
         addCWodAbilities(R.array.CVampire_Talents, R.array.CVampire_Skills, R.array.CVampire_Knowledges);
         modules.add(new HeaderModule(getString(R.string.advantages), spanCount));
-        Log.i(null, "creating Vampire");
-        Log.i(null, "character: " + character.getName());
-        Log.i(null, "system: " + character.getGameSystem().getOnyx().getSystemName());
-        Log.i(null, "clan: "+character.getRight().geteName());
+//        Log.i(null, "creating Vampire");
+//        Log.i(null, "character: " + character.getName());
+//        Log.i(null, "system: " + character.getGameSystem().getOnyx().getSystemName());
+//        Log.i(null, "clan: "+character.getRight().geteName());
 
-        modules.add(new StatBlockModule(getArray(CVampire.Clan.valueOf(
-                character.getRight().geteName()).getDisciplineArrayId()), 0, 5, getString(R.string.disciplines)));
+//        modules.add(new StatBlockModule(getArray(CVampire.Clan.valueOf(
+//                character.getRight().geteName()).getDisciplineArrayId()), 0, 5, getString(R.string.disciplines)));
         modules.add(new StatBlockModule(null, 0, 5, getString(R.string.backgrounds)));
         modules.add(new StatBlockModule(getArray(R.array.CVampire_Virtues), 1, 5, getString(R.string.virtues)));
         modules.add(new HeaderModule(null, spanCount));
@@ -227,7 +225,8 @@ public class Template {
     }
 
     private String[] getDisciplines(){
-        return getArray(CVampire.Clan.valueOf(character.getGameSystem().getOnyx().getRight().geteName()).getDisciplineArrayId());
+        return null;
+        //return getArray(CVampire.Clan.valueOf(character.getGameSystem().getOnyx().getRight().geteName()).getDisciplineArrayId());
     }
 
     private void addBloodpool(){

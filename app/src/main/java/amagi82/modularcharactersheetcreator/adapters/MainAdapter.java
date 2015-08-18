@@ -69,12 +69,12 @@ public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
     @Override
     public void onBindViewHolder(final CharacterViewHolder vh, final int position) {
         final GameCharacter character = characters.get(position);
-        if (character.getPortraitUri() == null) vh.icon.setImageBitmap(new CircleIcon(res).createIcon(character.getName(), res.getColor(R.color.primary)));
-        else Glide.with(context).load(character.getPortraitUri()).centerCrop().into(vh.icon);
+        if (character.getImageUriPort() == null) vh.icon.setImageBitmap(new CircleIcon(res).createIcon(character.getName(), res.getColor(R.color.primary)));
+        else Glide.with(context).load(character.getImageUriPort()).centerCrop().into(vh.icon);
         vh.tvName.setText(character.getName());
         vh.tvArchetype.setText(character.getArchetype());
-        vh.tvGameSystem.setTextColor(res.getColor(character.getGameSystem().getColor()));
-        vh.tvGameSystem.setText(character.getGameSystem().getName());
+        vh.tvGameSystem.setTextColor(res.getColor(character.getGameSystem().getGameColor()));
+        vh.tvGameSystem.setText(character.getGameSystem().getGameTitle());
         vh.gameCharacter = characters.get(position);
     }
 

@@ -18,19 +18,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
-import amagi82.modularcharactersheetcreator.activities.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.activities.MainActivity;
 import amagi82.modularcharactersheetcreator.adapters.ViewPagerAdapter;
 import amagi82.modularcharactersheetcreator.events.EditCharacterEvent;
 import amagi82.modularcharactersheetcreator.events.ModuleAddedEvent;
 import amagi82.modularcharactersheetcreator.events.UpNavigationEvent;
-import amagi82.modularcharactersheetcreator.models.games.Choice;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.modules.HeaderModule;
-import amagi82.modularcharactersheetcreator.utils.Icon;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -64,17 +60,17 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         setColors();
         collapsingToolbar.setTitle(character.getName());
 
-        if(character.getPortraitUri() != null) {
-            Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
-            scrimTop.setVisibility(View.VISIBLE);
-            scrimBottom.setVisibility(View.VISIBLE);
-        }
-        Glide.with(this).load(getUrl(character.getLeft())).centerCrop().into(iconLeft);
-        tvIconLeft.setText(character.getLeft().getTitle());
-        if(character.getGameSystem().getOnyx().hasRight()) {
-            tvIconRight.setText(character.getRight().getTitle());
-            Glide.with(this).load(getUrl(character.getRight())).centerCrop().into(iconRight);
-        }
+//        if(character.getPortraitUri() != null) {
+//            Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
+//            scrimTop.setVisibility(View.VISIBLE);
+//            scrimBottom.setVisibility(View.VISIBLE);
+//        }
+//        Glide.with(this).load(getUrl(character.getLeft())).centerCrop().into(iconLeft);
+//        tvIconLeft.setText(character.getLeft().getTitle());
+//        if(character.getGameSystem().getOnyx().hasRight()) {
+//            tvIconRight.setText(character.getRight().getTitle());
+//            Glide.with(this).load(getUrl(character.getRight())).centerCrop().into(iconRight);
+//        }
 
         adapter = new ViewPagerAdapter(getFragmentManager(), character.getSheets());
         viewPager.setAdapter(adapter);
@@ -126,9 +122,9 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         BUS.getBus().post(new ModuleAddedEvent(module));
     }
 
-    private String getUrl(Choice choice){
-        return new Icon(getResources(), choice).getUrl();
-    }
+//    private String getUrl(Choice choice){
+//        return new Icon(getResources(), choice).getUrl();
+//    }
 
     public GameCharacter getCharacter(){
         return character;
