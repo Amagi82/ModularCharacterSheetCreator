@@ -2,7 +2,8 @@
 <resources>
     <color name="primary">#8098B2</color>
     <color name="primary_dark">#607286</color>
-    <color name="accent">#C0CCD9</color>
+    <color name="accent">#607286</color>
+    <color name="accent_light">#C0CCD9</color>
     <color name="accent_dark">#607286</color>
 
     <color name="white">#FFF</color>
