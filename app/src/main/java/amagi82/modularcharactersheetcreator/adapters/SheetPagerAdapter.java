@@ -13,12 +13,12 @@ import java.util.Map;
 import amagi82.modularcharactersheetcreator.fragments.TabFragment;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 
-public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+public class SheetPagerAdapter extends FragmentStatePagerAdapter {
 
     private List<Sheet> sheets = new ArrayList<>();
     private Map<Sheet, Fragment> map = new HashMap<>();
 
-    public ViewPagerAdapter(FragmentManager fm, List<Sheet> sheets) {
+    public SheetPagerAdapter(FragmentManager fm, List<Sheet> sheets) {
         super(fm);
         this.sheets = sheets;
     }

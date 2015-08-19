@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.activities.MainActivity;
-import amagi82.modularcharactersheetcreator.adapters.ViewPagerAdapter;
+import amagi82.modularcharactersheetcreator.adapters.SheetPagerAdapter;
 import amagi82.modularcharactersheetcreator.events.EditCharacterEvent;
 import amagi82.modularcharactersheetcreator.events.ModuleAddedEvent;
 import amagi82.modularcharactersheetcreator.events.UpNavigationEvent;
@@ -50,7 +50,7 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
     @Bind(R.id.viewpager) ViewPager viewPager;
     @Bind(R.id.fab) FloatingActionButton fab;
     private GameCharacter character;
-    private ViewPagerAdapter adapter;
+    private SheetPagerAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,7 +72,7 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
 //            Glide.with(this).load(getUrl(character.getRight())).centerCrop().into(iconRight);
 //        }
 
-        adapter = new ViewPagerAdapter(getFragmentManager(), character.getSheets());
+        adapter = new SheetPagerAdapter(getFragmentManager(), character.getSheets());
         viewPager.setAdapter(adapter);
         tabLayout.setTabsFromPagerAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

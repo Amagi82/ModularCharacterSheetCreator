@@ -63,10 +63,10 @@ public class CharacterGameAdapter extends RecyclerView.Adapter<TileViewHolder> {
 
     @Override
     public void onBindViewHolder(TileViewHolder vh, int position) {
-        GameSystem system = systems.get(position);
-        Glide.with(fragment).load(system.getGameUrl()).into(vh.imageView);
+        GameSystem system = get(position);
+        Glide.with(fragment).load(fragment.getResources().getString(system.getGameUrl())).into(vh.imageView);
         vh.tvTitle.setVisibility(View.GONE);
-        vh.system = systems.get(position);
+        vh.system = system;
     }
 
     @Override

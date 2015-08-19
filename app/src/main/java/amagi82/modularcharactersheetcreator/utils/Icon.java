@@ -24,15 +24,11 @@ public class Icon {
 
     public String getUrl() {
         //The 20th Anniversary images are 500x500px, and all others are 200x200px. Request smaller images if needed.
-        String url = getString(splat.getUrl());
+        String url = res.getString(splat.getUrl());
         boolean big = url.contains("20th");
         if ((!big && size > 200) || (big && size > 500)) return url;
         int pos = url.lastIndexOf("/") + 1;
         Log.i(null, "Stringbuilder result = "+new StringBuilder(url).insert(pos, ("img.php?h=" + size + "+&w=" + size + "+&img=")).toString());
         return new StringBuilder(url).insert(pos, ("img.php?h=" + size + "+&w=" + size + "+&img=")).toString();
-    }
-
-    private String getString(int resId) {
-        return res.getString(resId);
     }
 }
