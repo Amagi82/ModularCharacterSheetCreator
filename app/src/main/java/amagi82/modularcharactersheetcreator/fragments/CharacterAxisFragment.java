@@ -48,7 +48,7 @@ public class CharacterAxisFragment extends Fragment{
         adapter.setLeft(isLeft);
         adapter.addAll(isLeft ? system.getListLeft(character.getLeft()) : system.getListRight(character.getLeft()));
 
-        tvPrompt.setText(String.format(getString(R.string.choose), getString(isLeft ? system.getLeftTitle() : system.getRightTitle())));
+        tvPrompt.setText(String.format(getString(R.string.choose), getString(isLeft ? system.getLeftTitle() : system.getRightTitle(character.getLeft()))));
 
         return rootView;
     }

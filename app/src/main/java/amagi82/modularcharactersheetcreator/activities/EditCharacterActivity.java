@@ -85,6 +85,7 @@ public class EditCharacterActivity extends AppCompatActivity {
     @Subscribe
     public void onRightAxisChosen(RightAxisEvent event) {
         character.setRight(event.splat);
+        if(character.getGameSystem().checkLeft()) character.setLeft(character.getGameSystem().updateLeft(character.getLeft(), character.getRight()));
         pagerAdapter.next();
         viewPager.setCurrentItem(3);
         appbar.setExpanded(true);

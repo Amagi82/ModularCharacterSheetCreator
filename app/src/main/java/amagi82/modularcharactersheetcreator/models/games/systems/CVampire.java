@@ -18,7 +18,7 @@ public class CVampire extends GameSystem {
         this.gameUrl = R.string.url_game_cwod_vampire;
         this.splashUrl = R.string.url_splash_cwod_vampire;
         this.gameColor = R.color.cwod_vampire;
-        this.overrideLeft = true;
+        this.checkLeft = true;
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
@@ -71,7 +71,7 @@ public class CVampire extends GameSystem {
         return list;
     }
 
-    @Override public Splat getOverriddenLeft(Splat left, Splat right) {
+    @Override public Splat updateLeft(Splat left, Splat right) {
         switch (left.getTitle()){
             case R.string.assamite:
                 return right.getTitle() == R.string.sabbat? new Splat(R.string.assamite_antitribu, R.string.url_cwod_vampire_antitribu_assamite) : left;

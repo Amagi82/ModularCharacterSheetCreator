@@ -1,10 +1,7 @@
 package amagi82.modularcharactersheetcreator.models.games.systems;
 
-import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +9,6 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
 
 public class CMage extends GameSystem {
-
-    @CMageFaction private int cMageFaction;
 
     public CMage() {
         super();
@@ -25,13 +20,13 @@ public class CMage extends GameSystem {
         this.gameColor = R.color.cwod_mage;
     }
 
-    @Override public int getRightTitle() {
-        switch (cMageFaction){
-            case TRADITIONS:
+    @Override public int getRightTitle(Splat leftSplat) {
+        switch (leftSplat.getTitle()){
+            case R.string.traditions:
                 return R.string.tradition;
-            case TECHNOCRACY:
+            case R.string.technocracy:
                 return R.string.convention;
-            case CRAFTS:
+            case R.string.crafts:
                 return R.string.craft;
         }
         return R.string.faction;
@@ -49,7 +44,6 @@ public class CMage extends GameSystem {
         List<Splat> list = new ArrayList<>();
         switch (splat.getTitle()){
             case R.string.traditions:
-                cMageFaction = TRADITIONS;
                 list.add(new Splat(R.string.akashayana, R.string.url_cwod_mage_tradition_akashayana));
                 list.add(new Splat(R.string.celestial_chorus, R.string.url_cwod_mage_tradition_celestial_chorus));
                 list.add(new Splat(R.string.cult_of_ecstasy, R.string.url_cwod_mage_tradition_cult_of_ecstasy));
@@ -61,7 +55,6 @@ public class CMage extends GameSystem {
                 list.add(new Splat(R.string.virtual_adepts, R.string.url_cwod_mage_tradition_virtual_adepts));
                 break;
             case R.string.technocracy:
-                cMageFaction = TECHNOCRACY;
                 list.add(new Splat(R.string.iteration_x, R.string.url_cwod_mage_convention_iteration_x));
                 list.add(new Splat(R.string.new_world_order, R.string.url_cwod_mage_convention_new_world_order));
                 list.add(new Splat(R.string.progenitors, R.string.url_cwod_mage_convention_progenitors));
@@ -69,7 +62,6 @@ public class CMage extends GameSystem {
                 list.add(new Splat(R.string.void_engineers, R.string.url_cwod_mage_convention_void_engineers));
                 break;
             case R.string.crafts:
-                cMageFaction = CRAFTS;
                 list.add(new Splat(R.string.ahl_i_batin, R.string.url_cwod_mage_craft_ahl_i_batin));
                 list.add(new Splat(R.string.bataa, R.string.url_cwod_mage_craft_bataa));
                 list.add(new Splat(R.string.children_of_knowledge, R.string.url_cwod_mage_craft_children_of_knowledge));
@@ -84,11 +76,4 @@ public class CMage extends GameSystem {
         }
         return list;
     }
-
-    @IntDef({TRADITIONS, TECHNOCRACY, CRAFTS})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface CMageFaction {}
-    public static final int TRADITIONS = 0;
-    public static final int TECHNOCRACY = 1;
-    public static final int CRAFTS = 2;
 }

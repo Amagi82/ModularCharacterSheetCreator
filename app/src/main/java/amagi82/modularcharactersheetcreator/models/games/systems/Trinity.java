@@ -1,10 +1,7 @@
 package amagi82.modularcharactersheetcreator.models.games.systems;
 
-import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +9,6 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
 
 public class Trinity extends GameSystem {
-    @TrinityAge private int trinityAge;
 
     public Trinity() {
         super();
@@ -24,8 +20,8 @@ public class Trinity extends GameSystem {
         this.gameColor = R.color.trinity;
     }
 
-    @Override public int getRightTitle() {
-        if(trinityAge == AEON) return R.string.psi_order;
+    @Override public int getRightTitle(Splat leftSplat) {
+        if(leftSplat.getTitle() == R.string.aeon) return R.string.psi_order;
         return R.string.allegiance;
     }
 
@@ -41,7 +37,6 @@ public class Trinity extends GameSystem {
         List<Splat> list = new ArrayList<>();
         switch(splat.getTitle()){
             case R.string.adventure:
-                trinityAge = ADVENTURE;
                 list.add(new Splat(R.string.the_aeon_society_for_gentlemen));
                 list.add(new Splat(R.string.the_air_circus));
                 list.add(new Splat(R.string.branch_9));
@@ -49,7 +44,6 @@ public class Trinity extends GameSystem {
                 list.add(new Splat(R.string.the_ponatowski_foundation));
                 break;
             case R.string.aberrant:
-                trinityAge = ABERRANT;
                 list.add(new Splat(R.string.aberrants));
                 list.add(new Splat(R.string.project_utopia));
                 list.add(new Splat(R.string.team_tomorrow));
@@ -62,7 +56,6 @@ public class Trinity extends GameSystem {
                 list.add(new Splat(R.string.independent));
                 break;
             default:
-                trinityAge = AEON;
                 list.add(new Splat(R.string.aesculapian_order));
                 list.add(new Splat(R.string.chitra_bhanu));
                 list.add(new Splat(R.string.isra));
@@ -75,13 +68,4 @@ public class Trinity extends GameSystem {
         }
         return list;
     }
-
-
-    @IntDef({ADVENTURE, ABERRANT, AEON})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface TrinityAge {}
-    public static final int ADVENTURE = 0;
-    public static final int ABERRANT = 1;
-    public static final int AEON = 2;
-
 }

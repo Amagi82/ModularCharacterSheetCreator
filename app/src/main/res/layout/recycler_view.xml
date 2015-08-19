@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/tvPrompt"
-        style="@style/Base.TextAppearance.AppCompat.Subhead"
+        style="@style/TextAppearance.AppCompat.Subhead"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         android:shadowRadius="10"
         android:shadowColor="@color/primary_dark"

@@ -19,7 +19,7 @@ public abstract class GameSystem {
     @StringRes protected int splashUrl = NONE;
     @ColorRes protected int gameColor = NONE; //Used in the list of characters @MainAdapter now.
     protected boolean isArchetypeLeft = true; //Archetype is displayed under the game system in the list of characters
-    protected boolean overrideLeft = false; //With CVampire, Sect must be known to determine if Clan is antitribu.
+    protected boolean checkLeft = false; //With CVampire, Sect must be known to determine if Clan is antitribu.
 
     public abstract List<Splat> getListLeft(@Nullable Splat splat);
 
@@ -31,67 +31,35 @@ public abstract class GameSystem {
         return gameTitle;
     }
 
-    public void setGameTitle(int gameTitle) {
-        this.gameTitle = gameTitle;
-    }
-
     public int getLeftTitle() {
         return leftTitle;
     }
 
-    public void setLeftTitle(int leftTitle) {
-        this.leftTitle = leftTitle;
-    }
-
-    public int getRightTitle() {
+    public int getRightTitle(@Nullable Splat leftSplat) {
         return rightTitle;
-    }
-
-    public void setRightTitle(int rightTitle) {
-        this.rightTitle = rightTitle;
     }
 
     public boolean isArchetypeLeft() {
         return isArchetypeLeft;
     }
 
-    public void setIsArchetypeLeft(boolean isArchetypeLeft) {
-        this.isArchetypeLeft = isArchetypeLeft;
-    }
-
     public int getGameUrl() {
         return gameUrl;
-    }
-
-    public void setGameUrl(int gameUrl) {
-        this.gameUrl = gameUrl;
     }
 
     public int getSplashUrl() {
         return splashUrl;
     }
 
-    public void setSplashUrl(int splashUrl) {
-        this.splashUrl = splashUrl;
-    }
-
     public int getGameColor() {
         return gameColor;
     }
 
-    public void setGameColor(int gameColor) {
-        this.gameColor = gameColor;
+    public boolean checkLeft() {
+        return checkLeft;
     }
 
-    public boolean isOverrideLeft() {
-        return overrideLeft;
-    }
-
-    public void setOverrideLeft(boolean overrideLeft) {
-        this.overrideLeft = overrideLeft;
-    }
-
-    public Splat getOverriddenLeft(Splat left, Splat right){
+    public Splat updateLeft(Splat left, Splat right){
         return null;
     }
 }

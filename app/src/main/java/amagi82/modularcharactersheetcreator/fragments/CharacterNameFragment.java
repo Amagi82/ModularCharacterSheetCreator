@@ -29,6 +29,8 @@ import java.io.IOException;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.activities.EditCharacterActivity;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
+import amagi82.modularcharactersheetcreator.utils.SplatIcon;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -44,6 +46,8 @@ public class CharacterNameFragment extends Fragment {
     @Bind(R.id.tvPrompt) TextView tvPrompt;
     @Bind(R.id.etName) EditText etName;
     @Bind(R.id.imagePortrait) ImageView imagePortrait;
+    @Bind(R.id.tvLeftSplatTitle) TextView tvLeftSplatTitle;
+    @Bind(R.id.tvRightSplatTitle) TextView tvRightSplatTitle;
     @Bind(R.id.leftSplat) ImageView leftSplat;
     @Bind(R.id.rightSplat) ImageView rightSplat;
     @Bind(R.id.tvLeftSplat) TextView tvLeftSplat;
@@ -58,8 +62,12 @@ public class CharacterNameFragment extends Fragment {
         ButterKnife.bind(this, rootView);
 
         character = ((EditCharacterActivity) getActivity()).getGameCharacter();
-        Glide.with(this).load(getString(character.getLeft().getUrl())).into(leftSplat);
-        Glide.with(this).load(getString(character.getRight().getUrl())).into(rightSplat);
+        GameSystem system = character.getGameSystem();
+        tvLeftSplatTitle.setText(getString(system.getLeftTitle())+":");
+        tvRightSplatTitle.setText(getString(system.getRightTitle(character.getLeft())) + ":");
+        int size = getResources().getDimensionPixelSize(R.dimen.character_circle_icon_size);
+        Glide.with(this).load(new SplatIcon(getResources(), character.getLeft(), size).getUrl()).into(leftSplat);
+        Glide.with(this).load(new SplatIcon(getResources(), character.getRight(), size).getUrl()).into(rightSplat);
         tvLeftSplat.setText(getString(character.getLeft().getTitle()));
         tvRightSplat.setText(getString(character.getRight().getTitle()));
 

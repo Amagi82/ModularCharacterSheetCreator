@@ -10,8 +10,6 @@ import amagi82.modularcharactersheetcreator.models.games.Splat;
 
 public class Exalted extends GameSystem {
 
-    private boolean isCaste = true;
-
     public Exalted() {
         super();
         this.gameTitle = R.string.exalted;
@@ -22,8 +20,8 @@ public class Exalted extends GameSystem {
         this.gameColor = R.color.exalted;
     }
 
-    @Override public int getRightTitle() {
-        return isCaste? R.string.caste : R.string.aspect;
+    @Override public int getRightTitle(Splat leftSplat) {
+        return leftSplat.getTitle() == R.string.terrestrial_exalted ? R.string.aspect : R.string.caste;
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
@@ -40,7 +38,7 @@ public class Exalted extends GameSystem {
 
     @Override public List<Splat> getListRight(Splat splat) {
         List<Splat> list = new ArrayList<>();
-        switch (splat.getTitle()){
+        switch (splat.getTitle()) {
             case R.string.solar_exalted:
                 list.add(new Splat(R.string.dawn));
                 list.add(new Splat(R.string.zenith));
@@ -69,7 +67,6 @@ public class Exalted extends GameSystem {
                 list.add(new Splat(R.string.wood));
                 break;
             case R.string.terrestrial_exalted:
-                isCaste = false;
                 list.add(new Splat(R.string.chosen_of_journeys));
                 list.add(new Splat(R.string.chosen_of_serenity));
                 list.add(new Splat(R.string.chosen_of_battles));

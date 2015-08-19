@@ -14,7 +14,7 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.TileAxisViewHolder;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
-import amagi82.modularcharactersheetcreator.utils.Icon;
+import amagi82.modularcharactersheetcreator.utils.SplatIcon;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 
 public class CharacterAxisAdapter extends RecyclerView.Adapter<TileAxisViewHolder> {
@@ -72,7 +72,7 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileAxisViewHolde
     @Override
     public void onBindViewHolder(TileAxisViewHolder vh, int position) {
         Splat splat = splats.get(position);
-        Glide.with(fragment).load(new Icon(res, splat, gridImageSize).getUrl()).into(vh.imageView);
+        Glide.with(fragment).load(new SplatIcon(res, splat, gridImageSize).getUrl()).into(vh.imageView);
         vh.tvTitle.setText(splat.getTitle());
         vh.splat = splat;
         vh.left = left;

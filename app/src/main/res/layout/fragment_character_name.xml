@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/tvPrompt"
-        style="@style/Base.TextAppearance.AppCompat.Subhead"
+        style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/default_margin"
@@ -30,61 +30,85 @@
         app:cardBackgroundColor="@color/cardview_light_background"
         app:cardCornerRadius="@dimen/card_corner_radius">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvLeftSplatTitle"
+                android:layout_width="@dimen/character_circle_icon_caption_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_small_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:gravity="center_horizontal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                tools:text="Clan"/>
 
-                <ImageView
-                    android:id="@+id/leftSplat"
-                    android:layout_width="@dimen/character_circle_icon_size"
-                    android:layout_height="@dimen/character_circle_icon_size"
-                    android:layout_gravity="start"
-                    android:layout_margin="@dimen/default_margin"
-                    tools:src="@drawable/clan_icon"/>
+            <ImageView
+                android:id="@+id/leftSplat"
+                android:layout_width="@dimen/character_circle_icon_size"
+                android:layout_height="@dimen/character_circle_icon_size"
+                android:layout_below="@id/tvLeftSplatTitle"
+                android:layout_marginBottom="@dimen/default_tiny_margin"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_tiny_margin"
+                tools:src="@drawable/clan_icon"/>
 
-                <TextView
-                    android:id="@+id/tvLeftSplat"
-                    android:layout_width="@dimen/character_circle_icon_size"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginLeft="@dimen/default_margin"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                    tools:text="Gangrel"/>
+            <TextView
+                android:id="@+id/tvLeftSplat"
+                android:layout_width="@dimen/character_circle_icon_caption_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/leftSplat"
+                android:layout_marginLeft="@dimen/default_small_margin"
+                android:gravity="center_horizontal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                tools:text="Gangrel"/>
 
-                <ImageView
-                    android:id="@+id/rightSplat"
-                    android:layout_width="@dimen/character_circle_icon_size"
-                    android:layout_height="@dimen/character_circle_icon_size"
-                    android:layout_gravity="end"
-                    android:layout_margin="@dimen/default_margin"
-                    tools:src="@drawable/clan_icon"/>
+            <TextView
+                android:id="@+id/tvRightSplatTitle"
+                android:layout_width="@dimen/character_circle_icon_caption_width"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/default_small_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:gravity="center_horizontal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                tools:text="Sect"/>
 
-                <TextView
-                    android:id="@+id/tvRightSplat"
-                    android:layout_width="@dimen/character_circle_icon_size"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|right"
-                    android:layout_marginRight="@dimen/default_margin"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                    tools:text="Camarilla"/>
-            </FrameLayout>
+            <ImageView
+                android:id="@+id/rightSplat"
+                android:layout_width="@dimen/character_circle_icon_size"
+                android:layout_height="@dimen/character_circle_icon_size"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/tvRightSplatTitle"
+                android:layout_marginBottom="@dimen/default_tiny_margin"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_tiny_margin"
+                tools:src="@drawable/clan_icon"/>
+
+            <TextView
+                android:id="@+id/tvRightSplat"
+                android:layout_width="@dimen/character_circle_icon_caption_width"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/rightSplat"
+                android:layout_marginRight="@dimen/default_small_margin"
+                android:gravity="center_horizontal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                tools:text="Camarilla"/>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/tvLeftSplat"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/default_extra_large_margin"
+                android:layout_marginBottom="48dp"
                 android:layout_marginLeft="@dimen/default_keyline_padded_layout"
                 android:layout_marginRight="@dimen/default_keyline_padded_layout"
-                android:layout_marginTop="@dimen/default_large_margin"
+                android:layout_marginTop="@dimen/default_extra_large_margin"
                 app:errorEnabled="false">
 
                 <EditText
@@ -108,7 +132,8 @@
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab"
                 style="@style/Fab"
-                android:layout_gravity="center"
+                android:layout_below="@id/textInputLayout"
+                android:layout_centerHorizontal="true"
                 android:src="@drawable/ic_camera_alt_white_24dp"
                 android:visibility="invisible"
                 tools:visibility="visible"/>
@@ -118,12 +143,13 @@
                 style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/fab"
                 android:layout_marginTop="@dimen/default_extra_large_margin"
                 android:text="@string/add"
                 android:visibility="invisible"
                 tools:visibility="visible"/>
 
-        </LinearLayout>
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 </FrameLayout>
