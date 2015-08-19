@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.edmodo.cropper.CropImageView;
@@ -40,8 +41,13 @@ import static android.app.Activity.RESULT_OK;
 public class CharacterNameFragment extends Fragment {
 
     private static final int PICK_FROM_FILE = 99;
+    @Bind(R.id.tvPrompt) TextView tvPrompt;
     @Bind(R.id.etName) EditText etName;
     @Bind(R.id.imagePortrait) ImageView imagePortrait;
+    @Bind(R.id.leftSplat) ImageView leftSplat;
+    @Bind(R.id.rightSplat) ImageView rightSplat;
+    @Bind(R.id.tvLeftSplat) TextView tvLeftSplat;
+    @Bind(R.id.tvRightSplat) TextView tvRightSplat;
     @Bind(R.id.fab) FloatingActionButton fab;
     @Bind(R.id.bUpdateCharacter) Button bUpdateCharacter;
     private GameCharacter character;
@@ -52,6 +58,11 @@ public class CharacterNameFragment extends Fragment {
         ButterKnife.bind(this, rootView);
 
         character = ((EditCharacterActivity) getActivity()).getGameCharacter();
+        Glide.with(this).load(getString(character.getLeft().getUrl())).into(leftSplat);
+        Glide.with(this).load(getString(character.getRight().getUrl())).into(rightSplat);
+        tvLeftSplat.setText(getString(character.getLeft().getTitle()));
+        tvRightSplat.setText(getString(character.getRight().getTitle()));
+
         etName.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -63,13 +74,13 @@ public class CharacterNameFragment extends Fragment {
                 if(s.length() >= 1){
                     bUpdateCharacter.setVisibility(View.VISIBLE);
                     fab.show();
+                    tvPrompt.setText(getString(R.string.confirm));
                 }else{
                     bUpdateCharacter.setVisibility(View.INVISIBLE);
                     fab.hide();
                 }
             }
         });
-
 
         return rootView;
     }

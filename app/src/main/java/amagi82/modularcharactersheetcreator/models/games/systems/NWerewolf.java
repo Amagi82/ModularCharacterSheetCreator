@@ -34,8 +34,8 @@ public class NWerewolf extends GameSystem {
     @Override public List<Splat> getListRight(@Nullable Splat splat) {
         List<Splat> list = new ArrayList<>();
         list.add(new Splat(R.string.cahalith, R.string.url_nwod_werewolf_auspice_cahalith));
-        list.add(new Splat(R.string.elodoth, R.string.elodoth));
-        list.add(new Splat(R.string.irraka, R.string.irraka));
+        list.add(new Splat(R.string.elodoth, R.string.url_nwod_werewolf_auspice_elodoth));
+        list.add(new Splat(R.string.irraka, R.string.url_nwod_werewolf_auspice_irraka));
         list.add(new Splat(R.string.ithaeur, R.string.url_nwod_werewolf_auspice_ithaeur));
         list.add(new Splat(R.string.rahu, R.string.url_nwod_werewolf_auspice_rahu));
         return list;

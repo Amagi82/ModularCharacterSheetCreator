@@ -2,6 +2,7 @@ package amagi82.modularcharactersheetcreator.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -31,6 +32,7 @@ public class EditCharacterActivity extends AppCompatActivity {
 
     public static final String LEFT = "Left";
     @Bind(R.id.coordinatorLayout) CoordinatorLayout coordinatorLayout;
+    @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
     @Bind(R.id.appbar) AppBarLayout appbar;
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.imageBackdrop) ImageView imageBackdrop;
@@ -85,6 +87,7 @@ public class EditCharacterActivity extends AppCompatActivity {
         character.setRight(event.splat);
         pagerAdapter.next();
         viewPager.setCurrentItem(3);
+        appbar.setExpanded(true);
     }
 
     @Override
