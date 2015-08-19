@@ -20,6 +20,9 @@
     <string name="action_tab_move_right">Move tab right</string>
 
     <!--Character creation-->
+    <string name="choose_game">Choose game system</string>
+    <string name="choose">Choose %s</string>
+    <string name="choose_name">Choose name</string>
     <string name="cancel">Cancel</string>
     <string name="crop">Crop</string>
     <string name="character_name">Character name</string>
@@ -39,6 +42,7 @@
     <string name="skip">Skip</string>
     <string name="add_character">Add character</string>
     <string name="update_character">Update character</string>
+    <string name="add">Add</string>
 
     <!--Modules-->
     <string name="color">Color</string>
@@ -66,8 +70,5 @@
         <item>Choose new photo</item>
     </string-array>
     <string name="title_activity_edit_character">EditCharacterActivity</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="add">Add</string>
 
 </resources>

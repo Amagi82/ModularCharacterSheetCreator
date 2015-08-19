@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
 
@@ -28,6 +29,7 @@ import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 public class CharacterAxisFragment extends Fragment{
 
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
+    @Bind(R.id.tvPrompt) TextView tvPrompt;
     private GameSystem system;
     private CharacterAxisAdapter adapter;
 
@@ -45,6 +47,8 @@ public class CharacterAxisFragment extends Fragment{
         recyclerView.setAdapter(adapter);
         adapter.setLeft(isLeft);
         adapter.addAll(isLeft ? system.getListLeft(character.getLeft()) : system.getListRight(character.getLeft()));
+
+        tvPrompt.setText(String.format(getString(R.string.choose), getString(isLeft ? system.getLeftTitle() : system.getRightTitle())));
 
         return rootView;
     }

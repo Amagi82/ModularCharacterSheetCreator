@@ -25,7 +25,7 @@ public class CVampire extends GameSystem {
         List<Splat> list = new ArrayList<>();
         if(splat != null && splat.getTitle() == R.string.bloodlines){
             list.add(new Splat(R.string.ahrimanes, R.string.url_cwod_vampire_clan_ahrimanes));
-            list.add(new Splat(R.string.anda, R.string.url_cwod_vampire_clan_baali));
+            list.add(new Splat(R.string.anda, R.string.url_cwod_vampire_clan_anda));
             list.add(new Splat(R.string.baali, R.string.url_cwod_vampire_clan_baali));
             list.add(new Splat(R.string.blood_brothers, R.string.url_cwod_vampire_clan_blood_brothers));
             list.add(new Splat(R.string.cappadocians, R.string.url_cwod_vampire_clan_cappadocians));
