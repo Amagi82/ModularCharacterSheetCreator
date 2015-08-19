@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import amagi82.modularcharactersheetcreator.events.LeftAxisEvent;
 import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
 import amagi82.modularcharactersheetcreator.events.TileGameClickedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -43,6 +45,9 @@ public class EditCharacterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_character);
         ButterKnife.bind(this);
 
+        imageBackdrop.getLayoutParams().height = new ScreenSize(this).getWidth() * 308 / 610;
+        imageBackdrop.requestLayout();
+
         setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -63,6 +68,7 @@ public class EditCharacterActivity extends AppCompatActivity {
     public void onGameSystemSelected(TileGameClickedEvent event) {
         character.setGameTitle(event.system.getGameTitle());
         Glide.with(this).load(getString(event.system.getSplashUrl())).into(imageBackdrop);
+        Log.i(null, "imageBackdrop is " + imageBackdrop.getMeasuredWidth() + " wide by " + imageBackdrop.getMeasuredHeight() + " tall");
         pagerAdapter.next();
         viewPager.setCurrentItem(1);
     }
