@@ -37,8 +37,6 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/default_margin"
-        android:layout_marginRight="@dimen/default_margin"
         app:behavior_overlapTop="56dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 

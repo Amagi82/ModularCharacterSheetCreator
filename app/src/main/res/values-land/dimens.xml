@@ -11,5 +11,6 @@
     <dimen name="character_name_margin_bottom">8dp</dimen>
     <dimen name="character_onyx_logo_margin_top">176dp</dimen>
 
-    <integer name="character_grid_span_count">5</integer>
+    <integer name="character_game_span_count">3</integer>
+    <integer name="character_axis_span_count">5</integer>
 </resources>

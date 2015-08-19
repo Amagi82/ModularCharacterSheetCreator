@@ -23,7 +23,7 @@ public class CharacterGameFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.recycler_view, container, false);
         ButterKnife.bind(this, rootView);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_game_span_count)));
         CharacterGameAdapter adapter = new CharacterGameAdapter(this);
         recyclerView.setAdapter(adapter);
         adapter.addAll(new Game().getList());

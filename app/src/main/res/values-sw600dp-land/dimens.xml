@@ -3,5 +3,6 @@
     <dimen name="character_collapsing_toolbar_height">240dp</dimen>
     <dimen name="portrait_height">296dp</dimen>
 
-    <integer name="character_grid_span_count">6</integer>
+    <integer name="character_game_span_count">4</integer>
+    <integer name="character_axis_span_count">6</integer>
 </resources>

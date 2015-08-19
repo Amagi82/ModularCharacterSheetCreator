@@ -40,7 +40,7 @@ public class CharacterAxisFragment extends Fragment{
         system = character.getGameSystem();
         boolean isLeft = getArguments().getBoolean(LEFT, true);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_grid_span_count)));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_axis_span_count)));
         adapter = new CharacterAxisAdapter(this);
         recyclerView.setAdapter(adapter);
         adapter.setLeft(isLeft);

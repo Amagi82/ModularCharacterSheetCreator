@@ -4,7 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="175dp"
-    tools:layout_width="150dp">
+    app:cardBackgroundColor="@color/cardview_light_background"
+    tools:layout_width="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/imageView"

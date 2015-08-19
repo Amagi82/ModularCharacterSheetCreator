@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
@@ -12,10 +11,10 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.adapters.viewholders.TileViewHolder;
+import amagi82.modularcharactersheetcreator.adapters.viewholders.TileGameViewHolder;
 import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 
-public class CharacterGameAdapter extends RecyclerView.Adapter<TileViewHolder> {
+public class CharacterGameAdapter extends RecyclerView.Adapter<TileGameViewHolder> {
 
     private Fragment fragment;
     private SortedList<GameSystem> systems;
@@ -57,15 +56,14 @@ public class CharacterGameAdapter extends RecyclerView.Adapter<TileViewHolder> {
     }
 
     @Override
-    public TileViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new TileViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_grid, parent, false));
+    public TileGameViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new TileGameViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_grid_game, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(TileViewHolder vh, int position) {
+    public void onBindViewHolder(TileGameViewHolder vh, int position) {
         GameSystem system = get(position);
         Glide.with(fragment).load(fragment.getResources().getString(system.getGameUrl())).into(vh.imageView);
-        vh.tvTitle.setVisibility(View.GONE);
         vh.system = system;
     }
 
