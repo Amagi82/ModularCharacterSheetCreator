@@ -13,16 +13,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.bluelinelabs.logansquare.LoganSquare;
 import com.bumptech.glide.Glide;
 import com.squareup.otto.Subscribe;
+
+import java.io.IOException;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterPagerAdapter;
 import amagi82.modularcharactersheetcreator.events.LeftAxisEvent;
+import amagi82.modularcharactersheetcreator.events.PageChangedEvent;
 import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
 import amagi82.modularcharactersheetcreator.events.TileGameClickedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
+import amagi82.modularcharactersheetcreator.widgets.NoSwipeViewPager;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -31,18 +36,18 @@ import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 public class EditCharacterActivity extends AppCompatActivity {
 
     public static final String LEFT = "Left";
+    private static final String CHARACTER = "Character";
     @Bind(R.id.coordinatorLayout) CoordinatorLayout coordinatorLayout;
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
     @Bind(R.id.appbar) AppBarLayout appbar;
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.imageBackdrop) ImageView imageBackdrop;
-    @Bind(R.id.viewpager) ViewPager viewPager;
-    private CharacterPagerAdapter pagerAdapter;
+    @Bind(R.id.viewpager) NoSwipeViewPager viewPager;
     private FragmentManager fm = getSupportFragmentManager();
     private GameCharacter character;
+    private int backstack;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_character);
         ButterKnife.bind(this);
@@ -54,51 +59,80 @@ public class EditCharacterActivity extends AppCompatActivity {
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //Test for savedInstanceState and current progress
-        character = new GameCharacter();
-        pagerAdapter = new CharacterPagerAdapter(fm);
-        viewPager.setAdapter(pagerAdapter);
+        if (savedInstanceState == null) {
+            Log.i(null, "savedInstanceState is null");
+            if(getIntent().getStringExtra(CHARACTER) != null) try {
+                Log.i(null, "Character from intent found");
+                character = LoganSquare.parse(getIntent().getStringExtra(CHARACTER), GameCharacter.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.i(null, "failed to parse character from intent");
+            }
+            if(character == null) character = new GameCharacter();
+            viewPager.setAdapter(new CharacterPagerAdapter(fm));
+        } else{
+            Log.i(null, "savedInstanceState is not null");
+            try {
+                character = LoganSquare.parse(savedInstanceState.getString(CHARACTER), GameCharacter.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e(null, "Failed to recover character. Creating new one");
+                character = new GameCharacter();
+            }
+            if(viewPager.getAdapter() == null){
+                Log.e(null, "ViewPager adapter is null and shouldn't be. Setting new one");
+                viewPager.setAdapter(new CharacterPagerAdapter(fm));
+            }
+            viewPager.setCurrentItem(character.getProgress());
+        }
 
-        //if (savedInstanceState == null) fm.beginTransaction().replace(R.id.container, new CharacterGameFragment()).commit();
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override public void onPageSelected(int position) {
+                BUS.getBus().post(new PageChangedEvent(position));
+            }
+
+            @Override public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
 
     public GameCharacter getGameCharacter(){
         return character;
     }
 
-    @Subscribe
-    public void onGameSystemSelected(TileGameClickedEvent event) {
+    @Subscribe public void onGameSystemSelected(TileGameClickedEvent event) {
         character.setGameTitle(event.system.getGameTitle());
         Glide.with(this).load(getString(event.system.getSplashUrl())).into(imageBackdrop);
         Log.i(null, "imageBackdrop is " + imageBackdrop.getMeasuredWidth() + " wide by " + imageBackdrop.getMeasuredHeight() + " tall");
-        pagerAdapter.next();
-        viewPager.setCurrentItem(1);
+        next();
     }
 
-    @Subscribe
-    public void onLeftAxisChosen(LeftAxisEvent event) {
+    @Subscribe public void onLeftAxisChosen(LeftAxisEvent event) {
         character.setLeft(event.splat);
-        pagerAdapter.next();
-        viewPager.setCurrentItem(2);
+        next();
     }
 
-    @Subscribe
-    public void onRightAxisChosen(RightAxisEvent event) {
+    @Subscribe public void onRightAxisChosen(RightAxisEvent event) {
         character.setRight(event.splat);
         if(character.getGameSystem().checkLeft()) character.setLeft(character.getGameSystem().updateLeft(character.getLeft(), character.getRight()));
-        pagerAdapter.next();
-        viewPager.setCurrentItem(3);
         appbar.setExpanded(true);
+        next();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    private void next(){
+        viewPager.nextPage();
+        backstack++;
+    }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_edit_character, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 //            case R.id.action_delete:
 //                new AlertDialog.Builder(this).setMessage(R.string.delete_character_query).setNegativeButton(R.string.cancel, null)
@@ -117,28 +151,31 @@ public class EditCharacterActivity extends AppCompatActivity {
         return false;
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-//        try {
-//            if (currentCharacter != null) outState.putString(CURRENT_CHARACTER, LoganSquare.serialize(currentCharacter));
-//            outState.putString(CHARACTERS, LoganSquare.serialize(characters, GameCharacter.class));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+    @Override protected void onSaveInstanceState(Bundle outState) {
+        try {
+            outState.putString(CHARACTER, LoganSquare.serialize(character));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    protected void onStart() {
+    @Override protected void onStart() {
         super.onStart();
         BUS.getBus().register(this);
     }
 
-    @Override
-    protected void onStop() {
+    @Override protected void onStop() {
         super.onStop();
         BUS.getBus().unregister(this);
     }
 
-
+    @Override public void onBackPressed() {
+        if(backstack > 0){
+            character.removeProgress(viewPager.getCurrentItem());
+            viewPager.previousPage();
+            backstack--;
+            if(viewPager.getCurrentItem() == 0) imageBackdrop.setImageResource(0);
+        }else super.onBackPressed();
+    }
 }

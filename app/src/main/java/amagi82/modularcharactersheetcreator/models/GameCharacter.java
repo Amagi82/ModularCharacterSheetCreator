@@ -4,6 +4,7 @@ package amagi82.modularcharactersheetcreator.models;
 import android.net.Uri;
 import android.support.annotation.ColorInt;
 import android.support.annotation.StringRes;
+import android.util.Log;
 
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
@@ -23,7 +24,7 @@ public class GameCharacter {
     @JsonField private String name = "";
     @JsonField private Splat left;
     @JsonField private Splat right;
-    @JsonField @StringRes private int gameTitle;
+    @JsonField @StringRes private int gameTitle = NONE;
     @JsonField @ColorInt private int colorBackground = NONE;
     @JsonField @ColorInt private int colorText = NONE;
     @JsonField @ColorInt private int colorTextDim = NONE;
@@ -49,6 +50,27 @@ public class GameCharacter {
     //Minimum requirements necessary to save the character
     public boolean isComplete() {
         return name.length() > 0 && gameTitle != NONE && left != null && right != null;
+    }
+
+    //Used during character creation/editing. Gets the current step in the character creation process
+    public int getProgress(){
+        return gameTitle == NONE ? 0 : left == null? 1 : right == null? 2 : 3;
+    }
+
+    //Used during character creation/editing. Removes progress on back.
+    public void removeProgress(int fromStep){
+        Log.i(null, "removeProgress from step: "+fromStep);
+        switch (fromStep){
+            case 1:
+                gameTitle = NONE;
+            case 2:
+                left = null;
+            case 3:
+                right = null;
+                break;
+            default:
+                break;
+        }
     }
 
     public String getName() {

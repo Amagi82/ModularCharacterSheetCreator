@@ -20,23 +20,21 @@ public class CharacterGameFragment extends Fragment {
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
     @Bind(R.id.tvPrompt) TextView tvPrompt;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.recycler_view, container, false);
         ButterKnife.bind(this, rootView);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_game_span_count)));
         CharacterGameAdapter adapter = new CharacterGameAdapter(this);
         recyclerView.setAdapter(adapter);
-        adapter.addAll(new Game().getList());
+        if (adapter.getItemCount() == 0) adapter.addAll(new Game().getList());
 
         tvPrompt.setText(R.string.choose_game);
 
         return rootView;
     }
 
-    @Override
-    public void onDestroyView() {
+    @Override public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }

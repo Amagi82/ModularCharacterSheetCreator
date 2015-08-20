@@ -30,8 +30,8 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.activities.EditCharacterActivity;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
-import amagi82.modularcharactersheetcreator.utils.SplatIcon;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
+import amagi82.modularcharactersheetcreator.utils.SplatIcon;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -56,20 +56,9 @@ public class CharacterNameFragment extends Fragment {
     @Bind(R.id.bUpdateCharacter) Button bUpdateCharacter;
     private GameCharacter character;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_character_name, container, false);
         ButterKnife.bind(this, rootView);
-
-        character = ((EditCharacterActivity) getActivity()).getGameCharacter();
-        GameSystem system = character.getGameSystem();
-        tvLeftSplatTitle.setText(getString(system.getLeftTitle())+":");
-        tvRightSplatTitle.setText(getString(system.getRightTitle(character.getLeft())) + ":");
-        int size = getResources().getDimensionPixelSize(R.dimen.character_circle_icon_size);
-        Glide.with(this).load(new SplatIcon(getResources(), character.getLeft(), size).getUrl()).into(leftSplat);
-        Glide.with(this).load(new SplatIcon(getResources(), character.getRight(), size).getUrl()).into(rightSplat);
-        tvLeftSplat.setText(getString(character.getLeft().getTitle()));
-        tvRightSplat.setText(getString(character.getRight().getTitle()));
 
         etName.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -79,18 +68,34 @@ public class CharacterNameFragment extends Fragment {
             }
 
             @Override public void afterTextChanged(Editable s) {
-                if(s.length() >= 1){
+                if (s.length() >= 1) {
                     bUpdateCharacter.setVisibility(View.VISIBLE);
                     fab.show();
                     tvPrompt.setText(getString(R.string.confirm));
-                }else{
+                } else {
                     bUpdateCharacter.setVisibility(View.INVISIBLE);
                     fab.hide();
                 }
             }
         });
-
         return rootView;
+    }
+
+    @Override public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+            character = ((EditCharacterActivity) getActivity()).getGameCharacter();
+            GameSystem system = character.getGameSystem();
+            if(system != null && character.getLeft() != null && character.getRight() != null){
+                tvLeftSplatTitle.setText(getString(system.getLeftTitle())+":");
+                tvRightSplatTitle.setText(getString(system.getRightTitle(character.getLeft())) + ":");
+                int size = getResources().getDimensionPixelSize(R.dimen.character_circle_icon_size);
+                Glide.with(this).load(new SplatIcon(getResources(), character.getLeft(), size).getUrl()).into(leftSplat);
+                Glide.with(this).load(new SplatIcon(getResources(), character.getRight(), size).getUrl()).into(rightSplat);
+                tvLeftSplat.setText(getString(character.getLeft().getTitle()));
+                tvRightSplat.setText(getString(character.getRight().getTitle()));
+            }
+        }
     }
 
     @OnClick(R.id.fab) void getPhoto() {
@@ -120,8 +125,7 @@ public class CharacterNameFragment extends Fragment {
     }
 
     //Called when an image is selected from the camera or the gallery, and lets you crop it into an icon
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK || data == null) {
             imagePortrait.setImageResource(0);
             return;
@@ -171,20 +175,17 @@ public class CharacterNameFragment extends Fragment {
         return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 
-    @Override
-    public void onStart() {
+    @Override public void onStart() {
         super.onStart();
         BUS.getBus().register(this);
     }
 
-    @Override
-    public void onStop() {
+    @Override public void onStop() {
         super.onStop();
         BUS.getBus().unregister(this);
     }
 
-    @Override
-    public void onDestroyView() {
+    @Override public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
