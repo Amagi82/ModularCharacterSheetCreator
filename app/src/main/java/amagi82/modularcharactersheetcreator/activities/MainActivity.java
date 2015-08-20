@@ -2,8 +2,8 @@ package amagi82.modularcharactersheetcreator.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.bluelinelabs.logansquare.LoganSquare;
@@ -34,10 +34,11 @@ import amagi82.modularcharactersheetcreator.models.games.systems.CVampire;
 import amagi82.modularcharactersheetcreator.models.games.systems.CWerewolf;
 import amagi82.modularcharactersheetcreator.templates.Template;
 import amagi82.modularcharactersheetcreator.utils.Logan;
+import nucleus.view.NucleusAppCompatActivity;
 
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends NucleusAppCompatActivity {
     public static final String CURRENT_CHARACTER = "currentCharacter";
     public static final String CHARACTERS = "characters";
     public static final String BUCKET = "bucket";
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override protected void onSaveInstanceState(Bundle outState) {
+    @Override protected void onSaveInstanceState(@NonNull Bundle outState) {
         try {
             if (currentCharacter != null) outState.putString(CURRENT_CHARACTER, LoganSquare.serialize(currentCharacter));
             outState.putString(CHARACTERS, LoganSquare.serialize(characters, GameCharacter.class));

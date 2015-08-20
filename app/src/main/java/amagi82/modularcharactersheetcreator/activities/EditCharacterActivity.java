@@ -6,7 +6,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -30,13 +29,17 @@ import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.widgets.NoSwipeViewPager;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import icepick.Icepick;
+import icepick.State;
+import nucleus.view.NucleusAppCompatActivity;
 
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 
-public class EditCharacterActivity extends AppCompatActivity {
+public class EditCharacterActivity extends NucleusAppCompatActivity {
 
     public static final String LEFT = "Left";
     private static final String CHARACTER = "Character";
+    private static final String BACKSTACK = "Backstack";
     @Bind(R.id.coordinatorLayout) CoordinatorLayout coordinatorLayout;
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
     @Bind(R.id.appbar) AppBarLayout appbar;
@@ -44,13 +47,14 @@ public class EditCharacterActivity extends AppCompatActivity {
     @Bind(R.id.imageBackdrop) ImageView imageBackdrop;
     @Bind(R.id.viewpager) NoSwipeViewPager viewPager;
     private FragmentManager fm = getSupportFragmentManager();
-    private GameCharacter character;
-    private int backstack;
+    @State private GameCharacter character;
+    @State private int backstack;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_character);
         ButterKnife.bind(this);
+        Icepick.restoreInstanceState(this, savedInstanceState);
 
         imageBackdrop.getLayoutParams().height = new ScreenSize(this).getWidth() * 308 / 610;
         imageBackdrop.requestLayout();
@@ -59,6 +63,7 @@ public class EditCharacterActivity extends AppCompatActivity {
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        CharacterPagerAdapter adapter;
         if (savedInstanceState == null) {
             Log.i(null, "savedInstanceState is null");
             if(getIntent().getStringExtra(CHARACTER) != null) try {
@@ -69,9 +74,9 @@ public class EditCharacterActivity extends AppCompatActivity {
                 Log.i(null, "failed to parse character from intent");
             }
             if(character == null) character = new GameCharacter();
-            viewPager.setAdapter(new CharacterPagerAdapter(fm));
         } else{
             Log.i(null, "savedInstanceState is not null");
+            backstack = savedInstanceState.getInt(BACKSTACK);
             try {
                 character = LoganSquare.parse(savedInstanceState.getString(CHARACTER), GameCharacter.class);
             } catch (IOException e) {
@@ -79,13 +84,7 @@ public class EditCharacterActivity extends AppCompatActivity {
                 Log.e(null, "Failed to recover character. Creating new one");
                 character = new GameCharacter();
             }
-            if(viewPager.getAdapter() == null){
-                Log.e(null, "ViewPager adapter is null and shouldn't be. Setting new one");
-                viewPager.setAdapter(new CharacterPagerAdapter(fm));
-            }
-            viewPager.setCurrentItem(character.getProgress());
         }
-
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
@@ -97,6 +96,8 @@ public class EditCharacterActivity extends AppCompatActivity {
             @Override public void onPageScrollStateChanged(int state) {
             }
         });
+        viewPager.setAdapter(new CharacterPagerAdapter(fm));
+        viewPager.setCurrentItem(character.getProgress());
     }
 
     public GameCharacter getGameCharacter(){
@@ -152,6 +153,8 @@ public class EditCharacterActivity extends AppCompatActivity {
     }
 
     @Override protected void onSaveInstanceState(Bundle outState) {
+        Icepick.saveInstanceState(this, outState);
+        outState.putInt(BACKSTACK, backstack);
         try {
             outState.putString(CHARACTER, LoganSquare.serialize(character));
         } catch (IOException e) {
