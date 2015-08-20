@@ -35,6 +35,8 @@ public class CharacterAxisFragment extends Fragment {
     private GameSystem system;
     private CharacterAxisAdapter adapter;
     private boolean isLeft;
+    private int previousPage;
+    private int page;
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.recycler_view, container, false);
@@ -46,40 +48,34 @@ public class CharacterAxisFragment extends Fragment {
 
         isLeft = getArguments().getBoolean(LEFT, true);
         adapter.setLeft(isLeft);
+        page = isLeft ? 1 : 2;
 
         return rootView;
     }
 
     @Subscribe public void onPageChanged(PageChangedEvent event) {
         int currentPage = event.currentPage;
-        if(isLeft){
-            if(currentPage == 1) updateLeft();
-            else adapter.clear();
-            if(currentPage == 2) updateLeft();
-        }else{
-            if(currentPage == 2) updateRight();
-            else adapter.clear();
-            if(currentPage == 3) updateRight();
-        }
+        if (currentPage == page && previousPage < currentPage) addItems(); //Items just became available. Add them
+        else if (currentPage - 1 == page) { //We've already selected a category. Refresh with default categories in case we have a sublist and the user navigates back
+            adapter.clear();
+            addItems();
+        } else if (currentPage < page) adapter.clear(); //The user navigated backward. Clear the data.
+
+        previousPage = currentPage;
     }
 
-    private void updateLeft() {
+    private void addItems() {
         GameCharacter character = ((EditCharacterActivity) getActivity()).getGameCharacter();
         system = character.getGameSystem();
 
         if (system != null) {
-            adapter.addAll(system.getListLeft(character.getLeft()));
-            setTvPrompt(system.getLeftTitle());
-        }
-    }
-
-    private void updateRight() {
-        GameCharacter character = ((EditCharacterActivity) getActivity()).getGameCharacter();
-        system = character.getGameSystem();
-
-        if (system != null && character.getLeft() != null) {
-            adapter.addAll(system.getListRight(character.getLeft()));
-            setTvPrompt(system.getRightTitle(character.getLeft()));
+            if (isLeft) {
+                adapter.addAll(system.getListLeft(character.getLeft()));
+                setTvPrompt(system.getLeftTitle());
+            } else if (character.getLeft() != null) {
+                adapter.addAll(system.getListRight(character.getLeft()));
+                setTvPrompt(system.getRightTitle(character.getLeft()));
+            }
         }
     }
 

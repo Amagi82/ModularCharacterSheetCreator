@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +85,7 @@ public class CharacterNameFragment extends Fragment {
     @Override public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser){
+            Log.i(null, "CharacterNameFragment is visible");
             character = ((EditCharacterActivity) getActivity()).getGameCharacter();
             GameSystem system = character.getGameSystem();
             if(system != null && character.getLeft() != null && character.getRight() != null){
