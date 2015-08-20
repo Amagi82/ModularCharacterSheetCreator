@@ -23,7 +23,7 @@ public class CVampire extends GameSystem {
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
         List<Splat> list = new ArrayList<>();
-        if(splat != null && splat.getTitle() == R.string.bloodlines){
+        if (splat != null && splat.getTitle() == R.string.bloodlines) {
             list.add(new Splat(R.string.ahrimanes, R.string.url_cwod_vampire_clan_ahrimanes));
             list.add(new Splat(R.string.anda, R.string.url_cwod_vampire_clan_anda));
             list.add(new Splat(R.string.baali, R.string.url_cwod_vampire_clan_baali));
@@ -42,7 +42,7 @@ public class CVampire extends GameSystem {
             list.add(new Splat(R.string.salubri, R.string.url_cwod_vampire_clan_salubri));
             list.add(new Splat(R.string.samedi, R.string.url_cwod_vampire_clan_samedi));
             list.add(new Splat(R.string.true_brujah, R.string.url_cwod_vampire_clan_true_brujah));
-        }else{
+        } else {
             list.add(new Splat(R.string.assamite, R.string.url_cwod_vampire_clan_assamite));
             list.add(new Splat(R.string.brujah, R.string.url_cwod_vampire_clan_brujah));
             list.add(new Splat(R.string.followers_of_set, R.string.url_cwod_vampire_clan_followers_of_set));
@@ -72,31 +72,55 @@ public class CVampire extends GameSystem {
     }
 
     @Override public Splat updateLeft(Splat left, Splat right) {
-        switch (left.getTitle()){
+        switch (left.getTitle()) {
             case R.string.assamite:
-                return right.getTitle() == R.string.sabbat? new Splat(R.string.assamite_antitribu, R.string.url_cwod_vampire_antitribu_assamite) : left;
+            case R.string.assamite_antitribu:
+                return right.getTitle() == R.string.sabbat ? new Splat(R.string.assamite_antitribu, R.string.url_cwod_vampire_antitribu_assamite) :
+                        new Splat(R.string.assamite, R.string.url_cwod_vampire_clan_assamite);
             case R.string.brujah:
-                return right.getTitle() == R.string.sabbat? new Splat(R.string.brujah_antitribu, R.string.url_cwod_vampire_antitribu_brujah) : left;
+            case R.string.brujah_antitribu:
+                return right.getTitle() == R.string.sabbat ? new Splat(R.string.brujah_antitribu, R.string.url_cwod_vampire_antitribu_brujah) :
+                        new Splat(R.string.brujah, R.string.url_cwod_vampire_clan_brujah);
             case R.string.gangrel:
-                return right.getTitle() == R.string.sabbat? new Splat(R.string.gangrel_antitribu, R.string.url_cwod_vampire_antitribu_gangrel) : left;
+            case R.string.gangrel_antitribu:
+                return right.getTitle() == R.string.sabbat ? new Splat(R.string.gangrel_antitribu, R.string.url_cwod_vampire_antitribu_gangrel) :
+                        new Splat(R.string.gangrel, R.string.url_cwod_vampire_clan_gangrel);
             case R.string.lasombra:
-                return right.getTitle() == R.string.camarilla? new Splat(R.string.lasombra_antitribu, R.string.url_cwod_vampire_antitribu_lasombra) : left;
+            case R.string.lasombra_antitribu:
+                return right.getTitle() == R.string.camarilla ? new Splat(R.string.lasombra_antitribu, R.string.url_cwod_vampire_antitribu_lasombra) :
+                        new Splat(R.string.lasombra, R.string.url_cwod_vampire_clan_lasombra);
             case R.string.malkavian:
-                return right.getTitle() == R.string.sabbat? new Splat(R.string.malkavian_antitribu, R.string.url_cwod_vampire_antitribu_malkavian) : left;
+            case R.string.malkavian_antitribu:
+                return right.getTitle() == R.string.sabbat ? new Splat(R.string.malkavian_antitribu, R.string.url_cwod_vampire_antitribu_malkavian) :
+                        new Splat(R.string.malkavian, R.string.url_cwod_vampire_clan_malkavian);
             case R.string.nosferatu:
-                return right.getTitle() == R.string.sabbat? new Splat(R.string.nosferatu_antitribu, R.string.url_cwod_vampire_antitribu_nosferatu) : left;
+            case R.string.nosferatu_antitribu:
+                return right.getTitle() == R.string.sabbat ? new Splat(R.string.nosferatu_antitribu, R.string.url_cwod_vampire_antitribu_nosferatu) :
+                        new Splat(R.string.nosferatu, R.string.url_cwod_vampire_clan_nosferatu);
             case R.string.ravnos:
-                return right.getTitle() != R.string.independent? new Splat(R.string.ravnos_antitribu, R.string.url_cwod_vampire_antitribu_ravnos) : left;
+            case R.string.ravnos_antitribu:
+                return right.getTitle() != R.string.independent ? new Splat(R.string.ravnos_antitribu, R.string.url_cwod_vampire_antitribu_ravnos) :
+                        new Splat(R.string.ravnos, R.string.url_cwod_vampire_clan_ravnos);
             case R.string.followers_of_set:
-                return right.getTitle() != R.string.independent? new Splat(R.string.serpents_of_the_light, R.string.url_cwod_vampire_antitribu_serpents_of_the_light) : left;
+            case R.string.serpents_of_the_light:
+                return right.getTitle() == R.string.camarilla ? new Splat(R.string.serpents_of_the_light, R.string.url_cwod_vampire_antitribu_serpents_of_the_light) :
+                        new Splat(R.string.followers_of_set, R.string.url_cwod_vampire_clan_followers_of_set);
             case R.string.toreador:
-                return right.getTitle() == R.string.sabbat? new Splat(R.string.toreador_antitribu, R.string.url_cwod_vampire_antitribu_toreador) : left;
+            case R.string.toreador_antitribu:
+                return right.getTitle() == R.string.sabbat ? new Splat(R.string.toreador_antitribu, R.string.url_cwod_vampire_antitribu_toreador) :
+                        new Splat(R.string.toreador, R.string.url_cwod_vampire_clan_toreador);
             case R.string.tremere:
-                return right.getTitle() == R.string.sabbat? new Splat(R.string.tremere_antitribu, R.string.url_cwod_vampire_antitribu_tremere) : left;
+            case R.string.tremere_antitribu:
+                return right.getTitle() == R.string.sabbat ? new Splat(R.string.tremere_antitribu, R.string.url_cwod_vampire_antitribu_tremere) :
+                        new Splat(R.string.tremere, R.string.url_cwod_vampire_clan_tremere);
             case R.string.ventrue:
-                return right.getTitle() == R.string.sabbat? new Splat(R.string.ventrue_antitribu, R.string.url_cwod_vampire_antitribu_ventrue) : left;
+            case R.string.ventrue_antitribu:
+                return right.getTitle() == R.string.sabbat ? new Splat(R.string.ventrue_antitribu, R.string.url_cwod_vampire_antitribu_ventrue) :
+                        new Splat(R.string.ventrue, R.string.url_cwod_vampire_clan_ventrue);
             case R.string.salubri:
-                return right.getTitle() == R.string.sabbat? new Splat(R.string.salubri_antitribu, R.string.url_cwod_vampire_antitribu_salubri) : left;
+            case R.string.salubri_antitribu:
+                return right.getTitle() == R.string.sabbat ? new Splat(R.string.salubri_antitribu, R.string.url_cwod_vampire_antitribu_salubri) :
+                        new Splat(R.string.salubri, R.string.url_cwod_vampire_clan_salubri);
         }
         return left;
     }
