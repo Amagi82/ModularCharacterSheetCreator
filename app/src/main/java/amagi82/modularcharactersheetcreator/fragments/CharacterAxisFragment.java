@@ -23,6 +23,7 @@ import amagi82.modularcharactersheetcreator.models.games.Splat;
 import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import icepick.State;
 
 import static amagi82.modularcharactersheetcreator.activities.EditCharacterActivity.LEFT;
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
@@ -33,12 +34,12 @@ public class CharacterAxisFragment extends BaseFragment {
     @Bind(R.id.tvPrompt) TextView tvPrompt;
     private GameSystem system;
     private CharacterAxisAdapter adapter;
-    private boolean isLeft;
-    private int previousPage;
-    private int page;
+    @State private boolean isLeft;
+    @State private int previousPage;
+    @State private int page;
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.recycler_view, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_character_choice, container, false);
         ButterKnife.bind(this, rootView);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_axis_span_count)));

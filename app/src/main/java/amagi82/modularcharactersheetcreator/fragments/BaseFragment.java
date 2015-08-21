@@ -10,18 +10,17 @@ import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 
 public class BaseFragment extends Fragment{
 
-    @Override public void onStart() {
-        super.onStart();
-        BUS.getBus().register(this);
-    }
-
     @Override public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Icepick.restoreInstanceState(this, savedInstanceState);
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
+    @Override public void onStart() {
+        super.onStart();
+        BUS.getBus().register(this);
+    }
+
+    @Override public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Icepick.saveInstanceState(this, outState);
     }
@@ -31,8 +30,7 @@ public class BaseFragment extends Fragment{
         BUS.getBus().unregister(this);
     }
 
-    @Override
-    public void onDestroyView() {
+    @Override public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }

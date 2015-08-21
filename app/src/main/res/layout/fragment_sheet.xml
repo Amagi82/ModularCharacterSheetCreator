@@ -15,7 +15,7 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             style="@style/CollapsingToolbar.Sheet"
-            app:contentScrim="?attr/colorPrimary"
+            app:contentScrim="@color/primary"
             app:expandedTitleMarginBottom="@dimen/default_margin"
             app:expandedTitleMarginEnd="@dimen/sheet_expanded_title_margin_end"
             app:expandedTitleMarginStart="@dimen/sheet_expanded_title_margin_start"
