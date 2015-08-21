@@ -6,12 +6,10 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
-import com.bluelinelabs.logansquare.LoganSquare;
 import com.colintmiller.simplenosql.NoSQL;
 import com.colintmiller.simplenosql.NoSQLEntity;
 import com.squareup.otto.Subscribe;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,18 +30,18 @@ import amagi82.modularcharactersheetcreator.models.games.Splat;
 import amagi82.modularcharactersheetcreator.models.games.systems.CMage;
 import amagi82.modularcharactersheetcreator.models.games.systems.CVampire;
 import amagi82.modularcharactersheetcreator.models.games.systems.CWerewolf;
+import amagi82.modularcharactersheetcreator.presenters.MainPresenter;
 import amagi82.modularcharactersheetcreator.templates.Template;
 import amagi82.modularcharactersheetcreator.utils.Logan;
+import nucleus.factory.RequiresPresenter;
 import nucleus.view.NucleusAppCompatActivity;
 
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 
-public class MainActivity extends NucleusAppCompatActivity {
-    public static final String CURRENT_CHARACTER = "currentCharacter";
-    public static final String CHARACTERS = "characters";
+@RequiresPresenter(MainPresenter.class)
+public class MainActivity extends NucleusAppCompatActivity<MainPresenter> {
     public static final String BUCKET = "bucket";
     public static final String EDIT_MODE = "EditMode";
-    public static final String CHARACTER = "Character";
     public static final int REQUEST_CODE = 50;
     public static final int NONE = -1;
     private FragmentManager fm = getSupportFragmentManager();
@@ -75,12 +73,12 @@ public class MainActivity extends NucleusAppCompatActivity {
     }
 
     @Override protected void onSaveInstanceState(@NonNull Bundle outState) {
-        try {
-            if (currentCharacter != null) outState.putString(CURRENT_CHARACTER, LoganSquare.serialize(currentCharacter));
-            outState.putString(CHARACTERS, LoganSquare.serialize(characters, GameCharacter.class));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            if (currentCharacter != null) outState.putString(CURRENT_CHARACTER, LoganSquare.serialize(currentCharacter));
+//            outState.putString(CHARACTERS, LoganSquare.serialize(characters, GameCharacter.class));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         super.onSaveInstanceState(outState);
     }
 

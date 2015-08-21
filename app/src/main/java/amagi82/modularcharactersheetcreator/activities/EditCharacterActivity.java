@@ -25,17 +25,19 @@ import amagi82.modularcharactersheetcreator.events.PageChangedEvent;
 import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
 import amagi82.modularcharactersheetcreator.events.TileGameClickedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.presenters.EditCharacterPresenter;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.widgets.NoSwipeViewPager;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import icepick.Icepick;
 import icepick.State;
+import nucleus.factory.RequiresPresenter;
 import nucleus.view.NucleusAppCompatActivity;
 
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 
-public class EditCharacterActivity extends NucleusAppCompatActivity {
+@RequiresPresenter(EditCharacterPresenter.class)
+public class EditCharacterActivity extends NucleusAppCompatActivity<EditCharacterPresenter> {
 
     public static final String LEFT = "Left";
     private static final String CHARACTER = "Character";
@@ -54,7 +56,6 @@ public class EditCharacterActivity extends NucleusAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_character);
         ButterKnife.bind(this);
-        Icepick.restoreInstanceState(this, savedInstanceState);
 
         imageBackdrop.getLayoutParams().height = new ScreenSize(this).getWidth() * 308 / 610;
         imageBackdrop.requestLayout();
@@ -150,17 +151,6 @@ public class EditCharacterActivity extends NucleusAppCompatActivity {
                 return true;
         }
         return false;
-    }
-
-    @Override protected void onSaveInstanceState(Bundle outState) {
-        Icepick.saveInstanceState(this, outState);
-        outState.putInt(BACKSTACK, backstack);
-        try {
-            outState.putString(CHARACTER, LoganSquare.serialize(character));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        super.onSaveInstanceState(outState);
     }
 
     @Override protected void onStart() {
