@@ -4,8 +4,11 @@ package amagi82.modularcharactersheetcreator.models.modules;
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+import org.parceler.Parcel;
+
 import amagi82.modularcharactersheetcreator.utils.EnumTypeConverter;
 
+@Parcel
 @JsonObject
 public class Module {
 

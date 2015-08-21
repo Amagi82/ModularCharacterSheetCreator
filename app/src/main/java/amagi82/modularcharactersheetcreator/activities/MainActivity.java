@@ -51,8 +51,7 @@ public class MainActivity extends NucleusAppCompatActivity {
     private GameCharacter currentCharacter;
     private Logan logan = new Logan();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -147,14 +146,12 @@ public class MainActivity extends NucleusAppCompatActivity {
         BUS.getBus().unregister(this);
     }
 
-    @Subscribe
-    public void onCharacterAdded(CharacterAddedEvent event) {
+    @Subscribe public void onCharacterAdded(CharacterAddedEvent event) {
         characters.add(event.character);
         saveCharacter(event.character);
     }
 
-    @Subscribe
-    public void onCharacterChanged(CharacterChangedEvent event) {
+    @Subscribe public void onCharacterChanged(CharacterChangedEvent event) {
         for (GameCharacter character : characters) {
             if (character.getEntityId().equals(event.character.getEntityId())) {
                 character = event.character;
@@ -164,8 +161,7 @@ public class MainActivity extends NucleusAppCompatActivity {
         }
     }
 
-    @Subscribe
-    public void onCharacterDeleted(CharacterDeletedEvent event) {
+    @Subscribe public void onCharacterDeleted(CharacterDeletedEvent event) {
         for (int i = characters.size() - 1; i>= 0; i--) {
             if (characters.get(i).getEntityId().equals(event.character.getEntityId())) {
                 NoSQL.with(this).using(GameCharacter.class).bucketId(BUCKET).entityId(event.character.getEntityId()).delete();
@@ -175,14 +171,12 @@ public class MainActivity extends NucleusAppCompatActivity {
         }
     }
 
-    @Subscribe
-    public void onCreateNewCharacter(CreateNewCharacterEvent event) {
+    @Subscribe public void onCreateNewCharacter(CreateNewCharacterEvent event) {
         startActivityForResult(new Intent(this, EditCharacterActivity.class), REQUEST_CODE);
         //fm.beginTransaction().replace(R.id.container, new CharacterFragment()).addToBackStack(null).commit();
     }
 
-    @Subscribe
-    public void onEditCharacter(EditCharacterEvent event) {
+    @Subscribe public void onEditCharacter(EditCharacterEvent event) {
         currentCharacter = event.character;
         CharacterGameFragment fragment = new CharacterGameFragment();
         Bundle bundle = new Bundle();
@@ -191,14 +185,12 @@ public class MainActivity extends NucleusAppCompatActivity {
         fm.beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
     }
 
-    @Subscribe
-    public void onCharacterClicked(CharacterClickedEvent event) {
+    @Subscribe public void onCharacterClicked(CharacterClickedEvent event) {
         currentCharacter = event.character;
         fm.beginTransaction().replace(R.id.container, new SheetFragment()).addToBackStack(null).commit();
     }
 
-    @Subscribe
-    public void upNavigation(UpNavigationEvent event){
+    @Subscribe public void upNavigation(UpNavigationEvent event){
         fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 }

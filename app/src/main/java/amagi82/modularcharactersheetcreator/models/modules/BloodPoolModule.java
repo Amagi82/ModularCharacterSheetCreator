@@ -3,6 +3,7 @@ package amagi82.modularcharactersheetcreator.models.modules;
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+@Parcel
 @JsonObject
 public class BloodPoolModule extends Module {
 

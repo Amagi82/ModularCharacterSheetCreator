@@ -3,8 +3,11 @@ package amagi82.modularcharactersheetcreator.models.modules;
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+import org.parceler.Parcel;
+
 import java.util.List;
 
+@Parcel
 @JsonObject
 public class HealthModule extends Module {
 

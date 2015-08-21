@@ -3,9 +3,12 @@ package amagi82.modularcharactersheetcreator.models.modules;
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+import org.parceler.Parcel;
+
 /*
     Used to fill a single row of a stat block
  */
+@Parcel
 @JsonObject
 public class Stat {
 

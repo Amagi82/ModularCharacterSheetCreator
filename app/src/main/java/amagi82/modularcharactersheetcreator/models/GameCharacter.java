@@ -9,6 +9,8 @@ import android.util.Log;
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -19,6 +21,7 @@ import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 
 import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
 
+@Parcel
 @JsonObject
 public class GameCharacter {
     @JsonField private String name = "";

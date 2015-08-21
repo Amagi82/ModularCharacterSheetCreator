@@ -3,11 +3,14 @@ package amagi82.modularcharactersheetcreator.models;
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 
+@Parcel
 @JsonObject
 public class Sheet {
 
