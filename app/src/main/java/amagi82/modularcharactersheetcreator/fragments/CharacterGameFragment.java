@@ -1,7 +1,6 @@
 package amagi82.modularcharactersheetcreator.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +14,7 @@ import amagi82.modularcharactersheetcreator.models.games.Game;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class CharacterGameFragment extends Fragment {
+public class CharacterGameFragment extends BaseFragment {
 
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
     @Bind(R.id.tvPrompt) TextView tvPrompt;
@@ -32,10 +31,5 @@ public class CharacterGameFragment extends Fragment {
         tvPrompt.setText(R.string.choose_game);
 
         return rootView;
-    }
-
-    @Override public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 }

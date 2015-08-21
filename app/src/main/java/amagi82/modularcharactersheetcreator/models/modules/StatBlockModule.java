@@ -14,7 +14,7 @@ import java.util.List;
 public class StatBlockModule extends Module {
 
     @JsonField
-    private List<Stat> stats;
+    List<Stat> stats;
 
     public StatBlockModule() {
         super(Type.STATBLOCK);

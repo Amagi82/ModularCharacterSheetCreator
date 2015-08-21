@@ -14,9 +14,9 @@ import amagi82.modularcharactersheetcreator.models.modules.Module;
 @JsonObject
 public class Sheet {
 
-    @JsonField private String title = "";
-    @JsonField private int numColumns = 3;
-    @JsonField private List<Module> modules = new ArrayList<>();
+    @JsonField String title = "";
+    @JsonField int numColumns = 3;
+    @JsonField List<Module> modules = new ArrayList<>();
 
     public Sheet() {
     }

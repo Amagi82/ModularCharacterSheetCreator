@@ -16,10 +16,10 @@ public class Module {
         DEFAULT, HEADER, HEALTH, STATBLOCK, STATUS, TITLETEXTBLOCK, BLOODPOOL
     }
 
-    @JsonField(typeConverter = EnumTypeConverter.class) private Type type;
-    @JsonField private int spanCount = 1;
-    @JsonField private String title;
-    @JsonField private String text;
+    @JsonField(typeConverter = EnumTypeConverter.class) Type type;
+    @JsonField int spanCount = 1;
+    @JsonField String title;
+    @JsonField String text;
 
     public Module() {
         this(null, null, 1);

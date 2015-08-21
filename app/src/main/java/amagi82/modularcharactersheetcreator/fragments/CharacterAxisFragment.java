@@ -2,7 +2,6 @@ package amagi82.modularcharactersheetcreator.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.StringRes;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,7 +27,7 @@ import butterknife.ButterKnife;
 import static amagi82.modularcharactersheetcreator.activities.EditCharacterActivity.LEFT;
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 
-public class CharacterAxisFragment extends Fragment {
+public class CharacterAxisFragment extends BaseFragment {
 
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
     @Bind(R.id.tvPrompt) TextView tvPrompt;
@@ -90,20 +89,5 @@ public class CharacterAxisFragment extends Fragment {
             if (splat.isEndPoint()) BUS.getBus().post(event.left ? new LeftAxisEvent(splat) : new RightAxisEvent(splat));
             else adapter.replaceAll(event.left ? system.getListLeft(splat) : system.getListRight(splat));
         }
-    }
-
-    @Override public void onStart() {
-        super.onStart();
-        BUS.getBus().register(this);
-    }
-
-    @Override public void onStop() {
-        super.onStop();
-        BUS.getBus().unregister(this);
-    }
-
-    @Override public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 }

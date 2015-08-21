@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
 import android.text.Editable;
@@ -38,10 +37,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
-import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 import static android.app.Activity.RESULT_OK;
 
-public class CharacterNameFragment extends Fragment {
+public class CharacterNameFragment extends BaseFragment {
 
     private static final int PICK_FROM_FILE = 99;
     @Bind(R.id.tvPrompt) TextView tvPrompt;
@@ -175,20 +173,5 @@ public class CharacterNameFragment extends Fragment {
 
     private boolean isOrientationPort(){
         return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-    }
-
-    @Override public void onStart() {
-        super.onStart();
-        BUS.getBus().register(this);
-    }
-
-    @Override public void onStop() {
-        super.onStop();
-        BUS.getBus().unregister(this);
-    }
-
-    @Override public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 }

@@ -17,9 +17,9 @@ import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
 @Parcel
 @JsonObject
 public class Splat {
-    @JsonField @StringRes private int title;
-    @JsonField @StringRes private int url;
-    @JsonField private boolean endPoint;
+    @JsonField @StringRes int title;
+    @JsonField @StringRes int url;
+    @JsonField boolean endPoint;
 
     public Splat() {
         this(NONE);

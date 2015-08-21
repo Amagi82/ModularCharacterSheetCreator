@@ -25,19 +25,15 @@ import amagi82.modularcharactersheetcreator.events.PageChangedEvent;
 import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
 import amagi82.modularcharactersheetcreator.events.TileGameClickedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
-import amagi82.modularcharactersheetcreator.presenters.EditCharacterPresenter;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.widgets.NoSwipeViewPager;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import icepick.State;
-import nucleus.factory.RequiresPresenter;
-import nucleus.view.NucleusAppCompatActivity;
 
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 
-@RequiresPresenter(EditCharacterPresenter.class)
-public class EditCharacterActivity extends NucleusAppCompatActivity<EditCharacterPresenter> {
+public class EditCharacterActivity extends BaseActivity {
 
     public static final String LEFT = "Left";
     private static final String CHARACTER = "Character";
@@ -151,16 +147,6 @@ public class EditCharacterActivity extends NucleusAppCompatActivity<EditCharacte
                 return true;
         }
         return false;
-    }
-
-    @Override protected void onStart() {
-        super.onStart();
-        BUS.getBus().register(this);
-    }
-
-    @Override protected void onStop() {
-        super.onStop();
-        BUS.getBus().unregister(this);
     }
 
     @Override public void onBackPressed() {

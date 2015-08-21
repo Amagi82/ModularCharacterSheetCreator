@@ -1,7 +1,6 @@
 package amagi82.modularcharactersheetcreator.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,18 +12,17 @@ import com.squareup.otto.Subscribe;
 
 import java.util.List;
 
-import amagi82.modularcharactersheetcreator.activities.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.activities.MainActivity;
 import amagi82.modularcharactersheetcreator.adapters.SheetAdapter;
 import amagi82.modularcharactersheetcreator.events.ModuleAddedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
-import amagi82.modularcharactersheetcreator.utils.Otto;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TabFragment extends Fragment {
+public class TabFragment extends BaseFragment {
 
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
     private SheetAdapter adapter;
@@ -50,20 +48,6 @@ public class TabFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         return rootView;
-    }
-
-    @Override public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-    @Override public void onStart() {
-        super.onStart();
-        Otto.BUS.getBus().register(this);
-    }
-
-    @Override public void onStop() {
-        super.onStop();
-        Otto.BUS.getBus().unregister(this);
     }
 
     @Subscribe

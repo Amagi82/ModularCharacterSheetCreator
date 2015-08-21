@@ -10,10 +10,10 @@ import org.parceler.Parcel;
 @JsonObject
 public class StatusModule extends Module {
 
-    @JsonField private int valueMin;
-    @JsonField private int value;
-    @JsonField private int valueMax;
-    @JsonField private int numStars;
+    @JsonField int valueMin;
+    @JsonField int value;
+    @JsonField int valueMax;
+    @JsonField int numStars;
 
     public StatusModule() {
         super(Type.STATUS);

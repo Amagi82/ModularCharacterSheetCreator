@@ -15,7 +15,7 @@ import java.util.List;
 @JsonObject
 public class TitleTextBlockModule extends Module {
 
-    @JsonField private List<Stat> stats;
+    @JsonField List<Stat> stats;
 
     public TitleTextBlockModule() {
         super(Type.TITLETEXTBLOCK);

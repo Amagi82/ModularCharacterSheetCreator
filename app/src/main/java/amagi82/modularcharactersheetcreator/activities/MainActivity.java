@@ -2,7 +2,6 @@ package amagi82.modularcharactersheetcreator.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
@@ -30,16 +29,11 @@ import amagi82.modularcharactersheetcreator.models.games.Splat;
 import amagi82.modularcharactersheetcreator.models.games.systems.CMage;
 import amagi82.modularcharactersheetcreator.models.games.systems.CVampire;
 import amagi82.modularcharactersheetcreator.models.games.systems.CWerewolf;
-import amagi82.modularcharactersheetcreator.presenters.MainPresenter;
 import amagi82.modularcharactersheetcreator.templates.Template;
 import amagi82.modularcharactersheetcreator.utils.Logan;
-import nucleus.factory.RequiresPresenter;
-import nucleus.view.NucleusAppCompatActivity;
 
-import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
+public class MainActivity extends BaseActivity {
 
-@RequiresPresenter(MainPresenter.class)
-public class MainActivity extends NucleusAppCompatActivity<MainPresenter> {
     public static final String BUCKET = "bucket";
     public static final String EDIT_MODE = "EditMode";
     public static final int REQUEST_CODE = 50;
@@ -70,16 +64,6 @@ public class MainActivity extends NucleusAppCompatActivity<MainPresenter> {
         if(savedInstanceState == null){
             fm.beginTransaction().replace(R.id.container, new MainFragment()).commit();
         }
-    }
-
-    @Override protected void onSaveInstanceState(@NonNull Bundle outState) {
-//        try {
-//            if (currentCharacter != null) outState.putString(CURRENT_CHARACTER, LoganSquare.serialize(currentCharacter));
-//            outState.putString(CHARACTERS, LoganSquare.serialize(characters, GameCharacter.class));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        super.onSaveInstanceState(outState);
     }
 
     public List<GameCharacter> getCharacters() {
@@ -132,16 +116,6 @@ public class MainActivity extends NucleusAppCompatActivity<MainPresenter> {
         NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>(BUCKET, character.getEntityId());
         entity.setData(character);
         NoSQL.with(this).withSerializer(logan).using(GameCharacter.class).save(entity);
-    }
-
-    @Override protected void onStart() {
-        super.onStart();
-        BUS.getBus().register(this);
-    }
-
-    @Override protected void onStop() {
-        super.onStop();
-        BUS.getBus().unregister(this);
     }
 
     @Subscribe public void onCharacterAdded(CharacterAddedEvent event) {

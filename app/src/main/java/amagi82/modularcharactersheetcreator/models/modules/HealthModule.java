@@ -11,10 +11,10 @@ import java.util.List;
 @JsonObject
 public class HealthModule extends Module {
 
-    @JsonField private List<Stat> healthLevels;
-    @JsonField private int damageBashing;
-    @JsonField private int damageLethal;
-    @JsonField private int damageAgg;
+    @JsonField List<Stat> healthLevels;
+    @JsonField int damageBashing;
+    @JsonField int damageLethal;
+    @JsonField int damageAgg;
 
     public HealthModule() {
         super(Type.HEALTH);

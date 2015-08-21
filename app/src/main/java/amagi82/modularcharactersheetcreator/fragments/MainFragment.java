@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,8 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import amagi82.modularcharactersheetcreator.activities.MainActivity;
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.activities.MainActivity;
 import amagi82.modularcharactersheetcreator.adapters.MainAdapter;
 import amagi82.modularcharactersheetcreator.events.CreateNewCharacterEvent;
 import amagi82.modularcharactersheetcreator.utils.Otto;
@@ -22,7 +21,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends BaseFragment {
 
     @Bind(R.id.coordinatorLayout) CoordinatorLayout coordinatorLayout;
     @Bind(R.id.appbar) AppBarLayout appbar;
@@ -72,21 +71,5 @@ public class MainFragment extends Fragment {
 //                });
 //
 //        toolbar.animate().alpha(0).setDuration(400);
-    }
-
-    @Override public void onStart() {
-        super.onStart();
-        Otto.BUS.getBus().register(this);
-    }
-
-    @Override public void onStop() {
-        super.onStop();
-        Otto.BUS.getBus().unregister(this);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 }

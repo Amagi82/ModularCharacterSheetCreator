@@ -24,20 +24,20 @@ import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
 @Parcel
 @JsonObject
 public class GameCharacter {
-    @JsonField private String name = "";
-    @JsonField private Splat left;
-    @JsonField private Splat right;
-    @JsonField @StringRes private int gameTitle = NONE;
-    @JsonField @ColorInt private int colorBackground = NONE;
-    @JsonField @ColorInt private int colorText = NONE;
-    @JsonField @ColorInt private int colorTextDim = NONE;
-    @JsonField private String entityId = UUID.randomUUID().toString();
-    @JsonField private long timeStamp;
-    @JsonField private List<Sheet> sheets = new ArrayList<>();
-    @JsonField private String imageUriPortString;
-    @JsonField private String imageUriLandString;
-    private Uri imageUriPort;
-    private Uri imageUriLand;
+    @JsonField String name = "";
+    @JsonField Splat left;
+    @JsonField Splat right;
+    @JsonField @StringRes int gameTitle = NONE;
+    @JsonField @ColorInt int colorBackground = NONE;
+    @JsonField @ColorInt int colorText = NONE;
+    @JsonField @ColorInt int colorTextDim = NONE;
+    @JsonField String entityId = UUID.randomUUID().toString();
+    @JsonField long timeStamp;
+    @JsonField List<Sheet> sheets = new ArrayList<>();
+    @JsonField String imageUriPortString;
+    @JsonField String imageUriLandString;
+    Uri imageUriPort;
+    Uri imageUriLand;
 
     public GameCharacter() {
         timeStamp = System.currentTimeMillis();

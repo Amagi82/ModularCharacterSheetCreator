@@ -12,13 +12,13 @@ import org.parceler.Parcel;
 @JsonObject
 public class Stat {
 
-    @JsonField private String category = "";
-    @JsonField private String specialty;
-    @JsonField private int valueMin;
-    @JsonField private int value;
-    @JsonField private int valueTemporary;
-    @JsonField private int valueMax;
-    @JsonField private int numStars;
+    @JsonField String category = "";
+    @JsonField String specialty;
+    @JsonField int valueMin;
+    @JsonField int value;
+    @JsonField int valueTemporary;
+    @JsonField int valueMax;
+    @JsonField int numStars;
 
     public Stat() {
     }
