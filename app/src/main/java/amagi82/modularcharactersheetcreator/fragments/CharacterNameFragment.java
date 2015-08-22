@@ -104,6 +104,13 @@ public class CharacterNameFragment extends BaseFragment {
         }
     }
 
+    @OnClick(R.id.bUpdateCharacter) void updateCharacter(){
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("Character", getCharacter());
+        getActivity().setResult(RESULT_OK, returnIntent);
+        getActivity().finish();
+    }
+
     @OnClick(R.id.fab) void getPhoto() {
         character = getCharacter();
         Uri image = getUri();

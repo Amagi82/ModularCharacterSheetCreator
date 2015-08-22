@@ -107,7 +107,7 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
     }
 
     private void setColors() {
-        int shadow = getResources().getColor(R.color.black, getActivity().getTheme());
+        int shadow = getResources().getColor(R.color.black);
         tvIconLeft.setShadowLayer(3, 0, 0, shadow);
         tvIconRight.setShadowLayer(3, 0, 0, shadow);
         int colorText = character.colorText();
