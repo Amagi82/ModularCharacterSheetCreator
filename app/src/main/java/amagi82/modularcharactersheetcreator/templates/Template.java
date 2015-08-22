@@ -195,10 +195,7 @@ public class Template {
 
 
     private Sheet createCharacterSheet(){
-        Sheet sheet = new Sheet();
-        sheet.setTitle(getString(R.string.character_sheet));
-        sheet.setModules(modules);
-        return sheet;
+        return Sheet.create(getString(R.string.character_sheet), modules);
     }
 
     private void addCWodAttributes(){

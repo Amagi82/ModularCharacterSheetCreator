@@ -1,15 +1,9 @@
 package amagi82.modularcharactersheetcreator.models;
 
-
 import android.net.Uri;
 import android.support.annotation.ColorInt;
 import android.support.annotation.StringRes;
 import android.util.Log;
-
-import com.bluelinelabs.logansquare.annotation.JsonField;
-import com.bluelinelabs.logansquare.annotation.JsonObject;
-
-import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,21 +15,20 @@ import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 
 import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
 
-@Parcel
-@JsonObject
+
 public class GameCharacter {
-    @JsonField String name = "";
-    @JsonField Splat left;
-    @JsonField Splat right;
-    @JsonField @StringRes int gameTitle = NONE;
-    @JsonField @ColorInt int colorBackground = NONE;
-    @JsonField @ColorInt int colorText = NONE;
-    @JsonField @ColorInt int colorTextDim = NONE;
-    @JsonField String entityId = UUID.randomUUID().toString();
-    @JsonField long timeStamp;
-    @JsonField List<Sheet> sheets = new ArrayList<>();
-    @JsonField String imageUriPortString;
-    @JsonField String imageUriLandString;
+    String name = "";
+    Splat left;
+    Splat right;
+    @StringRes int gameTitle = NONE;
+    @ColorInt int colorBackground = NONE;
+    @ColorInt int colorText = NONE;
+    @ColorInt int colorTextDim = NONE;
+    String entityId = UUID.randomUUID().toString();
+    long timeStamp;
+    List<Sheet> sheets = new ArrayList<>();
+    String imageUriPortString;
+    String imageUriLandString;
     Uri imageUriPort;
     Uri imageUriLand;
 

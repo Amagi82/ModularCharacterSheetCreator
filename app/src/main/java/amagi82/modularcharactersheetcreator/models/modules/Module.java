@@ -1,25 +1,16 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
 
-import com.bluelinelabs.logansquare.annotation.JsonField;
-import com.bluelinelabs.logansquare.annotation.JsonObject;
-
-import org.parceler.Parcel;
-
-import amagi82.modularcharactersheetcreator.utils.EnumTypeConverter;
-
-@Parcel
-@JsonObject
 public class Module {
 
     public enum Type {
         DEFAULT, HEADER, HEALTH, STATBLOCK, STATUS, TITLETEXTBLOCK, BLOODPOOL
     }
 
-    @JsonField(typeConverter = EnumTypeConverter.class) Type type;
-    @JsonField int spanCount = 1;
-    @JsonField String title;
-    @JsonField String text;
+    Type type;
+    int spanCount = 1;
+    String title;
+    String text;
 
     public Module() {
         this(null, null, 1);

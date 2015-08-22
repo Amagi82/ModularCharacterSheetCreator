@@ -46,7 +46,7 @@ public class SheetPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return sheets.get(position).getTitle();
+        return sheets.get(position).title();
     }
 
     @Override public int getCount() {

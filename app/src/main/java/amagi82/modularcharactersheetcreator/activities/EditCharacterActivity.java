@@ -5,21 +5,18 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import com.bluelinelabs.logansquare.LoganSquare;
 import com.bumptech.glide.Glide;
 import com.squareup.otto.Subscribe;
 
-import java.io.IOException;
-
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterPagerAdapter;
+import amagi82.modularcharactersheetcreator.callbacks.PageListener;
 import amagi82.modularcharactersheetcreator.events.LeftAxisEvent;
 import amagi82.modularcharactersheetcreator.events.PageChangedEvent;
 import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
@@ -36,8 +33,6 @@ import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 public class EditCharacterActivity extends BaseActivity {
 
     public static final String LEFT = "Left";
-    private static final String CHARACTER = "Character";
-    private static final String BACKSTACK = "Backstack";
     @Bind(R.id.coordinatorLayout) CoordinatorLayout coordinatorLayout;
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
     @Bind(R.id.appbar) AppBarLayout appbar;
@@ -45,13 +40,15 @@ public class EditCharacterActivity extends BaseActivity {
     @Bind(R.id.imageBackdrop) ImageView imageBackdrop;
     @Bind(R.id.viewpager) NoSwipeViewPager viewPager;
     private FragmentManager fm = getSupportFragmentManager();
-    @State private GameCharacter character;
-    @State private int backstack;
+    GameCharacter character;
+    @State int backstack;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_character);
         ButterKnife.bind(this);
+        Log.i(null, "backstack == "+backstack);
+        Log.i(null, "character == "+character);
 
         imageBackdrop.getLayoutParams().height = new ScreenSize(this).getWidth() * 308 / 610;
         imageBackdrop.requestLayout();
@@ -60,37 +57,12 @@ public class EditCharacterActivity extends BaseActivity {
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        CharacterPagerAdapter adapter;
-        if (savedInstanceState == null) {
-            Log.i(null, "savedInstanceState is null");
-            if(getIntent().getStringExtra(CHARACTER) != null) try {
-                Log.i(null, "Character from intent found");
-                character = LoganSquare.parse(getIntent().getStringExtra(CHARACTER), GameCharacter.class);
-            } catch (IOException e) {
-                e.printStackTrace();
-                Log.i(null, "failed to parse character from intent");
-            }
-            if(character == null) character = new GameCharacter();
-        } else{
-            Log.i(null, "savedInstanceState is not null");
-            backstack = savedInstanceState.getInt(BACKSTACK);
-            try {
-                character = LoganSquare.parse(savedInstanceState.getString(CHARACTER), GameCharacter.class);
-            } catch (IOException e) {
-                e.printStackTrace();
-                Log.e(null, "Failed to recover character. Creating new one");
-                character = new GameCharacter();
-            }
-        }
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
+        if(character == null) character = new GameCharacter();
+        else if(character.getGameSystem() != null) Glide.with(this).load(getString(character.getGameSystem().getSplashUrl())).into(imageBackdrop);
 
+        viewPager.addOnPageChangeListener(new PageListener() {
             @Override public void onPageSelected(int position) {
                 BUS.getBus().post(new PageChangedEvent(position));
-            }
-
-            @Override public void onPageScrollStateChanged(int state) {
             }
         });
         viewPager.setAdapter(new CharacterPagerAdapter(fm));

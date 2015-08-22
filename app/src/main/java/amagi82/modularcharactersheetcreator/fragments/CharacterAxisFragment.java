@@ -34,9 +34,9 @@ public class CharacterAxisFragment extends BaseFragment {
     @Bind(R.id.tvPrompt) TextView tvPrompt;
     private GameSystem system;
     private CharacterAxisAdapter adapter;
-    @State private boolean isLeft;
-    @State private int previousPage;
-    @State private int page;
+    @State boolean isLeft;
+    @State int previousPage;
+    @State int page;
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_character_choice, container, false);

@@ -1,24 +1,17 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
-import com.bluelinelabs.logansquare.annotation.JsonField;
-import com.bluelinelabs.logansquare.annotation.JsonObject;
-
-import org.parceler.Parcel;
-
 /*
     Used to fill a single row of a stat block
  */
-@Parcel
-@JsonObject
 public class Stat {
 
-    @JsonField String category = "";
-    @JsonField String specialty;
-    @JsonField int valueMin;
-    @JsonField int value;
-    @JsonField int valueTemporary;
-    @JsonField int valueMax;
-    @JsonField int numStars;
+    String category = "";
+    String specialty;
+    int valueMin;
+    int value;
+    int valueTemporary;
+    int valueMax;
+    int numStars;
 
     public Stat() {
     }

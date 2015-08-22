@@ -1,19 +1,12 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
 
-import com.bluelinelabs.logansquare.annotation.JsonField;
-import com.bluelinelabs.logansquare.annotation.JsonObject;
-
-import org.parceler.Parcel;
-
-@Parcel
-@JsonObject
 public class StatusModule extends Module {
 
-    @JsonField int valueMin;
-    @JsonField int value;
-    @JsonField int valueMax;
-    @JsonField int numStars;
+    int valueMin;
+    int value;
+    int valueMax;
+    int numStars;
 
     public StatusModule() {
         super(Type.STATUS);

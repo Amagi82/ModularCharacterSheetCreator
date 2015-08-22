@@ -35,8 +35,8 @@ public class TabFragment extends BaseFragment {
         GameCharacter character = ((MainActivity) getActivity()).getCurrentCharacter();
         Log.i(null, "Current character is "+character.getName());
         Sheet sheet = character.getSheets().get(getArguments().getInt("position"));
-        int spanCount = sheet.getNumColumns();
-        modules = sheet.getModules();
+        int spanCount = sheet.numColumns();
+        modules = sheet.modules();
 
         adapter = new SheetAdapter(getResources(), modules);
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), spanCount);

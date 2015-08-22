@@ -1,20 +1,13 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
-import com.bluelinelabs.logansquare.annotation.JsonField;
-import com.bluelinelabs.logansquare.annotation.JsonObject;
-
-import org.parceler.Parcel;
-
 import java.util.List;
 
-@Parcel
-@JsonObject
 public class HealthModule extends Module {
 
-    @JsonField List<Stat> healthLevels;
-    @JsonField int damageBashing;
-    @JsonField int damageLethal;
-    @JsonField int damageAgg;
+    List<Stat> healthLevels;
+    int damageBashing;
+    int damageLethal;
+    int damageAgg;
 
     public HealthModule() {
         super(Type.HEALTH);

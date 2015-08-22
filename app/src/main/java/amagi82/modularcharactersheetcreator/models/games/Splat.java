@@ -2,11 +2,6 @@ package amagi82.modularcharactersheetcreator.models.games;
 
 import android.support.annotation.StringRes;
 
-import com.bluelinelabs.logansquare.annotation.JsonField;
-import com.bluelinelabs.logansquare.annotation.JsonObject;
-
-import org.parceler.Parcel;
-
 import amagi82.modularcharactersheetcreator.R;
 
 import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
@@ -14,12 +9,10 @@ import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
 /*
     Splats are a generic term for factions or groups in the Storyteller/Storytelling system. Also known as "character axis".
  */
-@Parcel
-@JsonObject
-public class Splat {
-    @JsonField @StringRes int title;
-    @JsonField @StringRes int url;
-    @JsonField boolean endPoint;
+public class Splat{
+    @StringRes int title;
+    @StringRes int url;
+    boolean endPoint;
 
     public Splat() {
         this(NONE);

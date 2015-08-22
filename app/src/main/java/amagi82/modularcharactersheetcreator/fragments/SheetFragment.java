@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.activities.MainActivity;
 import amagi82.modularcharactersheetcreator.adapters.SheetPagerAdapter;
@@ -27,6 +29,7 @@ import amagi82.modularcharactersheetcreator.events.UpNavigationEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.modules.HeaderModule;
+import amagi82.modularcharactersheetcreator.models.modules.Module;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -142,9 +145,7 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
                 BUS.getBus().post(new EditCharacterEvent(character));
                 return true;
             case R.id.action_tab_add:
-                Sheet sheet = new Sheet();
-                sheet.setTitle("New Sheet");
-                adapter.addFragment(sheet);
+                adapter.addFragment(Sheet.create("New Sheet", new ArrayList<Module>()));
                 adapter.notifyDataSetChanged();
                 tabLayout.setTabsFromPagerAdapter(adapter);
                 return true;

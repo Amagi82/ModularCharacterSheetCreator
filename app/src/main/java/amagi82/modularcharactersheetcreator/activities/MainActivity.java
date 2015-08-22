@@ -30,7 +30,6 @@ import amagi82.modularcharactersheetcreator.models.games.systems.CMage;
 import amagi82.modularcharactersheetcreator.models.games.systems.CVampire;
 import amagi82.modularcharactersheetcreator.models.games.systems.CWerewolf;
 import amagi82.modularcharactersheetcreator.templates.Template;
-import amagi82.modularcharactersheetcreator.utils.Logan;
 
 public class MainActivity extends BaseActivity {
 
@@ -41,7 +40,6 @@ public class MainActivity extends BaseActivity {
     private FragmentManager fm = getSupportFragmentManager();
     private List<GameCharacter> characters;
     private GameCharacter currentCharacter;
-    private Logan logan = new Logan();
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +113,7 @@ public class MainActivity extends BaseActivity {
     private void saveCharacter(GameCharacter character) {
         NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>(BUCKET, character.getEntityId());
         entity.setData(character);
-        NoSQL.with(this).withSerializer(logan).using(GameCharacter.class).save(entity);
+        NoSQL.with(this).using(GameCharacter.class).save(entity);
     }
 
     @Subscribe public void onCharacterAdded(CharacterAddedEvent event) {

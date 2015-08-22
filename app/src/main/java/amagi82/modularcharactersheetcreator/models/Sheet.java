@@ -1,47 +1,24 @@
 package amagi82.modularcharactersheetcreator.models;
 
-import com.bluelinelabs.logansquare.annotation.JsonField;
-import com.bluelinelabs.logansquare.annotation.JsonObject;
+import android.os.Parcelable;
 
-import org.parceler.Parcel;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.models.modules.Module;
+import auto.parcel.AutoParcel;
 
-@Parcel
-@JsonObject
-public class Sheet {
+@AutoParcel
+public abstract class Sheet implements Parcelable{
 
-    @JsonField String title = "";
-    @JsonField int numColumns = 3;
-    @JsonField List<Module> modules = new ArrayList<>();
+    public abstract String title();
+    public abstract int numColumns();
+    public abstract List<Module> modules();
 
-    public Sheet() {
+    public static Sheet create(String title, int numColumns, List<Module> modules) {
+        return new AutoParcel_Sheet(title, numColumns, modules);
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public List<Module> getModules() {
-        return modules;
-    }
-
-    public void setModules(List<Module> modules) {
-        this.modules = modules;
-    }
-
-    public int getNumColumns() {
-        return numColumns;
-    }
-
-    public void setNumColumns(int numColumns) {
-        this.numColumns = numColumns;
+    public static Sheet create(String title, List<Module> modules) {
+        return new AutoParcel_Sheet(title, 3, modules);
     }
 }

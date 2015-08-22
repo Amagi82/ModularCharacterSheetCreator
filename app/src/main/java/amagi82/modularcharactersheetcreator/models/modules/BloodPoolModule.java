@@ -1,17 +1,10 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
-import com.bluelinelabs.logansquare.annotation.JsonField;
-import com.bluelinelabs.logansquare.annotation.JsonObject;
-
-import org.parceler.Parcel;
-
-@Parcel
-@JsonObject
 public class BloodPoolModule extends Module {
 
-    @JsonField int bloodCurrent;
-    @JsonField int bloodMax;
-    @JsonField int bloodPerTurn;
+    int bloodCurrent;
+    int bloodMax;
+    int bloodPerTurn;
 
     public BloodPoolModule() {
         this(null, 7, 10, 1);
