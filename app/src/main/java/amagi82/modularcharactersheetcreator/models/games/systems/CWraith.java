@@ -22,44 +22,44 @@ public class CWraith extends GameSystem {
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
         List<Splat> list = new ArrayList<>();
-        list.add(new Splat(R.string.iron_legion));
-        list.add(new Splat(R.string.skeletal_legion));
-        list.add(new Splat(R.string.grim_legion));
-        list.add(new Splat(R.string.penitent_legion));
-        list.add(new Splat(R.string.emerald_legion));
-        list.add(new Splat(R.string.silent_legion));
-        list.add(new Splat(R.string.legion_of_paupers));
-        list.add(new Splat(R.string.legion_of_fate));
+        list.add(Splat.create(R.string.iron_legion));
+        list.add(Splat.create(R.string.skeletal_legion));
+        list.add(Splat.create(R.string.grim_legion));
+        list.add(Splat.create(R.string.penitent_legion));
+        list.add(Splat.create(R.string.emerald_legion));
+        list.add(Splat.create(R.string.silent_legion));
+        list.add(Splat.create(R.string.legion_of_paupers));
+        list.add(Splat.create(R.string.legion_of_fate));
         return list;
     }
 
-    @Nullable @Override public List<Splat> getListRight(@Nullable Splat splat) {
+    @Override public List<Splat> getListRight(@Nullable Splat splat) {
         List<Splat> list = new ArrayList<>();
         if(splat != null){
-            switch (splat.getTitle()){
+            switch (splat.title()){
                 case R.string.great_guilds:
-                    list.add(new Splat(R.string.artificers));
-                    list.add(new Splat(R.string.masquers));
-                    list.add(new Splat(R.string.pardoners));
-                    list.add(new Splat(R.string.usurers));
+                    list.add(Splat.create(R.string.artificers));
+                    list.add(Splat.create(R.string.masquers));
+                    list.add(Splat.create(R.string.pardoners));
+                    list.add(Splat.create(R.string.usurers));
                     break;
                 case R.string.working_guilds:
-                    list.add(new Splat(R.string.chanteurs));
-                    list.add(new Splat(R.string.harbingers));
-                    list.add(new Splat(R.string.oracles));
-                    list.add(new Splat(R.string.sandmen));
+                    list.add(Splat.create(R.string.chanteurs));
+                    list.add(Splat.create(R.string.harbingers));
+                    list.add(Splat.create(R.string.oracles));
+                    list.add(Splat.create(R.string.sandmen));
                     break;
                 case R.string.criminal_guilds:
-                    list.add(new Splat(R.string.haunters));
-                    list.add(new Splat(R.string.monitors));
-                    list.add(new Splat(R.string.spooks));
-                    list.add(new Splat(R.string.proctors));
-                    list.add(new Splat(R.string.puppeteers));
+                    list.add(Splat.create(R.string.haunters));
+                    list.add(Splat.create(R.string.monitors));
+                    list.add(Splat.create(R.string.spooks));
+                    list.add(Splat.create(R.string.proctors));
+                    list.add(Splat.create(R.string.puppeteers));
                     break;
                 case R.string.forbidden_guilds:
-                    list.add(new Splat(R.string.alchemists));
-                    list.add(new Splat(R.string.mnemoi));
-                    list.add(new Splat(R.string.solicitors));
+                    list.add(Splat.create(R.string.alchemists));
+                    list.add(Splat.create(R.string.mnemoi));
+                    list.add(Splat.create(R.string.solicitors));
                     break;
                 default:
                     addDefault(list);
@@ -72,10 +72,10 @@ public class CWraith extends GameSystem {
     }
 
     private void addDefault(List<Splat> list){
-        list.add(new Splat(R.string.none));
-        list.add(new Splat(R.string.great_guilds, false));
-        list.add(new Splat(R.string.working_guilds, false));
-        list.add(new Splat(R.string.criminal_guilds, false));
-        list.add(new Splat(R.string.forbidden_guilds, false));
+        list.add(Splat.create(R.string.none));
+        list.add(Splat.create(R.string.great_guilds, false));
+        list.add(Splat.create(R.string.working_guilds, false));
+        list.add(Splat.create(R.string.criminal_guilds, false));
+        list.add(Splat.create(R.string.forbidden_guilds, false));
     }
 }

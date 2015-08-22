@@ -17,11 +17,13 @@ import com.squareup.otto.Subscribe;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterPagerAdapter;
 import amagi82.modularcharactersheetcreator.callbacks.PageListener;
+import amagi82.modularcharactersheetcreator.events.CharacterUpdatedEvent;
 import amagi82.modularcharactersheetcreator.events.LeftAxisEvent;
 import amagi82.modularcharactersheetcreator.events.PageChangedEvent;
 import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
 import amagi82.modularcharactersheetcreator.events.TileGameClickedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.games.Splat;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.widgets.NoSwipeViewPager;
 import butterknife.Bind;
@@ -40,15 +42,15 @@ public class EditCharacterActivity extends BaseActivity {
     @Bind(R.id.imageBackdrop) ImageView imageBackdrop;
     @Bind(R.id.viewpager) NoSwipeViewPager viewPager;
     private FragmentManager fm = getSupportFragmentManager();
-    GameCharacter character;
+    @State GameCharacter character;
     @State int backstack;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_character);
         ButterKnife.bind(this);
-        Log.i(null, "backstack == "+backstack);
-        Log.i(null, "character == "+character);
+        Log.i(null, "backstack == " + backstack);
+        Log.i(null, "character == " + character);
 
         imageBackdrop.getLayoutParams().height = new ScreenSize(this).getWidth() * 308 / 610;
         imageBackdrop.requestLayout();
@@ -57,8 +59,8 @@ public class EditCharacterActivity extends BaseActivity {
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(character == null) character = new GameCharacter();
-        else if(character.getGameSystem() != null) Glide.with(this).load(getString(character.getGameSystem().getSplashUrl())).into(imageBackdrop);
+        if (character == null) character = GameCharacter.builder().build();
+        else if (character.getGameSystem() != null) Glide.with(this).load(getString(character.getGameSystem().getSplashUrl())).into(imageBackdrop);
 
         viewPager.addOnPageChangeListener(new PageListener() {
             @Override public void onPageSelected(int position) {
@@ -69,30 +71,34 @@ public class EditCharacterActivity extends BaseActivity {
         viewPager.setCurrentItem(character.getProgress());
     }
 
-    public GameCharacter getGameCharacter(){
+    public GameCharacter getGameCharacter() {
         return character;
     }
 
     @Subscribe public void onGameSystemSelected(TileGameClickedEvent event) {
-        character.setGameTitle(event.system.getGameTitle());
+        character = character.toBuilder().gameTitle(event.system.getGameTitle()).build();
         Glide.with(this).load(getString(event.system.getSplashUrl())).into(imageBackdrop);
         Log.i(null, "imageBackdrop is " + imageBackdrop.getMeasuredWidth() + " wide by " + imageBackdrop.getMeasuredHeight() + " tall");
         next();
     }
 
     @Subscribe public void onLeftAxisChosen(LeftAxisEvent event) {
-        character.setLeft(event.splat);
+        character = character.toBuilder().left(event.splat).build();
         next();
     }
 
     @Subscribe public void onRightAxisChosen(RightAxisEvent event) {
-        character.setRight(event.splat);
-        if(character.getGameSystem().checkLeft()) character.setLeft(character.getGameSystem().updateLeft(character.getLeft(), character.getRight()));
+        Splat updatedLeft = character.getGameSystem().checkLeft() ? character.getGameSystem().updateLeft(character.left(), event.splat) : character.left();
+        character = character.toBuilder().left(updatedLeft).right(event.splat).build();
         appbar.setExpanded(true);
         next();
     }
 
-    private void next(){
+    @Subscribe public void onCharacterUpdated(CharacterUpdatedEvent event) {
+        character = event.character;
+    }
+
+    private void next() {
         viewPager.nextPage();
         backstack++;
     }
@@ -122,11 +128,11 @@ public class EditCharacterActivity extends BaseActivity {
     }
 
     @Override public void onBackPressed() {
-        if(backstack > 0){
+        if (backstack > 0) {
             character.removeProgress(viewPager.getCurrentItem());
             viewPager.previousPage();
             backstack--;
-            if(viewPager.getCurrentItem() == 0) imageBackdrop.setImageResource(0);
-        }else super.onBackPressed();
+            if (viewPager.getCurrentItem() == 0) imageBackdrop.setImageResource(0);
+        } else super.onBackPressed();
     }
 }

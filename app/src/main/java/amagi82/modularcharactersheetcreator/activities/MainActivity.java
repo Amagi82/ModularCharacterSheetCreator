@@ -14,7 +14,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.events.CharacterAddedEvent;
-import amagi82.modularcharactersheetcreator.events.CharacterChangedEvent;
+import amagi82.modularcharactersheetcreator.events.CharacterUpdatedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterClickedEvent;
 import amagi82.modularcharactersheetcreator.events.CharacterDeletedEvent;
 import amagi82.modularcharactersheetcreator.events.CreateNewCharacterEvent;
@@ -93,25 +93,27 @@ public class MainActivity extends BaseActivity {
 
     private void generateSampleCharacters() {
         Log.i(null, "Creating data");
-        characters.add(new GameCharacter("Thomas Anstis", new CVampire(), new Splat(R.string.gangrel, R.string.url_cwod_vampire_clan_gangrel), new Splat(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla)));
-        characters.add(new GameCharacter("Tom Lytton", new CVampire(), new Splat(R.string.brujah_antitribu, R.string.url_cwod_vampire_antitribu_brujah), new Splat(R.string.anarchs, R.string.url_cwod_vampire_sect_anarchs)));
-        characters.add(new GameCharacter("Georgia Johnson", new CVampire(), new Splat(R.string.tremere, R.string.url_cwod_vampire_clan_tremere), new Splat(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla)));
-        characters.add(new GameCharacter("Augustus von Rabenholtz", new CVampire(), new Splat(R.string.ventrue, R.string.url_cwod_vampire_clan_ventrue), new Splat(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla)));
-        characters.add(new GameCharacter("Dr. Von Natsi", new CMage(), new Splat(R.string.traditions, R.string.url_cwod_mage_faction_traditions), new Splat(R.string.scions_of_ether, R.string.url_cwod_mage_tradition_scions_of_ether)));
-        characters.add(new GameCharacter("Stormwalker", new CWerewolf(), new Splat(R.string.glass_walkers, R.string.url_cwod_werewolf_tribe_glass_walkers), new Splat(R.string.ahroun, R.string.url_cwod_werewolf_auspice_ahroun)));
+        characters.add(GameCharacter.create("Thomas Anstis", new CVampire(), Splat.create(R.string.gangrel, R.string.url_cwod_vampire_clan_gangrel), Splat.create(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla)));
+        characters.add(GameCharacter.create("Tom Lytton", new CVampire(), Splat.create(R.string.brujah_antitribu, R.string.url_cwod_vampire_antitribu_brujah), Splat.create(R.string.anarchs, R.string.url_cwod_vampire_sect_anarchs)));
+        characters.add(GameCharacter.create("Georgia Johnson", new CVampire(), Splat.create(R.string.tremere, R.string.url_cwod_vampire_clan_tremere), Splat.create(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla)));
+        characters.add(GameCharacter.create("Augustus von Rabenholtz", new CVampire(), Splat.create(R.string.ventrue, R.string.url_cwod_vampire_clan_ventrue), Splat.create(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla)));
+        characters.add(GameCharacter.create("Dr. Von Natsi", new CMage(), Splat.create(R.string.traditions, R.string.url_cwod_mage_faction_traditions), Splat.create(R.string.scions_of_ether, R.string.url_cwod_mage_tradition_scions_of_ether)));
+        characters.add(GameCharacter.create("Stormwalker", new CWerewolf(), Splat.create(R.string.glass_walkers, R.string.url_cwod_werewolf_tribe_glass_walkers), Splat.create(R.string.ahroun, R.string.url_cwod_werewolf_auspice_ahroun)));
 
         for (GameCharacter character : characters) {
-            Log.i(null, "Creating template for "+character.getName());
+            Log.i(null, "Creating template for "+character.name());
             Template template = new Template(this, character);
             Sheet sheet = template.createDefaultSheet();
-            character.getSheets().add(sheet);
-            Log.i(null, character.getName() + " contains " + character.getGameSystem().toString());
+            List<Sheet> sheets = new ArrayList<>();
+            sheets.add(sheet);
+            character = character.toBuilder().sheets(sheets).build();
+            Log.i(null, character.name() + " contains " + character.getGameSystem().toString());
         }
         for (GameCharacter character : characters) saveCharacter(character);
     }
 
     private void saveCharacter(GameCharacter character) {
-        NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>(BUCKET, character.getEntityId());
+        NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>(BUCKET, character.entityId());
         entity.setData(character);
         NoSQL.with(this).using(GameCharacter.class).save(entity);
     }
@@ -121,20 +123,20 @@ public class MainActivity extends BaseActivity {
         saveCharacter(event.character);
     }
 
-    @Subscribe public void onCharacterChanged(CharacterChangedEvent event) {
+    @Subscribe public void onCharacterChanged(CharacterUpdatedEvent event) {
         for (GameCharacter character : characters) {
-            if (character.getEntityId().equals(event.character.getEntityId())) {
+            if (character.entityId().equals(event.character.entityId())) {
                 character = event.character;
                 saveCharacter(character);
-                Log.i(null, character.getName() + " has been updated");
+                Log.i(null, character.name() + " has been updated");
             } else Log.i(null, "Character failed to update");
         }
     }
 
     @Subscribe public void onCharacterDeleted(CharacterDeletedEvent event) {
         for (int i = characters.size() - 1; i>= 0; i--) {
-            if (characters.get(i).getEntityId().equals(event.character.getEntityId())) {
-                NoSQL.with(this).using(GameCharacter.class).bucketId(BUCKET).entityId(event.character.getEntityId()).delete();
+            if (characters.get(i).entityId().equals(event.character.entityId())) {
+                NoSQL.with(this).using(GameCharacter.class).bucketId(BUCKET).entityId(event.character.entityId()).delete();
                 characters.remove(characters.get(i));
                 break;
             }

@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games.systems;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -21,71 +22,71 @@ public class Exalted extends GameSystem {
     }
 
     @Override public int getRightTitle(Splat leftSplat) {
-        return leftSplat.getTitle() == R.string.terrestrial_exalted ? R.string.aspect : R.string.caste;
+        return leftSplat.title() == R.string.terrestrial_exalted ? R.string.aspect : R.string.caste;
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
         List<Splat> list = new ArrayList<>();
-        list.add(new Splat(R.string.solar_exalted));
-        list.add(new Splat(R.string.abyssal_exalted));
-        list.add(new Splat(R.string.lunar_exalted));
-        list.add(new Splat(R.string.sidereal_exalted));
-        list.add(new Splat(R.string.terrestrial_exalted));
-        list.add(new Splat(R.string.alchemical_exalted));
-        list.add(new Splat(R.string.infernal_exalted));
+        list.add(Splat.create(R.string.solar_exalted));
+        list.add(Splat.create(R.string.abyssal_exalted));
+        list.add(Splat.create(R.string.lunar_exalted));
+        list.add(Splat.create(R.string.sidereal_exalted));
+        list.add(Splat.create(R.string.terrestrial_exalted));
+        list.add(Splat.create(R.string.alchemical_exalted));
+        list.add(Splat.create(R.string.infernal_exalted));
         return list;
     }
 
-    @Override public List<Splat> getListRight(Splat splat) {
+    @Override public List<Splat> getListRight(@NonNull Splat splat) {
         List<Splat> list = new ArrayList<>();
-        switch (splat.getTitle()) {
+        switch (splat.title()) {
             case R.string.solar_exalted:
-                list.add(new Splat(R.string.dawn));
-                list.add(new Splat(R.string.zenith));
-                list.add(new Splat(R.string.twilight));
-                list.add(new Splat(R.string.night));
-                list.add(new Splat(R.string.eclipse));
+                list.add(Splat.create(R.string.dawn));
+                list.add(Splat.create(R.string.zenith));
+                list.add(Splat.create(R.string.twilight));
+                list.add(Splat.create(R.string.night));
+                list.add(Splat.create(R.string.eclipse));
                 break;
             case R.string.abyssal_exalted:
-                list.add(new Splat(R.string.dusk));
-                list.add(new Splat(R.string.midnight));
-                list.add(new Splat(R.string.daybreak));
-                list.add(new Splat(R.string.day));
-                list.add(new Splat(R.string.moonshadow));
+                list.add(Splat.create(R.string.dusk));
+                list.add(Splat.create(R.string.midnight));
+                list.add(Splat.create(R.string.daybreak));
+                list.add(Splat.create(R.string.day));
+                list.add(Splat.create(R.string.moonshadow));
                 break;
             case R.string.lunar_exalted:
-                list.add(new Splat(R.string.full_moon));
-                list.add(new Splat(R.string.changing_moon));
-                list.add(new Splat(R.string.no_moon));
-                list.add(new Splat(R.string.casteless));
+                list.add(Splat.create(R.string.full_moon));
+                list.add(Splat.create(R.string.changing_moon));
+                list.add(Splat.create(R.string.no_moon));
+                list.add(Splat.create(R.string.casteless));
                 break;
             case R.string.sidereal_exalted:
-                list.add(new Splat(R.string.air));
-                list.add(new Splat(R.string.earth));
-                list.add(new Splat(R.string.fire));
-                list.add(new Splat(R.string.water));
-                list.add(new Splat(R.string.wood));
+                list.add(Splat.create(R.string.air));
+                list.add(Splat.create(R.string.earth));
+                list.add(Splat.create(R.string.fire));
+                list.add(Splat.create(R.string.water));
+                list.add(Splat.create(R.string.wood));
                 break;
             case R.string.terrestrial_exalted:
-                list.add(new Splat(R.string.chosen_of_journeys));
-                list.add(new Splat(R.string.chosen_of_serenity));
-                list.add(new Splat(R.string.chosen_of_battles));
-                list.add(new Splat(R.string.chosen_of_secrets));
-                list.add(new Splat(R.string.chosen_of_endings));
+                list.add(Splat.create(R.string.chosen_of_journeys));
+                list.add(Splat.create(R.string.chosen_of_serenity));
+                list.add(Splat.create(R.string.chosen_of_battles));
+                list.add(Splat.create(R.string.chosen_of_secrets));
+                list.add(Splat.create(R.string.chosen_of_endings));
                 break;
             case R.string.alchemical_exalted:
-                list.add(new Splat(R.string.orichalcum));
-                list.add(new Splat(R.string.moonsilver));
-                list.add(new Splat(R.string.starmetal));
-                list.add(new Splat(R.string.jade));
-                list.add(new Splat(R.string.soulsteel));
+                list.add(Splat.create(R.string.orichalcum));
+                list.add(Splat.create(R.string.moonsilver));
+                list.add(Splat.create(R.string.starmetal));
+                list.add(Splat.create(R.string.jade));
+                list.add(Splat.create(R.string.soulsteel));
                 break;
             case R.string.infernal_exalted:
-                list.add(new Splat(R.string.slayer));
-                list.add(new Splat(R.string.malefactor));
-                list.add(new Splat(R.string.defiler));
-                list.add(new Splat(R.string.scrourge));
-                list.add(new Splat(R.string.fiend));
+                list.add(Splat.create(R.string.slayer));
+                list.add(Splat.create(R.string.malefactor));
+                list.add(Splat.create(R.string.defiler));
+                list.add(Splat.create(R.string.scrourge));
+                list.add(Splat.create(R.string.fiend));
                 break;
             default:
                 return null;

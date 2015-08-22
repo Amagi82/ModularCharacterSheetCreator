@@ -3,6 +3,7 @@ package amagi82.modularcharactersheetcreator.adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,7 +28,7 @@ public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
     public MainAdapter(Context context) {
         characters = new SortedList<>(GameCharacter.class, new SortedList.Callback<GameCharacter>() {
             @Override public int compare(GameCharacter o1, GameCharacter o2) {
-                return o1.getTimeStamp() > o2.getTimeStamp() ? -1 : o1.getTimeStamp() < o2.getTimeStamp() ? 1 : 0;
+                return o1.timeStamp() > o2.timeStamp() ? -1 : o1.timeStamp() < o2.timeStamp() ? 1 : 0;
             }
 
             @Override public void onInserted(int position, int count) {
@@ -51,7 +52,7 @@ public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
             }
 
             @Override public boolean areItemsTheSame(GameCharacter item1, GameCharacter item2) {
-                return item1.getEntityId().equals(item2.getEntityId());
+                return item1.entityId().equals(item2.entityId());
             }
         });
         this.context = context;
@@ -69,9 +70,10 @@ public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
     @Override
     public void onBindViewHolder(final CharacterViewHolder vh, final int position) {
         final GameCharacter character = characters.get(position);
-        if (character.getImageUriPort() == null) vh.icon.setImageBitmap(new CircleIcon(res).createIcon(character.getName(), res.getColor(R.color.primary)));
-        else Glide.with(context).load(character.getImageUriPort()).centerCrop().into(vh.icon);
-        vh.tvName.setText(character.getName());
+        Uri imageUri = character.imageUriPort() == null? character.imageUriLand() : character.imageUriPort();
+        if (imageUri == null) vh.icon.setImageBitmap(new CircleIcon(res).createIcon(character.name()));
+        else Glide.with(context).load(imageUri).centerCrop().into(vh.icon);
+        vh.tvName.setText(character.name());
         vh.tvArchetype.setText(character.getArchetype());
         vh.tvGameSystem.setTextColor(res.getColor(character.getGameSystem().getGameColor()));
         vh.tvGameSystem.setText(character.getGameSystem().getGameTitle());

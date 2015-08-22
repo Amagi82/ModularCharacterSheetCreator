@@ -28,6 +28,7 @@ import java.io.IOException;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.activities.EditCharacterActivity;
+import amagi82.modularcharactersheetcreator.events.CharacterUpdatedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
@@ -37,6 +38,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
+import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 import static android.app.Activity.RESULT_OK;
 
 public class CharacterNameFragment extends BaseFragment {
@@ -80,20 +82,20 @@ public class CharacterNameFragment extends BaseFragment {
         return rootView;
     }
 
-    @Override public void setUserVisibleHint(boolean isVisibleToUser) {
+    @SuppressWarnings("ConstantConditions") @Override public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser){
             Log.i(null, "CharacterNameFragment is visible");
             character = ((EditCharacterActivity) getActivity()).getGameCharacter();
             GameSystem system = character.getGameSystem();
-            if(system != null && character.getLeft() != null && character.getRight() != null){
+            if(system != null && character.left() != null && character.right() != null){
                 tvLeftSplatTitle.setText(getString(system.getLeftTitle())+":");
-                tvRightSplatTitle.setText(getString(system.getRightTitle(character.getLeft())) + ":");
+                tvRightSplatTitle.setText(getString(system.getRightTitle(character.left())) + ":");
                 int size = getResources().getDimensionPixelSize(R.dimen.character_circle_icon_size);
-                Glide.with(this).load(new SplatIcon(getResources(), character.getLeft(), size).getUrl()).into(leftSplat);
-                Glide.with(this).load(new SplatIcon(getResources(), character.getRight(), size).getUrl()).into(rightSplat);
-                tvLeftSplat.setText(getString(character.getLeft().getTitle()));
-                tvRightSplat.setText(getString(character.getRight().getTitle()));
+                Glide.with(this).load(new SplatIcon(getResources(), character.left(), size).getUrl()).into(leftSplat);
+                Glide.with(this).load(new SplatIcon(getResources(), character.right(), size).getUrl()).into(rightSplat);
+                tvLeftSplat.setText(getString(character.left().title()));
+                tvRightSplat.setText(getString(character.right().title()));
             }
         }
     }
@@ -107,11 +109,9 @@ public class CharacterNameFragment extends BaseFragment {
                 public void onClick(DialogInterface dialog, int which) {
                     if (which == 0) {
                         //Remove the image and use the default icon
-                        character.setImageUriPort(null);
-                        character.setImageUriLand(null);
+                        character = character.toBuilder().clearImageUri().colorBackground(NONE).colorText(NONE).colorTextDim(NONE).build();
+                        BUS.getBus().post(new CharacterUpdatedEvent(character));
                         imagePortrait.setImageResource(0);
-                        character.setColorBackground(NONE);
-                        character.setColorText(NONE);
                         //setTextScrims();
                     } else getImageFromGallery();
                 }
@@ -144,8 +144,6 @@ public class CharacterNameFragment extends BaseFragment {
                     @Override public void onClick(DialogInterface dialog, int which) {
                         Bitmap croppedImage = cropper.getCroppedImage();
                         Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), croppedImage, "OnyxPathCharacterPortrait", "Portrait used by your character"));
-                        if(isOrientationPort()) character.setImageUriPort(uri);
-                        else character.setImageUriLand(uri);
 
                         Palette palette = Palette.from(croppedImage).generate();
                         Palette.Swatch swatch = null;
@@ -156,19 +154,20 @@ public class CharacterNameFragment extends BaseFragment {
                                 if (swatch == null || swatch.getPopulation() < s.getPopulation()) swatch = s;
                             }
                         }
-                        if (swatch != null) {
-                            character.setColorBackground(swatch.getRgb());
-                            character.setColorText(swatch.getBodyTextColor());
-                            character.setColorTextDim(swatch.getTitleTextColor());
-                        }
+                        boolean noSwatch = swatch == null;
+                        character = character.toBuilder().imageUri(uri, isOrientationPort())
+                                .colorBackground(noSwatch? NONE : swatch.getRgb())
+                                .colorText(noSwatch? NONE : swatch.getBodyTextColor())
+                                .colorTextDim(noSwatch? NONE : swatch.getTitleTextColor()).build();
                         Glide.with(CharacterNameFragment.this).load(uri).into(imagePortrait);
+                        BUS.getBus().post(new CharacterUpdatedEvent(character));
                         //setTextScrims();
                     }
                 }).show();
     }
 
     private Uri getUri() {
-        return isOrientationPort()? character.getImageUriPort() : character.getImageUriLand();
+        return isOrientationPort()? character.imageUriPort() : character.imageUriLand();
     }
 
     private boolean isOrientationPort(){

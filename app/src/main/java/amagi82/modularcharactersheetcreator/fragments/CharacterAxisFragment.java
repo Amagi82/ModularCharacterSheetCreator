@@ -70,11 +70,11 @@ public class CharacterAxisFragment extends BaseFragment {
 
         if (system != null) {
             if (isLeft) {
-                adapter.addAll(system.getListLeft(character.getLeft()));
+                adapter.addAll(system.getListLeft(character.left()));
                 setTvPrompt(system.getLeftTitle());
-            } else if (character.getLeft() != null) {
-                adapter.addAll(system.getListRight(character.getLeft()));
-                setTvPrompt(system.getRightTitle(character.getLeft()));
+            } else if (character.left() != null) {
+                adapter.addAll(system.getListRight(character.left()));
+                setTvPrompt(system.getRightTitle(character.left()));
             }
         }
     }

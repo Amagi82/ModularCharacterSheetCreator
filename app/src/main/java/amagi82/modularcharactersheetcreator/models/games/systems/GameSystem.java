@@ -14,18 +14,16 @@ public abstract class GameSystem {
 
     @StringRes protected int gameTitle = NONE;
     @StringRes protected int leftTitle = NONE;
-    @StringRes protected int rightTitle = NONE; //Note: some titles change based on category. Always call rightTitle after listRight.
+    @StringRes protected int rightTitle = NONE;
     @StringRes protected int gameUrl = NONE;
     @StringRes protected int splashUrl = NONE;
-    @ColorRes protected int gameColor = NONE; //Used in the list of characters @MainAdapter now.
+    @ColorRes protected int gameColor = NONE; //Used in the list of characters in MainAdapter
     protected boolean isArchetypeLeft = true; //Archetype is displayed under the game system in the list of characters
     protected boolean checkLeft = false; //With CVampire, Sect must be known to determine if Clan is antitribu.
 
     public abstract List<Splat> getListLeft(@Nullable Splat splat);
 
-    @Nullable
-    public abstract List<Splat> getListRight(@Nullable Splat splat);
-
+    public abstract List<Splat> getListRight(Splat splat);
 
     public int getGameTitle() {
         return gameTitle;
@@ -35,7 +33,7 @@ public abstract class GameSystem {
         return leftTitle;
     }
 
-    public int getRightTitle(@Nullable Splat leftSplat) {
+    public int getRightTitle(Splat leftSplat) {
         return rightTitle;
     }
 

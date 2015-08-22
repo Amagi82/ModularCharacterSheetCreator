@@ -1,202 +1,106 @@
 package amagi82.modularcharactersheetcreator.models;
 
 import android.net.Uri;
+import android.os.Parcelable;
 import android.support.annotation.ColorInt;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
 import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
+import auto.parcel.AutoParcel;
 
 import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
 
+@AutoParcel
+public abstract class GameCharacter implements Parcelable{
+    public abstract String name();
+    @Nullable public abstract Splat left();
+    @Nullable public abstract Splat right();
+    public abstract @StringRes int gameTitle();
+    public abstract @ColorInt int colorBackground();
+    public abstract @ColorInt int colorText();
+    public abstract @ColorInt int colorTextDim();
+    @Nullable public abstract List<Sheet> sheets();
+    @Nullable public abstract Uri imageUriPort();
+    @Nullable public abstract Uri imageUriLand();
+    public abstract String entityId();
+    public abstract long timeStamp();
 
-public class GameCharacter {
-    String name = "";
-    Splat left;
-    Splat right;
-    @StringRes int gameTitle = NONE;
-    @ColorInt int colorBackground = NONE;
-    @ColorInt int colorText = NONE;
-    @ColorInt int colorTextDim = NONE;
-    String entityId = UUID.randomUUID().toString();
-    long timeStamp;
-    List<Sheet> sheets = new ArrayList<>();
-    String imageUriPortString;
-    String imageUriLandString;
-    Uri imageUriPort;
-    Uri imageUriLand;
-
-    public GameCharacter() {
-        timeStamp = System.currentTimeMillis();
+    GameCharacter() {
     }
 
-    public GameCharacter(String name, GameSystem system, Splat left, Splat right){
-        this.name = name;
-        gameTitle = system.getGameTitle();
-        this.left = left;
-        this.right = right;
+    public static GameCharacter create(String name, GameSystem system, Splat left, Splat right){
+        return builder().name(name).gameTitle(system.getGameTitle()).left(left).right(right).build();
     }
+
+    @AutoParcel.Builder
+    public abstract static class Builder{
+        public abstract Builder name(String name);
+        public abstract Builder left(Splat left);
+        public abstract Builder right(Splat right);
+        public abstract Builder gameTitle(@StringRes int title);
+        public abstract Builder colorBackground(@ColorInt int color);
+        public abstract Builder colorText(@ColorInt int color);
+        public abstract Builder colorTextDim(@ColorInt int color);
+        public abstract Builder sheets(List<Sheet> sheets);
+        public Builder imageUri(Uri image, boolean portrait){
+            return portrait? imageUriPort(image) : imageUriLand(image);
+        }
+        public Builder clearImageUri(){
+            return imageUriPort(null).imageUriLand(null);
+        }
+        abstract Builder imageUriPort(Uri imagePort);
+        abstract Builder imageUriLand(Uri imageLand);
+        abstract Builder entityId(String id);
+        abstract Builder timeStamp(long currentTime);
+        public abstract GameCharacter build();
+
+        Builder() {
+        }
+    }
+    public static Builder builder(){
+        return new AutoParcel_GameCharacter.Builder()
+                .name("")
+                .gameTitle(NONE)
+                .colorBackground(NONE)
+                .colorText(NONE)
+                .colorTextDim(NONE)
+                .entityId(UUID.randomUUID().toString())
+                .timeStamp(System.currentTimeMillis());
+    }
+
+    public abstract Builder toBuilder();
 
     //Minimum requirements necessary to save the character
     public boolean isComplete() {
-        return name.length() > 0 && gameTitle != NONE && left != null && right != null;
+        return name().length() > 0 && gameTitle() != NONE && left() != null && right() != null;
     }
 
     //Used during character creation/editing. Gets the current step in the character creation process
     public int getProgress(){
-        return gameTitle == NONE ? 0 : left == null? 1 : right == null? 2 : 3;
+        return gameTitle() == NONE ? 0 : left() == null? 1 : right() == null? 2 : 3;
     }
 
     //Used during character creation/editing. Removes progress on back.
-    public void removeProgress(int fromStep){
-        Log.i(null, "removeProgress from step: "+fromStep);
-        switch (fromStep){
-            case 1:
-                gameTitle = NONE;
-            case 2:
-                left = null;
-            case 3:
-                right = null;
-                break;
-            default:
-                break;
-        }
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Splat getLeft() {
-        return left;
-    }
-
-    public void setLeft(Splat left) {
-        this.left = left;
-    }
-
-    public Splat getRight() {
-        return right;
-    }
-
-    public void setRight(Splat right) {
-        this.right = right;
-    }
-
-    public int getGameTitle() {
-        return gameTitle;
-    }
-
-    public void setGameTitle(int gameTitle) {
-        this.gameTitle = gameTitle;
+    public GameCharacter removeProgress(int fromStep){
+        int gameTitle = fromStep <= 1? NONE : gameTitle();
+        Splat left = fromStep <= 2? null : left();
+        Splat right = fromStep <= 3? null : right();
+        return toBuilder().gameTitle(gameTitle).left(left).right(right).build();
     }
 
     public GameSystem getGameSystem(){
-        return gameTitle == NONE? null : new Game().getSystem(gameTitle);
+        return new Game().getSystem(gameTitle()); //May return null.
     }
 
     public int getArchetype() {
-        if(left == null || right == null || gameTitle == NONE) return NONE;
-        return new Game().getSystem(gameTitle).isArchetypeLeft()? left.getTitle() : right.getTitle();
-    }
-
-    public int getColorBackground() {
-        return colorBackground;
-    }
-
-    public void setColorBackground(int colorBackground) {
-        this.colorBackground = colorBackground;
-    }
-
-    public int getColorText() {
-        return colorText;
-    }
-
-    public void setColorText(int colorText) {
-        this.colorText = colorText;
-    }
-
-    public int getColorTextDim() {
-        return colorTextDim;
-    }
-
-    public void setColorTextDim(int colorTextDim) {
-        this.colorTextDim = colorTextDim;
-    }
-
-    public String getEntityId() {
-        return entityId;
-    }
-
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-
-    public long getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(long timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
-    public void updateTimeStamp() {
-        timeStamp = System.currentTimeMillis();
-    }
-
-    public List<Sheet> getSheets() {
-        return sheets;
-    }
-
-    public void setSheets(List<Sheet> sheets) {
-        this.sheets = sheets;
-    }
-
-    public String getImageUriPortString() {
-        return imageUriPortString;
-    }
-
-    public void setImageUriPortString(String imageUriPortString) {
-        this.imageUriPortString = imageUriPortString;
-        if(imageUriPort == null) imageUriPort = Uri.parse(imageUriPortString);
-    }
-
-    public String getImageUriLandString() {
-        return imageUriLandString;
-    }
-
-    public void setImageUriLandString(String imageUriLandString) {
-        this.imageUriLandString = imageUriLandString;
-        if(imageUriLand == null) imageUriLand = Uri.parse(imageUriLandString);
-    }
-
-    public Uri getImageUriPort() {
-        return imageUriPort;
-    }
-
-    public void setImageUriPort(Uri imageUriPort) {
-        this.imageUriPort = imageUriPort;
-        this.imageUriPortString = imageUriPort.toString();
-        if(imageUriLand == null) setImageUriLand(imageUriPort);
-    }
-
-    public Uri getImageUriLand() {
-        return imageUriLand;
-    }
-
-    public void setImageUriLand(Uri imageUriLand) {
-        this.imageUriLand = imageUriLand;
-        this.imageUriLandString = imageUriLand.toString();
-        if(imageUriPort == null) setImageUriPort(imageUriLand);
+        if(left() == null || right() == null || gameTitle() == NONE) return NONE;
+        //noinspection ConstantConditions
+        return new Game().getSystem(gameTitle()).isArchetypeLeft()? left().title() : right().title();
     }
 }

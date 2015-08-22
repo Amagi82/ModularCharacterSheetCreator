@@ -1,62 +1,35 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.os.Parcelable;
 import android.support.annotation.StringRes;
 
 import amagi82.modularcharactersheetcreator.R;
-
-import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
+import auto.parcel.AutoParcel;
 
 /*
     Splats are a generic term for factions or groups in the Storyteller/Storytelling system. Also known as "character axis".
  */
-public class Splat{
-    @StringRes int title;
-    @StringRes int url;
-    boolean endPoint;
+@AutoParcel
+public abstract class Splat implements Parcelable{
 
-    public Splat() {
-        this(NONE);
+    private static int DEFAULT_URL = R.string.url_default;
+
+    public abstract @StringRes int title();
+    public abstract @StringRes int url();
+    public abstract boolean isEndPoint();
+
+    Splat() {
     }
 
-    public Splat(@StringRes int title) {
-        this(title, R.string.url_default);
+    public static Splat create(@StringRes int title) {
+        return new AutoParcel_Splat(title, DEFAULT_URL, true);
     }
 
-    public Splat(@StringRes int title, boolean endPoint) {
-        this(title, R.string.url_default, endPoint);
+    public static Splat create(@StringRes int title, boolean isEndPoint) {
+        return new AutoParcel_Splat(title, DEFAULT_URL, isEndPoint);
     }
 
-    public Splat(@StringRes int title, @StringRes int url) {
-        this(title, url, true);
-    }
-
-    public Splat(@StringRes int title, @StringRes int url, boolean endPoint) {
-        this.title = title;
-        this.url = url;
-        this.endPoint = endPoint;
-    }
-
-    public int getTitle() {
-        return title;
-    }
-
-    public void setTitle(@StringRes int title) {
-        this.title = title;
-    }
-
-    public int getUrl() {
-        return url;
-    }
-
-    public void setUrl(@StringRes int url) {
-        this.url = url;
-    }
-
-    public boolean isEndPoint() {
-        return endPoint;
-    }
-
-    public void setEndPoint(boolean endPoint) {
-        this.endPoint = endPoint;
+    public static Splat create(@StringRes int title, @StringRes int url) {
+        return new AutoParcel_Splat(title, url, true);
     }
 }

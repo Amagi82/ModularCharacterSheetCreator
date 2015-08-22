@@ -14,6 +14,9 @@ public abstract class Sheet implements Parcelable{
     public abstract int numColumns();
     public abstract List<Module> modules();
 
+    Sheet() {
+    }
+
     public static Sheet create(String title, int numColumns, List<Module> modules) {
         return new AutoParcel_Sheet(title, numColumns, modules);
     }

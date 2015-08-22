@@ -23,7 +23,7 @@ public class SplatIcon {
 
     public String getUrl() {
         //The 20th Anniversary images are 500x500px, and all others are 200x200px. Request smaller images if needed.
-        String url = res.getString(splat.getUrl());
+        String url = res.getString(splat.url());
         boolean big = url.contains("20th");
         if ((!big && size > 200) || (big && size > 500)) return url;
         int pos = url.lastIndexOf("/") + 1;

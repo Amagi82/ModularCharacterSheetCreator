@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,7 @@ import amagi82.modularcharactersheetcreator.models.Sheet;
 
 public class SheetPagerAdapter extends FragmentStatePagerAdapter {
 
-    private List<Sheet> sheets = new ArrayList<>();
+    private List<Sheet> sheets;
     private Map<Sheet, Fragment> map = new HashMap<>();
 
     public SheetPagerAdapter(FragmentManager fm, List<Sheet> sheets) {

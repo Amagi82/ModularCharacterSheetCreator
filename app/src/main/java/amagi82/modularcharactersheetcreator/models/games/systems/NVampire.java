@@ -22,23 +22,23 @@ public class NVampire extends GameSystem {
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
         List<Splat> list = new ArrayList<>();
-        list.add(new Splat(R.string.daeva, R.string.url_nwod_vampire_clan_daeva));
-        list.add(new Splat(R.string.gangrel, R.string.url_nwod_vampire_clan_gangrel));
-        list.add(new Splat(R.string.mekhet, R.string.url_nwod_vampire_clan_mekhet));
-        list.add(new Splat(R.string.nosferatu, R.string.url_nwod_vampire_clan_nosferatu));
-        list.add(new Splat(R.string.ventrue, R.string.url_nwod_vampire_clan_ventrue));
+        list.add(Splat.create(R.string.daeva, R.string.url_nwod_vampire_clan_daeva));
+        list.add(Splat.create(R.string.gangrel, R.string.url_nwod_vampire_clan_gangrel));
+        list.add(Splat.create(R.string.mekhet, R.string.url_nwod_vampire_clan_mekhet));
+        list.add(Splat.create(R.string.nosferatu, R.string.url_nwod_vampire_clan_nosferatu));
+        list.add(Splat.create(R.string.ventrue, R.string.url_nwod_vampire_clan_ventrue));
         return list;
     }
 
     @Override public List<Splat> getListRight(@Nullable Splat splat) {
         List<Splat> list = new ArrayList<>();
-        list.add(new Splat(R.string.carthian_movement, R.string.url_nwod_vampire_covenant_carthian_movement));
-        list.add(new Splat(R.string.circle_of_the_crone, R.string.url_nwod_vampire_covenant_circle_of_the_crone));
-        list.add(new Splat(R.string.holy_engineers, R.string.url_nwod_vampire_covenant_holy_engineers));
-        list.add(new Splat(R.string.invictus, R.string.url_nwod_vampire_covenant_invictus));
-        list.add(new Splat(R.string.lancea_et_sanctum, R.string.url_nwod_vampire_covenant_lancea_et_sanctum));
-        list.add(new Splat(R.string.ordo_dracul, R.string.url_nwod_vampire_covenant_ordo_dracul));
-        list.add(new Splat(R.string.unaligned, R.string.url_nwod_vampire_covenant_unaligned));
+        list.add(Splat.create(R.string.carthian_movement, R.string.url_nwod_vampire_covenant_carthian_movement));
+        list.add(Splat.create(R.string.circle_of_the_crone, R.string.url_nwod_vampire_covenant_circle_of_the_crone));
+        list.add(Splat.create(R.string.holy_engineers, R.string.url_nwod_vampire_covenant_holy_engineers));
+        list.add(Splat.create(R.string.invictus, R.string.url_nwod_vampire_covenant_invictus));
+        list.add(Splat.create(R.string.lancea_et_sanctum, R.string.url_nwod_vampire_covenant_lancea_et_sanctum));
+        list.add(Splat.create(R.string.ordo_dracul, R.string.url_nwod_vampire_covenant_ordo_dracul));
+        list.add(Splat.create(R.string.unaligned, R.string.url_nwod_vampire_covenant_unaligned));
         return list;
     }
 }

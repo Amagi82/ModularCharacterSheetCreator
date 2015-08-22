@@ -22,19 +22,19 @@ public class NDemon extends GameSystem {
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
         List<Splat> list = new ArrayList<>();
-        list.add(new Splat(R.string.destroyer, R.string.url_nwod_demon_incarnation_destroyer));
-        list.add(new Splat(R.string.guardian, R.string.url_nwod_demon_incarnation_guardian));
-        list.add(new Splat(R.string.messenger, R.string.url_nwod_demon_incarnation_messenger));
-        list.add(new Splat(R.string.psychopomp, R.string.url_nwod_demon_incarnation_psychopomp));
+        list.add(Splat.create(R.string.destroyer, R.string.url_nwod_demon_incarnation_destroyer));
+        list.add(Splat.create(R.string.guardian, R.string.url_nwod_demon_incarnation_guardian));
+        list.add(Splat.create(R.string.messenger, R.string.url_nwod_demon_incarnation_messenger));
+        list.add(Splat.create(R.string.psychopomp, R.string.url_nwod_demon_incarnation_psychopomp));
         return list;
     }
 
     @Override public List<Splat> getListRight(@Nullable Splat splat) {
         List<Splat> list = new ArrayList<>();
-        list.add(new Splat(R.string.inquisitor, R.string.url_nwod_demon_agenda_inquisitor));
-        list.add(new Splat(R.string.integrator, R.string.url_nwod_demon_agenda_integrator));
-        list.add(new Splat(R.string.saboteur, R.string.url_nwod_demon_agenda_saboteur));
-        list.add(new Splat(R.string.tempter, R.string.url_nwod_demon_agenda_tempter));
+        list.add(Splat.create(R.string.inquisitor, R.string.url_nwod_demon_agenda_inquisitor));
+        list.add(Splat.create(R.string.integrator, R.string.url_nwod_demon_agenda_integrator));
+        list.add(Splat.create(R.string.saboteur, R.string.url_nwod_demon_agenda_saboteur));
+        list.add(Splat.create(R.string.tempter, R.string.url_nwod_demon_agenda_tempter));
         return list;
     }
 }

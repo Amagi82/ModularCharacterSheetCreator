@@ -61,21 +61,21 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         ButterKnife.bind(this, rootView);
         character = ((MainActivity) getActivity()).getCurrentCharacter();
         setColors();
-        collapsingToolbar.setTitle(character.getName());
+        collapsingToolbar.setTitle(character.name());
 
 //        if(character.getPortraitUri() != null) {
 //            Glide.with(this).load(character.getPortraitUri()).centerCrop().into(imagePortrait);
 //            scrimTop.setVisibility(View.VISIBLE);
 //            scrimBottom.setVisibility(View.VISIBLE);
 //        }
-//        Glide.with(this).load(getUrl(character.getLeft())).centerCrop().into(iconLeft);
-//        tvIconLeft.setText(character.getLeft().getTitle());
+//        Glide.with(this).load(url(character.getLeft())).centerCrop().into(iconLeft);
+//        tvIconLeft.setText(character.getLeft().title());
 //        if(character.getGameSystem().getOnyx().hasRight()) {
-//            tvIconRight.setText(character.getRight().getTitle());
-//            Glide.with(this).load(getUrl(character.getRight())).centerCrop().into(iconRight);
+//            tvIconRight.setText(character.getRight().title());
+//            Glide.with(this).load(url(character.getRight())).centerCrop().into(iconRight);
 //        }
 
-        adapter = new SheetPagerAdapter(getFragmentManager(), character.getSheets());
+        adapter = new SheetPagerAdapter(getFragmentManager(), character.sheets());
         viewPager.setAdapter(adapter);
         tabLayout.setTabsFromPagerAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -107,12 +107,12 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
     }
 
     private void setColors() {
-        int shadow = getResources().getColor(R.color.black);
+        int shadow = getResources().getColor(R.color.black, getActivity().getTheme());
         tvIconLeft.setShadowLayer(3, 0, 0, shadow);
         tvIconRight.setShadowLayer(3, 0, 0, shadow);
-        int colorText = character.getColorText();
-        int colorTextDim = character.getColorTextDim();
-        int colorBackground = character.getColorBackground();
+        int colorText = character.colorText();
+        int colorTextDim = character.colorTextDim();
+        int colorBackground = character.colorBackground();
         if(colorBackground != NONE) tabLayout.setBackgroundColor(colorBackground);
         if(colorText != NONE && colorTextDim != NONE) tabLayout.setTabTextColors(colorTextDim, colorText);
     }
@@ -125,8 +125,8 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         BUS.getBus().post(new ModuleAddedEvent(module));
     }
 
-//    private String getUrl(Choice choice){
-//        return new Icon(getResources(), choice).getUrl();
+//    private String url(Choice choice){
+//        return new Icon(getResources(), choice).url();
 //    }
 
     public GameCharacter getCharacter(){

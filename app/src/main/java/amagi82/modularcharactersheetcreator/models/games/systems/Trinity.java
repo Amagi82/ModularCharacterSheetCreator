@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games.systems;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -21,49 +22,49 @@ public class Trinity extends GameSystem {
     }
 
     @Override public int getRightTitle(Splat leftSplat) {
-        if(leftSplat.getTitle() == R.string.aeon) return R.string.psi_order;
+        if(leftSplat.title() == R.string.aeon) return R.string.psi_order;
         return R.string.allegiance;
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
         List<Splat> list = new ArrayList<>();
-        list.add(new Splat(R.string.adventure));
-        list.add(new Splat(R.string.aberrant));
-        list.add(new Splat(R.string.aeon));
+        list.add(Splat.create(R.string.adventure));
+        list.add(Splat.create(R.string.aberrant));
+        list.add(Splat.create(R.string.aeon));
         return list;
     }
 
-    @Override public List<Splat> getListRight(Splat splat) {
+    @Override public List<Splat> getListRight(@NonNull Splat splat) {
         List<Splat> list = new ArrayList<>();
-        switch(splat.getTitle()){
+        switch(splat.title()){
             case R.string.adventure:
-                list.add(new Splat(R.string.the_aeon_society_for_gentlemen));
-                list.add(new Splat(R.string.the_air_circus));
-                list.add(new Splat(R.string.branch_9));
-                list.add(new Splat(R.string.the_international_detective_agency));
-                list.add(new Splat(R.string.the_ponatowski_foundation));
+                list.add(Splat.create(R.string.the_aeon_society_for_gentlemen));
+                list.add(Splat.create(R.string.the_air_circus));
+                list.add(Splat.create(R.string.branch_9));
+                list.add(Splat.create(R.string.the_international_detective_agency));
+                list.add(Splat.create(R.string.the_ponatowski_foundation));
                 break;
             case R.string.aberrant:
-                list.add(new Splat(R.string.aberrants));
-                list.add(new Splat(R.string.project_utopia));
-                list.add(new Splat(R.string.team_tomorrow));
-                list.add(new Splat(R.string.project_proteus));
-                list.add(new Splat(R.string.the_teragen));
-                list.add(new Splat(R.string.the_directive));
-                list.add(new Splat(R.string.corporate));
-                list.add(new Splat(R.string.government));
-                list.add(new Splat(R.string.other));
-                list.add(new Splat(R.string.independent));
+                list.add(Splat.create(R.string.aberrants));
+                list.add(Splat.create(R.string.project_utopia));
+                list.add(Splat.create(R.string.team_tomorrow));
+                list.add(Splat.create(R.string.project_proteus));
+                list.add(Splat.create(R.string.the_teragen));
+                list.add(Splat.create(R.string.the_directive));
+                list.add(Splat.create(R.string.corporate));
+                list.add(Splat.create(R.string.government));
+                list.add(Splat.create(R.string.other));
+                list.add(Splat.create(R.string.independent));
                 break;
             default:
-                list.add(new Splat(R.string.aesculapian_order));
-                list.add(new Splat(R.string.chitra_bhanu));
-                list.add(new Splat(R.string.isra));
-                list.add(new Splat(R.string.the_legions));
-                list.add(new Splat(R.string.the_ministry_of_noetic_affairs));
-                list.add(new Splat(R.string.nova_forca_das_nacoes));
-                list.add(new Splat(R.string.orgotek));
-                list.add(new Splat(R.string.the_upeo_wa_macho));
+                list.add(Splat.create(R.string.aesculapian_order));
+                list.add(Splat.create(R.string.chitra_bhanu));
+                list.add(Splat.create(R.string.isra));
+                list.add(Splat.create(R.string.the_legions));
+                list.add(Splat.create(R.string.the_ministry_of_noetic_affairs));
+                list.add(Splat.create(R.string.nova_forca_das_nacoes));
+                list.add(Splat.create(R.string.orgotek));
+                list.add(Splat.create(R.string.the_upeo_wa_macho));
                 break;
         }
         return list;

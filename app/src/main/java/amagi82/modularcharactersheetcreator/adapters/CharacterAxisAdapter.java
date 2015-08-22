@@ -54,7 +54,7 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileAxisViewHolde
             }
 
             @Override public boolean areItemsTheSame(Splat item1, Splat item2) {
-                return item1.getTitle() == item2.getTitle();
+                return item1.title() == item2.title();
             }
         });
 
@@ -73,7 +73,7 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileAxisViewHolde
     public void onBindViewHolder(TileAxisViewHolder vh, int position) {
         Splat splat = splats.get(position);
         Glide.with(fragment).load(new SplatIcon(res, splat, gridImageSize).getUrl()).into(vh.imageView);
-        vh.tvTitle.setText(splat.getTitle());
+        vh.tvTitle.setText(splat.title());
         vh.splat = splat;
         vh.left = left;
     }
@@ -101,10 +101,6 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileAxisViewHolde
 
     public void addAll(List<Splat> list) {
         splats.addAll(list);
-    }
-
-    public void removeItemAt(int index) {
-        splats.removeItemAt(index);
     }
 
     public void clear() {

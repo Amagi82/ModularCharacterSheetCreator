@@ -33,8 +33,8 @@ public class TabFragment extends BaseFragment {
         ButterKnife.bind(this, rootView);
 
         GameCharacter character = ((MainActivity) getActivity()).getCurrentCharacter();
-        Log.i(null, "Current character is "+character.getName());
-        Sheet sheet = character.getSheets().get(getArguments().getInt("position"));
+        Log.i(null, "Current character is "+character.name());
+        Sheet sheet = character.sheets().get(getArguments().getInt("position"));
         int spanCount = sheet.numColumns();
         modules = sheet.modules();
 
