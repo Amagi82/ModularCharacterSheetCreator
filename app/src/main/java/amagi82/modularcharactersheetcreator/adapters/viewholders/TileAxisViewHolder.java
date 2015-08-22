@@ -1,7 +1,6 @@
 package amagi82.modularcharactersheetcreator.adapters.viewholders;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,7 +26,6 @@ public class TileAxisViewHolder extends RecyclerView.ViewHolder{
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                Log.i(null, "sending TileSplatClickedEvent");
                 BUS.getBus().post(new TileSplatClickedEvent(splat, left));
             }
         });

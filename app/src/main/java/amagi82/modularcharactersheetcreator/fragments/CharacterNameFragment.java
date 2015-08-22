@@ -11,8 +11,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
 import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +26,7 @@ import java.io.IOException;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.activities.EditCharacterActivity;
+import amagi82.modularcharactersheetcreator.callbacks.TextEntryListener;
 import amagi82.modularcharactersheetcreator.events.CharacterUpdatedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
@@ -40,6 +39,8 @@ import butterknife.OnClick;
 import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 import static android.app.Activity.RESULT_OK;
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 
 public class CharacterNameFragment extends BaseFragment {
 
@@ -55,38 +56,41 @@ public class CharacterNameFragment extends BaseFragment {
     @Bind(R.id.tvRightSplat) TextView tvRightSplat;
     @Bind(R.id.fab) FloatingActionButton fab;
     @Bind(R.id.bUpdateCharacter) Button bUpdateCharacter;
+    private TextEntryListener textWatcher;
     private GameCharacter character;
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_character_name, container, false);
         ButterKnife.bind(this, rootView);
 
-        etName.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
+        textWatcher = new TextEntryListener() {
             @Override public void afterTextChanged(Editable s) {
+                super.afterTextChanged(s);
                 if (s.length() >= 1) {
-                    bUpdateCharacter.setVisibility(View.VISIBLE);
-                    fab.show();
+                    bUpdateCharacter.setVisibility(VISIBLE);
                     tvPrompt.setText(getString(R.string.confirm));
+                    fab.show();
                 } else {
-                    bUpdateCharacter.setVisibility(View.INVISIBLE);
+                    bUpdateCharacter.setVisibility(INVISIBLE);
+                    tvPrompt.setText(getString(R.string.choose_name));
                     fab.hide();
                 }
             }
-        });
+        };
+        etName.addTextChangedListener(textWatcher);
+
         return rootView;
+    }
+
+    @Override public void onDestroyView() {
+        etName.removeTextChangedListener(textWatcher);
+        super.onDestroyView();
     }
 
     @SuppressWarnings("ConstantConditions") @Override public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser){
-            Log.i(null, "CharacterNameFragment is visible");
-            character = ((EditCharacterActivity) getActivity()).getGameCharacter();
+            character = getCharacter();
             GameSystem system = character.getGameSystem();
             if(system != null && character.left() != null && character.right() != null){
                 tvLeftSplatTitle.setText(getString(system.getLeftTitle())+":");
@@ -101,6 +105,7 @@ public class CharacterNameFragment extends BaseFragment {
     }
 
     @OnClick(R.id.fab) void getPhoto() {
+        character = getCharacter();
         Uri image = getUri();
         if (image == null) getImageFromGallery();
         else {
@@ -155,6 +160,7 @@ public class CharacterNameFragment extends BaseFragment {
                             }
                         }
                         boolean noSwatch = swatch == null;
+                        character = getCharacter();
                         character = character.toBuilder().imageUri(uri, isOrientationPort())
                                 .colorBackground(noSwatch? NONE : swatch.getRgb())
                                 .colorText(noSwatch? NONE : swatch.getBodyTextColor())
@@ -172,5 +178,9 @@ public class CharacterNameFragment extends BaseFragment {
 
     private boolean isOrientationPort(){
         return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+    }
+
+    private GameCharacter getCharacter(){
+        return ((EditCharacterActivity) getActivity()).getGameCharacter();
     }
 }

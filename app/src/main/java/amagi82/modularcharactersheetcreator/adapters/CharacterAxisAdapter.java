@@ -9,13 +9,14 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.TileAxisViewHolder;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
-import amagi82.modularcharactersheetcreator.utils.SplatIcon;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
+import amagi82.modularcharactersheetcreator.utils.SplatIcon;
 
 public class CharacterAxisAdapter extends RecyclerView.Adapter<TileAxisViewHolder> {
 
@@ -93,6 +94,14 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileAxisViewHolde
 
     public Splat get(int position) {
         return splats.get(position);
+    }
+
+    public ArrayList<Splat> getAll(){
+        ArrayList<Splat> list = new ArrayList<>();
+        for(int i = 0; i<splats.size(); i++){
+            list.add(splats.get(i));
+        }
+        return list;
     }
 
     public int add(Splat choice) {

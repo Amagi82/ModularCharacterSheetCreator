@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
 
+import java.util.ArrayList;
+
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.activities.EditCharacterActivity;
 import amagi82.modularcharactersheetcreator.adapters.CharacterAxisAdapter;
@@ -34,7 +36,8 @@ public class CharacterAxisFragment extends BaseFragment {
     @Bind(R.id.tvPrompt) TextView tvPrompt;
     private GameSystem system;
     private CharacterAxisAdapter adapter;
-    @State boolean isLeft;
+    private boolean isLeft;
+    @State ArrayList<Splat> list;
     @State int previousPage;
     @State int page;
 
@@ -47,10 +50,16 @@ public class CharacterAxisFragment extends BaseFragment {
         recyclerView.setAdapter(adapter);
 
         isLeft = getArguments().getBoolean(LEFT, true);
-        adapter.setLeft(isLeft);
-        page = isLeft ? 1 : 2;
 
         return rootView;
+    }
+
+    @Override public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if(list != null) adapter.addAll(list); //Restore the list on screen rotation
+        adapter.setLeft(isLeft);
+        page = isLeft ? 1 : 2;
     }
 
     @Subscribe public void onPageChanged(PageChangedEvent event) {
@@ -90,5 +99,10 @@ public class CharacterAxisFragment extends BaseFragment {
             if (splat.isEndPoint()) BUS.getBus().post(event.left ? new LeftAxisEvent(splat) : new RightAxisEvent(splat));
             else adapter.replaceAll(event.left ? system.getListLeft(splat) : system.getListRight(splat));
         }
+    }
+
+    @Override public void onSaveInstanceState(Bundle outState) {
+        if(adapter != null) list = adapter.getAll(); //Restore the list on screen rotation
+        super.onSaveInstanceState(outState);
     }
 }

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,6 @@ public class CharacterPagerAdapter extends FragmentPagerAdapter {
 
     public CharacterPagerAdapter(FragmentManager fm) {
         super(fm);
-        Log.i(null, "creating new pager adapter");
         fragments.add(new CharacterGameFragment());
         fragments.add(getAxisFragment(true));
         fragments.add(getAxisFragment(false));

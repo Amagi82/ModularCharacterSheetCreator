@@ -49,8 +49,6 @@ public class EditCharacterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_character);
         ButterKnife.bind(this);
-        Log.i(null, "backstack == " + backstack);
-        Log.i(null, "character == " + character);
 
         imageBackdrop.getLayoutParams().height = new ScreenSize(this).getWidth() * 308 / 610;
         imageBackdrop.requestLayout();
