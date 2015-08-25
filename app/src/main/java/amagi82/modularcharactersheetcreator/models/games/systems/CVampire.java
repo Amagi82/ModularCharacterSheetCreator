@@ -22,7 +22,7 @@ public class CVampire extends GameSystem {
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(18);
         if (splat != null && splat.title() == R.string.bloodlines) {
             list.add(Splat.create(R.string.ahrimanes, R.string.url_cwod_vampire_clan_ahrimanes));
             list.add(Splat.create(R.string.anda, R.string.url_cwod_vampire_clan_anda));
@@ -63,7 +63,7 @@ public class CVampire extends GameSystem {
     }
 
     @Override public List<Splat> getListRight(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(4);
         list.add(Splat.create(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla));
         list.add(Splat.create(R.string.anarchs, R.string.url_cwod_vampire_sect_anarchs));
         list.add(Splat.create(R.string.sabbat, R.string.url_cwod_vampire_sect_sabbat));

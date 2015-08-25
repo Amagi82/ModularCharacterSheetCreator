@@ -21,7 +21,7 @@ public class CWraith extends GameSystem {
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(8);
         list.add(Splat.create(R.string.iron_legion));
         list.add(Splat.create(R.string.skeletal_legion));
         list.add(Splat.create(R.string.grim_legion));
@@ -34,7 +34,7 @@ public class CWraith extends GameSystem {
     }
 
     @Override public List<Splat> getListRight(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(5);
         if(splat != null){
             switch (splat.title()){
                 case R.string.great_guilds:

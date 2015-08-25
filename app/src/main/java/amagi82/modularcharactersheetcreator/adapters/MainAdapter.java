@@ -21,7 +21,7 @@ import amagi82.modularcharactersheetcreator.utils.CircleIcon;
 
 public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
 
-    SortedList<GameCharacter> characters;
+    private SortedList<GameCharacter> characters;
     private Context context;
     private Resources res;
 

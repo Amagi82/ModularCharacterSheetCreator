@@ -73,26 +73,26 @@ public class EditCharacterActivity extends BaseActivity {
         return character;
     }
 
-    @Subscribe public void onGameSystemSelected(TileGameClickedEvent event) {
+    @Subscribe public void gameSelected(TileGameClickedEvent event) {
         character = character.toBuilder().gameTitle(event.system.getGameTitle()).build();
         Glide.with(this).load(getString(event.system.getSplashUrl())).into(imageBackdrop);
         Log.i(null, "imageBackdrop is " + imageBackdrop.getMeasuredWidth() + " wide by " + imageBackdrop.getMeasuredHeight() + " tall");
         next();
     }
 
-    @Subscribe public void onLeftAxisChosen(LeftAxisEvent event) {
+    @Subscribe public void leftAxisSelected(LeftAxisEvent event) {
         character = character.toBuilder().left(event.splat).build();
         next();
     }
 
-    @Subscribe public void onRightAxisChosen(RightAxisEvent event) {
+    @Subscribe public void rightAxisSelected(RightAxisEvent event) {
         Splat updatedLeft = character.getGameSystem().checkLeft() ? character.getGameSystem().updateLeft(character.left(), event.splat) : character.left();
         character = character.toBuilder().left(updatedLeft).right(event.splat).build();
         appbar.setExpanded(true);
         next();
     }
 
-    @Subscribe public void onCharacterUpdated(CharacterUpdatedEvent event) {
+    @Subscribe public void characterUpdated(CharacterUpdatedEvent event) {
         character = event.character;
     }
 

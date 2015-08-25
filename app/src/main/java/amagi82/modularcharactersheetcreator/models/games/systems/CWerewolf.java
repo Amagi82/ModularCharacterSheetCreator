@@ -21,7 +21,7 @@ public class CWerewolf extends GameSystem {
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(16);
         list.add(Splat.create(R.string.black_furies, R.string.url_cwod_werewolf_tribe_black_furies));
         list.add(Splat.create(R.string.bone_gnawers, R.string.url_cwod_werewolf_tribe_bone_gnawers));
         list.add(Splat.create(R.string.bunyip, R.string.url_cwod_werewolf_tribe_bunyip));
@@ -42,7 +42,7 @@ public class CWerewolf extends GameSystem {
     }
 
     @Override public List<Splat> getListRight(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(5);
         list.add(Splat.create(R.string.ahroun, R.string.url_cwod_werewolf_auspice_ahroun));
         list.add(Splat.create(R.string.galliard, R.string.url_cwod_werewolf_auspice_galliard));
         list.add(Splat.create(R.string.philodox, R.string.url_cwod_werewolf_auspice_philodox));

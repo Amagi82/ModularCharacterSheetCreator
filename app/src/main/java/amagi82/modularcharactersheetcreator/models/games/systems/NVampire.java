@@ -21,7 +21,7 @@ public class NVampire extends GameSystem {
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(5);
         list.add(Splat.create(R.string.daeva, R.string.url_nwod_vampire_clan_daeva));
         list.add(Splat.create(R.string.gangrel, R.string.url_nwod_vampire_clan_gangrel));
         list.add(Splat.create(R.string.mekhet, R.string.url_nwod_vampire_clan_mekhet));
@@ -31,7 +31,7 @@ public class NVampire extends GameSystem {
     }
 
     @Override public List<Splat> getListRight(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(7);
         list.add(Splat.create(R.string.carthian_movement, R.string.url_nwod_vampire_covenant_carthian_movement));
         list.add(Splat.create(R.string.circle_of_the_crone, R.string.url_nwod_vampire_covenant_circle_of_the_crone));
         list.add(Splat.create(R.string.holy_engineers, R.string.url_nwod_vampire_covenant_holy_engineers));

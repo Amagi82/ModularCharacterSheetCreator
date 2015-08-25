@@ -21,7 +21,7 @@ public class NDemon extends GameSystem {
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(4);
         list.add(Splat.create(R.string.destroyer, R.string.url_nwod_demon_incarnation_destroyer));
         list.add(Splat.create(R.string.guardian, R.string.url_nwod_demon_incarnation_guardian));
         list.add(Splat.create(R.string.messenger, R.string.url_nwod_demon_incarnation_messenger));
@@ -30,7 +30,7 @@ public class NDemon extends GameSystem {
     }
 
     @Override public List<Splat> getListRight(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(4);
         list.add(Splat.create(R.string.inquisitor, R.string.url_nwod_demon_agenda_inquisitor));
         list.add(Splat.create(R.string.integrator, R.string.url_nwod_demon_agenda_integrator));
         list.add(Splat.create(R.string.saboteur, R.string.url_nwod_demon_agenda_saboteur));

@@ -26,7 +26,7 @@ public class Exalted extends GameSystem {
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(7);
         list.add(Splat.create(R.string.solar_exalted));
         list.add(Splat.create(R.string.abyssal_exalted));
         list.add(Splat.create(R.string.lunar_exalted));
@@ -38,7 +38,7 @@ public class Exalted extends GameSystem {
     }
 
     @Override public List<Splat> getListRight(@NonNull Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(5);
         switch (splat.title()) {
             case R.string.solar_exalted:
                 list.add(Splat.create(R.string.dawn));

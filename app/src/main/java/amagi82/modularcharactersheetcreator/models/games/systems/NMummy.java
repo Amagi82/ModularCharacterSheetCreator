@@ -21,7 +21,7 @@ public class NMummy extends GameSystem {
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(5);
         list.add(Splat.create(R.string.bull_headed, R.string.url_nwod_mummy_decree_bull_headed));
         list.add(Splat.create(R.string.falcon_headed, R.string.url_nwod_mummy_decree_falcon_headed));
         list.add(Splat.create(R.string.jackal_headed, R.string.url_nwod_mummy_decree_jackal_headed));
@@ -31,7 +31,7 @@ public class NMummy extends GameSystem {
     }
 
     @Override public List<Splat> getListRight(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(5);
         list.add(Splat.create(R.string.maa_kep, R.string.url_nwod_mummy_guild_maa_kep));
         list.add(Splat.create(R.string.mesen_nebu, R.string.url_nwod_mummy_guild_mesen_nebu));
         list.add(Splat.create(R.string.sesha_hebsu, R.string.url_nwod_mummy_guild_sesha_hebsu));

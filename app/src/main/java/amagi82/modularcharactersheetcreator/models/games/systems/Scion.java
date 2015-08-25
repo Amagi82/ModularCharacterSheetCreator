@@ -22,7 +22,7 @@ public class Scion extends GameSystem {
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(3);
         list.add(Splat.create(R.string.hero));
         list.add(Splat.create(R.string.demigod));
         list.add(Splat.create(R.string.god));
@@ -30,7 +30,7 @@ public class Scion extends GameSystem {
     }
 
     @Override public List<Splat> getListRight(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(10);
         list.add(Splat.create(R.string.pesedjet));
         list.add(Splat.create(R.string.dodekatheon));
         list.add(Splat.create(R.string.aesir));

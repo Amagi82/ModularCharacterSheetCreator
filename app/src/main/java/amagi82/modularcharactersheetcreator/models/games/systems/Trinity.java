@@ -27,7 +27,7 @@ public class Trinity extends GameSystem {
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(3);
         list.add(Splat.create(R.string.adventure));
         list.add(Splat.create(R.string.aberrant));
         list.add(Splat.create(R.string.aeon));
@@ -35,7 +35,7 @@ public class Trinity extends GameSystem {
     }
 
     @Override public List<Splat> getListRight(@NonNull Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(10);
         switch(splat.title()){
             case R.string.adventure:
                 list.add(Splat.create(R.string.the_aeon_society_for_gentlemen));

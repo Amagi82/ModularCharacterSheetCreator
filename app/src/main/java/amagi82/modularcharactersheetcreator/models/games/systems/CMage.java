@@ -34,7 +34,7 @@ public class CMage extends GameSystem {
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(3);
         list.add(Splat.create(R.string.traditions, R.string.url_cwod_mage_faction_traditions));
         list.add(Splat.create(R.string.technocracy, R.string.url_cwod_mage_faction_technocracy));
         list.add(Splat.create(R.string.crafts, R.string.url_cwod_mage_faction_crafts));
@@ -42,7 +42,7 @@ public class CMage extends GameSystem {
     }
 
     @Override public List<Splat> getListRight(@NonNull Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(10);
         switch (splat.title()){
             case R.string.traditions:
                 list.add(Splat.create(R.string.akashayana, R.string.url_cwod_mage_tradition_akashayana));

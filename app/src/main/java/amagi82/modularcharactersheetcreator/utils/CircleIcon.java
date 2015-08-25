@@ -13,14 +13,10 @@ public class CircleIcon {
 
     private Resources res;
     private int circleImageSize;
-    private TextPaint textPaint;
-    private int textColor;
 
     public CircleIcon(Resources res) {
         this.res = res;
         circleImageSize = res.getDimensionPixelSize(R.dimen.circle_icon_size);
-        textPaint = new TextPaint();
-        textColor = getColor(R.color.white);
     }
 
     public Bitmap createIcon(String name){
@@ -28,14 +24,13 @@ public class CircleIcon {
     }
 
     public Bitmap createIcon(String name, int backgroundColor){
-
         String firstLetter = name.length() > 0? name.substring(0,1) : "";
 
-        textPaint.reset();
+        TextPaint textPaint = new TextPaint();
         textPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setLinearText(true);
-        textPaint.setColor(textColor);
+        textPaint.setColor(getColor(R.color.white));
         textPaint.setTextSize(res.getDimension(R.dimen.circle_icon_text_size));
 
         Rect rect = new Rect();

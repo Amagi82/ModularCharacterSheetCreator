@@ -21,7 +21,7 @@ public class CharacterPagerAdapter extends FragmentPagerAdapter {
         CharacterAxisFragment (x2)
         CharacterNameFragment
      */
-    private List<Fragment> fragments = new ArrayList<>();
+    private List<Fragment> fragments = new ArrayList<>(4);
 
     public CharacterPagerAdapter(FragmentManager fm) {
         super(fm);

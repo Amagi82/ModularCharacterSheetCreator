@@ -51,7 +51,7 @@ public class Game {
     }
 
     public List<GameSystem> getList() {
-        List<GameSystem> list = new ArrayList<>();
+        List<GameSystem> list = new ArrayList<>(11);
         list.add(new CMage());
         list.add(new CVampire());
         list.add(new CWerewolf());

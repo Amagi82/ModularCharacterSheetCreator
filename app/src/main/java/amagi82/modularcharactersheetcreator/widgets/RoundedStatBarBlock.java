@@ -1,6 +1,7 @@
 package amagi82.modularcharactersheetcreator.widgets;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -8,6 +9,7 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -20,19 +22,21 @@ import amagi82.modularcharactersheetcreator.models.modules.Stat;
 
 public class RoundedStatBarBlock extends ProgressBar {
 
+    private Resources res = getResources();
     private List<Stat> stats;
-    private int colorFill;
-    private int colorFillSecondary;
-    private int colorBorder;
-    private int colorBorderInactive;
-    private int textColor;
-    private int textColorSpecialty;
-    private int rowHeight; //Standard height of a row
-    private int extraRowHeight; //Extra height if needed for Specialty
+    @ColorInt private int colorFill;
+    @ColorInt private int colorFillSecondary;
+    @ColorInt private int colorBorder;
+    @ColorInt private int colorBorderInactive;
+    @ColorInt private int textColor;
+    @ColorInt private int textColorSpecialty;
+    private final int max; //Number of stats per row
+    private final int textSpacing;
+    private final int rowSpacing;
+    private final int rowHeight; //Standard height of a row
+    private final int extraRowHeight; //Extra height if needed for Specialty
     private int barWidth; //Actual layoutWidth of the stat bar. Same as the layoutWidth if the Category text overlaps it
     private int layoutWidth; //Measured layoutWidth available to the view
-    private int textSpacing;
-    private int rowSpacing;
     private float textSize;
     private float textSizeSpecialty;
     private float gap; //Gap between stat boxes
@@ -43,10 +47,10 @@ public class RoundedStatBarBlock extends ProgressBar {
     private Path path = new Path(); //Path for the stat boxes
     private RectF statBox = new RectF(); //Used to measure stat boxes
     static Rect textBox = new Rect(); //Used to measure text layoutWidth
-    static Paint paintFill = new Paint();
-    static Paint paintBorder = new Paint();
-    static TextPaint textPaint = new TextPaint();
-    static TextPaint textPaintItalic = new TextPaint();
+    static Paint paintFill;
+    static Paint paintBorder;
+    static TextPaint textPaint;
+    static TextPaint textPaintItalic;
 
     public RoundedStatBarBlock(Context context) {
         this(context, null);
@@ -56,22 +60,38 @@ public class RoundedStatBarBlock extends ProgressBar {
         super(context, attrs);
         getXmlAttrs(context, attrs);
 
-        paintFill.setStyle(Paint.Style.FILL);
-        paintFill.setAntiAlias(true);
-        paintBorder.setStyle(Paint.Style.STROKE);
-        paintBorder.setAntiAlias(true);
-        paintBorder.setStrokeWidth(2);
+        if(paintFill == null){
+            paintFill = new Paint();
+            paintFill.setStyle(Paint.Style.FILL);
+            paintFill.setAntiAlias(true);
+        }
+        if(paintBorder == null){
+            paintBorder = new Paint();
+            paintBorder.setStyle(Paint.Style.STROKE);
+            paintBorder.setAntiAlias(true);
+            paintBorder.setStrokeWidth(2);
+        }
+        if(textPaint == null){
+            textPaint = new TextPaint();
+            textPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+            textPaint.setLinearText(true);
+            textPaint.setTextSize(textSize);
+            textPaint.setColor(textColor);
+        }
 
-        textPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        textPaint.setLinearText(true);
-        textPaint.setTextSize(textSize);
-        textPaint.setColor(textColor);
-
-        textPaintItalic.setFlags(Paint.ANTI_ALIAS_FLAG);
-        textPaintItalic.setLinearText(true);
-        textPaintItalic.setTextSize(textSizeSpecialty);
-        textPaintItalic.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
-        textPaintItalic.setColor(textColorSpecialty);
+        if(textPaintItalic == null){
+            textPaintItalic = new TextPaint();
+            textPaintItalic.setFlags(Paint.ANTI_ALIAS_FLAG);
+            textPaintItalic.setLinearText(true);
+            textPaintItalic.setTextSize(textSizeSpecialty);
+            textPaintItalic.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
+            textPaintItalic.setColor(textColorSpecialty);
+        }
+        max = getMax();
+        textSpacing = res.getDimensionPixelSize(R.dimen.round_stat_bar_text_spacing);
+        rowSpacing = res.getDimensionPixelSize(R.dimen.round_stat_bar_row_spacing);
+        rowHeight = res.getDimensionPixelSize(R.dimen.round_stat_bar_height);
+        extraRowHeight = (int) textSizeSpecialty + textSpacing;
     }
 
     @Override
@@ -79,12 +99,8 @@ public class RoundedStatBarBlock extends ProgressBar {
         int layoutHeight = 0;
         int maxCategoryWidth = 0;
         int maxSpecialtyWidth = 0;
-        int minBarWidth = (getResources().getDimensionPixelSize(R.dimen.round_stat_bar_height) + (int) gap) * getMax();
-        textSpacing = getResources().getDimensionPixelSize(R.dimen.round_stat_bar_text_spacing);
+        int minBarWidth = (res.getDimensionPixelSize(R.dimen.round_stat_bar_height) + (int) gap) * max;
         layoutWidth = MeasureSpec.getSize(widthMeasureSpec);
-        rowHeight = getResources().getDimensionPixelSize(R.dimen.round_stat_bar_height);
-        extraRowHeight = (int) textSizeSpecialty + textSpacing;
-        rowSpacing = getResources().getDimensionPixelSize(R.dimen.round_stat_bar_row_spacing);
 
         //Get maximum layoutWidth of Category and Specialty text
         for (Stat stat : stats) {
@@ -107,8 +123,8 @@ public class RoundedStatBarBlock extends ProgressBar {
 
         //Get the size of the stat box
         barWidth = categoryOverlapsStatBar ? layoutWidth : minBarWidth;
-        statBox.set(gap, getPaddingTop(), (barWidth / getMax()) - gap, rowHeight - getPaddingBottom());
-        boxOffset = (barWidth) / getMax();
+        statBox.set(gap, getPaddingTop(), (barWidth / max) - gap, rowHeight - getPaddingBottom());
+        boxOffset = (barWidth) / max;
 
         setMeasuredDimension(layoutWidth, layoutHeight);
     }
@@ -127,7 +143,7 @@ public class RoundedStatBarBlock extends ProgressBar {
             path.addRoundRect(statBox, cornerRadius, cornerRadius, Path.Direction.CW);
             path.offset(layoutWidth - barWidth, verticalOffsetTotal);
 
-            for (int i = 0; i < getMax(); i++) {
+            for (int i = 0; i < max; i++) {
                 if (i < stat.getValueTemporary()) {
                     paintFill.setColor(i < stat.getValue() ? colorFill : colorFillSecondary);
                     canvas.drawPath(path, paintFill);
@@ -154,16 +170,16 @@ public class RoundedStatBarBlock extends ProgressBar {
     private void getXmlAttrs(Context context, AttributeSet attrs) {
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RoundedStatBar, 0, 0);
         try {
-            colorFill = a.getColor(R.styleable.RoundedStatBar_rsb_colorFill, getResources().getColor(R.color.round_stat_bar_fill));
-            colorFillSecondary = a.getColor(R.styleable.RoundedStatBar_rsb_colorFillSecondary, getResources().getColor(R.color.round_stat_bar_secondary));
-            colorBorder = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorder, getResources().getColor(R.color.round_stat_bar_border));
-            colorBorderInactive = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorderInactive, getResources().getColor(R.color.round_stat_bar_border_inactive));
-            textColor = a.getColor(R.styleable.RoundedStatBar_rsb_textColor, getResources().getColor(R.color.round_stat_bar_text_color));
-            textColorSpecialty = a.getColor(R.styleable.RoundedStatBar_rsb_textColorSpecialty, getResources().getColor(R.color.round_stat_bar_text_color_specialty));
-            textSize = a.getDimension(R.styleable.RoundedStatBar_rsb_textSize, getResources().getDimension(R.dimen.round_stat_bar_text_size));
-            textSizeSpecialty = a.getDimension(R.styleable.RoundedStatBar_rsb_textSizeSpecialty, getResources().getDimension(R.dimen.round_stat_bar_specialty_text_size));
-            gap = a.getDimension(R.styleable.RoundedStatBar_rsb_gap, getResources().getDimension(R.dimen.round_stat_bar_gap));
-            cornerRadius = a.getDimension(R.styleable.RoundedStatBar_rsb_cornerRadius, getResources().getDimension(R.dimen.round_stat_bar_corner_radius));
+            colorFill = a.getColor(R.styleable.RoundedStatBar_rsb_colorFill, res.getColor(R.color.round_stat_bar_fill));
+            colorFillSecondary = a.getColor(R.styleable.RoundedStatBar_rsb_colorFillSecondary, res.getColor(R.color.round_stat_bar_secondary));
+            colorBorder = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorder, res.getColor(R.color.round_stat_bar_border));
+            colorBorderInactive = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorderInactive, res.getColor(R.color.round_stat_bar_border_inactive));
+            textColor = a.getColor(R.styleable.RoundedStatBar_rsb_textColor, res.getColor(R.color.round_stat_bar_text_color));
+            textColorSpecialty = a.getColor(R.styleable.RoundedStatBar_rsb_textColorSpecialty, res.getColor(R.color.round_stat_bar_text_color_specialty));
+            textSize = a.getDimension(R.styleable.RoundedStatBar_rsb_textSize, res.getDimension(R.dimen.round_stat_bar_text_size));
+            textSizeSpecialty = a.getDimension(R.styleable.RoundedStatBar_rsb_textSizeSpecialty, res.getDimension(R.dimen.round_stat_bar_specialty_text_size));
+            gap = a.getDimension(R.styleable.RoundedStatBar_rsb_gap, res.getDimension(R.dimen.round_stat_bar_gap));
+            cornerRadius = a.getDimension(R.styleable.RoundedStatBar_rsb_cornerRadius, res.getDimension(R.dimen.round_stat_bar_corner_radius));
         } finally {
             a.recycle();
         }

@@ -21,7 +21,7 @@ public class NWerewolf extends GameSystem {
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(6);
         list.add(Splat.create(R.string.blood_talons, R.string.url_nwod_werewolf_tribe_blood_talons));
         list.add(Splat.create(R.string.bone_shadows, R.string.url_nwod_werewolf_tribe_bone_shadows));
         list.add(Splat.create(R.string.ghost_wolves, R.string.url_nwod_werewolf_tribe_ghost_wolves));
@@ -32,7 +32,7 @@ public class NWerewolf extends GameSystem {
     }
 
     @Override public List<Splat> getListRight(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>();
+        List<Splat> list = new ArrayList<>(5);
         list.add(Splat.create(R.string.cahalith, R.string.url_nwod_werewolf_auspice_cahalith));
         list.add(Splat.create(R.string.elodoth, R.string.url_nwod_werewolf_auspice_elodoth));
         list.add(Splat.create(R.string.irraka, R.string.url_nwod_werewolf_auspice_irraka));
