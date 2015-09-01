@@ -6,10 +6,8 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.squareup.otto.Subscribe;
@@ -24,7 +22,7 @@ import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
 import amagi82.modularcharactersheetcreator.events.TileGameClickedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
-import amagi82.modularcharactersheetcreator.utils.ScreenSize;
+import amagi82.modularcharactersheetcreator.widgets.ImageBackdrop;
 import amagi82.modularcharactersheetcreator.widgets.NoSwipeViewPager;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -39,7 +37,7 @@ public class EditCharacterActivity extends BaseActivity {
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
     @Bind(R.id.appbar) AppBarLayout appbar;
     @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.imageBackdrop) ImageView imageBackdrop;
+    @Bind(R.id.imageBackdrop) ImageBackdrop imageBackdrop;
     @Bind(R.id.viewpager) NoSwipeViewPager viewPager;
     private FragmentManager fm = getSupportFragmentManager();
     @State GameCharacter character;
@@ -49,9 +47,6 @@ public class EditCharacterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_character);
         ButterKnife.bind(this);
-
-        imageBackdrop.getLayoutParams().height = new ScreenSize(this).getWidth() * 308 / 610;
-        imageBackdrop.requestLayout();
 
         setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;
@@ -76,7 +71,6 @@ public class EditCharacterActivity extends BaseActivity {
     @Subscribe public void gameSelected(TileGameClickedEvent event) {
         character = character.toBuilder().gameTitle(event.system.getGameTitle()).build();
         Glide.with(this).load(getString(event.system.getSplashUrl())).into(imageBackdrop);
-        Log.i(null, "imageBackdrop is " + imageBackdrop.getMeasuredWidth() + " wide by " + imageBackdrop.getMeasuredHeight() + " tall");
         next();
     }
 
