@@ -34,7 +34,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 
 public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener{
@@ -110,11 +109,11 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
         int shadow = getResources().getColor(R.color.black);
         tvIconLeft.setShadowLayer(3, 0, 0, shadow);
         tvIconRight.setShadowLayer(3, 0, 0, shadow);
-        int colorText = character.colorText();
-        int colorTextDim = character.colorTextDim();
-        int colorBackground = character.colorBackground();
-        if(colorBackground != NONE) tabLayout.setBackgroundColor(colorBackground);
-        if(colorText != NONE && colorTextDim != NONE) tabLayout.setTabTextColors(colorTextDim, colorText);
+//        int colorText = character.colorText();
+//        int colorTextDim = character.colorTextDim();
+//        int colorBackground = character.colorBackground();
+//        if(colorBackground != NONE) tabLayout.setBackgroundColor(colorBackground);
+//        if(colorText != NONE && colorTextDim != NONE) tabLayout.setTabTextColors(colorTextDim, colorText);
     }
 
     @OnClick(R.id.fab)

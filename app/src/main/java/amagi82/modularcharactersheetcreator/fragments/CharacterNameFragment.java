@@ -29,6 +29,7 @@ import amagi82.modularcharactersheetcreator.activities.EditCharacterActivity;
 import amagi82.modularcharactersheetcreator.callbacks.TextEntryListener;
 import amagi82.modularcharactersheetcreator.events.CharacterUpdatedEvent;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.GameCharacter.ColorScheme;
 import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.utils.SplatIcon;
@@ -36,7 +37,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static amagi82.modularcharactersheetcreator.activities.MainActivity.NONE;
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 import static android.app.Activity.RESULT_OK;
 import static android.view.View.INVISIBLE;
@@ -113,15 +113,14 @@ public class CharacterNameFragment extends BaseFragment {
 
     @OnClick(R.id.fab) void getPhoto() {
         character = getCharacter();
-        Uri image = getUri();
-        if (image == null) getImageFromGallery();
+        if (character.image() == null) getImageFromGallery();
         else {
             new AlertDialog.Builder(getActivity()).setItems(R.array.portrait_choices, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if (which == 0) {
                         //Remove the image and use the default icon
-                        character = character.toBuilder().clearImageUri().colorBackground(NONE).colorText(NONE).colorTextDim(NONE).build();
+                        character = character.toBuilder().image(null).colorScheme(null).build();
                         BUS.getBus().post(new CharacterUpdatedEvent(character));
                         imagePortrait.setImageResource(0);
                         //setTextScrims();
@@ -168,19 +167,15 @@ public class CharacterNameFragment extends BaseFragment {
                         }
                         boolean noSwatch = swatch == null;
                         character = getCharacter();
-                        character = character.toBuilder().imageUri(uri, isOrientationPort())
-                                .colorBackground(noSwatch? NONE : swatch.getRgb())
-                                .colorText(noSwatch? NONE : swatch.getBodyTextColor())
-                                .colorTextDim(noSwatch? NONE : swatch.getTitleTextColor()).build();
+                        character = character.toBuilder()
+                                .image(GameCharacter.CharacterImage.create(uri, croppedImage.getHeight(), croppedImage.getWidth()))
+                                .colorScheme(noSwatch ? null : ColorScheme.create(swatch.getRgb(), swatch.getBodyTextColor(), swatch.getTitleTextColor()))
+                                .build();
                         Glide.with(CharacterNameFragment.this).load(uri).into(imagePortrait);
                         BUS.getBus().post(new CharacterUpdatedEvent(character));
                         //setTextScrims();
                     }
                 }).show();
-    }
-
-    private Uri getUri() {
-        return isOrientationPort()? character.imageUriPort() : character.imageUriLand();
     }
 
     private boolean isOrientationPort(){

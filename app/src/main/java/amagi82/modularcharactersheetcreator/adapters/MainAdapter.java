@@ -70,7 +70,7 @@ public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
     @Override
     public void onBindViewHolder(final CharacterViewHolder vh, final int position) {
         final GameCharacter character = characters.get(position);
-        Uri imageUri = character.imageUriPort() == null? character.imageUriLand() : character.imageUriPort();
+        Uri imageUri = character.image() == null? null : character.image().uri();
         if (imageUri == null) vh.icon.setImageBitmap(new CircleIcon(res).createIcon(character.name()));
         else Glide.with(context).load(imageUri).centerCrop().into(vh.icon);
         vh.tvName.setText(character.name());
