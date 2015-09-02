@@ -1,6 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="character" type="amagi82.modularcharactersheetcreator.observables.EditCharacterObserver"/>
+        <variable name="observer" type="amagi82.modularcharactersheetcreator.observables.EditCharacterObserver"/>
     </data>
 
 <android.support.design.widget.CoordinatorLayout
@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
-                app:imageUrl="@{character.splashUrl}"
+                app:imageUrl="@{observer.splashUrl}"
                 app:layout_collapseMode="parallax"/>
 
             <android.support.v7.widget.Toolbar

@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    style="@style/Card"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/cardview_light_background">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"/>
+    <data>
+        <variable
+            name="system"
+            type="amagi82.modularcharactersheetcreator.models.games.systems.GameSystem"/>
+    </data>
 
-</android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        style="@style/Card"
+        app:cardBackgroundColor="@color/cardview_light_background">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            />
+
+    </android.support.v7.widget.CardView>
+</layout>

@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    style="@style/Card"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="splat" type="amagi82.modularcharactersheetcreator.models.games.Splat"/>
+    </data>
+
+<android.support.v7.widget.CardView
+    style="@style/Card"
     android:layout_height="160dp"
     app:cardBackgroundColor="@color/cardview_light_background"
-    tools:layout_width="140dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:layout_width="140dp">
 
     <ImageView
         android:id="@+id/imageView"
@@ -24,7 +29,9 @@
         android:background="@color/tileAlpha"
         android:gravity="center"
         android:padding="@dimen/default_small_margin"
+        android:text="@{splat.title()}"
         android:textColor="@color/white"
         tools:text="Header"/>
 
 </android.support.v7.widget.CardView>
+    </layout>

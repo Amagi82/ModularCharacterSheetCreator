@@ -1,26 +1,32 @@
 package amagi82.modularcharactersheetcreator.adapters;
 
+import android.databinding.DataBindingUtil;
 import android.support.v4.app.Fragment;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.adapters.viewholders.TileGameViewHolder;
+import amagi82.modularcharactersheetcreator.databinding.TileGridGameBinding;
+import amagi82.modularcharactersheetcreator.events.TileGameClickedEvent;
 import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
 
-public class CharacterGameAdapter extends RecyclerView.Adapter<TileGameViewHolder> {
+import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 
-    private Fragment fragment;
+public class CharacterGameAdapter extends RecyclerView.Adapter<CharacterGameAdapter.ViewHolder> {
+
     private SortedList<GameSystem> systems;
+    private Fragment fragment;
+    private LayoutInflater inflater;
 
     public CharacterGameAdapter(Fragment fragment) {
         this.fragment = fragment;
+        inflater = LayoutInflater.from(fragment.getContext());
 
         systems = new SortedList<>(GameSystem.class, new SortedList.Callback<GameSystem>() {
             @Override public int compare(GameSystem o1, GameSystem o2) {
@@ -56,15 +62,19 @@ public class CharacterGameAdapter extends RecyclerView.Adapter<TileGameViewHolde
     }
 
     @Override
-    public TileGameViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new TileGameViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_grid_game, parent, false));
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        TileGridGameBinding binding = TileGridGameBinding.inflate(inflater, parent, false);
+        return new ViewHolder(binding.getRoot());
     }
 
     @Override
-    public void onBindViewHolder(TileGameViewHolder vh, int position) {
-        GameSystem system = get(position);
-        Glide.with(fragment).load(fragment.getResources().getString(system.getGameUrl())).into(vh.imageView);
-        vh.system = system;
+    public void onBindViewHolder(ViewHolder vh, final int position) {
+        Glide.with(fragment).load(fragment.getString(systems.get(position).getGameUrl())).into(vh.binding.imageView);
+        vh.binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                BUS.getBus().post(new TileGameClickedEvent(systems.get(position)));
+            }
+        });
     }
 
     @Override
@@ -72,11 +82,16 @@ public class CharacterGameAdapter extends RecyclerView.Adapter<TileGameViewHolde
         return systems.size();
     }
 
-    public GameSystem get(int position) {
-        return systems.get(position);
-    }
-
     public void addAll(List<GameSystem> list) {
         systems.addAll(list);
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder{
+        public TileGridGameBinding binding;
+
+        public ViewHolder(final View itemView) {
+            super(itemView);
+            binding = DataBindingUtil.bind(itemView);
+        }
     }
 }

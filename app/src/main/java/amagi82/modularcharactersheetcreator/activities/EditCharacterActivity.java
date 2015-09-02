@@ -46,7 +46,7 @@ public class EditCharacterActivity extends BaseActivity {
 
         if (character == null) character = GameCharacter.builder().build();
         if (observer == null) observer = new EditCharacterObserver(character);
-        binding.setCharacter(observer);
+        binding.setObserver(observer);
 
         viewPager.addOnPageChangeListener(new PageListener() {
             @Override public void onPageSelected(int position) {

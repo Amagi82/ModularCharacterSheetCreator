@@ -2,7 +2,6 @@ package amagi82.modularcharactersheetcreator.observables;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.util.Log;
 
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
@@ -26,26 +25,21 @@ public class EditCharacterObserver extends BaseObservable{
     }
 
     public void setCharacter(GameCharacter character) {
-        Log.i(null, "setCharacter called");
         this.character = character;
         int url = (character.getGameSystem() == null) ? NONE : character.getGameSystem().getSplashUrl();
         if(url != this.splashUrl) {
-            Log.i(null, "updating splashUrl");
             this.splashUrl = url;
             notifyPropertyChanged(BR.splashUrl);
         }
         if(character.left() != this.left) {
-            Log.i(null, "updating left");
             this.left = character.left();
             notifyPropertyChanged(BR.left);
         }
         if(character.right() != this.right) {
-            Log.i(null, "updating right");
             this.right = character.right();
             notifyPropertyChanged(BR.right);
         }
         if (!character.name().equals(this.name)) {
-            Log.i(null, "updating name");
             this.name = character.name();
             notifyPropertyChanged(BR.name);
         }

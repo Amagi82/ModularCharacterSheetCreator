@@ -1,10 +1,12 @@
 package amagi82.modularcharactersheetcreator.adapters;
 
 import android.content.res.Resources;
+import android.databinding.DataBindingUtil;
 import android.support.v4.app.Fragment;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
@@ -13,22 +15,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.adapters.viewholders.TileAxisViewHolder;
+import amagi82.modularcharactersheetcreator.databinding.TileGridBinding;
+import amagi82.modularcharactersheetcreator.events.TileSplatClickedEvent;
 import amagi82.modularcharactersheetcreator.models.games.Splat;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.utils.SplatIcon;
 
-public class CharacterAxisAdapter extends RecyclerView.Adapter<TileAxisViewHolder> {
+import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
+
+public class CharacterAxisAdapter extends RecyclerView.Adapter<CharacterAxisAdapter.ViewHolder> {
 
     private Fragment fragment;
     private Resources res;
     private SortedList<Splat> splats;
     private boolean left = true;
     private int gridImageSize;
+    private LayoutInflater inflater;
 
     public CharacterAxisAdapter(Fragment fragment) {
         this.fragment = fragment;
         res = fragment.getResources();
+        inflater = LayoutInflater.from(fragment.getContext());
         splats = new SortedList<>(Splat.class, new SortedList.Callback<Splat>() {
             @Override public int compare(Splat o1, Splat o2) {
                 return 0;
@@ -66,17 +73,20 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileAxisViewHolde
     }
 
     @Override
-    public TileAxisViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new TileAxisViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.tile_grid, parent, false));
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        TileGridBinding binding = TileGridBinding.inflate(inflater, parent, false);
+        return new ViewHolder(binding.getRoot());
     }
 
     @Override
-    public void onBindViewHolder(TileAxisViewHolder vh, int position) {
-        Splat splat = splats.get(position);
-        Glide.with(fragment).load(new SplatIcon(res, splat, gridImageSize).getUrl()).into(vh.imageView);
-        vh.tvTitle.setText(splat.title());
-        vh.splat = splat;
-        vh.left = left;
+    public void onBindViewHolder(ViewHolder vh, int position) {
+        final Splat splat = splats.get(position);
+        Glide.with(fragment).load(new SplatIcon(res, splat, gridImageSize).getUrl()).into(vh.binding.imageView);
+        vh.binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                BUS.getBus().post(new TileSplatClickedEvent(splat, left));
+            }
+        });
     }
 
     @Override
@@ -118,5 +128,14 @@ public class CharacterAxisAdapter extends RecyclerView.Adapter<TileAxisViewHolde
     public void replaceAll(List<Splat> list) {
         clear();
         addAll(list);
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder{
+        public TileGridBinding binding;
+
+        public ViewHolder(final View itemView) {
+            super(itemView);
+            binding = DataBindingUtil.bind(itemView);
+        }
     }
 }
