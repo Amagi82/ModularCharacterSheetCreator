@@ -23,14 +23,14 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.0'
-    compile 'com.android.support:recyclerview-v7:23.0.0'
-    compile 'com.android.support:cardview-v7:23.0.0'
-    compile 'com.android.support:design:23.0.0'
-    compile 'com.android.support:palette-v7:23.0.0'
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:recyclerview-v7:23.0.1'
+    compile 'com.android.support:cardview-v7:23.0.1'
+    compile 'com.android.support:design:23.0.1'
+    compile 'com.android.support:palette-v7:23.0.1'
     compile 'de.hdodenhof:circleimageview:1.3.0'
     compile 'com.github.lzyzsd:circleprogress:1.1.0' //Circle progress bar- used for blood pools or health bars
-    compile 'com.akexorcist:RoundCornerProgressBar:1.2.2' //Usable for health bars
+    compile 'com.akexorcist:RoundCornerProgressBar:1.2.8' //Usable for health bars
     compile 'com.squareup:otto:1.3.8' //Event Bus for easy & reliable communication between classes
     compile 'com.jakewharton:butterknife:7.0.1' //Dependency injection for views
     compile 'com.colintmiller:simplenosql:0.5.1' //NoSQL database
@@ -38,11 +38,11 @@ dependencies {
     compile 'com.edmodo:cropper:1.0.1'
     compile 'com.google.dagger:dagger:2.0.1' //Dependency injection
     compile 'frankiesardo:icepick:3.1.0' //Save/load instance state with a simple annotation
-    compile 'com.github.frankiesardo:auto-parcel:0.3'
+    compile 'com.github.frankiesardo:auto-parcel:0.3.1'
     provided 'javax.annotation:jsr250-api:1.0' //Annotations required for Dagger, Icepick, and Auto-Parcel
     apt 'com.google.dagger:dagger-compiler:2.0.1'
     apt 'frankiesardo:icepick-processor:3.1.0'
-    apt 'com.github.frankiesardo:auto-parcel-processor:0.3'
+    apt 'com.github.frankiesardo:auto-parcel-processor:0.3.1'
     //compile: compiles the library with the app
     //provided: puts the annotation processor classes and dependencies in the IDE class path
     //apt: Annotation Processing Tool, the processor is not added to the class path; it's only used for annotation processing
