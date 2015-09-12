@@ -23,13 +23,13 @@ import amagi82.modularcharactersheetcreator.events.UpNavigationEvent;
 import amagi82.modularcharactersheetcreator.fragments.CharacterGameFragment;
 import amagi82.modularcharactersheetcreator.fragments.MainFragment;
 import amagi82.modularcharactersheetcreator.fragments.SheetFragment;
-import amagi82.modularcharactersheetcreator.models.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.Sheet;
-import amagi82.modularcharactersheetcreator.models.games.Splat;
-import amagi82.modularcharactersheetcreator.models.games.systems.CMage;
-import amagi82.modularcharactersheetcreator.models.games.systems.CVampire;
-import amagi82.modularcharactersheetcreator.models.games.systems.CWerewolf;
-import amagi82.modularcharactersheetcreator.templates.Template;
+import amagi82.modularcharactersheetcreator.core_models.GameCharacter;
+import amagi82.modularcharactersheetcreator.core_models.Sheet;
+import amagi82.modularcharactersheetcreator.core_models.Splat;
+import amagi82.modularcharactersheetcreator.game_models.CMage;
+import amagi82.modularcharactersheetcreator.game_models.CVampire;
+import amagi82.modularcharactersheetcreator.game_models.CWerewolf;
+import amagi82.modularcharactersheetcreator.utils.Template;
 
 public class MainActivity extends BaseActivity {
 

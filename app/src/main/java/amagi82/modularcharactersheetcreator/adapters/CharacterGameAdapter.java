@@ -14,7 +14,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.databinding.TileGridGameBinding;
 import amagi82.modularcharactersheetcreator.events.TileGameClickedEvent;
-import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
+import amagi82.modularcharactersheetcreator.game_models.GameSystem;
 
 import static amagi82.modularcharactersheetcreator.utils.Otto.BUS;
 

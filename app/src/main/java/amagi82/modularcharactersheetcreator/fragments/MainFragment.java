@@ -29,6 +29,7 @@ public class MainFragment extends BaseFragment {
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
     @Bind(R.id.fab) FloatingActionButton fab;
     //@InjectView(R.id.fab_frame) FrameLayout fab_frame;
+    boolean isExpanded = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class MainFragment extends BaseFragment {
     @OnClick(R.id.fab)
     public void onFabClicked() {
         Otto.BUS.getBus().post(new CreateNewCharacterEvent());
+
 
 //        float scale = (float) (2* Math.hypot(fab_frame.getWidth(), fab_frame.getHeight()) / fab.getHeight());
 //        fab.setImageResource(0);

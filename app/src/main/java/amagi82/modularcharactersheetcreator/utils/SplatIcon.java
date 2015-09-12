@@ -3,7 +3,7 @@ package amagi82.modularcharactersheetcreator.utils;
 import android.content.res.Resources;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.games.Splat;
+import amagi82.modularcharactersheetcreator.core_models.Splat;
 
 public class SplatIcon {
 

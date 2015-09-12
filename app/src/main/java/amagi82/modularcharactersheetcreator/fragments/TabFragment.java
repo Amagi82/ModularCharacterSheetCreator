@@ -16,9 +16,9 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.activities.MainActivity;
 import amagi82.modularcharactersheetcreator.adapters.SheetAdapter;
 import amagi82.modularcharactersheetcreator.events.ModuleAddedEvent;
-import amagi82.modularcharactersheetcreator.models.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.Sheet;
-import amagi82.modularcharactersheetcreator.models.modules.Module;
+import amagi82.modularcharactersheetcreator.core_models.GameCharacter;
+import amagi82.modularcharactersheetcreator.core_models.Sheet;
+import amagi82.modularcharactersheetcreator.core_models.modules.Module;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 

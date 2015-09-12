@@ -1,6 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="observer" type="amagi82.modularcharactersheetcreator.observables.EditCharacterObserver"/>
+        <variable name="observer" type="amagi82.modularcharactersheetcreator.view_models.EditCharacterObserver"/>
     </data>
 
 <android.support.design.widget.CoordinatorLayout

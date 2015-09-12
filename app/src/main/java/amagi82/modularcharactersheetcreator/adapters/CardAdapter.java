@@ -8,7 +8,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.RowStatViewHolder;
-import amagi82.modularcharactersheetcreator.models.modules.Stat;
+import amagi82.modularcharactersheetcreator.core_models.modules.Stat;
 
 public class CardAdapter extends RecyclerView.Adapter<RowStatViewHolder> {
 

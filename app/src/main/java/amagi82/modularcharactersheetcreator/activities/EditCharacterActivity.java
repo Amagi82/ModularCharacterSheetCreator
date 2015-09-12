@@ -10,16 +10,16 @@ import com.squareup.otto.Subscribe;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterPagerAdapter;
-import amagi82.modularcharactersheetcreator.callbacks.PageListener;
+import amagi82.modularcharactersheetcreator.listeners.PageListener;
 import amagi82.modularcharactersheetcreator.databinding.ActivityEditCharacterBinding;
 import amagi82.modularcharactersheetcreator.events.CharacterUpdatedEvent;
 import amagi82.modularcharactersheetcreator.events.LeftAxisEvent;
 import amagi82.modularcharactersheetcreator.events.PageChangedEvent;
 import amagi82.modularcharactersheetcreator.events.RightAxisEvent;
 import amagi82.modularcharactersheetcreator.events.TileGameClickedEvent;
-import amagi82.modularcharactersheetcreator.models.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.games.Splat;
-import amagi82.modularcharactersheetcreator.observables.EditCharacterObserver;
+import amagi82.modularcharactersheetcreator.core_models.GameCharacter;
+import amagi82.modularcharactersheetcreator.core_models.Splat;
+import amagi82.modularcharactersheetcreator.view_models.EditCharacterObserver;
 import amagi82.modularcharactersheetcreator.widgets.NoSwipeViewPager;
 import icepick.State;
 

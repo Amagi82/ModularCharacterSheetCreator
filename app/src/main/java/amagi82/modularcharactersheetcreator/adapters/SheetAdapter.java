@@ -14,13 +14,13 @@ import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleBloodPool
 import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleHealthViewHolder;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleStatusViewHolder;
 import amagi82.modularcharactersheetcreator.adapters.viewholders.ModuleViewHolder;
-import amagi82.modularcharactersheetcreator.models.modules.BloodPoolModule;
-import amagi82.modularcharactersheetcreator.models.modules.HealthModule;
-import amagi82.modularcharactersheetcreator.models.modules.Module;
-import amagi82.modularcharactersheetcreator.models.modules.Stat;
-import amagi82.modularcharactersheetcreator.models.modules.StatBlockModule;
-import amagi82.modularcharactersheetcreator.models.modules.StatusModule;
-import amagi82.modularcharactersheetcreator.models.modules.TitleTextBlockModule;
+import amagi82.modularcharactersheetcreator.core_models.modules.BloodPoolModule;
+import amagi82.modularcharactersheetcreator.core_models.modules.HealthModule;
+import amagi82.modularcharactersheetcreator.core_models.modules.Module;
+import amagi82.modularcharactersheetcreator.core_models.modules.Stat;
+import amagi82.modularcharactersheetcreator.core_models.modules.StatBlockModule;
+import amagi82.modularcharactersheetcreator.core_models.modules.StatusModule;
+import amagi82.modularcharactersheetcreator.core_models.modules.TitleTextBlockModule;
 
 public class SheetAdapter extends RecyclerView.Adapter<ModuleViewHolder> {
 

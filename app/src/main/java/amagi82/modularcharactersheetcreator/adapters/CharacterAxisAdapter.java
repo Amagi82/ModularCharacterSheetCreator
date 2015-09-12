@@ -17,7 +17,7 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.TileGridBinding;
 import amagi82.modularcharactersheetcreator.events.TileSplatClickedEvent;
-import amagi82.modularcharactersheetcreator.models.games.Splat;
+import amagi82.modularcharactersheetcreator.core_models.Splat;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.utils.SplatIcon;
 

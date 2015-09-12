@@ -1,6 +1,6 @@
 package amagi82.modularcharactersheetcreator.events;
 
-import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.core_models.GameCharacter;
 
 public class CharacterAddedEvent {
     public final GameCharacter character;

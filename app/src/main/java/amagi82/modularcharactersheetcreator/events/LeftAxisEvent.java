@@ -1,6 +1,6 @@
 package amagi82.modularcharactersheetcreator.events;
 
-import amagi82.modularcharactersheetcreator.models.games.Splat;
+import amagi82.modularcharactersheetcreator.core_models.Splat;
 
 public class LeftAxisEvent {
     public final Splat splat;

@@ -26,11 +26,11 @@ import java.io.IOException;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.activities.EditCharacterActivity;
-import amagi82.modularcharactersheetcreator.callbacks.TextEntryListener;
+import amagi82.modularcharactersheetcreator.listeners.TextEntryListener;
 import amagi82.modularcharactersheetcreator.events.CharacterUpdatedEvent;
-import amagi82.modularcharactersheetcreator.models.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.GameCharacter.ColorScheme;
-import amagi82.modularcharactersheetcreator.models.games.systems.GameSystem;
+import amagi82.modularcharactersheetcreator.core_models.GameCharacter;
+import amagi82.modularcharactersheetcreator.core_models.GameCharacter.ColorScheme;
+import amagi82.modularcharactersheetcreator.game_models.GameSystem;
 import amagi82.modularcharactersheetcreator.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.utils.SplatIcon;
 import butterknife.Bind;

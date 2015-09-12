@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="splat" type="amagi82.modularcharactersheetcreator.models.games.Splat"/>
+        <variable name="splat" type="amagi82.modularcharactersheetcreator.core_models.Splat"/>
     </data>
 
 <android.support.v7.widget.CardView

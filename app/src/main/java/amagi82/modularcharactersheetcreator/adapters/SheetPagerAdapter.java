@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import amagi82.modularcharactersheetcreator.fragments.TabFragment;
-import amagi82.modularcharactersheetcreator.models.Sheet;
+import amagi82.modularcharactersheetcreator.core_models.Sheet;
 
 public class SheetPagerAdapter extends FragmentStatePagerAdapter {
 

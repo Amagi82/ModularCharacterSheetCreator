@@ -1,6 +1,6 @@
 package amagi82.modularcharactersheetcreator.events;
 
-import amagi82.modularcharactersheetcreator.models.modules.Module;
+import amagi82.modularcharactersheetcreator.core_models.modules.Module;
 
 public class ModuleClickedEvent {
     public final Module module;

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.adapters.CharacterGameAdapter;
-import amagi82.modularcharactersheetcreator.models.games.Game;
+import amagi82.modularcharactersheetcreator.game_models.Game;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
