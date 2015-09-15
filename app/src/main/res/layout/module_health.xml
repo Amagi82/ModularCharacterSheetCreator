@@ -17,7 +17,7 @@
             android:layout_marginTop="@dimen/default_large_margin"
             android:text="@string/health"/>
 
-        <amagi82.modularcharactersheetcreator.widgets.RoundedStatBar
+        <amagi82.modularcharactersheetcreator.ui.extras.widgets.RoundedStatBar
             android:id="@+id/statBar"
             style="@style/StatRatingBarTen"
             android:layout_below="@id/tvTitle"

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="system"
-            type="amagi82.modularcharactersheetcreator.game_models.GameSystem"/>
+            type="amagi82.modularcharactersheetcreator.entities.games.GameSystem"/>
     </data>
 
     <android.support.v7.widget.CardView
