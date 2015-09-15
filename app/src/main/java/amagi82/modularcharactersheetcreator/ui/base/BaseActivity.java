@@ -3,7 +3,6 @@ package amagi82.modularcharactersheetcreator.ui.base;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import butterknife.ButterKnife;
 import icepick.Icepick;
 
 import static amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto.BUS;
@@ -28,10 +27,5 @@ public abstract class BaseActivity extends AppCompatActivity{
     @Override protected void onStop() {
         super.onStop();
         BUS.getBus().unregister(this);
-    }
-
-    @Override protected void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
     }
 }

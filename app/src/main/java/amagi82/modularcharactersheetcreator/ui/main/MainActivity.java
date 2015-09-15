@@ -1,11 +1,12 @@
 package amagi82.modularcharactersheetcreator.ui.main;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 
 import com.colintmiller.simplenosql.NoSQL;
 import com.colintmiller.simplenosql.NoSQLEntity;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.databinding.ActivityMainBinding;
 import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.entities.characters.Sheet;
 import amagi82.modularcharactersheetcreator.entities.characters.Splat;
@@ -23,14 +25,9 @@ import amagi82.modularcharactersheetcreator.entities.games.CWerewolf;
 import amagi82.modularcharactersheetcreator.ui.base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.Template;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
-    @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.recycler_view) RecyclerView recyclerView;
     public static final String BUCKET = "bucket";
     public static final int REQUEST_CODE = 50;
     public static final int NONE = -1;
@@ -39,8 +36,8 @@ public class MainActivity extends BaseActivity {
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding.toolbar.setLogo(R.drawable.title_onyx);
 
         //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
 //        if (savedInstanceState != null) {
@@ -57,13 +54,18 @@ public class MainActivity extends BaseActivity {
         generateSampleCharacters();
         currentCharacter = characters.get(0);
 
-        toolbar.setLogo(R.drawable.title_onyx);
-
-        recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView rv = binding.recyclerView;
+        rv.setHasFixedSize(true); //Improves performance if changes in content never change layout size
+        rv.setLayoutManager(new LinearLayoutManager(this));
         MainAdapter adapter = new MainAdapter(this);
-        recyclerView.setAdapter(adapter);
+        rv.setAdapter(adapter);
         adapter.addAll(characters);
+
+        binding.fab.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                startActivityForResult(new Intent(MainActivity.this, EditActivity.class), REQUEST_CODE);
+            }
+        });
     }
 
     public List<GameCharacter> getCharacters() {
@@ -122,9 +124,4 @@ public class MainActivity extends BaseActivity {
 
 //    deleteCharacter
 //    NoSQL.with(this).using(GameCharacter.class).bucketId(BUCKET).entityId(event.character.entityId()).delete();
-
-    @OnClick(R.id.fab)
-    public void onFabClicked() {
-        startActivityForResult(new Intent(this, EditActivity.class), REQUEST_CODE);
-    }
 }
