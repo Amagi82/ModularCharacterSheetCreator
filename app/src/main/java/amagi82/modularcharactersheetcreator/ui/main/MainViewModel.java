@@ -7,7 +7,11 @@ import android.util.Log;
 
 import java.util.List;
 
+import amagi82.modularcharactersheetcreator.BR;
+import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
+import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinderBase;
 
 public class MainViewModel extends BaseObservable {
 
@@ -44,5 +48,9 @@ public class MainViewModel extends BaseObservable {
 
     public ObservableArrayList<GameCharacter> getList() {
         return list;
+    }
+
+    public ItemBinder<MainItemViewModel> itemBinder(){
+        return new ItemBinderBase<>(BR.character, R.layout.item_main);
     }
 }

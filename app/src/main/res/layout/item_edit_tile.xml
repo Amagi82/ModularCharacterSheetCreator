@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="system"
-            type="amagi82.modularcharactersheetcreator.entities.games.GameSystem"/>
+            name="viewModel"
+            type="amagi82.modularcharactersheetcreator.ui.edit.game.GameItemViewModel"/>
     </data>
 
     <android.support.v7.widget.CardView
         style="@style/Card"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         app:cardBackgroundColor="@color/cardview_light_background">
 
         <ImageView
-            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            />
+            app:imageUrl="@{viewModel.url}"/>
 
     </android.support.v7.widget.CardView>
 </layout>

@@ -3,11 +3,9 @@ package amagi82.modularcharactersheetcreator.ui.edit.axis;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -25,9 +23,6 @@ import static amagi82.modularcharactersheetcreator.ui.edit.EditActivity.LEFT;
 
 public class AxisFragment extends BaseFragment {
 
-    @Bind(R.id.recycler_view) RecyclerView recyclerView;
-    @Bind(R.id.tvPrompt) TextView tvPrompt;
-    private GameSystem system;
     private AxisAdapter adapter;
     private boolean isLeft;
     @State ArrayList<Splat> list;
@@ -35,7 +30,7 @@ public class AxisFragment extends BaseFragment {
     @State int page;
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_edit_axis, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_edit_default, container, false);
         ButterKnife.bind(this, rootView);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_axis_span_count)));
@@ -68,7 +63,7 @@ public class AxisFragment extends BaseFragment {
 
     private void addItems() {
         GameCharacter character = ((EditActivity) getActivity()).getGameCharacter();
-        system = character.getGameSystem();
+        GameSystem system = character.getGameSystem();
 
         if (system != null) {
             if (isLeft) {

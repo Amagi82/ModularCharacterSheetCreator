@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="viewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.edit.EditViewModel"/>
+        <variable name="context"
+                  type="amagi82.modularcharactersheetcreator.ui.edit.EditActivity"/>
+    </data>
+
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,8 +18,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <TextView
-        android:id="@+id/tvPrompt"
         style="@style/TextAppearance.AppCompat.Subhead"
+        android:text="@{viewModel.title}"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         android:shadowRadius="10"
         android:shadowColor="@color/primary_dark"
@@ -22,6 +31,9 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         style="@style/RecyclerView.Card"
+        app:items="@{viewModel.list}"
+        app:itemViewBinder="@{context.itemViewBinder}"
         android:paddingTop="@dimen/default_large_margin">
     </android.support.v7.widget.RecyclerView>
 </FrameLayout>
+</layout>

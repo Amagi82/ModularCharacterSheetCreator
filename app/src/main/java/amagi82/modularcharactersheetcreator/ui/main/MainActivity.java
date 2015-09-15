@@ -115,4 +115,5 @@ public class MainActivity extends BaseActivity {
 
 //    deleteCharacter
 //    NoSQL.with(this).using(GameCharacter.class).bucketId(BUCKET).entityId(event.character.entityId()).delete();
+
 }

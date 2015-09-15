@@ -20,7 +20,7 @@ public class GameFragment extends BaseFragment {
     @Bind(R.id.tvPrompt) TextView tvPrompt;
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_edit_axis, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_edit_default, container, false);
         ButterKnife.bind(this, rootView);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_game_span_count)));

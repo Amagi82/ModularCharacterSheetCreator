@@ -2,11 +2,10 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="vm" type="amagi82.modularcharactersheetcreator.ui.edit.EditViewModel"/>
+        <variable name="viewModel" type="amagi82.modularcharactersheetcreator.ui.edit.EditViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/coordinatorLayout"
         style="@style/CoordinatorLayout"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -14,11 +13,9 @@
         tools:context=".EditActivity">
 
         <android.support.design.widget.AppBarLayout
-            android:id="@+id/appbar"
             style="@style/AppBar.Fits">
 
             <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar"
                 style="@style/CollapsingToolbar"
                 android:layout_height="wrap_content"
                 app:contentScrim="@color/primary"
@@ -26,11 +23,10 @@
                 app:titleEnabled="false">
 
                 <amagi82.modularcharactersheetcreator.ui.xtras.widgets.ImageBackdrop
-                    android:id="@+id/imageBackdrop"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fitsSystemWindows="true"
-                    app:imageUrl="@{vm.splashUrl}"
+                    app:imageUrl="@{viewModel.splashUrl}"
                     app:layout_collapseMode="parallax"/>
 
                 <android.support.v7.widget.Toolbar

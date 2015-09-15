@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewModel"
+            type="amagi82.modularcharactersheetcreator.ui.edit.axis.AxisItemViewModel"/>
+    </data>
+
+    <android.support.v7.widget.CardView
+        style="@style/Card"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_height="160dp"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        tools:layout_width="140dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            app:imageUrl="@{viewModel.url}"/>
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/tileAlpha"
+            android:gravity="center"
+            android:padding="@dimen/default_small_margin"
+            android:text="@{viewModel.title}"
+            android:textColor="@color/white"
+            tools:text="Header"/>
+
+    </android.support.v7.widget.CardView>
+</layout>

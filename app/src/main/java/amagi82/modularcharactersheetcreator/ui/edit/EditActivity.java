@@ -17,23 +17,23 @@ public class EditActivity extends BaseActivity {
     public static final String LEFT = "Left";
     private NoSwipeViewPager viewPager;
     private FragmentManager fm = getSupportFragmentManager();
-    private EditViewModel observer;
+    private EditViewModel viewModel;
     @State GameCharacter character;
     @State int backstack;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityEditBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_edit);
-        viewPager = binding.viewpager;
 
         setSupportActionBar(binding.toolbar);
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (character == null) character = GameCharacter.builder().build();
-        if (observer == null) observer = new EditViewModel(character);
-        binding.setObserver(observer);
+        if (viewModel == null) viewModel = new EditViewModel(character);
+        binding.setViewModel(viewModel);
 
+        viewPager = binding.viewpager;
         viewPager.addOnPageChangeListener(new PageListener() {
             @Override public void onPageSelected(int position) {
                 //BUS.getBus().post(new PageChangedEvent(position));
@@ -49,20 +49,20 @@ public class EditActivity extends BaseActivity {
 
 //    @Subscribe public void gameSelected(TileGameClickedEvent event) {
 //        character = character.toBuilder().gameTitle(event.system.getGameTitle()).build();
-//        observer.setCharacter(character);
+//        viewModel.setCharacter(character);
 //        next();
 //    }
 //
 //    @Subscribe public void leftAxisSelected(LeftAxisEvent event) {
 //        character = character.toBuilder().left(event.splat).build();
-//        observer.setCharacter(character);
+//        viewModel.setCharacter(character);
 //        next();
 //    }
 //
 //    @Subscribe public void rightAxisSelected(RightAxisEvent event) {
 //        Splat updatedLeft = character.getGameSystem().checkLeft() ? character.getGameSystem().updateLeft(character.left(), event.splat) : character.left();
 //        character = character.toBuilder().left(updatedLeft).right(event.splat).build();
-//        observer.setCharacter(character);
+//        viewModel.setCharacter(character);
 //        binding.appbar.setExpanded(true);
 //        next();
 //    }
@@ -93,7 +93,7 @@ public class EditActivity extends BaseActivity {
     @Override public void onBackPressed() {
         if (backstack > 0) {
             character = character.removeProgress(viewPager.getCurrentItem());
-            observer.setCharacter(character);
+            viewModel.setCharacter(character);
             viewPager.previousPage();
             backstack--;
         } else super.onBackPressed();
