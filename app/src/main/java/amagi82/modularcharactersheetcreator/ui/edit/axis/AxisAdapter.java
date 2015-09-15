@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.ui.extras.databinding.TileGridBinding;
-import amagi82.modularcharactersheetcreator.ui.extras.events.TileSplatClickedEvent;
+import amagi82.modularcharactersheetcreator.ui.xtras.databinding.TileGridBinding;
+import amagi82.modularcharactersheetcreator.ui.xtras.events.TileSplatClickedEvent;
 import amagi82.modularcharactersheetcreator.entities.characters.Splat;
-import amagi82.modularcharactersheetcreator.ui.extras.utils.ScreenSize;
-import amagi82.modularcharactersheetcreator.ui.extras.utils.SplatIcon;
+import amagi82.modularcharactersheetcreator.ui.xtras.utils.ScreenSize;
+import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;
 
-import static amagi82.modularcharactersheetcreator.ui.extras.utils.Otto.BUS;
+import static amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto.BUS;
 
 public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.ViewHolder> {
 

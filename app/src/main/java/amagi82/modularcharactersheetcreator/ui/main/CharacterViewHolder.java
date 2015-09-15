@@ -5,9 +5,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.ui.extras.events.CharacterClickedEvent;
+import amagi82.modularcharactersheetcreator.ui.xtras.events.CharacterClickedEvent;
 import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.ui.extras.utils.Otto;
+import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;

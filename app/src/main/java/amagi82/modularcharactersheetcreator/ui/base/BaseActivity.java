@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import butterknife.ButterKnife;
 import icepick.Icepick;
 
-import static amagi82.modularcharactersheetcreator.ui.extras.utils.Otto.BUS;
+import static amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto.BUS;
 
-public class BaseActivity extends AppCompatActivity{
+public abstract class BaseActivity extends AppCompatActivity{
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

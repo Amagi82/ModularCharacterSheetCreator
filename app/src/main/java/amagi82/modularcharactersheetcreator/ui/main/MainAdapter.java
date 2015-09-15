@@ -16,7 +16,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.ui.extras.utils.CircleIcon;
+import amagi82.modularcharactersheetcreator.ui.xtras.utils.CircleIcon;
 
 public class MainAdapter extends RecyclerView.Adapter<CharacterViewHolder> {
 

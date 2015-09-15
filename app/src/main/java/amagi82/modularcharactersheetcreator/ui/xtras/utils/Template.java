@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui.extras.utils;
+package amagi82.modularcharactersheetcreator.ui.xtras.utils;
 
 import android.content.Context;
 

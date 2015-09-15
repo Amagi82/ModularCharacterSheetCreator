@@ -2,25 +2,18 @@ package amagi82.modularcharactersheetcreator.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.colintmiller.simplenosql.NoSQL;
 import com.colintmiller.simplenosql.NoSQLEntity;
-import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.ui.edit.game.GameFragment;
-import amagi82.modularcharactersheetcreator.ui.extras.events.CharacterAddedEvent;
-import amagi82.modularcharactersheetcreator.ui.extras.events.CharacterUpdatedEvent;
-import amagi82.modularcharactersheetcreator.ui.extras.events.CharacterClickedEvent;
-import amagi82.modularcharactersheetcreator.ui.extras.events.CharacterDeletedEvent;
-import amagi82.modularcharactersheetcreator.ui.extras.events.EditCharacterEvent;
-import amagi82.modularcharactersheetcreator.ui.extras.events.UpNavigationEvent;
-import amagi82.modularcharactersheetcreator.ui.sheet.SheetFragment;
 import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.entities.characters.Sheet;
 import amagi82.modularcharactersheetcreator.entities.characters.Splat;
@@ -29,21 +22,25 @@ import amagi82.modularcharactersheetcreator.entities.games.CVampire;
 import amagi82.modularcharactersheetcreator.entities.games.CWerewolf;
 import amagi82.modularcharactersheetcreator.ui.base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
-import amagi82.modularcharactersheetcreator.ui.extras.utils.Template;
+import amagi82.modularcharactersheetcreator.ui.xtras.utils.Template;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
+    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.recycler_view) RecyclerView recyclerView;
     public static final String BUCKET = "bucket";
-    public static final String EDIT_MODE = "EditMode";
     public static final int REQUEST_CODE = 50;
     public static final int NONE = -1;
-    private FragmentManager fm = getSupportFragmentManager();
     private List<GameCharacter> characters;
     private GameCharacter currentCharacter;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
 //        if (savedInstanceState != null) {
@@ -59,9 +56,14 @@ public class MainActivity extends BaseActivity {
         loadSavedCharacters();
         generateSampleCharacters();
         currentCharacter = characters.get(0);
-        if(savedInstanceState == null){
-            fm.beginTransaction().replace(R.id.container, new MainFragment()).commit();
-        }
+
+        toolbar.setLogo(R.drawable.title_onyx);
+
+        recyclerView.setHasFixedSize(true); //Improves performance if changes in content never change layout size
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        MainAdapter adapter = new MainAdapter(this);
+        recyclerView.setAdapter(adapter);
+        adapter.addAll(characters);
     }
 
     public List<GameCharacter> getCharacters() {
@@ -118,51 +120,11 @@ public class MainActivity extends BaseActivity {
         NoSQL.with(this).using(GameCharacter.class).save(entity);
     }
 
-    @Subscribe public void onCharacterAdded(CharacterAddedEvent event) {
-        characters.add(event.character);
-        saveCharacter(event.character);
-    }
+//    deleteCharacter
+//    NoSQL.with(this).using(GameCharacter.class).bucketId(BUCKET).entityId(event.character.entityId()).delete();
 
-    @Subscribe public void onCharacterChanged(CharacterUpdatedEvent event) {
-        for (GameCharacter character : characters) {
-            if (character.entityId().equals(event.character.entityId())) {
-                character = event.character;
-                saveCharacter(character);
-                Log.i(null, character.name() + " has been updated");
-            } else Log.i(null, "Character failed to update");
-        }
-    }
-
-    @Subscribe public void onCharacterDeleted(CharacterDeletedEvent event) {
-        for (int i = characters.size() - 1; i>= 0; i--) {
-            if (characters.get(i).entityId().equals(event.character.entityId())) {
-                NoSQL.with(this).using(GameCharacter.class).bucketId(BUCKET).entityId(event.character.entityId()).delete();
-                characters.remove(characters.get(i));
-                break;
-            }
-        }
-    }
-
-    @Subscribe public void onCreateNewCharacter(CreateNewCharacterEvent event) {
+    @OnClick(R.id.fab)
+    public void onFabClicked() {
         startActivityForResult(new Intent(this, EditActivity.class), REQUEST_CODE);
-        //fm.beginTransaction().replace(R.id.container, new CharacterFragment()).addToBackStack(null).commit();
-    }
-
-    @Subscribe public void onEditCharacter(EditCharacterEvent event) {
-        currentCharacter = event.character;
-        GameFragment fragment = new GameFragment();
-        Bundle bundle = new Bundle();
-        bundle.putBoolean(EDIT_MODE, true);
-        fragment.setArguments(bundle);
-        fm.beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
-    }
-
-    @Subscribe public void onCharacterClicked(CharacterClickedEvent event) {
-        currentCharacter = event.character;
-        fm.beginTransaction().replace(R.id.container, new SheetFragment()).addToBackStack(null).commit();
-    }
-
-    @Subscribe public void upNavigation(UpNavigationEvent event){
-        fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 }

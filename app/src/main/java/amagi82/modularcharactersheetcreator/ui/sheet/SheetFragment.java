@@ -22,9 +22,9 @@ import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.ui.main.MainActivity;
-import amagi82.modularcharactersheetcreator.ui.extras.events.EditCharacterEvent;
-import amagi82.modularcharactersheetcreator.ui.extras.events.ModuleAddedEvent;
-import amagi82.modularcharactersheetcreator.ui.extras.events.UpNavigationEvent;
+import amagi82.modularcharactersheetcreator.ui.xtras.events.EditCharacterEvent;
+import amagi82.modularcharactersheetcreator.ui.xtras.events.ModuleAddedEvent;
+import amagi82.modularcharactersheetcreator.ui.xtras.events.UpNavigationEvent;
 import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.entities.characters.Sheet;
 import amagi82.modularcharactersheetcreator.entities.modules.HeaderModule;
@@ -33,7 +33,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static amagi82.modularcharactersheetcreator.ui.extras.utils.Otto.BUS;
+import static amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto.BUS;
 
 public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener{
 

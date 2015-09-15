@@ -9,19 +9,19 @@ import android.view.MenuItem;
 import com.squareup.otto.Subscribe;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.ui.extras.databinding.ActivityEditCharacterBinding;
-import amagi82.modularcharactersheetcreator.ui.extras.events.CharacterUpdatedEvent;
-import amagi82.modularcharactersheetcreator.ui.extras.events.LeftAxisEvent;
-import amagi82.modularcharactersheetcreator.ui.extras.events.PageChangedEvent;
-import amagi82.modularcharactersheetcreator.ui.extras.events.RightAxisEvent;
-import amagi82.modularcharactersheetcreator.ui.extras.events.TileGameClickedEvent;
+import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ActivityEditCharacterBinding;
+import amagi82.modularcharactersheetcreator.ui.xtras.events.CharacterUpdatedEvent;
+import amagi82.modularcharactersheetcreator.ui.xtras.events.LeftAxisEvent;
+import amagi82.modularcharactersheetcreator.ui.xtras.events.PageChangedEvent;
+import amagi82.modularcharactersheetcreator.ui.xtras.events.RightAxisEvent;
+import amagi82.modularcharactersheetcreator.ui.xtras.events.TileGameClickedEvent;
 import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.entities.characters.Splat;
 import amagi82.modularcharactersheetcreator.ui.base.BaseActivity;
-import amagi82.modularcharactersheetcreator.ui.extras.widgets.NoSwipeViewPager;
+import amagi82.modularcharactersheetcreator.ui.xtras.widgets.NoSwipeViewPager;
 import icepick.State;
 
-import static amagi82.modularcharactersheetcreator.ui.extras.utils.Otto.BUS;
+import static amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto.BUS;
 
 public class EditActivity extends BaseActivity {
 
@@ -89,7 +89,7 @@ public class EditActivity extends BaseActivity {
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_edit_character, menu);
+        getMenuInflater().inflate(R.menu.menu_edit, menu);
         return true;
     }
 

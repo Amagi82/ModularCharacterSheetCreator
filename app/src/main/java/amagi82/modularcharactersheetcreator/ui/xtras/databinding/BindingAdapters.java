@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui.extras.databinding;
+package amagi82.modularcharactersheetcreator.ui.xtras.databinding;
 
 import android.databinding.BindingAdapter;
 import android.support.annotation.StringRes;

@@ -12,11 +12,11 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import amagi82.modularcharactersheetcreator.ui.extras.databinding.TileGridGameBinding;
-import amagi82.modularcharactersheetcreator.ui.extras.events.TileGameClickedEvent;
+import amagi82.modularcharactersheetcreator.ui.xtras.databinding.TileGridGameBinding;
+import amagi82.modularcharactersheetcreator.ui.xtras.events.TileGameClickedEvent;
 import amagi82.modularcharactersheetcreator.entities.games.GameSystem;
 
-import static amagi82.modularcharactersheetcreator.ui.extras.utils.Otto.BUS;
+import static amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto.BUS;
 
 public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
 

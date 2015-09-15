@@ -6,9 +6,9 @@ import android.support.v4.app.Fragment;
 import butterknife.ButterKnife;
 import icepick.Icepick;
 
-import static amagi82.modularcharactersheetcreator.ui.extras.utils.Otto.BUS;
+import static amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto.BUS;
 
-public class BaseFragment extends Fragment{
+public abstract class BaseFragment extends Fragment{
 
     @Override public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

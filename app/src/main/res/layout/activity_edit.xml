@@ -23,7 +23,7 @@
             app:layout_scrollFlags="scroll"
             app:titleEnabled="false">
 
-            <amagi82.modularcharactersheetcreator.ui.extras.widgets.ImageBackdrop
+            <amagi82.modularcharactersheetcreator.ui.xtras.widgets.ImageBackdrop
                 android:id="@+id/imageBackdrop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <amagi82.modularcharactersheetcreator.ui.extras.widgets.NoSwipeViewPager
+    <amagi82.modularcharactersheetcreator.ui.xtras.widgets.NoSwipeViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
