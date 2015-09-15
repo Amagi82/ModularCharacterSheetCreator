@@ -27,12 +27,10 @@ import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.Template;
 
 public class MainActivity extends BaseActivity {
-
     public static final String BUCKET = "bucket";
     public static final int REQUEST_CODE = 50;
     public static final int NONE = -1;
     private List<GameCharacter> characters;
-    private GameCharacter currentCharacter;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +50,9 @@ public class MainActivity extends BaseActivity {
 //        } else
         loadSavedCharacters();
         generateSampleCharacters();
-        currentCharacter = characters.get(0);
 
         RecyclerView rv = binding.recyclerView;
-        rv.setHasFixedSize(true); //Improves performance if changes in content never change layout size
+        rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(this));
         MainAdapter adapter = new MainAdapter(this);
         rv.setAdapter(adapter);
@@ -66,14 +63,6 @@ public class MainActivity extends BaseActivity {
                 startActivityForResult(new Intent(MainActivity.this, EditActivity.class), REQUEST_CODE);
             }
         });
-    }
-
-    public List<GameCharacter> getCharacters() {
-        return characters;
-    }
-
-    public GameCharacter getCurrentCharacter() {
-        return currentCharacter;
     }
 
     private void loadSavedCharacters() {

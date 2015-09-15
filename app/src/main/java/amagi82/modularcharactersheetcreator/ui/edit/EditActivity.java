@@ -14,9 +14,7 @@ import amagi82.modularcharactersheetcreator.ui.xtras.widgets.NoSwipeViewPager;
 import icepick.State;
 
 public class EditActivity extends BaseActivity {
-
     public static final String LEFT = "Left";
-    private ActivityEditBinding binding;
     private NoSwipeViewPager viewPager;
     private FragmentManager fm = getSupportFragmentManager();
     private EditViewModel observer;
@@ -25,7 +23,7 @@ public class EditActivity extends BaseActivity {
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_edit);
+        ActivityEditBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_edit);
         viewPager = binding.viewpager;
 
         setSupportActionBar(binding.toolbar);
