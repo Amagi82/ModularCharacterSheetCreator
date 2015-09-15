@@ -14,24 +14,34 @@ import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinderBase;
 
 public class AxisViewModel extends BaseObservable {
     @Bindable private ObservableArrayList<Splat> list;
+    @Bindable private String title;
 
     public AxisViewModel(List<Splat> list) {
         this.list.addAll(list);
     }
 
-    public void add(Splat character){
-        list.add(character);
+    public void replaceAll(List<Splat> list){
+        this.list.clear();
+        this.list.addAll(list);
     }
 
-    public void remove(Splat character){
-        list.remove(character);
+    public void addAll(List<Splat> list){
+        this.list.addAll(list);
     }
 
     public ObservableArrayList<Splat> getList() {
         return list;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public ItemBinder<AxisItemViewModel> itemBinder(){
-        return new ItemBinderBase<>(BR.splat, R.layout.item_edit_tile_title);
+        return new ItemBinderBase<>(BR.viewModel, R.layout.item_edit_tile_title);
     }
 }

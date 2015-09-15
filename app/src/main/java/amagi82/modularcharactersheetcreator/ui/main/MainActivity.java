@@ -51,7 +51,6 @@ public class MainActivity extends BaseActivity {
         generateSampleCharacters();
 
         MainViewModel viewModel = new MainViewModel(characters);
-        binding.setContext(this);
         binding.setViewModel(viewModel);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setOnClickListener(new View.OnClickListener() {

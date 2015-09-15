@@ -1,52 +1,56 @@
 package amagi82.modularcharactersheetcreator.ui.edit.axis;
 
+import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.otto.Subscribe;
+
 import java.util.ArrayList;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.databinding.FragmentEditAxisBinding;
 import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.entities.characters.Splat;
 import amagi82.modularcharactersheetcreator.entities.games.GameSystem;
 import amagi82.modularcharactersheetcreator.ui.base.BaseFragment;
 import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import amagi82.modularcharactersheetcreator.ui.edit.ListUpdatedEvent;
+import amagi82.modularcharactersheetcreator.ui.main.MainActivity;
+import amagi82.modularcharactersheetcreator.ui.main.MainViewModel;
 import icepick.State;
 
 import static amagi82.modularcharactersheetcreator.ui.edit.EditActivity.LEFT;
 
 public class AxisFragment extends BaseFragment {
 
-    private AxisAdapter adapter;
     private boolean isLeft;
+    private AxisViewModel viewModel;
     @State ArrayList<Splat> list;
     @State int previousPage;
     @State int page;
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_edit_default, container, false);
-        ButterKnife.bind(this, rootView);
+        FragmentEditAxisBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_axis, container, false);
+        if(list == null) list = new ArrayList<>();
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_axis_span_count)));
-        adapter = new AxisAdapter(this);
-        recyclerView.setAdapter(adapter);
+        viewModel = new AxisViewModel(list);
+        binding.setViewModel(viewModel);
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_axis_span_count)));
 
         isLeft = getArguments().getBoolean(LEFT, true);
 
-        return rootView;
+        return binding.getRoot();
     }
 
     @Override public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        if(list != null) adapter.addAll(list); //Restore the list on screen rotation
-        adapter.setLeft(isLeft);
         page = isLeft ? 1 : 2;
     }
 
@@ -60,6 +64,10 @@ public class AxisFragment extends BaseFragment {
 //
 //        previousPage = currentPage;
 //    }
+
+    @Subscribe public void onListUpdated(ListUpdatedEvent event){
+        viewModel.replaceAll(event.list);
+    }
 
     private void addItems() {
         GameCharacter character = ((EditActivity) getActivity()).getGameCharacter();

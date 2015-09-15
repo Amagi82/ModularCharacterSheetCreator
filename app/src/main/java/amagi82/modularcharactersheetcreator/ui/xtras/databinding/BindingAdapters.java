@@ -26,6 +26,11 @@ public class BindingAdapters {
         if(url != NONE) Glide.with(img.getContext()).load(img.getContext().getString(url)).into(img);
     }
 
+    @BindingAdapter("bind:imageUrl")
+    public static void loadImage(ImageView img, String url){
+        Glide.with(img.getContext()).load(url).into(img);
+    }
+
     @BindingAdapter("bind:loadIcon")
     public static void loadIcon(CircleImageView icon, GameCharacter character){
         Uri imageUri = character.image() == null ? null : character.image().uri();

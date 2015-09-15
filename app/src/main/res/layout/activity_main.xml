@@ -4,8 +4,6 @@
     <data>
         <variable name="viewModel"
                   type="amagi82.modularcharactersheetcreator.ui.main.MainViewModel"/>
-        <variable name="context"
-                  type="amagi82.modularcharactersheetcreator.ui.main.MainActivity"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -27,7 +25,7 @@
             android:id="@+id/recycler_view"
             style="@style/RecyclerView"
             app:items="@{viewModel.list}"
-            app:itemViewBinder="@{context.itemViewBinder}"
+            app:itemViewBinder="@{viewModel.itemViewBinder}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         <android.support.design.widget.FloatingActionButton

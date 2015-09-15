@@ -7,12 +7,15 @@ import android.databinding.ViewDataBinding;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.lang.ref.WeakReference;
 import java.util.Collection;
 
+import amagi82.modularcharactersheetcreator.ui.edit.ItemClickedEvent;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
+import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
 
 @SuppressWarnings("unchecked")
 public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<BindingRecyclerViewAdapter.ViewHolder> {
@@ -64,10 +67,15 @@ public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<BindingR
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         T item = items.get(position);
         viewHolder.binding.setVariable(itemBinder.getBindingVariable(item), item);
         viewHolder.binding.executePendingBindings();
+        viewHolder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                Otto.BUS.getBus().post(new ItemClickedEvent(position));
+            }
+        });
     }
 
     @Override

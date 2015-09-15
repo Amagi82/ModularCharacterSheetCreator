@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="viewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.edit.game.GameViewModel"/>
+    </data>
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/character_recyclerview_keyline"
+        android:paddingRight="@dimen/character_recyclerview_keyline"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"
+            android:shadowColor="@color/primary_dark"
+            android:shadowRadius="10"
+            android:text="@string/choose_game"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            style="@style/RecyclerView.Card"
+            android:paddingTop="@dimen/default_large_margin"
+            app:itemViewBinder="@{viewModel.itemViewBinder}"
+            app:items="@{viewModel.list}">
+        </android.support.v7.widget.RecyclerView>
+    </FrameLayout>
+</layout>

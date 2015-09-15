@@ -3,9 +3,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable name="viewModel"
-                  type="amagi82.modularcharactersheetcreator.ui.edit.EditViewModel"/>
-        <variable name="context"
-                  type="amagi82.modularcharactersheetcreator.ui.edit.EditActivity"/>
+                  type="amagi82.modularcharactersheetcreator.ui.edit.axis.AxisViewModel"/>
     </data>
 
 <FrameLayout
@@ -32,7 +30,7 @@
         android:id="@+id/recycler_view"
         style="@style/RecyclerView.Card"
         app:items="@{viewModel.list}"
-        app:itemViewBinder="@{context.itemViewBinder}"
+        app:itemViewBinder="@{viewModel.itemViewBinder}"
         android:paddingTop="@dimen/default_large_margin">
     </android.support.v7.widget.RecyclerView>
 </FrameLayout>

@@ -1,35 +1,25 @@
 package amagi82.modularcharactersheetcreator.ui.edit.game;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.ui.base.BaseFragment;
+import amagi82.modularcharactersheetcreator.databinding.FragmentEditGameBinding;
 import amagi82.modularcharactersheetcreator.entities.games.Game;
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import amagi82.modularcharactersheetcreator.ui.base.BaseFragment;
 
 public class GameFragment extends BaseFragment {
 
-    @Bind(R.id.recycler_view) RecyclerView recyclerView;
-    @Bind(R.id.tvPrompt) TextView tvPrompt;
-
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_edit_default, container, false);
-        ButterKnife.bind(this, rootView);
+        FragmentEditGameBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_game, container, false);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_game_span_count)));
-        GameAdapter adapter = new GameAdapter(this);
-        recyclerView.setAdapter(adapter);
-        if (adapter.getItemCount() == 0) adapter.addAll(new Game().getList());
+        binding.setViewModel(new GameViewModel(new Game().getList()));
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_game_span_count)));
 
-        tvPrompt.setText(R.string.choose_game);
-
-        return rootView;
+        return binding.getRoot();
     }
 }
