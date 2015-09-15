@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
@@ -51,12 +50,15 @@ public class MainActivity extends BaseActivity {
         loadSavedCharacters();
         generateSampleCharacters();
 
-        RecyclerView rv = binding.recyclerView;
-        rv.setHasFixedSize(true);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        MainAdapter adapter = new MainAdapter(this);
-        rv.setAdapter(adapter);
-        adapter.addAll(characters);
+        MainViewModel viewModel = new MainViewModel(characters);
+        binding.setContext(this);
+        binding.setViewModel(viewModel);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+
+            }
+        });
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {

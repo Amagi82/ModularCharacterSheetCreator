@@ -5,6 +5,7 @@ import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
 import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
@@ -77,7 +78,7 @@ public abstract class GameCharacter implements Parcelable {
 
     @AutoParcel
     public static abstract class CharacterImage {
-        public abstract Uri uri();
+        @NonNull public abstract Uri uri();
         @IntRange(from = 100, to = 2560) public abstract int height();
         @IntRange(from = 100, to = 2560) public abstract int width();
 

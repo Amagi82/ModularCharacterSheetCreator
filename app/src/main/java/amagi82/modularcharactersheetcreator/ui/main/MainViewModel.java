@@ -2,62 +2,47 @@ package amagi82.modularcharactersheetcreator.ui.main;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.databinding.ObservableArrayList;
+import android.util.Log;
 
-import amagi82.modularcharactersheetcreator.BR;
+import java.util.List;
+
 import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.entities.characters.Splat;
-
-import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.NONE;
 
 public class MainViewModel extends BaseObservable {
-    private GameCharacter character;
-    private int splashUrl = NONE;
-    private Splat left;
-    private Splat right;
-    private String name;
 
-    public MainViewModel(GameCharacter character) {
-        setCharacter(character);
+    @Bindable private ObservableArrayList<GameCharacter> list;
+
+    public MainViewModel(List<GameCharacter> list) {
+        this.list.addAll(list);
     }
 
-    @Bindable public GameCharacter getCharacter() {
-        return character;
+    public void add(GameCharacter character){
+        list.add(character);
     }
 
-    public void setCharacter(GameCharacter character) {
-        this.character = character;
-        int url = (character.getGameSystem() == null) ? NONE : character.getGameSystem().getSplashUrl();
-        if(url != this.splashUrl) {
-            this.splashUrl = url;
-            notifyPropertyChanged(BR.splashUrl);
-        }
-        if(character.left() != this.left) {
-            this.left = character.left();
-            notifyPropertyChanged(BR.left);
-        }
-        if(character.right() != this.right) {
-            this.right = character.right();
-            notifyPropertyChanged(BR.right);
-        }
-        if (!character.name().equals(this.name)) {
-            this.name = character.name();
-            notifyPropertyChanged(BR.name);
+    public void remove(GameCharacter character){
+        list.remove(character);
+    }
+
+    public void update(GameCharacter character){
+        int index = getIndex(character);
+        if(index >=0) list.set(index, character);
+        else {
+            Log.i(null, "Cannot update character- no matching EntityId found. Adding new character instead");
+            list.add(character);
         }
     }
 
-    @Bindable public int getSplashUrl() {
-        return splashUrl;
+    private int getIndex(GameCharacter character){
+        int size = list.size();
+        for (int i = 0; i < size; i++){
+            if(list.get(i).entityId().equals(character.entityId())) return i;
+        }
+        return -1;
     }
 
-    @Bindable public Splat getLeft() {
-        return left;
-    }
-
-    @Bindable public Splat getRight() {
-        return right;
-    }
-
-    @Bindable public String getName() {
-        return name;
+    public ObservableArrayList<GameCharacter> getList() {
+        return list;
     }
 }
