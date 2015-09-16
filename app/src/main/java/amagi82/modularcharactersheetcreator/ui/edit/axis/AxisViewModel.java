@@ -42,6 +42,6 @@ public class AxisViewModel extends BaseObservable {
     }
 
     public ItemBinder<AxisItemViewModel> itemBinder(){
-        return new ItemBinderBase<>(BR.viewModel, R.layout.item_edit_tile_title);
+        return new ItemBinderBase<>(BR.axis, R.layout.item_edit_tile_axis);
     }
 }
