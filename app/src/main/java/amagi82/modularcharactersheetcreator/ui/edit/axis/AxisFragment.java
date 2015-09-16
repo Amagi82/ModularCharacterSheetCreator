@@ -30,7 +30,6 @@ import static amagi82.modularcharactersheetcreator.ui.edit.EditActivity.LEFT;
 
 public class AxisFragment extends BaseFragment {
 
-    private boolean isLeft;
     private AxisViewModel viewModel;
     @State ArrayList<Splat> list;
     @State int previousPage;
@@ -40,11 +39,9 @@ public class AxisFragment extends BaseFragment {
         FragmentEditAxisBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_axis, container, false);
         if(list == null) list = new ArrayList<>();
 
-        viewModel = new AxisViewModel(list);
+        viewModel = new AxisViewModel(getResources(), list);
         binding.setViewModel(viewModel);
         binding.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_axis_span_count)));
-
-        isLeft = getArguments().getBoolean(LEFT, true);
 
         return binding.getRoot();
     }
@@ -65,40 +62,7 @@ public class AxisFragment extends BaseFragment {
 //        previousPage = currentPage;
 //    }
 
-    @Subscribe public void onListUpdated(ListUpdatedEvent event){
+    @Subscribe public void updateList(ListUpdatedEvent event){
         viewModel.replaceAll(event.list);
-    }
-
-    private void addItems() {
-        GameCharacter character = ((EditActivity) getActivity()).getGameCharacter();
-        GameSystem system = character.getGameSystem();
-
-        if (system != null) {
-            if (isLeft) {
-                adapter.addAll(system.getListLeft(character.left()));
-                setTvPrompt(system.getLeftTitle());
-            } else if (character.left() != null) {
-                adapter.addAll(system.getListRight(character.left()));
-                setTvPrompt(system.getRightTitle(character.left()));
-            }
-        }
-    }
-
-    private void setTvPrompt(@StringRes int title) {
-        tvPrompt.setText(String.format(getString(R.string.choose), getString(title)));
-    }
-
-//    @Subscribe public void onItemSelected(TileSplatClickedEvent event) {
-//        //Both Axis fragments get this event. Make sure we don't send two events.
-//        if (isLeft && event.left || !isLeft && !event.left) {
-//            Splat splat = event.splat;
-//            if (splat.isEndPoint()) BUS.getBus().post(event.left ? new LeftAxisEvent(splat) : new RightAxisEvent(splat));
-//            else adapter.replaceAll(event.left ? system.getListLeft(splat) : system.getListRight(splat));
-//        }
-//    }
-
-    @Override public void onSaveInstanceState(Bundle outState) {
-        if(adapter != null) list = adapter.getAll(); //Restore the list on screen rotation
-        super.onSaveInstanceState(outState);
     }
 }
