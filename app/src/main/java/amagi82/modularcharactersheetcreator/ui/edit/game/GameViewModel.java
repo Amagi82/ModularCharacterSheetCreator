@@ -13,7 +13,7 @@ import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinderBase;
 
 public class GameViewModel extends BaseObservable {
-    @Bindable private ObservableArrayList<GameSystem> list;
+    @Bindable private ObservableArrayList<GameSystem> list = new ObservableArrayList<>();
 
     public GameViewModel(List<GameSystem> list) {
         this.list.addAll(list);

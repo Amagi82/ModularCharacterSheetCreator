@@ -17,7 +17,7 @@ import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinderBase;
 
 public class AxisViewModel extends BaseObservable {
-    @Bindable private ObservableArrayList<Splat> list;
+    @Bindable private ObservableArrayList<Splat> list = new ObservableArrayList<>();
     @Bindable private String title;
     private Resources res;
     private boolean isLeft;

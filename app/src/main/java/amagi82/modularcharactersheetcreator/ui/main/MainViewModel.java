@@ -15,7 +15,7 @@ import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinderBase;
 
 public class MainViewModel extends BaseObservable {
 
-    @Bindable private ObservableArrayList<GameCharacter> list;
+    @Bindable private ObservableArrayList<GameCharacter> list = new ObservableArrayList<>();
 
     public MainViewModel(List<GameCharacter> list) {
         this.list.addAll(list);

@@ -33,10 +33,12 @@ public class BindingAdapters {
 
     @BindingAdapter("bind:loadIcon")
     public static void loadIcon(CircleImageView icon, GameCharacter character){
-        Uri imageUri = character.image() == null ? null : character.image().uri();
-        Context context = icon.getContext();
-        if (imageUri == null) icon.setImageBitmap(new CircleIcon(context.getResources()).createIcon(character.name()));
-        else Glide.with(context).load(imageUri).centerCrop().into(icon);
+        if(character != null){
+            Uri imageUri = character.image() == null ? null : character.image().uri();
+            Context context = icon.getContext();
+            if (imageUri == null) icon.setImageBitmap(new CircleIcon(context.getResources()).createIcon(character.name()));
+            else Glide.with(context).load(imageUri).centerCrop().into(icon);
+        }
     }
 
     @SuppressWarnings("unchecked")

@@ -1,46 +1,15 @@
 package amagi82.modularcharactersheetcreator.ui.edit.name;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.graphics.Palette;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.edmodo.cropper.CropImageView;
-
-import java.io.IOException;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui.base.BaseFragment;
 import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
-import amagi82.modularcharactersheetcreator.ui.xtras.events.CharacterUpdatedEvent;
-import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter.ColorScheme;
-import amagi82.modularcharactersheetcreator.entities.games.GameSystem;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.ScreenSize;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
-import static amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto.BUS;
-import static android.app.Activity.RESULT_OK;
-import static android.view.View.INVISIBLE;
-import static android.view.View.VISIBLE;
 
 public class NameFragment extends BaseFragment {
 
