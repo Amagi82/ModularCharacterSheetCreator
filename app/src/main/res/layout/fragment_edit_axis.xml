@@ -2,36 +2,35 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="viewModel"
+        <variable name="axisViewModel"
                   type="amagi82.modularcharactersheetcreator.ui.edit.axis.AxisViewModel"/>
     </data>
 
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/character_recyclerview_keyline"
-    android:paddingRight="@dimen/character_recyclerview_keyline"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-    <TextView
-        style="@style/TextAppearance.AppCompat.Subhead"
-        android:text="@{viewModel.title}"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        android:shadowRadius="10"
-        android:shadowColor="@color/primary_dark"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/default_margin"
-        android:layout_marginRight="@dimen/default_margin"/>
+        android:paddingLeft="@dimen/character_recyclerview_keyline"
+        android:paddingRight="@dimen/character_recyclerview_keyline">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        style="@style/RecyclerView.Card"
-        app:items="@{viewModel.list}"
-        app:itemViewBinder="@{viewModel.itemViewBinder}"
-        android:paddingTop="@dimen/default_large_margin">
-    </android.support.v7.widget.RecyclerView>
-</FrameLayout>
+        <TextView
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"
+            android:shadowColor="@color/primary_dark"
+            android:shadowRadius="10"
+            android:text="@{axisViewModel.title}"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            style="@style/RecyclerView.Card"
+            android:paddingTop="@dimen/default_large_margin"
+            app:itemViewBinder="@{axisViewModel.itemViewBinder}"
+            app:items="@{axisViewModel.list}">
+        </android.support.v7.widget.RecyclerView>
+    </FrameLayout>
 </layout>

@@ -50,7 +50,7 @@ public class MainViewModel extends BaseObservable {
         return list;
     }
 
-    public ItemBinder<MainItemViewModel> itemBinder(){
+    public ItemBinder<MainItemViewModel> itemViewBinder(){
         return new ItemBinderBase<>(BR.character, R.layout.item_main);
     }
 }

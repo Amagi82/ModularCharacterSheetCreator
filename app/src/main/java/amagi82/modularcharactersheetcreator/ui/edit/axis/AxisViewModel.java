@@ -20,10 +20,12 @@ public class AxisViewModel extends BaseObservable {
     @Bindable private ObservableArrayList<Splat> list;
     @Bindable private String title;
     private Resources res;
+    private boolean isLeft;
 
-    public AxisViewModel(Resources res, List<Splat> list) {
+    public AxisViewModel(Resources res, GameCharacter character, boolean isLeft) {
         this.res = res;
-        this.list.addAll(list);
+        this.isLeft = isLeft;
+        update(character);
     }
 
     public void replaceAll(List<Splat> list){
@@ -39,7 +41,7 @@ public class AxisViewModel extends BaseObservable {
         return list;
     }
 
-    public void update(GameCharacter character, boolean isLeft){
+    public void update(GameCharacter character){
         GameSystem system = character.getGameSystem();
         if (isLeft) {
             replaceAll(system.getListLeft(character.left()));
@@ -62,7 +64,7 @@ public class AxisViewModel extends BaseObservable {
         return res.getString(title);
     }
 
-    public ItemBinder<AxisItemViewModel> itemBinder(){
-        return new ItemBinderBase<>(BR.axis, R.layout.item_edit_tile_axis);
+    public ItemBinder<AxisItemViewModel> itemViewBinder(){
+        return new ItemBinderBase<>(BR.axisViewModel, R.layout.item_edit_tile_axis);
     }
 }

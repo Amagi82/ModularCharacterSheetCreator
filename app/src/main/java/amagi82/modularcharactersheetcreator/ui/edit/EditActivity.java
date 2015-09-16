@@ -31,7 +31,7 @@ public class EditActivity extends BaseActivity {
 
         if (character == null) character = GameCharacter.builder().build();
         if (viewModel == null) viewModel = new EditViewModel(character);
-        binding.setViewModel(viewModel);
+        binding.setEditViewModel(viewModel);
 
         viewPager = binding.viewpager;
         viewPager.addOnPageChangeListener(new PageListener() {

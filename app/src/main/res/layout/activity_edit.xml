@@ -2,7 +2,7 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="viewModel" type="amagi82.modularcharactersheetcreator.ui.edit.EditViewModel"/>
+        <variable name="editViewModel" type="amagi82.modularcharactersheetcreator.ui.edit.EditViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -26,7 +26,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fitsSystemWindows="true"
-                    app:imageUrl="@{viewModel.splashUrl}"
+                    app:imageUrl="@{editViewModel.splashUrl}"
                     app:layout_collapseMode="parallax"/>
 
                 <android.support.v7.widget.Toolbar

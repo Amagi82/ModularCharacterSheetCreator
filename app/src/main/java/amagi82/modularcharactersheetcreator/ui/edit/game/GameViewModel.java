@@ -31,7 +31,7 @@ public class GameViewModel extends BaseObservable {
         return list;
     }
 
-    public ItemBinder<GameItemViewModel> itemBinder(){
-        return new ItemBinderBase<>(BR.game, R.layout.item_edit_tile_game);
+    public ItemBinder<GameItemViewModel> itemViewBinder(){
+        return new ItemBinderBase<>(BR.gameViewModel, R.layout.item_edit_tile_game);
     }
 }

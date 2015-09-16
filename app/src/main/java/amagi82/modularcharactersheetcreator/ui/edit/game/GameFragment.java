@@ -17,7 +17,7 @@ public class GameFragment extends BaseFragment {
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentEditGameBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_game, container, false);
 
-        binding.setViewModel(new GameViewModel(new Game().getList()));
+        binding.setGameViewModel(new GameViewModel(new Game().getList()));
         binding.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_game_span_count)));
 
         return binding.getRoot();

@@ -2,14 +2,13 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="viewModel"
+        <variable name="nameViewModel"
                   type="amagi82.modularcharactersheetcreator.ui.main.MainViewModel"/>
         <variable name="context"
                   type="amagi82.modularcharactersheetcreator.ui.main.MainActivity"/>
     </data>
 
 <FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
