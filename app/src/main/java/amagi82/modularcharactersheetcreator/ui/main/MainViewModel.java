@@ -19,6 +19,7 @@ public class MainViewModel extends BaseObservable {
 
     public MainViewModel(List<GameCharacter> list) {
         this.list.addAll(list);
+        Log.i(null, "MainViewModel created with current list: "+list.toString() +" of size: "+list.size());
     }
 
     public void add(GameCharacter character){
@@ -51,6 +52,7 @@ public class MainViewModel extends BaseObservable {
     }
 
     public ItemBinder<MainItemViewModel> itemViewBinder(){
+        Log.i(null, "MainViewModel.ItemBinder called");
         return new ItemBinderBase<>(BR.character, R.layout.item_main);
     }
 }

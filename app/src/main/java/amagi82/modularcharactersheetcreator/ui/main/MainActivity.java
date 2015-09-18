@@ -33,8 +33,6 @@ public class MainActivity extends BaseActivity {
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        binding.toolbar.setLogo(R.drawable.title_onyx);
 
         //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
 //        if (savedInstanceState != null) {
@@ -51,7 +49,10 @@ public class MainActivity extends BaseActivity {
         generateSampleCharacters();
 
         MainViewModel viewModel = new MainViewModel(characters);
+
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setMainViewModel(viewModel);
+        binding.toolbar.setLogo(R.drawable.title_onyx);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
