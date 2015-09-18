@@ -2,16 +2,17 @@ package amagi82.modularcharactersheetcreator.ui.main;
 
 import android.content.res.Resources;
 import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 
 import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
 
 public class MainItemViewModel extends BaseObservable {
 
-    private GameCharacter character;
-    private String system;
-    private int systemColor;
-    private String name;
-    private String archetype;
+    @Bindable private GameCharacter character;
+    @Bindable private String system;
+    @Bindable private int systemColor;
+    @Bindable private String name;
+    @Bindable private String archetype;
 
     public MainItemViewModel(Resources res, GameCharacter character) {
         this.character = character;

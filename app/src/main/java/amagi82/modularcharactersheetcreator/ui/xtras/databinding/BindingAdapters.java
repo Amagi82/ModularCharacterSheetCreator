@@ -23,7 +23,7 @@ public class BindingAdapters {
 
     @BindingAdapter("bind:imageUrl")
     public static void loadImage(ImageView img, @StringRes int url){
-        if(url != NONE) Glide.with(img.getContext()).load(img.getContext().getString(url)).into(img);
+        if(url != NONE && url != 0) Glide.with(img.getContext()).load(img.getContext().getString(url)).into(img);
     }
 
     @BindingAdapter("bind:imageUrl")

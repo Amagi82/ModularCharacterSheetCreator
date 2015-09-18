@@ -43,6 +43,7 @@ public class AxisViewModel extends BaseObservable {
 
     public void update(GameCharacter character){
         GameSystem system = character.getGameSystem();
+        if(system == null) return;
         if (isLeft) {
             replaceAll(system.getListLeft(character.left()));
             setTitle(system.getLeftTitle());

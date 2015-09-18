@@ -15,13 +15,10 @@ import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui.base.BaseFragment;
 import amagi82.modularcharactersheetcreator.ui.edit.CharacterUpdatedEvent;
 import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
-import icepick.State;
 
 public class AxisFragment extends BaseFragment {
 
     private AxisViewModel viewModel;
-    @State int previousPage;
-    @State int page;
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentEditAxisBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_axis, container, false);
@@ -44,17 +41,4 @@ public class AxisFragment extends BaseFragment {
     @Subscribe public void characterUpdated(CharacterUpdatedEvent event){
         viewModel.update(getCurrentCharacter());
     }
-
-    //    @Subscribe public void onPageChanged(PageChangedEvent event) {
-//        int currentPage = event.currentPage;
-//        if (currentPage == page && previousPage < currentPage) addItems(); //Items just became available. Add them
-//        else if (currentPage - 1 == page) { //We've already selected a category. Refresh with default categories in case we have a sublist and the user navigates back
-//            adapter.clear();
-//            addItems();
-//        } else if (currentPage < page) adapter.clear(); //The user navigated backward. Clear the data.
-//
-//        previousPage = currentPage;
-//    }
-
-
 }
