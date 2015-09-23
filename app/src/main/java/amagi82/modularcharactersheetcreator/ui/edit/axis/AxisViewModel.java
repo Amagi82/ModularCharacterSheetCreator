@@ -33,15 +33,6 @@ public class AxisViewModel extends BaseObservable {
         update(character);
     }
 
-
-
-    private int getGridImageSize() {
-        int margins = res.getDimensionPixelSize(R.dimen.card_margin) * 2;
-        int spanCount = res.getInteger(R.integer.character_axis_span_count);
-        int widthAvail = new ScreenSize(context).getWidth() - margins;
-        return (widthAvail - margins) / spanCount;
-    }
-
     public void update(GameCharacter character) {
         GameSystem system = character.getGameSystem();
         if (system == null) return;
@@ -70,11 +61,18 @@ public class AxisViewModel extends BaseObservable {
         return res.getString(title);
     }
 
+    private int getGridImageSize() {
+        int margins = res.getDimensionPixelSize(R.dimen.card_margin) * 2;
+        int spanCount = res.getInteger(R.integer.character_axis_span_count);
+        int widthAvail = new ScreenSize(context).getWidth() - margins;
+        return (widthAvail - margins) / spanCount;
+    }
+
     public ObservableArrayList<AxisItemViewModel> getList() {
         return list;
     }
 
     public ItemBinder<AxisItemViewModel> itemViewBinder() {
-        return new ItemBinderBase<>(BR.axisItemViewModel, R.layout.item_edit_tile_axis);
+        return new ItemBinderBase<>(BR.axisItemViewModel, R.layout.item_edit_axis);
     }
 }
