@@ -1,6 +1,7 @@
 <resources>
     <item name="container_id" type="id">12345</item>
     <string name="app_name">Onyx Path</string>
+    <string name="no_data">no data</string>
     <plurals name="dice_penalty">
         <item quantity="zero"> </item>
         <item quantity="one">%d Die</item>

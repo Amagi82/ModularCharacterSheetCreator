@@ -4,8 +4,9 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="mainViewModel"
-                  type="amagi82.modularcharactersheetcreator.ui.main.MainViewModel"/>
+        <variable
+            name="mainViewModel"
+            type="amagi82.modularcharactersheetcreator.ui.main.MainViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout

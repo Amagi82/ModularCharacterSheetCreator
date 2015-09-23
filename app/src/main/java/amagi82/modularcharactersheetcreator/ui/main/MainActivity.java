@@ -27,13 +27,16 @@ import amagi82.modularcharactersheetcreator.ui.xtras.utils.Template;
 
 public class MainActivity extends BaseActivity {
     public static final String BUCKET = "bucket";
-    public static final int REQUEST_CODE = 50;
+    public static final String ADD = "add";
+    public static final String REMOVE = "remove";
+    public static final String UPDATE = "update";
     public static final int NONE = -1;
-    private List<GameCharacter> characters;
+    private MainViewModel viewModel;
+    private ActivityMainBinding binding;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.i(null, "Main Activity onCreate");
         //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
 //        if (savedInstanceState != null) {
 //            try {
@@ -45,30 +48,32 @@ public class MainActivity extends BaseActivity {
 //                e.printStackTrace();
 //            }
 //        } else
-        loadSavedCharacters();
-        generateSampleCharacters();
+        //loadSavedCharacters();
 
-        MainViewModel viewModel = new MainViewModel(characters);
+        viewModel = new MainViewModel();
+        viewModel.addAll(generateSampleCharacters());
 
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setMainViewModel(viewModel);
         binding.toolbar.setLogo(R.drawable.title_onyx);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-
-            }
-        });
+//        binding.recyclerView.setOnClickListener(new View.OnClickListener() {
+//            @Override public void onClick(View v) {
+//
+//            }
+//        });
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                startActivityForResult(new Intent(MainActivity.this, EditActivity.class), REQUEST_CODE);
+                startActivity(new Intent(MainActivity.this, EditActivity.class));
             }
         });
+
+        Log.i(null, "Main Activity created");
     }
 
     private void loadSavedCharacters() {
-        characters = new ArrayList<>();
+        //characters = new ArrayList<>();
 //        NoSQL.with(this).withDeserializer(logan).using(GameCharacter.class).bucketId(BUCKET).orderBy(new DataComparator<GameCharacter>() {
 //            @Override public int compare(NoSQLEntity<GameCharacter> o1, NoSQLEntity<GameCharacter> o2) {
 //                return o1.getData().getTimeStamp() > o2.getData().getTimeStamp() ? -1 : o1.getData().getTimeStamp() < o2.getData().getTimeStamp() ? 1 : 0;
@@ -86,8 +91,9 @@ public class MainActivity extends BaseActivity {
 //        });
     }
 
-    private void generateSampleCharacters() {
+    private List<GameCharacter> generateSampleCharacters() {
         Log.i(null, "Creating data");
+        List<GameCharacter> characters = new ArrayList<>();
         characters.add(GameCharacter.create("Thomas Anstis", new CVampire(), Splat.create(R.string.gangrel, R.string.url_cwod_vampire_clan_gangrel), Splat.create(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla)));
         characters.add(GameCharacter.create("Tom Lytton", new CVampire(), Splat.create(R.string.brujah_antitribu, R.string.url_cwod_vampire_antitribu_brujah), Splat.create(R.string.anarchs, R.string.url_cwod_vampire_sect_anarchs)));
         characters.add(GameCharacter.create("Georgia Johnson", new CVampire(), Splat.create(R.string.tremere, R.string.url_cwod_vampire_clan_tremere), Splat.create(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla)));
@@ -104,7 +110,9 @@ public class MainActivity extends BaseActivity {
             character = character.toBuilder().sheets(sheets).build();
             Log.i(null, character.name() + " contains " + character.getGameSystem().toString());
         }
-        for (GameCharacter character : characters) saveCharacter(character);
+        //for (GameCharacter character : characters) saveCharacter(character);
+
+        return characters;
     }
 
     private void saveCharacter(GameCharacter character) {

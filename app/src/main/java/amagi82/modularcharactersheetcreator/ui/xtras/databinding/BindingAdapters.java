@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -19,7 +20,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.NONE;
 
 public class BindingAdapters {
-    private static final int KEY = -123;
 
     @BindingAdapter("bind:imageUrl")
     public static void loadImage(ImageView img, @StringRes int url){
@@ -41,19 +41,13 @@ public class BindingAdapters {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @BindingAdapter("items")
-    public static <T> void setItems(RecyclerView recyclerView, Collection<T> items) {
-        BindingRecyclerViewAdapter<T> adapter = (BindingRecyclerViewAdapter<T>) recyclerView.getAdapter();
-        if (adapter != null) adapter.setItems(items);
-        else recyclerView.setTag(KEY, items);
+    @BindingAdapter({"bind:items", "bind:itemViewBinder"})
+    public static <T> void setAdapter(RecyclerView recyclerView, Collection<T> items, ItemBinder<T> itemViewMapper) {
+        recyclerView.setAdapter(new BindingRecyclerViewAdapter<>(itemViewMapper, items));
     }
 
-
-    @SuppressWarnings("unchecked")
-    @BindingAdapter("itemViewBinder")
-    public static <T> void setItemViewBinder(RecyclerView recyclerView, ItemBinder<T> itemViewMapper) {
-        Collection<T> items = (Collection<T>) recyclerView.getTag(KEY);
-        recyclerView.setAdapter(new BindingRecyclerViewAdapter<>(itemViewMapper, items));
+    @BindingAdapter("android:text")
+    public static void setText(TextView textView, @StringRes int stringRes){
+        if(stringRes != 0) textView.setText(stringRes);
     }
 }

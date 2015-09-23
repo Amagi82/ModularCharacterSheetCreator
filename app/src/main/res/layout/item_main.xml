@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="mainItemViewModel"
+            name="mainItem"
             type="amagi82.modularcharactersheetcreator.ui.main.MainItemViewModel"/>
     </data>
 
@@ -14,6 +14,7 @@
         android:layout_height="@dimen/default_list_item_height">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleImageView"
             android:layout_width="@dimen/circle_icon_size"
             android:layout_height="@dimen/circle_icon_size"
             android:layout_alignParentLeft="true"
@@ -23,7 +24,7 @@
             android:contentDescription="@string/character_icon"
             app:border_color="@color/grey_700"
             app:border_width="1dp"
-            app:loadIcon="@{mainItemViewModel.character}"
+            app:loadIcon="@{mainItem.character}"
             tools:background="@color/primary"/>
 
         <TextView
@@ -31,27 +32,29 @@
             style="@style/CharacterItemText.Right"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/default_margin"
-            android:text="@{mainItemViewModel.system}"
-            android:textColor="@{mainItemViewModel.systemColor}"
+            android:text="@{mainItem.system}"
+            android:textColor="@{mainItem.systemColor}"
             android:textStyle="bold"
             tools:text="Game system"/>
 
         <TextView
+            android:id="@+id/tvCharacterName"
             style="@style/CharacterItemText"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/default_keyline"
             android:layout_toLeftOf="@id/tvGameSystem"
             android:maxLines="2"
-            android:text="@{mainItemViewModel.name}"
+            android:text="@{mainItem.name}"
             android:textSize="16sp"
             tools:text="Character name"/>
 
         <TextView
+            android:id="@+id/tvCharacterArchetype"
             style="@style/CharacterItemText.Right"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@{mainItemViewModel.archetype}"
+            android:text="@{mainItem.archetype}"
             android:textStyle="italic"
             tools:text="Dwarven cleric"/>
 

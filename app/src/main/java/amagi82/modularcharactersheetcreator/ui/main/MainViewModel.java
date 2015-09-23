@@ -15,44 +15,49 @@ import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinderBase;
 
 public class MainViewModel extends BaseObservable {
 
-    @Bindable private ObservableArrayList<GameCharacter> list = new ObservableArrayList<>();
+    @Bindable public ObservableArrayList<MainItemViewModel> list;
 
-    public MainViewModel(List<GameCharacter> list) {
-        this.list.addAll(list);
-        Log.i(null, "MainViewModel created with current list: "+list.toString() +" of size: "+list.size());
+    public MainViewModel() {
+        this.list = new ObservableArrayList<>();
     }
 
-    public void add(GameCharacter character){
-        list.add(character);
-    }
-
-    public void remove(GameCharacter character){
-        list.remove(character);
-    }
-
-    public void update(GameCharacter character){
-        int index = getIndex(character);
-        if(index >=0) list.set(index, character);
-        else {
-            Log.i(null, "Cannot update character- no matching EntityId found. Adding new character instead");
-            list.add(character);
+    public void addAll(List<GameCharacter> list){
+        for (GameCharacter character : list) {
+            this.list.add(new MainItemViewModel(character));
         }
     }
 
-    private int getIndex(GameCharacter character){
+    public void add(GameCharacter character){
+        this.list.add(new MainItemViewModel(character));
+    }
+
+    public void remove(GameCharacter character){
+        int index = getIndex(character.entityId());
+        if(index >= 0) list.remove(index);
+    }
+
+    public void update(GameCharacter character){
+        int index = getIndex(character.entityId());
+        if(index >=0) list.set(index, new MainItemViewModel(character));
+        else {
+            Log.i(null, "Cannot update character- no matching EntityId found. Adding new character instead");
+            add(character);
+        }
+    }
+
+    private int getIndex(String entityId){
         int size = list.size();
         for (int i = 0; i < size; i++){
-            if(list.get(i).entityId().equals(character.entityId())) return i;
+            if(list.get(i).getEntityId().equals(entityId)) return i;
         }
         return -1;
     }
 
-    public ObservableArrayList<GameCharacter> getList() {
+    public ObservableArrayList<MainItemViewModel> getList() {
         return list;
     }
 
     public ItemBinder<MainItemViewModel> itemViewBinder(){
-        Log.i(null, "MainViewModel.ItemBinder called");
-        return new ItemBinderBase<>(BR.character, R.layout.item_main);
+        return new ItemBinderBase<>(BR.mainItem, R.layout.item_main);
     }
 }

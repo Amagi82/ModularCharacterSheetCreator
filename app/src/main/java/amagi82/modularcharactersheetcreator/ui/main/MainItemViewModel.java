@@ -1,25 +1,15 @@
 package amagi82.modularcharactersheetcreator.ui.main;
 
 import android.databinding.BaseObservable;
-import android.support.annotation.StringRes;
-import android.util.Log;
 
 import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
 
 public class MainItemViewModel extends BaseObservable {
-    private GameCharacter character;
-    @StringRes private int system;
-    private int systemColor;
-    private String name;
-    @StringRes private int archetype;
+
+    private final GameCharacter character;
 
     public MainItemViewModel(GameCharacter character) {
         this.character = character;
-        system = character.gameTitle();
-        systemColor = character.getGameSystem().getGameColor();
-        name = character.name();
-        archetype = character.getArchetype();
-        Log.i(null, "MainItemViewModel created for " + name);
     }
 
     public GameCharacter getCharacter() {
@@ -27,16 +17,23 @@ public class MainItemViewModel extends BaseObservable {
     }
 
     public int getSystem() {
-        return system;
+        return character.gameTitle();
     }
+
     public int getSystemColor() {
-        return systemColor;
+        return character.getGameSystem().getGameColor();
     }
+
     public String getName() {
-        return name;
+        return character.name();
     }
+
     public int getArchetype() {
-        return archetype;
+        return character.getArchetype();
+    }
+
+    public String getEntityId(){
+        return character.entityId();
     }
 }
 
