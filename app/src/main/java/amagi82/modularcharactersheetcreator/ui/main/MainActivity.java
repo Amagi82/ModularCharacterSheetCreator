@@ -3,6 +3,7 @@ package amagi82.modularcharactersheetcreator.ui.main;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.StringDef;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.view.View;
 import com.colintmiller.simplenosql.NoSQL;
 import com.colintmiller.simplenosql.NoSQLEntity;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +30,8 @@ import amagi82.modularcharactersheetcreator.ui.xtras.utils.Template;
 
 public class MainActivity extends BaseActivity {
     public static final String BUCKET = "bucket";
-    public static final String ADD = "add";
-    public static final String REMOVE = "remove";
-    public static final String UPDATE = "update";
     public static final int NONE = -1;
     private MainViewModel viewModel;
-    private ActivityMainBinding binding;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +52,7 @@ public class MainActivity extends BaseActivity {
         viewModel = new MainViewModel();
         viewModel.addAll(generateSampleCharacters());
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setMainViewModel(viewModel);
         binding.toolbar.setLogo(R.drawable.title_onyx);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -69,7 +68,25 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        updateList();
         Log.i(null, "Main Activity created");
+    }
+
+    private void updateList() {
+        Intent intent = getIntent();
+        if(intent.getStringExtra(UPDATE_TYPE) == null) return;
+        GameCharacter character = intent.getParcelableExtra(CHARACTER);
+        switch (intent.getStringExtra(UPDATE_TYPE)) {
+            case ADD:
+                viewModel.add(character);
+                break;
+            case REMOVE:
+                viewModel.remove(character);
+                break;
+            case UPDATE:
+                viewModel.update(character);
+                break;
+        }
     }
 
     private void loadSavedCharacters() {
@@ -124,4 +141,13 @@ public class MainActivity extends BaseActivity {
 //    deleteCharacter
 //    NoSQL.with(this).using(GameCharacter.class).bucketId(BUCKET).entityId(event.character.entityId()).delete();
 
+    @StringDef({ADD, REMOVE, UPDATE})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface UpdateCharacters {}
+
+    public static final String ADD = "add";
+    public static final String REMOVE = "remove";
+    public static final String UPDATE = "update";
+    public static final String CHARACTER = "character";
+    public static final String UPDATE_TYPE = "update type";
 }
