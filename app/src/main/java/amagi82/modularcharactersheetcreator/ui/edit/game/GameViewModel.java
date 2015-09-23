@@ -13,25 +13,19 @@ import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinderBase;
 
 public class GameViewModel extends BaseObservable {
-    @Bindable private ObservableArrayList<GameSystem> list = new ObservableArrayList<>();
+    @Bindable private ObservableArrayList<GameItemViewModel> list = new ObservableArrayList<>();
 
     public GameViewModel(List<GameSystem> list) {
-        this.list.addAll(list);
+        for(GameSystem system : list){
+            this.list.add(new GameItemViewModel(system.getGameUrl()));
+        }
     }
 
-    public void add(GameSystem character){
-        list.add(character);
-    }
-
-    public void remove(GameSystem character){
-        list.remove(character);
-    }
-
-    public ObservableArrayList<GameSystem> getList() {
+    public ObservableArrayList<GameItemViewModel> getList() {
         return list;
     }
 
     public ItemBinder<GameItemViewModel> itemViewBinder(){
-        return new ItemBinderBase<>(BR.game, R.layout.item_edit_tile_game);
+        return new ItemBinderBase<>(BR.gameItemViewModel, R.layout.item_edit_tile_game);
     }
 }

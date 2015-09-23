@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="mainItem"
+            name="mainItemViewModel"
             type="amagi82.modularcharactersheetcreator.ui.main.MainItemViewModel"/>
     </data>
 
@@ -24,7 +24,7 @@
             android:contentDescription="@string/character_icon"
             app:border_color="@color/grey_700"
             app:border_width="1dp"
-            app:loadIcon="@{mainItem.character}"
+            app:loadIcon="@{mainItemViewModel.character}"
             tools:background="@color/primary"/>
 
         <TextView
@@ -32,8 +32,8 @@
             style="@style/CharacterItemText.Right"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/default_margin"
-            android:text="@{mainItem.system}"
-            android:textColor="@{mainItem.systemColor}"
+            android:text="@{mainItemViewModel.system}"
+            android:textColor="@{mainItemViewModel.systemColor}"
             android:textStyle="bold"
             tools:text="Game system"/>
 
@@ -45,7 +45,7 @@
             android:layout_marginLeft="@dimen/default_keyline"
             android:layout_toLeftOf="@id/tvGameSystem"
             android:maxLines="2"
-            android:text="@{mainItem.name}"
+            android:text="@{mainItemViewModel.name}"
             android:textSize="16sp"
             tools:text="Character name"/>
 
@@ -54,7 +54,7 @@
             style="@style/CharacterItemText.Right"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@{mainItem.archetype}"
+            android:text="@{mainItemViewModel.archetype}"
             android:textStyle="italic"
             tools:text="Dwarven cleric"/>
 

@@ -1,32 +1,20 @@
 package amagi82.modularcharactersheetcreator.ui.xtras.utils;
 
-import android.content.res.Resources;
-
-import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.entities.characters.Splat;
-
+//This class returns a url for an icon at reduced dimensions if necessary
 public class SplatIcon {
-
-    private Resources res;
-    private Splat splat;
+    private String baseUrl;
     private int size;
 
-    public SplatIcon(Resources res, Splat splat){
-        this(res, splat, res.getDimensionPixelSize(R.dimen.circle_icon_size));
-    }
-
-    public SplatIcon(Resources res, Splat splat, int size) {
-        this.res = res;
-        this.splat = splat;
+    public SplatIcon(String baseUrl, int size) {
+        this.baseUrl = baseUrl;
         this.size = size;
     }
 
     public String getUrl() {
         //The 20th Anniversary images are 500x500px, and all others are 200x200px. Request smaller images if needed.
-        String url = res.getString(splat.url());
-        boolean big = url.contains("20th");
-        if ((!big && size > 200) || (big && size > 500)) return url;
-        int pos = url.lastIndexOf("/") + 1;
-        return new StringBuilder(url).insert(pos, ("img.php?h=" + size + "+&w=" + size + "+&img=")).toString();
+        boolean big = baseUrl.contains("20th");
+        if ((!big && size > 200) || (big && size > 500)) return baseUrl;
+        int pos = baseUrl.lastIndexOf("/") + 1;
+        return new StringBuilder(baseUrl).insert(pos, ("img.php?h=" + size + "+&w=" + size + "+&img=")).toString();
     }
 }

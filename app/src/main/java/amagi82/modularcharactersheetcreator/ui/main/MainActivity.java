@@ -49,8 +49,7 @@ public class MainActivity extends BaseActivity {
 //        } else
         //loadSavedCharacters();
 
-        viewModel = new MainViewModel();
-        viewModel.addAll(generateSampleCharacters());
+        viewModel = new MainViewModel(generateSampleCharacters());
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setMainViewModel(viewModel);

@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.ui.edit.axis;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
@@ -15,42 +16,46 @@ import amagi82.modularcharactersheetcreator.entities.characters.Splat;
 import amagi82.modularcharactersheetcreator.entities.games.GameSystem;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinderBase;
+import amagi82.modularcharactersheetcreator.ui.xtras.utils.ScreenSize;
+import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;
 
 public class AxisViewModel extends BaseObservable {
-    @Bindable private ObservableArrayList<Splat> list = new ObservableArrayList<>();
+    @Bindable private ObservableArrayList<AxisItemViewModel> list = new ObservableArrayList<>();
     @Bindable private String title;
+    private Context context;
     private Resources res;
     private boolean isLeft;
 
-    public AxisViewModel(Resources res, GameCharacter character, boolean isLeft) {
-        this.res = res;
+    public AxisViewModel(Context context, GameCharacter character, boolean isLeft) {
+        this.context = context;
+        res = context.getResources();
         this.isLeft = isLeft;
         update(character);
     }
 
-    public void replaceAll(List<Splat> list){
-        this.list.clear();
-        this.list.addAll(list);
+
+
+    private int getGridImageSize() {
+        int margins = res.getDimensionPixelSize(R.dimen.card_margin) * 2;
+        int spanCount = res.getInteger(R.integer.character_axis_span_count);
+        int widthAvail = new ScreenSize(context).getWidth() - margins;
+        return (widthAvail - margins) / spanCount;
     }
 
-    public void addAll(List<Splat> list){
-        this.list.addAll(list);
-    }
-
-    public ObservableArrayList<Splat> getList() {
-        return list;
-    }
-
-    public void update(GameCharacter character){
+    public void update(GameCharacter character) {
         GameSystem system = character.getGameSystem();
-        if(system == null) return;
-        if (isLeft) {
-            replaceAll(system.getListLeft(character.left()));
-            setTitle(system.getLeftTitle());
-        } else if (character.left() != null) {
-            replaceAll(system.getListRight(character.left()));
-            setTitle(system.getRightTitle(character.left()));
+        if (system == null) return;
+        if (isLeft) updateModel(system.getListLeft(character.left()), system.getLeftTitle());
+        else if (character.left() != null) updateModel(system.getListRight(character.left()), system.getRightTitle(character.left()));
+    }
+
+    private void updateModel(List<Splat> list, @StringRes int title) {
+        this.list.clear();
+        int gridImageSize = getGridImageSize();
+        for (Splat splat : list) {
+            this.list.add(new AxisItemViewModel(new SplatIcon(getString(splat.url()), gridImageSize).getUrl(), splat.title()));
         }
+        setTitle(title);
     }
 
     public String getTitle() {
@@ -65,7 +70,11 @@ public class AxisViewModel extends BaseObservable {
         return res.getString(title);
     }
 
-    public ItemBinder<AxisItemViewModel> itemViewBinder(){
-        return new ItemBinderBase<>(BR.axis, R.layout.item_edit_tile_axis);
+    public ObservableArrayList<AxisItemViewModel> getList() {
+        return list;
+    }
+
+    public ItemBinder<AxisItemViewModel> itemViewBinder() {
+        return new ItemBinderBase<>(BR.axisItemViewModel, R.layout.item_edit_tile_axis);
     }
 }

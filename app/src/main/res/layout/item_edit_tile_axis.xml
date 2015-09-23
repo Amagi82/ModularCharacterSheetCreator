@@ -3,7 +3,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="axis"
+            name="axisItemViewModel"
             type="amagi82.modularcharactersheetcreator.ui.edit.axis.AxisItemViewModel"/>
     </data>
 
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            app:imageUrl="@{axis.url}"/>
+            app:imageUrl="@{axisItemViewModel.url}"/>
 
         <TextView
             style="@style/TextAppearance.AppCompat.Subhead"
@@ -30,7 +30,7 @@
             android:background="@color/tileAlpha"
             android:gravity="center"
             android:padding="@dimen/default_small_margin"
-            android:text="@{axis.title}"
+            android:text="@{axisItemViewModel.title}"
             android:textColor="@color/white"
             tools:text="Header"/>
 

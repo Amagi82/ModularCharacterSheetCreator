@@ -28,7 +28,7 @@
             android:id="@+id/recycler_view"
             style="@style/RecyclerView.Card"
             android:paddingTop="@dimen/default_large_margin"
-            >
-        </android.support.v7.widget.RecyclerView>
+            app:items="@{gameViewModel.list}"
+            app:itemViewBinder="@{gameViewModel.itemViewBinder}"/>
     </FrameLayout>
 </layout>

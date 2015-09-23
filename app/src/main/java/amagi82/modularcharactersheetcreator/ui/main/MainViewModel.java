@@ -14,11 +14,10 @@ import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinderBase;
 
 public class MainViewModel extends BaseObservable {
+    @Bindable private ObservableArrayList<MainItemViewModel> list = new ObservableArrayList<>();
 
-    @Bindable public ObservableArrayList<MainItemViewModel> list;
-
-    public MainViewModel() {
-        this.list = new ObservableArrayList<>();
+    public MainViewModel(List<GameCharacter> list) {
+        addAll(list);
     }
 
     public void addAll(List<GameCharacter> list){
@@ -58,6 +57,6 @@ public class MainViewModel extends BaseObservable {
     }
 
     public ItemBinder<MainItemViewModel> itemViewBinder(){
-        return new ItemBinderBase<>(BR.mainItem, R.layout.item_main);
+        return new ItemBinderBase<>(BR.mainItemViewModel, R.layout.item_main);
     }
 }
