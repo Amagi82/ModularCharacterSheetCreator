@@ -53,4 +53,8 @@ public class Game {
         list.add(new Trinity());
         return list;
     }
+
+    public GameSystem get(int position){
+        return getList().get(position);
+    }
 }

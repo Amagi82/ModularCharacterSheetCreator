@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import java.util.Collection;
 
 import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.ui.base.BindingRecyclerViewAdapter;
+import amagi82.modularcharactersheetcreator.ui.base.BaseRecyclerViewAdapter;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.CircleIcon;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -24,6 +24,7 @@ public class BindingAdapters {
     @BindingAdapter("bind:imageUrl")
     public static void loadImage(ImageView img, @StringRes int url){
         if(url != NONE && url != 0) Glide.with(img.getContext()).load(img.getContext().getString(url)).into(img);
+        else Glide.clear(img);
     }
 
     @BindingAdapter("bind:imageUrl")
@@ -43,7 +44,7 @@ public class BindingAdapters {
 
     @BindingAdapter({"bind:items", "bind:itemViewBinder"})
     public static <T> void setAdapter(RecyclerView recyclerView, Collection<T> items, ItemBinder<T> itemViewMapper) {
-        recyclerView.setAdapter(new BindingRecyclerViewAdapter<>(itemViewMapper, items));
+        recyclerView.setAdapter(new BaseRecyclerViewAdapter<>(itemViewMapper, items));
     }
 
     @BindingAdapter("android:text")

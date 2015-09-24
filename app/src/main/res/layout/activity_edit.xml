@@ -4,7 +4,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="editViewModel" type="amagi82.modularcharactersheetcreator.ui.edit.EditViewModel"/>
+        <variable name="editViewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.edit.EditViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -13,6 +14,7 @@
         tools:context=".EditActivity">
 
         <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
             style="@style/AppBar.Fits">
 
             <android.support.design.widget.CollapsingToolbarLayout

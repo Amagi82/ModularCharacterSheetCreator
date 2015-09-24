@@ -2,13 +2,19 @@ package amagi82.modularcharactersheetcreator.ui.edit.axis;
 
 import android.databinding.BaseObservable;
 
-public class AxisItemViewModel extends BaseObservable {
-    private String url;
-    private int title;
+import amagi82.modularcharactersheetcreator.entities.characters.Splat;
 
-    public AxisItemViewModel(String url, int title) {
+public class AxisItemViewModel extends BaseObservable {
+    private Splat splat;
+    private String url;
+
+    public AxisItemViewModel(String url, Splat splat) {
         this.url = url;
-        this.title = title;
+        this.splat = splat;
+    }
+
+    public Splat getSplat() {
+        return splat;
     }
 
     public String getUrl() {
@@ -16,6 +22,6 @@ public class AxisItemViewModel extends BaseObservable {
     }
 
     public int getTitle() {
-        return title;
+        return splat.title();
     }
 }

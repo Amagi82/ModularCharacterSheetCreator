@@ -2,74 +2,88 @@ package amagi82.modularcharactersheetcreator.ui.edit;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.squareup.otto.Subscribe;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.ActivityEditBinding;
 import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.entities.characters.Splat;
+import amagi82.modularcharactersheetcreator.entities.games.Game;
 import amagi82.modularcharactersheetcreator.ui.base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.xtras.widgets.NoSwipeViewPager;
 import icepick.State;
 
+import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.CHARACTER;
+import static amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto.BUS;
+
 public class EditActivity extends BaseActivity {
     public static final String LEFT = "Left";
+    private ActivityEditBinding binding;
     private NoSwipeViewPager viewPager;
-    private FragmentManager fm = getSupportFragmentManager();
-    private EditViewModel viewModel;
     @State GameCharacter character;
     @State int backstack;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityEditBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_edit);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_edit);
+        binding.setEditViewModel(new EditViewModel());
 
         setSupportActionBar(binding.toolbar);
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (character == null) character = GameCharacter.builder().build();
-        if (viewModel == null) viewModel = new EditViewModel(character);
-        binding.setEditViewModel(viewModel);
+        if (character == null) {
+            if (getIntent().getParcelableExtra(CHARACTER) != null) character = getIntent().getParcelableExtra(CHARACTER);
+            else character = GameCharacter.builder().build();
+        }
+        if (character.getGameSystem() != null) binding.getEditViewModel().splashUrl.set(character.getGameSystem().getSplashUrl());
 
         viewPager = binding.viewpager;
-        viewPager.addOnPageChangeListener(new PageListener() {
-            @Override public void onPageSelected(int position) {
-                //BUS.getBus().post(new PageChangedEvent(position));
-            }
-        });
-        viewPager.setAdapter(new EditPagerAdapter(fm));
+        viewPager.setAdapter(new EditViewPagerAdapter(getSupportFragmentManager()));
         viewPager.setCurrentItem(character.getProgress());
+
+        Log.i("EditActivity", "backstack: " + backstack);
+        Log.i("EditActivity", "page count: "+viewPager.getAdapter().getCount());
+        for(int i = 0; i< viewPager.getAdapter().getCount(); i++){
+            Log.i("EditActivity", "fragment " + i + ": "+((EditViewPagerAdapter)viewPager.getAdapter()).getItem(i));
+        }
     }
 
     public GameCharacter getGameCharacter() {
         return character;
     }
 
-//    @Subscribe public void gameSelected(TileGameClickedEvent event) {
-//        character = character.toBuilder().gameTitle(event.system.getGameTitle()).build();
-//        viewModel.setCharacter(character);
-//        next();
-//    }
-//
-//    @Subscribe public void leftAxisSelected(LeftAxisEvent event) {
-//        character = character.toBuilder().left(event.splat).build();
-//        viewModel.setCharacter(character);
-//        next();
-//    }
-//
-//    @Subscribe public void rightAxisSelected(RightAxisEvent event) {
-//        Splat updatedLeft = character.getGameSystem().checkLeft() ? character.getGameSystem().updateLeft(character.left(), event.splat) : character.left();
-//        character = character.toBuilder().left(updatedLeft).right(event.splat).build();
-//        viewModel.setCharacter(character);
-//        binding.appbar.setExpanded(true);
-//        next();
-//    }
-//
-//    @Subscribe public void characterUpdated(CharacterUpdatedEvent event) {
-//        character = event.character;
-//    }
+    @Subscribe public void itemClicked(ItemClickedEvent event) {
+        int pos = event.position;
+        Splat splat;
+        switch (viewPager.getCurrentItem()) {
+            case 0:
+                character = character.toBuilder().gameTitle(new Game().get(pos).getGameTitle()).build();
+                binding.getEditViewModel().splashUrl.set(character.getGameSystem().getSplashUrl());
+                break;
+            case 1:
+                splat = getSplat(true, pos);
+                if (!splat.isEndPoint()) return;
+                character = character.toBuilder().left(splat).build();
+                break;
+            case 2:
+                splat = getSplat(false, pos);
+                if (!splat.isEndPoint()) return;
+                character = character.toBuilder().right(splat).build();
+                binding.appbar.setExpanded(true);
+                break;
+        }
+        BUS.getBus().post(new CharacterUpdatedEvent());
+        next();
+    }
+
+    private Splat getSplat(boolean left, int position){
+        return ((EditViewPagerAdapter) viewPager.getAdapter()).getFragment(left).getSplat(position);
+    }
 
     private void next() {
         viewPager.nextPage();
@@ -93,9 +107,9 @@ public class EditActivity extends BaseActivity {
     @Override public void onBackPressed() {
         if (backstack > 0) {
             character = character.removeProgress(viewPager.getCurrentItem());
-            viewModel.setCharacter(character);
             viewPager.previousPage();
             backstack--;
+            if(viewPager.getCurrentItem() == 0) binding.getEditViewModel().splashUrl.set(0);
         } else super.onBackPressed();
     }
 }

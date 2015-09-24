@@ -18,13 +18,13 @@ import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
 
 @SuppressWarnings("unchecked")
-public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<BindingRecyclerViewAdapter.ViewHolder> {
+public class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<BaseRecyclerViewAdapter.ViewHolder> {
     private final WeakReferenceOnListChangedCallback onListChangedCallback;
     private final ItemBinder<T> itemBinder;
     private ObservableList<T> items;
     private LayoutInflater inflater;
 
-    public BindingRecyclerViewAdapter(ItemBinder<T> itemBinder, @Nullable Collection<T> items) {
+    public BaseRecyclerViewAdapter(ItemBinder<T> itemBinder, @Nullable Collection<T> items) {
         this.itemBinder = itemBinder;
         this.onListChangedCallback = new WeakReferenceOnListChangedCallback<>(this);
         setItems(items);
@@ -99,10 +99,10 @@ public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<BindingR
 
     private static class WeakReferenceOnListChangedCallback<T> extends ObservableList.OnListChangedCallback {
 
-        private final WeakReference<BindingRecyclerViewAdapter<T>> adapterReference;
+        private final WeakReference<BaseRecyclerViewAdapter<T>> adapterReference;
 
-        public WeakReferenceOnListChangedCallback(BindingRecyclerViewAdapter<T> bindingRecyclerViewAdapter) {
-            adapterReference = new WeakReference<>(bindingRecyclerViewAdapter);
+        public WeakReferenceOnListChangedCallback(BaseRecyclerViewAdapter<T> baseRecyclerViewAdapter) {
+            adapterReference = new WeakReference<>(baseRecyclerViewAdapter);
         }
 
         @Override

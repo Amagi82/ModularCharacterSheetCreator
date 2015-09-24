@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
 import java.util.List;
@@ -22,29 +23,29 @@ import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;
 public class AxisViewModel extends BaseObservable {
     @Bindable private ObservableArrayList<AxisItemViewModel> list = new ObservableArrayList<>();
     @Bindable private String title;
-    private Context context;
+    private int gridImageSize;
     private Resources res;
     private boolean isLeft;
 
     public AxisViewModel(Context context, GameCharacter character, boolean isLeft) {
-        this.context = context;
         res = context.getResources();
+        gridImageSize = getGridImageSize(new ScreenSize(context).getWidth());
         this.isLeft = isLeft;
-        update(character);
+        updateList(character, null);
     }
 
-    public void update(GameCharacter character) {
+    public void updateList(GameCharacter character, @Nullable Splat splat) {
         GameSystem system = character.getGameSystem();
         if (system == null) return;
-        if (isLeft) updateModel(system.getListLeft(character.left()), system.getLeftTitle());
-        else if (character.left() != null) updateModel(system.getListRight(character.left()), system.getRightTitle(character.left()));
+        if (isLeft) updateItemModels(system.getListLeft(splat), system.getLeftTitle());
+        else if (character.left() != null)
+            updateItemModels(system.getListRight(splat == null? character.left() : splat), system.getRightTitle(character.left()));
     }
 
-    private void updateModel(List<Splat> list, @StringRes int title) {
+    private void updateItemModels(List<Splat> list, @StringRes int title) {
         this.list.clear();
-        int gridImageSize = getGridImageSize();
         for (Splat splat : list) {
-            this.list.add(new AxisItemViewModel(new SplatIcon(getString(splat.url()), gridImageSize).getUrl(), splat.title()));
+            this.list.add(new AxisItemViewModel(new SplatIcon(getString(splat.url()), gridImageSize).getUrl(), splat));
         }
         setTitle(title);
     }
@@ -61,10 +62,10 @@ public class AxisViewModel extends BaseObservable {
         return res.getString(title);
     }
 
-    private int getGridImageSize() {
+    private int getGridImageSize(int screenWidth) {
         int margins = res.getDimensionPixelSize(R.dimen.card_margin) * 2;
         int spanCount = res.getInteger(R.integer.character_axis_span_count);
-        int widthAvail = new ScreenSize(context).getWidth() - margins;
+        int widthAvail = screenWidth - margins;
         return (widthAvail - margins) / spanCount;
     }
 
