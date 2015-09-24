@@ -11,14 +11,6 @@ import amagi82.modularcharactersheetcreator.ui.edit.game.GameFragment;
 import amagi82.modularcharactersheetcreator.ui.edit.name.NameFragment;
 
 public class EditViewPagerAdapter extends FragmentPagerAdapter {
-
-    /*
-        Should never contain more than 4 fragments. These include, in order:
-        GameFragment
-        AxisFragment (Left)
-        AxisFragment (Right)
-        NameFragment
-     */
     private AxisFragment leftAxisFragment;
     private AxisFragment rightAxisFragment;
 

@@ -3,7 +3,6 @@ package amagi82.modularcharactersheetcreator.ui.edit.axis;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,12 +27,10 @@ public class AxisFragment extends BaseFragment {
         binding.setAxisViewModel(axisViewModel);
         binding.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.character_axis_span_count)));
 
-        Log.i("AxisFragment", "id: "+this + "for Left = "+getArguments().getBoolean(EditActivity.LEFT));
         return binding.getRoot();
     }
 
     public Splat getSplat(int position){
-        Log.i("AxisFragment", "getSplat - axisViewModel = "+axisViewModel);
         Splat splat = axisViewModel.getList().get(position).getSplat();
         updateIfNotEndpoint(splat);
         return splat;

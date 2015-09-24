@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
+import android.databinding.ObservableField;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
@@ -22,7 +23,7 @@ import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;
 
 public class AxisViewModel extends BaseObservable {
     @Bindable private ObservableArrayList<AxisItemViewModel> list = new ObservableArrayList<>();
-    @Bindable private String title;
+    public ObservableField<String> title = new ObservableField<>();
     private int gridImageSize;
     private Resources res;
     private boolean isLeft;
@@ -47,15 +48,7 @@ public class AxisViewModel extends BaseObservable {
         for (Splat splat : list) {
             this.list.add(new AxisItemViewModel(new SplatIcon(getString(splat.url()), gridImageSize).getUrl(), splat));
         }
-        setTitle(title);
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    private void setTitle(@StringRes int title) {
-        this.title = String.format(getString(R.string.choose), getString(title));
+        this.title.set(String.format(getString(R.string.choose), getString(title)));
     }
 
     private String getString(@StringRes int title) {

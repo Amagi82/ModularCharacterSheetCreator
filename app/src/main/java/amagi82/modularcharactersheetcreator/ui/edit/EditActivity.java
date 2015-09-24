@@ -2,7 +2,6 @@ package amagi82.modularcharactersheetcreator.ui.edit;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -45,12 +44,6 @@ public class EditActivity extends BaseActivity {
         viewPager = binding.viewpager;
         viewPager.setAdapter(new EditViewPagerAdapter(getSupportFragmentManager()));
         viewPager.setCurrentItem(character.getProgress());
-
-        Log.i("EditActivity", "backstack: " + backstack);
-        Log.i("EditActivity", "page count: "+viewPager.getAdapter().getCount());
-        for(int i = 0; i< viewPager.getAdapter().getCount(); i++){
-            Log.i("EditActivity", "fragment " + i + ": "+((EditViewPagerAdapter)viewPager.getAdapter()).getItem(i));
-        }
     }
 
     public GameCharacter getGameCharacter() {
