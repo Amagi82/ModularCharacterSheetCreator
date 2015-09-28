@@ -46,5 +46,12 @@
             app:behavior_overlapTop="@dimen/character_grid_overlay"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            style="@style/Fab.Bottom"
+            android:tint="@color/white"
+            android:visibility="invisible"
+            android:src="@drawable/ic_done_24dp"/>
+
     </android.support.design.widget.CoordinatorLayout>
 </layout>

@@ -33,6 +33,7 @@
                     android:inputType="textPersonName"
                     android:minWidth="@dimen/toolbar_edittext_minwidth"
                     android:singleLine="true"
+                    app:addTextChangedListener="@{nameItemViewModel.textWatcher}"
                     android:text="@{nameItemViewModel.name}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 

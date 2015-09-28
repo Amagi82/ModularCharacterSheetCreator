@@ -12,7 +12,7 @@
 
         <TextView
             style="@style/TextPrompt"
-            android:text="@string/choose_game"/>
+            android:text="@string/confirm"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"

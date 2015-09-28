@@ -2,6 +2,7 @@ package amagi82.modularcharactersheetcreator.ui.edit.name;
 
 import android.content.res.Resources;
 import android.databinding.ObservableArrayList;
+import android.text.TextWatcher;
 
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
@@ -19,7 +20,6 @@ public class NameViewModel {
     private ObservableArrayList<ItemViewModel> list = new ObservableArrayList<>();
     private Resources res;
 
-    @SuppressWarnings("ConstantConditions")
     public NameViewModel(Resources res, GameCharacter character) {
         this.res = res;
         update(character);
@@ -37,10 +37,14 @@ public class NameViewModel {
                 list.add(new AxisItemViewModel(new SplatIcon(res.getString(left.url()), imageSize).getUrl(), left, system.getLeftTitle()));
                 if(right != null) {
                     list.add(new AxisItemViewModel(new SplatIcon(res.getString(right.url()), imageSize).getUrl(), right, system.getRightTitle(left)));
-                    list.add(new NameItemViewModel(character.name(), character.image() == null? null : character.image().uri()));
+                    list.add(new NameItemViewModel(character.name(), character.image() == null ? null : character.image().uri()));
                 }
             }
         }
+    }
+
+    public TextWatcher getTextWatcher(){
+        return ((NameItemViewModel) list.get(3)).getTextWatcher();
     }
 
     public ObservableArrayList<ItemViewModel> getList() {

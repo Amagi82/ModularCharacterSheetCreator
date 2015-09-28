@@ -1,15 +1,16 @@
-package amagi82.modularcharactersheetcreator.ui.edit.name;
+package amagi82.modularcharactersheetcreator.ui.xtras.utils;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 
-public abstract class TextEntryListener implements TextWatcher{
+public abstract class TextListener implements TextWatcher{
     @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-    }
 
+    }
     @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-    }
 
+    }
     @Override public void afterTextChanged(Editable s) {
+
     }
 }

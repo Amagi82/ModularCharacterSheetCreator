@@ -70,5 +70,6 @@
 
     <integer name="character_game_span_count">2</integer>
     <integer name="character_axis_span_count">3</integer>
+    <integer name="character_name_span_count">2</integer>
 
 </resources>
