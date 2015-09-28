@@ -1,7 +1,5 @@
 package amagi82.modularcharactersheetcreator.ui.edit.game;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 
 import java.util.List;
@@ -12,8 +10,8 @@ import amagi82.modularcharactersheetcreator.entities.games.GameSystem;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinderBase;
 
-public class GameViewModel extends BaseObservable {
-    @Bindable private ObservableArrayList<GameItemViewModel> list = new ObservableArrayList<>();
+public class GameViewModel {
+    private ObservableArrayList<GameItemViewModel> list = new ObservableArrayList<>();
 
     public GameViewModel(List<GameSystem> list) {
         for(GameSystem system : list){

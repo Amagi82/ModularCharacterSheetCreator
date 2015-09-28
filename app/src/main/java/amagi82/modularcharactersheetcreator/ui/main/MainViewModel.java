@@ -1,7 +1,5 @@
 package amagi82.modularcharactersheetcreator.ui.main;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 import android.util.Log;
 
@@ -13,8 +11,8 @@ import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinderBase;
 
-public class MainViewModel extends BaseObservable {
-    @Bindable private ObservableArrayList<MainItemViewModel> list = new ObservableArrayList<>();
+public class MainViewModel {
+    private ObservableArrayList<MainItemViewModel> list = new ObservableArrayList<>();
 
     public MainViewModel(List<GameCharacter> list) {
         addAll(list);

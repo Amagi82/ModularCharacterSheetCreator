@@ -1,10 +1,8 @@
 package amagi82.modularcharactersheetcreator.ui.main;
 
-import android.databinding.BaseObservable;
-
 import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
 
-public class MainItemViewModel extends BaseObservable {
+public class MainItemViewModel {
 
     private final GameCharacter character;
 

@@ -2,8 +2,6 @@ package amagi82.modularcharactersheetcreator.ui.edit.axis;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.support.annotation.Nullable;
@@ -21,8 +19,8 @@ import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinderBase;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;
 
-public class AxisViewModel extends BaseObservable {
-    @Bindable private ObservableArrayList<AxisItemViewModel> list = new ObservableArrayList<>();
+public class AxisViewModel {
+    private ObservableArrayList<AxisItemViewModel> list = new ObservableArrayList<>();
     public ObservableField<String> title = new ObservableField<>();
     private int gridImageSize;
     private Resources res;
