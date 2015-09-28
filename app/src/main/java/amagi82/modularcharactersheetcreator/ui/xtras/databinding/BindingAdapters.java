@@ -3,6 +3,7 @@ package amagi82.modularcharactersheetcreator.ui.xtras.databinding;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.net.Uri;
+import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
@@ -47,8 +48,8 @@ public class BindingAdapters {
         recyclerView.setAdapter(new BaseRecyclerViewAdapter<>(itemViewMapper, items));
     }
 
-    @BindingAdapter("android:text")
-    public static void setText(TextView textView, @StringRes int stringRes){
-        if(stringRes != 0) textView.setText(stringRes);
+    @BindingAdapter("android:textColor")
+    public static void setTextColor(TextView textView, @ColorRes int colorRes){
+        if(colorRes != 0) textView.setTextColor(textView.getResources().getColor(colorRes));
     }
 }
