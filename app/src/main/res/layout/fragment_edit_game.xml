@@ -8,24 +8,14 @@
     </data>
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/character_recyclerview_keyline"
-        android:paddingRight="@dimen/character_recyclerview_keyline">
+        style="@style/EditFragmentFrame">
 
         <TextView
-            style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginRight="@dimen/default_margin"
-            android:shadowColor="@color/primary_dark"
-            android:shadowRadius="10"
-            android:text="@string/choose_game"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+            style="@style/TextPrompt"
+            android:text="@string/choose_game"/>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/recyclerView"
             style="@style/RecyclerView.Card"
             android:paddingTop="@dimen/default_large_margin"
             app:items="@{gameViewModel.list}"

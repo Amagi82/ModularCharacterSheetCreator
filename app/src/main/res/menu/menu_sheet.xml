@@ -4,14 +4,16 @@
 
     <item
         android:id="@+id/action_theme"
-        android:icon="@drawable/ic_palette_white_24dp"
+        android:tint="@color/white"
+        android:icon="@drawable/ic_palette_24dp"
         android:orderInCategory="1"
         android:title="@string/action_theme"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/action_edit"
-        android:icon="@drawable/ic_edit_white_24dp"
+        android:tint="@color/white"
+        android:icon="@drawable/ic_edit_24dp"
         android:orderInCategory="2"
         android:title="@string/action_edit"
         app:showAsAction="ifRoom"/>

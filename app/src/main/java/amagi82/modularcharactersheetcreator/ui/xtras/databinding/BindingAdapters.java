@@ -33,6 +33,11 @@ public class BindingAdapters {
         Glide.with(img.getContext()).load(url).into(img);
     }
 
+    @BindingAdapter("bind:imageUri")
+    public static void loadImage(ImageView img, Uri uri){
+        Glide.with(img.getContext()).load(uri).into(img);
+    }
+
     @BindingAdapter("bind:loadIcon")
     public static void loadIcon(CircleImageView icon, GameCharacter character){
         if(character != null){

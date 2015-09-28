@@ -22,13 +22,13 @@ import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;
 public class AxisViewModel {
     private ObservableArrayList<AxisItemViewModel> list = new ObservableArrayList<>();
     public ObservableField<String> title = new ObservableField<>();
-    private int gridImageSize;
+    private int imageSize;
     private Resources res;
     private boolean isLeft;
 
     public AxisViewModel(Context context, GameCharacter character, boolean isLeft) {
         res = context.getResources();
-        gridImageSize = getGridImageSize(new ScreenSize(context).getWidth());
+        imageSize = getImageSize(new ScreenSize(context).getWidth());
         this.isLeft = isLeft;
         updateList(character, null);
     }
@@ -44,7 +44,7 @@ public class AxisViewModel {
     private void updateItemModels(List<Splat> list, @StringRes int title) {
         this.list.clear();
         for (Splat splat : list) {
-            this.list.add(new AxisItemViewModel(new SplatIcon(getString(splat.url()), gridImageSize).getUrl(), splat));
+            this.list.add(new AxisItemViewModel(new SplatIcon(getString(splat.url()), imageSize).getUrl(), splat));
         }
         this.title.set(String.format(getString(R.string.choose), getString(title)));
     }
@@ -53,7 +53,7 @@ public class AxisViewModel {
         return res.getString(title);
     }
 
-    private int getGridImageSize(int screenWidth) {
+    private int getImageSize(int screenWidth) {
         int margins = res.getDimensionPixelSize(R.dimen.card_margin) * 2;
         int spanCount = res.getInteger(R.integer.character_axis_span_count);
         int widthAvail = screenWidth - margins;

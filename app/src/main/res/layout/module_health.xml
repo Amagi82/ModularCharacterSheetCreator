@@ -46,7 +46,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="@dimen/default_margin"
             android:contentDescription="@string/heal_damage"
-            android:src="@drawable/ic_favorite_grey600_24dp"/>
+            android:src="@drawable/ic_favorite_24dp"/>
 
         <ImageView
             android:id="@+id/bAddDamageAgg"

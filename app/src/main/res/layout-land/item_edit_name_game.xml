@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="gameItemViewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.edit.game.GameItemViewModel"/>
+    </data>
+
+    <android.support.v7.widget.CardView
+        style="@style/Card"
+        tools:layout_width="180dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:imageUrl="@{gameItemViewModel.url}"
+                tools:layout_height="72dp"
+                tools:background="@color/primary"/>
+
+            <ImageView
+                android:id="@+id/actionBack"
+                style="@style/ActionButton"
+                android:src="@drawable/ic_undo_24dp"/>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</layout>

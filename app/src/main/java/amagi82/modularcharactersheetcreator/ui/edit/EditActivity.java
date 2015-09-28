@@ -67,9 +67,9 @@ public class EditActivity extends BaseActivity {
                 splat = getSplat(false, pos);
                 if (!splat.isEndPoint()) return;
                 character = character.toBuilder().right(splat).build();
-                binding.appbar.setExpanded(true);
                 break;
         }
+        binding.appbar.setExpanded(true);
         BUS.getBus().post(new CharacterUpdatedEvent());
         next();
     }
