@@ -45,8 +45,7 @@
 
             <ImageView
                 android:id="@+id/actionBack"
-                style="@style/ActionButton"
-                android:src="@drawable/ic_undo_24dp"/>
+                style="@style/ActionButton.Undo"/>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

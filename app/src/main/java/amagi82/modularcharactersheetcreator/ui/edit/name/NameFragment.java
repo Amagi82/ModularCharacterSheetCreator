@@ -37,9 +37,7 @@ public class NameFragment extends BaseFragment {
             }
         });
         binding.recyclerView.setLayoutManager(layoutManager);
-
-
-
+        
 //        textWatcher = new TextEntryListener() {
 //            @Override public void afterTextChanged(Editable s) {
 //                super.afterTextChanged(s);
