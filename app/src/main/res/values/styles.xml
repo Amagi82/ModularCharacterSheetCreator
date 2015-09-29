@@ -13,6 +13,10 @@
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
     </style>
 
+    <style name="Card.EditName">
+        <item name="android:layout_height">@dimen/card_height_edit_name_screen</item>
+    </style>
+
     <style name="TextHeader" parent="TextAppearance.AppCompat.Title">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -223,6 +227,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">@dimen/default_small_margin</item>
+        <item name="android:layout_gravity">bottom</item>
     </style>
 
     <style name="ActionButton.Undo">

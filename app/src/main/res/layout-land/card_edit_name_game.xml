@@ -9,25 +9,22 @@
     </data>
 
     <android.support.v7.widget.CardView
-        style="@style/Card"
+        style="@style/Card.EditName"
         tools:layout_width="180dp">
 
-        <LinearLayout
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginBottom="@dimen/card_action_item_bounds"
+            android:adjustViewBounds="true"
+            android:paddingTop="@dimen/default_small_margin"
+            app:imageUrl="@{gameItemViewModel.url}"
+            tools:background="@color/primary"
+            tools:layout_height="96dp"/>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:imageUrl="@{gameItemViewModel.url}"
-                tools:background="@color/primary"
-                tools:layout_height="72dp"/>
+        <ImageView
+            android:id="@+id/actionBack"
+            style="@style/ActionButton.Undo"/>
 
-            <ImageView
-                android:id="@+id/actionBack"
-                style="@style/ActionButton.Undo"/>
-
-        </LinearLayout>
     </android.support.v7.widget.CardView>
 </layout>
