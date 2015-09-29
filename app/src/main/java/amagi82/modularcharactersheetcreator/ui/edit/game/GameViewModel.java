@@ -24,6 +24,6 @@ public class GameViewModel {
     }
 
     public ItemBinder<GameItemViewModel> itemViewBinder(){
-        return new ItemBinderBase<>(BR.gameItemViewModel, R.layout.item_edit_game);
+        return new ItemBinderBase<>(BR.gameItemViewModel, R.layout.tile_edit_game);
     }
 }

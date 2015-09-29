@@ -65,6 +65,6 @@ public class AxisViewModel {
     }
 
     public ItemBinder<AxisItemViewModel> itemViewBinder() {
-        return new ItemBinderBase<>(BR.axisItemViewModel, R.layout.item_edit_axis);
+        return new ItemBinderBase<>(BR.axisItemViewModel, R.layout.tile_edit_axis);
     }
 }

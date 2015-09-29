@@ -53,9 +53,9 @@ public class NameViewModel {
 
     public ItemBinder<ItemViewModel> itemViewBinder(){
         return new CompositeItemBinder<>(
-                new GameItemBinder(BR.gameItemViewModel, R.layout.item_edit_name_game),
-                new AxisItemBinder(BR.axisItemViewModel, R.layout.item_edit_name_axis),
-                new NameItemBinder(BR.nameItemViewModel, R.layout.item_edit_name)
+                new GameItemBinder(BR.gameItemViewModel, R.layout.card_edit_name_game),
+                new AxisItemBinder(BR.axisItemViewModel, R.layout.card_edit_name_axis),
+                new NameItemBinder(BR.nameItemViewModel, R.layout.card_edit_name)
         );
     }
 
