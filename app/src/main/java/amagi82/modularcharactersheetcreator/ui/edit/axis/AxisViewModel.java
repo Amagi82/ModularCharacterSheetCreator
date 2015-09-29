@@ -22,9 +22,9 @@ import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;
 public class AxisViewModel {
     private ObservableArrayList<AxisItemViewModel> list = new ObservableArrayList<>();
     public ObservableField<String> title = new ObservableField<>();
-    private int imageSize;
-    private Resources res;
-    private boolean isLeft;
+    private final int imageSize;
+    private final Resources res;
+    private final boolean isLeft;
 
     public AxisViewModel(Context context, GameCharacter character, boolean isLeft) {
         res = context.getResources();

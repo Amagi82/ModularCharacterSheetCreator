@@ -2,8 +2,8 @@ package amagi82.modularcharactersheetcreator.ui.xtras.utils;
 
 //This class returns a url for an icon at reduced dimensions if necessary
 public class SplatIcon {
-    private String baseUrl;
-    private int size;
+    private final String baseUrl;
+    private final int size;
 
     public SplatIcon(String baseUrl, int size) {
         this.baseUrl = baseUrl;

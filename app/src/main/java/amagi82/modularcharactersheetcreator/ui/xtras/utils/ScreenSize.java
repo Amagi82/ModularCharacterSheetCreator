@@ -7,8 +7,8 @@ import android.view.WindowManager;
 
 public class ScreenSize {
 
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
     public ScreenSize(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);

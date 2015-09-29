@@ -4,7 +4,7 @@ public class CompositeItemBinder<T> implements ItemBinder<T> {
 
     private final ConditionalDataBinder<T>[] conditionalDataBinders;
 
-    public CompositeItemBinder(ConditionalDataBinder<T>... conditionalDataBinders) {
+    @SafeVarargs public CompositeItemBinder(ConditionalDataBinder<T>... conditionalDataBinders) {
         this.conditionalDataBinders = conditionalDataBinders;
     }
 

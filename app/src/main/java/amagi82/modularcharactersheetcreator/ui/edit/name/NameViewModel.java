@@ -36,6 +36,7 @@ public class NameViewModel {
                 list.add(new AxisItemViewModel(new SplatIcon(res.getString(left.url()), imageSize).getUrl(), left, system.getLeftTitle()));
                 if(right != null) {
                     list.add(new AxisItemViewModel(new SplatIcon(res.getString(right.url()), imageSize).getUrl(), right, system.getRightTitle(left)));
+                    //noinspection ConstantConditions
                     list.add(new NameItemViewModel(character.name(), character.image() == null ? null : character.image().uri()));
                 }
             }

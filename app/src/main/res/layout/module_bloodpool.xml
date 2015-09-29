@@ -48,7 +48,7 @@
             card_view:circle_max="10"
             card_view:circle_progress="7"
             card_view:circle_suffix_text=""
-            card_view:circle_text_size="@dimen/abc_text_size_display_1_material"/>
+            card_view:circle_text_size="34sp"/>
 
         <TextView
             android:id="@+id/tvBloodPerTurn"

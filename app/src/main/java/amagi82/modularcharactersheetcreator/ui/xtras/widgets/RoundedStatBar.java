@@ -1,6 +1,7 @@
 package amagi82.modularcharactersheetcreator.ui.xtras.widgets;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -10,6 +11,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.widget.RatingBar;
@@ -40,11 +42,11 @@ public class RoundedStatBar extends RatingBar {
     private float xPos;
     private float yPosTitle;
     private float yPosSpecialty;
-    private Paint paintFill = new Paint();
-    private Paint paintBorder = new Paint();
-    private Path path = new Path();
-    private RectF rect = new RectF();
-    private TextPaint textPaint = new TextPaint();
+    private final Paint paintFill = new Paint();
+    private final Paint paintBorder = new Paint();
+    private final Path path = new Path();
+    private final RectF rect = new RectF();
+    private final TextPaint textPaint = new TextPaint();
 
     public RoundedStatBar(Context context) {
         this(context, null);
@@ -157,6 +159,7 @@ public class RoundedStatBar extends RatingBar {
     //Set any XML attributes that may have been specified
     private void getXmlAttrs(Context context, AttributeSet attrs) {
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RoundedStatBar, 0, 0);
+        Resources res = getResources();
         try {
             title = a.getString(R.styleable.RoundedStatBar_rsb_title);
             specialty = a.getString(R.styleable.RoundedStatBar_rsb_specialty);
@@ -164,19 +167,21 @@ public class RoundedStatBar extends RatingBar {
             ratingBase = a.getInt(R.styleable.RoundedStatBar_rsb_ratingBase, (int) getRating());
             ratingMax = a.getInt(R.styleable.RoundedStatBar_rsb_ratingMax, getNumStars());
             colorBackground = a.getColor(R.styleable.RoundedStatBar_rsb_colorBackground, MainActivity.NONE);
-            colorFill = a.getColor(R.styleable.RoundedStatBar_rsb_colorFill, getResources().getColor(R.color.round_stat_bar_fill));
-            colorFillSecondary = a.getColor(R.styleable.RoundedStatBar_rsb_colorFillSecondary, getResources().getColor(R.color.round_stat_bar_secondary));
-            colorBorder = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorder, getResources().getColor(R.color.round_stat_bar_border));
-            colorBorderInactive = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorderInactive, getResources().getColor(R.color.round_stat_bar_border_inactive));
-            textColor = a.getColor(R.styleable.RoundedStatBar_rsb_textColor, getResources().getColor(R.color.white));
-            textSize = a.getDimension(R.styleable.RoundedStatBar_rsb_textSize, getResources().getDimension(R.dimen.round_stat_bar_text_size));
-            textSizeSpecialty = a.getDimension(R.styleable.RoundedStatBar_rsb_textSizeSpecialty, getResources().getDimension(R.dimen.round_stat_bar_specialty_text_size));
-            gap = a.getDimension(R.styleable.RoundedStatBar_rsb_gap, getResources().getDimension(R.dimen.round_stat_bar_gap));
-            cornerRadius = a.getDimension(R.styleable.RoundedStatBar_rsb_cornerRadius, getResources().getDimension(R.dimen.round_stat_bar_corner_radius));
+            colorFill = a.getColor(R.styleable.RoundedStatBar_rsb_colorFill, ContextCompat.getColor(context, R.color.round_stat_bar_fill));
+            colorFillSecondary = a.getColor(R.styleable.RoundedStatBar_rsb_colorFillSecondary, ContextCompat.getColor(context, R.color.round_stat_bar_secondary));
+            colorBorder = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorder, ContextCompat.getColor(context, R.color.round_stat_bar_border));
+            colorBorderInactive = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorderInactive, ContextCompat.getColor(context, R.color.round_stat_bar_border_inactive));
+            textColor = a.getColor(R.styleable.RoundedStatBar_rsb_textColor, ContextCompat.getColor(context, R.color.white));
+            textSize = a.getDimension(R.styleable.RoundedStatBar_rsb_textSize, res.getDimension(R.dimen.round_stat_bar_text_size));
+            textSizeSpecialty = a.getDimension(R.styleable.RoundedStatBar_rsb_textSizeSpecialty, res.getDimension(R.dimen.round_stat_bar_specialty_text_size));
+            gap = a.getDimension(R.styleable.RoundedStatBar_rsb_gap, res.getDimension(R.dimen.round_stat_bar_gap));
+            cornerRadius = a.getDimension(R.styleable.RoundedStatBar_rsb_cornerRadius, res.getDimension(R.dimen.round_stat_bar_corner_radius));
         } finally {
             a.recycle();
         }
     }
+
+
 
     public void setTitle(String title) {
         this.title = title;

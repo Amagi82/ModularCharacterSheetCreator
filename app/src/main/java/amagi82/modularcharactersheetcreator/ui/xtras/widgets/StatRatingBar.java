@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.RatingBar;
 
@@ -30,12 +31,12 @@ public class StatRatingBar extends RatingBar {
     private enum Healthbox {EMPTY, CHECK, X}
     public enum BarType {CIRCLE, SQUARE, HEALTHBAR}
     private BarType barType;
-    private Paint paintTemp = new Paint();
-    private Paint paintInside = new Paint();
-    private Paint paintOutline = new Paint();
+    private final Paint paintTemp = new Paint();
+    private final Paint paintInside = new Paint();
+    private final Paint paintOutline = new Paint();
     private Path path = new Path();
-    private RectF rectangle = new RectF();
-    private float dp = getResources().getDisplayMetrics().density;
+    private final RectF rectangle = new RectF();
+    private final float dp = getResources().getDisplayMetrics().density;
     private boolean vertical = false;
 
     public StatRatingBar(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -168,11 +169,11 @@ public class StatRatingBar extends RatingBar {
     private void getXmlAttrs(Context context, AttributeSet attrs) {
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.StatRatingBar, 0, 0);
         try {
-            colorOutlineOn = a.getInt(R.styleable.StatRatingBar_colorOutlineOn, getResources().getColor(R.color.outlineDark));
-            colorOutlineOff = a.getInt(R.styleable.StatRatingBar_colorOutlineOff, getResources().getColor(R.color.outlineMed));
-            colorOutlinePressed = a.getInt(R.styleable.StatRatingBar_colorOutlinePressed, getResources().getColor(R.color.darkRed));
-            colorFill = a.getInt(R.styleable.StatRatingBar_colorFill, getResources().getColor(R.color.fillDark));
-            colorFillPressed = a.getInt(R.styleable.StatRatingBar_colorFillPressed, getResources().getColor(R.color.darkRed));
+            colorOutlineOn = a.getInt(R.styleable.StatRatingBar_colorOutlineOn, ContextCompat.getColor(context, R.color.outlineDark));
+            colorOutlineOff = a.getInt(R.styleable.StatRatingBar_colorOutlineOff, ContextCompat.getColor(context, R.color.outlineMed));
+            colorOutlinePressed = a.getInt(R.styleable.StatRatingBar_colorOutlinePressed, ContextCompat.getColor(context, R.color.darkRed));
+            colorFill = a.getInt(R.styleable.StatRatingBar_colorFill, ContextCompat.getColor(context, R.color.fillDark));
+            colorFillPressed = a.getInt(R.styleable.StatRatingBar_colorFillPressed, ContextCompat.getColor(context, R.color.darkRed));
             vertical = a.getBoolean(R.styleable.StatRatingBar_vertical, false);
             int type = a.getInt(R.styleable.StatRatingBar_barType, 0);
             barType = (type == 0)? BarType.CIRCLE : type == 1? BarType.SQUARE : BarType.HEALTHBAR;

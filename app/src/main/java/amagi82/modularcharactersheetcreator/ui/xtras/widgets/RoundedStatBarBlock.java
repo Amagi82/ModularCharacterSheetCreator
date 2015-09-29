@@ -11,6 +11,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.widget.ProgressBar;
@@ -22,7 +23,7 @@ import amagi82.modularcharactersheetcreator.entities.modules.Stat;
 
 public class RoundedStatBarBlock extends ProgressBar {
 
-    private Resources res = getResources();
+    private final Resources res = getResources();
     private List<Stat> stats;
     @ColorInt private int colorFill;
     @ColorInt private int colorFillSecondary;
@@ -44,9 +45,9 @@ public class RoundedStatBarBlock extends ProgressBar {
     private float boxOffset; //distance to offset the stat boxes in the x direction
     private boolean categoryOverlapsStatBar;
     private boolean specialtyTakesSecondLine;
-    private Path path = new Path(); //Path for the stat boxes
-    private RectF statBox = new RectF(); //Used to measure stat boxes
-    static Rect textBox = new Rect(); //Used to measure text layoutWidth
+    private final Path path = new Path(); //Path for the stat boxes
+    private final RectF statBox = new RectF(); //Used to measure stat boxes
+    static final Rect textBox = new Rect(); //Used to measure text layoutWidth
     static Paint paintFill;
     static Paint paintBorder;
     static TextPaint textPaint;
@@ -170,12 +171,12 @@ public class RoundedStatBarBlock extends ProgressBar {
     private void getXmlAttrs(Context context, AttributeSet attrs) {
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RoundedStatBar, 0, 0);
         try {
-            colorFill = a.getColor(R.styleable.RoundedStatBar_rsb_colorFill, res.getColor(R.color.round_stat_bar_fill));
-            colorFillSecondary = a.getColor(R.styleable.RoundedStatBar_rsb_colorFillSecondary, res.getColor(R.color.round_stat_bar_secondary));
-            colorBorder = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorder, res.getColor(R.color.round_stat_bar_border));
-            colorBorderInactive = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorderInactive, res.getColor(R.color.round_stat_bar_border_inactive));
-            textColor = a.getColor(R.styleable.RoundedStatBar_rsb_textColor, res.getColor(R.color.round_stat_bar_text_color));
-            textColorSpecialty = a.getColor(R.styleable.RoundedStatBar_rsb_textColorSpecialty, res.getColor(R.color.round_stat_bar_text_color_specialty));
+            colorFill = a.getColor(R.styleable.RoundedStatBar_rsb_colorFill, ContextCompat.getColor(context, R.color.round_stat_bar_fill));
+            colorFillSecondary = a.getColor(R.styleable.RoundedStatBar_rsb_colorFillSecondary, ContextCompat.getColor(context, R.color.round_stat_bar_secondary));
+            colorBorder = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorder, ContextCompat.getColor(context, R.color.round_stat_bar_border));
+            colorBorderInactive = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorderInactive, ContextCompat.getColor(context, R.color.round_stat_bar_border_inactive));
+            textColor = a.getColor(R.styleable.RoundedStatBar_rsb_textColor, ContextCompat.getColor(context, R.color.round_stat_bar_text_color));
+            textColorSpecialty = a.getColor(R.styleable.RoundedStatBar_rsb_textColorSpecialty, ContextCompat.getColor(context, R.color.round_stat_bar_text_color_specialty));
             textSize = a.getDimension(R.styleable.RoundedStatBar_rsb_textSize, res.getDimension(R.dimen.round_stat_bar_text_size));
             textSizeSpecialty = a.getDimension(R.styleable.RoundedStatBar_rsb_textSizeSpecialty, res.getDimension(R.dimen.round_stat_bar_specialty_text_size));
             gap = a.getDimension(R.styleable.RoundedStatBar_rsb_gap, res.getDimension(R.dimen.round_stat_bar_gap));

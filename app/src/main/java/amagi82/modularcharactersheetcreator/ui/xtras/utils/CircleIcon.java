@@ -1,22 +1,22 @@
 package amagi82.modularcharactersheetcreator.ui.xtras.utils;
 
-import android.content.res.Resources;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 
 import amagi82.modularcharactersheetcreator.R;
 
 public class CircleIcon {
+    private final Context context;
+    private final int circleImageSize;
 
-    private Resources res;
-    private int circleImageSize;
-
-    public CircleIcon(Resources res) {
-        this.res = res;
-        circleImageSize = res.getDimensionPixelSize(R.dimen.circle_icon_size);
+    public CircleIcon(Context context) {
+        this.context = context;
+        circleImageSize = context.getResources().getDimensionPixelSize(R.dimen.circle_icon_size);
     }
 
     public Bitmap createIcon(String name){
@@ -31,7 +31,7 @@ public class CircleIcon {
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setLinearText(true);
         textPaint.setColor(getColor(R.color.white));
-        textPaint.setTextSize(res.getDimension(R.dimen.circle_icon_text_size));
+        textPaint.setTextSize(context.getResources().getDimension(R.dimen.circle_icon_text_size));
 
         Rect rect = new Rect();
         rect.set(0, 0, circleImageSize, circleImageSize);
@@ -49,6 +49,6 @@ public class CircleIcon {
     }
 
     private int getColor(int colorId){
-        return res.getColor(colorId);
+        return ContextCompat.getColor(context, colorId);
     }
 }

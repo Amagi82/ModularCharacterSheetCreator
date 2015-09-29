@@ -5,6 +5,7 @@ import android.databinding.BindingAdapter;
 import android.net.Uri;
 import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,9 +42,9 @@ public class BindingAdapters {
     @BindingAdapter("bind:loadIcon")
     public static void loadIcon(CircleImageView icon, GameCharacter character){
         if(character != null){
-            Uri imageUri = character.image() == null ? null : character.image().uri();
+            @SuppressWarnings("ConstantConditions") Uri imageUri = character.image() == null ? null : character.image().uri();
             Context context = icon.getContext();
-            if (imageUri == null) icon.setImageBitmap(new CircleIcon(context.getResources()).createIcon(character.name()));
+            if (imageUri == null) icon.setImageBitmap(new CircleIcon(context).createIcon(character.name()));
             else Glide.with(context).load(imageUri).centerCrop().into(icon);
         }
     }
@@ -55,6 +56,6 @@ public class BindingAdapters {
 
     @BindingAdapter("android:textColor")
     public static void setTextColor(TextView textView, @ColorRes int colorRes){
-        if(colorRes != 0) textView.setTextColor(textView.getResources().getColor(colorRes));
+        if(colorRes != 0) textView.setTextColor(ContextCompat.getColor(textView.getContext(), colorRes));
     }
 }

@@ -12,7 +12,7 @@ import auto.parcel.AutoParcel;
 @AutoParcel
 public abstract class Splat implements Parcelable{
 
-    private static int DEFAULT_URL = R.string.url_default;
+    private static final int DEFAULT_URL = R.string.url_default;
 
     public abstract @StringRes int title();
     public abstract @StringRes int url();

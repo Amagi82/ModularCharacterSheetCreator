@@ -19,15 +19,13 @@ import amagi82.modularcharactersheetcreator.entities.modules.StatusModule;
 
 public class Template {
 
-    private Context context;
-    private GameCharacter character;
+    private final Context context;
     private GameSystem system;
     private List<Module> modules;
     private int spanCount = 3;
 
     public Template(Context context, GameCharacter character) {
         this.context = context;
-        this.character = character;
         //system = character.getGameSystem();
     }
 
