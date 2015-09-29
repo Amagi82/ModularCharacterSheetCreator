@@ -2,7 +2,6 @@ package amagi82.modularcharactersheetcreator.ui.edit.name;
 
 import android.content.res.Resources;
 import android.databinding.ObservableArrayList;
-import android.text.TextWatcher;
 
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
@@ -41,10 +40,6 @@ public class NameViewModel {
                 }
             }
         }
-    }
-
-    public TextWatcher getTextWatcher(){
-        return ((NameItemViewModel) list.get(3)).getTextWatcher();
     }
 
     public ObservableArrayList<ItemViewModel> getList() {

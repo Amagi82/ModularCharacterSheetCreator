@@ -37,22 +37,6 @@ public class NameFragment extends BaseFragment {
             }
         });
         binding.recyclerView.setLayoutManager(layoutManager);
-        
-//        textWatcher = new TextEntryListener() {
-//            @Override public void afterTextChanged(Editable s) {
-//                super.afterTextChanged(s);
-//                if (s.length() >= 1) {
-//                    bUpdateCharacter.setVisibility(VISIBLE);
-//                    tvPrompt.setText(getString(R.string.confirm));
-//                    fab.show();
-//                } else {
-//                    bUpdateCharacter.setVisibility(INVISIBLE);
-//                    tvPrompt.setText(getString(R.string.choose_name));
-//                    fab.hide();
-//                }
-//            }
-//        };
-//        etName.addTextChangedListener(textWatcher);
 
         return binding.getRoot();
     }
@@ -65,19 +49,6 @@ public class NameFragment extends BaseFragment {
         nameViewModel.update(getCurrentCharacter());
     }
 
-//    @Override public void onDestroyView() {
-//        etName.removeTextChangedListener(textWatcher);
-//        super.onDestroyView();
-//    }
-//
-//
-//    @OnClick(R.id.bUpdateCharacter) void updateCharacter(){
-//        Intent returnIntent = new Intent();
-//        returnIntent.putExtra("Character", getCharacter());
-//        getActivity().setResult(RESULT_OK, returnIntent);
-//        getActivity().finish();
-//    }
-//
 //    @OnClick(R.id.fab) void getPhoto() {
 //        character = getCharacter();
 //        if (character.image() == null) getImageFromGallery();
