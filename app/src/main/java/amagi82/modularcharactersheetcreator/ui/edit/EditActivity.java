@@ -1,7 +1,11 @@
 package amagi82.modularcharactersheetcreator.ui.edit;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -34,6 +38,7 @@ public class EditActivity extends BaseActivity {
         setSupportActionBar(binding.toolbar);
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(getTintedIcon());
 
         if (character == null) {
             if (getIntent().getParcelableExtra(CHARACTER) != null) character = getIntent().getParcelableExtra(CHARACTER);
@@ -44,6 +49,20 @@ public class EditActivity extends BaseActivity {
         viewPager = binding.viewpager;
         viewPager.setAdapter(new EditViewPagerAdapter(getSupportFragmentManager()));
         viewPager.setCurrentItem(character.getProgress());
+    }
+
+    @SuppressWarnings("deprecation") @NonNull private Drawable getTintedIcon() {
+        Drawable icon;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            icon = getResources().getDrawable(R.drawable.ic_close_24dp, getTheme());
+            assert icon != null;
+            icon.setColorFilter(getResources().getColor(R.color.white, getTheme()), PorterDuff.Mode.SRC_ATOP);
+        }else{
+            icon = getResources().getDrawable(R.drawable.ic_close_24dp);
+            assert icon != null;
+            icon.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        }
+        return icon;
     }
 
     public GameCharacter getGameCharacter() {
