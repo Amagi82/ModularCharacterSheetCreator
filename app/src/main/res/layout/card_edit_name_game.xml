@@ -9,17 +9,31 @@
     </data>
 
     <android.support.v7.widget.CardView
-        style="@style/Card.EditName">
+        style="@style/Card.EditName"
+        tools:layout_width="180dp">
 
-        <ImageView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/card_action_item_bounds"
-            android:adjustViewBounds="true"
-            android:padding="@dimen/default_small_margin"
-            app:imageUrl="@{gameItemViewModel.url}"
-            tools:background="@color/primary"
-            tools:layout_height="96dp"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_small_margin"
+                android:text="@string/game"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textSize="20sp"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_small_margin"
+                android:adjustViewBounds="true"
+                app:imageUrl="@{gameItemViewModel.url}"
+                tools:background="@color/primary"
+                tools:layout_height="96dp"/>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/actionBack"

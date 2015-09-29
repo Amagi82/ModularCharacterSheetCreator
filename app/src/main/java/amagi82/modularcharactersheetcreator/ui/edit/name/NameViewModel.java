@@ -27,7 +27,7 @@ public class NameViewModel {
 
     public void update(GameCharacter character){
         list.clear();
-        int imageSize = res.getDimensionPixelSize(R.dimen.character_circle_icon_size);
+        int imageSize = res.getDimensionPixelSize(R.dimen.card_max_image_height);
         GameSystem system = character.getGameSystem();
         Splat left = character.left();
         Splat right = character.right();
