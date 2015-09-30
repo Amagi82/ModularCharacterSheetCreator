@@ -20,8 +20,8 @@ import amagi82.modularcharactersheetcreator.ui.xtras.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;
 
 public class AxisViewModel {
-    private ObservableArrayList<AxisItemViewModel> list = new ObservableArrayList<>();
-    public ObservableField<String> title = new ObservableField<>();
+    public final ObservableArrayList<AxisItemViewModel> list = new ObservableArrayList<>();
+    public final ObservableField<String> title = new ObservableField<>();
     private final int imageSize;
     private final Resources res;
     private final boolean isLeft;
@@ -58,10 +58,6 @@ public class AxisViewModel {
         int spanCount = res.getInteger(R.integer.character_axis_span_count);
         int widthAvail = screenWidth - margins;
         return (widthAvail - margins) / spanCount;
-    }
-
-    public ObservableArrayList<AxisItemViewModel> getList() {
-        return list;
     }
 
     public ItemBinder<AxisItemViewModel> itemViewBinder() {

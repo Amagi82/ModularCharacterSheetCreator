@@ -3,17 +3,20 @@
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.4.0-beta1'
-        classpath 'com.android.databinding:dataBinder:1.0-rc1'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.7' //used for compile time annotation processing
+        classpath 'com.android.databinding:dataBinder:1.0-rc2'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8' //used for compile time annotation processing
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:0.13.1514'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
         maven {url "https://clojars.org/repo/"}
     }
 }

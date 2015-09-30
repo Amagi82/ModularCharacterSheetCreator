@@ -31,7 +31,7 @@ public class AxisFragment extends BaseFragment {
     }
 
     public Splat getSplat(int position){
-        Splat splat = axisViewModel.getList().get(position).getSplat();
+        Splat splat = axisViewModel.list.get(position).splat;
         updateIfNotEndpoint(splat);
         return splat;
     }

@@ -3,9 +3,8 @@ package amagi82.modularcharactersheetcreator.ui.base;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
 import icepick.Icepick;
-
-import static amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto.BUS;
 
 public abstract class BaseActivity extends AppCompatActivity{
 
@@ -16,7 +15,7 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     @Override protected void onStart() {
         super.onStart();
-        BUS.getBus().register(this);
+        Otto.bus.register(this);
     }
 
     @Override protected void onSaveInstanceState(Bundle outState) {
@@ -26,6 +25,6 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     @Override protected void onStop() {
         super.onStop();
-        BUS.getBus().unregister(this);
+        Otto.bus.unregister(this);
     }
 }

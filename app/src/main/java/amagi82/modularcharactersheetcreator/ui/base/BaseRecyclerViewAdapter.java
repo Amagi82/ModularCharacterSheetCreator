@@ -73,7 +73,7 @@ public class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<BaseRecycle
         viewHolder.binding.executePendingBindings();
         viewHolder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                Otto.BUS.getBus().post(new ItemClickedEvent(position));
+                Otto.bus.post(new ItemClickedEvent(position));
             }
         });
     }

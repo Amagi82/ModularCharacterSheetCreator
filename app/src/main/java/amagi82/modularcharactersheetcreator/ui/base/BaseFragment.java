@@ -3,9 +3,8 @@ package amagi82.modularcharactersheetcreator.ui.base;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
 import icepick.Icepick;
-
-import static amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto.BUS;
 
 public abstract class BaseFragment extends Fragment{
 
@@ -16,7 +15,7 @@ public abstract class BaseFragment extends Fragment{
 
     @Override public void onStart() {
         super.onStart();
-        BUS.getBus().register(this);
+        Otto.bus.register(this);
     }
 
     @Override public void onSaveInstanceState(Bundle outState) {
@@ -26,6 +25,6 @@ public abstract class BaseFragment extends Fragment{
 
     @Override public void onStop() {
         super.onStop();
-        BUS.getBus().unregister(this);
+        Otto.bus.unregister(this);
     }
 }

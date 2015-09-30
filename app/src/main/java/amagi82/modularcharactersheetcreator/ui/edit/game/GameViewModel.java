@@ -11,16 +11,12 @@ import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinderBase;
 
 public class GameViewModel {
-    private ObservableArrayList<GameItemViewModel> list = new ObservableArrayList<>();
+    public final ObservableArrayList<GameItemViewModel> list = new ObservableArrayList<>();
 
     public GameViewModel(List<GameSystem> list) {
         for(GameSystem system : list){
             this.list.add(new GameItemViewModel(system.getGameUrl()));
         }
-    }
-
-    public ObservableArrayList<GameItemViewModel> getList() {
-        return list;
     }
 
     public ItemBinder<GameItemViewModel> itemViewBinder(){

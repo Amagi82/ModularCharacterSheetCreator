@@ -16,7 +16,7 @@ import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;
 
 public class NameViewModel {
-    private ObservableArrayList<ItemViewModel> list = new ObservableArrayList<>();
+    public final ObservableArrayList<ItemViewModel> list = new ObservableArrayList<>();
     private Resources res;
 
     public NameViewModel(Resources res, GameCharacter character) {
@@ -41,10 +41,6 @@ public class NameViewModel {
                 }
             }
         }
-    }
-
-    public ObservableArrayList<ItemViewModel> getList() {
-        return list;
     }
 
     public ItemBinder<ItemViewModel> itemViewBinder(){

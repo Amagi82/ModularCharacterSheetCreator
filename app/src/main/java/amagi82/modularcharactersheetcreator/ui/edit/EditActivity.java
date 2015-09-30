@@ -16,11 +16,11 @@ import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.entities.characters.Splat;
 import amagi82.modularcharactersheetcreator.entities.games.Game;
 import amagi82.modularcharactersheetcreator.ui.base.BaseActivity;
+import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
 import amagi82.modularcharactersheetcreator.ui.xtras.widgets.NoSwipeViewPager;
 import icepick.State;
 
 import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.CHARACTER;
-import static amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto.BUS;
 
 public class EditActivity extends BaseActivity {
     public static final String LEFT = "Left";
@@ -76,7 +76,7 @@ public class EditActivity extends BaseActivity {
                 break;
         }
         binding.appbar.setExpanded(true);
-        BUS.getBus().post(new CharacterUpdatedEvent());
+        Otto.bus.post(new CharacterUpdatedEvent());
         next();
     }
 
