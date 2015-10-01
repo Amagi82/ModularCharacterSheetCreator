@@ -15,7 +15,7 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     @Override protected void onStart() {
         super.onStart();
-        Otto.bus.register(this);
+        Otto.BUS.getBus().register(this);
     }
 
     @Override protected void onSaveInstanceState(Bundle outState) {
@@ -25,6 +25,6 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     @Override protected void onStop() {
         super.onStop();
-        Otto.bus.unregister(this);
+        Otto.BUS.getBus().unregister(this);
     }
 }

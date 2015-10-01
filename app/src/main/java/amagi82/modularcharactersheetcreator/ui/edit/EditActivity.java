@@ -76,7 +76,7 @@ public class EditActivity extends BaseActivity {
                 break;
         }
         binding.appbar.setExpanded(true);
-        Otto.bus.post(new CharacterUpdatedEvent());
+        Otto.BUS.getBus().post(new CharacterUpdatedEvent());
         next();
     }
 
