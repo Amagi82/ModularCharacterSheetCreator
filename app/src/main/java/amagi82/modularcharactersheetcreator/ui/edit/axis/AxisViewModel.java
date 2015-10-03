@@ -14,8 +14,8 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.entities.characters.Splat;
 import amagi82.modularcharactersheetcreator.entities.games.GameSystem;
+import amagi82.modularcharactersheetcreator.ui.xtras.databinding.Binding;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
-import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinderBase;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;
 
@@ -60,7 +60,7 @@ public class AxisViewModel {
         return (widthAvail - margins) / spanCount;
     }
 
-    public ItemBinder<AxisItemViewModel> itemViewBinder() {
-        return new ItemBinderBase<>(BR.axisItemViewModel, R.layout.tile_edit_axis);
+    public Binding<AxisItemViewModel> itemViewBinder() {
+        return new ItemBinder<>(BR.axisItemViewModel, R.layout.tile_edit_axis);
     }
 }

@@ -7,8 +7,8 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.entities.games.GameSystem;
+import amagi82.modularcharactersheetcreator.ui.xtras.databinding.Binding;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
-import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinderBase;
 
 public class GameViewModel {
     public final ObservableArrayList<GameItemViewModel> list = new ObservableArrayList<>();
@@ -19,7 +19,7 @@ public class GameViewModel {
         }
     }
 
-    public ItemBinder<GameItemViewModel> itemViewBinder(){
-        return new ItemBinderBase<>(BR.gameItemViewModel, R.layout.tile_edit_game);
+    public Binding<GameItemViewModel> itemViewBinder(){
+        return new ItemBinder<>(BR.gameItemViewModel, R.layout.tile_edit_game);
     }
 }

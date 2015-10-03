@@ -50,7 +50,7 @@ public class BindingAdapters {
     }
 
     @BindingAdapter({"bind:items", "bind:itemViewBinder"})
-    public static <T> void setAdapter(RecyclerView recyclerView, Collection<T> items, ItemBinder<T> itemViewMapper) {
+    public static <T> void setAdapter(RecyclerView recyclerView, Collection<T> items, Binding<T> itemViewMapper) {
         recyclerView.setAdapter(new BaseRecyclerViewAdapter<>(itemViewMapper, items));
     }
 

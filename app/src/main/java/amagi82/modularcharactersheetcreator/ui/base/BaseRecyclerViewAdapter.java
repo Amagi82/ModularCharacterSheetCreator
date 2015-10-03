@@ -14,18 +14,18 @@ import java.lang.ref.WeakReference;
 import java.util.Collection;
 
 import amagi82.modularcharactersheetcreator.ui.edit.ItemClickedEvent;
-import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
+import amagi82.modularcharactersheetcreator.ui.xtras.databinding.Binding;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
 
 @SuppressWarnings("unchecked")
 public class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<BaseRecyclerViewAdapter.ViewHolder> {
     private final WeakReferenceOnListChangedCallback onListChangedCallback;
-    private final ItemBinder<T> itemBinder;
+    private final Binding<T> binding;
     private ObservableList<T> items;
     private LayoutInflater inflater;
 
-    public BaseRecyclerViewAdapter(ItemBinder<T> itemBinder, @Nullable Collection<T> items) {
-        this.itemBinder = itemBinder;
+    public BaseRecyclerViewAdapter(Binding<T> binding, @Nullable Collection<T> items) {
+        this.binding = binding;
         this.onListChangedCallback = new WeakReferenceOnListChangedCallback<>(this);
         setItems(items);
     }
@@ -69,7 +69,7 @@ public class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<BaseRecycle
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         T item = items.get(position);
-        viewHolder.binding.setVariable(itemBinder.getBindingVariable(item), item);
+        viewHolder.binding.setVariable(binding.getBindingVariable(item), item);
         viewHolder.binding.executePendingBindings();
         viewHolder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -80,7 +80,7 @@ public class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<BaseRecycle
 
     @Override
     public int getItemViewType(int position) {
-        return itemBinder.getLayoutRes(items.get(position));
+        return binding.getLayoutRes(items.get(position));
     }
 
     @Override

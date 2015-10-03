@@ -1,16 +1,16 @@
 package amagi82.modularcharactersheetcreator.ui.xtras.databinding;
 
-public class CompositeItemBinder<T> implements ItemBinder<T> {
+public class MultiItemBinder<T> implements Binding<T> {
 
-    private final ConditionalDataBinder<T>[] conditionalDataBinders;
+    private final BindingCondition<T>[] bindingConditions;
 
-    @SafeVarargs public CompositeItemBinder(ConditionalDataBinder<T>... conditionalDataBinders) {
-        this.conditionalDataBinders = conditionalDataBinders;
+    @SafeVarargs public MultiItemBinder(BindingCondition<T>... bindingConditions) {
+        this.bindingConditions = bindingConditions;
     }
 
     @Override
     public int getLayoutRes(T model) {
-        for (ConditionalDataBinder<T> dataBinder : conditionalDataBinders) {
+        for (BindingCondition<T> dataBinder : bindingConditions) {
             if (dataBinder.canHandle(model)) return dataBinder.getLayoutRes(model);
         }
         throw new IllegalStateException();
@@ -18,7 +18,7 @@ public class CompositeItemBinder<T> implements ItemBinder<T> {
 
     @Override
     public int getBindingVariable(T model) {
-        for (ConditionalDataBinder<T> dataBinder : conditionalDataBinders) {
+        for (BindingCondition<T> dataBinder : bindingConditions) {
             if (dataBinder.canHandle(model)) return dataBinder.getBindingVariable(model);
         }
         throw new IllegalStateException();
