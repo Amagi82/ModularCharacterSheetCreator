@@ -20,7 +20,9 @@
                 android:text="@string/confirm"/>
 
             <include layout="@layout/card_edit_name_game"
-                     style="@style/Card"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/card_height_edit_name_screen"
+                     android:layout_margin="@dimen/card_margin"
                      bind:gameItemViewModel="@{nameViewModel.gameItem}"/>
 
             <LinearLayout
