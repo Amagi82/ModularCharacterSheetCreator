@@ -1,9 +1,8 @@
 package amagi82.modularcharactersheetcreator.ui.edit.axis;
 
 import amagi82.modularcharactersheetcreator.entities.characters.Splat;
-import amagi82.modularcharactersheetcreator.ui.edit.name.ItemViewModel;
 
-public class AxisItemViewModel extends ItemViewModel{
+public class AxisItemViewModel{
     public final String url;
     public final Splat splat;
     public final int axisTitle;

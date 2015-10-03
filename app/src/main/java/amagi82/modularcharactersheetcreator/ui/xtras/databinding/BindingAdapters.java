@@ -58,4 +58,9 @@ public class BindingAdapters {
     public static void setTextColor(TextView textView, @ColorRes int colorRes){
         if(colorRes != 0) textView.setTextColor(ContextCompat.getColor(textView.getContext(), colorRes));
     }
+
+    @BindingAdapter("android:text")
+    public static void setText(TextView textView, @StringRes int stringRes){
+        if(stringRes != 0) textView.setText(stringRes);
+    }
 }

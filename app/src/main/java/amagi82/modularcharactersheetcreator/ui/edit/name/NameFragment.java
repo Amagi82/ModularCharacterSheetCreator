@@ -1,9 +1,7 @@
 package amagi82.modularcharactersheetcreator.ui.edit.name;
 
-import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,18 +23,6 @@ public class NameFragment extends BaseFragment {
 
         nameViewModel = new NameViewModel(getResources(), getCurrentCharacter());
         binding.setNameViewModel(nameViewModel);
-
-        final int spanCount = getResources().getInteger(R.integer.character_name_span_count);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), spanCount);
-        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                if (position == 3) return spanCount;
-                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT && position == 0) return spanCount;
-                return 1;
-            }
-        });
-        binding.recyclerView.setLayoutManager(layoutManager);
 
         return binding.getRoot();
     }
