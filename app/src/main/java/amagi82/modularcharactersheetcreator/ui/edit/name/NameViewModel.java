@@ -4,9 +4,9 @@ import android.content.res.Resources;
 import android.databinding.ObservableField;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.entities.characters.Splat;
-import amagi82.modularcharactersheetcreator.entities.games.GameSystem;
+import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.characters.Splat;
+import amagi82.modularcharactersheetcreator.models.games.GameSystem;
 import amagi82.modularcharactersheetcreator.ui.edit.axis.AxisItemViewModel;
 import amagi82.modularcharactersheetcreator.ui.edit.game.GameItemViewModel;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;

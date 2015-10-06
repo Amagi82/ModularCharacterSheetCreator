@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.entities.modules.Module;
+import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.ui.base.BaseFragment;
 
 public class TabFragment extends BaseFragment {

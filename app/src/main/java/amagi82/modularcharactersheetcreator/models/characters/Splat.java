@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.entities.characters;
+package amagi82.modularcharactersheetcreator.models.characters;
 
 import android.os.Parcelable;
 import android.support.annotation.StringRes;

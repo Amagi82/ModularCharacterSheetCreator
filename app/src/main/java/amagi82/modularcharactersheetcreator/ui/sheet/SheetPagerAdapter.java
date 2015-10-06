@@ -9,7 +9,7 @@ import android.support.v4.util.ArrayMap;
 import java.util.List;
 import java.util.Map;
 
-import amagi82.modularcharactersheetcreator.entities.characters.Sheet;
+import amagi82.modularcharactersheetcreator.models.characters.Sheet;
 
 public class SheetPagerAdapter extends FragmentStatePagerAdapter {
 

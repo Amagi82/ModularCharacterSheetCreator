@@ -19,7 +19,7 @@ import android.widget.ProgressBar;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.entities.modules.Stat;
+import amagi82.modularcharactersheetcreator.models.modules.Stat;
 
 public class RoundedStatBarBlock extends ProgressBar {
 

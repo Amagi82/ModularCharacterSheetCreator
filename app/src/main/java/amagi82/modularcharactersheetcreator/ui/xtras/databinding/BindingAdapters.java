@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.Collection;
 
-import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui.base.BaseRecyclerViewAdapter;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.CircleIcon;
 import de.hdodenhof.circleimageview.CircleImageView;

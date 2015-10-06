@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.entities.games;
+package amagi82.modularcharactersheetcreator.models.games;
 
 import android.support.annotation.Nullable;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.entities.characters.Splat;
+import amagi82.modularcharactersheetcreator.models.characters.Splat;
 
 public class CWerewolf extends GameSystem {
 

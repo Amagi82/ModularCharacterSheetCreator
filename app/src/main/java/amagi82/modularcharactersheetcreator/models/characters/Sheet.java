@@ -1,10 +1,10 @@
-package amagi82.modularcharactersheetcreator.entities.characters;
+package amagi82.modularcharactersheetcreator.models.characters;
 
 import android.os.Parcelable;
 
 import java.util.List;
 
-import amagi82.modularcharactersheetcreator.entities.modules.Module;
+import amagi82.modularcharactersheetcreator.models.modules.Module;
 import auto.parcel.AutoParcel;
 
 @AutoParcel

@@ -7,7 +7,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.Binding;
 import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
 

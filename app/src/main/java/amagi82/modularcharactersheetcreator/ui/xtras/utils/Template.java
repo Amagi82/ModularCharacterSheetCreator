@@ -6,16 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.entities.characters.Sheet;
-import amagi82.modularcharactersheetcreator.entities.games.GameSystem;
-import amagi82.modularcharactersheetcreator.entities.modules.BloodPoolModule;
-import amagi82.modularcharactersheetcreator.entities.modules.HeaderModule;
-import amagi82.modularcharactersheetcreator.entities.modules.HealthModule;
-import amagi82.modularcharactersheetcreator.entities.modules.Module;
-import amagi82.modularcharactersheetcreator.entities.modules.Stat;
-import amagi82.modularcharactersheetcreator.entities.modules.StatBlockModule;
-import amagi82.modularcharactersheetcreator.entities.modules.StatusModule;
+import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.characters.Sheet;
+import amagi82.modularcharactersheetcreator.models.games.GameSystem;
+import amagi82.modularcharactersheetcreator.models.modules.BloodPoolModule;
+import amagi82.modularcharactersheetcreator.models.modules.HeaderModule;
+import amagi82.modularcharactersheetcreator.models.modules.HealthModule;
+import amagi82.modularcharactersheetcreator.models.modules.Module;
+import amagi82.modularcharactersheetcreator.models.modules.Stat;
+import amagi82.modularcharactersheetcreator.models.modules.StatBlockModule;
+import amagi82.modularcharactersheetcreator.models.modules.StatusModule;
 
 public class Template {
 

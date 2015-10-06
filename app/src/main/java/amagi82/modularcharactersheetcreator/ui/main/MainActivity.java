@@ -18,12 +18,12 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.ActivityMainBinding;
-import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.entities.characters.Sheet;
-import amagi82.modularcharactersheetcreator.entities.characters.Splat;
-import amagi82.modularcharactersheetcreator.entities.games.CMage;
-import amagi82.modularcharactersheetcreator.entities.games.CVampire;
-import amagi82.modularcharactersheetcreator.entities.games.CWerewolf;
+import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.characters.Sheet;
+import amagi82.modularcharactersheetcreator.models.characters.Splat;
+import amagi82.modularcharactersheetcreator.models.games.CMage;
+import amagi82.modularcharactersheetcreator.models.games.CVampire;
+import amagi82.modularcharactersheetcreator.models.games.CWerewolf;
 import amagi82.modularcharactersheetcreator.ui.base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.Template;

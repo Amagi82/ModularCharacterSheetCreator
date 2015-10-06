@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.entities.games;
+package amagi82.modularcharactersheetcreator.models.games;
 
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
@@ -6,7 +6,7 @@ import android.support.annotation.StringRes;
 
 import java.util.List;
 
-import amagi82.modularcharactersheetcreator.entities.characters.Splat;
+import amagi82.modularcharactersheetcreator.models.characters.Splat;
 
 import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.NONE;
 

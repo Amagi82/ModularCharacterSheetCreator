@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 
 public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickListener, View.OnClickListener{
 

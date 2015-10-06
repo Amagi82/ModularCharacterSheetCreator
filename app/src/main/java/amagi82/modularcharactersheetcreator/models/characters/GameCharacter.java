@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.entities.characters;
+package amagi82.modularcharactersheetcreator.models.characters;
 
 import android.net.Uri;
 import android.os.Parcelable;
@@ -14,8 +14,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 import java.util.UUID;
 
-import amagi82.modularcharactersheetcreator.entities.games.Game;
-import amagi82.modularcharactersheetcreator.entities.games.GameSystem;
+import amagi82.modularcharactersheetcreator.models.games.Game;
+import amagi82.modularcharactersheetcreator.models.games.GameSystem;
 import auto.parcel.AutoParcel;
 
 import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.NONE;

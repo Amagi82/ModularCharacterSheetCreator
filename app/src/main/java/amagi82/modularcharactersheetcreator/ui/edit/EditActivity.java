@@ -12,9 +12,9 @@ import com.squareup.otto.Subscribe;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.ActivityEditBinding;
-import amagi82.modularcharactersheetcreator.entities.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.entities.characters.Splat;
-import amagi82.modularcharactersheetcreator.entities.games.Game;
+import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.characters.Splat;
+import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.ui.base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
 import amagi82.modularcharactersheetcreator.ui.xtras.widgets.NoSwipeViewPager;

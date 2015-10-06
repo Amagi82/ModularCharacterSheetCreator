@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.FragmentEditGameBinding;
-import amagi82.modularcharactersheetcreator.entities.games.Game;
+import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.ui.base.BaseFragment;
 
 public class GameFragment extends BaseFragment {

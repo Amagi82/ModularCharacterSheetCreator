@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.entities.modules;
+package amagi82.modularcharactersheetcreator.models.modules;
 
 import java.util.List;
 

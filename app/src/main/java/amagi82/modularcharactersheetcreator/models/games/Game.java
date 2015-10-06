@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.entities.games;
+package amagi82.modularcharactersheetcreator.models.games;
 
 import android.support.annotation.StringRes;
 
