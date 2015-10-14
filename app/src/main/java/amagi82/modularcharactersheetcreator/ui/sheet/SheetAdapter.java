@@ -14,8 +14,8 @@ public class SheetAdapter {
 //    }
 //
 //    @Override
-//    public int getItemViewType(int position) {
-//        return modules.get(position).getType().ordinal();
+//    public int getItemViewType(int url) {
+//        return modules.get(url).getType().ordinal();
 //    }
 //
 //    // Create new views (invoked by the layout manager). Type from getItemViewType above.
@@ -41,25 +41,25 @@ public class SheetAdapter {
 //
 //    // Replace the contents of a view (invoked by the layout manager)
 //    @Override
-//    public void onBindViewHolder(ModuleViewHolder vh, final int position) {
-//        if (vh.tvTitle != null) vh.tvTitle.setText(modules.get(position).getTitle());
-//        if (vh.tvText != null) vh.tvText.setText(modules.get(position).getText());
+//    public void onBindViewHolder(ModuleViewHolder vh, final int url) {
+//        if (vh.tvTitle != null) vh.tvTitle.setText(modules.get(url).getTitle());
+//        if (vh.tvText != null) vh.tvText.setText(modules.get(url).getText());
 //
 //        switch (types[vh.getItemViewType()]) {
 //            case BLOODPOOL:
-//                bind((ModuleBloodPoolViewHolder) vh, (BloodPoolModule) modules.get(position));
+//                bind((ModuleBloodPoolViewHolder) vh, (BloodPoolModule) modules.get(url));
 //                break;
 //            case HEALTH:
-//                bind((ModuleHealthViewHolder) vh, (HealthModule) modules.get(position));
+//                bind((ModuleHealthViewHolder) vh, (HealthModule) modules.get(url));
 //                break;
 //            case STATBLOCK:
-//                bind((ModuleBlockViewHolder) vh, (StatBlockModule) modules.get(position));
+//                bind((ModuleBlockViewHolder) vh, (StatBlockModule) modules.get(url));
 //                break;
 //            case STATUS:
-//                bind((ModuleStatusViewHolder) vh, (StatusModule) modules.get(position));
+//                bind((ModuleStatusViewHolder) vh, (StatusModule) modules.get(url));
 //                break;
 //            case TITLETEXTBLOCK:
-//                bind((ModuleBlockViewHolder) vh, (TitleTextBlockModule) modules.get(position));
+//                bind((ModuleBlockViewHolder) vh, (TitleTextBlockModule) modules.get(url));
 //                break;
 //        }
 //    }

@@ -13,9 +13,9 @@ import com.squareup.otto.Subscribe;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.ActivityEditBinding;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.characters.Splat;
-import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.ui.base.BaseActivity;
+import amagi82.modularcharactersheetcreator.ui.edit.axis.AxisSelectedEvent;
+import amagi82.modularcharactersheetcreator.ui.edit.game.GameSelectedEvent;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
 import amagi82.modularcharactersheetcreator.ui.xtras.widgets.NoSwipeViewPager;
 import icepick.State;
@@ -56,35 +56,21 @@ public class EditActivity extends BaseActivity {
         return character;
     }
 
-    @Subscribe public void itemClicked(ItemClickedEvent event) {
-        int pos = event.position;
-        Splat splat;
-        switch (viewPager.getCurrentItem()) {
-            case 0:
-                character = character.toBuilder().gameTitle(new Game().get(pos).getGameTitle()).build();
-                binding.getEditViewModel().splashUrl.set(character.getGameSystem().getSplashUrl());
-                break;
-            case 1:
-                splat = getSplat(true, pos);
-                if (!splat.isEndPoint()) return;
-                character = character.toBuilder().left(splat).build();
-                break;
-            case 2:
-                splat = getSplat(false, pos);
-                if (!splat.isEndPoint()) return;
-                character = character.toBuilder().right(splat).build();
-                break;
-        }
-        binding.appbar.setExpanded(true);
+    @Subscribe public void itemClicked(GameSelectedEvent event) {
+        character = character.toBuilder().gameTitle(event.gameTitle).build();
+        binding.getEditViewModel().splashUrl.set(character.getGameSystem().getSplashUrl());
+        nextPage();
+    }
+
+    @Subscribe public void itemClicked(AxisSelectedEvent event) {
+        if (viewPager.getCurrentItem() == 1) character = character.toBuilder().left(event.splat).build();
+        else character = character.toBuilder().right(event.splat).build();
+        nextPage();
+    }
+
+    private void nextPage() {
         Otto.BUS.getBus().post(new CharacterUpdatedEvent());
-        next();
-    }
-
-    private Splat getSplat(boolean left, int position){
-        return ((EditViewPagerAdapter) viewPager.getAdapter()).getFragment(left).getSplat(position);
-    }
-
-    private void next() {
+        binding.appbar.setExpanded(true);
         viewPager.nextPage();
         backstack++;
     }
@@ -108,7 +94,7 @@ public class EditActivity extends BaseActivity {
             character = character.removeProgress(viewPager.getCurrentItem());
             viewPager.previousPage();
             backstack--;
-            if(viewPager.getCurrentItem() == 0) binding.getEditViewModel().splashUrl.set(0);
+            if (viewPager.getCurrentItem() == 0) binding.getEditViewModel().splashUrl.set(0);
         } else super.onBackPressed();
     }
 }

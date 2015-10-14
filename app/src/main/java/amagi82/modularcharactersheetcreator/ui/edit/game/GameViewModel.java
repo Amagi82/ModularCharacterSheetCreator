@@ -7,19 +7,15 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.games.GameSystem;
-import amagi82.modularcharactersheetcreator.ui.xtras.databinding.Binding;
-import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
+import me.tatarka.bindingcollectionadapter.ItemView;
 
 public class GameViewModel {
     public final ObservableArrayList<GameItemViewModel> list = new ObservableArrayList<>();
+    public final ItemView itemView = ItemView.of(BR.gameItemViewModel, R.layout.tile_edit_game);
 
     public GameViewModel(List<GameSystem> list) {
         for(GameSystem system : list){
-            this.list.add(new GameItemViewModel(system.getGameUrl()));
+            this.list.add(new GameItemViewModel(system.getGameUrl(), system.getGameTitle()));
         }
-    }
-
-    public Binding<GameItemViewModel> itemViewBinder(){
-        return new ItemBinder<>(BR.gameItemViewModel, R.layout.tile_edit_game);
     }
 }

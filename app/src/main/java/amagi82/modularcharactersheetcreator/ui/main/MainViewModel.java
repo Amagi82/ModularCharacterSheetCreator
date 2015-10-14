@@ -8,11 +8,11 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.ui.xtras.databinding.Binding;
-import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
+import me.tatarka.bindingcollectionadapter.ItemView;
 
 public class MainViewModel {
-    private ObservableArrayList<MainItemViewModel> list = new ObservableArrayList<>();
+    public final ObservableArrayList<MainItemViewModel> list = new ObservableArrayList<>();
+    public final ItemView itemView = ItemView.of(BR.mainItemViewModel, R.layout.item_main);
 
     public MainViewModel(List<GameCharacter> list) {
         addAll(list);
@@ -48,13 +48,5 @@ public class MainViewModel {
             if(list.get(i).getEntityId().equals(entityId)) return i;
         }
         return -1;
-    }
-
-    public ObservableArrayList<MainItemViewModel> getList() {
-        return list;
-    }
-
-    public Binding<MainItemViewModel> itemViewBinder(){
-        return new ItemBinder<>(BR.mainItemViewModel, R.layout.item_main);
     }
 }

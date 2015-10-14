@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.StringDef;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
 
@@ -54,12 +53,6 @@ public class MainActivity extends BaseActivity {
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setMainViewModel(viewModel);
         binding.toolbar.setLogo(R.drawable.title_onyx);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        binding.recyclerView.setOnClickListener(new View.OnClickListener() {
-//            @Override public void onClick(View v) {
-//
-//            }
-//        });
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {

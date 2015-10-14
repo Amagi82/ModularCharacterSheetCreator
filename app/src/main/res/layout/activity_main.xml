@@ -6,6 +6,7 @@
     <data>
         <variable name="mainViewModel"
                   type="amagi82.modularcharactersheetcreator.ui.main.MainViewModel"/>
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -25,7 +26,8 @@
             android:id="@+id/recyclerView"
             style="@style/RecyclerView"
             app:items="@{mainViewModel.list}"
-            app:itemViewBinder="@{mainViewModel.itemViewBinder}"
+            app:itemView="@{mainViewModel.itemView}"
+            app:layoutManager="@{LayoutManagers.linear()}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         <android.support.design.widget.FloatingActionButton
@@ -35,5 +37,4 @@
             android:src="@drawable/ic_person_add_24dp"/>
 
     </android.support.design.widget.CoordinatorLayout>
-
 </layout>

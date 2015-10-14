@@ -5,6 +5,7 @@
     <data>
         <variable name="axisViewModel"
                   type="amagi82.modularcharactersheetcreator.ui.edit.axis.AxisViewModel"/>
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
     </data>
 
     <FrameLayout
@@ -19,6 +20,7 @@
             style="@style/RecyclerView.Card"
             android:paddingTop="@dimen/default_large_margin"
             app:items="@{axisViewModel.list}"
-            app:itemViewBinder="@{axisViewModel.itemViewBinder}"/>
+            app:itemView="@{axisViewModel.itemView}"
+            app:layoutManager="@{LayoutManagers.grid(@integer/character_axis_span_count)}"/>
     </FrameLayout>
 </layout>

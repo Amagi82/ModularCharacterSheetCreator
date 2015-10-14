@@ -5,6 +5,7 @@
     <data>
         <variable name="gameViewModel"
                   type="amagi82.modularcharactersheetcreator.ui.edit.game.GameViewModel"/>
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
     </data>
 
     <FrameLayout
@@ -19,6 +20,7 @@
             style="@style/RecyclerView.Card"
             android:paddingTop="@dimen/default_large_margin"
             app:items="@{gameViewModel.list}"
-            app:itemViewBinder="@{gameViewModel.itemViewBinder}"/>
+            app:itemView="@{gameViewModel.itemView}"
+            app:layoutManager="@{LayoutManagers.grid(@integer/character_game_span_count)}"/>
     </FrameLayout>
 </layout>

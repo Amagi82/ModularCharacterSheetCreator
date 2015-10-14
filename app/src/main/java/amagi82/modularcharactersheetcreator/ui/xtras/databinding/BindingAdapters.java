@@ -6,16 +6,12 @@ import android.net.Uri;
 import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.Collection;
-
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.ui.base.BaseRecyclerViewAdapter;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.CircleIcon;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -47,11 +43,6 @@ public class BindingAdapters {
             if (imageUri == null) icon.setImageBitmap(new CircleIcon(context).createIcon(character.name()));
             else Glide.with(context).load(imageUri).centerCrop().into(icon);
         }
-    }
-
-    @BindingAdapter({"bind:items", "bind:itemViewBinder"})
-    public static <T> void setAdapter(RecyclerView recyclerView, Collection<T> items, Binding<T> itemViewMapper) {
-        recyclerView.setAdapter(new BaseRecyclerViewAdapter<>(itemViewMapper, items));
     }
 
     @BindingAdapter("android:textColor")

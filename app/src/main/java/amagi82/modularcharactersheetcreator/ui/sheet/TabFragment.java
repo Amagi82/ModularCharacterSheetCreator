@@ -23,15 +23,15 @@ public class TabFragment extends BaseFragment {
 
 //        GameCharacter character = ((MainActivity) getActivity()).getCurrentCharacter();
 //        Log.i(null, "Current character is "+character.name());
-//        Sheet sheet = character.sheets().get(getArguments().getInt("position"));
+//        Sheet sheet = character.sheets().get(getArguments().getInt("url"));
 //        int spanCount = sheet.numColumns();
 //        modules = sheet.modules();
 //
 //        adapter = new SheetAdapter(getResources(), modules);
 //        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), spanCount);
 //        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-//            @Override public int getSpanSize(int position) {
-//                return modules.get(position).getSpanCount();
+//            @Override public int getSpanSize(int url) {
+//                return modules.get(url).getSpanCount();
 //            }
 //        });
 //        recyclerView.setLayoutManager(layoutManager);

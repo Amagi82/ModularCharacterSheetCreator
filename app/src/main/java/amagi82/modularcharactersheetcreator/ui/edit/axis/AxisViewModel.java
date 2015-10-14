@@ -14,13 +14,13 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 import amagi82.modularcharactersheetcreator.models.games.GameSystem;
-import amagi82.modularcharactersheetcreator.ui.xtras.databinding.Binding;
-import amagi82.modularcharactersheetcreator.ui.xtras.databinding.ItemBinder;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;
+import me.tatarka.bindingcollectionadapter.ItemView;
 
 public class AxisViewModel {
     public final ObservableArrayList<AxisItemViewModel> list = new ObservableArrayList<>();
+    public final ItemView itemView = ItemView.of(BR.axisItemViewModel, R.layout.tile_edit_axis);
     public final ObservableField<String> title = new ObservableField<>();
     private final int imageSize;
     private final Resources res;
@@ -38,7 +38,7 @@ public class AxisViewModel {
         if (system == null) return;
         if (isLeft) updateItemModels(system.getListLeft(splat), system.getLeftTitle());
         else if (character.left() != null)
-            updateItemModels(system.getListRight(splat == null? character.left() : splat), system.getRightTitle(character.left()));
+            updateItemModels(system.getListRight(splat == null ? character.left() : splat), system.getRightTitle(character.left()));
     }
 
     private void updateItemModels(List<Splat> list, @StringRes int title) {
@@ -58,9 +58,5 @@ public class AxisViewModel {
         int spanCount = res.getInteger(R.integer.character_axis_span_count);
         int widthAvail = screenWidth - margins;
         return (widthAvail - margins) / spanCount;
-    }
-
-    public Binding<AxisItemViewModel> itemViewBinder() {
-        return new ItemBinder<>(BR.axisItemViewModel, R.layout.tile_edit_axis);
     }
 }

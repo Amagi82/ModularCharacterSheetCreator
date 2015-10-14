@@ -24,7 +24,7 @@ public class EditViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override public Object instantiateItem(ViewGroup container, int position) {
         Fragment createdFragment = (Fragment) super.instantiateItem(container, position);
-        // save the appropriate reference depending on position
+        // save the appropriate reference depending on url
         if(position == 1) leftAxisFragment = (AxisFragment) createdFragment;
         if(position == 2) rightAxisFragment = (AxisFragment) createdFragment;
         return createdFragment;

@@ -27,7 +27,7 @@ public class NameViewModel {
         boolean reset = false;
         GameSystem game = character.getGameSystem();
         if(game == null) reset = true;
-        gameItem.set(new GameItemViewModel(reset ? R.string.url_default : game.getGameUrl()));
+        gameItem.set(new GameItemViewModel(reset ? R.string.url_default : game.getGameUrl(), 0));
 
         Splat left = character.left();
         if(left == null) reset = true;
