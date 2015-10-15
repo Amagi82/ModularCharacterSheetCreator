@@ -21,7 +21,7 @@ public class NameFragment extends BaseFragment {
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentEditNameBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_name, container, false);
 
-        nameViewModel = new NameViewModel(getResources(), getCurrentCharacter());
+        nameViewModel = new NameViewModel(getCurrentCharacter());
         binding.setNameViewModel(nameViewModel);
 
         return binding.getRoot();

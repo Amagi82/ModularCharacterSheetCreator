@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            app:imageUrl="@{axisItemViewModel.url}"/>
+            app:splatIconUrl="@{axisItemViewModel.getUrl()}"/>
 
         <TextView
             style="@style/TextAppearance.AppCompat.Subhead"

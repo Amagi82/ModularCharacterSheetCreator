@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:bind="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="nameViewModel"
                   type="amagi82.modularcharactersheetcreator.ui.edit.name.NameViewModel"/>
@@ -23,7 +23,7 @@
                      android:layout_width="match_parent"
                      android:layout_height="@dimen/card_height_edit_name_screen"
                      android:layout_margin="@dimen/card_margin"
-                     bind:gameItemViewModel="@{nameViewModel.gameItem}"/>
+                     app:gameItemViewModel="@{nameViewModel.gameItem}"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,15 +31,15 @@
                 android:orientation="horizontal">
 
                 <include layout="@layout/card_edit_name_axis"
-                         bind:axisItemViewModel="@{nameViewModel.leftItem}"/>
+                         app:axisItemViewModel="@{nameViewModel.leftItem}"/>
 
                 <include layout="@layout/card_edit_name_axis"
-                         bind:axisItemViewModel="@{nameViewModel.rightItem}"/>
+                         app:axisItemViewModel="@{nameViewModel.rightItem}"/>
 
             </LinearLayout>
 
             <include layout="@layout/card_edit_name"
-                     bind:nameItemViewModel="@{nameViewModel.nameItem}"/>
+                     app:nameItemViewModel="@{nameViewModel.nameItem}"/>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

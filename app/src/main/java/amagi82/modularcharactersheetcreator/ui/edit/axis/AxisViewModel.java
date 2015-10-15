@@ -1,9 +1,7 @@
 package amagi82.modularcharactersheetcreator.ui.edit.axis;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.databinding.ObservableArrayList;
-import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
@@ -14,22 +12,16 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 import amagi82.modularcharactersheetcreator.models.games.GameSystem;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.ScreenSize;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;
 import me.tatarka.bindingcollectionadapter.ItemView;
 
 public class AxisViewModel {
     public final ObservableArrayList<AxisItemViewModel> list = new ObservableArrayList<>();
     public final ItemView itemView = ItemView.of(BR.axisItemViewModel, R.layout.tile_edit_axis);
-    public final ObservableField<String> title = new ObservableField<>();
-    private final int imageSize;
-    private final Resources res;
+    public final ObservableInt title = new ObservableInt();
     private final boolean isLeft;
     private GameCharacter currentCharacter;
 
-    public AxisViewModel(Context context, GameCharacter character, boolean isLeft) {
-        res = context.getResources();
-        imageSize = getImageSize(new ScreenSize(context).getWidth());
+    public AxisViewModel(GameCharacter character, boolean isLeft) {
         this.isLeft = isLeft;
         currentCharacter = character;
         update(character, null);
@@ -69,19 +61,8 @@ public class AxisViewModel {
 
     private void addItemModels(List<Splat> list, @StringRes int title) {
         for (Splat splat : list) {
-            this.list.add(new AxisItemViewModel(new SplatIcon(getString(splat.url()), imageSize).getUrl(), splat));
+            this.list.add(new AxisItemViewModel(splat));
         }
-        this.title.set(String.format(getString(R.string.choose), getString(title)));
-    }
-
-    private String getString(@StringRes int title) {
-        return res.getString(title);
-    }
-
-    private int getImageSize(int screenWidth) {
-        int margins = res.getDimensionPixelSize(R.dimen.card_margin) * 2;
-        int spanCount = res.getInteger(R.integer.character_axis_span_count);
-        int widthAvail = screenWidth - margins;
-        return (widthAvail - margins) / spanCount;
+        this.title.set(title);
     }
 }

@@ -21,7 +21,7 @@ public class AxisFragment extends BaseFragment {
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentEditAxisBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_axis, container, false);
 
-        axisViewModel = new AxisViewModel(getActivity(), getCurrentCharacter(), getArguments().getBoolean(EditActivity.LEFT));
+        axisViewModel = new AxisViewModel(getCurrentCharacter(), getArguments().getBoolean(EditActivity.LEFT));
         binding.setAxisViewModel(axisViewModel);
 
         return binding.getRoot();

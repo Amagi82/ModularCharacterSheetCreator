@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:bind="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="nameItemViewModel"
                   type="amagi82.modularcharactersheetcreator.ui.edit.name.NameItemViewModel"/>
@@ -21,7 +21,7 @@
                 android:layout_marginLeft="@dimen/default_keyline_padded_layout"
                 android:layout_marginRight="@dimen/default_keyline_padded_layout"
                 android:layout_marginTop="@dimen/default_margin"
-                bind:errorEnabled="false">
+                app:errorEnabled="false">
 
                 <EditText
                     android:id="@+id/etName"
@@ -44,7 +44,7 @@
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginRight="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
-                bind:imageUri="@{nameItemViewModel.imageUri}"/>
+                app:imageUri="@{nameItemViewModel.imageUri}"/>
 
             <ImageView
                 android:id="@+id/actionPhoto"
