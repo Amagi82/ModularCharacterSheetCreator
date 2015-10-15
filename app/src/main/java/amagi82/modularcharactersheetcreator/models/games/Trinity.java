@@ -1,6 +1,5 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -19,10 +18,11 @@ public class Trinity extends GameSystem {
         this.gameUrl = R.string.url_game_trinity;
         this.splashUrl = R.string.url_splash_trinity;
         this.gameColor = R.color.trinity;
+        this.isRightListFinal = false;
     }
 
-    @Override public int getRightTitle(Splat leftSplat) {
-        if(leftSplat.title() == R.string.aeon) return R.string.psi_order;
+    @Override public int getRightTitle(@Nullable Splat leftSplat) {
+        if (leftSplat != null && leftSplat.title() == R.string.aeon) return R.string.psi_order;
         return R.string.allegiance;
     }
 
@@ -34,9 +34,10 @@ public class Trinity extends GameSystem {
         return list;
     }
 
-    @Override public List<Splat> getListRight(@NonNull Splat splat) {
+    @Override public List<Splat> getListRight(@Nullable Splat splat) {
         List<Splat> list = new ArrayList<>(10);
-        switch(splat.title()){
+        if (splat == null) return list;
+        switch (splat.title()) {
             case R.string.adventure:
                 list.add(Splat.create(R.string.the_aeon_society_for_gentlemen));
                 list.add(Splat.create(R.string.the_air_circus));

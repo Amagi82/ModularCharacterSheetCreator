@@ -56,13 +56,13 @@ public class EditActivity extends BaseActivity {
         return character;
     }
 
-    @Subscribe public void itemClicked(GameSelectedEvent event) {
+    @Subscribe public void gameSelected(GameSelectedEvent event) {
         character = character.toBuilder().gameTitle(event.gameTitle).build();
         binding.getEditViewModel().splashUrl.set(character.getGameSystem().getSplashUrl());
         nextPage();
     }
 
-    @Subscribe public void itemClicked(AxisSelectedEvent event) {
+    @Subscribe public void axisSelected(AxisSelectedEvent event) {
         if (viewPager.getCurrentItem() == 1) character = character.toBuilder().left(event.splat).build();
         else character = character.toBuilder().right(event.splat).build();
         nextPage();
@@ -94,7 +94,10 @@ public class EditActivity extends BaseActivity {
             character = character.removeProgress(viewPager.getCurrentItem());
             viewPager.previousPage();
             backstack--;
-            if (viewPager.getCurrentItem() == 0) binding.getEditViewModel().splashUrl.set(0);
+            if (viewPager.getCurrentItem() == 0) {
+                binding.getEditViewModel().splashUrl.set(0);
+                Otto.BUS.getBus().post(new CharacterUpdatedEvent());
+            }
         } else super.onBackPressed();
     }
 }

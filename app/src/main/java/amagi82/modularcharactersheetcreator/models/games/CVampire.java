@@ -19,6 +19,7 @@ public class CVampire extends GameSystem {
         this.splashUrl = R.string.url_splash_cwod_vampire;
         this.gameColor = R.color.cwod_vampire;
         this.checkLeft = true;
+        this.isLeftListFinal = false;
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {

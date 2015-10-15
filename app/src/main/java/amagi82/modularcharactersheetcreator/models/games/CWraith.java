@@ -18,6 +18,7 @@ public class CWraith extends GameSystem {
         this.gameUrl = R.string.url_game_cwod_wraith;
         this.splashUrl = R.string.url_splash_cwod_wraith;
         this.gameColor = R.color.cwod_wraith;
+        this.isRightListFinal = false;
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {

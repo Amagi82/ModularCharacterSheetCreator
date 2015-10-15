@@ -25,24 +25,50 @@ public class AxisViewModel {
     private final int imageSize;
     private final Resources res;
     private final boolean isLeft;
+    private GameCharacter currentCharacter;
+
 
     public AxisViewModel(Context context, GameCharacter character, boolean isLeft) {
         res = context.getResources();
         imageSize = getImageSize(new ScreenSize(context).getWidth());
         this.isLeft = isLeft;
-        updateList(character, null);
+        currentCharacter = character;
+        update(character, null);
     }
 
-    public void updateList(GameCharacter character, @Nullable Splat splat) {
-        GameSystem system = character.getGameSystem();
-        if (system == null) return;
-        if (isLeft) updateItemModels(system.getListLeft(splat), system.getLeftTitle());
-        else if (character.left() != null)
-            updateItemModels(system.getListRight(splat == null ? character.left() : splat), system.getRightTitle(character.left()));
+    public void update(GameCharacter character, @Nullable Splat splat) {
+        if (character == null || character.getGameSystem() == null) {
+            list.clear();
+            return;
+        }
+        GameSystem updatedSystem = character.getGameSystem();
+        if (currentCharacter.getGameSystem() == null || currentCharacter.getGameSystem().getClass() != updatedSystem.getClass()) list.clear();
+
+        if (isLeft) checkLeft(updatedSystem, splat);
+        else checkRight(updatedSystem, splat == null ? character.left() : splat);
+
+        currentCharacter = character;
     }
 
-    private void updateItemModels(List<Splat> list, @StringRes int title) {
-        this.list.clear();
+    private void checkLeft(GameSystem system, Splat splat) {
+        if (list.size() == 0) addItemModels(system.getListLeft(splat), system.getLeftTitle());
+        else if (!system.isLeftListFinal() && !currentCharacter.getGameSystem().getListLeft(splat).equals(system.getListLeft(splat))) {
+            list.clear();
+            addItemModels(system.getListLeft(splat), system.getLeftTitle());
+        }
+    }
+
+    private void checkRight(GameSystem system, Splat splat) {
+        if (list.size() == 0) {
+            if (system.isRightListFinal() || splat != null)
+                addItemModels(system.getListRight(splat), system.getRightTitle(splat));
+        } else if (!system.isRightListFinal() && !currentCharacter.getGameSystem().getListRight(splat).equals(system.getListRight(splat))) {
+            list.clear();
+            addItemModels(system.getListRight(splat), system.getRightTitle(splat));
+        }
+    }
+
+    private void addItemModels(List<Splat> list, @StringRes int title) {
         for (Splat splat : list) {
             this.list.add(new AxisItemViewModel(new SplatIcon(getString(splat.url()), imageSize).getUrl(), splat));
         }

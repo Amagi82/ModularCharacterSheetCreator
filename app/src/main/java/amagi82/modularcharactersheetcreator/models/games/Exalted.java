@@ -1,6 +1,5 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -19,10 +18,12 @@ public class Exalted extends GameSystem {
         this.gameUrl = R.string.url_game_exalted;
         this.splashUrl = R.string.url_splash_exalted;
         this.gameColor = R.color.exalted;
+        this.isRightListFinal = false;
     }
 
-    @Override public int getRightTitle(Splat leftSplat) {
-        return leftSplat.title() == R.string.terrestrial_exalted ? R.string.aspect : R.string.caste;
+    @Override public int getRightTitle(@Nullable Splat leftSplat) {
+        if (leftSplat == null || leftSplat.title() != R.string.terrestrial_exalted) return rightTitle;
+        else return R.string.aspect;
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {
@@ -37,8 +38,9 @@ public class Exalted extends GameSystem {
         return list;
     }
 
-    @Override public List<Splat> getListRight(@NonNull Splat splat) {
+    @Override public List<Splat> getListRight(@Nullable Splat splat) {
         List<Splat> list = new ArrayList<>(5);
+        if (splat == null) return list;
         switch (splat.title()) {
             case R.string.solar_exalted:
                 list.add(Splat.create(R.string.dawn));

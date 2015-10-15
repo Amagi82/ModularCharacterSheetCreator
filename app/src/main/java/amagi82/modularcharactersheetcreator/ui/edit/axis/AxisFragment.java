@@ -31,11 +31,11 @@ public class AxisFragment extends BaseFragment {
         return ((EditActivity) getActivity()).getGameCharacter();
     }
 
-    @Subscribe public void updateList(AxisUpdateEvent event) {
-        axisViewModel.updateList(getCurrentCharacter(), event.splat);
+    @Subscribe public void axisUpdated(AxisUpdateEvent event) {
+        axisViewModel.update(getCurrentCharacter(), event.splat);
     }
 
     @Subscribe public void characterUpdated(CharacterUpdatedEvent event) {
-        axisViewModel.updateList(getCurrentCharacter(), null);
+        axisViewModel.update(getCurrentCharacter(), null);
     }
 }

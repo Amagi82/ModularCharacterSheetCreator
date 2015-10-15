@@ -1,6 +1,5 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -19,16 +18,19 @@ public class CMage extends GameSystem {
         this.gameUrl = R.string.url_game_cwod_mage;
         this.splashUrl = R.string.url_splash_cwod_mage;
         this.gameColor = R.color.cwod_mage;
+        this.isRightListFinal = false;
     }
 
-    @Override public int getRightTitle(Splat leftSplat) {
-        switch (leftSplat.title()){
-            case R.string.traditions:
-                return R.string.tradition;
-            case R.string.technocracy:
-                return R.string.convention;
-            case R.string.crafts:
-                return R.string.craft;
+    @Override public int getRightTitle(@Nullable Splat leftSplat) {
+        if(leftSplat != null) {
+            switch (leftSplat.title()) {
+                case R.string.traditions:
+                    return R.string.tradition;
+                case R.string.technocracy:
+                    return R.string.convention;
+                case R.string.crafts:
+                    return R.string.craft;
+            }
         }
         return R.string.faction;
     }
@@ -41,8 +43,9 @@ public class CMage extends GameSystem {
         return list;
     }
 
-    @Override public List<Splat> getListRight(@NonNull Splat splat) {
+    @Override public List<Splat> getListRight(@Nullable Splat splat) {
         List<Splat> list = new ArrayList<>(10);
+        if(splat == null) return list;
         switch (splat.title()){
             case R.string.traditions:
                 list.add(Splat.create(R.string.akashayana, R.string.url_cwod_mage_tradition_akashayana));
