@@ -61,7 +61,7 @@ public class AxisViewModel {
         if (list.size() == 0) {
             if (system.isRightListFinal() || splat != null)
                 addItemModels(system.getListRight(splat), system.getRightTitle(splat));
-        } else if (!system.isRightListFinal() && !system.getListRight(currentCharacter.left()).equals(system.getListRight(splat))) {
+        } else if (!system.isRightListFinal() && list.get(0).getTitle() != system.getListRight(splat).get(0).title()) {
             list.clear();
             addItemModels(system.getListRight(splat), system.getRightTitle(splat));
         }
