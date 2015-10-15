@@ -27,7 +27,6 @@ public class AxisViewModel {
     private final boolean isLeft;
     private GameCharacter currentCharacter;
 
-
     public AxisViewModel(Context context, GameCharacter character, boolean isLeft) {
         res = context.getResources();
         imageSize = getImageSize(new ScreenSize(context).getWidth());
@@ -52,7 +51,7 @@ public class AxisViewModel {
 
     private void checkLeft(GameSystem system, Splat splat) {
         if (list.size() == 0) addItemModels(system.getListLeft(splat), system.getLeftTitle());
-        else if (!system.isLeftListFinal() && !currentCharacter.getGameSystem().getListLeft(splat).equals(system.getListLeft(splat))) {
+        else if (!system.isLeftListFinal() && list.get(0).getTitle() != system.getListLeft(splat).get(0).title()) {
             list.clear();
             addItemModels(system.getListLeft(splat), system.getLeftTitle());
         }
@@ -62,7 +61,7 @@ public class AxisViewModel {
         if (list.size() == 0) {
             if (system.isRightListFinal() || splat != null)
                 addItemModels(system.getListRight(splat), system.getRightTitle(splat));
-        } else if (!system.isRightListFinal() && !currentCharacter.getGameSystem().getListRight(splat).equals(system.getListRight(splat))) {
+        } else if (!system.isRightListFinal() && !system.getListRight(currentCharacter.left()).equals(system.getListRight(splat))) {
             list.clear();
             addItemModels(system.getListRight(splat), system.getRightTitle(splat));
         }
