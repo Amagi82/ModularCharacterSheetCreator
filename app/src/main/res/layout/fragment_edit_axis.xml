@@ -14,7 +14,7 @@
         <TextView
             style="@style/TextPrompt"
             app:format="@{@string/choose}"
-            app:textId="@{axisViewModel.title}"/>
+            app:argId="@{axisViewModel.title}"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"

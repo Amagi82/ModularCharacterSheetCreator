@@ -62,10 +62,10 @@ public class BindingAdapters {
         }
     }
 
-    @BindingAdapter({"format", "textId"})
-    public static void setFormattedText(TextView textView, String format, int resId){
-        if(resId == 0) return;
-        textView.setText(String.format(format, textView.getResources().getString(resId)));
+    @BindingAdapter({"format", "argId"})
+    public static void setFormattedText(TextView textView, String format, int argId){
+        if(argId == 0) return;
+        textView.setText(String.format(format, textView.getResources().getString(argId)));
     }
 
     @BindingAdapter("android:textColor")
