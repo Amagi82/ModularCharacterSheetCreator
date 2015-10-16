@@ -62,6 +62,12 @@ public class BindingAdapters {
         }
     }
 
+    @BindingAdapter({"format", "textId"})
+    public static void setFormattedText(TextView textView, String format, int resId){
+        if(resId == 0) return;
+        textView.setText(String.format(format, textView.getResources().getString(resId)));
+    }
+
     @BindingAdapter("android:textColor")
     public static void setTextColor(TextView textView, @ColorRes int colorRes) {
         if (colorRes != 0) textView.setTextColor(ContextCompat.getColor(textView.getContext(), colorRes));

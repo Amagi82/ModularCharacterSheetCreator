@@ -13,7 +13,8 @@
 
         <TextView
             style="@style/TextPrompt"
-            android:text="@{@string/choose(axisViewModel.title)}"/>
+            app:format="@{@string/choose}"
+            app:textId="@{axisViewModel.title}"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
