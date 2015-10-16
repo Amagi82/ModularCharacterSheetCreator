@@ -53,6 +53,8 @@ public class AxisViewModel {
         if (list.size() == 0) {
             if (system.isRightListFinal() || splat != null)
                 addItemModels(system.getListRight(splat), system.getRightTitle(splat));
+        } else if(system.getListRight(splat).size() == 0){
+            list.clear();
         } else if (!system.isRightListFinal() && list.get(0).getTitle() != system.getListRight(splat).get(0).title()) {
             list.clear();
             addItemModels(system.getListRight(splat), system.getRightTitle(splat));
