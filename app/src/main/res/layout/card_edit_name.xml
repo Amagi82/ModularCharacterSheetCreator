@@ -3,8 +3,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="nameItemViewModel"
-                  type="amagi82.modularcharactersheetcreator.ui.edit.name.NameItemViewModel"/>
+        <variable name="nameViewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.edit.name.NameViewModel"/>
     </data>
 
     <android.support.v7.widget.CardView
@@ -24,7 +24,6 @@
                 app:errorEnabled="false">
 
                 <EditText
-                    android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -33,18 +32,19 @@
                     android:inputType="textPersonName"
                     android:minWidth="@dimen/toolbar_edittext_minwidth"
                     android:singleLine="true"
-                    android:text="@{nameItemViewModel.name}"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+                    android:text="@{nameViewModel.name}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    app:textWatcher="@{nameViewModel.textWatcher}"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="96dp"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginRight="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
-                app:imageUri="@{nameItemViewModel.imageUri}"/>
+                app:imageUri="@{nameViewModel.imageUri}"/>
 
             <ImageView
                 android:id="@+id/actionPhoto"

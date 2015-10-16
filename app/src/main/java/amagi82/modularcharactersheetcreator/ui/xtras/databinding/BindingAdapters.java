@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -66,6 +68,11 @@ public class BindingAdapters {
     public static void setFormattedText(TextView textView, String format, int argId){
         if(argId == 0) return;
         textView.setText(String.format(format, textView.getResources().getString(argId)));
+    }
+
+    @BindingAdapter("textWatcher")
+    public static void addTextWatcher(EditText editText, TextWatcher textWatcher){
+        if(textWatcher != null) editText.addTextChangedListener(textWatcher);
     }
 
     @BindingAdapter("android:textColor")

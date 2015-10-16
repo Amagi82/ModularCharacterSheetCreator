@@ -36,7 +36,7 @@
             </LinearLayout>
 
             <include layout="@layout/card_edit_name"
-                     app:nameItemViewModel="@{nameViewModel.nameItem}"/>
+                     app:nameViewModel="@{nameViewModel}"/>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

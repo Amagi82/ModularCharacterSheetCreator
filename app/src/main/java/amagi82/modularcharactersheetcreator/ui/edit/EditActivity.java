@@ -5,6 +5,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,6 +17,7 @@ import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui.base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.edit.axis.AxisSelectedEvent;
 import amagi82.modularcharactersheetcreator.ui.edit.game.GameSelectedEvent;
+import amagi82.modularcharactersheetcreator.ui.edit.name.NameChangedEvent;
 import amagi82.modularcharactersheetcreator.ui.edit.name.ResetItemEvent;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
 import amagi82.modularcharactersheetcreator.ui.xtras.widgets.NoSwipeViewPager;
@@ -27,6 +29,7 @@ public class EditActivity extends BaseActivity {
     public static final String LEFT = "Left";
     private ActivityEditBinding binding;
     private NoSwipeViewPager viewPager;
+    private boolean keyboardVisible = false;
     @State GameCharacter character;
     @State @GameCharacter.Progress int currentPage;
 
@@ -51,6 +54,7 @@ public class EditActivity extends BaseActivity {
         viewPager = binding.viewpager;
         viewPager.setAdapter(new EditViewPagerAdapter(getSupportFragmentManager()));
         viewPager.setCurrentItem(character.getProgress());
+
     }
 
     public GameCharacter getGameCharacter() {
@@ -71,6 +75,15 @@ public class EditActivity extends BaseActivity {
         if (viewPager.getCurrentItem() == 1) character = character.toBuilder().left(event.splat).build();
         else character = character.toBuilder().right(event.splat).build();
         nextPage();
+    }
+
+    @Subscribe public void nameChanged(NameChangedEvent event){
+        Log.i("EditActivity", "nameChanged to "+event.name);
+
+//        if(event.name.length() > 1) binding.fab.show();
+//        else binding.fab.hide();
+//
+//        character = character.toBuilder().name(event.name).build();
     }
 
     private void nextPage() {
