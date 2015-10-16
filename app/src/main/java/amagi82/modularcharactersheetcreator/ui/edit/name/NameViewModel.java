@@ -23,10 +23,11 @@ public class NameViewModel {
         Splat left = character.left();
         Splat right = character.right();
 
-        if(system != null) {
+        if(right != null) {
             gameItem.set(new GameItemViewModel(system.getGameUrl(), 0));
-            if(left != null) leftItem.set(new AxisItemViewModel(left, system.getLeftTitle()));
-            if(right != null) rightItem.set(new AxisItemViewModel(right, system.getRightTitle(left)));
+            if(system.checkLeft()) left = system.updateLeft(left, right);
+            leftItem.set(new AxisItemViewModel(left, system.getLeftTitle()));
+            rightItem.set(new AxisItemViewModel(right, system.getRightTitle(left)));
         }
         //noinspection ConstantConditions
         nameItem.set(new NameItemViewModel(character.name(), character.image() == null ? null : character.image().uri()));
