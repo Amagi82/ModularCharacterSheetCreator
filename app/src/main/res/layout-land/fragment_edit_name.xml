@@ -25,13 +25,13 @@
                 android:orientation="horizontal">
 
                 <include layout="@layout/card_edit_name_game"
-                         app:gameItemViewModel="@{nameViewModel.gameItem}"/>
+                         app:nameGameItemViewModel="@{nameViewModel.gameItem}"/>
 
                 <include layout="@layout/card_edit_name_axis"
-                         app:axisItemViewModel="@{nameViewModel.leftItem}"/>
+                         app:nameAxisItemViewModel="@{nameViewModel.leftItem}"/>
 
                 <include layout="@layout/card_edit_name_axis"
-                         app:axisItemViewModel="@{nameViewModel.rightItem}"/>
+                         app:nameAxisItemViewModel="@{nameViewModel.rightItem}"/>
 
             </LinearLayout>
 

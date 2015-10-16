@@ -16,6 +16,7 @@ import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui.base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.edit.axis.AxisSelectedEvent;
 import amagi82.modularcharactersheetcreator.ui.edit.game.GameSelectedEvent;
+import amagi82.modularcharactersheetcreator.ui.edit.name.ResetItemEvent;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
 import amagi82.modularcharactersheetcreator.ui.xtras.widgets.NoSwipeViewPager;
 import icepick.State;
@@ -27,7 +28,7 @@ public class EditActivity extends BaseActivity {
     private ActivityEditBinding binding;
     private NoSwipeViewPager viewPager;
     @State GameCharacter character;
-    @State int backstack;
+    @State @GameCharacter.Progress int currentPage;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +57,10 @@ public class EditActivity extends BaseActivity {
         return character;
     }
 
+    @Subscribe public void resetItem(ResetItemEvent event){
+        goBack(event.toPage);
+    }
+
     @Subscribe public void gameSelected(GameSelectedEvent event) {
         character = character.toBuilder().gameTitle(event.gameTitle).build();
         binding.getEditViewModel().splashUrl.set(character.getGameSystem().getSplashUrl());
@@ -72,7 +77,7 @@ public class EditActivity extends BaseActivity {
         Otto.BUS.getBus().post(new CharacterUpdatedEvent());
         binding.appbar.setExpanded(true);
         viewPager.nextPage();
-        backstack++;
+        currentPage++;
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,12 +95,17 @@ public class EditActivity extends BaseActivity {
     }
 
     @Override public void onBackPressed() {
-        if (backstack > 0) {
-            character = character.removeProgress(viewPager.getCurrentItem());
-            Otto.BUS.getBus().post(new CharacterUpdatedEvent());
-            viewPager.previousPage();
-            backstack--;
-            if (viewPager.getCurrentItem() == 0) binding.getEditViewModel().splashUrl.set(0);
-        } else super.onBackPressed();
+        if (currentPage > 0) goBack(currentPage - 1);
+        else super.onBackPressed();
+    }
+
+    private void goBack(int toPage){
+        currentPage = toPage;
+        character = character.removeProgress(currentPage);
+        Otto.BUS.getBus().post(new CharacterUpdatedEvent());
+        binding.appbar.setExpanded(true);
+        viewPager.setCurrentItem(currentPage);
+
+        if (currentPage == GameCharacter.START) binding.getEditViewModel().splashUrl.set(0);
     }
 }

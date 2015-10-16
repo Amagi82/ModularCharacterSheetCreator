@@ -4,8 +4,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="gameItemViewModel"
-                  type="amagi82.modularcharactersheetcreator.ui.edit.game.GameItemViewModel"/>
+        <variable name="nameGameItemViewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.edit.name.NameGameItemViewModel"/>
     </data>
 
     <android.support.v7.widget.CardView
@@ -30,13 +30,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/default_small_margin"
                 android:adjustViewBounds="true"
-                app:imageUrl="@{gameItemViewModel.url}"
+                app:imageUrl="@{nameGameItemViewModel.url}"
                 tools:background="@color/primary"
                 tools:layout_height="96dp"/>
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/actionBack"
+            android:onClick="@{nameGameItemViewModel.onResetClicked}"
             style="@style/ActionButton.Undo"/>
 
     </android.support.v7.widget.CardView>

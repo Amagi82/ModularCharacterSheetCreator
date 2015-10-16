@@ -5,13 +5,11 @@ import android.databinding.ObservableField;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 import amagi82.modularcharactersheetcreator.models.games.GameSystem;
-import amagi82.modularcharactersheetcreator.ui.edit.axis.AxisItemViewModel;
-import amagi82.modularcharactersheetcreator.ui.edit.game.GameItemViewModel;
 
 public class NameViewModel {
-    public final ObservableField<GameItemViewModel> gameItem = new ObservableField<>();
-    public final ObservableField<AxisItemViewModel> leftItem = new ObservableField<>();
-    public final ObservableField<AxisItemViewModel> rightItem = new ObservableField<>();
+    public final ObservableField<NameGameItemViewModel> gameItem = new ObservableField<>();
+    public final ObservableField<NameAxisItemViewModel> leftItem = new ObservableField<>();
+    public final ObservableField<NameAxisItemViewModel> rightItem = new ObservableField<>();
     public final ObservableField<NameItemViewModel> nameItem = new ObservableField<>();
 
     public NameViewModel(GameCharacter character) {
@@ -24,10 +22,10 @@ public class NameViewModel {
         Splat right = character.right();
 
         if(right != null) {
-            gameItem.set(new GameItemViewModel(system.getGameUrl(), 0));
+            gameItem.set(new NameGameItemViewModel(system.getGameUrl(), 0));
             if(system.checkLeft()) left = system.updateLeft(left, right);
-            leftItem.set(new AxisItemViewModel(left, system.getLeftTitle()));
-            rightItem.set(new AxisItemViewModel(right, system.getRightTitle(left)));
+            leftItem.set(new NameAxisItemViewModel(left, system.getLeftTitle(), true));
+            rightItem.set(new NameAxisItemViewModel(right, system.getRightTitle(left), false));
         }
         //noinspection ConstantConditions
         nameItem.set(new NameItemViewModel(character.name(), character.image() == null ? null : character.image().uri()));

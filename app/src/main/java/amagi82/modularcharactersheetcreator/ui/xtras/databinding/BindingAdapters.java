@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,7 +44,6 @@ public class BindingAdapters {
             }
             size = imageSize;
         }
-        Log.i("BindingAdapters", "size = " + size);
         if (url != NONE && url != 0) Glide.with(img.getContext()).load(new SplatIcon(img.getResources().getString(url), size).getUrl()).into(img);
     }
 

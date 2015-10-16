@@ -7,14 +7,8 @@ import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
 
 public class AxisItemViewModel{
     public final Splat splat;
-    public final int axisTitle;
 
     public AxisItemViewModel(Splat splat) {
-        this(splat, 0);
-    }
-
-    public AxisItemViewModel(Splat splat, int axisTitle) {
-        this.axisTitle = axisTitle;
         this.splat = splat;
     }
 

@@ -101,10 +101,10 @@ public abstract class GameCharacter implements Parcelable {
     }
 
     //Used during character creation/editing. Removes progress on back.
-    public GameCharacter removeProgress(@IntRange(from = 0, to = 3) int fromStep) {
-        int gameTitle = fromStep <= LEFT ? NONE : gameTitle();
-        Splat left = fromStep <= RIGHT ? null : left();
-        Splat right = fromStep <= FINISH ? null : right();
+    public GameCharacter removeProgress(@Progress int toStep) {
+        int gameTitle = toStep == START ? NONE : gameTitle();
+        Splat left = toStep <= LEFT ? null : left();
+        Splat right = toStep <= RIGHT ? null : right();
         return toBuilder().gameTitle(gameTitle).left(left).right(right).build();
     }
 

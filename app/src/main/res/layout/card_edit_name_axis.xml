@@ -4,8 +4,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="axisItemViewModel"
-                  type="amagi82.modularcharactersheetcreator.ui.edit.axis.AxisItemViewModel"/>
+        <variable name="nameAxisItemViewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.edit.name.NameAxisItemViewModel"/>
     </data>
 
     <android.support.v7.widget.CardView
@@ -29,7 +29,7 @@
                 android:layout_marginBottom="@dimen/default_small_margin"
                 android:layout_marginLeft="@dimen/default_small_margin"
                 android:layout_marginTop="@dimen/default_small_margin"
-                android:text="@{axisItemViewModel.axisTitle}"
+                android:text="@{nameAxisItemViewModel.axisTitle}"
                 android:textSize="20sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 tools:text="Clan"/>
@@ -40,7 +40,7 @@
                 android:layout_alignRight="@id/center"
                 android:layout_below="@id/tvTitle"
                 android:layout_marginLeft="@dimen/default_small_margin"
-                android:text="@{axisItemViewModel.title}"
+                android:text="@{nameAxisItemViewModel.title}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 tools:text="Gangrel"/>
 
@@ -49,12 +49,12 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/default_small_margin"
                 android:layout_toRightOf="@id/center"
-                app:splatIconUrl="@{axisItemViewModel.getUrl()}"
+                app:splatIconUrl="@{nameAxisItemViewModel.getUrl()}"
                 tools:src="@drawable/clan_icon"/>
         </RelativeLayout>
 
         <ImageView
-            android:id="@+id/actionBack"
+            android:onClick="@{nameAxisItemViewModel.onResetClicked}"
             style="@style/ActionButton.Undo" />
 
     </android.support.v7.widget.CardView>
