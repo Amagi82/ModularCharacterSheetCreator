@@ -6,8 +6,6 @@ import android.net.Uri;
 import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
-import android.text.TextWatcher;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,8 +14,10 @@ import com.bumptech.glide.Glide;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.CircleIcon;
+import amagi82.modularcharactersheetcreator.ui.xtras.utils.EditTextListener;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;
+import amagi82.modularcharactersheetcreator.ui.xtras.widgets.FocusAwareEditText;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.NONE;
@@ -70,9 +70,9 @@ public class BindingAdapters {
         textView.setText(String.format(format, textView.getResources().getString(argId)));
     }
 
-    @BindingAdapter("textWatcher")
-    public static void addTextWatcher(EditText editText, TextWatcher textWatcher){
-        if(textWatcher != null) editText.addTextChangedListener(textWatcher);
+    @BindingAdapter("editTextListener")
+    public static void addTextWatcher(FocusAwareEditText editText, EditTextListener listener){
+        if(listener != null) editText.setTextChangedListener(listener);
     }
 
     @BindingAdapter("android:textColor")

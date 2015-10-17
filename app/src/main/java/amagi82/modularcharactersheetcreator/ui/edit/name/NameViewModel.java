@@ -2,13 +2,12 @@ package amagi82.modularcharactersheetcreator.ui.edit.name;
 
 import android.databinding.ObservableField;
 import android.net.Uri;
-import android.text.TextWatcher;
 
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 import amagi82.modularcharactersheetcreator.models.games.GameSystem;
+import amagi82.modularcharactersheetcreator.ui.xtras.utils.EditTextListener;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.SimpleTextWatcher;
 
 public class NameViewModel {
     public final ObservableField<NameGameItemViewModel> gameItem = new ObservableField<>();
@@ -16,11 +15,15 @@ public class NameViewModel {
     public final ObservableField<NameAxisItemViewModel> rightItem = new ObservableField<>();
     public final ObservableField<String> name = new ObservableField<>();
     public final ObservableField<Uri> imageUri = new ObservableField<>();
-    public final TextWatcher textWatcher = new SimpleTextWatcher() {
-        @Override public void onTextChanged(String newValue) {
-            Otto.BUS.getBus().post(new NameChangedEvent(newValue));
+    public final EditTextListener editTextListener = new EditTextListener() {
+        @Override public void onTextChanged(String newText) {
+            Otto.BUS.getBus().post(new NameChangedEvent(newText));
+        }
+        @Override public void onKeyboardShown() {
+            Otto.BUS.getBus().post(new KeyboardVisibleEvent());
         }
     };
+
 
     public NameViewModel(GameCharacter character) {
         update(character);

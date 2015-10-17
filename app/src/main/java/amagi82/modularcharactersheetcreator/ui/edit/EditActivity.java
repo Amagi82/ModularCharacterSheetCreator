@@ -17,6 +17,7 @@ import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui.base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.edit.axis.AxisSelectedEvent;
 import amagi82.modularcharactersheetcreator.ui.edit.game.GameSelectedEvent;
+import amagi82.modularcharactersheetcreator.ui.edit.name.KeyboardVisibleEvent;
 import amagi82.modularcharactersheetcreator.ui.edit.name.NameChangedEvent;
 import amagi82.modularcharactersheetcreator.ui.edit.name.ResetItemEvent;
 import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
@@ -80,10 +81,14 @@ public class EditActivity extends BaseActivity {
     @Subscribe public void nameChanged(NameChangedEvent event){
         Log.i("EditActivity", "nameChanged to "+event.name);
 
-//        if(event.name.length() > 1) binding.fab.show();
-//        else binding.fab.hide();
-//
-//        character = character.toBuilder().name(event.name).build();
+        if(event.name.length() > 0) binding.fab.show();
+        else binding.fab.hide();
+
+        character = character.toBuilder().name(event.name).build();
+    }
+
+    @Subscribe public void keyboardVisible(KeyboardVisibleEvent event){
+        binding.fab.hide();
     }
 
     private void nextPage() {

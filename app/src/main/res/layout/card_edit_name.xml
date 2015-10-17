@@ -13,7 +13,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -23,7 +25,7 @@
                 android:layout_marginTop="@dimen/default_margin"
                 app:errorEnabled="false">
 
-                <EditText
+                <amagi82.modularcharactersheetcreator.ui.xtras.widgets.FocusAwareEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -34,7 +36,7 @@
                     android:singleLine="true"
                     android:text="@{nameViewModel.name}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                    app:textWatcher="@{nameViewModel.textWatcher}"/>
+                    app:editTextListener="@{nameViewModel.editTextListener}"/>
 
             </android.support.design.widget.TextInputLayout>
 
