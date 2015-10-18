@@ -12,16 +12,16 @@ import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.NONE;
 
 public abstract class GameSystem {
 
-    @StringRes protected int gameTitle = NONE;
-    @StringRes protected int leftTitle = NONE;
-    @StringRes protected int rightTitle = NONE;
-    @StringRes protected int gameUrl = NONE;
-    @StringRes protected int splashUrl = NONE;
-    @ColorRes protected int gameColor = NONE; //Used in the list of characters in MainAdapter
-    protected boolean isArchetypeLeft = true; //Archetype is displayed under the game system in the list of characters
-    protected boolean checkLeft = false; //With CVampire, Sect must be known to determine if Clan is antitribu.
-    protected boolean isLeftListFinal = true; //False if the list can change depending on choices
-    protected boolean isRightListFinal = true; //False if the list can change depending on choices
+    @StringRes int gameTitle = NONE;
+    @StringRes int leftTitle = NONE;
+    @StringRes int rightTitle = NONE;
+    @StringRes int gameUrl = NONE;
+    @StringRes int splashUrl = NONE;
+    @ColorRes int gameColor = NONE; //Used in the list of characters in MainAdapter
+    boolean isArchetypeLeft = true; //Archetype is displayed under the game system in the list of characters
+    boolean checkLeft = false; //With CVampire, Sect must be known to determine if Clan is antitribu.
+    boolean isLeftListFinal = true; //False if the list can change depending on choices
+    boolean isRightListFinal = true; //False if the list can change depending on choices
 
     public abstract List<Splat> getListLeft(@Nullable Splat splat);
 

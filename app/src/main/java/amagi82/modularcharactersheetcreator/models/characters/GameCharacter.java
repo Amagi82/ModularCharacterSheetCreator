@@ -109,7 +109,7 @@ public abstract class GameCharacter implements Parcelable {
     }
 
     public GameSystem getGameSystem() {
-        return new Game().getSystem(gameTitle()); //May return null.
+        return new Game().getSystem(gameTitle());
     }
 
     @SuppressWarnings("ConstantConditions")

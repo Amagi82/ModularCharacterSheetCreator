@@ -18,8 +18,7 @@ public abstract class Splat implements Parcelable{
     public abstract @StringRes int url();
     public abstract boolean isEndPoint();
 
-    Splat() {
-    }
+    Splat() {}
 
     public static Splat create(@StringRes int title) {
         return new AutoParcel_Splat(title, DEFAULT_URL, true);
