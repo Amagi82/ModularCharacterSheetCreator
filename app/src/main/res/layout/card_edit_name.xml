@@ -49,6 +49,7 @@
                 app:imageUri="@{nameViewModel.imageUri}"/>
 
             <ImageView
+                android:onClick="onActionPhoto"
                 style="@style/ActionButton"
                 android:src="@drawable/ic_camera_alt_24dp"
                 android:tint="@color/primary_dark"/>

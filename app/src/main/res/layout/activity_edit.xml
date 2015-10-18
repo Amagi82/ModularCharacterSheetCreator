@@ -49,6 +49,7 @@
             app:page="@{editViewModel.page}"/>
 
         <android.support.design.widget.FloatingActionButton
+            android:onClick="onFabClicked"
             style="@style/Fab.Bottom"
             android:src="@drawable/ic_done_24dp"
             android:tint="@color/white"

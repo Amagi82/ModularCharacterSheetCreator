@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.squareup.otto.Subscribe;
 
@@ -114,5 +115,13 @@ public class EditActivity extends BaseActivity {
         editViewModel.update(character);
         binding.appbar.setExpanded(true);
         backstack = character.getProgress();
+    }
+
+    public void onActionPhoto(View view) {
+
+    }
+
+    public void onFabClicked(View view) {
+
     }
 }

@@ -3,6 +3,7 @@ package amagi82.modularcharactersheetcreator.ui.edit;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableInt;
+import android.view.View;
 
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
@@ -53,5 +54,9 @@ public class EditViewModel {
 
     public void softKeyboardVisible() {
         isFabShown.set(false);
+    }
+
+    public void onFabClicked(View view){
+
     }
 }
