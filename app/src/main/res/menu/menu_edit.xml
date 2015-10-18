@@ -2,8 +2,10 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="amagi82.modularcharactersheetcreator.ui.edit.EditActivity">
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
+
+      <item
+          android:title="@string/action_delete"
+          android:onClick="onActionDelete"
           android:orderInCategory="100"
           app:showAsAction="never"/>
 </menu>

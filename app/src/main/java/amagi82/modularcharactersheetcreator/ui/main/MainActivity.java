@@ -3,12 +3,9 @@ package amagi82.modularcharactersheetcreator.ui.main;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.StringDef;
+import android.support.annotation.IntDef;
 import android.util.Log;
 import android.view.View;
-
-import com.colintmiller.simplenosql.NoSQL;
-import com.colintmiller.simplenosql.NoSQLEntity;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -24,8 +21,8 @@ import amagi82.modularcharactersheetcreator.models.games.CMage;
 import amagi82.modularcharactersheetcreator.models.games.CVampire;
 import amagi82.modularcharactersheetcreator.models.games.CWerewolf;
 import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
-import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.Template;
+import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
 
 public class MainActivity extends BaseActivity {
     public static final String BUCKET = "bucket";
@@ -53,32 +50,6 @@ public class MainActivity extends BaseActivity {
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setMainViewModel(viewModel);
         binding.toolbar.setLogo(R.drawable.title_onyx);
-
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, EditActivity.class));
-            }
-        });
-
-        updateList();
-        Log.i(null, "Main Activity created");
-    }
-
-    private void updateList() {
-        Intent intent = getIntent();
-        if(intent.getStringExtra(UPDATE_TYPE) == null) return;
-        GameCharacter character = intent.getParcelableExtra(CHARACTER);
-        switch (intent.getStringExtra(UPDATE_TYPE)) {
-            case ADD:
-                viewModel.add(character);
-                break;
-            case REMOVE:
-                viewModel.remove(character);
-                break;
-            case UPDATE:
-                viewModel.update(character);
-                break;
-        }
     }
 
     private void loadSavedCharacters() {
@@ -125,21 +96,45 @@ public class MainActivity extends BaseActivity {
     }
 
     private void saveCharacter(GameCharacter character) {
-        NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>(BUCKET, character.entityId());
-        entity.setData(character);
-        NoSQL.with(this).using(GameCharacter.class).save(entity);
+//        NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>(BUCKET, character.entityId());
+//        entity.setData(character);
+//        NoSQL.with(this).using(GameCharacter.class).save(entity);
     }
 
 //    deleteCharacter
 //    NoSQL.with(this).using(GameCharacter.class).bucketId(BUCKET).entityId(event.character.entityId()).delete();
 
-    @StringDef({ADD, REMOVE, UPDATE})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface UpdateCharacters {}
 
-    public static final String ADD = "add";
-    public static final String REMOVE = "remove";
-    public static final String UPDATE = "update";
-    public static final String CHARACTER = "character";
-    public static final String UPDATE_TYPE = "update type";
+    @Override protected void onActivityResult(@ReqCode int requestCode, @ResultCode int resultCode, Intent data) {
+        Log.i("MainActivity", "onActivityResult resultCode = "+resultCode);
+        if(resultCode == RESULT_CANCELED) return;
+
+        GameCharacter character = data.getParcelableExtra(CHARACTER);
+        int position = data.getIntExtra(POSITION, -1);
+        Log.i("MainActivity", "onActivityResult: position: "+position);
+        Log.i("MainActivity", "onActivityResult: character returned: "+character);
+
+        if(resultCode == RESULT_OK && requestCode == ADD) viewModel.add(character);
+        else if(resultCode == RESULT_OK && requestCode == MODIFY && position >= 0) viewModel.update(character, position);
+        else if(resultCode == RESULT_DELETED && position >= 0) viewModel.remove(position);
+    }
+
+    public void onClickAddCharacter(View view) {
+        startActivityForResult(new Intent(MainActivity.this, EditActivity.class), ADD);
+    }
+
+    @IntDef({ADD, MODIFY})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ReqCode {}
+
+    @IntDef({RESULT_CANCELED, RESULT_OK, RESULT_DELETED})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ResultCode{}
+
+    public static final int ADD = 1;
+    public static final int MODIFY = 2;
+    public static final int RESULT_DELETED = 3;
+
+    public static final String CHARACTER = "CHARACTER";
+    public static final String POSITION = "POSITION";
 }

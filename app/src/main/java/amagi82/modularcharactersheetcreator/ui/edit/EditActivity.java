@@ -1,12 +1,12 @@
 package amagi82.modularcharactersheetcreator.ui.edit;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -25,6 +25,8 @@ import amagi82.modularcharactersheetcreator.ui.edit._events.ResetSelectionEvent;
 import icepick.State;
 
 import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.CHARACTER;
+import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.POSITION;
+import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.RESULT_DELETED;
 
 public class EditActivity extends BaseActivity {
     private ActivityEditBinding binding;
@@ -36,12 +38,16 @@ public class EditActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit);
 
-        setSupportActionBar(binding.toolbar);
-        //noinspection ConstantConditions
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Drawable icon = ContextCompat.getDrawable(this, R.drawable.ic_close_24dp);
         icon.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
-        getSupportActionBar().setHomeAsUpIndicator(icon);
+        binding.toolbar.setNavigationIcon(icon);
+        binding.toolbar.inflateMenu(R.menu.menu_edit);
+        binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                setResult(RESULT_CANCELED);
+                finish();
+            }
+        });
 
         if (character == null) {
             if (getIntent().getParcelableExtra(CHARACTER) != null) character = getIntent().getParcelableExtra(CHARACTER);
@@ -56,20 +62,6 @@ public class EditActivity extends BaseActivity {
                 editViewModel.update(character);
             }
         }, 10);
-    }
-
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_edit, menu);
-        return true;
-    }
-
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_discard:
-                finish();
-                return true;
-        }
-        return false;
     }
 
     @Subscribe public void gameSelected(GameSelectedEvent event) {
@@ -103,7 +95,10 @@ public class EditActivity extends BaseActivity {
 
     @Override public void onBackPressed() {
         if (backstack > 0) goBack(backstack - 1);
-        else super.onBackPressed();
+        else {
+            setResult(RESULT_CANCELED);
+            super.onBackPressed();
+        }
     }
 
     private void goBack(int toPage) {
@@ -122,6 +117,12 @@ public class EditActivity extends BaseActivity {
     }
 
     public void onFabClicked(View view) {
+        setResult(RESULT_OK, new Intent().putExtra(CHARACTER, character).putExtra(POSITION, getIntent().getIntExtra(POSITION, -1)));
+        finish();
+    }
 
+    public void onActionDelete(MenuItem item) {
+        setResult(RESULT_DELETED, new Intent().putExtra(POSITION, getIntent().getIntExtra(POSITION, -1)));
+        finish();
     }
 }
