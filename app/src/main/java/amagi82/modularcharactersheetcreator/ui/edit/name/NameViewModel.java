@@ -6,12 +6,13 @@ import android.net.Uri;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 import amagi82.modularcharactersheetcreator.models.games.GameSystem;
+import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
+import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener;
+import amagi82.modularcharactersheetcreator.ui.edit._base.BaseViewModel;
 import amagi82.modularcharactersheetcreator.ui.edit._events.KeyboardVisibleEvent;
 import amagi82.modularcharactersheetcreator.ui.edit._events.NameChangedEvent;
-import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener;
-import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
 
-public class NameViewModel {
+public class NameViewModel extends BaseViewModel{
     public final ObservableField<GameCardViewModel> gameItem = new ObservableField<>();
     public final ObservableField<AxisCardViewModel> leftItem = new ObservableField<>();
     public final ObservableField<AxisCardViewModel> rightItem = new ObservableField<>();
@@ -27,9 +28,7 @@ public class NameViewModel {
     };
 
 
-    public NameViewModel(GameCharacter character) {
-        update(character);
-    }
+    public NameViewModel() {}
 
     public void update(GameCharacter character){
         GameSystem gameSystem = character.getGameSystem();

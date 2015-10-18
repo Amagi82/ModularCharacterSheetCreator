@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -17,31 +16,27 @@ import amagi82.modularcharactersheetcreator.databinding.ActivityEditBinding;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.edit._events.AxisSelectedEvent;
-import amagi82.modularcharactersheetcreator.ui.edit._events.CharacterUpdatedEvent;
+import amagi82.modularcharactersheetcreator.ui.edit._events.AxisUpdateEvent;
 import amagi82.modularcharactersheetcreator.ui.edit._events.GameSelectedEvent;
 import amagi82.modularcharactersheetcreator.ui.edit._events.KeyboardVisibleEvent;
 import amagi82.modularcharactersheetcreator.ui.edit._events.NameChangedEvent;
 import amagi82.modularcharactersheetcreator.ui.edit._events.ResetSelectionEvent;
-import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
-import amagi82.modularcharactersheetcreator.ui._extras.widgets.NoSwipeViewPager;
 import icepick.State;
 
 import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.CHARACTER;
 
 public class EditActivity extends BaseActivity {
-    public static final String LEFT = "Left";
     private ActivityEditBinding binding;
-    private NoSwipeViewPager viewPager;
+    private EditViewModel editViewModel;
     @State GameCharacter character;
-    @State @GameCharacter.Progress int currentPage;
+    @State int backstack;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit);
-        binding.setEditViewModel(new EditViewModel());
 
         setSupportActionBar(binding.toolbar);
-        assert getSupportActionBar() != null;
+        //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Drawable icon = ContextCompat.getDrawable(this, R.drawable.ic_close_24dp);
         icon.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
@@ -51,56 +46,15 @@ public class EditActivity extends BaseActivity {
             if (getIntent().getParcelableExtra(CHARACTER) != null) character = getIntent().getParcelableExtra(CHARACTER);
             else character = GameCharacter.builder().build();
         }
-        if (character.getGameSystem() != null) binding.getEditViewModel().splashUrl.set(character.getGameSystem().getSplashUrl());
 
-        viewPager = binding.viewpager;
-        viewPager.setAdapter(new EditViewPagerAdapter(getSupportFragmentManager()));
-        viewPager.setCurrentItem(character.getProgress());
-
-    }
-
-    public GameCharacter getGameCharacter() {
-        return character;
-    }
-
-    @Subscribe public void resetItem(ResetSelectionEvent event) {
-        goBack(event.toPage);
-    }
-
-    @Subscribe public void gameSelected(GameSelectedEvent event) {
-        character = character.toBuilder().gameTitle(event.gameTitle).build();
-        binding.getEditViewModel().splashUrl.set(character.getGameSystem().getSplashUrl());
-        nextPage();
-    }
-
-    @Subscribe public void axisSelected(AxisSelectedEvent event) {
-        if (viewPager.getCurrentItem() == 1) character = character.toBuilder().left(event.splat).build();
-        else character = character.toBuilder().right(event.splat).build();
-        nextPage();
-    }
-
-    @Subscribe public void nameChanged(NameChangedEvent event) {
-        Log.i("EditActivity", "nameChanged to " + event.name);
-        character = character.toBuilder().name(event.name).build();
-        if (event.name.length() > 0) {
-            new Handler().postDelayed(new Runnable() {
-                @Override public void run() {
-                    if (character.isComplete()) binding.fab.show();
-                }
-            }, 500);
-        } else binding.fab.hide();
-    }
-
-    @Subscribe public void keyboardVisible(KeyboardVisibleEvent event) {
-        binding.fab.hide();
-    }
-
-    private void nextPage() {
-        Otto.BUS.get().post(new CharacterUpdatedEvent());
-        binding.appbar.setExpanded(true);
-        viewPager.nextPage();
-        currentPage++;
-        if (currentPage == GameCharacter.FINISH && character.isComplete()) binding.fab.show();
+        editViewModel = new EditViewModel(character);
+        binding.setEditViewModel(editViewModel);
+        //If an update to a page > 0 is handled immediately, the adapter doesn't get set up.
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                editViewModel.update(character);
+            }
+        }, 10);
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -117,18 +71,48 @@ public class EditActivity extends BaseActivity {
         return false;
     }
 
+    @Subscribe public void gameSelected(GameSelectedEvent event) {
+        character = character.toBuilder().gameTitle(event.gameTitle).build();
+        update();
+    }
+
+    @Subscribe public void axisUpdated(AxisUpdateEvent event) {
+        editViewModel.update(character, event.splat);
+        binding.appbar.setExpanded(true);
+    }
+
+    @Subscribe public void axisSelected(AxisSelectedEvent event) {
+        if (editViewModel.page.get() == GameCharacter.LEFT) character = character.toBuilder().left(event.splat).build();
+        else character = character.toBuilder().right(event.splat).build();
+        update();
+    }
+
+    @Subscribe public void nameChanged(NameChangedEvent event) {
+        character = character.toBuilder().name(event.name).build();
+        editViewModel.update(character);
+    }
+
+    @Subscribe public void keyboardVisible(KeyboardVisibleEvent event) {
+        editViewModel.softKeyboardVisible();
+    }
+
+    @Subscribe public void resetItem(ResetSelectionEvent event) {
+        goBack(event.toPage);
+    }
+
     @Override public void onBackPressed() {
-        if (currentPage > 0) goBack(currentPage - 1);
+        if (backstack > 0) goBack(backstack - 1);
         else super.onBackPressed();
     }
 
     private void goBack(int toPage) {
-        currentPage = toPage;
-        binding.fab.hide();
-        character = character.removeProgress(currentPage);
-        Otto.BUS.get().post(new CharacterUpdatedEvent());
+        character = character.removeProgress(toPage);
+        update();
+    }
+
+    private void update(){
+        editViewModel.update(character);
         binding.appbar.setExpanded(true);
-        viewPager.setCurrentItem(currentPage);
-        if (currentPage == GameCharacter.START) binding.getEditViewModel().splashUrl.set(0);
+        backstack = character.getProgress();
     }
 }

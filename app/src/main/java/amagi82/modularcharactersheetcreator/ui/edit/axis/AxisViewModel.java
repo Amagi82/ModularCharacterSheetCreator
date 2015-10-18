@@ -12,9 +12,10 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 import amagi82.modularcharactersheetcreator.models.games.GameSystem;
+import amagi82.modularcharactersheetcreator.ui.edit._base.BaseViewModel;
 import me.tatarka.bindingcollectionadapter.ItemView;
 
-public class AxisViewModel {
+public class AxisViewModel extends BaseViewModel {
     public final ObservableArrayList<AxisItemViewModel> list = new ObservableArrayList<>();
     public final ItemView itemView = ItemView.of(BR.axisItemViewModel, R.layout.tile_edit_axis);
     public final ObservableInt title = new ObservableInt();
@@ -24,7 +25,6 @@ public class AxisViewModel {
     public AxisViewModel(GameCharacter character, boolean isLeft) {
         this.isLeft = isLeft;
         currentCharacter = character;
-        update(character, null);
     }
 
     public void update(GameCharacter character, @Nullable Splat splat) {

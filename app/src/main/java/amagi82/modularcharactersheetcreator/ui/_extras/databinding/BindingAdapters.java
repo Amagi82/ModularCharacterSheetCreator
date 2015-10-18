@@ -3,8 +3,10 @@ package amagi82.modularcharactersheetcreator.ui._extras.databinding;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,10 +16,11 @@ import com.bumptech.glide.Glide;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.CircleIcon;
-import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.SplatIcon;
 import amagi82.modularcharactersheetcreator.ui._extras.widgets.FocusAwareEditText;
+import amagi82.modularcharactersheetcreator.ui._extras.widgets.NoSwipeViewPager;
+import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.NONE;
@@ -62,6 +65,21 @@ public class BindingAdapters {
             if (imageUri == null) icon.setImageBitmap(new CircleIcon(context).createIcon(character.name()));
             else Glide.with(context).load(imageUri).centerCrop().into(icon);
         }
+    }
+
+    @BindingAdapter("page")
+    public static void setCurrentPage(NoSwipeViewPager viewPager, int page){
+        viewPager.setCurrentItem(page);
+    }
+
+    @BindingAdapter("fab")
+    public static void setFabVisibility(final FloatingActionButton fab, boolean isShown){
+        if(isShown) new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                fab.show();
+            }
+        }, 500);
+        else fab.hide();
     }
 
     @BindingAdapter({"format", "argId"})

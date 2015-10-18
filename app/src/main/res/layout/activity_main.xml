@@ -23,7 +23,6 @@
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
             style="@style/RecyclerView"
             app:items="@{mainViewModel.list}"
             app:itemView="@{mainViewModel.itemView}"

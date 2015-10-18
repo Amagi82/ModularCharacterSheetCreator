@@ -16,7 +16,6 @@
             android:text="@string/choose_game"/>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
             style="@style/RecyclerView.Card"
             android:paddingTop="@dimen/default_large_margin"
             app:items="@{gameViewModel.list}"

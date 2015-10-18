@@ -23,7 +23,7 @@
                      android:layout_width="match_parent"
                      android:layout_height="@dimen/card_height_edit_name_screen"
                      android:layout_margin="@dimen/card_margin"
-                     app:nameGameItemViewModel="@{nameViewModel.gameItem}"/>
+                     app:gameCardViewModel="@{nameViewModel.gameItem}"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,10 +31,10 @@
                 android:orientation="horizontal">
 
                 <include layout="@layout/card_edit_name_axis"
-                         app:nameAxisItemViewModel="@{nameViewModel.leftItem}"/>
+                         app:axisCardViewModel="@{nameViewModel.leftItem}"/>
 
                 <include layout="@layout/card_edit_name_axis"
-                         app:nameAxisItemViewModel="@{nameViewModel.rightItem}"/>
+                         app:axisCardViewModel="@{nameViewModel.rightItem}"/>
 
             </LinearLayout>
 

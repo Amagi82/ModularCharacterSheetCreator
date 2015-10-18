@@ -31,13 +31,4 @@ public class NoSwipeViewPager extends ViewPager{
     public void setPagingEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
-    //Convenience methods
-    public void nextPage(){
-        setCurrentItem(getCurrentItem() + 1);
-    }
-
-    public void previousPage(){
-        setCurrentItem(getCurrentItem() - 1);
-    }
 }
