@@ -47,7 +47,7 @@ public class NameFragment extends BaseFragment {
 //                    if (which == 0) {
 //                        //Remove the image and use the default icon
 //                        character = character.toBuilder().image(null).colorScheme(null).build();
-//                        BUS.getBus().post(new CharacterUpdatedEvent(character));
+//                        BUS.get().post(new CharacterUpdatedEvent(character));
 //                        imagePortrait.setImageResource(0);
 //                        //setTextScrims();
 //                    } else getImageFromGallery();
@@ -98,7 +98,7 @@ public class NameFragment extends BaseFragment {
 //                                .colorScheme(noSwatch ? null : ColorScheme.create(swatch.getRgb(), swatch.getBodyTextColor(), swatch.getTitleTextColor()))
 //                                .build();
 //                        Glide.with(NameFragment.this).load(uri).into(imagePortrait);
-//                        BUS.getBus().post(new CharacterUpdatedEvent(character));
+//                        BUS.get().post(new CharacterUpdatedEvent(character));
 //                        //setTextScrims();
 //                    }
 //                }).show();

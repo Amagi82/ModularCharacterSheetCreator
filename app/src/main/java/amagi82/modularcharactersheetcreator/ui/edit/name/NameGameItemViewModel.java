@@ -15,6 +15,6 @@ public class NameGameItemViewModel {
     }
 
     public void onResetClicked(View view) {
-        Otto.BUS.getBus().post(new ResetItemEvent(GameCharacter.START));
+        Otto.BUS.get().post(new ResetItemEvent(GameCharacter.START));
     }
 }

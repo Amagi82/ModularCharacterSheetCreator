@@ -21,6 +21,6 @@ public class AxisItemViewModel{
     }
 
     public void onItemClick(View view) {
-        Otto.BUS.getBus().post(splat.isEndPoint()? new AxisSelectedEvent(splat) : new AxisUpdateEvent(splat));
+        Otto.BUS.get().post(splat.isEndPoint()? new AxisSelectedEvent(splat) : new AxisUpdateEvent(splat));
     }
 }

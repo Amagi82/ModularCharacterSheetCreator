@@ -97,7 +97,7 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
 //        Log.i(null, "adding new module");
 //        HeaderModule module = new HeaderModule();
 //        module.setTitle("New Module");
-//        BUS.getBus().post(new ModuleAddedEvent(module));
+//        BUS.get().post(new ModuleAddedEvent(module));
 //    }
 //
 ////    private String url(Choice choice){
@@ -110,14 +110,14 @@ public class SheetFragment extends Fragment implements Toolbar.OnMenuItemClickLi
 //
     //Up navigation
     @Override public void onClick(View v) {
-        //BUS.getBus().post(new UpNavigationEvent());
+        //BUS.get().post(new UpNavigationEvent());
     }
 //
     @Override public boolean onMenuItemClick(MenuItem item) {
 //        switch(item.getItemId()){
 //            case R.id.action_edit:
 //                //Update any character info before editing.
-//                BUS.getBus().post(new EditCharacterEvent(character));
+//                BUS.get().post(new EditCharacterEvent(character));
 //                return true;
 //            case R.id.action_tab_add:
 //                adapter.addFragment(Sheet.create("New Sheet", new ArrayList<Module>()));

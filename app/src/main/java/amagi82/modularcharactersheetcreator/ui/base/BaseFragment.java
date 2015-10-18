@@ -15,7 +15,7 @@ public abstract class BaseFragment extends Fragment{
 
     @Override public void onStart() {
         super.onStart();
-        Otto.BUS.getBus().register(this);
+        Otto.BUS.get().register(this);
     }
 
     @Override public void onSaveInstanceState(Bundle outState) {
@@ -25,6 +25,6 @@ public abstract class BaseFragment extends Fragment{
 
     @Override public void onStop() {
         super.onStop();
-        Otto.BUS.getBus().unregister(this);
+        Otto.BUS.get().unregister(this);
     }
 }

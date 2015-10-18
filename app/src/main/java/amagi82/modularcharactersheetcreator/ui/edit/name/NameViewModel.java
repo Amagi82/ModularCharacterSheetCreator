@@ -17,10 +17,10 @@ public class NameViewModel {
     public final ObservableField<Uri> imageUri = new ObservableField<>();
     public final EditTextListener editTextListener = new EditTextListener() {
         @Override public void onTextChanged(String newText) {
-            Otto.BUS.getBus().post(new NameChangedEvent(newText));
+            Otto.BUS.get().post(new NameChangedEvent(newText));
         }
         @Override public void onKeyboardShown() {
-            Otto.BUS.getBus().post(new KeyboardVisibleEvent());
+            Otto.BUS.get().post(new KeyboardVisibleEvent());
         }
     };
 

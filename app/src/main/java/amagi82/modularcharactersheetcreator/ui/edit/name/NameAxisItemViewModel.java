@@ -26,6 +26,6 @@ public class NameAxisItemViewModel {
     }
 
     public void onResetClicked(View view) {
-        Otto.BUS.getBus().post(new ResetItemEvent(isLeft? GameCharacter.LEFT : GameCharacter.RIGHT));
+        Otto.BUS.get().post(new ResetItemEvent(isLeft? GameCharacter.LEFT : GameCharacter.RIGHT));
     }
 }

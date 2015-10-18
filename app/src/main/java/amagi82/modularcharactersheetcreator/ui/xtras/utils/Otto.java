@@ -7,7 +7,7 @@ public enum Otto {
 
     private final Bus bus = new Bus();
 
-    public Bus getBus() {
+    public Bus get() {
         return bus;
     }
 }

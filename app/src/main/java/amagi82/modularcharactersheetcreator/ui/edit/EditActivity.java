@@ -92,7 +92,7 @@ public class EditActivity extends BaseActivity {
     }
 
     private void nextPage() {
-        Otto.BUS.getBus().post(new CharacterUpdatedEvent());
+        Otto.BUS.get().post(new CharacterUpdatedEvent());
         binding.appbar.setExpanded(true);
         viewPager.nextPage();
         currentPage++;
@@ -120,7 +120,7 @@ public class EditActivity extends BaseActivity {
     private void goBack(int toPage){
         currentPage = toPage;
         character = character.removeProgress(currentPage);
-        Otto.BUS.getBus().post(new CharacterUpdatedEvent());
+        Otto.BUS.get().post(new CharacterUpdatedEvent());
         binding.appbar.setExpanded(true);
         viewPager.setCurrentItem(currentPage);
 

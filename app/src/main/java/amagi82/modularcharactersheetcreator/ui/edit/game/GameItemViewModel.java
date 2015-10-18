@@ -14,6 +14,6 @@ public class GameItemViewModel {
     }
 
     public void onItemClick(View view) {
-        Otto.BUS.getBus().post(new GameSelectedEvent(gameTitle));
+        Otto.BUS.get().post(new GameSelectedEvent(gameTitle));
     }
 }
