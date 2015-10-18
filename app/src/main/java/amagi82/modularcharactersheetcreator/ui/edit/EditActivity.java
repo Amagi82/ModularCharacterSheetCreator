@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Menu;
@@ -80,11 +81,15 @@ public class EditActivity extends BaseActivity {
 
     @Subscribe public void nameChanged(NameChangedEvent event){
         Log.i("EditActivity", "nameChanged to "+event.name);
-
-        if(event.name.length() > 0) binding.fab.show();
-        else binding.fab.hide();
-
         character = character.toBuilder().name(event.name).build();
+        if(event.name.length() > 0) {
+            new Handler().postDelayed(new Runnable() {
+                @Override public void run() {
+                    if(character.isComplete()) binding.fab.show();
+                }
+            }, 500);
+        }
+        else binding.fab.hide();
     }
 
     @Subscribe public void keyboardVisible(KeyboardVisibleEvent event){
@@ -96,6 +101,7 @@ public class EditActivity extends BaseActivity {
         binding.appbar.setExpanded(true);
         viewPager.nextPage();
         currentPage++;
+        if (currentPage == GameCharacter.FINISH && character.isComplete()) binding.fab.show();
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -118,6 +124,7 @@ public class EditActivity extends BaseActivity {
     }
 
     private void goBack(int toPage){
+        binding.fab.hide();
         currentPage = toPage;
         character = character.removeProgress(currentPage);
         Otto.BUS.get().post(new CharacterUpdatedEvent());

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import com.squareup.otto.Subscribe;
 
@@ -21,7 +20,6 @@ public class NameFragment extends BaseFragment {
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentEditNameBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_name, container, false);
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         nameViewModel = new NameViewModel(getCurrentCharacter());
         binding.setNameViewModel(nameViewModel);

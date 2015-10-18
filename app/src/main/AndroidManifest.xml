@@ -26,6 +26,7 @@
         <activity
             android:name=".ui.edit.EditActivity"
             android:label=""
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".ui.main.MainActivity" >
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
