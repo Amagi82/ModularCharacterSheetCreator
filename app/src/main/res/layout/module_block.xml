@@ -16,7 +16,7 @@
             android:paddingBottom="@dimen/default_small_margin"
             tools:text="Title"/>
 
-        <amagi82.modularcharactersheetcreator.ui.xtras.widgets.RoundedStatBarBlock
+        <amagi82.modularcharactersheetcreator.ui._extras.widgets.RoundedStatBarBlock
             android:id="@+id/statBarBlock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

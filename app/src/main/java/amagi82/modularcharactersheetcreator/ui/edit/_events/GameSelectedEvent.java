@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui.edit.game;
+package amagi82.modularcharactersheetcreator.ui.edit._events;
 
 public class GameSelectedEvent {
     public final int gameTitle;

@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui.xtras.utils;
+package amagi82.modularcharactersheetcreator.ui._extras.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

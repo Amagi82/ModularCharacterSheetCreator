@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui.xtras.databinding;
+package amagi82.modularcharactersheetcreator.ui._extras.databinding;
 
 import android.content.Context;
 import android.databinding.BindingAdapter;
@@ -13,11 +13,11 @@ import com.bumptech.glide.Glide;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.CircleIcon;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.EditTextListener;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.ScreenSize;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.SplatIcon;
-import amagi82.modularcharactersheetcreator.ui.xtras.widgets.FocusAwareEditText;
+import amagi82.modularcharactersheetcreator.ui._extras.utils.CircleIcon;
+import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener;
+import amagi82.modularcharactersheetcreator.ui._extras.utils.ScreenSize;
+import amagi82.modularcharactersheetcreator.ui._extras.utils.SplatIcon;
+import amagi82.modularcharactersheetcreator.ui._extras.widgets.FocusAwareEditText;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.NONE;

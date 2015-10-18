@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui.xtras.widgets;
+package amagi82.modularcharactersheetcreator.ui._extras.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -9,8 +9,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.EditTextListener;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.SimpleTextWatcher;
+import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener;
+import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.SimpleTextWatcher;
 
 public class FocusAwareEditText extends EditText {
     private EditTextListener listener;

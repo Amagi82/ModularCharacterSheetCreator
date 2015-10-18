@@ -6,13 +6,15 @@ import android.net.Uri;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 import amagi82.modularcharactersheetcreator.models.games.GameSystem;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.EditTextListener;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
+import amagi82.modularcharactersheetcreator.ui.edit._events.KeyboardVisibleEvent;
+import amagi82.modularcharactersheetcreator.ui.edit._events.NameChangedEvent;
+import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener;
+import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
 
 public class NameViewModel {
-    public final ObservableField<NameGameItemViewModel> gameItem = new ObservableField<>();
-    public final ObservableField<NameAxisItemViewModel> leftItem = new ObservableField<>();
-    public final ObservableField<NameAxisItemViewModel> rightItem = new ObservableField<>();
+    public final ObservableField<GameCardViewModel> gameItem = new ObservableField<>();
+    public final ObservableField<AxisCardViewModel> leftItem = new ObservableField<>();
+    public final ObservableField<AxisCardViewModel> rightItem = new ObservableField<>();
     public final ObservableField<String> name = new ObservableField<>();
     public final ObservableField<Uri> imageUri = new ObservableField<>();
     public final EditTextListener editTextListener = new EditTextListener() {
@@ -30,15 +32,15 @@ public class NameViewModel {
     }
 
     public void update(GameCharacter character){
-        GameSystem system = character.getGameSystem();
+        GameSystem gameSystem = character.getGameSystem();
         Splat left = character.left();
         Splat right = character.right();
 
         if(right != null) {
-            gameItem.set(new NameGameItemViewModel(system.getGameUrl(), 0));
-            if(system.checkLeft()) left = system.updateLeft(left, right);
-            leftItem.set(new NameAxisItemViewModel(left, system.getLeftTitle(), true));
-            rightItem.set(new NameAxisItemViewModel(right, system.getRightTitle(left), false));
+            gameItem.set(new GameCardViewModel(gameSystem.getGameUrl(), 0));
+            if(gameSystem.checkLeft()) left = gameSystem.updateLeft(left, right);
+            leftItem.set(new AxisCardViewModel(left, gameSystem.getLeftTitle(), true));
+            rightItem.set(new AxisCardViewModel(right, gameSystem.getRightTitle(left), false));
         }
         name.set(character.name());
 

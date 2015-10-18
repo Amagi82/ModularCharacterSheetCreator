@@ -4,14 +4,15 @@ import android.view.View;
 
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
+import amagi82.modularcharactersheetcreator.ui.edit._events.ResetSelectionEvent;
+import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
 
-public class NameAxisItemViewModel {
+public class AxisCardViewModel {
     public final Splat splat;
     public final int axisTitle;
     public final boolean isLeft;
 
-    public NameAxisItemViewModel(Splat splat, int axisTitle, boolean isLeft) {
+    public AxisCardViewModel(Splat splat, int axisTitle, boolean isLeft) {
         this.axisTitle = axisTitle;
         this.splat = splat;
         this.isLeft = isLeft;
@@ -26,6 +27,6 @@ public class NameAxisItemViewModel {
     }
 
     public void onResetClicked(View view) {
-        Otto.BUS.get().post(new ResetItemEvent(isLeft? GameCharacter.LEFT : GameCharacter.RIGHT));
+        Otto.BUS.get().post(new ResetSelectionEvent(isLeft? GameCharacter.LEFT : GameCharacter.RIGHT));
     }
 }

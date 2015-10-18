@@ -2,7 +2,8 @@ package amagi82.modularcharactersheetcreator.ui.edit.game;
 
 import android.view.View;
 
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
+import amagi82.modularcharactersheetcreator.ui.edit._events.GameSelectedEvent;
+import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
 
 public class GameItemViewModel {
     public final int url;

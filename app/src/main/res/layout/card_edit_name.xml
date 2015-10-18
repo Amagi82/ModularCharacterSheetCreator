@@ -25,7 +25,7 @@
                 android:layout_marginTop="@dimen/default_margin"
                 app:errorEnabled="false">
 
-                <amagi82.modularcharactersheetcreator.ui.xtras.widgets.FocusAwareEditText
+                <amagi82.modularcharactersheetcreator.ui._extras.widgets.FocusAwareEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"

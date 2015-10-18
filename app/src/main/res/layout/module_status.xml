@@ -23,7 +23,7 @@
             android:paddingBottom="@dimen/default_margin"
             tools:text="Path of Humanity"/>
 
-        <amagi82.modularcharactersheetcreator.ui.xtras.widgets.RoundedStatBar
+        <amagi82.modularcharactersheetcreator.ui._extras.widgets.RoundedStatBar
             android:id="@+id/statBar"
             style="@style/StatRatingBarTen"/>
     </LinearLayout>

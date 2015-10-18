@@ -23,9 +23,9 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
 import amagi82.modularcharactersheetcreator.models.games.CMage;
 import amagi82.modularcharactersheetcreator.models.games.CVampire;
 import amagi82.modularcharactersheetcreator.models.games.CWerewolf;
-import amagi82.modularcharactersheetcreator.ui.base.BaseActivity;
+import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.Template;
+import amagi82.modularcharactersheetcreator.ui._extras.utils.Template;
 
 public class MainActivity extends BaseActivity {
     public static final String BUCKET = "bucket";

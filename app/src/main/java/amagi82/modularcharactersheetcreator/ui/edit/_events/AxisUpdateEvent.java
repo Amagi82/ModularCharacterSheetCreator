@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui.edit.axis;
+package amagi82.modularcharactersheetcreator.ui.edit._events;
 
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 

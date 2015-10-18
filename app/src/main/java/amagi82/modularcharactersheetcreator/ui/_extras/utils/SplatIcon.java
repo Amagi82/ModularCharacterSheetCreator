@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui.xtras.utils;
+package amagi82.modularcharactersheetcreator.ui._extras.utils;
 
 //This class returns a url for an icon at reduced dimensions if necessary
 public class SplatIcon {

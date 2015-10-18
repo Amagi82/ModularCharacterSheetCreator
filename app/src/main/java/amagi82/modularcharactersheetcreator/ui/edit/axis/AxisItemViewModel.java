@@ -3,7 +3,9 @@ package amagi82.modularcharactersheetcreator.ui.edit.axis;
 import android.view.View;
 
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
+import amagi82.modularcharactersheetcreator.ui.edit._events.AxisSelectedEvent;
+import amagi82.modularcharactersheetcreator.ui.edit._events.AxisUpdateEvent;
+import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
 
 public class AxisItemViewModel{
     public final Splat splat;

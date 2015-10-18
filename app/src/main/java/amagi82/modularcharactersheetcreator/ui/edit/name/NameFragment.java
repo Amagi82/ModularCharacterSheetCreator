@@ -11,8 +11,8 @@ import com.squareup.otto.Subscribe;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.FragmentEditNameBinding;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.ui.base.BaseFragment;
-import amagi82.modularcharactersheetcreator.ui.edit.CharacterUpdatedEvent;
+import amagi82.modularcharactersheetcreator.ui._base.BaseFragment;
+import amagi82.modularcharactersheetcreator.ui.edit._events.CharacterUpdatedEvent;
 import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
 
 public class NameFragment extends BaseFragment {

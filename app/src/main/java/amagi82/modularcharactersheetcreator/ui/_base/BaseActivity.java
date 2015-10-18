@@ -1,9 +1,9 @@
-package amagi82.modularcharactersheetcreator.ui.base;
+package amagi82.modularcharactersheetcreator.ui._base;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
+import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
 import icepick.Icepick;
 
 public abstract class BaseActivity extends AppCompatActivity{

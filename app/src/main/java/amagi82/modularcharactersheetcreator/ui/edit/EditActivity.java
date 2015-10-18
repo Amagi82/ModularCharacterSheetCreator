@@ -15,14 +15,15 @@ import com.squareup.otto.Subscribe;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.ActivityEditBinding;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.ui.base.BaseActivity;
-import amagi82.modularcharactersheetcreator.ui.edit.axis.AxisSelectedEvent;
-import amagi82.modularcharactersheetcreator.ui.edit.game.GameSelectedEvent;
-import amagi82.modularcharactersheetcreator.ui.edit.name.KeyboardVisibleEvent;
-import amagi82.modularcharactersheetcreator.ui.edit.name.NameChangedEvent;
-import amagi82.modularcharactersheetcreator.ui.edit.name.ResetItemEvent;
-import amagi82.modularcharactersheetcreator.ui.xtras.utils.Otto;
-import amagi82.modularcharactersheetcreator.ui.xtras.widgets.NoSwipeViewPager;
+import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
+import amagi82.modularcharactersheetcreator.ui.edit._events.AxisSelectedEvent;
+import amagi82.modularcharactersheetcreator.ui.edit._events.CharacterUpdatedEvent;
+import amagi82.modularcharactersheetcreator.ui.edit._events.GameSelectedEvent;
+import amagi82.modularcharactersheetcreator.ui.edit._events.KeyboardVisibleEvent;
+import amagi82.modularcharactersheetcreator.ui.edit._events.NameChangedEvent;
+import amagi82.modularcharactersheetcreator.ui.edit._events.ResetSelectionEvent;
+import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
+import amagi82.modularcharactersheetcreator.ui._extras.widgets.NoSwipeViewPager;
 import icepick.State;
 
 import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.CHARACTER;
@@ -31,7 +32,6 @@ public class EditActivity extends BaseActivity {
     public static final String LEFT = "Left";
     private ActivityEditBinding binding;
     private NoSwipeViewPager viewPager;
-    private boolean keyboardVisible = false;
     @State GameCharacter character;
     @State @GameCharacter.Progress int currentPage;
 
@@ -63,7 +63,7 @@ public class EditActivity extends BaseActivity {
         return character;
     }
 
-    @Subscribe public void resetItem(ResetItemEvent event){
+    @Subscribe public void resetItem(ResetSelectionEvent event) {
         goBack(event.toPage);
     }
 
@@ -79,20 +79,19 @@ public class EditActivity extends BaseActivity {
         nextPage();
     }
 
-    @Subscribe public void nameChanged(NameChangedEvent event){
-        Log.i("EditActivity", "nameChanged to "+event.name);
+    @Subscribe public void nameChanged(NameChangedEvent event) {
+        Log.i("EditActivity", "nameChanged to " + event.name);
         character = character.toBuilder().name(event.name).build();
-        if(event.name.length() > 0) {
+        if (event.name.length() > 0) {
             new Handler().postDelayed(new Runnable() {
                 @Override public void run() {
-                    if(character.isComplete()) binding.fab.show();
+                    if (character.isComplete()) binding.fab.show();
                 }
             }, 500);
-        }
-        else binding.fab.hide();
+        } else binding.fab.hide();
     }
 
-    @Subscribe public void keyboardVisible(KeyboardVisibleEvent event){
+    @Subscribe public void keyboardVisible(KeyboardVisibleEvent event) {
         binding.fab.hide();
     }
 
@@ -123,14 +122,13 @@ public class EditActivity extends BaseActivity {
         else super.onBackPressed();
     }
 
-    private void goBack(int toPage){
-        binding.fab.hide();
+    private void goBack(int toPage) {
         currentPage = toPage;
+        binding.fab.hide();
         character = character.removeProgress(currentPage);
         Otto.BUS.get().post(new CharacterUpdatedEvent());
         binding.appbar.setExpanded(true);
         viewPager.setCurrentItem(currentPage);
-
         if (currentPage == GameCharacter.START) binding.getEditViewModel().splashUrl.set(0);
     }
 }

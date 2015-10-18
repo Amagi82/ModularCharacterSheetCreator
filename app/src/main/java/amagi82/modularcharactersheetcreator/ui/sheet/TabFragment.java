@@ -9,7 +9,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
-import amagi82.modularcharactersheetcreator.ui.base.BaseFragment;
+import amagi82.modularcharactersheetcreator.ui._base.BaseFragment;
 
 public class TabFragment extends BaseFragment {
 

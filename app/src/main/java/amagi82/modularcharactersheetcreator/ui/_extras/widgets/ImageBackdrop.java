@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui.xtras.widgets;
+package amagi82.modularcharactersheetcreator.ui._extras.widgets;
 
 import android.annotation.TargetApi;
 import android.content.Context;
