@@ -61,10 +61,10 @@ public abstract class GameCharacter implements Parcelable {
     public abstract Builder toBuilder();
 
     @AutoParcel
-    public static abstract class ColorScheme {
-        public abstract @ColorInt int colorBackground();
-        public abstract @ColorInt int colorText();
-        public abstract @ColorInt int colorTextDim();
+    public static abstract class ColorScheme implements Parcelable{
+        @ColorInt public abstract int colorBackground();
+        @ColorInt public abstract int colorText();
+        @ColorInt public abstract int colorTextDim();
 
         ColorScheme() {}
 
@@ -74,7 +74,7 @@ public abstract class GameCharacter implements Parcelable {
     }
 
     @AutoParcel
-    public static abstract class CharacterImage {
+    public static abstract class CharacterImage implements Parcelable{
         @NonNull public abstract Uri uri();
         public abstract int height();
         public abstract int width();

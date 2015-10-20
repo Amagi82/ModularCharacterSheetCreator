@@ -14,8 +14,7 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:ignore="UnusedAttribute" >
-        <activity
-            android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.main.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,12 +25,18 @@
         <activity
             android:name=".ui.edit.EditActivity"
             android:label=""
-            android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".ui.main.MainActivity" >
+            android:parentActivityName=".ui.main.MainActivity"
+            android:windowSoftInputMode="adjustPan" >
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.crop.CropActivity"
+            android:label="@string/title_activity_crop"
+            android:theme="@style/AppTheme" >
         </activity>
     </application>
 

@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.ui.edit;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.PorterDuff;
@@ -7,6 +8,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -16,6 +19,7 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.ActivityEditBinding;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
+import amagi82.modularcharactersheetcreator.ui.crop.CropActivity;
 import amagi82.modularcharactersheetcreator.ui.edit._events.AxisSelectedEvent;
 import amagi82.modularcharactersheetcreator.ui.edit._events.AxisUpdateEvent;
 import amagi82.modularcharactersheetcreator.ui.edit._events.GameSelectedEvent;
@@ -37,6 +41,7 @@ import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.RESULT_D
     Exiting this screen takes you back to the MainActivity.
  */
 public class EditActivity extends BaseActivity {
+    private static final int REQ_CODE = 1;
     private ActivityEditBinding binding;
     private EditViewModel editViewModel;
     @State GameCharacter character;
@@ -121,7 +126,32 @@ public class EditActivity extends BaseActivity {
     }
 
     public void onActionPhoto(View view) {
+        if (character.image() == null) getCroppedImage();
+        else {
+            new AlertDialog.Builder(this).setItems(R.array.portrait_choices, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (which == 0) {
+                        //Remove the image and use the default icon
+                        character = character.toBuilder().image(null).colorScheme(null).build();
+                        editViewModel.update(character);
+                    } else getCroppedImage();
+                }
+            }).show();
+        }
+    }
 
+    private void getCroppedImage(){
+        startActivityForResult(new Intent(EditActivity.this, CropActivity.class).putExtra(CHARACTER, character), REQ_CODE);
+    }
+
+    @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_OK || data == null) {
+            Log.i("EditActivity", "onActivityResult: failure");
+            return;
+        }
+        character = data.getParcelableExtra(CHARACTER);
+        editViewModel.update(character);
     }
 
     public void onFabClicked(View view) {

@@ -73,5 +73,6 @@
         <item>Choose new photo</item>
     </string-array>
     <string name="title_activity_edit_character">EditCharacterActivity</string>
+    <string name="title_activity_crop">CropActivity</string>
 
 </resources>
