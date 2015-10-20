@@ -44,7 +44,7 @@
     <color name="card_background">#FEF1E0</color>
     <color name="card_header_background">#F6E6CE</color>
 
-    <color name="edit_name_image_placeholder_grey">#EEEEEE</color>
+    <color name="edit_name_image_placeholder_grey">#E2E2E2</color>
 
     <!-- Game theme colors-->
     <color name="scion">#809CB0</color>

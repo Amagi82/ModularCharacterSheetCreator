@@ -52,7 +52,8 @@ public class BindingAdapters {
 
     @BindingAdapter("imageUri")
     public static void loadImage(ImageView img, Uri uri) {
-        Glide.with(img.getContext()).load(uri).into(img);
+        img.setAdjustViewBounds(uri != null);
+        Glide.with(img.getContext()).load(uri).placeholder(R.drawable.ic_person_24dp).into(img);
     }
 
     @BindingAdapter("loadIcon")
@@ -66,13 +67,13 @@ public class BindingAdapters {
     }
 
     @BindingAdapter("page")
-    public static void setCurrentPage(NoSwipeViewPager viewPager, int page){
+    public static void setCurrentPage(NoSwipeViewPager viewPager, int page) {
         viewPager.setCurrentItem(page);
     }
 
     @BindingAdapter("fab")
-    public static void setFabVisibility(final FloatingActionButton fab, boolean isShown){
-        if(isShown) new Handler().postDelayed(new Runnable() {
+    public static void setFabVisibility(final FloatingActionButton fab, boolean isShown) {
+        if (isShown) new Handler().postDelayed(new Runnable() {
             @Override public void run() {
                 fab.show();
             }
@@ -81,14 +82,14 @@ public class BindingAdapters {
     }
 
     @BindingAdapter({"format", "argId"})
-    public static void setFormattedText(TextView textView, String format, int argId){
-        if(argId == 0) return;
+    public static void setFormattedText(TextView textView, String format, int argId) {
+        if (argId == 0) return;
         textView.setText(String.format(format, textView.getResources().getString(argId)));
     }
 
     @BindingAdapter("editTextListener")
-    public static void addTextWatcher(FocusAwareEditText editText, EditTextListener listener){
-        if(listener != null) editText.setTextChangedListener(listener);
+    public static void addTextWatcher(FocusAwareEditText editText, EditTextListener listener) {
+        if (listener != null) editText.setTextChangedListener(listener);
     }
 
     @BindingAdapter("android:textColor")
