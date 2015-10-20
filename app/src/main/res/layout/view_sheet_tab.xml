@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="sheetTabViewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.sheet.SheetTabViewModel"/>
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers"/>
+    </data>
+
+    <android.support.v7.widget.RecyclerView
+        style="@style/RecyclerView.Card"
+
+        app:layoutManager="@{LayoutManagers.grid(3)}"/>
+
+</layout>

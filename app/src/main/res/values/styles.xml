@@ -71,38 +71,27 @@
         <item name="android:paddingBottom">@dimen/default_margin</item>
     </style>
 
-    <style name="CircleIcon_CharacterFragment">
-        <item name="android:layout_width">@dimen/character_choice_icon_size</item>
-        <item name="android:layout_height">@dimen/character_choice_icon_size</item>
-        <item name="android:layout_marginLeft">@dimen/character_icon_keyline</item>
-        <item name="android:layout_marginRight">@dimen/character_icon_keyline_right</item>
-        <item name="android:layout_marginTop">?actionBarSize</item>
-    </style>
-
     <style name="CircleIcon">
         <item name="android:layout_marginTop">@dimen/sheet_icon_margin_top</item>
         <item name="android:layout_marginLeft">@dimen/default_small_margin</item>
         <item name="android:layout_marginRight">@dimen/default_small_margin</item>
         <item name="android:layout_width">@dimen/character_choice_icon_size_small</item>
         <item name="android:layout_height">@dimen/character_choice_icon_size_small</item>
+        <item name="layout_collapseMode">parallax</item>
+        <item name="layout_collapseParallaxMultiplier">0.7</item>
     </style>
 
     <style name="CircleIconCaption" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:layout_width">@dimen/character_choice_caption_size</item>
+        <item name="android:layout_width">@dimen/character_choice_caption_size_small</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">?actionBarSize</item>
-        <item name="android:paddingTop">@dimen/character_choice_icon_size</item>
+        <item name="android:layout_marginTop">@dimen/sheet_text_margin_top</item>
         <item name="android:layout_marginLeft">@dimen/character_icon_text_keyline</item>
         <item name="android:layout_marginRight">@dimen/character_icon_text_keyline_right</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textSize">10sp</item>
         <item name="android:clickable">true</item>
-    </style>
-
-    <style name="CircleIconCaption.Small">
-        <item name="android:paddingTop">0dp</item>
-        <item name="android:layout_marginTop">@dimen/sheet_text_margin_top</item>
-        <item name="android:layout_width">@dimen/character_choice_caption_size_small</item>
+        <item name="layout_collapseMode">parallax</item>
+        <item name="layout_collapseParallaxMultiplier">0.7</item>
     </style>
 
     <style name="Fab">
@@ -175,12 +164,10 @@
 
     <style name="CollapsingToolbar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/character_collapsing_toolbar_height</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:fitsSystemWindows">true</item>
-    </style>
-
-    <style name="CollapsingToolbar.Sheet">
-        <item name="android:layout_height">@dimen/portrait_height</item>
+        <item name="contentScrim">@color/primary</item>
+        <item name="layout_scrollFlags">scroll</item>
     </style>
 
     <style name="Toolbar">
@@ -236,7 +223,33 @@
         <item name="android:tint">@color/primary_dark</item>
         <item name="android:src">@drawable/ic_undo_24dp</item>
     </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="ScrimBottom">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/sheet_text_scrim_height_bottom</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:background">@drawable/scrim_bottom</item>
+    </style>
+
+    <style name="ScrimTop">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/sheet_text_scrim_height_top</item>
+        <item name="android:background">@drawable/scrim_top</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="layout_collapseMode">pin</item>
+    </style>
+
+    <style name="ImageBackdrop">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="layout_collapseMode">parallax</item>
+    </style>
+
+    <style name="ViewPager">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="layout_behavior">@string/appbar_scrolling_view_behavior</item>
+    </style>
 
 </resources>

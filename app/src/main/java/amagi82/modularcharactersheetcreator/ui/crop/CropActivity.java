@@ -16,7 +16,8 @@ import java.io.IOException;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.ActivityCropBinding;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.ui.main.MainActivity;
+
+import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.CHARACTER;
 
 /*
     This screen takes an image from the gallery and allows the user to crop it.
@@ -31,7 +32,7 @@ public class CropActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_crop);
 
-        character = getIntent().getParcelableExtra(MainActivity.CHARACTER);
+        character = getIntent().getParcelableExtra(CHARACTER);
         if(character == null) {
             Log.i("CropActivity", "ERROR: character is null");
             finish();
@@ -71,7 +72,7 @@ public class CropActivity extends AppCompatActivity {
                 .colorScheme(swatch == null ? null : GameCharacter.ColorScheme.create(swatch.getRgb(), swatch.getBodyTextColor(), swatch.getTitleTextColor()))
                 .build();
 
-        setResult(RESULT_OK, new Intent().putExtra(MainActivity.CHARACTER, character));
+        setResult(RESULT_OK, new Intent().putExtra(CHARACTER, character));
         finish();
     }
 }

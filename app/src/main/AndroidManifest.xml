@@ -38,6 +38,8 @@
             android:label="@string/title_activity_crop"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity android:name=".ui.sheet.SheetActivity" >
+        </activity>
     </application>
 
 </manifest>
