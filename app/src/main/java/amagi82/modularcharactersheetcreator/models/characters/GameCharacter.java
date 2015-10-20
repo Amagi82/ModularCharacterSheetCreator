@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
-import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -18,14 +17,12 @@ import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.models.games.GameSystem;
 import auto.parcel.AutoParcel;
 
-import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.NONE;
-
 @AutoParcel
 public abstract class GameCharacter implements Parcelable {
     public abstract String name();
+    public abstract @StringRes int gameTitle();
     @Nullable public abstract Splat left();
     @Nullable public abstract Splat right();
-    public abstract @StringRes int gameTitle();
     @Nullable public abstract ColorScheme colorScheme();
     @Nullable public abstract List<Sheet> sheets();
     @Nullable public abstract CharacterImage image();
@@ -41,9 +38,9 @@ public abstract class GameCharacter implements Parcelable {
     @AutoParcel.Builder
     public abstract static class Builder {
         public abstract Builder name(String name);
+        public abstract Builder gameTitle(@StringRes int title);
         public abstract Builder left(Splat left);
         public abstract Builder right(Splat right);
-        public abstract Builder gameTitle(@StringRes int title);
         public abstract Builder colorScheme(ColorScheme colorScheme);
         public abstract Builder sheets(List<Sheet> sheets);
         public abstract Builder image(CharacterImage image);
@@ -56,7 +53,7 @@ public abstract class GameCharacter implements Parcelable {
     public static Builder builder() {
         return new AutoParcel_GameCharacter.Builder()
                 .name("")
-                .gameTitle(NONE)
+                .gameTitle(0)
                 .entityId(UUID.randomUUID().toString())
                 .timeStamp(System.currentTimeMillis());
     }
@@ -79,8 +76,8 @@ public abstract class GameCharacter implements Parcelable {
     @AutoParcel
     public static abstract class CharacterImage {
         @NonNull public abstract Uri uri();
-        @IntRange(from = 100, to = 2560) public abstract int height();
-        @IntRange(from = 100, to = 2560) public abstract int width();
+        public abstract int height();
+        public abstract int width();
 
         CharacterImage() {}
 
@@ -97,12 +94,12 @@ public abstract class GameCharacter implements Parcelable {
     //Used during character creation/editing. Gets the current step in the character creation process
     @Progress
     public int getProgress() {
-        return gameTitle() == NONE ? START : left() == null ? LEFT : right() == null ? RIGHT : FINISH;
+        return gameTitle() == 0 ? START : left() == null ? LEFT : right() == null ? RIGHT : FINISH;
     }
 
     //Used during character creation/editing. Removes progress on back.
     public GameCharacter removeProgress(@Progress int toStep) {
-        int gameTitle = toStep == START ? NONE : gameTitle();
+        int gameTitle = toStep == START ? 0 : gameTitle();
         Splat left = toStep <= LEFT ? null : left();
         Splat right = toStep <= RIGHT ? null : right();
         return toBuilder().gameTitle(gameTitle).left(left).right(right).build();
@@ -114,7 +111,7 @@ public abstract class GameCharacter implements Parcelable {
 
     @SuppressWarnings("ConstantConditions")
     public int getArchetype() {
-        if (left() == null || right() == null || gameTitle() == NONE) return NONE;
+        if (left() == null || right() == null || gameTitle() == 0) return 0;
         return new Game().getSystem(gameTitle()).isArchetypeLeft() ? left().title() : right().title();
     }
 

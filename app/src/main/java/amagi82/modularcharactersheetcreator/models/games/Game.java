@@ -7,6 +7,9 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 
+/*
+    This class simply returns a list of all game systems, or an individual game system from its title.
+ */
 public class Game {
 
     public GameSystem getSystem(@StringRes int gameTitle) {

@@ -8,6 +8,11 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 
+/*
+    Classic World of Darkness
+    Wraith: The Oblivion
+    20th Anniversary Edition
+ */
 public class CWraith extends GameSystem {
 
     public CWraith() {

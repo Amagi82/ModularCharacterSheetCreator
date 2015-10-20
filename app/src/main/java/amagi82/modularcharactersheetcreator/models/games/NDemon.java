@@ -8,6 +8,10 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 
+/*
+    New World of Darkness
+    Demon: The Descent
+ */
 public class NDemon extends GameSystem {
 
     public NDemon() {

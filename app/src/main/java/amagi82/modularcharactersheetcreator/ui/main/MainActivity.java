@@ -24,9 +24,14 @@ import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.Template;
 import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
 
+/*
+    Main screen the user launches into. Contains a list of characters the user has created.
+
+    Navigation:
+    Floating Action Button navigates to Edit screen, where you can create a new character.
+    Clicking on a character takes you to the Sheet screen.
+ */
 public class MainActivity extends BaseActivity {
-    public static final String BUCKET = "bucket";
-    public static final int NONE = -1;
     private MainViewModel viewModel;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +122,8 @@ public class MainActivity extends BaseActivity {
         if(resultCode == RESULT_OK && requestCode == ADD) viewModel.add(character);
         else if(resultCode == RESULT_OK && requestCode == MODIFY && position >= 0) viewModel.update(character, position);
         else if(resultCode == RESULT_DELETED && position >= 0) viewModel.remove(position);
+
+        //TODO: make sure characters are modified in the database
     }
 
     public void onClickAddCharacter(View view) {

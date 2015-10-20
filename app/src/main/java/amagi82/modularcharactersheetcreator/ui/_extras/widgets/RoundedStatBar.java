@@ -70,7 +70,7 @@ public class RoundedStatBar extends RatingBar {
 
         if (getRating() < ratingMin) setRating(ratingMin);
 
-        if(colorBackground != MainActivity.NONE){
+        if(colorBackground != 0){
             GradientDrawable gradient = new GradientDrawable();
             gradient.setShape(GradientDrawable.RECTANGLE);
             gradient.setColor(colorBackground);
@@ -166,7 +166,7 @@ public class RoundedStatBar extends RatingBar {
             ratingMin = a.getInt(R.styleable.RoundedStatBar_rsb_ratingMin, 1);
             ratingBase = a.getInt(R.styleable.RoundedStatBar_rsb_ratingBase, (int) getRating());
             ratingMax = a.getInt(R.styleable.RoundedStatBar_rsb_ratingMax, getNumStars());
-            colorBackground = a.getColor(R.styleable.RoundedStatBar_rsb_colorBackground, MainActivity.NONE);
+            colorBackground = a.getColor(R.styleable.RoundedStatBar_rsb_colorBackground, 0);
             colorFill = a.getColor(R.styleable.RoundedStatBar_rsb_colorFill, ContextCompat.getColor(context, R.color.round_stat_bar_fill));
             colorFillSecondary = a.getColor(R.styleable.RoundedStatBar_rsb_colorFillSecondary, ContextCompat.getColor(context, R.color.round_stat_bar_secondary));
             colorBorder = a.getColor(R.styleable.RoundedStatBar_rsb_colorBorder, ContextCompat.getColor(context, R.color.round_stat_bar_border));
@@ -180,8 +180,6 @@ public class RoundedStatBar extends RatingBar {
             a.recycle();
         }
     }
-
-
 
     public void setTitle(String title) {
         this.title = title;

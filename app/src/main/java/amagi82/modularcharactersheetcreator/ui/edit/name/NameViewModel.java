@@ -8,7 +8,7 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
 import amagi82.modularcharactersheetcreator.models.games.GameSystem;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
 import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener;
-import amagi82.modularcharactersheetcreator.ui.edit._base.BaseViewModel;
+import amagi82.modularcharactersheetcreator.ui._base.BaseViewModel;
 import amagi82.modularcharactersheetcreator.ui.edit._events.KeyboardVisibleEvent;
 import amagi82.modularcharactersheetcreator.ui.edit._events.NameChangedEvent;
 

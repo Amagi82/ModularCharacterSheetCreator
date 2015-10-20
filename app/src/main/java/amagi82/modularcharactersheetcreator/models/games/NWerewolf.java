@@ -8,6 +8,10 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 
+/*
+    New World of Darkness
+    Werewolf: The Forsaken
+ */
 public class NWerewolf extends GameSystem {
 
     public NWerewolf() {

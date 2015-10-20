@@ -6,13 +6,11 @@ import android.view.Display;
 import android.view.WindowManager;
 
 public class ScreenSize {
-
     private final int width;
     private final int height;
 
     public ScreenSize(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
+        Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
         width = size.x;

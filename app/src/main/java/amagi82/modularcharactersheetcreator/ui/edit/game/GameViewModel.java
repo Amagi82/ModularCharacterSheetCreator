@@ -8,7 +8,7 @@ import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.models.games.GameSystem;
-import amagi82.modularcharactersheetcreator.ui.edit._base.BaseViewModel;
+import amagi82.modularcharactersheetcreator.ui._base.BaseViewModel;
 import me.tatarka.bindingcollectionadapter.ItemView;
 
 public class GameViewModel extends BaseViewModel{

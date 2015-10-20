@@ -8,6 +8,10 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 
+/*
+    New World of Darkness
+    Vampire: The Requiem
+ */
 public class NVampire extends GameSystem {
 
     public NVampire() {

@@ -8,6 +8,11 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 
+/*
+    Classic World of Darkness
+    Werewolf: The Apocalypse
+    20th Anniversary Edition
+ */
 public class CWerewolf extends GameSystem {
 
     public CWerewolf() {

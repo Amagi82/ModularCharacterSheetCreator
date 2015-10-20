@@ -10,6 +10,10 @@ import android.text.TextPaint;
 
 import amagi82.modularcharactersheetcreator.R;
 
+/*
+    Creates a colored circle with the first letter of your character's name in the center
+    Used in the Main character list by default if the user has not added a character photo
+ */
 public class CircleIcon {
     private final Context context;
     private final int circleImageSize;

@@ -8,6 +8,10 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 
+/*
+    Exalted 2nd Edition
+    (3rd Edition will be included once available)
+ */
 public class Exalted extends GameSystem {
 
     public Exalted() {

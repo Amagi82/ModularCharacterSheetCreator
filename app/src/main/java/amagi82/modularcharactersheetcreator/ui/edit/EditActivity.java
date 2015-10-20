@@ -28,6 +28,14 @@ import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.CHARACTE
 import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.POSITION;
 import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.RESULT_DELETED;
 
+/*
+    Screen used to create or modify the core of a GameCharacter. Choose game system, character axis(commonly referred to as "splats", name, and photo.
+    Character sheet settings are not handled here (see Sheet).
+
+    Navigation:
+    This screen can be reached from either MainActivity (for new characters) or from SheetActivity (for modifying existing characters).
+    Exiting this screen takes you back to the MainActivity.
+ */
 public class EditActivity extends BaseActivity {
     private ActivityEditBinding binding;
     private EditViewModel editViewModel;

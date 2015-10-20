@@ -23,15 +23,13 @@ import amagi82.modularcharactersheetcreator.ui._extras.widgets.NoSwipeViewPager;
 import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.NONE;
-
 public class BindingAdapters {
     private static int screenWidth;
     private static int imageSize;
 
     @BindingAdapter("imageUrl")
     public static void loadImage(ImageView img, @StringRes int url) {
-        if (url != NONE && url != 0) Glide.with(img.getContext()).load(img.getContext().getString(url)).into(img);
+        if (url != 0) Glide.with(img.getContext()).load(img.getContext().getString(url)).into(img);
         else Glide.clear(img);
     }
 
@@ -49,7 +47,7 @@ public class BindingAdapters {
             }
             size = imageSize;
         }
-        if (url != NONE && url != 0) Glide.with(img.getContext()).load(new SplatIcon(img.getResources().getString(url), size).getUrl()).into(img);
+        if (url != 0) Glide.with(img.getContext()).load(new SplatIcon(img.getResources().getString(url), size).getUrl()).into(img);
     }
 
     @BindingAdapter("imageUri")

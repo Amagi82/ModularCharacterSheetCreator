@@ -12,7 +12,7 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 import amagi82.modularcharactersheetcreator.models.games.GameSystem;
-import amagi82.modularcharactersheetcreator.ui.edit._base.BaseViewModel;
+import amagi82.modularcharactersheetcreator.ui._base.BaseViewModel;
 import me.tatarka.bindingcollectionadapter.ItemView;
 
 public class AxisViewModel extends BaseViewModel {
@@ -51,11 +51,10 @@ public class AxisViewModel extends BaseViewModel {
 
     private void checkRight(GameSystem system, Splat splat) {
         if (list.size() == 0) {
-            if (system.isRightListFinal() || splat != null)
-                addItemModels(system.getListRight(splat), system.getRightTitle(splat));
-        } else if(system.getListRight(splat).size() == 0){
-            list.clear();
-        } else if (!system.isRightListFinal() && list.get(0).getTitle() != system.getListRight(splat).get(0).title()) {
+            if (system.isRightListFinal() || splat != null) addItemModels(system.getListRight(splat), system.getRightTitle(splat));
+        }
+        else if(system.getListRight(splat).size() == 0) list.clear();
+        else if (!system.isRightListFinal() && list.get(0).getTitle() != system.getListRight(splat).get(0).title()) {
             list.clear();
             addItemModels(system.getListRight(splat), system.getRightTitle(splat));
         }

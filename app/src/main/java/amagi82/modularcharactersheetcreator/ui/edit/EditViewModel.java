@@ -3,13 +3,12 @@ package amagi82.modularcharactersheetcreator.ui.edit;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableInt;
-import android.view.View;
 
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
-import amagi82.modularcharactersheetcreator.ui.edit._base.BaseViewModel;
+import amagi82.modularcharactersheetcreator.ui._base.BaseViewModel;
 import amagi82.modularcharactersheetcreator.ui.edit.axis.AxisViewModel;
 import amagi82.modularcharactersheetcreator.ui.edit.game.GameViewModel;
 import amagi82.modularcharactersheetcreator.ui.edit.name.NameViewModel;
@@ -47,6 +46,7 @@ public class EditViewModel {
         ((NameViewModel) pages.get(3)).update(character);
     }
 
+    //Selection was not an end point. Display the sub-list.
     public void update(GameCharacter character, Splat splat) {
         ((AxisViewModel) pages.get(1)).update(character, splat);
         ((AxisViewModel) pages.get(2)).update(character, splat);
@@ -54,9 +54,5 @@ public class EditViewModel {
 
     public void softKeyboardVisible() {
         isFabShown.set(false);
-    }
-
-    public void onFabClicked(View view){
-
     }
 }

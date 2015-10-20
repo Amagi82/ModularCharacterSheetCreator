@@ -8,16 +8,17 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 
-import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.NONE;
-
+/*
+    Base class implemented by all game systems
+ */
 public abstract class GameSystem {
 
-    @StringRes int gameTitle = NONE;
-    @StringRes int leftTitle = NONE;
-    @StringRes int rightTitle = NONE;
-    @StringRes int gameUrl = NONE;
-    @StringRes int splashUrl = NONE;
-    @ColorRes int gameColor = NONE; //Used in the list of characters in MainAdapter
+    @StringRes int gameTitle;
+    @StringRes int leftTitle;
+    @StringRes int rightTitle;
+    @StringRes int gameUrl;
+    @StringRes int splashUrl;
+    @ColorRes int gameColor; //Used in the list of characters in MainAdapter
     boolean isArchetypeLeft = true; //Archetype is displayed under the game system in the list of characters
     boolean checkLeft = false; //With CVampire, Sect must be known to determine if Clan is antitribu.
     boolean isLeftListFinal = true; //False if the list can change depending on choices
