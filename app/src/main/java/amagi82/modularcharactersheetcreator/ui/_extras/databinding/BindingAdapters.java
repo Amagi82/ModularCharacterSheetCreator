@@ -8,6 +8,7 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,6 +53,7 @@ public class BindingAdapters {
 
     @BindingAdapter("imageUri")
     public static void loadImage(ImageView img, Uri uri) {
+        img.getLayoutParams().width = uri == null ? ViewGroup.LayoutParams.WRAP_CONTENT : ViewGroup.LayoutParams.MATCH_PARENT;
         img.setAdjustViewBounds(uri != null);
         Glide.with(img.getContext()).load(uri).placeholder(R.drawable.ic_person_24dp).into(img);
     }

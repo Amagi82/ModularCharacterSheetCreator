@@ -41,13 +41,14 @@
             </android.support.design.widget.TextInputLayout>
 
             <ImageView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_margin"
+                android:layout_gravity="center"
                 android:layout_marginTop="@dimen/default_large_margin"
                 android:background="@color/edit_name_image_placeholder_grey"
                 android:minHeight="@dimen/edit_name_image_minheight"
+                android:minWidth="@dimen/edit_name_image_minwidth"
+                android:scaleType="fitCenter"
                 android:tint="@color/grey"
                 app:imageUri="@{nameViewModel.imageUri}"/>
 

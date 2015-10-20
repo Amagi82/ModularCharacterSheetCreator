@@ -71,12 +71,11 @@
     <dimen name="toolbar_edittext_minwidth">180dp</dimen>
     <dimen name="text_field_title_height">80dp</dimen>
 
+    <dimen name="edit_name_image_minheight">64dp</dimen>
+    <dimen name="edit_name_image_minwidth">188dp</dimen>
+
     <integer name="character_game_span_count">2</integer>
     <integer name="character_axis_span_count">3</integer>
     <integer name="character_name_span_count">2</integer>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="edit_name_image_minheight">88dp</dimen>
 
 </resources>
