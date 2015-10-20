@@ -119,7 +119,7 @@ public class EditActivity extends BaseActivity {
         update();
     }
 
-    private void update(){
+    private void update() {
         editViewModel.update(character);
         binding.appbar.setExpanded(true);
         backstack = character.getProgress();
@@ -141,7 +141,7 @@ public class EditActivity extends BaseActivity {
         }
     }
 
-    private void getCroppedImage(){
+    private void getCroppedImage() {
         startActivityForResult(new Intent(EditActivity.this, CropActivity.class).putExtra(CHARACTER, character), REQ_CODE);
     }
 

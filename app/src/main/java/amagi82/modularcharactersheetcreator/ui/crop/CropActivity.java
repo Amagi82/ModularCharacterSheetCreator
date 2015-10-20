@@ -36,9 +36,8 @@ public class CropActivity extends AppCompatActivity {
             Log.i("CropActivity", "ERROR: character is null");
             finish();
         }
-
-        Intent intentFromGallery = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intentFromGallery, getString(R.string.complete_action_using)), REQ_CODE);
+        Intent intent = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.complete_action_using)), REQ_CODE);
     }
 
     @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -87,7 +87,7 @@ public class MainActivity extends BaseActivity {
         characters.add(GameCharacter.create("Stormwalker", new CWerewolf(), Splat.create(R.string.glass_walkers, R.string.url_cwod_werewolf_tribe_glass_walkers), Splat.create(R.string.ahroun, R.string.url_cwod_werewolf_auspice_ahroun)));
 
         for (GameCharacter character : characters) {
-            Log.i(null, "Creating template for "+character.name());
+            Log.i(null, "Creating template for " + character.name());
             Template template = new Template(this, character);
             Sheet sheet = template.createDefaultSheet();
             List<Sheet> sheets = new ArrayList<>();
@@ -111,17 +111,17 @@ public class MainActivity extends BaseActivity {
 
 
     @Override protected void onActivityResult(@ReqCode int requestCode, @ResultCode int resultCode, Intent data) {
-        Log.i("MainActivity", "onActivityResult resultCode = "+resultCode);
-        if(resultCode == RESULT_CANCELED) return;
+        Log.i("MainActivity", "onActivityResult resultCode = " + resultCode);
+        if (resultCode == RESULT_CANCELED) return;
 
         GameCharacter character = data.getParcelableExtra(CHARACTER);
         int position = data.getIntExtra(POSITION, -1);
-        Log.i("MainActivity", "onActivityResult: position: "+position);
-        Log.i("MainActivity", "onActivityResult: character returned: "+character);
+        Log.i("MainActivity", "onActivityResult: position: " + position);
+        Log.i("MainActivity", "onActivityResult: character returned: " + character);
 
-        if(resultCode == RESULT_OK && requestCode == ADD) viewModel.add(character);
-        else if(resultCode == RESULT_OK && requestCode == MODIFY && position >= 0) viewModel.update(character, position);
-        else if(resultCode == RESULT_DELETED && position >= 0) viewModel.remove(position);
+        if (resultCode == RESULT_OK && requestCode == ADD) viewModel.add(character);
+        else if (resultCode == RESULT_OK && requestCode == MODIFY && position >= 0) viewModel.update(character, position);
+        else if (resultCode == RESULT_DELETED && position >= 0) viewModel.remove(position);
 
         //TODO: make sure characters are modified in the database
     }
@@ -132,11 +132,13 @@ public class MainActivity extends BaseActivity {
 
     @IntDef({ADD, MODIFY})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ReqCode {}
+    public @interface ReqCode {
+    }
 
     @IntDef({RESULT_CANCELED, RESULT_OK, RESULT_DELETED})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ResultCode{}
+    public @interface ResultCode {
+    }
 
     public static final int ADD = 1;
     public static final int MODIFY = 2;

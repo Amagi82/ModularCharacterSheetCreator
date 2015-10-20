@@ -13,9 +13,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:focusable="true"
-            android:focusableInTouchMode="true">
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -42,15 +42,18 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="96dp"
-                android:layout_marginLeft="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_margin"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_small_margin"
+                android:layout_marginRight="@dimen/default_small_margin"
                 android:layout_marginTop="@dimen/default_margin"
+                android:adjustViewBounds="true"
+                android:background="@color/edit_name_image_placeholder_grey"
+                android:minHeight="@dimen/edit_name_image_minheight"
                 app:imageUri="@{nameViewModel.imageUri}"/>
 
             <ImageView
-                android:onClick="onActionPhoto"
                 style="@style/ActionButton"
+                android:onClick="onActionPhoto"
                 android:src="@drawable/ic_camera_alt_24dp"
                 android:tint="@color/primary_dark"/>
 
