@@ -16,8 +16,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                app:cropMode="ratio_free"
+                app:cropMode="ratio_16_9"
                 app:handleColor="@color/primary"
+                app:initialFrameScale="0.9"
                 app:minFrameSize="100dp"/>
 
         </android.support.design.widget.AppBarLayout>
