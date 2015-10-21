@@ -1,10 +1,15 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
-public class BloodPoolModule extends Module {
+import android.os.Parcelable;
 
-    int bloodCurrent;
-    int bloodMax;
-    int bloodPerTurn;
+import auto.parcel.AutoParcel;
+
+@AutoParcel
+public abstract class BloodPoolModule extends Module implements Parcelable{
+
+    public abstract int bloodCurrent();
+    public abstract int bloodMax();
+    public abstract int bloodPerTurn();
 
     public BloodPoolModule() {
         this(null, 7, 10, 1);
@@ -21,6 +26,8 @@ public class BloodPoolModule extends Module {
         this.bloodMax = bloodMax;
         this.bloodPerTurn = bloodPerTurn;
     }
+
+
 
     public int getBloodCurrent() {
         return bloodCurrent;

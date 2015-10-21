@@ -1,65 +1,26 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
 
-public class Module {
+import android.support.annotation.IntDef;
 
-    public enum Type {
-        DEFAULT, HEADER, HEALTH, STATBLOCK, STATUS, TITLETEXTBLOCK, BLOODPOOL
-    }
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
-    Type type;
-    int spanCount = 1;
-    String title;
-    String text;
+public abstract class Module {
 
-    public Module() {
-        this(null, null, 1);
-    }
+    @Type public abstract int type();
+    public abstract String title();
 
-    public Module(Type type) {
-        this.type = type;
-    }
+    public Module() {}
 
-    public Module(String title, String text){
-        this(title, text, 1);
-    }
 
-    public Module(String title, String text, int spanCount){
-        this.type = Type.DEFAULT;
-        this.title = title;
-        this.text = text;
-        this.spanCount = spanCount;
-    }
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({HEADER_MODULE, STAT_MODULE, STAT_BLOCK_MODULE, HEALTH_MODULE, BLOODPOOL_MODULE})
+    public @interface Type {}
 
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
-    public int getSpanCount() {
-        return spanCount;
-    }
-
-    public void setSpanCount(int spanCount) {
-        this.spanCount = spanCount;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
+    public static final int HEADER_MODULE = 0;
+    public static final int STAT_MODULE = 1;
+    public static final int STAT_BLOCK_MODULE = 2;
+    public static final int HEALTH_MODULE = 3;
+    public static final int BLOODPOOL_MODULE = 4;
 }
