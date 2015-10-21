@@ -25,7 +25,7 @@
                 <ImageView
                     style="@style/ImageBackdrop"
                     android:minHeight="196dp"
-
+                    app:imageUri="@{sheetViewModel.character.image.uri}"
                     app:layout_collapseParallaxMultiplier="0.7"/>
 
                 <ImageView

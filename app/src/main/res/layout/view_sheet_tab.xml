@@ -10,7 +10,8 @@
 
     <android.support.v7.widget.RecyclerView
         style="@style/RecyclerView.Card"
-
-        app:layoutManager="@{LayoutManagers.grid(3)}"/>
+        app:itemView="@{sheetTabViewModel.itemView}"
+        app:items="@{sheetTabViewModel.modules}"
+        app:layoutManager="@{LayoutManagers.grid(sheetTabViewModel.numColumns)}"/>
 
 </layout>
