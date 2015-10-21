@@ -15,13 +15,11 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.ActivityMainBinding;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.characters.Sheet;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 import amagi82.modularcharactersheetcreator.models.games.CMage;
 import amagi82.modularcharactersheetcreator.models.games.CVampire;
 import amagi82.modularcharactersheetcreator.models.games.CWerewolf;
 import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
-import amagi82.modularcharactersheetcreator.ui._extras.utils.Template;
 import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
 
 /*
@@ -86,15 +84,15 @@ public class MainActivity extends BaseActivity {
         characters.add(GameCharacter.create("Dr. Von Natsi", new CMage(), Splat.create(R.string.traditions, R.string.url_cwod_mage_faction_traditions), Splat.create(R.string.scions_of_ether, R.string.url_cwod_mage_tradition_scions_of_ether)));
         characters.add(GameCharacter.create("Stormwalker", new CWerewolf(), Splat.create(R.string.glass_walkers, R.string.url_cwod_werewolf_tribe_glass_walkers), Splat.create(R.string.ahroun, R.string.url_cwod_werewolf_auspice_ahroun)));
 
-        for (GameCharacter character : characters) {
-            Log.i(null, "Creating template for " + character.name());
-            Template template = new Template(this, character);
-            Sheet sheet = template.createDefaultSheet();
-            List<Sheet> sheets = new ArrayList<>();
-            sheets.add(sheet);
-            character = character.toBuilder().sheets(sheets).build();
-            Log.i(null, character.name() + " contains " + character.getGameSystem().toString());
-        }
+//        for (GameCharacter character : characters) {
+//            Log.i(null, "Creating template for " + character.name());
+//            Template template = new Template(this, character);
+//            Sheet sheet = template.createDefaultSheet();
+//            List<Sheet> sheets = new ArrayList<>();
+//            sheets.add(sheet);
+//            character = character.toBuilder().sheets(sheets).build();
+//            Log.i(null, character.name() + " contains " + character.getGameSystem().toString());
+//        }
         //for (GameCharacter character : characters) saveCharacter(character);
 
         return characters;
