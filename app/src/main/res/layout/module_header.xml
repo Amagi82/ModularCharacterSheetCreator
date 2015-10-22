@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="headerViewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.sheet.modules.HeaderViewModel"/>
+    </data>
 <android.support.v7.widget.CardView
-    style="@style/Card"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    card_view:cardBackgroundColor="@color/card_header_background"
-    card_view:cardCornerRadius="@dimen/card_corner_radius">
+    style="@style/Card.Dark">
 
     <TextView
-        android:id="@+id/tvTitle"
+        android:text="@{headerViewModel.title}"
         style="@style/TextHeader"
         tools:text="Header"/>
 
 </android.support.v7.widget.CardView>
+</layout>

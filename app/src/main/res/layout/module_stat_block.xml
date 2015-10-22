@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="statBlockViewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.sheet.modules.StatBlockViewModel"/>
+    </data>
+    <android.support.v7.widget.CardView
+        style="@style/Card.Medium">
+
+        <LinearLayout
+            style="@style/LinearLayoutCard">
+
+            <TextView
+                style="@style/TextTitle"
+                android:paddingBottom="@dimen/default_small_margin"
+                android:text="@{statBlockViewModel.title}"
+                tools:text="Title"/>
+
+            <amagi82.modularcharactersheetcreator.ui._extras.widgets.RoundedStatBarBlock
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:statBlock="@{statBlockViewModel.statBlock}"/>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</layout>

@@ -14,13 +14,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.List;
+
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.modules.Stat;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.CircleIcon;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.SplatIcon;
 import amagi82.modularcharactersheetcreator.ui._extras.widgets.FocusAwareEditText;
 import amagi82.modularcharactersheetcreator.ui._extras.widgets.NoSwipeViewPager;
+import amagi82.modularcharactersheetcreator.ui._extras.widgets.RoundedStatBar;
+import amagi82.modularcharactersheetcreator.ui._extras.widgets.RoundedStatBarBlock;
 import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -102,5 +107,15 @@ public class BindingAdapters {
     @BindingAdapter("android:text")
     public static void setText(TextView textView, @StringRes int stringRes) {
         if (stringRes != 0) textView.setText(stringRes);
+    }
+
+    @BindingAdapter("statBlock")
+    public static void setStatBlock(RoundedStatBarBlock statBarBlock, List<Stat> statBlock){
+        statBarBlock.setStats(statBlock);
+    }
+
+    @BindingAdapter("statBar")
+    public static void setStatBar(RoundedStatBar statBar, Stat stat){
+        statBar.setStat(stat);
     }
 }

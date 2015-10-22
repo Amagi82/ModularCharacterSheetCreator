@@ -1,73 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    style="@style/Card"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    card_view:cardBackgroundColor="@color/card_background"
-    card_view:cardCornerRadius="@dimen/card_corner_radius">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="healthViewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.sheet.modules.HealthViewModel"/>
+    </data>
+    <android.support.v7.widget.CardView
+        style="@style/Card.Medium">
 
-        <TextView
-            android:id="@+id/tvTitle"
-            style="@style/TextTitle"
-            android:layout_marginTop="@dimen/default_large_margin"
-            android:text="@string/health"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <amagi82.modularcharactersheetcreator.ui._extras.widgets.RoundedStatBar
-            android:id="@+id/statBar"
-            style="@style/StatRatingBarTen"
-            android:layout_below="@id/tvTitle"
-            android:layout_margin="@dimen/default_margin"
-            android:numStars="7"
-            card_view:barType="healthbox"/>
+            <TextView
+                style="@style/TextTitle"
+                android:layout_marginTop="@dimen/default_large_margin"
+                android:text="@string/health"/>
 
-        <TextView
-            android:id="@+id/tvDamageLevel"
-            style="@style/HealthModuleText"
-            tools:text="Mauled"/>
+            <amagi82.modularcharactersheetcreator.ui._extras.widgets.RoundedStatBar
+                style="@style/StatRatingBarTen"
+                android:layout_below="@id/tvTitle"
+                android:layout_margin="@dimen/default_margin"
+                app:barType="healthbox"
+                app:statBar="@{healthViewModel.stat}"/>
 
-        <TextView
-            android:id="@+id/tvPenalty"
-            style="@style/HealthModuleText"
-            android:layout_alignParentRight="true"
-            tools:text="-2 Dice"/>
+            <TextView
+                android:id="@+id/tvDamageLevel"
+                style="@style/HealthModuleText"
+                android:text="@{textViewModel.damageText}"
+                tools:text="Mauled"/>
 
-        <View
-            style="@style/Divider"
-            android:layout_below="@id/tvDamageLevel"/>
+            <TextView
+                style="@style/HealthModuleText"
+                android:layout_alignParentRight="true"
+                android:text="@{textViewModel.damagePenalty}"
+                tools:text="-2 Dice"/>
 
-        <ImageView
-            android:id="@+id/bHealDamage"
-            style="@style/HealthModuleIcon"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:contentDescription="@string/heal_damage"
-            android:src="@drawable/ic_favorite_24dp"/>
+            <View
+                style="@style/Divider"
+                android:layout_below="@id/tvDamageLevel"/>
 
-        <ImageView
-            android:id="@+id/bAddDamageAgg"
-            style="@style/HealthModuleIcon"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/default_margin"
-            android:contentDescription="@string/take_agg_damage"
-            android:src="@drawable/ic_agg_claws"/>
+            <ImageView
+                android:id="@+id/bHealDamage"
+                style="@style/HealthModuleIcon"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:contentDescription="@string/heal_damage"
+                android:onClick="onHeal"
+                android:src="@drawable/ic_favorite_24dp"/>
 
-        <ImageView
-            android:id="@+id/bAddDamageLethal"
-            style="@style/HealthModuleIcon"
-            android:layout_toLeftOf="@id/bAddDamageAgg"
-            android:contentDescription="@string/take_lethal_damage"
-            android:src="@drawable/ic_lethal_axe"/>
+            <ImageView
+                android:id="@+id/bAddDamageAgg"
+                style="@style/HealthModuleIcon"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/default_margin"
+                android:contentDescription="@string/take_agg_damage"
+                android:onClick="onDamageAgg"
+                android:src="@drawable/ic_agg_claws"/>
 
-        <ImageView
-            android:id="@+id/bAddDamageBashing"
-            style="@style/HealthModuleIcon"
-            android:layout_toLeftOf="@id/bAddDamageLethal"
-            android:contentDescription="@string/take_bashing_damage"
-            android:src="@drawable/ic_bashing_punch"/>
-    </RelativeLayout>
-</android.support.v7.widget.CardView>
+            <ImageView
+                android:id="@+id/bAddDamageLethal"
+                style="@style/HealthModuleIcon"
+                android:layout_toLeftOf="@id/bAddDamageAgg"
+                android:contentDescription="@string/take_lethal_damage"
+                android:onClick="onDamageLethal"
+                android:src="@drawable/ic_lethal_axe"/>
+
+            <ImageView
+                style="@style/HealthModuleIcon"
+                android:layout_toLeftOf="@id/bAddDamageLethal"
+                android:contentDescription="@string/take_bashing_damage"
+                android:onClick="onDamageBashing"
+                android:src="@drawable/ic_bashing_punch"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</layout>

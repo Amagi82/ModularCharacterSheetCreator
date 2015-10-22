@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="statViewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.sheet.modules.StatViewModel"/>
+    </data>
+    <android.support.v7.widget.CardView
+        style="@style/Card.Medium">
+
+        <LinearLayout
+            style="@style/LinearLayoutCard">
+
+            <TextView
+                style="@style/TextTitle"
+                android:paddingBottom="@dimen/default_margin"
+                android:text="@{statViewModel.title}"
+                tools:text="Humanity"/>
+
+            <TextView
+                style="@style/TextBody"
+                android:layout_gravity="center_horizontal"
+                android:paddingBottom="@dimen/default_margin"
+                android:text="@{statViewModel.textBody}"
+                tools:text="Path of Humanity"/>
+
+            <amagi82.modularcharactersheetcreator.ui._extras.widgets.RoundedStatBar
+                style="@style/StatRatingBarTen"
+                app:statBar="@{statViewModel.stat}"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</layout>

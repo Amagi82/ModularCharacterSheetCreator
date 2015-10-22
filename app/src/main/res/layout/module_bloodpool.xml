@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="bloodPoolViewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.sheet.module.BloodPoolViewModel"/>
+    </data>
 <android.support.v7.widget.CardView
-    style="@style/Card"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    card_view:cardBackgroundColor="@color/card_background"
-    card_view:cardCornerRadius="@dimen/card_corner_radius"
+    style="@style/Card.Medium"
     tools:layout_width="120dp">
 
     <RelativeLayout
-        style="@style/LinearLayoutWodCardBlock">
+        style="@style/LinearLayoutCard">
 
         <TextView
             android:id="@+id/tvTitle"
@@ -44,11 +47,11 @@
             android:layout_below="@id/tvTitle"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/default_tiny_margin"
-            card_view:circle_finished_color="@color/darkRed"
-            card_view:circle_max="10"
-            card_view:circle_progress="7"
-            card_view:circle_suffix_text=""
-            card_view:circle_text_size="34sp"/>
+            app:circle_finished_color="@color/darkRed"
+            app:circle_max="10"
+            app:circle_progress="7"
+            app:circle_suffix_text=""
+            app:circle_text_size="34sp"/>
 
         <TextView
             android:id="@+id/tvBloodPerTurn"
@@ -59,3 +62,4 @@
             tools:text="Blood Per Turn: 2"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>
+</layout>
