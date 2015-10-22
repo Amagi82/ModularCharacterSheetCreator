@@ -4,13 +4,13 @@ import android.databinding.ObservableField;
 
 import amagi82.modularcharactersheetcreator.models.modules.Health;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
-import amagi82.modularcharactersheetcreator.ui._base.BaseViewModel;
+import amagi82.modularcharactersheetcreator.ui._base.BaseModuleViewModel;
 
-public class HealthViewModel extends BaseViewModel {
+public class HealthViewModel extends BaseModuleViewModel {
     public final ObservableField<Health> health = new ObservableField<>();
 
     public HealthViewModel(Module module) {
-        update(module);
+        super(module);
     }
 
     public void update(Module module){
