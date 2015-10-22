@@ -23,19 +23,18 @@
                 style="@style/StatRatingBarTen"
                 android:layout_below="@id/tvTitle"
                 android:layout_margin="@dimen/default_margin"
-                app:barType="healthbox"
-                app:statBar="@{healthViewModel.stat}"/>
+                app:healthBar="@{healthViewModel.health}"/>
 
             <TextView
                 android:id="@+id/tvDamageLevel"
                 style="@style/HealthModuleText"
-                android:text="@{textViewModel.damageText}"
+                android:text="@{healthViewModel.health.damageText}"
                 tools:text="Mauled"/>
 
             <TextView
                 style="@style/HealthModuleText"
                 android:layout_alignParentRight="true"
-                android:text="@{textViewModel.damagePenalty}"
+                android:text="@{healthViewModel.health.damagePenalty}"
                 tools:text="-2 Dice"/>
 
             <View

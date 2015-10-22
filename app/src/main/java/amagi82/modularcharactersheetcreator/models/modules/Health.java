@@ -6,6 +6,8 @@ import auto.parcel.AutoParcel;
 
 @AutoParcel
 public abstract class Health implements Parcelable{
+    public abstract String damageText();
+    public abstract String damagePenalty();
     public abstract int bashing();
     public abstract int lethal();
     public abstract int agg();
@@ -15,6 +17,8 @@ public abstract class Health implements Parcelable{
 
     @AutoParcel.Builder
     public abstract static class Builder {
+        public abstract Builder damageText(String damageText);
+        public abstract Builder damagePenalty(String damagePenalty);
         public abstract Builder bashing(int bashing);
         public abstract Builder lethal(int lethal);
         public abstract Builder agg(int agg);
@@ -26,6 +30,8 @@ public abstract class Health implements Parcelable{
 
     public static Builder builder() {
         return new AutoParcel_Health.Builder()
+                .damageText("")
+                .damagePenalty("")
                 .numBoxes(7);
     }
 

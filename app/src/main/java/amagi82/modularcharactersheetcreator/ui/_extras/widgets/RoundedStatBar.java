@@ -17,6 +17,7 @@ import android.util.AttributeSet;
 import android.widget.RatingBar;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.modules.Health;
 import amagi82.modularcharactersheetcreator.models.modules.Stat;
 
 public class RoundedStatBar extends RatingBar {
@@ -183,6 +184,10 @@ public class RoundedStatBar extends RatingBar {
 
     public void setStat(Stat stat){
         //TODO: set this up to get everything from a stat
+    }
+
+    public void setHealth(Health health){
+        //TODO: set this up
     }
 
     public void setTitle(String title) {

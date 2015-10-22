@@ -128,7 +128,7 @@
     <orderEntry type="library" exported="" name="adapters-1.0-rc3" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.1.0" level="project" />
     <orderEntry type="library" exported="" name="bindingcollectionadapter-recyclerview-0.14" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-23.1.0" level="project" />
     <orderEntry type="library" exported="" name="auto-parcel-0.3.1" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-23.1.0" level="project" />
   </component>
 </module>

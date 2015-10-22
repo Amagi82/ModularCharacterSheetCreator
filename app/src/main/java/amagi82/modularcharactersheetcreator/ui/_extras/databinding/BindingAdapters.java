@@ -18,6 +18,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.modules.Health;
 import amagi82.modularcharactersheetcreator.models.modules.Stat;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.CircleIcon;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.ScreenSize;
@@ -117,5 +118,10 @@ public class BindingAdapters {
     @BindingAdapter("statBar")
     public static void setStatBar(RoundedStatBar statBar, Stat stat){
         statBar.setStat(stat);
+    }
+
+    @BindingAdapter("healthBar")
+    public static void setHealthBar(RoundedStatBar statBar, Health health){
+        statBar.setHealth(health);
     }
 }

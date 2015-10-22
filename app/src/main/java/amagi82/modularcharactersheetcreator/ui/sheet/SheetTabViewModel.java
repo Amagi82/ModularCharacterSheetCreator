@@ -20,7 +20,7 @@ public class SheetTabViewModel {
         @Override public void select(ItemView itemView, int position, Module item) {
             switch (item.type()){
                 case HEADER_MODULE:
-                    //itemView.set()
+
                     break;
                 case TEXT_MODULE:
 
