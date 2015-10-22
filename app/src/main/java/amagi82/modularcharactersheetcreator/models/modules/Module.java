@@ -1,6 +1,5 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
-
 import android.net.Uri;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;

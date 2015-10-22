@@ -105,10 +105,10 @@ public class RoundedStatBarBlock extends ProgressBar {
 
         //Get maximum layoutWidth of Category and Specialty text
         for (Stat stat : stats) {
-            textPaint.getTextBounds(stat.getCategory(), 0, stat.getCategory().length(), textBox);
+            textPaint.getTextBounds(stat.category(), 0, stat.category().length(), textBox);
             maxCategoryWidth = Math.max(maxCategoryWidth, textBox.width());
-            if (stat.getSpecialty() != null) {
-                textPaintItalic.getTextBounds(stat.getSpecialty(), 0, stat.getSpecialty().length(), textBox);
+            if (stat.specialty() != null) {
+                textPaintItalic.getTextBounds(stat.specialty(), 0, stat.specialty().length(), textBox);
                 maxSpecialtyWidth = Math.max(maxSpecialtyWidth, textBox.width());
             }
         }
@@ -119,7 +119,7 @@ public class RoundedStatBarBlock extends ProgressBar {
 
         //Determine how tall the layout needs to be
         if (specialtyTakesSecondLine && maxSpecialtyWidth > 0) {
-            for (Stat stat : stats) layoutHeight += rowHeight + rowSpacing + (stat.getSpecialty() == null ? 0 : extraRowHeight);
+            for (Stat stat : stats) layoutHeight += rowHeight + rowSpacing + (stat.specialty() == null ? 0 : extraRowHeight);
         } else layoutHeight = (rowHeight + rowSpacing) * stats.size();
 
         //Get the size of the stat box
@@ -145,22 +145,22 @@ public class RoundedStatBarBlock extends ProgressBar {
             path.offset(layoutWidth - barWidth, verticalOffsetTotal);
 
             for (int i = 0; i < max; i++) {
-                if (i < stat.getValueTemporary()) {
-                    paintFill.setColor(i < stat.getValue() ? colorFill : colorFillSecondary);
+                if (i < stat.valueTemp()) {
+                    paintFill.setColor(i < stat.value() ? colorFill : colorFillSecondary);
                     canvas.drawPath(path, paintFill);
                 }
-                paintBorder.setColor(i < stat.getValueMax() ? colorBorder : colorBorderInactive);
+                paintBorder.setColor(i < stat.valueMax() ? colorBorder : colorBorderInactive);
                 canvas.drawPath(path, paintBorder);
 
                 path.offset(boxOffset, 0);
             }
-            canvas.drawText(stat.getCategory(), xPosCategory, yPosCategory, textPaint);
-            if (stat.getSpecialty() != null) {
-                textPaint.getTextBounds(stat.getCategory(), 0, stat.getCategory().length(), textBox);
+            canvas.drawText(stat.category(), xPosCategory, yPosCategory, textPaint);
+            if (stat.specialty() != null) {
+                textPaint.getTextBounds(stat.category(), 0, stat.category().length(), textBox);
                 if (!specialtyTakesSecondLine) xPosSpecialty = textBox.width() + textSpacing;
-                canvas.drawText(stat.getSpecialty(), xPosSpecialty, yPosSpecialty, textPaintItalic);
+                canvas.drawText(stat.specialty(), xPosSpecialty, yPosSpecialty, textPaintItalic);
             }
-            float verticalOffset = rowHeight + rowSpacing + ((specialtyTakesSecondLine && stat.getSpecialty() != null) ? extraRowHeight : 0);
+            float verticalOffset = rowHeight + rowSpacing + ((specialtyTakesSecondLine && stat.specialty() != null) ? extraRowHeight : 0);
             verticalOffsetTotal += verticalOffset;
             yPosCategory += verticalOffset;
             yPosSpecialty += verticalOffset;
