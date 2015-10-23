@@ -34,7 +34,7 @@ public class SheetTabViewModel {
     public final ObservableArrayList<BaseModuleViewModel> modules = new ObservableArrayList<>();
     public final ItemViewSelector<BaseModuleViewModel> itemView = new BaseItemViewSelector<BaseModuleViewModel>() {
         @Override public void select(ItemView itemView, int position, BaseModuleViewModel item) {
-            switch (item.type){
+            switch (item.type) {
                 case HEADER_MODULE:
                     itemView.set(BR.headerViewModel, R.layout.module_header);
                     break;
@@ -54,7 +54,7 @@ public class SheetTabViewModel {
                     itemView.set(BR.bloodPoolViewModel, R.layout.module_bloodpool);
                     break;
                 case IMAGE_MODULE:
-                    //itemView.set(BR., R.layout.);
+                    itemView.set(BR.imageViewModel, R.layout.module_image);
                     break;
             }
         }
@@ -63,8 +63,8 @@ public class SheetTabViewModel {
     public SheetTabViewModel(Sheet sheet) {
         title.set(sheet.title());
         numColumns.set(sheet.numColumns());
-        for (Module module : sheet.modules()){
-            switch (module.type()){
+        for (Module module : sheet.modules()) {
+            switch (module.type()) {
                 case HEADER_MODULE:
                     modules.add(new HeaderViewModel(module));
                     break;
