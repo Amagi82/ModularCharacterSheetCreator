@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui._extras.utils;
+package amagi82.modularcharactersheetcreator.models.templates;
 
 public class Template {
 //
