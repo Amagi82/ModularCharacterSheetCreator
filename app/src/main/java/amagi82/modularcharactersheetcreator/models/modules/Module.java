@@ -14,6 +14,7 @@ import auto.parcel.AutoParcel;
 @AutoParcel
 public abstract class Module {
     @Type public abstract int type();
+    @SpanCount public abstract int spanCount();
     @NonNull public abstract String title();
     @Nullable public abstract String textBody();
     @Nullable public abstract Stat stat();
@@ -23,7 +24,7 @@ public abstract class Module {
     @Nullable public abstract Uri image();
 
     public static Module createHeader(String title){
-        return builder().type(HEADER_MODULE).title(title).build();
+        return builder().type(HEADER_MODULE).title(title).spanCount(FULL).build();
     }
 
     public static Module createText(String title, String textBody){
@@ -53,6 +54,7 @@ public abstract class Module {
     @AutoParcel.Builder
     abstract static class Builder {
         abstract Builder type(@Type int type);
+        abstract Builder spanCount(@SpanCount int spanCount);
         abstract Builder title(String title);
         abstract Builder textBody(String textBody);
         abstract Builder stat(Stat stat);
@@ -66,7 +68,7 @@ public abstract class Module {
     }
 
     static Builder builder() {
-        return new AutoParcel_Module.Builder();
+        return new AutoParcel_Module.Builder().spanCount(ONE);
     }
 
     @Retention(RetentionPolicy.SOURCE)
@@ -80,4 +82,14 @@ public abstract class Module {
     public static final int HEALTH_MODULE = 5;
     public static final int BLOODPOOL_MODULE = 6;
     public static final int IMAGE_MODULE = 7;
+
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({ONE, TWO, THREE, FULL})
+    public @interface SpanCount {}
+
+    public static final int ONE = 1;
+    public static final int TWO = 2;
+    public static final int THREE = 3;
+    public static final int FULL = 99;
 }
