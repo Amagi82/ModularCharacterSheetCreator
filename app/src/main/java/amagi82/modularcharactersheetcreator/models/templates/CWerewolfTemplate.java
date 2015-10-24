@@ -10,13 +10,13 @@ import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Sheet;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 
-public class CMageTemplate extends Template{
+public class CWerewolfTemplate extends Template {
 
-    public CMageTemplate(Resources res) {
+    public CWerewolfTemplate(Resources res) {
         super(res);
     }
 
-    @Override public Sheet getDefaultSheet(GameCharacter character) {
+    @Override Sheet getDefaultSheet(GameCharacter character) {
         List<Module> modules = new ArrayList<>();
         modules.add(header(R.string.attributes));
         modules.add(statBlock(R.string.physical, R.array.CWod_Physical, 1, 5));
@@ -24,21 +24,13 @@ public class CMageTemplate extends Template{
         modules.add(statBlock(R.string.mental, R.array.CWod_Mental, 1, 5));
 
         modules.add(header(R.string.abilities));
-        modules.add(statBlock(R.string.talents, R.array.CMage_Talents, 0, 5));
-        modules.add(statBlock(R.string.skills, R.array.CMage_Skills, 0, 5));
-        modules.add(statBlock(R.string.knowledges, R.array.CMage_Knowledges, 0, 5));
-
-        modules.add(header(R.string.spheres));
-        modules.add(statBlock(0, R.array.CMage_Spheres_Left, 0, 5));
-        modules.add(statBlock(0, R.array.CMage_Spheres_Center, 0, 5));
-        modules.add(statBlock(0, R.array.CMage_Spheres_Right, 0, 5));
+        modules.add(statBlock(R.string.talents, R.array.CWerewolf_Talents, 0, 5));
+        modules.add(statBlock(R.string.skills, R.array.CWerewolf_Skills, 0, 5));
+        modules.add(statBlock(R.string.knowledges, R.array.CWerewolf_Knowledges, 0, 5));
 
         modules.add(header(R.string.advantages));
         modules.add(statBlock(R.string.backgrounds, 0, 0, 5));
-        modules.add(stat(R.string.arete, 0, 1, 10));
-        modules.add(health());
-        modules.add(stat(R.string.willpower, 0, 1, 10));
-        //TODO: add other traits, quintessence/paradox, and xp counter
+
 
         return sheet(modules);
     }

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.characters.Sheet;
 import amagi82.modularcharactersheetcreator.models.modules.BloodPool;
 import amagi82.modularcharactersheetcreator.models.modules.Health;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
@@ -18,6 +20,41 @@ public abstract class Template {
 
     public Template(Resources res) {
         this.res = res;
+    }
+
+    abstract Sheet getDefaultSheet(GameCharacter character);
+
+    public static Sheet getTemplate(Resources res, GameCharacter character){
+        switch (character.gameTitle()) {
+            case R.string.cwod_mage:
+                return new CMageTemplate(res).getDefaultSheet(character);
+            case R.string.cwod_vampire:
+                return new CVampireTemplate(res).getDefaultSheet(character);
+            case R.string.cwod_werewolf:
+                return new CWerewolfTemplate(res).getDefaultSheet(character);
+            case R.string.cwod_wraith:
+                //return new CWraithTemplate(res).getDefaultSheet(character);
+            case R.string.exalted:
+                //return new ExaltedTemplate(res).getDefaultSheet(character);
+            case R.string.nwod_demon:
+                //return new NDemonTemplate(res).getDefaultSheet(character);
+            case R.string.nwod_mummy:
+                //return new NMummyTemplate(res).getDefaultSheet(character);
+            case R.string.nwod_vampire:
+                //return new NVampireTemplate(res).getDefaultSheet(character);
+            case R.string.nwod_werewolf:
+                //return new NWerewolfTemplate(res).getDefaultSheet(character);
+            case R.string.scion:
+                //return new ScionTemplate(res).getDefaultSheet(character);
+            case R.string.trinity:
+                //return new TrinityTemplate(res).getDefaultSheet(character);
+            default:
+                return null;
+        }
+    }
+
+    Sheet sheet(List<Module> modules){
+        return Sheet.create(getString(R.string.character_sheet), modules);
     }
 
     Module bloodPool() {

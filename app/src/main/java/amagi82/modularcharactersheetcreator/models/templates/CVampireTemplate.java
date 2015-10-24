@@ -2,12 +2,13 @@ package amagi82.modularcharactersheetcreator.models.templates;
 
 import android.content.res.Resources;
 import android.support.annotation.ArrayRes;
-import android.support.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.characters.Sheet;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 
 public class CVampireTemplate extends Template{
@@ -16,7 +17,9 @@ public class CVampireTemplate extends Template{
         super(res);
     }
 
-    public List<Module> create(@StringRes int clanTitleId){
+    @SuppressWarnings("ConstantConditions")
+    @Override Sheet getDefaultSheet(GameCharacter character) {
+        if(character.left() == null) return null;
         List<Module> modules = new ArrayList<>();
         modules.add(header(R.string.attributes));
         modules.add(statBlock(R.string.physical, R.array.CWod_Physical, 1, 5));
@@ -29,7 +32,7 @@ public class CVampireTemplate extends Template{
         modules.add(statBlock(R.string.knowledges, R.array.CVampire_Knowledges, 0, 5));
 
         modules.add(header(R.string.advantages));
-        modules.add(statBlock(R.string.disciplines, getDisciplines(clanTitleId), 0, 5));
+        modules.add(statBlock(R.string.disciplines, getDisciplines(character.left().title()), 0, 5));
         modules.add(statBlock(R.string.backgrounds, 0, 0, 5));
         modules.add(statBlock(R.string.virtues, R.array.CVampire_Virtues, 1, 5));
 
@@ -40,7 +43,7 @@ public class CVampireTemplate extends Template{
         modules.add(bloodPool());
         modules.add(health());
 
-        return modules;
+        return sheet(modules);
     }
 
     @ArrayRes private int getDisciplines(int clanTitleId){
