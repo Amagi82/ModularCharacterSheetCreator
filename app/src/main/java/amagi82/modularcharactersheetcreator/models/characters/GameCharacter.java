@@ -10,6 +10,7 @@ import android.support.annotation.StringRes;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ public abstract class GameCharacter implements Parcelable {
     @Nullable public abstract Splat left();
     @Nullable public abstract Splat right();
     @Nullable public abstract ColorScheme colorScheme();
-    @Nullable public abstract List<Sheet> sheets();
+    @NonNull public abstract List<Sheet> sheets();
     @Nullable public abstract CharacterImage image();
     public abstract String entityId();
     public abstract long timeStamp();
@@ -54,6 +55,7 @@ public abstract class GameCharacter implements Parcelable {
         return new AutoParcel_GameCharacter.Builder()
                 .name("")
                 .gameTitle(0)
+                .sheets(new ArrayList<Sheet>())
                 .entityId(UUID.randomUUID().toString())
                 .timeStamp(System.currentTimeMillis());
     }

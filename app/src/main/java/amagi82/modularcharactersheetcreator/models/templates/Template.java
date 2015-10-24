@@ -33,21 +33,21 @@ public abstract class Template {
             case R.string.cwod_werewolf:
                 return new CWerewolfTemplate(res).createSheet(character);
             case R.string.cwod_wraith:
-                //return new CWraithTemplate(res).createSheet(character);
+                return new CWraithTemplate(res).createSheet(character);
             case R.string.exalted:
-                //return new ExaltedTemplate(res).createSheet(character);
+                return new ExaltedTemplate(res).createSheet(character);
             case R.string.nwod_demon:
-                //return new NDemonTemplate(res).createSheet(character);
+                return new NDemonTemplate(res).createSheet(character);
             case R.string.nwod_mummy:
-                //return new NMummyTemplate(res).createSheet(character);
+                return new NMummyTemplate(res).createSheet(character);
             case R.string.nwod_vampire:
-                //return new NVampireTemplate(res).createSheet(character);
+                return new NVampireTemplate(res).createSheet(character);
             case R.string.nwod_werewolf:
-                //return new NWerewolfTemplate(res).createSheet(character);
+                return new NWerewolfTemplate(res).createSheet(character);
             case R.string.scion:
-                //return new ScionTemplate(res).createSheet(character);
+                return new ScionTemplate(res).createSheet(character);
             case R.string.trinity:
-                //return new TrinityTemplate(res).createSheet(character);
+                return new TrinityTemplate(res).createSheet(character);
             default:
                 return null;
         }
