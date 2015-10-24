@@ -20,44 +20,46 @@ public abstract class Template {
         this.res = res;
     }
 
-    Module bloodPool(){
+    Module bloodPool() {
         return Module.createBloodPool(getString(R.string.blood_pool), BloodPool.createDefault());
     }
 
-    Module header(@StringRes int resId){
+    Module header(@StringRes int resId) {
         return Module.createHeader(getString(resId));
     }
 
-    Module health(){
+    Module health() {
         return Module.createHealth(getString(R.string.health), Health.createDefault());
     }
 
-    Module statBlock(@StringRes int titleId, @ArrayRes int arrayId, int valueMin, int valueMax){
+    Module statBlock(@StringRes int titleId, @ArrayRes int arrayId, int valueMin, int valueMax) {
         return Module.createStatBlock(getString(titleId), createDefaultStats(arrayId, valueMin, valueMax));
     }
 
-    Module stat(@StringRes int titleId, @StringRes int bodyId, int valueMin, int valueMax){
+    Module stat(@StringRes int titleId, @StringRes int bodyId, int valueMin, int valueMax) {
         return Module.createStat(getString(titleId), getString(bodyId), Stat.createDefault("", valueMin, valueMax));
     }
 
-    Module text(@StringRes int titleId, String bodyText){
+    Module text(@StringRes int titleId, String bodyText) {
         return Module.createText(getString(titleId), bodyText);
     }
 
-    private List<Stat> createDefaultStats(int arrayId, int valueMin, int valueMax){
+    private List<Stat> createDefaultStats(int arrayId, int valueMin, int valueMax) {
         List<Stat> stats = new ArrayList<>();
         String[] categories = getArray(arrayId);
-        for (String category : categories){
-            stats.add(Stat.createDefault(category, valueMin, valueMax));
+        if (categories != null) {
+            for (String category : categories) {
+                stats.add(Stat.createDefault(category, valueMin, valueMax));
+            }
         }
         return stats;
     }
 
-    private String getString(@StringRes int resId){
-        return res.getString(resId);
+    private String getString(@StringRes int resId) {
+        return resId == 0 ? "" : res.getString(resId);
     }
 
-    private String[] getArray(@ArrayRes int resId){
-        return res.getStringArray(resId);
+    private String[] getArray(@ArrayRes int resId) {
+        return resId == 0 ? null : res.getStringArray(resId);
     }
 }

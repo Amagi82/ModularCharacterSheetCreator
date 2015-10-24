@@ -93,7 +93,7 @@ public class CVampire extends GameSystem {
                         Splat.create(R.string.gangrel, R.string.url_cwod_vampire_clan_gangrel);
             case R.string.lasombra:
             case R.string.lasombra_antitribu:
-                return right.title() == R.string.camarilla ? Splat.create(R.string.lasombra_antitribu, R.string.url_cwod_vampire_antitribu_lasombra) :
+                return right.title() != R.string.sabbat ? Splat.create(R.string.lasombra_antitribu, R.string.url_cwod_vampire_antitribu_lasombra) :
                         Splat.create(R.string.lasombra, R.string.url_cwod_vampire_clan_lasombra);
             case R.string.malkavian:
             case R.string.malkavian_antitribu:
