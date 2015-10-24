@@ -33,14 +33,15 @@ public class CVampireTemplate extends Template{
         modules.add(statBlock(R.string.backgrounds, 0, 0, 5));
         modules.add(statBlock(R.string.virtues, R.array.CVampire_Virtues, 1, 5));
 
+        //TODO: Organize these, add merits and flaws?, add clan weakness, add xp counter
         modules.add(header(0));
-
+        modules.add(stat(R.string.humanity, 0, 5, 10));
+        modules.add(stat(R.string.willpower, 0, 1, 10));
+        modules.add(bloodPool());
+        modules.add(health());
 
         return modules;
     }
-
-
-
 
     @ArrayRes private int getDisciplines(int clanTitleId){
         switch (clanTitleId){
