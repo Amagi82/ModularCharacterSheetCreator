@@ -65,12 +65,20 @@ public abstract class Template {
         return Module.createHeader(getString(resId));
     }
 
+    Module header(@StringRes int resId, @Module.SpanCount int spanCount) {
+        return Module.createHeader(getString(resId), spanCount);
+    }
+
     Module health() {
         return Module.createHealth(getString(R.string.health), Health.createDefault());
     }
 
     Module statBlock(@StringRes int titleId, @ArrayRes int arrayId, int valueMin, int valueMax) {
         return Module.createStatBlock(getString(titleId), createDefaultStats(arrayId, valueMin, valueMax));
+    }
+
+    Module statBlock(@StringRes int titleId, @StringRes int textBody, @ArrayRes int arrayId, int valueMin, int valueMax) {
+        return Module.createStatBlock(getString(titleId), getString(textBody), createDefaultStats(arrayId, valueMin, valueMax));
     }
 
     Module stat(@StringRes int titleId, @StringRes int bodyId, int valueMin, int valueMax) {

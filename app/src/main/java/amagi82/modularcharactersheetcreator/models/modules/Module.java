@@ -27,6 +27,10 @@ public abstract class Module {
         return builder().type(HEADER_MODULE).title(title).spanCount(FULL).build();
     }
 
+    public static Module createHeader(String title, @SpanCount int spanCount){
+        return builder().type(HEADER_MODULE).title(title).spanCount(spanCount).build();
+    }
+
     public static Module createText(String title, String textBody){
         return builder().type(TEXT_MODULE).title(title).textBody(textBody).build();
     }
@@ -37,6 +41,10 @@ public abstract class Module {
 
     public static Module createStatBlock(String title, List<Stat> statBlock){
         return builder().type(STAT_BLOCK_MODULE).title(title).statBlock(statBlock).build();
+    }
+
+    public static Module createStatBlock(String title, String textBody, List<Stat> statBlock){
+        return builder().type(STAT_BLOCK_MODULE).title(title).textBody(textBody).statBlock(statBlock).build();
     }
 
     public static Module createHealth(String title, Health health){

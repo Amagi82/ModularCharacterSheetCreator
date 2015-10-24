@@ -82,6 +82,7 @@
     <string name="corpus">Corpus</string>
     <string name="pathos">Pathos</string>
     <string name="fetters">Fetters</string>
+    <string name="angst">Angst</string>
     <!--Exalted-specific-->
     <string name="specialties">Specialties</string>
     <string name="charms">Charms</string>
@@ -180,6 +181,8 @@
     </integer-array>
 
     <!--Generic NWod-->
+    <string name="unskilled_neg_3">(-3 Unskilled)</string>
+    <string name="unskilled_neg_1">(-1 Unskilled)</string>
     <string-array name="NWod_Attribute_Titles">
         <item>Power</item>
         <item>Finesse</item>
