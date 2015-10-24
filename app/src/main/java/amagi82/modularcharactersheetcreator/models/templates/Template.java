@@ -18,42 +18,42 @@ import amagi82.modularcharactersheetcreator.models.modules.Stat;
 public abstract class Template {
     private Resources res;
 
-    public Template(Resources res) {
+    Template(Resources res) {
         this.res = res;
     }
 
-    abstract Sheet getDefaultSheet(GameCharacter character);
+    abstract Sheet createSheet(GameCharacter character);
 
-    public static Sheet getTemplate(Resources res, GameCharacter character){
+    public static Sheet create(Resources res, GameCharacter character) {
         switch (character.gameTitle()) {
             case R.string.cwod_mage:
-                return new CMageTemplate(res).getDefaultSheet(character);
+                return new CMageTemplate(res).createSheet(character);
             case R.string.cwod_vampire:
-                return new CVampireTemplate(res).getDefaultSheet(character);
+                return new CVampireTemplate(res).createSheet(character);
             case R.string.cwod_werewolf:
-                return new CWerewolfTemplate(res).getDefaultSheet(character);
+                return new CWerewolfTemplate(res).createSheet(character);
             case R.string.cwod_wraith:
-                //return new CWraithTemplate(res).getDefaultSheet(character);
+                //return new CWraithTemplate(res).createSheet(character);
             case R.string.exalted:
-                //return new ExaltedTemplate(res).getDefaultSheet(character);
+                //return new ExaltedTemplate(res).createSheet(character);
             case R.string.nwod_demon:
-                //return new NDemonTemplate(res).getDefaultSheet(character);
+                //return new NDemonTemplate(res).createSheet(character);
             case R.string.nwod_mummy:
-                //return new NMummyTemplate(res).getDefaultSheet(character);
+                //return new NMummyTemplate(res).createSheet(character);
             case R.string.nwod_vampire:
-                //return new NVampireTemplate(res).getDefaultSheet(character);
+                //return new NVampireTemplate(res).createSheet(character);
             case R.string.nwod_werewolf:
-                //return new NWerewolfTemplate(res).getDefaultSheet(character);
+                //return new NWerewolfTemplate(res).createSheet(character);
             case R.string.scion:
-                //return new ScionTemplate(res).getDefaultSheet(character);
+                //return new ScionTemplate(res).createSheet(character);
             case R.string.trinity:
-                //return new TrinityTemplate(res).getDefaultSheet(character);
+                //return new TrinityTemplate(res).createSheet(character);
             default:
                 return null;
         }
     }
 
-    Sheet sheet(List<Module> modules){
+    Sheet sheet(List<Module> modules) {
         return Sheet.create(getString(R.string.character_sheet), modules);
     }
 
@@ -77,8 +77,8 @@ public abstract class Template {
         return Module.createStat(getString(titleId), getString(bodyId), Stat.createDefault("", valueMin, valueMax));
     }
 
-    Module text(@StringRes int titleId, String bodyText) {
-        return Module.createText(getString(titleId), bodyText);
+    Module text(@StringRes int titleId) {
+        return Module.createText(getString(titleId), "");
     }
 
     private List<Stat> createDefaultStats(int arrayId, int valueMin, int valueMax) {

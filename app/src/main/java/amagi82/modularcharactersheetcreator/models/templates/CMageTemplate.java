@@ -12,11 +12,11 @@ import amagi82.modularcharactersheetcreator.models.modules.Module;
 
 public class CMageTemplate extends Template{
 
-    public CMageTemplate(Resources res) {
+    CMageTemplate(Resources res) {
         super(res);
     }
 
-    @Override public Sheet getDefaultSheet(GameCharacter character) {
+    @Override public Sheet createSheet(GameCharacter character) {
         List<Module> modules = new ArrayList<>();
         modules.add(header(R.string.attributes));
         modules.add(statBlock(R.string.physical, R.array.CWod_Physical, 1, 5));

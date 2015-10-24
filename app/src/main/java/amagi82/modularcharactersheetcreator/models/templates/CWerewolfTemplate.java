@@ -12,11 +12,11 @@ import amagi82.modularcharactersheetcreator.models.modules.Module;
 
 public class CWerewolfTemplate extends Template {
 
-    public CWerewolfTemplate(Resources res) {
+    CWerewolfTemplate(Resources res) {
         super(res);
     }
 
-    @Override Sheet getDefaultSheet(GameCharacter character) {
+    @Override Sheet createSheet(GameCharacter character) {
         List<Module> modules = new ArrayList<>();
         modules.add(header(R.string.attributes));
         modules.add(statBlock(R.string.physical, R.array.CWod_Physical, 1, 5));
@@ -30,7 +30,18 @@ public class CWerewolfTemplate extends Template {
 
         modules.add(header(R.string.advantages));
         modules.add(statBlock(R.string.backgrounds, 0, 0, 5));
+        modules.add(text(R.string.gifts));
+        modules.add(text(R.string.gifts));
 
+        modules.add(header(0));
+        modules.add(stat(R.string.glory, 0, 0, 10));
+        modules.add(stat(R.string.rage, 0, 0, 10));
+        modules.add(health());
+        modules.add(stat(R.string.honor, 0, 0, 10));
+        modules.add(stat(R.string.gnosis, 0, 0, 10));
+        modules.add(stat(R.string.wisdom, 0, 0, 10));
+        modules.add(stat(R.string.willpower, 0, 0, 10));
+        //TODO: add xp counter and everything from pg 2 of the werewolf sheet
 
         return sheet(modules);
     }

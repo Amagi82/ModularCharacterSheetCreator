@@ -13,12 +13,12 @@ import amagi82.modularcharactersheetcreator.models.modules.Module;
 
 public class CVampireTemplate extends Template{
 
-    public CVampireTemplate(Resources res) {
+    CVampireTemplate(Resources res) {
         super(res);
     }
 
     @SuppressWarnings("ConstantConditions")
-    @Override Sheet getDefaultSheet(GameCharacter character) {
+    @Override Sheet createSheet(GameCharacter character) {
         if(character.left() == null) return null;
         List<Module> modules = new ArrayList<>();
         modules.add(header(R.string.attributes));
