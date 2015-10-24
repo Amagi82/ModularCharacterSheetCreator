@@ -15,6 +15,10 @@ public abstract class Health implements Parcelable{
 
     public Health() {}
 
+    public static Health createDefault(){
+        return builder().build();
+    }
+
     @AutoParcel.Builder
     public abstract static class Builder {
         public abstract Builder damageText(String damageText);

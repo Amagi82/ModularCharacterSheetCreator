@@ -31,8 +31,8 @@ public abstract class Module {
         return builder().type(TEXT_MODULE).title(title).textBody(textBody).build();
     }
 
-    public static Module createStat(String title, Stat stat){
-        return builder().type(STAT_MODULE).title(title).stat(stat).build();
+    public static Module createStat(String title, String textBody, Stat stat){
+        return builder().type(STAT_MODULE).title(title).textBody(textBody).stat(stat).build();
     }
 
     public static Module createStatBlock(String title, List<Stat> statBlock){

@@ -13,6 +13,10 @@ public abstract class BloodPool implements Parcelable{
 
     public BloodPool() {}
 
+    public static BloodPool createDefault(){
+        return builder().build();
+    }
+
     @AutoParcel.Builder
     public abstract static class Builder {
         public abstract Builder currentBlood(int currentBlood);

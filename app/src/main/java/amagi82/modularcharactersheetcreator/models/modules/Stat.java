@@ -21,6 +21,10 @@ public abstract class Stat implements Parcelable {
 
     public Stat() {}
 
+    public static Stat createDefault(String category, int valueMin, int valueMax){
+        return builder().category(category).valueMin(valueMin).value(valueMin).valueTemp(valueMin).valueMax(valueMax).numStars(valueMax).build();
+    }
+
     @AutoParcel.Builder
     public abstract static class Builder {
         public abstract Builder category(String category);
@@ -38,6 +42,7 @@ public abstract class Stat implements Parcelable {
     public static Builder builder() {
         return new AutoParcel_Stat.Builder()
                 .category("")
+                .valueMax(5)
                 .numStars(5);
     }
 
