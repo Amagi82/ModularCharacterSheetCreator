@@ -12,7 +12,7 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
     Exalted 2nd Edition
     (3rd Edition will be included once available)
  */
-public class Exalted extends GameSystem {
+public class Exalted extends Game {
 
     public Exalted() {
         super();

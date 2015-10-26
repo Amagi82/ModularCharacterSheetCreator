@@ -5,7 +5,7 @@ import android.net.Uri;
 
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
-import amagi82.modularcharactersheetcreator.models.games.GameSystem;
+import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
 import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener;
 import amagi82.modularcharactersheetcreator.ui._base.BaseViewModel;
@@ -31,15 +31,15 @@ public class NameViewModel extends BaseViewModel{
     public NameViewModel() {}
 
     public void update(GameCharacter character){
-        GameSystem gameSystem = character.getGameSystem();
+        Game game = character.getGameSystem();
         Splat left = character.left();
         Splat right = character.right();
 
         if(right != null) {
-            gameItem.set(new GameCardViewModel(gameSystem.getGameUrl(), 0));
-            if(gameSystem.checkLeft()) left = gameSystem.updateLeft(left, right);
-            leftItem.set(new AxisCardViewModel(left, gameSystem.getLeftTitle(), true));
-            rightItem.set(new AxisCardViewModel(right, gameSystem.getRightTitle(left), false));
+            gameItem.set(new GameCardViewModel(game.getGameUrl(), 0));
+            if(game.checkLeft()) left = game.updateLeft(left, right);
+            leftItem.set(new AxisCardViewModel(left, game.getLeftTitle(), true));
+            rightItem.set(new AxisCardViewModel(right, game.getRightTitle(left), false));
         }
         name.set(character.name());
 

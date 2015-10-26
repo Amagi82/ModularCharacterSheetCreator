@@ -11,7 +11,7 @@ import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
-import amagi82.modularcharactersheetcreator.models.games.GameSystem;
+import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.ui._base.BaseViewModel;
 import me.tatarka.bindingcollectionadapter.ItemView;
 
@@ -32,7 +32,7 @@ public class AxisViewModel extends BaseViewModel {
             list.clear();
             return;
         }
-        GameSystem updatedSystem = character.getGameSystem();
+        Game updatedSystem = character.getGameSystem();
         if (currentCharacter.getGameSystem() == null || currentCharacter.getGameSystem().getClass() != updatedSystem.getClass()) list.clear();
 
         if (isLeft) checkLeft(updatedSystem, splat);
@@ -41,7 +41,7 @@ public class AxisViewModel extends BaseViewModel {
         currentCharacter = character;
     }
 
-    private void checkLeft(GameSystem system, Splat splat) {
+    private void checkLeft(Game system, Splat splat) {
         if (list.size() == 0) addItemModels(system.getListLeft(splat), system.getLeftTitle());
         else if (!system.isLeftListFinal() && list.get(0).getTitle() != system.getListLeft(splat).get(0).title()) {
             list.clear();
@@ -49,7 +49,7 @@ public class AxisViewModel extends BaseViewModel {
         }
     }
 
-    private void checkRight(GameSystem system, Splat splat) {
+    private void checkRight(Game system, Splat splat) {
         if (list.size() == 0) {
             if (system.isRightListFinal() || splat != null) addItemModels(system.getListRight(splat), system.getRightTitle(splat));
         }

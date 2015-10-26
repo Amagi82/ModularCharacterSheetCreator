@@ -13,7 +13,7 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
     Wraith: The Oblivion
     20th Anniversary Edition
  */
-public class CWraith extends GameSystem {
+public class CWraith extends Game {
 
     public CWraith() {
         super();

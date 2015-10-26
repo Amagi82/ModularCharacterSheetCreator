@@ -13,7 +13,7 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
     Vampire: The Masquerade
     20th Anniversary Edition
  */
-public class CVampire extends GameSystem {
+public class CVampire extends Game {
 
     public CVampire() {
         super();

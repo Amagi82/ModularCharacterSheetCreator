@@ -12,7 +12,7 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
     New World of Darkness
     Mummy: The Curse
  */
-public class NMummy extends GameSystem {
+public class NMummy extends Game {
 
     public NMummy() {
         super();

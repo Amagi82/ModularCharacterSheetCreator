@@ -36,6 +36,9 @@ public abstract class Health implements Parcelable{
         return new AutoParcel_Health.Builder()
                 .damageText("")
                 .damagePenalty("")
+                .bashing(0)
+                .lethal(0)
+                .agg(0)
                 .numBoxes(7);
     }
 

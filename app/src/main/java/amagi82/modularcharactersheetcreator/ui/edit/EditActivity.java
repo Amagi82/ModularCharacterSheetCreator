@@ -15,9 +15,14 @@ import android.view.View;
 
 import com.squareup.otto.Subscribe;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.ActivityEditBinding;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.characters.Sheet;
+import amagi82.modularcharactersheetcreator.models.templates.Template;
 import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.crop.CropActivity;
 import amagi82.modularcharactersheetcreator.ui.edit._events.AxisSelectedEvent;
@@ -155,6 +160,12 @@ public class EditActivity extends BaseActivity {
     }
 
     public void onFabClicked(View view) {
+        if(character.sheets().size() == 0) {
+            Sheet defaultSheet = Template.create(getResources(), character);
+            List<Sheet> sheets = new ArrayList<>(1);
+            sheets.add(defaultSheet);
+            character = character.toBuilder().sheets(sheets).build();
+        }
         setResult(RESULT_OK, new Intent().putExtra(CHARACTER, character).putExtra(POSITION, getIntent().getIntExtra(POSITION, -1)));
         finish();
     }

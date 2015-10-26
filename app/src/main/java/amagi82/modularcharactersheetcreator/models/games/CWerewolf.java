@@ -13,7 +13,7 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
     Werewolf: The Apocalypse
     20th Anniversary Edition
  */
-public class CWerewolf extends GameSystem {
+public class CWerewolf extends Game {
 
     public CWerewolf() {
         super();

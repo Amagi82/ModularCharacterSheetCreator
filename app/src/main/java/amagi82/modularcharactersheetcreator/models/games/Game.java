@@ -1,18 +1,79 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.support.annotation.ColorRes;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
+import amagi82.modularcharactersheetcreator.models.characters.Splat;
 
 /*
-    This class simply returns a list of all game systems, or an individual game system from its title.
+    Base class implemented by all game systems
  */
-public class Game {
+public abstract class Game {
+    @StringRes int gameTitle;
+    @StringRes int leftTitle;
+    @StringRes int rightTitle;
+    @StringRes int gameUrl;
+    @StringRes int splashUrl;
+    @ColorRes int gameColor; //Used in the list of characters in MainAdapter
+    boolean isArchetypeLeft = true; //Archetype is displayed under the game system in the list of characters
+    boolean checkLeft = false; //With CVampire, Sect must be known to determine if Clan is antitribu.
+    boolean isLeftListFinal = true; //False if the list can change depending on choices
+    boolean isRightListFinal = true; //False if the list can change depending on choices
 
-    public GameSystem getSystem(@StringRes int gameTitle) {
+    public abstract List<Splat> getListLeft(@Nullable Splat splat);
+
+    public abstract List<Splat> getListRight(@Nullable Splat splat);
+
+    public int getGameTitle() {
+        return gameTitle;
+    }
+
+    public int getLeftTitle() {
+        return leftTitle;
+    }
+
+    public int getRightTitle(@Nullable Splat leftSplat) {
+        return rightTitle;
+    }
+
+    public boolean isArchetypeLeft() {
+        return isArchetypeLeft;
+    }
+
+    public int getGameUrl() {
+        return gameUrl;
+    }
+
+    public int getSplashUrl() {
+        return splashUrl;
+    }
+
+    public int getGameColor() {
+        return gameColor;
+    }
+
+    public boolean checkLeft() {
+        return checkLeft;
+    }
+
+    public boolean isLeftListFinal() {
+        return isLeftListFinal;
+    }
+
+    public boolean isRightListFinal() {
+        return isRightListFinal;
+    }
+
+    public Splat updateLeft(Splat left, Splat right){
+        return null;
+    }
+
+    public static Game getSystem(@StringRes int gameTitle) {
         switch (gameTitle) {
             case R.string.cwod_mage:
                 return new CMage();
@@ -41,8 +102,8 @@ public class Game {
         }
     }
 
-    public List<GameSystem> getList() {
-        List<GameSystem> list = new ArrayList<>(11);
+    public static List<Game> getSystems() {
+        List<Game> list = new ArrayList<>(11);
         list.add(new CMage());
         list.add(new CVampire());
         list.add(new CWerewolf());

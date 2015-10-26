@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.UUID;
 
 import amagi82.modularcharactersheetcreator.models.games.Game;
-import amagi82.modularcharactersheetcreator.models.games.GameSystem;
 import auto.parcel.AutoParcel;
 
 @AutoParcel
@@ -32,7 +31,7 @@ public abstract class GameCharacter implements Parcelable {
 
     GameCharacter() {}
 
-    public static GameCharacter create(String name, GameSystem system, Splat left, Splat right) {
+    public static GameCharacter create(String name, Game system, Splat left, Splat right) {
         return builder().name(name).gameTitle(system.getGameTitle()).left(left).right(right).build();
     }
 
@@ -107,14 +106,14 @@ public abstract class GameCharacter implements Parcelable {
         return toBuilder().gameTitle(gameTitle).left(left).right(right).build();
     }
 
-    public GameSystem getGameSystem() {
-        return new Game().getSystem(gameTitle());
+    public Game getGameSystem() {
+        return Game.getSystem(gameTitle());
     }
 
     @SuppressWarnings("ConstantConditions")
     public int getArchetype() {
         if (left() == null || right() == null || gameTitle() == 0) return 0;
-        return new Game().getSystem(gameTitle()).isArchetypeLeft() ? left().title() : right().title();
+        return Game.getSystem(gameTitle()).isArchetypeLeft() ? left().title() : right().title();
     }
 
     @Retention(RetentionPolicy.SOURCE)

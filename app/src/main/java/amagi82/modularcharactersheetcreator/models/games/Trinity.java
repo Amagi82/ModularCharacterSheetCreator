@@ -12,7 +12,7 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
     Trinity Continuum
     Includes Aeon, Aberrant, and Adventure
  */
-public class Trinity extends GameSystem {
+public class Trinity extends Game {
 
     public Trinity() {
         super();

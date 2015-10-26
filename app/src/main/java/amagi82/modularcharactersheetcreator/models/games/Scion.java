@@ -12,7 +12,7 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
     Scion 2nd Edition: Origins
     Includes Hero, Demigod, and God
  */
-public class Scion extends GameSystem {
+public class Scion extends Game {
 
     public Scion() {
         super();

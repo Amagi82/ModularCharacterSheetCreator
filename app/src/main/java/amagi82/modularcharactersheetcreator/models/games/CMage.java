@@ -13,7 +13,7 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
     Mage: The Ascension
     20th Anniversary Edition
  */
-public class CMage extends GameSystem {
+public class CMage extends Game {
 
     public CMage() {
         super();

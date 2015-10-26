@@ -88,9 +88,8 @@ public class MainActivity extends BaseActivity {
 
         for (GameCharacter character : characters) {
             Log.i(null, "Creating template for " + character.name());
-            Sheet defaultSheet;
             if(character.sheets().size() == 0) {
-                defaultSheet = Template.create(getResources(), character);
+                Sheet defaultSheet = Template.create(getResources(), character);
                 List<Sheet> sheets = new ArrayList<>(1);
                 sheets.add(defaultSheet);
                 character = character.toBuilder().sheets(sheets).build();

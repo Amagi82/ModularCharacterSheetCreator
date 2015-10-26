@@ -12,7 +12,7 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
     New World of Darkness
     Vampire: The Requiem
  */
-public class NVampire extends GameSystem {
+public class NVampire extends Game {
 
     public NVampire() {
         super();

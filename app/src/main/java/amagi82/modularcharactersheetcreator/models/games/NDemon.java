@@ -12,7 +12,7 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
     New World of Darkness
     Demon: The Descent
  */
-public class NDemon extends GameSystem {
+public class NDemon extends Game {
 
     public NDemon() {
         super();
