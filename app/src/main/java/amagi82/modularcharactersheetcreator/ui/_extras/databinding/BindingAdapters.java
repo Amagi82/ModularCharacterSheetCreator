@@ -8,6 +8,9 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.modules.Health;
 import amagi82.modularcharactersheetcreator.models.modules.Stat;
+import amagi82.modularcharactersheetcreator.ui._base.BaseModuleViewModel;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.CircleIcon;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.SplatIcon;
@@ -62,6 +66,16 @@ public class BindingAdapters {
         img.getLayoutParams().width = uri == null ? ViewGroup.LayoutParams.WRAP_CONTENT : ViewGroup.LayoutParams.MATCH_PARENT;
         img.setAdjustViewBounds(uri != null);
         Glide.with(img.getContext()).load(uri).placeholder(R.drawable.ic_person_24dp).into(img);
+    }
+
+    @BindingAdapter("characterPortrait")
+    public static void loadCharacterPortrait(ImageView img, Uri uri) {
+        Glide.with(img.getContext()).load(uri).into(img);
+    }
+
+    @BindingAdapter("visibility")
+    public static void setViewVisibility(View view, Uri uri){
+        view.setVisibility(uri == null? View.GONE : View.VISIBLE);
     }
 
     @BindingAdapter("loadIcon")
@@ -123,5 +137,16 @@ public class BindingAdapters {
     @BindingAdapter("healthBar")
     public static void setHealthBar(RoundedStatBar statBar, Health health){
         statBar.setHealth(health);
+    }
+
+    @BindingAdapter({"columns", "modules"})
+    public static void setLayoutManager(RecyclerView recyclerView, int numColumns, final List<BaseModuleViewModel> modules){
+        final GridLayoutManager manager = new GridLayoutManager(recyclerView.getContext(), numColumns);
+        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override public int getSpanSize(int position) {
+                return Math.min(manager.getSpanCount(), modules.get(position).spanCount);
+            }
+        });
+        recyclerView.setLayoutManager(manager);
     }
 }

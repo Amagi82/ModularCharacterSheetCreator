@@ -24,13 +24,14 @@
 
                 <ImageView
                     style="@style/ImageBackdrop"
+                    android:adjustViewBounds="true"
                     android:minHeight="196dp"
-                    app:imageUri="@{sheetViewModel.character.image.uri}"
+                    app:characterPortrait="@{sheetViewModel.character.image.uri}"
                     app:layout_collapseParallaxMultiplier="0.7"/>
 
                 <ImageView
                     style="@style/CircleIcon"
-                    app:imageUrl="@{sheetViewModel.character.left.url}"
+                    app:splatIconUrl="@{sheetViewModel.character.left.url}"
                     tools:src="@drawable/clan_icon"/>
 
                 <TextView
@@ -41,7 +42,7 @@
                 <ImageView
                     style="@style/CircleIcon"
                     android:layout_gravity="right"
-                    app:imageUrl="@{sheetViewModel.character.right.url}"
+                    app:splatIconUrl="@{sheetViewModel.character.right.url}"
                     tools:src="@drawable/clan_icon"/>
 
                 <TextView
@@ -51,10 +52,12 @@
                     tools:text="Right"/>
 
                 <View
-                    style="@style/ScrimTop"/>
+                    style="@style/ScrimTop"
+                    app:visibility="@{sheetViewModel.character.image.uri}"/>
 
                 <View
-                    style="@style/ScrimBottom"/>
+                    style="@style/ScrimBottom"
+                    app:visibility="@{sheetViewModel.character.image.uri}"/>
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"

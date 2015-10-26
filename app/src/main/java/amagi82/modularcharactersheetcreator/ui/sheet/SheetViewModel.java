@@ -2,7 +2,6 @@ package amagi82.modularcharactersheetcreator.ui.sheet;
 
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
-import android.util.Log;
 
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
@@ -24,7 +23,6 @@ public class SheetViewModel {
     public SheetViewModel(GameCharacter character) {
         //noinspection ConstantConditions
         for (Sheet sheet : character.sheets()) {
-            Log.i("SheetViewModel", "Adding tab for: "+sheet);
             tabs.add(new SheetTabViewModel(sheet));
         }
         this.character.set(character);

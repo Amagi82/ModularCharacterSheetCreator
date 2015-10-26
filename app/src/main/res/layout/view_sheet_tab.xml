@@ -12,6 +12,7 @@
         style="@style/RecyclerView.Card"
         app:itemView="@{sheetTabViewModel.itemView}"
         app:items="@{sheetTabViewModel.modules}"
-        app:layoutManager="@{LayoutManagers.grid(sheetTabViewModel.numColumns)}"/>
+        app:modules="@{sheetTabViewModel.modules}"
+        app:columns="@{sheetTabViewModel.numColumns}"/>
 
 </layout>
