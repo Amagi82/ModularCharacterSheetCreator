@@ -3,6 +3,7 @@ package amagi82.modularcharactersheetcreator.ui.sheet;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.util.Log;
 import android.view.View;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -21,9 +22,12 @@ public class SheetActivity extends BaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sheet);
 
         GameCharacter character = getIntent().getParcelableExtra(MainActivity.CHARACTER);
+        Log.i("SheetActivity", "Character =="+character);
+        if(character == null) finish();
 
         sheetViewModel = new SheetViewModel(character);
         binding.setSheetViewModel(sheetViewModel);
+        binding.executePendingBindings();
         binding.tabLayout.setTabsFromPagerAdapter(binding.viewPager.getAdapter());
         binding.tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(binding.viewPager));
         binding.viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout));

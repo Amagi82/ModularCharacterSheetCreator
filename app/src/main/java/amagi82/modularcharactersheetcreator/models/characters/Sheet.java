@@ -1,6 +1,7 @@
 package amagi82.modularcharactersheetcreator.models.characters;
 
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.List;
 
@@ -9,10 +10,9 @@ import auto.parcel.AutoParcel;
 
 @AutoParcel
 public abstract class Sheet implements Parcelable{
-
-    public abstract String title();
+    @NonNull public abstract String title();
     public abstract int numColumns();
-    public abstract List<Module> modules();
+    @NonNull public abstract List<Module> modules();
 
     Sheet() {}
 

@@ -1,6 +1,9 @@
 package amagi82.modularcharactersheetcreator.ui.main;
 
+import android.view.View;
+
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
 
 public class MainItemViewModel {
 
@@ -32,6 +35,10 @@ public class MainItemViewModel {
 
     public String getEntityId(){
         return character.entityId();
+    }
+
+    public void onItemClick(View view){
+        Otto.BUS.get().post(new CharacterClickedEvent(character));
     }
 }
 

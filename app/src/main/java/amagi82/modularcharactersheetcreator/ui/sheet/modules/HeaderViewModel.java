@@ -10,6 +10,7 @@ public class HeaderViewModel extends BaseModuleViewModel {
 
     public HeaderViewModel(Module module) {
         super(module);
+        update(module);
     }
 
     public void update(Module module){

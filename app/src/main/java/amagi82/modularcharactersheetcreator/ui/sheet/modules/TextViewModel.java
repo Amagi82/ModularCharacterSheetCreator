@@ -11,6 +11,7 @@ public class TextViewModel extends BaseModuleViewModel {
 
     public TextViewModel(Module module) {
         super(module);
+        update(module);
     }
 
     public void update(Module module){

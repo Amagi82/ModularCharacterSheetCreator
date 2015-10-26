@@ -11,6 +11,7 @@ public class BloodPoolViewModel extends BaseModuleViewModel {
 
     public BloodPoolViewModel(Module module) {
         super(module);
+        update(module);
     }
 
     public void update(Module module){

@@ -12,6 +12,7 @@ public class ImageViewModel extends BaseModuleViewModel {
 
     public ImageViewModel(Module module) {
         super(module);
+        update(module);
     }
 
     public void update(Module module){

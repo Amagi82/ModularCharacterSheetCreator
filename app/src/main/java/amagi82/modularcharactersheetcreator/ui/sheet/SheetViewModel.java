@@ -2,6 +2,7 @@ package amagi82.modularcharactersheetcreator.ui.sheet;
 
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
+import android.util.Log;
 
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
@@ -21,14 +22,11 @@ public class SheetViewModel {
     };
 
     public SheetViewModel(GameCharacter character) {
-        if(character.sheets() != null){
-            //noinspection ConstantConditions
-            for (Sheet sheet : character.sheets()) {
-                tabs.add(new SheetTabViewModel(sheet));
-            }
+        //noinspection ConstantConditions
+        for (Sheet sheet : character.sheets()) {
+            Log.i("SheetViewModel", "Adding tab for: "+sheet);
+            tabs.add(new SheetTabViewModel(sheet));
         }
-        //TODO: else make a default sheet from the template and an extra empty sheet for notes and update the character
-
         this.character.set(character);
     }
 }

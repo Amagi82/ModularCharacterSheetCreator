@@ -24,39 +24,39 @@ public abstract class Module implements Parcelable{
     @Nullable public abstract BloodPool bloodPool();
     @Nullable public abstract Uri image();
 
-    public static Module createHeader(String title){
+    public static Module createHeader(@NonNull String title){
         return builder().type(HEADER_MODULE).title(title).spanCount(FULL).build();
     }
 
-    public static Module createHeader(String title, @SpanCount int spanCount){
+    public static Module createHeader(@NonNull String title, @SpanCount int spanCount){
         return builder().type(HEADER_MODULE).title(title).spanCount(spanCount).build();
     }
 
-    public static Module createText(String title, String textBody){
+    public static Module createText(@NonNull String title, String textBody){
         return builder().type(TEXT_MODULE).title(title).textBody(textBody).build();
     }
 
-    public static Module createStat(String title, String textBody, Stat stat){
+    public static Module createStat(@NonNull String title, String textBody, Stat stat){
         return builder().type(STAT_MODULE).title(title).textBody(textBody).stat(stat).build();
     }
 
-    public static Module createStatBlock(String title, List<Stat> statBlock){
+    public static Module createStatBlock(@NonNull String title, List<Stat> statBlock){
         return builder().type(STAT_BLOCK_MODULE).title(title).statBlock(statBlock).build();
     }
 
-    public static Module createStatBlock(String title, String textBody, List<Stat> statBlock){
+    public static Module createStatBlock(@NonNull String title, String textBody, List<Stat> statBlock){
         return builder().type(STAT_BLOCK_MODULE).title(title).textBody(textBody).statBlock(statBlock).build();
     }
 
-    public static Module createHealth(String title, Health health){
+    public static Module createHealth(@NonNull String title, Health health){
         return builder().type(HEALTH_MODULE).title(title).health(health).build();
     }
 
-    public static Module createBloodPool(String title, BloodPool bloodPool){
+    public static Module createBloodPool(@NonNull String title, BloodPool bloodPool){
         return builder().type(BLOODPOOL_MODULE).title(title).bloodPool(bloodPool).build();
     }
 
-    public static Module createImage(String title, Uri image){
+    public static Module createImage(@NonNull String title, Uri image){
         return builder().type(IMAGE_MODULE).title(title).image(image).build();
     }
 
@@ -77,7 +77,9 @@ public abstract class Module implements Parcelable{
     }
 
     static Builder builder() {
-        return new AutoParcel_Module.Builder().spanCount(ONE);
+        return new AutoParcel_Module.Builder()
+                .title("")
+                .spanCount(ONE);
     }
 
     @Retention(RetentionPolicy.SOURCE)

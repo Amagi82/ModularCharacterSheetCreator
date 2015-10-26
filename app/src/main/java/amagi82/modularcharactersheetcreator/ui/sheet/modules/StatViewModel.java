@@ -13,6 +13,7 @@ public class StatViewModel extends BaseModuleViewModel {
 
     public StatViewModel(Module module) {
         super(module);
+        update(module);
     }
 
     public void update(Module module){

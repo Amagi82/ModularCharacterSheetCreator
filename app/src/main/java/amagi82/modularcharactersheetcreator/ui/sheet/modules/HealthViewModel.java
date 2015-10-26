@@ -11,6 +11,7 @@ public class HealthViewModel extends BaseModuleViewModel {
 
     public HealthViewModel(Module module) {
         super(module);
+        update(module);
     }
 
     public void update(Module module){

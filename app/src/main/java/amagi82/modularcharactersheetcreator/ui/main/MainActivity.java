@@ -7,6 +7,8 @@ import android.support.annotation.IntDef;
 import android.util.Log;
 import android.view.View;
 
+import com.squareup.otto.Subscribe;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import amagi82.modularcharactersheetcreator.models.games.CWerewolf;
 import amagi82.modularcharactersheetcreator.models.templates.Template;
 import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
+import amagi82.modularcharactersheetcreator.ui.sheet.SheetActivity;
 
 /*
     Main screen the user launches into. Contains a list of characters the user has created.
@@ -36,7 +39,7 @@ public class MainActivity extends BaseActivity {
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(null, "Main Activity onCreate");
+        Log.i("MainActivity", "onCreate");
         //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
 //        if (savedInstanceState != null) {
 //            try {
@@ -77,7 +80,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private List<GameCharacter> generateSampleCharacters() {
-        Log.i(null, "Creating data");
+        Log.i("MainActivity", "Creating data");
         List<GameCharacter> characters = new ArrayList<>();
         characters.add(GameCharacter.create("Thomas Anstis", new CVampire(), Splat.create(R.string.gangrel, R.string.url_cwod_vampire_clan_gangrel), Splat.create(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla)));
         characters.add(GameCharacter.create("Tom Lytton", new CVampire(), Splat.create(R.string.brujah_antitribu, R.string.url_cwod_vampire_antitribu_brujah), Splat.create(R.string.anarchs, R.string.url_cwod_vampire_sect_anarchs)));
@@ -86,15 +89,11 @@ public class MainActivity extends BaseActivity {
         characters.add(GameCharacter.create("Dr. Von Natsi", new CMage(), Splat.create(R.string.traditions, R.string.url_cwod_mage_faction_traditions), Splat.create(R.string.scions_of_ether, R.string.url_cwod_mage_tradition_scions_of_ether)));
         characters.add(GameCharacter.create("Stormwalker", new CWerewolf(), Splat.create(R.string.glass_walkers, R.string.url_cwod_werewolf_tribe_glass_walkers), Splat.create(R.string.ahroun, R.string.url_cwod_werewolf_auspice_ahroun)));
 
-        for (GameCharacter character : characters) {
-            Log.i(null, "Creating template for " + character.name());
-            if(character.sheets().size() == 0) {
-                Sheet defaultSheet = Template.create(getResources(), character);
-                List<Sheet> sheets = new ArrayList<>(1);
-                sheets.add(defaultSheet);
-                character = character.toBuilder().sheets(sheets).build();
-            }
-            Log.i(null, character.name() + " contains " + character.getGameSystem().toString());
+        for (int i = 0; i < characters.size(); i++) {
+            Sheet defaultSheet = Template.create(getResources(), characters.get(i));
+            List<Sheet> sheets = new ArrayList<>(1);
+            sheets.add(defaultSheet);
+            characters.set(i, characters.get(i).toBuilder().sheets(sheets).build());
         }
         //for (GameCharacter character : characters) saveCharacter(character);
 
@@ -125,6 +124,11 @@ public class MainActivity extends BaseActivity {
         else if (resultCode == RESULT_DELETED && position >= 0) viewModel.remove(position);
 
         //TODO: make sure characters are modified in the database
+    }
+
+    @Subscribe public void onItemClicked(CharacterClickedEvent event) {
+        Log.i("MainActivity", "onItemClicked, sending: " + event.character);
+        startActivity(new Intent(MainActivity.this, SheetActivity.class).putExtra(CHARACTER, event.character));
     }
 
     public void onClickAddCharacter(View view) {

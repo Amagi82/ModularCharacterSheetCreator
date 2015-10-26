@@ -11,7 +11,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_list_item_height">
+        android:layout_height="@dimen/default_list_item_height"
+        android:onClick="@{mainItemViewModel.onItemClick}">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageView"

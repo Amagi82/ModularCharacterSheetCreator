@@ -9,7 +9,6 @@ public abstract class BaseModuleViewModel {
     public BaseModuleViewModel(Module module) {
         type = module.type();
         spanCount = module.spanCount();
-        update(module);
     }
 
     public abstract void update(Module module);

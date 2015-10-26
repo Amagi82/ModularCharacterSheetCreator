@@ -3,6 +3,7 @@ package amagi82.modularcharactersheetcreator.ui.sheet;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
+import android.util.Log;
 
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
@@ -61,6 +62,7 @@ public class SheetTabViewModel {
     };
 
     public SheetTabViewModel(Sheet sheet) {
+        Log.i("SheetTabViewModel", "constructing "+sheet);
         title.set(sheet.title());
         numColumns.set(sheet.numColumns());
         for (Module module : sheet.modules()) {
