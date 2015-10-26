@@ -1,6 +1,7 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
 import android.net.Uri;
+import android.os.Parcelable;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +13,7 @@ import java.util.List;
 import auto.parcel.AutoParcel;
 
 @AutoParcel
-public abstract class Module {
+public abstract class Module implements Parcelable{
     @Type public abstract int type();
     @SpanCount public abstract int spanCount();
     @NonNull public abstract String title();
