@@ -31,7 +31,7 @@ public class RoundedStatBarBlock extends ProgressBar {
     @ColorInt private int colorBorderInactive;
     @ColorInt private int textColor;
     @ColorInt private int textColorSpecialty;
-    private final int max; //Number of stats per row
+    private int max = 5; //Number of stats per row
     private final int textSpacing;
     private final int rowSpacing;
     private final int rowHeight; //Standard height of a row
@@ -88,7 +88,6 @@ public class RoundedStatBarBlock extends ProgressBar {
             textPaintItalic.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
             textPaintItalic.setColor(textColorSpecialty);
         }
-        max = getMax();
         textSpacing = res.getDimensionPixelSize(R.dimen.round_stat_bar_text_spacing);
         rowSpacing = res.getDimensionPixelSize(R.dimen.round_stat_bar_row_spacing);
         rowHeight = res.getDimensionPixelSize(R.dimen.round_stat_bar_height);
@@ -188,46 +187,11 @@ public class RoundedStatBarBlock extends ProgressBar {
 
     public void setStats(List<Stat> stats) {
         this.stats = stats;
+        max = 1;
+        for(Stat stat : stats){
+            if(stat.numStars() > max) max = stat.numStars();
+        }
+        setMax(max);
         invalidate();
-    }
-
-    public void setColorFill(int colorFill) {
-        this.colorFill = colorFill;
-    }
-
-    public void setColorFillSecondary(int colorFillSecondary) {
-        this.colorFillSecondary = colorFillSecondary;
-    }
-
-    public void setTextColor(int textColor) {
-        this.textColor = textColor;
-    }
-
-    public void setTextColorSpecialty(int textColorSpecialty) {
-        this.textColorSpecialty = textColorSpecialty;
-    }
-
-    public void setTextSize(float textSize) {
-        this.textSize = textSize;
-    }
-
-    public void setTextSizeSpecialty(float textSizeSpecialty) {
-        this.textSizeSpecialty = textSizeSpecialty;
-    }
-
-    public void setGap(float gap) {
-        this.gap = gap;
-    }
-
-    public void setCornerRadius(float cornerRadius) {
-        this.cornerRadius = cornerRadius;
-    }
-
-    public void setColorBorder(int colorBorder) {
-        this.colorBorder = colorBorder;
-    }
-
-    public void setColorBorderInactive(int colorBorderInactive) {
-        this.colorBorderInactive = colorBorderInactive;
     }
 }
