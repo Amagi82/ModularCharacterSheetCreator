@@ -86,14 +86,14 @@
         <item name="android:layout_marginTop">@dimen/sheet_icon_margin_top</item>
         <item name="android:layout_marginLeft">@dimen/default_small_margin</item>
         <item name="android:layout_marginRight">@dimen/default_small_margin</item>
-        <item name="android:layout_width">@dimen/character_choice_icon_size_small</item>
-        <item name="android:layout_height">@dimen/character_choice_icon_size_small</item>
+        <item name="android:layout_width">@dimen/sheet_splat_icon_size</item>
+        <item name="android:layout_height">@dimen/sheet_splat_icon_size</item>
         <item name="layout_collapseMode">parallax</item>
         <item name="layout_collapseParallaxMultiplier">0.7</item>
     </style>
 
     <style name="CircleIconCaption" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:layout_width">@dimen/character_choice_caption_size_small</item>
+        <item name="android:layout_width">@dimen/sheet_splat_caption_size</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/sheet_text_margin_top</item>
         <item name="android:layout_marginLeft">@dimen/character_icon_text_keyline</item>
