@@ -10,6 +10,9 @@
         <item name="android:layout_margin">@dimen/card_margin</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Card.White">
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
     </style>
 
@@ -21,7 +24,7 @@
         <item name="cardBackgroundColor">@color/card_header_background</item>
     </style>
 
-    <style name="Card.EditName">
+    <style name="Card.White.EditName">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">@dimen/card_height_edit_name_screen</item>

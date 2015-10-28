@@ -9,7 +9,7 @@
     </data>
 
     <android.support.v7.widget.CardView
-        style="@style/Card.EditName"
+        style="@style/Card.White.EditName"
         tools:layout_width="180dp">
 
         <LinearLayout
