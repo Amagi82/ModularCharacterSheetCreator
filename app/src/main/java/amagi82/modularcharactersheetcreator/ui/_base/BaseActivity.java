@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import java.lang.annotation.Retention;
@@ -56,12 +58,12 @@ public abstract class BaseActivity extends AppCompatActivity{
         Otto.BUS.get().unregister(this);
     }
 
-    public void setTint(Drawable icon, @ColorInt int color){
+    public void setTint(@NonNull Drawable icon, @ColorInt int color){
         icon = DrawableCompat.wrap(icon);
         DrawableCompat.setTint(icon, color);
     }
 
-    public void setMenuTint(Menu menu, @ColorInt int color){
+    public void setMenuTint(@NonNull Menu menu, @ColorInt int color){
         for(int i = 0; i< menu.size(); i++){
             setTint(menu.getItem(i).getIcon(), color);
         }
@@ -71,5 +73,11 @@ public abstract class BaseActivity extends AppCompatActivity{
         Drawable icon = ContextCompat.getDrawable(this, res);
         setTint(icon, color);
         return icon;
+    }
+
+    public void setToolbar(@NonNull Toolbar toolbar){
+        setSupportActionBar(toolbar);
+        //noinspection ConstantConditions
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }

@@ -23,9 +23,7 @@ public class SheetActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sheet);
-        setSupportActionBar(binding.toolbar);
-        //noinspection ConstantConditions
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setToolbar(binding.toolbar);
 
         GameCharacter character = getIntent().getParcelableExtra(MainActivity.CHARACTER);
         Log.i("SheetActivity", "Character ==" + character);
