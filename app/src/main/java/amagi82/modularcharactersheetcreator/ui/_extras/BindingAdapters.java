@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui._extras.databinding;
+package amagi82.modularcharactersheetcreator.ui._extras;
 
 import android.databinding.BindingAdapter;
 import android.graphics.drawable.Drawable;
@@ -7,8 +7,11 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;

@@ -260,4 +260,14 @@
         <item name="android:textSize">@dimen/sheet_expanded_title_text_size</item>
     </style>
 
+    <style name="BottomSheet.StyleDialog" parent="BottomSheet.Dialog">
+        <item name="android:backgroundDimAmount">0.2</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="bs_dialogBackground">@color/primary</item>
+        <item name="bs_listStyle">@style/BottomSheet.StyleList</item>
+    </style>
+
+    <style name="BottomSheet.StyleList" parent="BottomSheet.List">
+        <item name="android:layoutAnimation">@null</item>
+    </style>
 </resources>

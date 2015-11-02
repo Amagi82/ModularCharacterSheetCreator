@@ -1,14 +1,18 @@
 package amagi82.modularcharactersheetcreator.ui.sheet;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.cocosw.bottomsheet.BottomSheet;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.ActivitySheetBinding;
@@ -18,11 +22,12 @@ import amagi82.modularcharactersheetcreator.ui.main.MainActivity;
 
 public class SheetActivity extends BaseActivity {
     private SheetViewModel sheetViewModel;
+    private ActivitySheetBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivitySheetBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_sheet);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_sheet);
         setToolbar(binding.toolbar);
 
         GameCharacter character = getIntent().getParcelableExtra(MainActivity.CHARACTER);
@@ -61,6 +66,26 @@ public class SheetActivity extends BaseActivity {
     }
 
     public void onFabClicked(View view) {
-        //Open the bottom sheet
+        final FloatingActionButton fab = (FloatingActionButton) view;
+        fab.hide();
+        new BottomSheet.Builder(this).sheet(binding.viewPager.getCurrentItem() == 0 ? R.menu.bottom_sheet_start : R.menu.bottom_sheet).grid()
+                .listener(new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case R.id.action_new_module:
+                                break;
+                            case R.id.action_new_tab:
+                                break;
+                            case R.id.action_rename_tab:
+                                break;
+                            case R.id.action_delete_tab:
+                                break;
+                        }
+                    }
+        }).setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override public void onDismiss(DialogInterface dialog) {
+                fab.show();
+            }
+        }).show();
     }
 }

@@ -10,15 +10,13 @@
 
     <!--Action menu-->
     <string name="action_delete">Delete</string>
-    <string name="action_discard_changes">Discard changes</string>
     <string name="action_edit">Edit</string>
     <string name="action_settings">Settings</string>
     <string name="action_theme">Theme</string>
-    <string name="action_tab_add">Add tab</string>
-    <string name="action_tab_delete">Delete tab</string>
-    <string name="action_tab_rename">Rename tab</string>
-    <string name="action_tab_move_left">Move tab left</string>
-    <string name="action_tab_move_right">Move tab right</string>
+    <string name="action_new_tab">New Module</string>
+    <string name="action_new_module">New Tab</string>
+    <string name="action_delete_tab">Delete Tab</string>
+    <string name="action_rename_tab">Rename tab</string>
 
     <!--Character creation-->
     <string name="choose_game">Choose game system</string>
@@ -72,7 +70,6 @@
         <item>Remove photo</item>
         <item>Choose new photo</item>
     </string-array>
-    <string name="title_activity_edit_character">EditCharacterActivity</string>
     <string name="title_activity_crop">CropActivity</string>
 
 </resources>
