@@ -16,11 +16,11 @@
             style="@style/AppBar.Fits">
 
             <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/collapsingToolbar"
                 style="@style/CollapsingToolbar"
                 app:expandedTitleMarginBottom="@dimen/default_margin"
                 app:expandedTitleMarginEnd="@dimen/sheet_expanded_title_margin_end"
-                app:expandedTitleMarginStart="@dimen/sheet_expanded_title_margin_start">
+                app:expandedTitleMarginStart="@dimen/sheet_expanded_title_margin_start"
+                app:title="@{sheetViewModel.character.name}">
 
                 <ImageView
                     style="@style/ImageBackdrop"
