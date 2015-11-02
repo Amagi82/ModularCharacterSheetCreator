@@ -3,9 +3,9 @@ package amagi82.modularcharactersheetcreator.models.modules;
 import android.os.Parcelable;
 import android.support.annotation.IntRange;
 
-import auto.parcel.AutoParcel;
+import auto.parcelgson.AutoParcelGson;
 
-@AutoParcel
+@AutoParcelGson
 public abstract class BloodPool implements Parcelable{
     @IntRange(from = 0, to = 50) public abstract int currentBlood();
     @IntRange(from = 10, to = 50) public abstract int maxBlood();
@@ -17,7 +17,7 @@ public abstract class BloodPool implements Parcelable{
         return builder().build();
     }
 
-    @AutoParcel.Builder
+    @AutoParcelGson.Builder
     public abstract static class Builder {
         public abstract Builder currentBlood(int currentBlood);
         public abstract Builder maxBlood(int maxBlood);
@@ -28,7 +28,7 @@ public abstract class BloodPool implements Parcelable{
     }
 
     public static Builder builder() {
-        return new AutoParcel_BloodPool.Builder()
+        return new AutoParcelGson_BloodPool.Builder()
                 .currentBlood(7)
                 .maxBlood(10)
                 .bloodPerTurn(1);

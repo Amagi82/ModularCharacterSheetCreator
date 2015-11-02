@@ -66,11 +66,9 @@ public class CropActivity extends AppCompatActivity {
                 if (swatch == null || swatch.getPopulation() < s.getPopulation()) swatch = s;
             }
         }
-
-        character = character.toBuilder()
-                .image(GameCharacter.CharacterImage.create(uri, croppedImage.getHeight(), croppedImage.getWidth()))
-                .colorScheme(swatch == null ? null : GameCharacter.ColorScheme.create(swatch.getRgb(), swatch.getBodyTextColor(), swatch.getTitleTextColor()))
-                .build();
+        character = character.withImage(
+                GameCharacter.CharacterImage.create(uri.toString(), croppedImage.getHeight(), croppedImage.getWidth()),
+                swatch == null ? null : GameCharacter.ColorScheme.create(swatch.getRgb(), swatch.getBodyTextColor(), swatch.getTitleTextColor()));
 
         setResult(RESULT_OK, new Intent().putExtra(CHARACTER, character));
         finish();

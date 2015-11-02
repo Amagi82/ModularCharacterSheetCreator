@@ -6,8 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.otto.Subscribe;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +27,7 @@ import amagi82.modularcharactersheetcreator.models.templates.Template;
 import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
 import amagi82.modularcharactersheetcreator.ui.sheet.SheetActivity;
+import auto.parcelgson.gson.AutoParcelGsonTypeAdapterFactory;
 
 /*
     Main screen the user launches into. Contains a list of characters the user has created.
@@ -33,49 +38,31 @@ import amagi82.modularcharactersheetcreator.ui.sheet.SheetActivity;
  */
 public class MainActivity extends BaseActivity {
     private MainViewModel viewModel;
+    private Gson gson;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("MainActivity", "onCreate");
-        //NoSQL.with(this).using(GameCharacter.class).bucketId("bucket").delete();
-//        if (savedInstanceState != null) {
-//            try {
-//                if(savedInstanceState.getString(CURRENT_CHARACTER) != null) {
-//                    currentCharacter = LoganSquare.parse(savedInstanceState.getString(CURRENT_CHARACTER), GameCharacter.class);
-//                }
-//                characters = LoganSquare.parseList(savedInstanceState.getString(CHARACTERS), GameCharacter.class);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        } else
-        //loadSavedCharacters();
-
-        viewModel = new MainViewModel(generateSampleCharacters());
-
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        gson = new GsonBuilder().registerTypeAdapterFactory(new AutoParcelGsonTypeAdapterFactory()).create();
+        viewModel = new MainViewModel();
+        getSharedPreferences(CHARACTERS, MODE_PRIVATE).edit().clear();
+        loadSavedCharacters();
+
         binding.setMainViewModel(viewModel);
         binding.toolbar.setLogo(R.drawable.title_onyx);
     }
 
     private void loadSavedCharacters() {
-        //characters = new ArrayList<>();
-//        NoSQL.with(this).withDeserializer(logan).using(GameCharacter.class).bucketId(BUCKET).orderBy(new DataComparator<GameCharacter>() {
-//            @Override public int compare(NoSQLEntity<GameCharacter> o1, NoSQLEntity<GameCharacter> o2) {
-//                return o1.getData().getTimeStamp() > o2.getData().getTimeStamp() ? -1 : o1.getData().getTimeStamp() < o2.getData().getTimeStamp() ? 1 : 0;
-//            }
-//        }).retrieve(new RetrievalCallback<GameCharacter>() {
-//            @Override public void retrievedResults(List<NoSQLEntity<GameCharacter>> entities) {
-//                Log.i(null, "Found " + entities.size() + " sample characters");
-//                if (entities.size() == 0) {
-//                    Log.i(null, "generating sample characters");
-//                    generateSampleCharacters();
-//                } else for (NoSQLEntity<GameCharacter> entity : entities) characters.add(entity.getData());
-//
-//                fm.beginTransaction().add(R.id.container, new MainFragment()).commit();
-//            }
-//        });
+        Log.i("MainActivity", "Shared Preferences contains: "+getSharedPreferences(CHARACTERS, MODE_PRIVATE).getAll().toString());
+        List<GameCharacter> characters;
+        if(getSharedPreferences(CHARACTERS, MODE_PRIVATE).contains(CHARACTERS)){
+            Type listType = new TypeToken<List<GameCharacter>>(){}.getType();
+            characters = gson.fromJson(getSharedPreferences(CHARACTERS, MODE_PRIVATE).getString(CHARACTERS, null), listType);
+        } else characters = generateSampleCharacters();
+        viewModel.addAll(characters);
     }
 
+    //Temporary sample data for testing purposes. Eventually add a splash screen to direct the user to create a new character if the list is empty
     private List<GameCharacter> generateSampleCharacters() {
         Log.i("MainActivity", "Creating data");
         List<GameCharacter> characters = new ArrayList<>();
@@ -90,22 +77,16 @@ public class MainActivity extends BaseActivity {
             Sheet defaultSheet = Template.create(getResources(), characters.get(i));
             List<Sheet> sheets = new ArrayList<>(1);
             sheets.add(defaultSheet);
-            characters.set(i, characters.get(i).toBuilder().sheets(sheets).build());
+            characters.set(i, characters.get(i).withSheets(sheets));
         }
-        //for (GameCharacter character : characters) saveCharacter(character);
+        getSharedPreferences(CHARACTERS, MODE_PRIVATE).edit().putString(CHARACTERS, gson.toJson(characters)).commit();
 
         return characters;
     }
 
-    private void saveCharacter(GameCharacter character) {
-//        NoSQLEntity<GameCharacter> entity = new NoSQLEntity<>(BUCKET, character.entityId());
-//        entity.setData(character);
-//        NoSQL.with(this).using(GameCharacter.class).save(entity);
+    private void saveCharacters() {
+        getSharedPreferences(CHARACTERS, MODE_PRIVATE).edit().putString(CHARACTERS, gson.toJson(viewModel.getCharacters())).commit();
     }
-
-//    deleteCharacter
-//    NoSQL.with(this).using(GameCharacter.class).bucketId(BUCKET).entityId(event.character.entityId()).delete();
-
 
     @Override protected void onActivityResult(@ReqCode int requestCode, @ResultCode int resultCode, Intent data) {
         Log.i("MainActivity", "onActivityResult resultCode = " + resultCode);
@@ -116,21 +97,25 @@ public class MainActivity extends BaseActivity {
         Log.i("MainActivity", "onActivityResult: position: " + position);
         Log.i("MainActivity", "onActivityResult: character returned: " + character);
 
-        if (resultCode == RESULT_OK && requestCode == ADD) viewModel.add(character);
-        else if (resultCode == RESULT_OK && requestCode == MODIFY && position >= 0) viewModel.update(character, position);
-        else if (resultCode == RESULT_DELETED && position >= 0) viewModel.remove(position);
-
-        //TODO: make sure characters are modified in the database
+        if (resultCode == RESULT_OK && requestCode == ADD) {
+            viewModel.add(character);
+            saveCharacters();
+        }
+        else if (resultCode == RESULT_OK && requestCode == MODIFY && position >= 0) {
+            viewModel.update(character, position);
+            saveCharacters();
+        }
+        else if (resultCode == RESULT_DELETED && position >= 0) {
+            viewModel.remove(position);
+            saveCharacters();
+        }
     }
 
     @Subscribe public void onItemClicked(CharacterClickedEvent event) {
-        Log.i("MainActivity", "onItemClicked, sending: " + event.character);
         startActivity(new Intent(MainActivity.this, SheetActivity.class).putExtra(CHARACTER, event.character));
     }
 
     public void onClickAddCharacter(View view) {
         startActivityForResult(new Intent(MainActivity.this, EditActivity.class), ADD);
     }
-
-
 }

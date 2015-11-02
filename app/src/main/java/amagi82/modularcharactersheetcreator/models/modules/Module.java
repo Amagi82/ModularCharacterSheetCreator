@@ -1,6 +1,5 @@
 package amagi82.modularcharactersheetcreator.models.modules;
 
-import android.net.Uri;
 import android.os.Parcelable;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
@@ -10,9 +9,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
-import auto.parcel.AutoParcel;
+import auto.parcelgson.AutoParcelGson;
 
-@AutoParcel
+@AutoParcelGson
 public abstract class Module implements Parcelable{
     @Type public abstract int type();
     @SpanCount public abstract int spanCount();
@@ -22,7 +21,7 @@ public abstract class Module implements Parcelable{
     @Nullable public abstract List<Stat> statBlock();
     @Nullable public abstract Health health();
     @Nullable public abstract BloodPool bloodPool();
-    @Nullable public abstract Uri image();
+    @Nullable public abstract String imageUri();
 
     public static Module createHeader(@NonNull String title){
         return builder().type(HEADER_MODULE).title(title).spanCount(FULL).build();
@@ -56,11 +55,11 @@ public abstract class Module implements Parcelable{
         return builder().type(BLOODPOOL_MODULE).title(title).bloodPool(bloodPool).build();
     }
 
-    public static Module createImage(@NonNull String title, Uri image){
-        return builder().type(IMAGE_MODULE).title(title).image(image).build();
+    public static Module createImage(@NonNull String title, String imageUri){
+        return builder().type(IMAGE_MODULE).title(title).imageUri(imageUri).build();
     }
 
-    @AutoParcel.Builder
+    @AutoParcelGson.Builder
     abstract static class Builder {
         abstract Builder type(@Type int type);
         abstract Builder spanCount(@SpanCount int spanCount);
@@ -70,14 +69,14 @@ public abstract class Module implements Parcelable{
         abstract Builder statBlock(List<Stat> statBlock);
         abstract Builder health(Health health);
         abstract Builder bloodPool(BloodPool bloodPool);
-        abstract Builder image(Uri image);
+        abstract Builder imageUri(String imageUri);
         abstract Module build();
 
         Builder() {}
     }
 
     static Builder builder() {
-        return new AutoParcel_Module.Builder()
+        return new AutoParcelGson_Module.Builder()
                 .title("")
                 .spanCount(ONE);
     }

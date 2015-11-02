@@ -4,12 +4,12 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import auto.parcel.AutoParcel;
+import auto.parcelgson.AutoParcelGson;
 
 /*
     Used to fill a single row of a stat block
  */
-@AutoParcel
+@AutoParcelGson
 public abstract class Stat implements Parcelable {
     @NonNull public abstract String category();
     @Nullable public abstract String specialty();
@@ -25,7 +25,7 @@ public abstract class Stat implements Parcelable {
         return builder().category(category).valueMin(valueMin).value(valueMin).valueTemp(valueMin).valueMax(valueMax).numStars(valueMax).build();
     }
 
-    @AutoParcel.Builder
+    @AutoParcelGson.Builder
     public abstract static class Builder {
         public abstract Builder category(String category);
         public abstract Builder specialty(String specialty);
@@ -40,7 +40,7 @@ public abstract class Stat implements Parcelable {
     }
 
     public static Builder builder() {
-        return new AutoParcel_Stat.Builder()
+        return new AutoParcelGson_Stat.Builder()
                 .category("")
                 .valueMax(5)
                 .numStars(5);

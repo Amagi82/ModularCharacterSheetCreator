@@ -6,9 +6,9 @@ import android.support.annotation.NonNull;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.models.modules.Module;
-import auto.parcel.AutoParcel;
+import auto.parcelgson.AutoParcelGson;
 
-@AutoParcel
+@AutoParcelGson
 public abstract class Sheet implements Parcelable{
     @NonNull public abstract String title();
     public abstract int numColumns();
@@ -17,10 +17,10 @@ public abstract class Sheet implements Parcelable{
     Sheet() {}
 
     public static Sheet create(String title, int numColumns, List<Module> modules) {
-        return new AutoParcel_Sheet(title, numColumns, modules);
+        return new AutoParcelGson_Sheet(title, numColumns, modules);
     }
 
     public static Sheet create(String title, List<Module> modules) {
-        return new AutoParcel_Sheet(title, 3, modules);
+        return new AutoParcelGson_Sheet(title, 3, modules);
     }
 }

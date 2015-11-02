@@ -1,6 +1,5 @@
 package amagi82.modularcharactersheetcreator.models.characters;
 
-import android.net.Uri;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
@@ -15,9 +14,9 @@ import java.util.List;
 import java.util.UUID;
 
 import amagi82.modularcharactersheetcreator.models.games.Game;
-import auto.parcel.AutoParcel;
+import auto.parcelgson.AutoParcelGson;
 
-@AutoParcel
+@AutoParcelGson
 public abstract class GameCharacter implements Parcelable {
     public abstract String name();
     public abstract @StringRes int gameTitle();
@@ -35,23 +34,52 @@ public abstract class GameCharacter implements Parcelable {
         return builder().name(name).gameTitle(system.getGameTitle()).left(left).right(right).build();
     }
 
-    @AutoParcel.Builder
-    public abstract static class Builder {
-        public abstract Builder name(String name);
-        public abstract Builder gameTitle(@StringRes int title);
-        public abstract Builder left(Splat left);
-        public abstract Builder right(Splat right);
-        public abstract Builder colorScheme(ColorScheme colorScheme);
-        public abstract Builder sheets(List<Sheet> sheets);
-        public abstract Builder image(CharacterImage image);
+    public static GameCharacter create(){
+        return builder().build();
+    }
+
+    public GameCharacter withName(String name){
+        return toBuilder().name(name).timeStamp(System.currentTimeMillis()).build();
+    }
+
+    public GameCharacter withGame(@StringRes int gameTitle){
+        return toBuilder().gameTitle(gameTitle).timeStamp(System.currentTimeMillis()).build();
+    }
+
+    public GameCharacter withLeft(Splat left){
+        return toBuilder().left(left).timeStamp(System.currentTimeMillis()).build();
+    }
+
+    public GameCharacter withRight(Splat right){
+        return toBuilder().right(right).timeStamp(System.currentTimeMillis()).build();
+    }
+
+    public GameCharacter withSheets(List<Sheet> sheets){
+        return toBuilder().sheets(sheets).timeStamp(System.currentTimeMillis()).build();
+    }
+
+    public GameCharacter withImage(CharacterImage image, ColorScheme scheme){
+        return toBuilder().image(image).colorScheme(scheme).timeStamp(System.currentTimeMillis()).build();
+    }
+
+    @AutoParcelGson.Builder
+    abstract static class Builder {
+        abstract Builder name(String name);
+        abstract Builder gameTitle(@StringRes int title);
+        abstract Builder left(Splat left);
+        abstract Builder right(Splat right);
+        abstract Builder colorScheme(ColorScheme colorScheme);
+        abstract Builder sheets(List<Sheet> sheets);
+        abstract Builder image(CharacterImage image);
         abstract Builder entityId(String id);
         abstract Builder timeStamp(long currentTime);
-        public abstract GameCharacter build();
+        abstract GameCharacter build();
 
         Builder() {}
     }
-    public static Builder builder() {
-        return new AutoParcel_GameCharacter.Builder()
+
+    static Builder builder() {
+        return new AutoParcelGson_GameCharacter.Builder()
                 .name("")
                 .gameTitle(0)
                 .sheets(new ArrayList<Sheet>())
@@ -59,9 +87,9 @@ public abstract class GameCharacter implements Parcelable {
                 .timeStamp(System.currentTimeMillis());
     }
 
-    public abstract Builder toBuilder();
+    abstract Builder toBuilder();
 
-    @AutoParcel
+    @AutoParcelGson
     public static abstract class ColorScheme implements Parcelable{
         @ColorInt public abstract int colorBackground();
         @ColorInt public abstract int colorText();
@@ -70,20 +98,20 @@ public abstract class GameCharacter implements Parcelable {
         ColorScheme() {}
 
         public static ColorScheme create(int colorBackground, int colorText, int colorTextDim) {
-            return new AutoParcel_GameCharacter_ColorScheme(colorBackground, colorText, colorTextDim);
+            return new AutoParcelGson_GameCharacter_ColorScheme(colorBackground, colorText, colorTextDim);
         }
     }
 
-    @AutoParcel
+    @AutoParcelGson
     public static abstract class CharacterImage implements Parcelable{
-        @NonNull public abstract Uri uri();
+        @NonNull public abstract String uri();
         public abstract int height();
         public abstract int width();
 
         CharacterImage() {}
 
-        public static CharacterImage create(Uri uri, int height, int width) {
-            return new AutoParcel_GameCharacter_CharacterImage(uri, height, width);
+        public static CharacterImage create(String uri, int height, int width) {
+            return new AutoParcelGson_GameCharacter_CharacterImage(uri, height, width);
         }
     }
 
@@ -103,7 +131,7 @@ public abstract class GameCharacter implements Parcelable {
         int gameTitle = toStep == START ? 0 : gameTitle();
         Splat left = toStep <= LEFT ? null : left();
         Splat right = toStep <= RIGHT ? null : right();
-        return toBuilder().gameTitle(gameTitle).left(left).right(right).build();
+        return toBuilder().gameTitle(gameTitle).left(left).right(right).timeStamp(System.currentTimeMillis()).build();
     }
 
     public Game getGameSystem() {

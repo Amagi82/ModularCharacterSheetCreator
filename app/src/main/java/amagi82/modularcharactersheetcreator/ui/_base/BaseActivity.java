@@ -36,7 +36,9 @@ public abstract class BaseActivity extends AppCompatActivity{
     public static final int DEFAULT = 4;
 
     public static final String CHARACTER = "CHARACTER";
+    public static final String CHARACTERS = "CHARACTERS";
     public static final String POSITION = "POSITION";
+    public static final String BUCKET = "BUCKET";
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

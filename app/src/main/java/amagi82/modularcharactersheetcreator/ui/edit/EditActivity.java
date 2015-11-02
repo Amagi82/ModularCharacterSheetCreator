@@ -60,7 +60,7 @@ public class EditActivity extends BaseActivity {
 
         if (character == null) {
             if (getIntent().getParcelableExtra(CHARACTER) != null) character = getIntent().getParcelableExtra(CHARACTER);
-            else character = GameCharacter.builder().build();
+            else character = GameCharacter.create();
         }
 
         editViewModel = new EditViewModel(character);
@@ -74,7 +74,7 @@ public class EditActivity extends BaseActivity {
     }
 
     @Subscribe public void gameSelected(GameSelectedEvent event) {
-        character = character.toBuilder().gameTitle(event.gameTitle).build();
+        character = character.withGame(event.gameTitle);
         update();
     }
 
@@ -84,13 +84,13 @@ public class EditActivity extends BaseActivity {
     }
 
     @Subscribe public void axisSelected(AxisSelectedEvent event) {
-        if (editViewModel.page.get() == GameCharacter.LEFT) character = character.toBuilder().left(event.splat).build();
-        else character = character.toBuilder().right(event.splat).build();
+        if (editViewModel.page.get() == GameCharacter.LEFT) character = character.withLeft(event.splat);
+        else character = character.withRight(event.splat);
         update();
     }
 
     @Subscribe public void nameChanged(NameChangedEvent event) {
-        character = character.toBuilder().name(event.name).build();
+        character = character.withName(event.name);
         editViewModel.update(character);
     }
 
@@ -129,7 +129,7 @@ public class EditActivity extends BaseActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     if (which == 0) {
                         //Remove the image and use the default icon
-                        character = character.toBuilder().image(null).colorScheme(null).build();
+                        character = character.withImage(null, null);
                         editViewModel.update(character);
                     } else getCroppedImage();
                 }
@@ -155,7 +155,7 @@ public class EditActivity extends BaseActivity {
             Sheet defaultSheet = Template.create(getResources(), character);
             List<Sheet> sheets = new ArrayList<>(1);
             sheets.add(defaultSheet);
-            character = character.toBuilder().sheets(sheets).build();
+            character = character.withSheets(sheets);
         }
         setResult(RESULT_OK, new Intent().putExtra(CHARACTER, character).putExtra(POSITION, getIntent().getIntExtra(POSITION, -1)));
         finish();

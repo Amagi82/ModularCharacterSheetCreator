@@ -2,7 +2,6 @@ package amagi82.modularcharactersheetcreator.ui._extras.databinding;
 
 import android.databinding.BindingAdapter;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
@@ -70,15 +69,15 @@ public class BindingAdapters {
 
     //Load image from uri, with placeholder. Layout params and view bounds must be changed to size the image and placeholder correctly.
     @BindingAdapter({"imageUri", "placeholder"})
-    public static void loadImageUri(ImageView img, Uri uri, Drawable placeholder) {
-        img.getLayoutParams().width = uri == null ? ViewGroup.LayoutParams.WRAP_CONTENT : ViewGroup.LayoutParams.MATCH_PARENT;
+    public static void loadImageUri(ImageView img, String uri, Drawable placeholder) {
+        img.getLayoutParams().width = (uri == null) ? ViewGroup.LayoutParams.WRAP_CONTENT : ViewGroup.LayoutParams.MATCH_PARENT;
         img.setAdjustViewBounds(uri != null);
         Glide.with(img.getContext()).load(uri).placeholder(placeholder).into(img);
     }
 
     //Load image from uri
     @BindingAdapter("imageUri")
-    public static void loadImageUri(ImageView img, Uri uri) {
+    public static void loadImageUri(ImageView img, String uri) {
         Glide.with(img.getContext()).load(uri).into(img);
     }
 
@@ -86,7 +85,7 @@ public class BindingAdapters {
     @BindingAdapter("loadIcon")
     public static void loadIcon(CircleImageView icon, GameCharacter character) {
         //noinspection ConstantConditions
-        Uri imageUri = character.image() == null ? null : character.image().uri();
+        String imageUri = character.image() == null ? null : character.image().uri();
         if (imageUri == null) icon.setImageBitmap(new CircleIcon(icon.getContext()).createIcon(character.name()));
         else Glide.with(icon.getContext()).load(imageUri).centerCrop().into(icon);
     }

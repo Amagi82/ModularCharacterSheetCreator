@@ -2,9 +2,9 @@ package amagi82.modularcharactersheetcreator.models.modules;
 
 import android.os.Parcelable;
 
-import auto.parcel.AutoParcel;
+import auto.parcelgson.AutoParcelGson;
 
-@AutoParcel
+@AutoParcelGson
 public abstract class Health implements Parcelable{
     public abstract String damageText();
     public abstract String damagePenalty();
@@ -19,7 +19,7 @@ public abstract class Health implements Parcelable{
         return builder().build();
     }
 
-    @AutoParcel.Builder
+    @AutoParcelGson.Builder
     public abstract static class Builder {
         public abstract Builder damageText(String damageText);
         public abstract Builder damagePenalty(String damagePenalty);
@@ -33,7 +33,7 @@ public abstract class Health implements Parcelable{
     }
 
     public static Builder builder() {
-        return new AutoParcel_Health.Builder()
+        return new AutoParcelGson_Health.Builder()
                 .damageText("")
                 .damagePenalty("")
                 .bashing(0)

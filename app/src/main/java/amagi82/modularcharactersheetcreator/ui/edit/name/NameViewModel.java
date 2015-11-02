@@ -1,14 +1,13 @@
 package amagi82.modularcharactersheetcreator.ui.edit.name;
 
 import android.databinding.ObservableField;
-import android.net.Uri;
 
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
 import amagi82.modularcharactersheetcreator.models.games.Game;
+import amagi82.modularcharactersheetcreator.ui._base.BaseViewModel;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
 import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener;
-import amagi82.modularcharactersheetcreator.ui._base.BaseViewModel;
 import amagi82.modularcharactersheetcreator.ui.edit._events.KeyboardVisibleEvent;
 import amagi82.modularcharactersheetcreator.ui.edit._events.NameChangedEvent;
 
@@ -17,7 +16,7 @@ public class NameViewModel extends BaseViewModel{
     public final ObservableField<AxisCardViewModel> leftItem = new ObservableField<>();
     public final ObservableField<AxisCardViewModel> rightItem = new ObservableField<>();
     public final ObservableField<String> name = new ObservableField<>();
-    public final ObservableField<Uri> imageUri = new ObservableField<>();
+    public final ObservableField<String> imageUri = new ObservableField<>();
     public final EditTextListener editTextListener = new EditTextListener() {
         @Override public void onTextChanged(String newText) {
             Otto.BUS.get().post(new NameChangedEvent(newText));
@@ -26,7 +25,6 @@ public class NameViewModel extends BaseViewModel{
             Otto.BUS.get().post(new KeyboardVisibleEvent());
         }
     };
-
 
     public NameViewModel() {}
 

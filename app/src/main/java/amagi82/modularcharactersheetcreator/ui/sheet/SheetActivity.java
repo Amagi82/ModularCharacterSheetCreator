@@ -49,6 +49,7 @@ public class SheetActivity extends BaseActivity {
             case R.id.action_theme:
                 return true;
             case R.id.action_edit:
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

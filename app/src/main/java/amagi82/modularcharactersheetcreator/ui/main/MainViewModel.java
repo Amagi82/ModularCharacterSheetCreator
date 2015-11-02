@@ -2,6 +2,9 @@ package amagi82.modularcharactersheetcreator.ui.main;
 
 import android.databinding.ObservableArrayList;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.BR;
@@ -13,18 +16,22 @@ public class MainViewModel {
     public final ObservableArrayList<MainItemViewModel> list = new ObservableArrayList<>();
     public final ItemView itemView = ItemView.of(BR.mainItemViewModel, R.layout.item_main);
 
-    public MainViewModel(List<GameCharacter> list) {
-        addAll(list);
+    public MainViewModel(){}
+
+    public MainViewModel(List<GameCharacter> characters) {
+        addAll(characters);
     }
 
-    public void addAll(List<GameCharacter> list){
-        for (GameCharacter character : list) {
-            this.list.add(new MainItemViewModel(character));
+    public void addAll(List<GameCharacter> characters){
+        this.list.clear();
+        for (GameCharacter character : characters) {
+            list.add(new MainItemViewModel(character));
         }
+        sort();
     }
 
     public void add(GameCharacter character){
-        this.list.add(new MainItemViewModel(character));
+        list.add(0, new MainItemViewModel(character));
     }
 
     public void remove(int position){
@@ -33,5 +40,22 @@ public class MainViewModel {
 
     public void update(GameCharacter character, int position){
         list.set(position, new MainItemViewModel(character));
+        sort();
+    }
+
+    public List<GameCharacter> getCharacters(){
+        List<GameCharacter> characters = new ArrayList<>(list.size());
+        for(MainItemViewModel item : list){
+            characters.add(item.getCharacter());
+        }
+        return characters;
+    }
+
+    private void sort(){
+        Collections.sort(list, new Comparator<MainItemViewModel>() {
+            @Override public int compare(MainItemViewModel o1, MainItemViewModel o2) {
+                return o1.getCharacter().timeStamp() > o2.getCharacter().timeStamp() ? -1 : 1;
+            }
+        });
     }
 }
