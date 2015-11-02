@@ -33,10 +33,6 @@ import amagi82.modularcharactersheetcreator.ui.edit._events.NameChangedEvent;
 import amagi82.modularcharactersheetcreator.ui.edit._events.ResetSelectionEvent;
 import icepick.State;
 
-import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.CHARACTER;
-import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.POSITION;
-import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.RESULT_DELETED;
-
 /*
     Screen used to create or modify the core of a GameCharacter. Choose game system, character axis(commonly referred to as "splats", name, and photo.
     Character sheet settings are not handled here (see Sheet).
@@ -46,7 +42,6 @@ import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.RESULT_D
     Exiting this screen takes you back to the MainActivity.
  */
 public class EditActivity extends BaseActivity {
-    private static final int REQ_CODE = 1;
     private ActivityEditBinding binding;
     private EditViewModel editViewModel;
     @State GameCharacter character;
@@ -147,7 +142,7 @@ public class EditActivity extends BaseActivity {
     }
 
     private void getCroppedImage() {
-        startActivityForResult(new Intent(EditActivity.this, CropActivity.class).putExtra(CHARACTER, character), REQ_CODE);
+        startActivityForResult(new Intent(EditActivity.this, CropActivity.class).putExtra(CHARACTER, character), DEFAULT);
     }
 
     @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {

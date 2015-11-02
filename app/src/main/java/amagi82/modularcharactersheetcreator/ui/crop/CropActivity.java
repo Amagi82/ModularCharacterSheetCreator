@@ -17,13 +17,13 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.ActivityCropBinding;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 
+import static amagi82.modularcharactersheetcreator.ui._base.BaseActivity.DEFAULT;
 import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.CHARACTER;
 
 /*
     This screen takes an image from the gallery and allows the user to crop it.
  */
 public class CropActivity extends AppCompatActivity {
-    private static final int REQ_CODE = 1;
     private GameCharacter character;
     private ActivityCropBinding binding;
 
@@ -38,7 +38,7 @@ public class CropActivity extends AppCompatActivity {
             finish();
         }
         Intent intent = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, getString(R.string.complete_action_using)), REQ_CODE);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.complete_action_using)), DEFAULT);
     }
 
     @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {

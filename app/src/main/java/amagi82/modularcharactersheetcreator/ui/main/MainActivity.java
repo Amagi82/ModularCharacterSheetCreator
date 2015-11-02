@@ -3,14 +3,11 @@ package amagi82.modularcharactersheetcreator.ui.main;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.IntDef;
 import android.util.Log;
 import android.view.View;
 
 import com.squareup.otto.Subscribe;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,20 +132,5 @@ public class MainActivity extends BaseActivity {
         startActivityForResult(new Intent(MainActivity.this, EditActivity.class), ADD);
     }
 
-    @IntDef({ADD, MODIFY})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface ReqCode {
-    }
 
-    @IntDef({RESULT_CANCELED, RESULT_OK, RESULT_DELETED})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface ResultCode {
-    }
-
-    public static final int ADD = 1;
-    public static final int MODIFY = 2;
-    public static final int RESULT_DELETED = 3;
-
-    public static final String CHARACTER = "CHARACTER";
-    public static final String POSITION = "POSITION";
 }
