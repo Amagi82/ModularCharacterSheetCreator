@@ -18,34 +18,4 @@
         android:title="@string/action_edit"
         app:showAsAction="ifRoom"/>
 
-    <item
-        android:id="@+id/action_tab_rename"
-        android:orderInCategory="5"
-        android:title="@string/action_tab_rename"
-        app:showAsAction="never"/>
-
-    <item
-        android:id="@+id/action_tab_move_left"
-        android:orderInCategory="6"
-        android:title="@string/action_tab_move_left"
-        android:visible="false"
-        app:showAsAction="never"/>
-
-    <item
-        android:id="@+id/action_tab_move_right"
-        android:orderInCategory="7"
-        android:title="@string/action_tab_move_right"
-        app:showAsAction="never"/>
-
-    <item
-        android:id="@+id/action_tab_add"
-        android:orderInCategory="8"
-        android:title="@string/action_tab_add"
-        app:showAsAction="never"/>
-
-    <item
-        android:id="@+id/action_tab_delete"
-        android:orderInCategory="9"
-        android:title="@string/action_tab_delete"
-        app:showAsAction="never"/>
 </menu>

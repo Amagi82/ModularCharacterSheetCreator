@@ -4,6 +4,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -20,10 +22,11 @@ public class SheetActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sheet);
+        setSupportActionBar(binding.toolbar);
 
         GameCharacter character = getIntent().getParcelableExtra(MainActivity.CHARACTER);
-        Log.i("SheetActivity", "Character =="+character);
-        if(character == null) finish();
+        Log.i("SheetActivity", "Character ==" + character);
+        if (character == null) finish();
 
         sheetViewModel = new SheetViewModel(character);
         binding.setSheetViewModel(sheetViewModel);
@@ -31,6 +34,23 @@ public class SheetActivity extends BaseActivity {
         binding.tabLayout.setTabsFromPagerAdapter(binding.viewPager.getAdapter());
         binding.tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(binding.viewPager));
         binding.viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout));
+    }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_sheet, menu);
+        return true;
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_theme:
+                return true;
+            case R.id.action_edit:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void onFabClicked(View view) {

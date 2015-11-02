@@ -16,6 +16,7 @@
             style="@style/AppBar.Fits">
 
             <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbar"
                 style="@style/CollapsingToolbar"
                 app:expandedTitleMarginBottom="@dimen/default_margin"
                 app:expandedTitleMarginEnd="@dimen/sheet_expanded_title_margin_end"

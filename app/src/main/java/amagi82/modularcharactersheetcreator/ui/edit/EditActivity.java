@@ -160,7 +160,7 @@ public class EditActivity extends BaseActivity {
     }
 
     public void onFabClicked(View view) {
-        if(character.sheets().size() == 0) {
+        if (character.sheets().size() == 0) {
             Sheet defaultSheet = Template.create(getResources(), character);
             List<Sheet> sheets = new ArrayList<>(1);
             sheets.add(defaultSheet);
