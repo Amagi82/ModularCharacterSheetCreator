@@ -1,6 +1,7 @@
 package amagi82.modularcharactersheetcreator.ui.main;
 
 import android.databinding.ObservableArrayList;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,12 +35,16 @@ public class MainViewModel {
         list.add(0, new MainItemViewModel(character));
     }
 
-    public void remove(int position){
-        list.remove(position);
+    public void remove(GameCharacter character){
+        int position = indexOf(character);
+        if(position != -1) list.remove(position);
+        else Log.i("MainViewModel", "No character with matching ID found");
     }
 
-    public void update(GameCharacter character, int position){
-        list.set(position, new MainItemViewModel(character));
+    public void update(GameCharacter character){
+        int position = indexOf(character);
+        if(position != -1) list.set(position, new MainItemViewModel(character));
+        else Log.i("MainViewModel", "No character with matching ID found");
         sort();
     }
 
@@ -49,6 +54,13 @@ public class MainViewModel {
             characters.add(item.getCharacter());
         }
         return characters;
+    }
+
+    private int indexOf(GameCharacter character){
+        for(int i = 0; i<list.size(); i++){
+            if(list.get(i).getCharacter().entityId().equals(character.entityId())) return i;
+        }
+        return -1;
     }
 
     private void sort(){

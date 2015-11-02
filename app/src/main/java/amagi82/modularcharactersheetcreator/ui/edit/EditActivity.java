@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -53,8 +52,7 @@ public class EditActivity extends BaseActivity {
         binding.toolbar.inflateMenu(R.menu.menu_edit);
         binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                setResult(RESULT_CANCELED);
-                finish();
+                finish(RESULT_CANCELED);
             }
         });
 
@@ -142,10 +140,7 @@ public class EditActivity extends BaseActivity {
     }
 
     @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != RESULT_OK || data == null) {
-            Log.i("EditActivity", "onActivityResult: failure");
-            return;
-        }
+        if (resultCode != RESULT_OK || data == null) return;
         character = data.getParcelableExtra(CHARACTER);
         editViewModel.update(character);
     }
@@ -157,12 +152,10 @@ public class EditActivity extends BaseActivity {
             sheets.add(defaultSheet);
             character = character.withSheets(sheets);
         }
-        setResult(RESULT_OK, new Intent().putExtra(CHARACTER, character).putExtra(POSITION, getIntent().getIntExtra(POSITION, -1)));
-        finish();
+        finish(RESULT_OK, new Intent().putExtra(CHARACTER, character));
     }
 
     public void onActionDelete(MenuItem item) {
-        setResult(RESULT_DELETED, new Intent().putExtra(POSITION, getIntent().getIntExtra(POSITION, -1)));
-        finish();
+        finish(RESULT_DELETED, new Intent().putExtra(CHARACTER, character));
     }
 }

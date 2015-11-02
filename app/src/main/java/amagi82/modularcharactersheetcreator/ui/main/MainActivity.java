@@ -45,7 +45,6 @@ public class MainActivity extends BaseActivity {
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         gson = new GsonBuilder().registerTypeAdapterFactory(new AutoParcelGsonTypeAdapterFactory()).create();
         viewModel = new MainViewModel();
-        getSharedPreferences(CHARACTERS, MODE_PRIVATE).edit().clear();
         loadSavedCharacters();
 
         binding.setMainViewModel(viewModel);
@@ -53,11 +52,12 @@ public class MainActivity extends BaseActivity {
     }
 
     private void loadSavedCharacters() {
-        Log.i("MainActivity", "Shared Preferences contains: "+getSharedPreferences(CHARACTERS, MODE_PRIVATE).getAll().toString());
+        Log.i("MainActivity", "Shared Preferences contains: " + getSaved().getAll().toString());
         List<GameCharacter> characters;
-        if(getSharedPreferences(CHARACTERS, MODE_PRIVATE).contains(CHARACTERS)){
-            Type listType = new TypeToken<List<GameCharacter>>(){}.getType();
-            characters = gson.fromJson(getSharedPreferences(CHARACTERS, MODE_PRIVATE).getString(CHARACTERS, null), listType);
+        if (getSaved().contains(LIST)) {
+            Type listType = new TypeToken<List<GameCharacter>>() {
+            }.getType();
+            characters = gson.fromJson(getSaved().getString(LIST, null), listType);
         } else characters = generateSampleCharacters();
         viewModel.addAll(characters);
     }
@@ -79,13 +79,13 @@ public class MainActivity extends BaseActivity {
             sheets.add(defaultSheet);
             characters.set(i, characters.get(i).withSheets(sheets));
         }
-        getSharedPreferences(CHARACTERS, MODE_PRIVATE).edit().putString(CHARACTERS, gson.toJson(characters)).commit();
+        putSaved(LIST, gson.toJson(characters));
 
         return characters;
     }
 
     private void saveCharacters() {
-        getSharedPreferences(CHARACTERS, MODE_PRIVATE).edit().putString(CHARACTERS, gson.toJson(viewModel.getCharacters())).commit();
+        putSaved(LIST, gson.toJson(viewModel.getCharacters()));
     }
 
     @Override protected void onActivityResult(@ReqCode int requestCode, @ResultCode int resultCode, Intent data) {
@@ -93,26 +93,24 @@ public class MainActivity extends BaseActivity {
         if (resultCode == RESULT_CANCELED) return;
 
         GameCharacter character = data.getParcelableExtra(CHARACTER);
-        int position = data.getIntExtra(POSITION, -1);
-        Log.i("MainActivity", "onActivityResult: position: " + position);
         Log.i("MainActivity", "onActivityResult: character returned: " + character);
 
-        if (resultCode == RESULT_OK && requestCode == ADD) {
+        if (resultCode == RESULT_EDIT) {
+            startActivityForResult(new Intent(MainActivity.this, EditActivity.class).putExtra(CHARACTER, character), MODIFY);
+        } else if (resultCode == RESULT_OK && requestCode == ADD) {
             viewModel.add(character);
             saveCharacters();
-        }
-        else if (resultCode == RESULT_OK && requestCode == MODIFY && position >= 0) {
-            viewModel.update(character, position);
+        } else if (resultCode == RESULT_OK && requestCode == MODIFY) {
+            viewModel.update(character);
             saveCharacters();
-        }
-        else if (resultCode == RESULT_DELETED && position >= 0) {
-            viewModel.remove(position);
+        } else if (resultCode == RESULT_DELETED) {
+            viewModel.remove(character);
             saveCharacters();
         }
     }
 
     @Subscribe public void onItemClicked(CharacterClickedEvent event) {
-        startActivity(new Intent(MainActivity.this, SheetActivity.class).putExtra(CHARACTER, event.character));
+        startActivityForResult(new Intent(MainActivity.this, SheetActivity.class).putExtra(CHARACTER, event.character), DEFAULT);
     }
 
     public void onClickAddCharacter(View view) {

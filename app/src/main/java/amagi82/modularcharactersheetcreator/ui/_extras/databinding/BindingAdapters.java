@@ -93,7 +93,8 @@ public class BindingAdapters {
     //Tracks current page in EditActivity
     @BindingAdapter("page")
     public static void setCurrentPage(NoSwipeViewPager viewPager, int page) {
-        viewPager.setCurrentItem(page);
+        boolean smoothScroll = Math.abs(page-viewPager.getCurrentItem()) < 2;
+        viewPager.setCurrentItem(page, smoothScroll);
     }
 
     @BindingAdapter("fabShown")

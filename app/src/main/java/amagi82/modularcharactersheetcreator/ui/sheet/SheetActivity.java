@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.ui.sheet;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,13 +17,12 @@ import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.main.MainActivity;
 
 public class SheetActivity extends BaseActivity {
-    private ActivitySheetBinding binding;
     private SheetViewModel sheetViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_sheet);
+        ActivitySheetBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_sheet);
         setToolbar(binding.toolbar);
 
         GameCharacter character = getIntent().getParcelableExtra(MainActivity.CHARACTER);
@@ -49,7 +49,7 @@ public class SheetActivity extends BaseActivity {
             case R.id.action_theme:
                 return true;
             case R.id.action_edit:
-
+                finish(RESULT_EDIT, new Intent().putExtra(CHARACTER, sheetViewModel.character.get()));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

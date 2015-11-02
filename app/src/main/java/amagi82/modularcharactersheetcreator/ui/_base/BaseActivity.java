@@ -1,5 +1,7 @@
 package amagi82.modularcharactersheetcreator.ui._base;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -25,7 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     public @interface ReqCode {
     }
 
-    @IntDef({RESULT_CANCELED, RESULT_OK, RESULT_DELETED})
+    @IntDef({RESULT_CANCELED, RESULT_OK, RESULT_DELETED, RESULT_EDIT})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ResultCode {
     }
@@ -33,12 +35,11 @@ public abstract class BaseActivity extends AppCompatActivity{
     public static final int ADD = 1;
     public static final int MODIFY = 2;
     public static final int RESULT_DELETED = 3;
-    public static final int DEFAULT = 4;
+    public static final int RESULT_EDIT = 4;
+    public static final int DEFAULT = 5;
 
     public static final String CHARACTER = "CHARACTER";
-    public static final String CHARACTERS = "CHARACTERS";
-    public static final String POSITION = "POSITION";
-    public static final String BUCKET = "BUCKET";
+    public static final String LIST = "LIST";
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,24 @@ public abstract class BaseActivity extends AppCompatActivity{
     @Override protected void onStop() {
         super.onStop();
         Otto.BUS.get().unregister(this);
+    }
+
+    public void finish(@ResultCode int resultCode){
+        setResult(resultCode);
+        finish();
+    }
+
+    public void finish(@ResultCode int resultCode, Intent intent){
+        setResult(resultCode, intent);
+        finish();
+    }
+
+    public SharedPreferences getSaved(){
+        return getSharedPreferences(LIST, MODE_PRIVATE);
+    }
+
+    public void putSaved(String key, String value){
+        getSaved().edit().putString(key, value).commit();
     }
 
     public void setTint(@NonNull Drawable icon, @ColorInt int color){
