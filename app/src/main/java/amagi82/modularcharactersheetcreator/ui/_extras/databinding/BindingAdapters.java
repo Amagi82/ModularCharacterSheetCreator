@@ -1,7 +1,7 @@
 package amagi82.modularcharactersheetcreator.ui._extras.databinding;
 
-import android.content.Context;
 import android.databinding.BindingAdapter;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.ColorRes;
@@ -10,7 +10,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,14 +37,22 @@ public class BindingAdapters {
     private static int screenWidth;
     private static int imageSize;
 
+    //Load image from url, do not resize.
     @BindingAdapter("imageUrl")
     public static void loadImage(ImageView img, @StringRes int url) {
         if (url != 0) Glide.with(img.getContext()).load(img.getContext().getString(url)).into(img);
         else Glide.clear(img);
     }
 
-    @BindingAdapter("splatIconUrl")
-    public static void loadSplatIcon(ImageView img, @StringRes int url) {
+    //Load image at a specific size
+    @BindingAdapter({"sizedImageUrl", "size"})
+    public static void loadSizedImage(ImageView img, @StringRes int url, float size) {
+        if (url != 0) Glide.with(img.getContext()).load(SplatIcon.getUrl(img.getResources().getString(url), (int) size)).into(img);
+    }
+
+    //Load image sized for the available space. If the ImageView has not been measured, calculate based on screen size
+    @BindingAdapter("sizedImageUrl")
+    public static void loadSizedImage(ImageView img, @StringRes int url) {
         int size = Math.min(img.getHeight(), img.getWidth());
         if (size == 0) {
             int width = new ScreenSize(img.getContext()).getWidth();
@@ -58,42 +65,39 @@ public class BindingAdapters {
             }
             size = imageSize;
         }
-        if (url != 0) Glide.with(img.getContext()).load(new SplatIcon(img.getResources().getString(url), size).getUrl()).into(img);
+        if (url != 0) Glide.with(img.getContext()).load(SplatIcon.getUrl(img.getResources().getString(url), size)).into(img);
     }
 
-    @BindingAdapter("imageUri")
-    public static void loadImage(ImageView img, Uri uri) {
+    //Load image from uri, with placeholder. Layout params and view bounds must be changed to size the image and placeholder correctly.
+    @BindingAdapter({"imageUri", "placeholder"})
+    public static void loadImageUri(ImageView img, Uri uri, Drawable placeholder) {
         img.getLayoutParams().width = uri == null ? ViewGroup.LayoutParams.WRAP_CONTENT : ViewGroup.LayoutParams.MATCH_PARENT;
         img.setAdjustViewBounds(uri != null);
-        Glide.with(img.getContext()).load(uri).placeholder(R.drawable.ic_person_24dp).into(img);
+        Glide.with(img.getContext()).load(uri).placeholder(placeholder).into(img);
     }
 
-    @BindingAdapter("characterPortrait")
-    public static void loadCharacterPortrait(ImageView img, Uri uri) {
+    //Load image from uri
+    @BindingAdapter("imageUri")
+    public static void loadImageUri(ImageView img, Uri uri) {
         Glide.with(img.getContext()).load(uri).into(img);
     }
 
-    @BindingAdapter("visibility")
-    public static void setViewVisibility(View view, Uri uri){
-        view.setVisibility(uri == null? View.GONE : View.VISIBLE);
-    }
-
+    //Load circle icon for items in MainActivity
     @BindingAdapter("loadIcon")
     public static void loadIcon(CircleImageView icon, GameCharacter character) {
-        if (character != null) {
-            @SuppressWarnings("ConstantConditions") Uri imageUri = character.image() == null ? null : character.image().uri();
-            Context context = icon.getContext();
-            if (imageUri == null) icon.setImageBitmap(new CircleIcon(context).createIcon(character.name()));
-            else Glide.with(context).load(imageUri).centerCrop().into(icon);
-        }
+        //noinspection ConstantConditions
+        Uri imageUri = character.image() == null ? null : character.image().uri();
+        if (imageUri == null) icon.setImageBitmap(new CircleIcon(icon.getContext()).createIcon(character.name()));
+        else Glide.with(icon.getContext()).load(imageUri).centerCrop().into(icon);
     }
 
+    //Tracks current page in EditActivity
     @BindingAdapter("page")
     public static void setCurrentPage(NoSwipeViewPager viewPager, int page) {
         viewPager.setCurrentItem(page);
     }
 
-    @BindingAdapter("fab")
+    @BindingAdapter("fabShown")
     public static void setFabVisibility(final FloatingActionButton fab, boolean isShown) {
         if (isShown) new Handler().postDelayed(new Runnable() {
             @Override public void run() {
@@ -103,6 +107,7 @@ public class BindingAdapters {
         else fab.hide();
     }
 
+    //Format a string
     @BindingAdapter({"format", "argId"})
     public static void setFormattedText(TextView textView, String format, int argId) {
         if (argId == 0) return;
@@ -114,33 +119,36 @@ public class BindingAdapters {
         if (listener != null) editText.setTextChangedListener(listener);
     }
 
+    //Make sure the color resource exists before applying
     @BindingAdapter("android:textColor")
     public static void setTextColor(TextView textView, @ColorRes int colorRes) {
         if (colorRes != 0) textView.setTextColor(ContextCompat.getColor(textView.getContext(), colorRes));
     }
 
+    //Make sure the string resource exists before applying
     @BindingAdapter("android:text")
     public static void setText(TextView textView, @StringRes int stringRes) {
         if (stringRes != 0) textView.setText(stringRes);
     }
 
     @BindingAdapter("statBlock")
-    public static void setStatBlock(RoundedStatBarBlock statBarBlock, List<Stat> statBlock){
+    public static void setStatBlock(RoundedStatBarBlock statBarBlock, List<Stat> statBlock) {
         statBarBlock.setStats(statBlock);
     }
 
     @BindingAdapter("statBar")
-    public static void setStatBar(RoundedStatBar statBar, Stat stat){
+    public static void setStatBar(RoundedStatBar statBar, Stat stat) {
         statBar.setStat(stat);
     }
 
     @BindingAdapter("healthBar")
-    public static void setHealthBar(RoundedStatBar statBar, Health health){
+    public static void setHealthBar(RoundedStatBar statBar, Health health) {
         statBar.setHealth(health);
     }
 
+    //Set grid layout manager to apply span count for each module
     @BindingAdapter({"columns", "modules"})
-    public static void setLayoutManager(RecyclerView recyclerView, int numColumns, final List<BaseModuleViewModel> modules){
+    public static void setLayoutManager(RecyclerView recyclerView, int numColumns, final List<BaseModuleViewModel> modules) {
         final GridLayoutManager manager = new GridLayoutManager(recyclerView.getContext(), numColumns);
         manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override public int getSpanSize(int position) {

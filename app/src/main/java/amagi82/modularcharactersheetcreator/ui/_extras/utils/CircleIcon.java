@@ -20,7 +20,7 @@ public class CircleIcon {
 
     public CircleIcon(Context context) {
         this.context = context;
-        circleImageSize = context.getResources().getDimensionPixelSize(R.dimen.circle_icon_size);
+        circleImageSize = context.getResources().getDimensionPixelSize(R.dimen.main_circle_icon_size);
     }
 
     public Bitmap createIcon(String name){
@@ -35,7 +35,7 @@ public class CircleIcon {
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setLinearText(true);
         textPaint.setColor(getColor(R.color.white));
-        textPaint.setTextSize(context.getResources().getDimension(R.dimen.circle_icon_text_size));
+        textPaint.setTextSize(context.getResources().getDimension(R.dimen.main_circle_icon_text_size));
 
         Rect rect = new Rect();
         rect.set(0, 0, circleImageSize, circleImageSize);

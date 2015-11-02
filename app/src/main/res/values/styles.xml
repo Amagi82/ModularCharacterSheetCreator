@@ -27,7 +27,7 @@
     <style name="Card.White.EditName">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">@dimen/card_height_edit_name_screen</item>
+        <item name="android:layout_height">@dimen/edit_name_card_height</item>
     </style>
 
     <style name="TextHeader" parent="TextAppearance.AppCompat.Title">
@@ -83,26 +83,28 @@
     </style>
 
     <style name="CircleIcon">
-        <item name="android:layout_marginTop">@dimen/sheet_icon_margin_top</item>
-        <item name="android:layout_marginLeft">@dimen/default_small_margin</item>
-        <item name="android:layout_marginRight">@dimen/default_small_margin</item>
-        <item name="android:layout_width">@dimen/sheet_splat_icon_size</item>
-        <item name="android:layout_height">@dimen/sheet_splat_icon_size</item>
+        <item name="android:layout_marginBottom">@dimen/sheet_icon_margin_bottom</item>
+        <item name="android:layout_marginLeft">@dimen/sheet_icon_margin_side</item>
+        <item name="android:layout_marginRight">@dimen/sheet_icon_margin_side</item>
+        <item name="android:layout_width">@dimen/sheet_icon_size</item>
+        <item name="android:layout_height">@dimen/sheet_icon_size</item>
+        <item name="android:layout_gravity">bottom</item>
         <item name="layout_collapseMode">parallax</item>
-        <item name="layout_collapseParallaxMultiplier">0.7</item>
+        <item name="layout_collapseParallaxMultiplier">0.2</item>
     </style>
 
     <style name="CircleIconCaption" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:layout_width">@dimen/sheet_splat_caption_size</item>
+        <item name="android:layout_width">@dimen/sheet_icon_caption_width</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">@dimen/sheet_text_margin_top</item>
-        <item name="android:layout_marginLeft">@dimen/character_icon_text_keyline</item>
-        <item name="android:layout_marginRight">@dimen/character_icon_text_keyline_right</item>
+        <item name="android:layout_marginBottom">@dimen/sheet_icon_caption_margin_bottom</item>
+        <item name="android:layout_marginLeft">@dimen/sheet_icon_caption_margin_side</item>
+        <item name="android:layout_marginRight">@dimen/sheet_icon_caption_margin_side</item>
+        <item name="android:layout_gravity">bottom</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textSize">10sp</item>
         <item name="android:clickable">true</item>
         <item name="layout_collapseMode">parallax</item>
-        <item name="layout_collapseParallaxMultiplier">0.7</item>
+        <item name="layout_collapseParallaxMultiplier">0.2</item>
     </style>
 
     <style name="Fab">
@@ -197,15 +199,6 @@
         <item name="android:layout_marginBottom">@dimen/default_tiny_margin</item>
     </style>
 
-    <style name="RaisedButton.Primary">
-        <item name="colorButtonNormal">@color/primary</item>
-    </style>
-
-    <style name="FlatButton" parent="Widget.AppCompat.Button.Borderless.Colored">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
     <style name="TextPrompt" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -219,8 +212,8 @@
     <style name="EditFragmentFrame">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingLeft">@dimen/character_recyclerview_keyline</item>
-        <item name="android:paddingRight">@dimen/character_recyclerview_keyline</item>
+        <item name="android:paddingLeft">@dimen/edit_recyclerview_keyline</item>
+        <item name="android:paddingRight">@dimen/edit_recyclerview_keyline</item>
     </style>
 
     <style name="ActionButton" parent="Widget.AppCompat.ActionButton">
@@ -261,6 +254,10 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="layout_behavior">@string/appbar_scrolling_view_behavior</item>
+    </style>
+
+    <style name="TextAppearance.Design.CollapsingToolbar.Expanded.Sheet">
+        <item name="android:textSize">@dimen/sheet_expanded_title_text_size</item>
     </style>
 
 </resources>

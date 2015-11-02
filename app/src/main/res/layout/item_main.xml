@@ -16,8 +16,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageView"
-            android:layout_width="@dimen/circle_icon_size"
-            android:layout_height="@dimen/circle_icon_size"
+            android:layout_width="@dimen/main_circle_icon_size"
+            android:layout_height="@dimen/main_circle_icon_size"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/default_margin"

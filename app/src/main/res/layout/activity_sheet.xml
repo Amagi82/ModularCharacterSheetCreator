@@ -4,6 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="android.view.View"/>
         <variable name="sheetViewModel"
                   type="amagi82.modularcharactersheetcreator.ui.sheet.SheetViewModel"/>
     </data>
@@ -20,18 +21,20 @@
                 app:expandedTitleMarginBottom="@dimen/default_margin"
                 app:expandedTitleMarginEnd="@dimen/sheet_expanded_title_margin_end"
                 app:expandedTitleMarginStart="@dimen/sheet_expanded_title_margin_start"
+                app:expandedTitleTextAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded.Sheet"
                 app:title="@{sheetViewModel.character.name}">
 
                 <ImageView
                     style="@style/ImageBackdrop"
                     android:adjustViewBounds="true"
                     android:minHeight="@dimen/sheet_portrait_minheight"
-                    app:characterPortrait="@{sheetViewModel.character.image.uri}"
+                    app:imageUri="@{sheetViewModel.character.image.uri}"
                     app:layout_collapseParallaxMultiplier="0.7"/>
 
                 <ImageView
                     style="@style/CircleIcon"
-                    app:splatIconUrl="@{sheetViewModel.character.left.url}"
+                    app:size="@{@dimen/sheet_icon_size}"
+                    app:sizedImageUrl="@{sheetViewModel.character.left.url}"
                     tools:src="@drawable/clan_icon"/>
 
                 <TextView
@@ -41,23 +44,24 @@
 
                 <ImageView
                     style="@style/CircleIcon"
-                    android:layout_gravity="right"
-                    app:splatIconUrl="@{sheetViewModel.character.right.url}"
+                    android:layout_gravity="bottom|right"
+                    app:size="@{@dimen/sheet_icon_size}"
+                    app:sizedImageUrl="@{sheetViewModel.character.right.url}"
                     tools:src="@drawable/clan_icon"/>
 
                 <TextView
                     style="@style/CircleIconCaption"
-                    android:layout_gravity="right"
+                    android:layout_gravity="bottom|right"
                     android:text="@{sheetViewModel.character.right.title}"
                     tools:text="Right"/>
 
                 <View
                     style="@style/ScrimTop"
-                    app:visibility="@{sheetViewModel.character.image.uri}"/>
+                    android:visibility="@{sheetViewModel.character.image.uri == null? View.GONE : View.VISIBLE}"/>
 
                 <View
                     style="@style/ScrimBottom"
-                    app:visibility="@{sheetViewModel.character.image.uri}"/>
+                    android:visibility="@{sheetViewModel.character.image.uri == null? View.GONE : View.VISIBLE}"/>
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"

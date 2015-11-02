@@ -32,7 +32,7 @@
                     android:hint="@string/character_name"
                     android:imeOptions="actionDone"
                     android:inputType="textPersonName"
-                    android:minWidth="@dimen/toolbar_edittext_minwidth"
+                    android:minWidth="@dimen/edit_name_edittext_minwidth"
                     android:singleLine="true"
                     android:text="@{nameViewModel.name}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
@@ -50,7 +50,8 @@
                 android:minWidth="@dimen/edit_name_image_minwidth"
                 android:scaleType="fitCenter"
                 android:tint="@color/grey"
-                app:imageUri="@{nameViewModel.imageUri}"/>
+                app:imageUri="@{nameViewModel.imageUri}"
+                app:placeholder="@{@drawable/ic_person_24dp}"/>
 
             <ImageView
                 style="@style/ActionButton"
