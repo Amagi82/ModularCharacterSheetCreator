@@ -3,11 +3,9 @@ package amagi82.modularcharactersheetcreator.ui.edit;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
@@ -51,9 +49,7 @@ public class EditActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit);
 
-        Drawable icon = ContextCompat.getDrawable(this, R.drawable.ic_close_24dp);
-        icon.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
-        binding.toolbar.setNavigationIcon(icon);
+        binding.toolbar.setNavigationIcon(getTintedIcon(R.drawable.ic_close_24dp, Color.WHITE));
         binding.toolbar.inflateMenu(R.menu.menu_edit);
         binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {

@@ -1,8 +1,14 @@
 package amagi82.modularcharactersheetcreator.ui._base;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.IntDef;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -48,5 +54,22 @@ public abstract class BaseActivity extends AppCompatActivity{
     @Override protected void onStop() {
         super.onStop();
         Otto.BUS.get().unregister(this);
+    }
+
+    public void setTint(Drawable icon, @ColorInt int color){
+        icon = DrawableCompat.wrap(icon);
+        DrawableCompat.setTint(icon, color);
+    }
+
+    public void setMenuTint(Menu menu, @ColorInt int color){
+        for(int i = 0; i< menu.size(); i++){
+            setTint(menu.getItem(i).getIcon(), color);
+        }
+    }
+
+    public Drawable getTintedIcon(@DrawableRes int res, @ColorInt int color){
+        Drawable icon = ContextCompat.getDrawable(this, res);
+        setTint(icon, color);
+        return icon;
     }
 }
