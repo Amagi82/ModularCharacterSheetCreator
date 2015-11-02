@@ -27,14 +27,18 @@ public class SheetActivity extends BaseActivity {
 
         GameCharacter character = getIntent().getParcelableExtra(MainActivity.CHARACTER);
         Log.i("SheetActivity", "Character ==" + character);
-        if (character == null) finish();
-
+        if (character == null) {
+            finish();
+            return;
+        }
         sheetViewModel = new SheetViewModel(character);
         binding.setSheetViewModel(sheetViewModel);
         binding.executePendingBindings();
         binding.tabLayout.setTabsFromPagerAdapter(binding.viewPager.getAdapter());
         binding.tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(binding.viewPager));
         binding.viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout));
+        if(character.colorScheme() != null) //noinspection ConstantConditions
+            binding.tabLayout.setBackgroundColor(character.colorScheme().colorBackground());
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {

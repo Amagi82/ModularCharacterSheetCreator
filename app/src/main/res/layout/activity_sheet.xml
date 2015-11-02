@@ -31,6 +31,14 @@
                     app:imageUri="@{sheetViewModel.character.image.uri}"
                     app:layout_collapseParallaxMultiplier="0.7"/>
 
+                <View
+                    style="@style/ScrimTop"
+                    android:visibility="@{sheetViewModel.character.image.uri == null? View.GONE : View.VISIBLE}"/>
+
+                <View
+                    style="@style/ScrimBottom"
+                    android:visibility="@{sheetViewModel.character.image.uri == null? View.GONE : View.VISIBLE}"/>
+
                 <ImageView
                     style="@style/CircleIcon"
                     app:size="@{@dimen/sheet_icon_size}"
@@ -54,14 +62,6 @@
                     android:layout_gravity="bottom|right"
                     android:text="@{sheetViewModel.character.right.title}"
                     tools:text="Right"/>
-
-                <View
-                    style="@style/ScrimTop"
-                    android:visibility="@{sheetViewModel.character.image.uri == null? View.GONE : View.VISIBLE}"/>
-
-                <View
-                    style="@style/ScrimBottom"
-                    android:visibility="@{sheetViewModel.character.image.uri == null? View.GONE : View.VISIBLE}"/>
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
