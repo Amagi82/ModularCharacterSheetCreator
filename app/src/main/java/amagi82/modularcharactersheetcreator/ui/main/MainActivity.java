@@ -3,6 +3,7 @@ package amagi82.modularcharactersheetcreator.ui.main;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
@@ -38,17 +39,32 @@ import auto.parcelgson.gson.AutoParcelGsonTypeAdapterFactory;
  */
 public class MainActivity extends BaseActivity {
     private MainViewModel viewModel;
+    ActivityMainBinding binding;
     private Gson gson;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         gson = new GsonBuilder().registerTypeAdapterFactory(new AutoParcelGsonTypeAdapterFactory()).create();
         viewModel = new MainViewModel();
         loadSavedCharacters();
 
         binding.setMainViewModel(viewModel);
         binding.toolbar.setLogo(R.drawable.title_onyx);
+    }
+
+    @Override protected void onResume() {
+        super.onResume();
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                binding.fab.show();
+            }
+        }, 400);
+    }
+
+    @Override protected void onPause() {
+        super.onPause();
+        binding.fab.hide();
     }
 
     private void loadSavedCharacters() {

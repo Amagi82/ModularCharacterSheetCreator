@@ -18,8 +18,8 @@
             style="@style/AppBar.Fits">
 
             <android.support.design.widget.CollapsingToolbarLayout
-                style="@style/CollapsingToolbar"
                 android:id="@+id/collapsingToolbar"
+                style="@style/CollapsingToolbar"
                 app:expandedTitleMarginBottom="@dimen/default_margin"
                 app:expandedTitleMarginEnd="@dimen/sheet_expanded_title_margin_end"
                 app:expandedTitleMarginStart="@dimen/sheet_expanded_title_margin_start"
@@ -90,10 +90,12 @@
             app:pageTitles="@{sheetViewModel.tabTitles}"/>
 
         <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
             style="@style/Fab.Bottom"
             android:onClick="onFabClicked"
             android:src="@drawable/ic_add_24dp"
-            android:tint="@color/white"/>
+            android:tint="@color/white"
+            android:visibility="invisible"/>
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

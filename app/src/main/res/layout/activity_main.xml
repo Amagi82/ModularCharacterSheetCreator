@@ -6,7 +6,7 @@
     <data>
         <variable name="mainViewModel"
                   type="amagi82.modularcharactersheetcreator.ui.main.MainViewModel"/>
-        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -24,16 +24,18 @@
 
         <android.support.v7.widget.RecyclerView
             style="@style/RecyclerView"
-            app:items="@{mainViewModel.list}"
             app:itemView="@{mainViewModel.itemView}"
+            app:items="@{mainViewModel.list}"
             app:layoutManager="@{LayoutManagers.linear()}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         <android.support.design.widget.FloatingActionButton
-            android:onClick="onClickAddCharacter"
+            android:id="@+id/fab"
             style="@style/Fab.Bottom"
+            android:onClick="onClickAddCharacter"
+            android:src="@drawable/ic_person_add_24dp"
             android:tint="@color/white"
-            android:src="@drawable/ic_person_add_24dp"/>
+            android:visibility="invisible"/>
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

@@ -6,8 +6,10 @@ import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,6 +45,17 @@ public class SheetActivity extends BaseActivity {
         binding.tabLayout.setTabsFromPagerAdapter(binding.viewPager.getAdapter());
         binding.tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(binding.viewPager));
         binding.viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout));
+        binding.viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+            @Override public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+                if (state != ViewPager.SCROLL_STATE_IDLE && binding.viewPager.getAdapter().getCount() > 1) binding.fab.hide();
+                else new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        binding.fab.show();
+                    }
+                }, 300);
+            }
+        });
 
         if(character.colorScheme() != null) {
             //noinspection ConstantConditions
@@ -51,6 +64,20 @@ public class SheetActivity extends BaseActivity {
             binding.collapsingToolbar.setContentScrimColor(color);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) binding.collapsingToolbar.setStatusBarScrimColor(color);
         }
+    }
+
+    @Override protected void onResume() {
+        super.onResume();
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                binding.fab.show();
+            }
+        }, 400);
+    }
+
+    @Override protected void onPause() {
+        super.onPause();
+        binding.fab.hide();
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
