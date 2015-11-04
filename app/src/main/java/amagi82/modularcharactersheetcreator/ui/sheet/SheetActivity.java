@@ -21,6 +21,7 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.ActivitySheetBinding;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
+import amagi82.modularcharactersheetcreator.ui._extras.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.ui.main.MainActivity;
 
 public class SheetActivity extends BaseActivity {
@@ -39,6 +40,14 @@ public class SheetActivity extends BaseActivity {
             finish();
             return;
         }
+        if(character.image() != null){
+            //noinspection ConstantConditions
+            int height = (int) ((new ScreenSize(this).getWidth() / (1.0*character.image().width())) * (1.0*character.image().height()));
+            binding.imageBackdrop.setMinimumHeight(height);
+            binding.imageBackdrop.setMaxHeight(height);
+        }
+
+
         sheetViewModel = new SheetViewModel(character);
         binding.setSheetViewModel(sheetViewModel);
         binding.executePendingBindings();

@@ -27,6 +27,7 @@
                 app:title="@{sheetViewModel.character.name}">
 
                 <ImageView
+                    android:id="@+id/imageBackdrop"
                     style="@style/ImageBackdrop"
                     android:adjustViewBounds="true"
                     android:minHeight="@dimen/sheet_portrait_minheight"
