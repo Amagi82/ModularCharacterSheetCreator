@@ -14,10 +14,12 @@
         tools:context=".SheetActivity">
 
         <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
             style="@style/AppBar.Fits">
 
             <android.support.design.widget.CollapsingToolbarLayout
                 style="@style/CollapsingToolbar"
+                android:id="@+id/collapsingToolbar"
                 app:expandedTitleMarginBottom="@dimen/default_margin"
                 app:expandedTitleMarginEnd="@dimen/sheet_expanded_title_margin_end"
                 app:expandedTitleMarginStart="@dimen/sheet_expanded_title_margin_start"

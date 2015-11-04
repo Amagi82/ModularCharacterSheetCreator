@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -30,7 +31,7 @@ public class SheetActivity extends BaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sheet);
         setToolbar(binding.toolbar);
 
-        GameCharacter character = getIntent().getParcelableExtra(MainActivity.CHARACTER);
+        final GameCharacter character = getIntent().getParcelableExtra(MainActivity.CHARACTER);
         Log.i("SheetActivity", "Character ==" + character);
         if (character == null) {
             finish();
@@ -42,8 +43,14 @@ public class SheetActivity extends BaseActivity {
         binding.tabLayout.setTabsFromPagerAdapter(binding.viewPager.getAdapter());
         binding.tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(binding.viewPager));
         binding.viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout));
-        if(character.colorScheme() != null) //noinspection ConstantConditions
-            binding.tabLayout.setBackgroundColor(character.colorScheme().colorBackground());
+
+        if(character.colorScheme() != null) {
+            //noinspection ConstantConditions
+            int color = character.colorScheme().colorBackground();
+            binding.tabLayout.setBackgroundColor(color);
+            binding.collapsingToolbar.setContentScrimColor(color);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) binding.collapsingToolbar.setStatusBarScrimColor(color);
+        }
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
