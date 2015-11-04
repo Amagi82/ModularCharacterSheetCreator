@@ -53,12 +53,13 @@ public class MainActivity extends BaseActivity {
 
     private void loadSavedCharacters() {
         Log.i("MainActivity", "Shared Preferences contains: " + getSaved().getAll().toString());
-        List<GameCharacter> characters;
+        List<GameCharacter> characters = new ArrayList<>();
         if (getSaved().contains(LIST)) {
             Type listType = new TypeToken<List<GameCharacter>>() {
             }.getType();
             characters = gson.fromJson(getSaved().getString(LIST, null), listType);
-        } else characters = generateSampleCharacters();
+        }
+        if(characters == null || characters.size() == 0) characters = generateSampleCharacters();
         viewModel.addAll(characters);
     }
 
