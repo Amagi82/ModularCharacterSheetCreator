@@ -26,7 +26,7 @@ import amagi82.modularcharactersheetcreator.models.games.CVampire;
 import amagi82.modularcharactersheetcreator.models.games.CWerewolf;
 import amagi82.modularcharactersheetcreator.models.templates.Template;
 import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
-import amagi82.modularcharactersheetcreator.ui.edit.EditActivity;
+import amagi82.modularcharactersheetcreator.ui.create.CreateActivity;
 import amagi82.modularcharactersheetcreator.ui.sheet.SheetActivity;
 import auto.parcelgson.gson.AutoParcelGsonTypeAdapterFactory;
 
@@ -34,7 +34,7 @@ import auto.parcelgson.gson.AutoParcelGsonTypeAdapterFactory;
     Main screen the user launches into. Contains a list of characters the user has created.
 
     Navigation:
-    Floating Action Button navigates to Edit screen, where you can create a new character.
+    Floating Action Button navigates to Create screen, where you can create a new character.
     Clicking on a character takes you to the Sheet screen.
  */
 public class MainActivity extends BaseActivity {
@@ -113,7 +113,7 @@ public class MainActivity extends BaseActivity {
         Log.i("MainActivity", "onActivityResult: character returned: " + character);
 
         if (resultCode == RESULT_EDIT) {
-            startActivityForResult(new Intent(MainActivity.this, EditActivity.class).putExtra(CHARACTER, character), MODIFY);
+            startActivityForResult(new Intent(MainActivity.this, CreateActivity.class).putExtra(CHARACTER, character), MODIFY);
         } else if (resultCode == RESULT_OK && requestCode == ADD) {
             viewModel.add(character);
             saveCharacters();
@@ -131,6 +131,6 @@ public class MainActivity extends BaseActivity {
     }
 
     public void onClickAddCharacter(View view) {
-        startActivityForResult(new Intent(MainActivity.this, EditActivity.class), ADD);
+        startActivityForResult(new Intent(MainActivity.this, CreateActivity.class), ADD);
     }
 }

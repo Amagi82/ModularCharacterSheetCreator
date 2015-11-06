@@ -6,7 +6,7 @@
     <data>
         <variable
             name="axisItemViewModel"
-            type="amagi82.modularcharactersheetcreator.ui.edit.axis.AxisItemViewModel"/>
+            type="amagi82.modularcharactersheetcreator.ui.create.axis.AxisItemViewModel"/>
     </data>
 
     <android.support.v7.widget.CardView

@@ -5,11 +5,11 @@
         xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="axisCardViewModel"
-                  type="amagi82.modularcharactersheetcreator.ui.edit.name.AxisCardViewModel"/>
+                  type="amagi82.modularcharactersheetcreator.ui.create.name.AxisCardViewModel"/>
     </data>
 
     <android.support.v7.widget.CardView
-        style="@style/Card.White.EditName"
+        style="@style/Card.White.CreateName"
         tools:layout_width="180dp">
 
         <RelativeLayout

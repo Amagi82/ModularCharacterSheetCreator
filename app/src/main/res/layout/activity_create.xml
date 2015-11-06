@@ -4,14 +4,14 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="editViewModel"
-                  type="amagi82.modularcharactersheetcreator.ui.edit.EditViewModel"/>
+        <variable name="createViewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.create.CreateViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
         style="@style/CoordinatorLayout"
         android:background="@color/primary_background"
-        tools:context=".EditActivity">
+        tools:context=".CreateActivity">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
@@ -23,7 +23,7 @@
 
                 <amagi82.modularcharactersheetcreator.ui._extras.widgets.ImageBackdrop
                     style="@style/ImageBackdrop"
-                    app:imageUrl="@{editViewModel.splashUrl}"/>
+                    app:imageUrl="@{createViewModel.splashUrl}"/>
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -36,16 +36,16 @@
         <amagi82.modularcharactersheetcreator.ui._extras.widgets.NoSwipeViewPager
             style="@style/ViewPager"
             app:behavior_overlapTop="@dimen/edit_viewpager_overlap_top"
-            app:itemView="@{editViewModel.itemView}"
-            app:items="@{editViewModel.pages}"
-            app:page="@{editViewModel.page}"/>
+            app:itemView="@{createViewModel.itemView}"
+            app:items="@{createViewModel.pages}"
+            app:page="@{createViewModel.page}"/>
 
         <android.support.design.widget.FloatingActionButton
             style="@style/Fab.Bottom"
             android:onClick="onFabClicked"
             android:src="@drawable/ic_done_24dp"
             android:tint="@color/white"
-            app:fabShown="@{editViewModel.isFabShown}"/>
+            app:fabShown="@{createViewModel.isFabShown}"/>
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

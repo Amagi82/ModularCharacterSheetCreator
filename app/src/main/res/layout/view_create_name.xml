@@ -4,11 +4,11 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="nameViewModel"
-                  type="amagi82.modularcharactersheetcreator.ui.edit.name.NameViewModel"/>
+                  type="amagi82.modularcharactersheetcreator.ui.create.name.NameViewModel"/>
     </data>
 
     <android.support.v4.widget.NestedScrollView
-        style="@style/EditFragmentFrame">
+        style="@style/CreatePageFrame">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,7 +19,7 @@
                 style="@style/TextPrompt"
                 android:text="@string/confirm"/>
 
-            <include layout="@layout/card_edit_name_game"
+            <include layout="@layout/card_create_name_game"
                      android:layout_width="match_parent"
                      android:layout_height="@dimen/edit_name_card_height"
                      android:layout_margin="@dimen/card_margin"
@@ -30,15 +30,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <include layout="@layout/card_edit_name_axis"
+                <include layout="@layout/card_create_name_axis"
                          app:axisCardViewModel="@{nameViewModel.leftItem}"/>
 
-                <include layout="@layout/card_edit_name_axis"
+                <include layout="@layout/card_create_name_axis"
                          app:axisCardViewModel="@{nameViewModel.rightItem}"/>
 
             </LinearLayout>
 
-            <include layout="@layout/card_edit_name"
+            <include layout="@layout/card_create_name"
                      app:nameViewModel="@{nameViewModel}"/>
 
         </LinearLayout>

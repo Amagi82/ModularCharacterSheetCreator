@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui.edit.axis;
+package amagi82.modularcharactersheetcreator.ui.create.axis;
 
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableInt;
@@ -17,7 +17,7 @@ import me.tatarka.bindingcollectionadapter.ItemView;
 
 public class AxisViewModel extends BaseViewModel {
     public final ObservableArrayList<AxisItemViewModel> list = new ObservableArrayList<>();
-    public final ItemView itemView = ItemView.of(BR.axisItemViewModel, R.layout.tile_edit_axis);
+    public final ItemView itemView = ItemView.of(BR.axisItemViewModel, R.layout.tile_create_axis);
     public final ObservableInt title = new ObservableInt();
     private final boolean isLeft;
     private GameCharacter currentCharacter;

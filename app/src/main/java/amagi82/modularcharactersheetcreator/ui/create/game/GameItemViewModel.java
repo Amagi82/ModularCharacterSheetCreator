@@ -1,8 +1,8 @@
-package amagi82.modularcharactersheetcreator.ui.edit.game;
+package amagi82.modularcharactersheetcreator.ui.create.game;
 
 import android.view.View;
 
-import amagi82.modularcharactersheetcreator.ui.edit._events.GameSelectedEvent;
+import amagi82.modularcharactersheetcreator.ui.create._events.GameSelectedEvent;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
 
 public class GameItemViewModel {

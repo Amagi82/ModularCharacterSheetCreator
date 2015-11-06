@@ -3,23 +3,24 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="gameViewModel"
-                  type="amagi82.modularcharactersheetcreator.ui.edit.game.GameViewModel"/>
+        <variable name="axisViewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.create.axis.AxisViewModel"/>
         <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
     </data>
 
     <FrameLayout
-        style="@style/EditFragmentFrame">
+        style="@style/CreatePageFrame">
 
         <TextView
             style="@style/TextPrompt"
-            android:text="@string/choose_game"/>
+            app:format="@{@string/choose}"
+            app:argId="@{axisViewModel.title}"/>
 
         <android.support.v7.widget.RecyclerView
             style="@style/RecyclerView.Card"
             android:paddingTop="@dimen/default_large_margin"
-            app:items="@{gameViewModel.list}"
-            app:itemView="@{gameViewModel.itemView}"
-            app:layoutManager="@{LayoutManagers.grid(@integer/character_game_span_count)}"/>
+            app:items="@{axisViewModel.list}"
+            app:itemView="@{axisViewModel.itemView}"
+            app:layoutManager="@{LayoutManagers.grid(@integer/character_axis_span_count)}"/>
     </FrameLayout>
 </layout>

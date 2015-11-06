@@ -1,9 +1,9 @@
-package amagi82.modularcharactersheetcreator.ui.edit.name;
+package amagi82.modularcharactersheetcreator.ui.create.name;
 
 import android.view.View;
 
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.ui.edit._events.ResetSelectionEvent;
+import amagi82.modularcharactersheetcreator.ui.create._events.ResetSelectionEvent;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
 
 public class GameCardViewModel {

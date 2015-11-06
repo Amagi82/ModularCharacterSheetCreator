@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui.edit.name;
+package amagi82.modularcharactersheetcreator.ui.create.name;
 
 import android.databinding.ObservableField;
 
@@ -8,8 +8,8 @@ import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.ui._base.BaseViewModel;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
 import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener;
-import amagi82.modularcharactersheetcreator.ui.edit._events.KeyboardVisibleEvent;
-import amagi82.modularcharactersheetcreator.ui.edit._events.NameChangedEvent;
+import amagi82.modularcharactersheetcreator.ui.create._events.KeyboardVisibleEvent;
+import amagi82.modularcharactersheetcreator.ui.create._events.NameChangedEvent;
 
 public class NameViewModel extends BaseViewModel{
     public final ObservableField<GameCardViewModel> gameItem = new ObservableField<>();

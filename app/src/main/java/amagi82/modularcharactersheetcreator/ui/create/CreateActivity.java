@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui.edit;
+package amagi82.modularcharactersheetcreator.ui.create;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,18 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.databinding.ActivityEditBinding;
+import amagi82.modularcharactersheetcreator.databinding.ActivityCreateBinding;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Sheet;
 import amagi82.modularcharactersheetcreator.models.templates.Template;
 import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
+import amagi82.modularcharactersheetcreator.ui.create._events.AxisSelectedEvent;
+import amagi82.modularcharactersheetcreator.ui.create._events.AxisUpdateEvent;
+import amagi82.modularcharactersheetcreator.ui.create._events.GameSelectedEvent;
+import amagi82.modularcharactersheetcreator.ui.create._events.KeyboardVisibleEvent;
+import amagi82.modularcharactersheetcreator.ui.create._events.NameChangedEvent;
+import amagi82.modularcharactersheetcreator.ui.create._events.ResetSelectionEvent;
 import amagi82.modularcharactersheetcreator.ui.crop.CropActivity;
-import amagi82.modularcharactersheetcreator.ui.edit._events.AxisSelectedEvent;
-import amagi82.modularcharactersheetcreator.ui.edit._events.AxisUpdateEvent;
-import amagi82.modularcharactersheetcreator.ui.edit._events.GameSelectedEvent;
-import amagi82.modularcharactersheetcreator.ui.edit._events.KeyboardVisibleEvent;
-import amagi82.modularcharactersheetcreator.ui.edit._events.NameChangedEvent;
-import amagi82.modularcharactersheetcreator.ui.edit._events.ResetSelectionEvent;
 import icepick.State;
 
 /*
@@ -38,18 +38,18 @@ import icepick.State;
     This screen can be reached from either MainActivity (for new characters) or from SheetActivity (for modifying existing characters).
     Exiting this screen takes you back to the MainActivity.
  */
-public class EditActivity extends BaseActivity {
-    private ActivityEditBinding binding;
-    private EditViewModel editViewModel;
+public class CreateActivity extends BaseActivity {
+    private ActivityCreateBinding binding;
+    private CreateViewModel createViewModel;
     @State GameCharacter character;
     @State int backstack;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_edit);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_create);
 
         binding.toolbar.setNavigationIcon(getTintedIcon(R.drawable.ic_close_24dp, Color.WHITE));
-        binding.toolbar.inflateMenu(R.menu.menu_edit);
+        binding.toolbar.inflateMenu(R.menu.menu_create);
         binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 finish(RESULT_CANCELED);
@@ -61,12 +61,12 @@ public class EditActivity extends BaseActivity {
             else character = GameCharacter.create();
         }
 
-        editViewModel = new EditViewModel(character);
-        binding.setEditViewModel(editViewModel);
+        createViewModel = new CreateViewModel(character);
+        binding.setCreateViewModel(createViewModel);
         //If an update to a page > 0 is handled immediately, the adapter doesn't get set up.
         new Handler().postDelayed(new Runnable() {
             @Override public void run() {
-                editViewModel.update(character);
+                createViewModel.update(character);
             }
         }, 10);
     }
@@ -77,23 +77,23 @@ public class EditActivity extends BaseActivity {
     }
 
     @Subscribe public void axisUpdated(AxisUpdateEvent event) {
-        editViewModel.update(character, event.splat);
+        createViewModel.update(character, event.splat);
         binding.appbar.setExpanded(true);
     }
 
     @Subscribe public void axisSelected(AxisSelectedEvent event) {
-        if (editViewModel.page.get() == GameCharacter.LEFT) character = character.withLeft(event.splat);
+        if (createViewModel.page.get() == GameCharacter.LEFT) character = character.withLeft(event.splat);
         else character = character.withRight(event.splat);
         update();
     }
 
     @Subscribe public void nameChanged(NameChangedEvent event) {
         character = character.withName(event.name);
-        editViewModel.update(character);
+        createViewModel.update(character);
     }
 
     @Subscribe public void keyboardVisible(KeyboardVisibleEvent event) {
-        editViewModel.softKeyboardVisible();
+        createViewModel.softKeyboardVisible();
     }
 
     @Subscribe public void resetItem(ResetSelectionEvent event) {
@@ -114,7 +114,7 @@ public class EditActivity extends BaseActivity {
     }
 
     private void update() {
-        editViewModel.update(character);
+        createViewModel.update(character);
         binding.appbar.setExpanded(true);
         backstack = character.getProgress();
     }
@@ -128,7 +128,7 @@ public class EditActivity extends BaseActivity {
                     if (which == 0) {
                         //Remove the image and use the default icon
                         character = character.withImage(null, null);
-                        editViewModel.update(character);
+                        createViewModel.update(character);
                     } else getCroppedImage();
                 }
             }).show();
@@ -136,13 +136,13 @@ public class EditActivity extends BaseActivity {
     }
 
     private void getCroppedImage() {
-        startActivityForResult(new Intent(EditActivity.this, CropActivity.class).putExtra(CHARACTER, character), DEFAULT);
+        startActivityForResult(new Intent(CreateActivity.this, CropActivity.class).putExtra(CHARACTER, character), DEFAULT);
     }
 
     @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK || data == null) return;
         character = data.getParcelableExtra(CHARACTER);
-        editViewModel.update(character);
+        createViewModel.update(character);
     }
 
     public void onFabClicked(View view) {

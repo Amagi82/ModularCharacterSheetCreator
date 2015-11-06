@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui.edit.game;
+package amagi82.modularcharactersheetcreator.ui.create.game;
 
 import android.databinding.ObservableArrayList;
 
@@ -12,7 +12,7 @@ import me.tatarka.bindingcollectionadapter.ItemView;
 
 public class GameViewModel extends BaseViewModel{
     public final ObservableArrayList<GameItemViewModel> list = new ObservableArrayList<>();
-    public final ItemView itemView = ItemView.of(BR.gameItemViewModel, R.layout.tile_edit_game);
+    public final ItemView itemView = ItemView.of(BR.gameItemViewModel, R.layout.tile_create_game);
 
     public GameViewModel() {
         List<Game> list = Game.getSystems();

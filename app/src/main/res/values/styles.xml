@@ -24,7 +24,7 @@
         <item name="cardBackgroundColor">@color/card_header_background</item>
     </style>
 
-    <style name="Card.White.EditName">
+    <style name="Card.White.CreateName">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">@dimen/edit_name_card_height</item>
@@ -209,7 +209,7 @@
         <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark</item>
     </style>
 
-    <style name="EditFragmentFrame">
+    <style name="CreatePageFrame">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingLeft">@dimen/edit_recyclerview_keyline</item>
