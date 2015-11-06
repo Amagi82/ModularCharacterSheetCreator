@@ -13,7 +13,7 @@ import me.tatarka.bindingcollectionadapter.ItemView;
 public class SheetViewModel {
     public final ObservableField<GameCharacter> character = new ObservableField<>();
     public final ObservableArrayList<SheetTabViewModel> tabs = new ObservableArrayList<>();
-    public final ItemView itemView = ItemView.of(BR.sheetTabViewModel, R.layout.view_sheet_tab);
+    public final ItemView itemView = ItemView.of(BR.sheetTabViewModel, R.layout.sheet_tab);
     public final BindingViewPagerAdapter.PageTitles<SheetTabViewModel> tabTitles = new BindingViewPagerAdapter.PageTitles<SheetTabViewModel>() {
         @Override public CharSequence getPageTitle(int position, SheetTabViewModel tab) {
             return tab.title.get();

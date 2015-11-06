@@ -15,7 +15,7 @@ import me.tatarka.bindingcollectionadapter.ItemView;
 
 public class MainViewModel {
     public final ObservableArrayList<MainItemViewModel> list = new ObservableArrayList<>();
-    public final ItemView itemView = ItemView.of(BR.mainItemViewModel, R.layout.item_main);
+    public final ItemView itemView = ItemView.of(BR.mainItemViewModel, R.layout.main_item);
 
     public MainViewModel(){}
 

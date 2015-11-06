@@ -14,7 +14,7 @@ import android.view.View;
 import java.io.IOException;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.databinding.ActivityCropBinding;
+import amagi82.modularcharactersheetcreator.databinding.CropActivityBinding;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 
 import static amagi82.modularcharactersheetcreator.ui._base.BaseActivity.DEFAULT;
@@ -25,12 +25,12 @@ import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.CHARACTE
  */
 public class CropActivity extends AppCompatActivity {
     private GameCharacter character;
-    private ActivityCropBinding binding;
+    private CropActivityBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_crop);
+        binding = DataBindingUtil.setContentView(this, R.layout.crop_activity);
 
         character = getIntent().getParcelableExtra(CHARACTER);
         if(character == null) {

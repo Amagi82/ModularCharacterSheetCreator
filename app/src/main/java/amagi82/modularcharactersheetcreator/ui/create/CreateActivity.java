@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.databinding.ActivityCreateBinding;
+import amagi82.modularcharactersheetcreator.databinding.CreateActivityBinding;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Sheet;
 import amagi82.modularcharactersheetcreator.models.templates.Template;
@@ -39,14 +39,14 @@ import icepick.State;
     Exiting this screen takes you back to the MainActivity.
  */
 public class CreateActivity extends BaseActivity {
-    private ActivityCreateBinding binding;
+    private CreateActivityBinding binding;
     private CreateViewModel createViewModel;
     @State GameCharacter character;
     @State int backstack;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_create);
+        binding = DataBindingUtil.setContentView(this, R.layout.create_activity);
 
         binding.toolbar.setNavigationIcon(getTintedIcon(R.drawable.ic_close_24dp, Color.WHITE));
         binding.toolbar.inflateMenu(R.menu.menu_create);

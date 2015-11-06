@@ -23,9 +23,9 @@ public class CreateViewModel {
     public final ObservableArrayList<BaseViewModel> pages = new ObservableArrayList<>();
     public final ItemViewSelector<BaseViewModel> itemView = new BaseItemViewSelector<BaseViewModel>() {
         @Override public void select(ItemView itemView, int position, BaseViewModel item) {
-            if (position == 0) itemView.set(BR.gameViewModel, R.layout.view_create_game);
-            else if (position == 3) itemView.set(BR.nameViewModel, R.layout.view_create_name);
-            else itemView.set(BR.axisViewModel, R.layout.view_create_axis);
+            if (position == 0) itemView.set(BR.gameViewModel, R.layout.create_tab_game);
+            else if (position == 3) itemView.set(BR.nameViewModel, R.layout.create_tab_name);
+            else itemView.set(BR.axisViewModel, R.layout.create_tab_axis);
         }
     };
 

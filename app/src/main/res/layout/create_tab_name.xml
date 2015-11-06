@@ -19,23 +19,26 @@
                 style="@style/TextPrompt"
                 android:text="@string/confirm"/>
 
+            <include layout="@layout/create_name_card_game"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/edit_name_card_height"
+                     android:layout_margin="@dimen/card_margin"
+                     app:gameCardViewModel="@{nameViewModel.gameItem}"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <include layout="@layout/card_create_name_game"
-                         app:gameCardViewModel="@{nameViewModel.gameItem}"/>
-
-                <include layout="@layout/card_create_name_axis"
+                <include layout="@layout/create_name_card_axis"
                          app:axisCardViewModel="@{nameViewModel.leftItem}"/>
 
-                <include layout="@layout/card_create_name_axis"
+                <include layout="@layout/create_name_card_axis"
                          app:axisCardViewModel="@{nameViewModel.rightItem}"/>
 
             </LinearLayout>
 
-            <include layout="@layout/card_create_name"
+            <include layout="@layout/create_name_card"
                      app:nameViewModel="@{nameViewModel}"/>
 
         </LinearLayout>

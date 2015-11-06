@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.databinding.ActivityMainBinding;
+import amagi82.modularcharactersheetcreator.databinding.MainActivityBinding;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.characters.Sheet;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
@@ -39,12 +39,12 @@ import auto.parcelgson.gson.AutoParcelGsonTypeAdapterFactory;
  */
 public class MainActivity extends BaseActivity {
     private MainViewModel viewModel;
-    ActivityMainBinding binding;
+    private MainActivityBinding binding;
     private Gson gson;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
         gson = new GsonBuilder().registerTypeAdapterFactory(new AutoParcelGsonTypeAdapterFactory()).create();
         viewModel = new MainViewModel();
         loadSavedCharacters();

@@ -17,7 +17,7 @@ import me.tatarka.bindingcollectionadapter.ItemView;
 
 public class AxisViewModel extends BaseViewModel {
     public final ObservableArrayList<AxisItemViewModel> list = new ObservableArrayList<>();
-    public final ItemView itemView = ItemView.of(BR.axisItemViewModel, R.layout.tile_create_axis);
+    public final ItemView itemView = ItemView.of(BR.axisItemViewModel, R.layout.create_axis_tile);
     public final ObservableInt title = new ObservableInt();
     private final boolean isLeft;
     private GameCharacter currentCharacter;

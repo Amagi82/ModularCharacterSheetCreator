@@ -18,7 +18,7 @@ import android.view.View;
 import com.cocosw.bottomsheet.BottomSheet;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.databinding.ActivitySheetBinding;
+import amagi82.modularcharactersheetcreator.databinding.SheetActivityBinding;
 import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.ScreenSize;
@@ -26,12 +26,12 @@ import amagi82.modularcharactersheetcreator.ui.main.MainActivity;
 
 public class SheetActivity extends BaseActivity {
     private SheetViewModel sheetViewModel;
-    private ActivitySheetBinding binding;
+    private SheetActivityBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_sheet);
+        binding = DataBindingUtil.setContentView(this, R.layout.sheet_activity);
         setToolbar(binding.toolbar);
 
         final GameCharacter character = getIntent().getParcelableExtra(MainActivity.CHARACTER);

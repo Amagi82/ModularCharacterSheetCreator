@@ -36,25 +36,25 @@ public class SheetTabViewModel {
         @Override public void select(ItemView itemView, int position, BaseModuleViewModel item) {
             switch (item.type) {
                 case HEADER_MODULE:
-                    itemView.set(BR.headerViewModel, R.layout.module_header);
+                    itemView.set(BR.headerViewModel, R.layout.sheet_mod_header);
                     break;
                 case TEXT_MODULE:
-                    itemView.set(BR.textViewModel, R.layout.module_text);
+                    itemView.set(BR.textViewModel, R.layout.sheet_mod_text);
                     break;
                 case STAT_MODULE:
-                    itemView.set(BR.statViewModel, R.layout.module_stat);
+                    itemView.set(BR.statViewModel, R.layout.sheet_mod_stat);
                     break;
                 case STAT_BLOCK_MODULE:
-                    itemView.set(BR.statBlockViewModel, R.layout.module_stat_block);
+                    itemView.set(BR.statBlockViewModel, R.layout.sheet_mod_stat_block);
                     break;
                 case HEALTH_MODULE:
-                    itemView.set(BR.healthViewModel, R.layout.module_health);
+                    itemView.set(BR.healthViewModel, R.layout.sheet_mod_health);
                     break;
                 case BLOODPOOL_MODULE:
-                    itemView.set(BR.bloodPoolViewModel, R.layout.module_bloodpool);
+                    itemView.set(BR.bloodPoolViewModel, R.layout.sheet_mod_bloodpool);
                     break;
                 case IMAGE_MODULE:
-                    itemView.set(BR.imageViewModel, R.layout.module_image);
+                    itemView.set(BR.imageViewModel, R.layout.sheet_mod_image);
                     break;
             }
         }
