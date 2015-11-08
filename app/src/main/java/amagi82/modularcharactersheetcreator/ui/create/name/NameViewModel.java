@@ -29,14 +29,11 @@ public class NameViewModel extends BaseViewModel{
 
     public void update(GameCharacter character){
         Game game = character.getGameSystem();
-        int left = character.leftId();
-        int right = character.rightId();
 
-        if(right != 0) {
+        if(character.rightId() != 0) {
             gameItem.set(new GameCardViewModel(game.getGameUrl(), game.getGameTitle()));
-            if(game.checkLeft()) left = game.updateLeft(left, right);
             leftItem.set(new AxisCardViewModel(character.getLeft(), game.getLeftTitle(), true));
-            rightItem.set(new AxisCardViewModel(character.getRight(), game.getRightTitle(left), false));
+            rightItem.set(new AxisCardViewModel(character.getRight(), game.getRightTitle(character.leftId()), false));
         }
         name.set(character.name());
 

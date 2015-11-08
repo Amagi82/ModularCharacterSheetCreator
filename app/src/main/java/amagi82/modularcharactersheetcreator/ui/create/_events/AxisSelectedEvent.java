@@ -1,9 +1,9 @@
 package amagi82.modularcharactersheetcreator.ui.create._events;
 
 public class AxisSelectedEvent {
-    public final int splat;
+    public final int splatId;
 
     public AxisSelectedEvent(int splatId) {
-        this.splat = splatId;
+        this.splatId = splatId;
     }
 }

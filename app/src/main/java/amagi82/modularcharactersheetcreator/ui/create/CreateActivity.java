@@ -19,6 +19,7 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.CreateActivityBinding;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
+import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.models.games.templates.Template;
 import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.create._events.AxisSelectedEvent;
@@ -82,8 +83,15 @@ public class CreateActivity extends BaseActivity {
     }
 
     @Subscribe public void axisSelected(AxisSelectedEvent event) {
-        if (createViewModel.page.get() == GameCharacter.LEFT) character = character.withLeft(event.splat);
-        else character = character.withRight(event.splat);
+        if (createViewModel.page.get() == GameCharacter.LEFT) character = character.withLeft(event.splatId);
+        else {
+            Game system = character.getGameSystem();
+            if(system.checkLeft()) {
+                int leftId = system.updateLeft(character.leftId(), event.splatId);
+                if(leftId != character.leftId()) character = character.withLeft(leftId);
+            }
+            character = character.withRight(event.splatId);
+        }
         update();
     }
 
