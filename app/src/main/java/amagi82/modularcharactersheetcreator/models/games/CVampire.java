@@ -1,10 +1,10 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
-import android.content.res.Resources;
+import android.support.annotation.ArrayRes;
 import android.util.SparseArray;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.characters.Splat;
+import amagi82.modularcharactersheetcreator.models.Splat;
 
 /*
     Classic World of Darkness
@@ -13,9 +13,8 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
  */
 public class CVampire extends Game {
 
-    public CVampire(Resources res) {
+    public CVampire() {
         super();
-        this.res = res;
         this.gameTitle = getString(R.string.cwod_vampire);
         this.leftTitle = getString(R.string.clan);
         this.rightTitle = getString(R.string.sect);
@@ -105,13 +104,90 @@ public class CVampire extends Game {
         if (leftSplatId == MALKAVIAN || leftSplatId == MALKAVIAN_ANTITRUBU) return rightSplatId == SABBAT ? MALKAVIAN_ANTITRUBU : MALKAVIAN;
         if (leftSplatId == NOSFERATU || leftSplatId == NOSFERATU_ANTITRUBU) return rightSplatId == SABBAT ? NOSFERATU_ANTITRUBU : NOSFERATU;
         if (leftSplatId == RAVNOS || leftSplatId == RAVNOS_ANTITRUBU) return rightSplatId != INDEPENDENT ? RAVNOS_ANTITRUBU : RAVNOS;
-        if (leftSplatId == FOLLOWERS_OF_SET || leftSplatId == SERPENTS_OF_THE_LIGHT)
-            return rightSplatId == CAMARILLA ? SERPENTS_OF_THE_LIGHT : FOLLOWERS_OF_SET;
+        if (leftSplatId == FOLLOWERS_OF_SET || leftSplatId == SERPENTS_OF_THE_LIGHT) return rightSplatId == CAMARILLA ? SERPENTS_OF_THE_LIGHT : FOLLOWERS_OF_SET;
         if (leftSplatId == TOREADOR || leftSplatId == TOREADOR_ANTITRUBU) return rightSplatId == SABBAT ? TOREADOR_ANTITRUBU : TOREADOR;
         if (leftSplatId == TREMERE || leftSplatId == TREMERE_ANTITRUBU) return rightSplatId == SABBAT ? TREMERE_ANTITRUBU : TREMERE;
         if (leftSplatId == VENTRUE || leftSplatId == VENTRUE_ANTITRUBU) return rightSplatId == SABBAT ? VENTRUE_ANTITRUBU : VENTRUE;
         if (leftSplatId == SALUBRI || leftSplatId == SALUBRI_ANTITRIBU) return rightSplatId == SABBAT ? SALUBRI_ANTITRIBU : SALUBRI;
         return leftSplatId;
+    }
+
+    @ArrayRes public int getDisciplines(int clanId){
+        switch (clanId){
+            case AHRIMANES:
+                return R.array.CVampire_Disc_Ahrimanes;
+            case ANDA:
+                return R.array.CVampire_Disc_Anda;
+            case ASSAMITE:
+            case ASSAMITE_ANTITRUBU:
+                return R.array.CVampire_Disc_Assamite;
+            case BAALI:
+                return R.array.CVampire_Disc_Baali;
+            case BLOOD_BROTHERS:
+                return R.array.CVampire_Disc_BloodBrothers;
+            case BRUJAH:
+            case BRUJAH_ANTITRUBU:
+                return R.array.CVampire_Disc_Brujah;
+            case CAPPADOCIANS:
+                return R.array.CVampire_Disc_Cappadocians;
+            case DAUGHERS_OF_CACOPHONY:
+                return R.array.CVampire_Disc_DaughtersOfCacophony;
+            case FOLLOWERS_OF_SET:
+            case SERPENTS_OF_THE_LIGHT:
+                return R.array.CVampire_Disc_FollowersOfSet;
+            case GANGREL:
+            case GANGREL_ANTITRUBU:
+                return R.array.CVampire_Disc_Gangrel;
+            case GARGOYLE:
+                return R.array.CVampire_Disc_Gargoyles;
+            case GIOVANNI:
+                return R.array.CVampire_Disc_Giovanni;
+            case HARBINGERS_OF_SKULLS:
+                return R.array.CVampire_Disc_HarbingersOfSkulls;
+            case KIASYD:
+                return R.array.CVampire_Disc_Kiasyd;
+            case LAMIA:
+                return R.array.CVampire_Disc_Lamia;
+            case LASOMBRA:
+            case LASOMBRA_ANTITRUBU:
+                return R.array.CVampire_Disc_Lasombra;
+            case LHIANNAN:
+                return R.array.CVampire_Disc_Lhiannan;
+            case MALKAVIAN:
+            case MALKAVIAN_ANTITRUBU:
+                return R.array.CVampire_Disc_Malkavian;
+            case NAGARAJA:
+                return R.array.CVampire_Disc_Nagaraja;
+            case NOIAD:
+                return R.array.CVampire_Disc_Noiad;
+            case NOSFERATU:
+            case NOSFERATU_ANTITRUBU:
+                return R.array.CVampire_Disc_Nosferatu;
+            case RAVNOS:
+            case RAVNOS_ANTITRUBU:
+                return R.array.CVampire_Disc_Ravnos;
+            case SALUBRI:
+                return R.array.CVampire_Disc_Salubri;
+            case SALUBRI_ANTITRIBU:
+                return R.array.CVampire_Disc_Valaren;
+            case SAMEDI:
+                return R.array.CVampire_Disc_Samedi;
+            case TOREADOR:
+            case TOREADOR_ANTITRUBU:
+                return R.array.CVampire_Disc_Toreador;
+            case TREMERE:
+            case TREMERE_ANTITRUBU:
+                return R.array.CVampire_Disc_Tremere;
+            case TRUE_BRUJAH:
+                return R.array.CVampire_Disc_TrueBrujah;
+            case TZIMISCE:
+                return R.array.CVampire_Disc_Tzimisce;
+            case VENTRUE:
+            case VENTRUE_ANTITRUBU:
+                return R.array.CVampire_Disc_Ventrue;
+            default:
+                return 0;
+        }
     }
 
     //Left

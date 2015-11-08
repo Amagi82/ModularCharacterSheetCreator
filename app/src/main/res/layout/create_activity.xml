@@ -23,7 +23,7 @@
 
                 <amagi82.modularcharactersheetcreator.ui._extras.widgets.ImageBackdrop
                     style="@style/ImageBackdrop"
-                    app:imageUrl="@{createViewModel.splashUrl}"/>
+                    app:url="@{createViewModel.splashUrl}"/>
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"

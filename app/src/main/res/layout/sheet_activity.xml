@@ -31,7 +31,7 @@
                     style="@style/ImageBackdrop"
                     android:adjustViewBounds="true"
                     android:minHeight="@dimen/sheet_portrait_minheight"
-                    app:imageUri="@{sheetViewModel.character.image.uri}"
+                    app:url="@{sheetViewModel.character.image.uri}"
                     app:layout_collapseParallaxMultiplier="0.7"/>
 
                 <View
@@ -45,7 +45,7 @@
                 <ImageView
                     style="@style/CircleIcon"
                     app:size="@{@dimen/sheet_icon_size}"
-                    app:sizedImageUrl="@{sheetViewModel.character.left.url}"
+                    app:url="@{sheetViewModel.character.left.url}"
                     tools:src="@drawable/clan_icon"/>
 
                 <TextView
@@ -57,7 +57,7 @@
                     style="@style/CircleIcon"
                     android:layout_gravity="bottom|right"
                     app:size="@{@dimen/sheet_icon_size}"
-                    app:sizedImageUrl="@{sheetViewModel.character.right.url}"
+                    app:url="@{sheetViewModel.character.right.url}"
                     tools:src="@drawable/clan_icon"/>
 
                 <TextView

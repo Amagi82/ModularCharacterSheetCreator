@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.models.templates;
+package amagi82.modularcharactersheetcreator.models.games.templates;
 
 import android.content.res.Resources;
 
@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.characters.Sheet;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.Sheet;
+import amagi82.modularcharactersheetcreator.models.games.Trinity;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 
 public class TrinityTemplate extends Template{
@@ -18,11 +19,11 @@ public class TrinityTemplate extends Template{
 
     @SuppressWarnings("ConstantConditions")
     @Override Sheet createSheet(GameCharacter character) {
-        if (character.left() == null) return null;
+        if (character.leftId() == 0) return null;
         List<Module> modules = new ArrayList<>();
-        if(character.left().title() == R.string.adventure) return createAdventure(modules);
-        else if(character.left().title() == R.string.aberrant) return createAberrant(modules);
-        else if(character.left().title() == R.string.aeon) return createAeon(modules);
+        if(character.leftId() == Trinity.ADVENTURE) return createAdventure(modules);
+        else if(character.leftId() == Trinity.ABERRANT) return createAberrant(modules);
+        else if(character.leftId() == Trinity.AEON) return createAeon(modules);
         else return null;
     }
 

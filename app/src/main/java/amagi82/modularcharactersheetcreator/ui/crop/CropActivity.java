@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.CropActivityBinding;
-import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
 
 import static amagi82.modularcharactersheetcreator.ui._base.BaseActivity.DEFAULT;
 import static amagi82.modularcharactersheetcreator.ui.main.MainActivity.CHARACTER;

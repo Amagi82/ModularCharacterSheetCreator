@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.models.templates;
+package amagi82.modularcharactersheetcreator.models.games.templates;
 
 import android.content.res.Resources;
 
@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.characters.Sheet;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 
-public class NWerewolfTemplate extends Template {
+public class NDemonTemplate extends Template {
 
-    NWerewolfTemplate(Resources res) {
+    NDemonTemplate(Resources res) {
         super(res);
     }
 
@@ -33,10 +33,9 @@ public class NWerewolfTemplate extends Template {
         modules.add(statBlock(R.string.merits, 0, 0, 5));
         modules.add(health()); //TODO: Add NWod-specific health module
         modules.add(stat(R.string.willpower, 0, 0, 10));
-        modules.add(stat(R.string.primal_urge, 0, 0, 10));
-        modules.add(stat(R.string.essence, 0, 0, 10)); //Two rows? 20 total?
-        modules.add(statBlock(R.string.renown, R.array.NWerewolf_Renown, 0, 5));
-        modules.add(stat(R.string.harmony, 0, 0, 10));
+        modules.add(stat(R.string.cover, 0, 0, 10));
+        modules.add(stat(R.string.primum, 0, 0, 10));
+        modules.add(stat(R.string.aether, 0, 0, 10)); //Two rows? 20 total?
 
         //TODO: Organize this sheet and add the remaining modules
 

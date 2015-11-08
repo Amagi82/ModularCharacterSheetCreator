@@ -1,11 +1,9 @@
 package amagi82.modularcharactersheetcreator.ui.create._events;
 
-import amagi82.modularcharactersheetcreator.models.characters.Splat;
-
 public class AxisSelectedEvent {
-    public final Splat splat;
+    public final int splat;
 
-    public AxisSelectedEvent(Splat splat) {
-        this.splat = splat;
+    public AxisSelectedEvent(int splatId) {
+        this.splat = splatId;
     }
 }

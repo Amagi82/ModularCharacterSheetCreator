@@ -30,8 +30,8 @@
                 android:layout_marginLeft="@dimen/default_small_margin"
                 android:layout_marginTop="@dimen/default_small_margin"
                 android:text="@{axisCardViewModel.axisTitle}"
-                android:textSize="20sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textSize="20sp"
                 tools:text="Clan"/>
 
             <TextView
@@ -40,7 +40,7 @@
                 android:layout_alignRight="@id/center"
                 android:layout_below="@id/tvTitle"
                 android:layout_marginLeft="@dimen/default_small_margin"
-                android:text="@{axisCardViewModel.title}"
+                android:text="@{axisCardViewModel.splat.title}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 tools:text="Gangrel"/>
 
@@ -49,13 +49,14 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/default_small_margin"
                 android:layout_toRightOf="@id/center"
-                app:sizedImageUrl="@{axisCardViewModel.getUrl()}"
+                app:size="@{0}"
+                app:url="@{axisCardViewModel.splat.url}"
                 tools:src="@drawable/clan_icon"/>
         </RelativeLayout>
 
         <ImageView
-            android:onClick="@{axisCardViewModel.onResetClicked}"
-            style="@style/ActionButton.Undo" />
+            style="@style/ActionButton.Undo"
+            android:onClick="@{axisCardViewModel.onResetClicked}"/>
 
     </android.support.v7.widget.CardView>
 </layout>

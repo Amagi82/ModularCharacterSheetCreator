@@ -25,7 +25,7 @@
             android:contentDescription="@string/character_icon"
             app:civ_border_color="@color/grey_700"
             app:civ_border_width="1dp"
-            app:loadIcon="@{mainItemViewModel.character}"
+            app:icon="@{mainItemViewModel.character}"
             tools:background="@color/primary"/>
 
         <TextView
@@ -33,10 +33,10 @@
             style="@style/CharacterItemText.Right"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/default_margin"
-            android:text="@{mainItemViewModel.system}"
+            android:text="@{mainItemViewModel.gameTitle}"
             android:textColor="@{mainItemViewModel.systemColor}"
             android:textStyle="bold"
-            tools:text="Game system"/>
+            tools:text="Game gameId"/>
 
         <TextView
             android:id="@+id/tvCharacterName"
@@ -46,7 +46,7 @@
             android:layout_marginLeft="@dimen/default_keyline"
             android:layout_toLeftOf="@id/tvGameSystem"
             android:maxLines="2"
-            android:text="@{mainItemViewModel.name}"
+            android:text="@{mainItemViewModel.character.name}"
             android:textSize="16sp"
             tools:text="Character name"/>
 
@@ -55,7 +55,7 @@
             style="@style/CharacterItemText.Right"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@{mainItemViewModel.archetype}"
+            android:text="@{mainItemViewModel.character.archetype}"
             android:textStyle="italic"
             tools:text="Dwarven cleric"/>
 

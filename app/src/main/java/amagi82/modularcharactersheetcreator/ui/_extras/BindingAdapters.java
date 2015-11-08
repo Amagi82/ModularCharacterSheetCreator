@@ -7,11 +7,8 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,7 +18,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.modules.Health;
 import amagi82.modularcharactersheetcreator.models.modules.Stat;
 import amagi82.modularcharactersheetcreator.ui._base.BaseModuleViewModel;
@@ -40,52 +37,42 @@ public class BindingAdapters {
     private static int imageSize;
 
     //Load image from url, do not resize.
-    @BindingAdapter("imageUrl")
-    public static void loadImage(ImageView img, @StringRes int url) {
-        if (url != 0) Glide.with(img.getContext()).load(img.getContext().getString(url)).into(img);
-        else Glide.clear(img);
+    @BindingAdapter("url")
+    public static void loadImage(ImageView img, String url) {
+        Glide.with(img.getContext()).load(url).into(img);
     }
 
-    //Load image at a specific size
-    @BindingAdapter({"sizedImageUrl", "size"})
-    public static void loadSizedImage(ImageView img, @StringRes int url, float size) {
-        if (url != 0) Glide.with(img.getContext()).load(SplatIcon.getUrl(img.getResources().getString(url), (int) size)).into(img);
-    }
-
-    //Load image sized for the available space. If the ImageView has not been measured, calculate based on screen size
-    @BindingAdapter("sizedImageUrl")
-    public static void loadSizedImage(ImageView img, @StringRes int url) {
-        int size = Math.min(img.getHeight(), img.getWidth());
-        if (size == 0) {
-            int width = new ScreenSize(img.getContext()).getWidth();
-            if (imageSize == 0 || screenWidth != width) {
-                screenWidth = width;
-                int margins = img.getResources().getDimensionPixelSize(R.dimen.card_margin) * 2;
-                int spanCount = img.getResources().getInteger(R.integer.character_axis_span_count);
-                int widthAvail = screenWidth - margins;
-                imageSize = (widthAvail - margins) / spanCount;
+    //Load splat image at a specific size. If size unknown, calculate best estimate before downloading.
+    @BindingAdapter({"url", "size"})
+    public static void loadImage(ImageView img, String url, float size) {
+        if(size < 1){
+            if(url == null) url = img.getResources().getString(R.string.url_default);
+            size = Math.min(img.getHeight(), img.getWidth());
+            if (size < 1) {
+                int width = new ScreenSize(img.getContext()).getWidth();
+                if (imageSize == 0 || screenWidth != width) {
+                    screenWidth = width;
+                    int margins = img.getResources().getDimensionPixelSize(R.dimen.card_margin) * 2;
+                    int spanCount = img.getResources().getInteger(R.integer.character_axis_span_count);
+                    int widthAvail = screenWidth - margins;
+                    imageSize = (widthAvail - margins) / spanCount;
+                }
+                size = imageSize;
             }
-            size = imageSize;
         }
-        if (url != 0) Glide.with(img.getContext()).load(SplatIcon.getUrl(img.getResources().getString(url), size)).into(img);
+        Glide.with(img.getContext()).load(SplatIcon.getUrl(url, (int) size)).into(img);
     }
 
     //Load image from uri, with placeholder. Layout params and view bounds must be changed to size the image and placeholder correctly.
-    @BindingAdapter({"imageUri", "placeholder"})
-    public static void loadImageUri(ImageView img, String uri, Drawable placeholder) {
-        img.getLayoutParams().width = (uri == null) ? ViewGroup.LayoutParams.WRAP_CONTENT : ViewGroup.LayoutParams.MATCH_PARENT;
-        img.setAdjustViewBounds(uri != null);
-        Glide.with(img.getContext()).load(uri).placeholder(placeholder).into(img);
-    }
-
-    //Load image from uri
-    @BindingAdapter("imageUri")
-    public static void loadImageUri(ImageView img, String uri) {
-        Glide.with(img.getContext()).load(uri).into(img);
+    @BindingAdapter({"url", "placeholder"})
+    public static void loadImage(ImageView img, String url, Drawable placeholder) {
+        img.getLayoutParams().width = (url == null) ? ViewGroup.LayoutParams.WRAP_CONTENT : ViewGroup.LayoutParams.MATCH_PARENT;
+        img.setAdjustViewBounds(url != null);
+        Glide.with(img.getContext()).load(url).placeholder(placeholder).into(img);
     }
 
     //Load circle icon for items in MainActivity
-    @BindingAdapter("loadIcon")
+    @BindingAdapter("icon")
     public static void loadIcon(CircleImageView icon, GameCharacter character) {
         //noinspection ConstantConditions
         String imageUri = character.image() == null ? null : character.image().uri();
@@ -108,13 +95,6 @@ public class BindingAdapters {
             }
         }, 500);
         else fab.hide();
-    }
-
-    //Format a string
-    @BindingAdapter({"format", "argId"})
-    public static void setFormattedText(TextView textView, String format, int argId) {
-        if (argId == 0) return;
-        textView.setText(String.format(format, textView.getResources().getString(argId)));
     }
 
     @BindingAdapter("editTextListener")

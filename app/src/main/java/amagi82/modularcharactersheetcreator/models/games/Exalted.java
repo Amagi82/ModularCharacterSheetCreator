@@ -1,10 +1,9 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
-import android.content.res.Resources;
 import android.util.SparseArray;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.characters.Splat;
+import amagi82.modularcharactersheetcreator.models.Splat;
 
 /*
     Exalted 2nd Edition
@@ -12,9 +11,8 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
  */
 public class Exalted extends Game {
 
-    public Exalted(Resources res) {
+    public Exalted() {
         super();
-        this.res = res;
         this.gameTitle = getString(R.string.exalted);
         this.leftTitle = getString(R.string.exalt);
         this.rightTitle = getString(R.string.caste);
@@ -26,7 +24,7 @@ public class Exalted extends Game {
     }
 
     private SparseArray<Splat> getSplats() {
-        SparseArray<Splat> splats = new SparseArray<>();
+        SparseArray<Splat> splats = new SparseArray<>(41);
 
         splats.put(SOLAR, splat(R.string.solar_exalted));
         splats.put(ABYSSAL, splat(R.string.abyssal_exalted));

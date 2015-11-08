@@ -17,9 +17,9 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.CreateActivityBinding;
-import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.characters.Sheet;
-import amagi82.modularcharactersheetcreator.models.templates.Template;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.Sheet;
+import amagi82.modularcharactersheetcreator.models.games.templates.Template;
 import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.create._events.AxisSelectedEvent;
 import amagi82.modularcharactersheetcreator.ui.create._events.AxisUpdateEvent;
@@ -31,7 +31,7 @@ import amagi82.modularcharactersheetcreator.ui.crop.CropActivity;
 import icepick.State;
 
 /*
-    Screen used to create or modify the core of a GameCharacter. Choose game system, character axis(commonly referred to as "splats", name, and photo.
+    Screen used to create or modify the core of a GameCharacter. Choose game gameId, character axis(commonly referred to as "splats", name, and photo.
     Character sheet settings are not handled here (see Sheet).
 
     Navigation:
@@ -72,12 +72,12 @@ public class CreateActivity extends BaseActivity {
     }
 
     @Subscribe public void gameSelected(GameSelectedEvent event) {
-        character = character.withGame(event.gameTitle);
+        character = character.withGame(event.gameId);
         update();
     }
 
     @Subscribe public void axisUpdated(AxisUpdateEvent event) {
-        createViewModel.update(character, event.splat);
+        createViewModel.update(character, event.splatId);
         binding.appbar.setExpanded(true);
     }
 

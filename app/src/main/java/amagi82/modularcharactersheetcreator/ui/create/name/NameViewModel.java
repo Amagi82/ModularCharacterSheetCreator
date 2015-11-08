@@ -2,8 +2,7 @@ package amagi82.modularcharactersheetcreator.ui.create.name;
 
 import android.databinding.ObservableField;
 
-import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.characters.Splat;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.ui._base.BaseViewModel;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
@@ -30,14 +29,14 @@ public class NameViewModel extends BaseViewModel{
 
     public void update(GameCharacter character){
         Game game = character.getGameSystem();
-        Splat left = character.left();
-        Splat right = character.right();
+        int left = character.leftId();
+        int right = character.rightId();
 
-        if(right != null) {
-            gameItem.set(new GameCardViewModel(game.getGameUrl(), 0));
+        if(right != 0) {
+            gameItem.set(new GameCardViewModel(game.getGameUrl(), game.getGameTitle()));
             if(game.checkLeft()) left = game.updateLeft(left, right);
-            leftItem.set(new AxisCardViewModel(left, game.getLeftTitle(), true));
-            rightItem.set(new AxisCardViewModel(right, game.getRightTitle(left), false));
+            leftItem.set(new AxisCardViewModel(character.getLeft(), game.getLeftTitle(), true));
+            rightItem.set(new AxisCardViewModel(character.getRight(), game.getRightTitle(left), false));
         }
         name.set(character.name());
 

@@ -1,6 +1,6 @@
 package amagi82.modularcharactersheetcreator.ui.main;
 
-import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
 
 public class CharacterClickedEvent {
     public final GameCharacter character;

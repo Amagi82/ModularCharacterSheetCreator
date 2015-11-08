@@ -2,12 +2,12 @@ package amagi82.modularcharactersheetcreator.ui.create;
 
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
+import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.characters.Splat;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui._base.BaseViewModel;
 import amagi82.modularcharactersheetcreator.ui.create.axis.AxisViewModel;
 import amagi82.modularcharactersheetcreator.ui.create.game.GameViewModel;
@@ -17,7 +17,7 @@ import me.tatarka.bindingcollectionadapter.ItemView;
 import me.tatarka.bindingcollectionadapter.ItemViewSelector;
 
 public class CreateViewModel {
-    public final ObservableInt splashUrl = new ObservableInt();
+    public final ObservableField<String> splashUrl = new ObservableField<>();
     public final ObservableInt page = new ObservableInt();
     public final ObservableBoolean isFabShown = new ObservableBoolean();
     public final ObservableArrayList<BaseViewModel> pages = new ObservableArrayList<>();
@@ -37,19 +37,19 @@ public class CreateViewModel {
     }
 
     public void update(GameCharacter character) {
-        splashUrl.set(character.getGameSystem() == null ? 0 : character.getGameSystem().getSplashUrl());
+        splashUrl.set(character.getGameSystem() == null ? null : character.getGameSystem().getSplashUrl());
         page.set(character.getProgress());
         isFabShown.set(character.isComplete());
 
-        ((AxisViewModel) pages.get(1)).update(character, null);
-        ((AxisViewModel) pages.get(2)).update(character, null);
+        ((AxisViewModel) pages.get(1)).update(character, 0);
+        ((AxisViewModel) pages.get(2)).update(character, 0);
         ((NameViewModel) pages.get(3)).update(character);
     }
 
     //Selection was not an end point. Display the sub-list.
-    public void update(GameCharacter character, Splat splat) {
-        ((AxisViewModel) pages.get(1)).update(character, splat);
-        ((AxisViewModel) pages.get(2)).update(character, splat);
+    public void update(GameCharacter character, int splatId) {
+        ((AxisViewModel) pages.get(1)).update(character, splatId);
+        ((AxisViewModel) pages.get(2)).update(character, splatId);
     }
 
     public void softKeyboardVisible() {

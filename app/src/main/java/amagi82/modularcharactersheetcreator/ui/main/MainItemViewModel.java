@@ -2,11 +2,10 @@ package amagi82.modularcharactersheetcreator.ui.main;
 
 import android.view.View;
 
-import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
 
 public class MainItemViewModel {
-
     private final GameCharacter character;
 
     public MainItemViewModel(GameCharacter character) {
@@ -17,24 +16,12 @@ public class MainItemViewModel {
         return character;
     }
 
-    public int getSystem() {
-        return character.gameTitle();
+    public String getGameTitle() {
+        return character.getGameSystem().getGameTitle();
     }
 
     public int getSystemColor() {
         return character.getGameSystem().getGameColor();
-    }
-
-    public String getName() {
-        return character.name();
-    }
-
-    public int getArchetype() {
-        return character.getArchetype();
-    }
-
-    public String getEntityId(){
-        return character.entityId();
     }
 
     public void onItemClick(View view){

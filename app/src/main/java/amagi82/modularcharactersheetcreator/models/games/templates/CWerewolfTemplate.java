@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.models.templates;
+package amagi82.modularcharactersheetcreator.models.games.templates;
 
 import android.content.res.Resources;
 
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.characters.Sheet;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 
 public class CWerewolfTemplate extends Template {

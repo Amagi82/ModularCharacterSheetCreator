@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            app:sizedImageUrl="@{axisItemViewModel.getUrl()}"/>
+            app:url="@{axisItemViewModel.splat.url}"
+            app:size="@{0}"/>
 
         <TextView
             style="@style/TextAppearance.AppCompat.Subhead"
@@ -30,7 +31,7 @@
             android:background="@color/tileAlpha"
             android:gravity="center"
             android:padding="@dimen/default_small_margin"
-            android:text="@{axisItemViewModel.title}"
+            android:text="@{axisItemViewModel.splat.title}"
             android:textColor="@color/white"
             tools:text="Header"/>
 

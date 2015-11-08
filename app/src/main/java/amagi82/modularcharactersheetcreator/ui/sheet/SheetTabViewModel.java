@@ -6,7 +6,7 @@ import android.databinding.ObservableInt;
 
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.characters.Sheet;
+import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.ui._base.BaseModuleViewModel;
 import amagi82.modularcharactersheetcreator.ui.sheet.modules.BloodPoolViewModel;

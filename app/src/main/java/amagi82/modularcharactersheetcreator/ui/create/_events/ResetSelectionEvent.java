@@ -1,6 +1,6 @@
 package amagi82.modularcharactersheetcreator.ui.create._events;
 
-import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
 
 public class ResetSelectionEvent {
     public final int toPage;

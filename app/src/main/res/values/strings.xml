@@ -19,7 +19,7 @@
     <string name="action_rename_tab">Rename tab</string>
 
     <!--Character creation-->
-    <string name="choose_game">Choose game system</string>
+    <string name="choose_game">Choose game gameId</string>
     <string name="choose">Choose %s</string>
     <string name="choose_name">Choose name</string>
     <string name="confirm">Confirm</string>

@@ -10,7 +10,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import me.tatarka.bindingcollectionadapter.ItemView;
 
 public class MainViewModel {
@@ -18,10 +18,6 @@ public class MainViewModel {
     public final ItemView itemView = ItemView.of(BR.mainItemViewModel, R.layout.main_item);
 
     public MainViewModel(){}
-
-    public MainViewModel(List<GameCharacter> characters) {
-        addAll(characters);
-    }
 
     public void addAll(List<GameCharacter> characters){
         this.list.clear();

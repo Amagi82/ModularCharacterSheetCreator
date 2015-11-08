@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.models.templates;
+package amagi82.modularcharactersheetcreator.models.games.templates;
 
 import android.content.res.Resources;
 import android.support.annotation.ArrayRes;
@@ -8,12 +8,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.characters.Sheet;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.Sheet;
+import amagi82.modularcharactersheetcreator.models.games.Game;
 import amagi82.modularcharactersheetcreator.models.modules.BloodPool;
 import amagi82.modularcharactersheetcreator.models.modules.Health;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.models.modules.Stat;
+
+import static amagi82.modularcharactersheetcreator.models.games.Game.CMAGE;
+import static amagi82.modularcharactersheetcreator.models.games.Game.CVAMPIRE;
+import static amagi82.modularcharactersheetcreator.models.games.Game.CWEREWOLF;
+import static amagi82.modularcharactersheetcreator.models.games.Game.CWRAITH;
+import static amagi82.modularcharactersheetcreator.models.games.Game.EXALTED;
+import static amagi82.modularcharactersheetcreator.models.games.Game.NDEMON;
+import static amagi82.modularcharactersheetcreator.models.games.Game.NMUMMY;
+import static amagi82.modularcharactersheetcreator.models.games.Game.NVAMPIRE;
+import static amagi82.modularcharactersheetcreator.models.games.Game.NWEREWOLF;
+import static amagi82.modularcharactersheetcreator.models.games.Game.SCION;
+import static amagi82.modularcharactersheetcreator.models.games.Game.TRINITY;
 
 public abstract class Template {
     private Resources res;
@@ -25,32 +38,36 @@ public abstract class Template {
     abstract Sheet createSheet(GameCharacter character);
 
     public static Sheet create(Resources res, GameCharacter character) {
-        switch (character.gameTitle()) {
-            case R.string.cwod_mage:
+        switch (character.gameId()) {
+            case CMAGE:
                 return new CMageTemplate(res).createSheet(character);
-            case R.string.cwod_vampire:
+            case CVAMPIRE:
                 return new CVampireTemplate(res).createSheet(character);
-            case R.string.cwod_werewolf:
+            case CWEREWOLF:
                 return new CWerewolfTemplate(res).createSheet(character);
-            case R.string.cwod_wraith:
+            case CWRAITH:
                 return new CWraithTemplate(res).createSheet(character);
-            case R.string.exalted:
+            case EXALTED:
                 return new ExaltedTemplate(res).createSheet(character);
-            case R.string.nwod_demon:
+            case NDEMON:
                 return new NDemonTemplate(res).createSheet(character);
-            case R.string.nwod_mummy:
+            case NMUMMY:
                 return new NMummyTemplate(res).createSheet(character);
-            case R.string.nwod_vampire:
+            case NVAMPIRE:
                 return new NVampireTemplate(res).createSheet(character);
-            case R.string.nwod_werewolf:
+            case NWEREWOLF:
                 return new NWerewolfTemplate(res).createSheet(character);
-            case R.string.scion:
+            case SCION:
                 return new ScionTemplate(res).createSheet(character);
-            case R.string.trinity:
+            case TRINITY:
                 return new TrinityTemplate(res).createSheet(character);
             default:
                 return null;
         }
+    }
+
+    Game getSystem(GameCharacter character){
+        return character.getGameSystem();
     }
 
     Sheet sheet(List<Module> modules) {

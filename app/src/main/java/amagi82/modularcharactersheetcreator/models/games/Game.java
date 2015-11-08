@@ -1,6 +1,5 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
-import android.content.res.Resources;
 import android.support.annotation.ColorRes;
 import android.support.annotation.IntDef;
 import android.support.annotation.StringRes;
@@ -9,20 +8,20 @@ import android.util.SparseArray;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import amagi82.modularcharactersheetcreator.models.characters.Splat;
+import amagi82.modularcharactersheetcreator.models.Splat;
+import amagi82.modularcharactersheetcreator.ui._base.App;
 
 /*
     Base class implemented by all game systems
  */
 public abstract class Game {
-    Resources res;
     String gameTitle;
     String leftTitle;
     String rightTitle;
     String gameUrl;
     String splashUrl;
     @ColorRes int gameColor; //Used in the list of characters in MainAdapter
-    boolean isArchetypeLeft = true; //Archetype is displayed under the game system in the list of characters
+    boolean isArchetypeLeft = true; //Archetype is displayed under the game gameId in the list of characters
     boolean checkLeft = false; //With CVampire, Sect must be known to determine if Clan is antitribu.
     boolean isLeftListFinal = true; //False if the list can change depending on choices
     boolean isRightListFinal = true; //False if the list can change depending on choices
@@ -80,37 +79,41 @@ public abstract class Game {
         return 0;
     }
 
-    public static Game getSystem(Resources res, @System int systemId) {
+    public static Game getSystem(@System int systemId) {
         switch (systemId) {
             case CMAGE:
-                return new CMage(res);
+                return new CMage();
             case CVAMPIRE:
-                return new CVampire(res);
+                return new CVampire();
             case CWEREWOLF:
-                return new CWerewolf(res);
+                return new CWerewolf();
             case CWRAITH:
-                return new CWraith(res);
+                return new CWraith();
             case EXALTED:
-                return new Exalted(res);
+                return new Exalted();
             case NDEMON:
-                return new NDemon(res);
+                return new NDemon();
             case NMUMMY:
-                return new NMummy(res);
+                return new NMummy();
             case NVAMPIRE:
-                return new NVampire(res);
+                return new NVampire();
             case NWEREWOLF:
-                return new NWerewolf(res);
+                return new NWerewolf();
             case SCION:
-                return new Scion(res);
+                return new Scion();
             case TRINITY:
-                return new Trinity(res);
+                return new Trinity();
             default:
                 return null;
         }
     }
 
-    String getString(@StringRes int string) {
-        return res.getString(string);
+    public static int[] getSystems() {
+        return new int[]{CMAGE, CVAMPIRE, CWEREWOLF, CWRAITH, EXALTED, NDEMON, NMUMMY, NVAMPIRE, NWEREWOLF, SCION, TRINITY};
+    }
+
+    String getString(@StringRes int resId) {
+        return App.getRes().getString(resId);
     }
 
     Splat splat(@StringRes int title) {
@@ -123,10 +126,6 @@ public abstract class Game {
 
     Splat splat(@StringRes int title, boolean isEndPoint) {
         return Splat.create(getString(title), isEndPoint);
-    }
-
-    public static int[] getSystems() {
-        return new int[]{CMAGE, CVAMPIRE, CWEREWOLF, CWRAITH, EXALTED, NDEMON, NMUMMY, NVAMPIRE, NWEREWOLF, SCION, TRINITY};
     }
 
     @Retention(RetentionPolicy.SOURCE)

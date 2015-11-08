@@ -5,8 +5,8 @@ import android.databinding.ObservableField;
 
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.characters.Sheet;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.Sheet;
 import me.tatarka.bindingcollectionadapter.BindingViewPagerAdapter;
 import me.tatarka.bindingcollectionadapter.ItemView;
 

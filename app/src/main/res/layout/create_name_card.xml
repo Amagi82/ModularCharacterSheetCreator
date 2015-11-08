@@ -50,7 +50,7 @@
                 android:minWidth="@dimen/edit_name_image_minwidth"
                 android:scaleType="fitCenter"
                 android:tint="@color/grey"
-                app:imageUri="@{nameViewModel.imageUri}"
+                app:url="@{nameViewModel.imageUri}"
                 app:placeholder="@{@drawable/ic_person_24dp}"/>
 
             <ImageView

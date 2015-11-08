@@ -1,10 +1,9 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
-import android.content.res.Resources;
 import android.util.SparseArray;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.characters.Splat;
+import amagi82.modularcharactersheetcreator.models.Splat;
 
 /*
     Classic World of Darkness
@@ -13,9 +12,8 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
  */
 public class CMage extends Game {
 
-    public CMage(Resources res) {
+    public CMage() {
         super();
-        this.res = res;
         this.gameTitle = getString(R.string.cwod_mage);
         this.leftTitle = getString(R.string.faction);
         this.isArchetypeLeft = false;
@@ -96,11 +94,13 @@ public class CMage extends Game {
     private static final int SCIONS_OF_ETHER = 107;
     private static final int VERBENAE = 108;
     private static final int VIRTUAL_ADEPTS = 109;
+
     private static final int ITERATION_X = 201;
     private static final int NEW_WORLD_ORDER = 202;
     private static final int PROGENITORS = 203;
     private static final int SYNDICATE = 204;
     private static final int VOID_ENGINEERS = 205;
+
     private static final int AHL_I_BATIN = 301;
     private static final int BATAA = 302;
     private static final int CHILDREN_OF_KNOWLEDGE = 303;

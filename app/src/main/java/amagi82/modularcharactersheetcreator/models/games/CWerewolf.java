@@ -1,10 +1,9 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
-import android.content.res.Resources;
 import android.util.SparseArray;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.characters.Splat;
+import amagi82.modularcharactersheetcreator.models.Splat;
 
 /*
     Classic World of Darkness
@@ -13,9 +12,8 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
  */
 public class CWerewolf extends Game {
 
-    public CWerewolf(Resources res) {
+    public CWerewolf() {
         super();
-        this.res = res;
         this.gameTitle = getString(R.string.cwod_werewolf);
         this.leftTitle = getString(R.string.tribe);
         this.rightTitle = getString(R.string.auspice);

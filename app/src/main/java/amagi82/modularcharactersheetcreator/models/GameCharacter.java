@@ -1,6 +1,5 @@
-package amagi82.modularcharactersheetcreator.models.characters;
+package amagi82.modularcharactersheetcreator.models;
 
-import android.content.res.Resources;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
@@ -21,9 +20,9 @@ import static amagi82.modularcharactersheetcreator.models.games.Game.NONE;
 @AutoParcelGson
 public abstract class GameCharacter implements Parcelable {
     public abstract String name();
-    public abstract @Game.System int system();
-    @Nullable public abstract Splat left();
-    @Nullable public abstract Splat right();
+    public abstract @Game.System int gameId();
+    public abstract int leftId();
+    public abstract int rightId();
     @Nullable public abstract ColorScheme colorScheme();
     @NonNull public abstract List<Sheet> sheets();
     @Nullable public abstract CharacterImage image();
@@ -32,8 +31,9 @@ public abstract class GameCharacter implements Parcelable {
 
     GameCharacter() {}
 
-    public static GameCharacter create(String name, @Game.System int system, Splat left, Splat right) {
-        return builder().name(name).system(system).left(left).right(right).build();
+    //Used to generate test objects, remove for production
+    public static GameCharacter create(String name, @Game.System int system, int left, int right) {
+        return builder().name(name).gameId(system).leftId(left).rightId(right).build();
     }
 
     public static GameCharacter create(){
@@ -45,15 +45,15 @@ public abstract class GameCharacter implements Parcelable {
     }
 
     public GameCharacter withGame(@Game.System int system){
-        return toBuilder().system(system).timeStamp(System.currentTimeMillis()).build();
+        return toBuilder().gameId(system).timeStamp(System.currentTimeMillis()).build();
     }
 
-    public GameCharacter withLeft(Splat left){
-        return toBuilder().left(left).timeStamp(System.currentTimeMillis()).build();
+    public GameCharacter withLeft(int left){
+        return toBuilder().leftId(left).timeStamp(System.currentTimeMillis()).build();
     }
 
-    public GameCharacter withRight(Splat right){
-        return toBuilder().right(right).timeStamp(System.currentTimeMillis()).build();
+    public GameCharacter withRight(int right){
+        return toBuilder().rightId(right).timeStamp(System.currentTimeMillis()).build();
     }
 
     public GameCharacter withSheets(List<Sheet> sheets){
@@ -67,9 +67,9 @@ public abstract class GameCharacter implements Parcelable {
     @AutoParcelGson.Builder
     abstract static class Builder {
         abstract Builder name(String name);
-        abstract Builder system(@Game.System int system);
-        abstract Builder left(Splat left);
-        abstract Builder right(Splat right);
+        abstract Builder gameId(@Game.System int gameId);
+        abstract Builder leftId(int leftId);
+        abstract Builder rightId(int rightId);
         abstract Builder colorScheme(ColorScheme colorScheme);
         abstract Builder sheets(List<Sheet> sheets);
         abstract Builder image(CharacterImage image);
@@ -83,7 +83,9 @@ public abstract class GameCharacter implements Parcelable {
     static Builder builder() {
         return new AutoParcelGson_GameCharacter.Builder()
                 .name("")
-                .system(NONE)
+                .gameId(NONE)
+                .leftId(0)
+                .rightId(0)
                 .sheets(new ArrayList<Sheet>())
                 .entityId(UUID.randomUUID().toString())
                 .timeStamp(System.currentTimeMillis());
@@ -125,25 +127,33 @@ public abstract class GameCharacter implements Parcelable {
     //Used during character creation/editing. Gets the current step in the character creation process
     @Progress
     public int getProgress() {
-        return system() == NONE ? START : left() == null ? LEFT : right() == null ? RIGHT : FINISH;
+        return gameId() == NONE ? START : leftId() == 0 ? LEFT : rightId() == 0 ? RIGHT : FINISH;
     }
 
     //Used during character creation/editing. Removes progress on back.
     public GameCharacter removeProgress(@Progress int toStep) {
-        int system = toStep == START ? NONE : system();
-        Splat left = toStep <= LEFT ? null : left();
-        Splat right = toStep <= RIGHT ? null : right();
-        return toBuilder().system(system).left(left).right(right).timeStamp(System.currentTimeMillis()).build();
+        int game = toStep == START ? NONE : gameId();
+        int left = toStep <= LEFT ? 0 : leftId();
+        int right = toStep <= RIGHT ? 0 : rightId();
+        return toBuilder().gameId(game).leftId(left).rightId(right).timeStamp(System.currentTimeMillis()).build();
     }
 
-    public Game getGameSystem(Resources res) {
-        return Game.getSystem(res, system());
+    public Game getGameSystem() {
+        return Game.getSystem(gameId());
     }
 
-    @SuppressWarnings("ConstantConditions")
-    public String getArchetype(Resources res) {
-        if (left() == null || right() == null || system() == NONE) return null;
-        return Game.getSystem(res, system()).isArchetypeLeft() ? left().title() : right().title();
+    public String getArchetype() {
+        if (leftId() == 0 || rightId() == 0 || gameId() == NONE) return null;
+        Game system = getGameSystem();
+        return system.isArchetypeLeft() ? system.getSplat(leftId()).title() : system.getSplat(rightId()).title();
+    }
+
+    public Splat getLeft(){
+        return getGameSystem().getSplat(leftId());
+    }
+
+    public Splat getRight(){
+        return getGameSystem().getSplat(rightId());
     }
 
     @Retention(RetentionPolicy.SOURCE)

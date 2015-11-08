@@ -1,14 +1,9 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
-import android.content.res.Resources;
-import android.support.annotation.Nullable;
 import android.util.SparseArray;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.characters.Splat;
+import amagi82.modularcharactersheetcreator.models.Splat;
 
 /*
     New World of Darkness
@@ -16,9 +11,8 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
  */
 public class NDemon extends Game {
 
-    public NDemon(Resources res) {
+    public NDemon() {
         super();
-        this.res = res;
         this.gameTitle = getString(R.string.nwod_demon);
         this.leftTitle = getString(R.string.incarnation);
         this.rightTitle = getString(R.string.agenda);
@@ -29,27 +23,38 @@ public class NDemon extends Game {
     }
 
     private SparseArray<Splat> getSplats(){
-        SparseArray<Splat> splats = new SparseArray<>();
+        SparseArray<Splat> splats = new SparseArray<>(8);
 
+        splats.put(DESTROYER, splat(R.string.destroyer, R.string.url_nwod_demon_incarnation_destroyer));
+        splats.put(GUARDIAN, splat(R.string.guardian, R.string.url_nwod_demon_incarnation_guardian));
+        splats.put(MESSANGER, splat(R.string.messenger, R.string.url_nwod_demon_incarnation_messenger));
+        splats.put(PSYCHOPOMP, splat(R.string.psychopomp, R.string.url_nwod_demon_incarnation_psychopomp));
+
+        splats.put(INQUISITOR, splat(R.string.inquisitor, R.string.url_nwod_demon_agenda_inquisitor));
+        splats.put(INTEGRATOR, splat(R.string.integrator, R.string.url_nwod_demon_agenda_integrator));
+        splats.put(SABOTEUR, splat(R.string.saboteur, R.string.url_nwod_demon_agenda_saboteur));
+        splats.put(TEMPTER, splat(R.string.tempter, R.string.url_nwod_demon_agenda_tempter));
 
         return splats;
     }
 
-    @Override public List<Splat> getListLeft(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>(4);
-        list.add(Splat.create(R.string.destroyer, R.string.url_nwod_demon_incarnation_destroyer));
-        list.add(Splat.create(R.string.guardian, R.string.url_nwod_demon_incarnation_guardian));
-        list.add(Splat.create(R.string.messenger, R.string.url_nwod_demon_incarnation_messenger));
-        list.add(Splat.create(R.string.psychopomp, R.string.url_nwod_demon_incarnation_psychopomp));
-        return list;
+    @Override public int[] getListLeft(int splatId) {
+        return new int[]{DESTROYER, GUARDIAN, MESSANGER, PSYCHOPOMP};
     }
 
-    @Override public List<Splat> getListRight(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>(4);
-        list.add(Splat.create(R.string.inquisitor, R.string.url_nwod_demon_agenda_inquisitor));
-        list.add(Splat.create(R.string.integrator, R.string.url_nwod_demon_agenda_integrator));
-        list.add(Splat.create(R.string.saboteur, R.string.url_nwod_demon_agenda_saboteur));
-        list.add(Splat.create(R.string.tempter, R.string.url_nwod_demon_agenda_tempter));
-        return list;
+    @Override public int[] getListRight(int splatId) {
+        return new int[]{INQUISITOR, INTEGRATOR, SABOTEUR, TEMPTER};
     }
+
+    //Left
+    private static final int DESTROYER = 1;
+    private static final int GUARDIAN = 2;
+    private static final int MESSANGER = 3;
+    private static final int PSYCHOPOMP = 4;
+
+    //Right
+    private static final int INQUISITOR = 101;
+    private static final int INTEGRATOR = 102;
+    private static final int SABOTEUR = 103;
+    private static final int TEMPTER = 104;
 }

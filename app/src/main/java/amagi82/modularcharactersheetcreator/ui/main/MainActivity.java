@@ -18,11 +18,10 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.MainActivityBinding;
-import amagi82.modularcharactersheetcreator.models.characters.GameCharacter;
-import amagi82.modularcharactersheetcreator.models.characters.Sheet;
-import amagi82.modularcharactersheetcreator.models.characters.Splat;
+import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.games.Game;
-import amagi82.modularcharactersheetcreator.models.templates.Template;
+import amagi82.modularcharactersheetcreator.models.games.templates.Template;
 import amagi82.modularcharactersheetcreator.ui._base.BaseActivity;
 import amagi82.modularcharactersheetcreator.ui.create.CreateActivity;
 import amagi82.modularcharactersheetcreator.ui.sheet.SheetActivity;
@@ -81,12 +80,12 @@ public class MainActivity extends BaseActivity {
     private List<GameCharacter> generateSampleCharacters() {
         Log.i("MainActivity", "Creating data");
         List<GameCharacter> characters = new ArrayList<>();
-        characters.add(GameCharacter.create("Thomas Anstis", Game.CVAMPIRE, Splat.create(R.string.gangrel, R.string.url_cwod_vampire_clan_gangrel), Splat.create(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla)));
-        characters.add(GameCharacter.create("Tom Lytton", Game.CVAMPIRE, Splat.create(R.string.brujah_antitribu, R.string.url_cwod_vampire_antitribu_brujah), Splat.create(R.string.anarchs, R.string.url_cwod_vampire_sect_anarchs)));
-        characters.add(GameCharacter.create("Georgia Johnson", Game.CVAMPIRE, Splat.create(R.string.tremere, R.string.url_cwod_vampire_clan_tremere), Splat.create(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla)));
-        characters.add(GameCharacter.create("Augustus von Rabenholtz", Game.CVAMPIRE, Splat.create(R.string.ventrue, R.string.url_cwod_vampire_clan_ventrue), Splat.create(R.string.camarilla, R.string.url_cwod_vampire_sect_camarilla)));
-        characters.add(GameCharacter.create("Dr. Von Natsi", Game.CMAGE, Splat.create(R.string.traditions, R.string.url_cwod_mage_faction_traditions), Splat.create(R.string.scions_of_ether, R.string.url_cwod_mage_tradition_scions_of_ether)));
-        characters.add(GameCharacter.create("Stormwalker", Game.CWEREWOLF, Splat.create(R.string.glass_walkers, R.string.url_cwod_werewolf_tribe_glass_walkers), Splat.create(R.string.ahroun, R.string.url_cwod_werewolf_auspice_ahroun)));
+        characters.add(GameCharacter.create("Thomas Anstis", Game.CVAMPIRE, 104, 1001));
+        characters.add(GameCharacter.create("Tom Lytton", Game.CVAMPIRE, 102, 1003));
+        characters.add(GameCharacter.create("Georgia Johnson", Game.CVAMPIRE, 121, 1001));
+        characters.add(GameCharacter.create("Augustus von Rabenholtz", Game.CVAMPIRE, 123, 1001));
+        characters.add(GameCharacter.create("Dr. Von Natsi", Game.CMAGE, 1, 107));
+        characters.add(GameCharacter.create("Stormwalker", Game.CWEREWOLF, 8, 101));
 
         for (int i = 0; i < characters.size(); i++) {
             Sheet defaultSheet = Template.create(getResources(), characters.get(i));

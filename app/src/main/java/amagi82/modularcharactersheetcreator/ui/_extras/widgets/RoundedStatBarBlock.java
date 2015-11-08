@@ -112,7 +112,7 @@ public class RoundedStatBarBlock extends ProgressBar {
             }
         }
 
-        //Determine if there is sufficient space to put the text to the left of the stat bar
+        //Determine if there is sufficient space to put the text to the leftId of the stat bar
         categoryOverlapsStatBar = minBarWidth + maxCategoryWidth + textSpacing > layoutWidth;
         specialtyTakesSecondLine = minBarWidth + maxCategoryWidth + maxSpecialtyWidth + (2 * textSpacing) > layoutWidth;
 

@@ -1,10 +1,9 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
-import android.content.res.Resources;
 import android.util.SparseArray;
 
 import amagi82.modularcharactersheetcreator.R;
-import amagi82.modularcharactersheetcreator.models.characters.Splat;
+import amagi82.modularcharactersheetcreator.models.Splat;
 
 /*
     Classic World of Darkness
@@ -13,9 +12,8 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
  */
 public class CWraith extends Game {
 
-    public CWraith(Resources res) {
+    public CWraith() {
         super();
-        this.res = res;
         this.gameTitle = getString(R.string.cwod_wraith);
         this.leftTitle = getString(R.string.legion);
         this.rightTitle = getString(R.string.guild);

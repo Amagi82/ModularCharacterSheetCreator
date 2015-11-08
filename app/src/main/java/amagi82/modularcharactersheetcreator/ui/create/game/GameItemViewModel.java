@@ -6,15 +6,17 @@ import amagi82.modularcharactersheetcreator.ui.create._events.GameSelectedEvent;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto;
 
 public class GameItemViewModel {
-    public final int url;
-    public final int gameTitle;
+    public final String gameTitle;
+    public final String url;
+    private final int gameId;
 
-    public GameItemViewModel(int url, int gameTitle) {
-        this.url = url;
+    public GameItemViewModel(String gameTitle, String url, int gameId) {
         this.gameTitle = gameTitle;
+        this.url = url;
+        this.gameId = gameId;
     }
 
     public void onItemClick(View view) {
-        Otto.BUS.get().post(new GameSelectedEvent(gameTitle));
+        Otto.BUS.get().post(new GameSelectedEvent(gameId));
     }
 }
