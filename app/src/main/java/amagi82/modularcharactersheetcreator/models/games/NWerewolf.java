@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -41,11 +42,11 @@ public class NWerewolf extends Game {
         return splats;
     }
 
-    @Override public int[] getListLeft(int splatId) {
+    @NonNull @Override public int[] getListLeft(int splatId) {
         return new int[]{BLOOD_TALONS, BONE_SHADOWS, GHOST_WOLVES, HUNTERS_IN_DARKNESS, IRON_MASTERS, STORM_LORDS};
     }
 
-    @Override public int[] getListRight(int splatId) {
+    @NonNull @Override public int[] getListRight(int splatId) {
         return new int[]{CAHALITH, ELODOTH, IRRAKA, ITHAEUR, RAHU};
     }
 

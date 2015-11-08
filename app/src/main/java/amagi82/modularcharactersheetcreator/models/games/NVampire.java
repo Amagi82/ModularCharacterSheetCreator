@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -42,11 +43,11 @@ public class NVampire extends Game {
         return splats;
     }
 
-    @Override public int[] getListLeft(int splatId) {
+    @NonNull @Override public int[] getListLeft(int splatId) {
         return new int[]{DAEVA, GANGREL, MEKHET, NOSFERATU, VENTRUE};
     }
 
-    @Override public int[] getListRight(int splatId) {
+    @NonNull @Override public int[] getListRight(int splatId) {
         return new int[]{CARTHIAN_MOVEMENT, CIRCLE_OF_THE_CRONE, HOLY_ENGINEERS, INVICTUS, LANCEA_ET_SANCTUM, ORDO_DRACUL, UNALIGNED};
     }
 

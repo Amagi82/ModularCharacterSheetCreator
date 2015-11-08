@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -40,11 +41,11 @@ public class NMummy extends Game {
         return splats;
     }
 
-    @Override public int[] getListLeft(int splatId) {
+    @NonNull @Override public int[] getListLeft(int splatId) {
         return new int[]{BULL_HEADED, FALCON_HEADED, JACKAL_HEADED, LION_HEADED, SERPENT_HEADED};
     }
 
-    @Override public int[] getListRight(int splatId) {
+    @NonNull @Override public int[] getListRight(int splatId) {
         return new int[]{MAA_KEP, MESEN_NEBU, SESHA_HEBSU, SU_MENENT, TEF_AABHI};
     }
 

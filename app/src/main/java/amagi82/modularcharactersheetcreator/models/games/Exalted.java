@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -83,11 +84,11 @@ public class Exalted extends Game {
         else return rightTitle;
     }
 
-    @Override public int[] getListLeft(int splatId) {
+    @NonNull @Override public int[] getListLeft(int splatId) {
         return new int[]{SOLAR, ABYSSAL, LUNAR, SIDEREAL, TERRESTRIAL, ALCHEMICAL, INFERNAL};
     }
 
-    @Override public int[] getListRight(int splatId) {
+    @NonNull @Override public int[] getListRight(int splatId) {
         if (splatId == SOLAR) return new int[]{DAWN, ZENITH, TWILIGHT, NIGHT, ECLIPSE};
         if (splatId == ABYSSAL) return new int[]{DUSK, MIDNIGHT, DAYBREAK, DAY, MOONSHADOW};
         if (splatId == LUNAR) return new int[]{FULL_MOON, CHANGING_MOON, NO_MOON, CASTELESS};
@@ -95,7 +96,7 @@ public class Exalted extends Game {
         if (splatId == TERRESTRIAL) return new int[]{CHOSEN_OF_JOURNEYS, CHOSEN_OF_SERENITY, CHOSEN_OF_BATTLES, CHOSEN_OF_SECRETS, CHOSEN_OF_ENDINGS};
         if (splatId == ALCHEMICAL) return new int[]{ORICHALCUM, MOONSILVER, STARMETAL, JADE, SOULSTEEL};
         if (splatId == INFERNAL) return new int[]{SLAYER, MALEFACTOR, DEFILER, SCOURGE, FIEND};
-        return null;
+        return new int[]{};
     }
 
     //Left

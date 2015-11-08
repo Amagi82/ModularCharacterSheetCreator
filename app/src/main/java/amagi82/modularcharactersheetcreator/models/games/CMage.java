@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -68,15 +69,15 @@ public class CMage extends Game {
         return getString(R.string.faction);
     }
 
-    @Override public int[] getListLeft(int splatId) {
+    @NonNull @Override public int[] getListLeft(int splatId) {
         return new int[]{TRADITIONS, TECHNOCRACY, CRAFTS};
     }
 
-    @Override public int[] getListRight(int splatId) {
+    @NonNull @Override public int[] getListRight(int splatId) {
         if(splatId == TRADITIONS) return new int[]{AKASHAYANA, CELESTIAL_CHORUS, CULT_OF_ECSTASY, DREAMSPEAKERS, EUTHANOTOI, ORDER_OF_HERMES, SCIONS_OF_ETHER, VERBENAE, VIRTUAL_ADEPTS};
         if(splatId == TECHNOCRACY) return new int[]{ITERATION_X, NEW_WORLD_ORDER, PROGENITORS, SYNDICATE, VOID_ENGINEERS};
         if(splatId == CRAFTS) return new int[]{AHL_I_BATIN, BATAA, CHILDREN_OF_KNOWLEDGE, HOLLOW_ONES, KNIGHTS_TEMPLAR, KOPA_LOEI, NGOMA, SISTERS_OF_HIPPOLYTA, TAFTANI, WU_LUNG};
-        return null;
+        return new int[]{};
     }
 
     //Left

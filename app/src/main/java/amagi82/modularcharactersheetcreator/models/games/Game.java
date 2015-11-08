@@ -2,6 +2,7 @@ package amagi82.modularcharactersheetcreator.models.games;
 
 import android.support.annotation.ColorRes;
 import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.util.SparseArray;
 
@@ -27,9 +28,9 @@ public abstract class Game {
     boolean isRightListFinal = true; //False if the list can change depending on choices
     SparseArray<Splat> splats;
 
-    public abstract int[] getListLeft(int splatId);
+    @NonNull public abstract int[] getListLeft(int splatId);
 
-    public abstract int[] getListRight(int splatId);
+    @NonNull public abstract int[] getListRight(int splatId);
 
     public Splat getSplat(int splatId){
         return splats.get(splatId);

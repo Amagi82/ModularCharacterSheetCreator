@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -64,11 +65,11 @@ public class Trinity extends Game {
         return getString(R.string.allegiance);
     }
 
-    @Override public int[] getListLeft(int splatId) {
+    @NonNull @Override public int[] getListLeft(int splatId) {
         return new int[]{ADVENTURE, ABERRANT, AEON};
     }
 
-    @Override public int[] getListRight(int splatId) {
+    @NonNull @Override public int[] getListRight(int splatId) {
         if(splatId == ADVENTURE) return new int[]{THE_AEON_SOCIETY_FOR_GENTLEMEN, THE_AIR_CIRCUS, BRANCH_9, THE_INTERNATIONAL_DETECTIVE_AGENCY, THE_PONATOWSKI_FOUNDATION};
         if(splatId == ABERRANT) return new int[]{ABERRANTS, PROJECT_UTOPIA, TEAM_TOMORROW, PROJECT_PROTEUS, THE_TERAGEN, THE_DIRECTIVE, CORPORATE, GOVERNMENT, OTHER, INDEPENDENT};
         return new int[]{AESCULAPIAN_ORDER, CHITRA_BHANU, ISRA, THE_LEGIONS, THE_MINISTRY_OF_NOETIC_AFFAIRS, NOVA_FORCA_DAS_NACOES, ORGOTEK, THE_UPEO_WA_MACHO};

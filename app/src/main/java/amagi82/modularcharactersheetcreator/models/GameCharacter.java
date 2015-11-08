@@ -44,16 +44,16 @@ public abstract class GameCharacter implements Parcelable {
         return toBuilder().name(name).timeStamp(System.currentTimeMillis()).build();
     }
 
-    public GameCharacter withGame(@Game.System int system){
-        return toBuilder().gameId(system).timeStamp(System.currentTimeMillis()).build();
+    public GameCharacter withGame(@Game.System int gameId){
+        return toBuilder().gameId(gameId).timeStamp(System.currentTimeMillis()).build();
     }
 
-    public GameCharacter withLeft(int left){
-        return toBuilder().leftId(left).timeStamp(System.currentTimeMillis()).build();
+    public GameCharacter withLeft(int leftId){
+        return toBuilder().leftId(leftId).timeStamp(System.currentTimeMillis()).build();
     }
 
-    public GameCharacter withRight(int right){
-        return toBuilder().rightId(right).timeStamp(System.currentTimeMillis()).build();
+    public GameCharacter withRight(int rightId){
+        return toBuilder().rightId(rightId).timeStamp(System.currentTimeMillis()).build();
     }
 
     public GameCharacter withSheets(List<Sheet> sheets){

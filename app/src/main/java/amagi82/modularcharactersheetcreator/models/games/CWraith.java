@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -65,11 +66,11 @@ public class CWraith extends Game {
         return splats;
     }
 
-    @Override public int[] getListLeft(int splatId) {
+    @NonNull @Override public int[] getListLeft(int splatId) {
         return new int[]{IRON_LEGION, SKELETAL_LEGION, GRIM_LEGION, PENITENT_LEGION, EMERALD_LEGION, SILENT_LEGION, LEGION_OF_PAUPERS, LEGION_OF_FATE};
     }
 
-    @Override public int[] getListRight(int splatId) {
+    @NonNull @Override public int[] getListRight(int splatId) {
         if(splatId == GREAT_GUILDS) return new int[]{ARTIFICERS, MASQUERS, PARDONERS, USURERS};
         if(splatId == WORKING_GUILDS) return new int[]{CHANTEURS, HARBINGERS, ORACLES, SANDMEN};
         if(splatId == CRIMINAL_GUILDS) return new int[]{HAUNTERS, MONITORS, SPOOKS, PROCTORS, PUPPETEERS};

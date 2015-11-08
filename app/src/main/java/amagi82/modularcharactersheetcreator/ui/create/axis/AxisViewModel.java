@@ -46,10 +46,9 @@ public class AxisViewModel extends BaseViewModel {
     }
 
     private void checkRight(Game system, int splatId) {
-        if (list.size() == 0)
-            if (system.isRightListFinal() || splatId != 0) addItemModels(system, splatId);
-        else if(system.getListRight(splatId).length == 0) list.clear();
-        else if (!system.isRightListFinal() && list.get(0).id != system.getListRight(splatId)[0]) {
+        if (list.size() == 0 && (system.isRightListFinal() || splatId != 0)) addItemModels(system, splatId);
+        else if (system.getListRight(splatId).length == 0) list.clear();
+        else if (!system.isRightListFinal() && list.size() > 0 && list.get(0).id != system.getListRight(splatId)[0]) {
             list.clear();
             addItemModels(system, splatId);
         }
@@ -57,7 +56,7 @@ public class AxisViewModel extends BaseViewModel {
     }
 
     private void addItemModels(Game system, int splatId) {
-        int[] items = isLeft? system.getListLeft(splatId) : system.getListRight(splatId);
+        int[] items = isLeft ? system.getListLeft(splatId) : system.getListRight(splatId);
         for (int id : items) {
             this.list.add(new AxisItemViewModel(system.getSplat(id), id));
         }

@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -52,12 +53,12 @@ public class CWerewolf extends Game {
         return splats;
     }
 
-    @Override public int[] getListLeft(int splatId) {
+    @NonNull @Override public int[] getListLeft(int splatId) {
         return new int[]{BLACK_FURIES, BONE_GNAWERS, BUNYIP, CHILDREN_OF_GAIA, CROATAN, FIANNA, GET_OF_FENRIS, GLASS_WALKERS, RED_TALONS,
                 SHADOW_LORDS, SILENT_STRIDERS, SILVER_FANGS, STARGAZERS, UKTENA, WENDIGO, WHITE_HOWLERS};
     }
 
-    @Override public int[] getListRight(int splatId) {
+    @NonNull @Override public int[] getListRight(int splatId) {
         return new int[]{AHROUN, GALLIARD, PHILODOX, RAGABASH, THEURGE};
     }
 

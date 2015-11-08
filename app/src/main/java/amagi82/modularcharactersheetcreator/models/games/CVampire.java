@@ -1,6 +1,7 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
 import android.support.annotation.ArrayRes;
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
 import amagi82.modularcharactersheetcreator.R;
@@ -85,14 +86,14 @@ public class CVampire extends Game {
         return splats;
     }
 
-    @Override public int[] getListLeft(int splatId) {
+    @NonNull @Override public int[] getListLeft(int splatId) {
         if (splatId == BLOODLINES) return new int[]{ANDA, BAALI, BLOOD_BROTHERS, CAPPADOCIANS, CHILDREN_OF_OSIRIS, DAUGHERS_OF_CACOPHONY, GARGOYLE,
                 HARBINGERS_OF_SKULLS, KIASYD, LAMIA, LHIANNAN, NAGARAJA, NOIAD, PANDERS, SALUBRI, SAMEDI, TRUE_BRUJAH};
         else return new int[]{ASSAMITE, BRUJAH, FOLLOWERS_OF_SET, GANGREL, GIOVANNI, LASOMBRA, MALKAVIAN, NOSFERATU, RAVNOS, TOREADOR, TREMERE,
                 TZIMISCE, VENTRUE, CAITIFF, BLOODLINES};
     }
 
-    @Override public int[] getListRight(int leftSplatId) {
+    @NonNull @Override public int[] getListRight(int leftSplatId) {
         return new int[]{CAMARILLA, ANARCHS, SABBAT, INDEPENDENT};
     }
 
