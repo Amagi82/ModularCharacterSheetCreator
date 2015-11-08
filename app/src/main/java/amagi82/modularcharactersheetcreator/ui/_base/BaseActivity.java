@@ -40,6 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     public static final String CHARACTER = "CHARACTER";
     public static final String LIST = "LIST";
+    public static final String MODULE = "MODULE";
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
