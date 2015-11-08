@@ -82,33 +82,33 @@ public class CMage extends Game {
     }
 
     //Left
-    static final int TRADITIONS = 1;
-    static final int TECHNOCRACY = 2;
-    static final int CRAFTS = 3;
+    private static final int TRADITIONS = 1;
+    private static final int TECHNOCRACY = 2;
+    private static final int CRAFTS = 3;
 
     //Right
-    static final int AKASHAYANA = 101;
-    static final int CELESTIAL_CHORUS = 102;
-    static final int CULT_OF_ECSTASY = 103;
-    static final int DREAMSPEAKERS = 104;
-    static final int EUTHANOTOI = 105;
-    static final int ORDER_OF_HERMES = 106;
-    static final int SCIONS_OF_ETHER = 107;
-    static final int VERBENAE = 108;
-    static final int VIRTUAL_ADEPTS = 109;
-    static final int ITERATION_X = 201;
-    static final int NEW_WORLD_ORDER = 202;
-    static final int PROGENITORS = 203;
-    static final int SYNDICATE = 204;
-    static final int VOID_ENGINEERS = 205;
-    static final int AHL_I_BATIN = 301;
-    static final int BATAA = 302;
-    static final int CHILDREN_OF_KNOWLEDGE = 303;
-    static final int HOLLOW_ONES = 304;
-    static final int KNIGHTS_TEMPLAR = 305;
-    static final int KOPA_LOEI = 306;
-    static final int NGOMA = 307;
-    static final int SISTERS_OF_HIPPOLYTA = 308;
-    static final int TAFTANI = 309;
-    static final int WU_LUNG = 310;
+    private static final int AKASHAYANA = 101;
+    private static final int CELESTIAL_CHORUS = 102;
+    private static final int CULT_OF_ECSTASY = 103;
+    private static final int DREAMSPEAKERS = 104;
+    private static final int EUTHANOTOI = 105;
+    private static final int ORDER_OF_HERMES = 106;
+    private static final int SCIONS_OF_ETHER = 107;
+    private static final int VERBENAE = 108;
+    private static final int VIRTUAL_ADEPTS = 109;
+    private static final int ITERATION_X = 201;
+    private static final int NEW_WORLD_ORDER = 202;
+    private static final int PROGENITORS = 203;
+    private static final int SYNDICATE = 204;
+    private static final int VOID_ENGINEERS = 205;
+    private static final int AHL_I_BATIN = 301;
+    private static final int BATAA = 302;
+    private static final int CHILDREN_OF_KNOWLEDGE = 303;
+    private static final int HOLLOW_ONES = 304;
+    private static final int KNIGHTS_TEMPLAR = 305;
+    private static final int KOPA_LOEI = 306;
+    private static final int NGOMA = 307;
+    private static final int SISTERS_OF_HIPPOLYTA = 308;
+    private static final int TAFTANI = 309;
+    private static final int WU_LUNG = 310;
 }

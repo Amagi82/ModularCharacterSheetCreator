@@ -2,6 +2,7 @@ package amagi82.modularcharactersheetcreator.models.games;
 
 import android.content.res.Resources;
 import android.support.annotation.Nullable;
+import android.util.SparseArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,14 @@ public class NWerewolf extends Game {
         this.gameUrl = getString(R.string.url_game_nwod_werewolf);
         this.splashUrl = getString(R.string.url_splash_nwod_werewolf);
         this.gameColor = R.color.nwod_werewolf;
+        this.splats = getSplats();
+    }
+
+    private SparseArray<Splat> getSplats(){
+        SparseArray<Splat> splats = new SparseArray<>();
+
+
+        return splats;
     }
 
     @Override public List<Splat> getListLeft(@Nullable Splat splat) {

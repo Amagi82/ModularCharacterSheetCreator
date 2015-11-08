@@ -1,10 +1,7 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
 import android.content.res.Resources;
-import android.support.annotation.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.util.SparseArray;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.characters.Splat;
@@ -25,80 +22,132 @@ public class Exalted extends Game {
         this.splashUrl = getString(R.string.url_splash_exalted);
         this.gameColor = R.color.exalted;
         this.isRightListFinal = false;
+        this.splats = getSplats();
     }
 
-    @Override public int getRightTitle(@Nullable Splat leftSplat) {
-        if (leftSplat == null || leftSplat.title() != R.string.terrestrial_exalted) return rightTitle;
-        else return R.string.aspect;
+    private SparseArray<Splat> getSplats() {
+        SparseArray<Splat> splats = new SparseArray<>();
+
+        splats.put(SOLAR, splat(R.string.solar_exalted));
+        splats.put(ABYSSAL, splat(R.string.abyssal_exalted));
+        splats.put(LUNAR, splat(R.string.lunar_exalted));
+        splats.put(SIDEREAL, splat(R.string.sidereal_exalted));
+        splats.put(TERRESTRIAL, splat(R.string.terrestrial_exalted));
+        splats.put(ALCHEMICAL, splat(R.string.alchemical_exalted));
+        splats.put(INFERNAL, splat(R.string.infernal_exalted));
+
+        splats.put(DAWN, splat(R.string.dawn));
+        splats.put(ZENITH, splat(R.string.zenith));
+        splats.put(TWILIGHT, splat(R.string.twilight));
+        splats.put(NIGHT, splat(R.string.night));
+        splats.put(ECLIPSE, splat(R.string.eclipse));
+
+        splats.put(DUSK, splat(R.string.dusk));
+        splats.put(MIDNIGHT, splat(R.string.midnight));
+        splats.put(DAYBREAK, splat(R.string.daybreak));
+        splats.put(DAY, splat(R.string.day));
+        splats.put(MOONSHADOW, splat(R.string.moonshadow));
+
+        splats.put(FULL_MOON, splat(R.string.full_moon));
+        splats.put(CHANGING_MOON, splat(R.string.changing_moon));
+        splats.put(NO_MOON, splat(R.string.no_moon));
+        splats.put(CASTELESS, splat(R.string.casteless));
+
+        splats.put(AIR, splat(R.string.air));
+        splats.put(EARTH, splat(R.string.earth));
+        splats.put(FIRE, splat(R.string.fire));
+        splats.put(WATER, splat(R.string.water));
+        splats.put(WOOD, splat(R.string.wood));
+
+        splats.put(CHOSEN_OF_JOURNEYS, splat(R.string.chosen_of_journeys));
+        splats.put(CHOSEN_OF_SERENITY, splat(R.string.chosen_of_serenity));
+        splats.put(CHOSEN_OF_BATTLES, splat(R.string.chosen_of_battles));
+        splats.put(CHOSEN_OF_SECRETS, splat(R.string.chosen_of_secrets));
+        splats.put(CHOSEN_OF_ENDINGS, splat(R.string.chosen_of_endings));
+
+        splats.put(ORICHALCUM, splat(R.string.orichalcum));
+        splats.put(MOONSILVER, splat(R.string.moonsilver));
+        splats.put(STARMETAL, splat(R.string.starmetal));
+        splats.put(JADE, splat(R.string.jade));
+        splats.put(SOULSTEEL, splat(R.string.soulsteel));
+
+        splats.put(SLAYER, splat(R.string.slayer));
+        splats.put(MALEFACTOR, splat(R.string.malefactor));
+        splats.put(DEFILER, splat(R.string.defiler));
+        splats.put(SCOURGE, splat(R.string.scrourge));
+        splats.put(FIEND, splat(R.string.fiend));
+
+        return splats;
     }
 
-    @Override public List<Splat> getListLeft(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>(7);
-        list.add(Splat.create(R.string.solar_exalted));
-        list.add(Splat.create(R.string.abyssal_exalted));
-        list.add(Splat.create(R.string.lunar_exalted));
-        list.add(Splat.create(R.string.sidereal_exalted));
-        list.add(Splat.create(R.string.terrestrial_exalted));
-        list.add(Splat.create(R.string.alchemical_exalted));
-        list.add(Splat.create(R.string.infernal_exalted));
-        return list;
+    @Override public String getRightTitle(int leftSplatId) {
+        if (leftSplatId == TERRESTRIAL) return getString(R.string.aspect);
+        else return rightTitle;
     }
 
-    @Override public List<Splat> getListRight(@Nullable Splat splat) {
-        List<Splat> list = new ArrayList<>(5);
-        if (splat == null) return list;
-        switch (splat.title()) {
-            case R.string.solar_exalted:
-                list.add(Splat.create(R.string.dawn));
-                list.add(Splat.create(R.string.zenith));
-                list.add(Splat.create(R.string.twilight));
-                list.add(Splat.create(R.string.night));
-                list.add(Splat.create(R.string.eclipse));
-                break;
-            case R.string.abyssal_exalted:
-                list.add(Splat.create(R.string.dusk));
-                list.add(Splat.create(R.string.midnight));
-                list.add(Splat.create(R.string.daybreak));
-                list.add(Splat.create(R.string.day));
-                list.add(Splat.create(R.string.moonshadow));
-                break;
-            case R.string.lunar_exalted:
-                list.add(Splat.create(R.string.full_moon));
-                list.add(Splat.create(R.string.changing_moon));
-                list.add(Splat.create(R.string.no_moon));
-                list.add(Splat.create(R.string.casteless));
-                break;
-            case R.string.sidereal_exalted:
-                list.add(Splat.create(R.string.air));
-                list.add(Splat.create(R.string.earth));
-                list.add(Splat.create(R.string.fire));
-                list.add(Splat.create(R.string.water));
-                list.add(Splat.create(R.string.wood));
-                break;
-            case R.string.terrestrial_exalted:
-                list.add(Splat.create(R.string.chosen_of_journeys));
-                list.add(Splat.create(R.string.chosen_of_serenity));
-                list.add(Splat.create(R.string.chosen_of_battles));
-                list.add(Splat.create(R.string.chosen_of_secrets));
-                list.add(Splat.create(R.string.chosen_of_endings));
-                break;
-            case R.string.alchemical_exalted:
-                list.add(Splat.create(R.string.orichalcum));
-                list.add(Splat.create(R.string.moonsilver));
-                list.add(Splat.create(R.string.starmetal));
-                list.add(Splat.create(R.string.jade));
-                list.add(Splat.create(R.string.soulsteel));
-                break;
-            case R.string.infernal_exalted:
-                list.add(Splat.create(R.string.slayer));
-                list.add(Splat.create(R.string.malefactor));
-                list.add(Splat.create(R.string.defiler));
-                list.add(Splat.create(R.string.scrourge));
-                list.add(Splat.create(R.string.fiend));
-                break;
-            default:
-                return null;
-        }
-        return list;
+    @Override public int[] getListLeft(int splatId) {
+        return new int[]{SOLAR, ABYSSAL, LUNAR, SIDEREAL, TERRESTRIAL, ALCHEMICAL, INFERNAL};
     }
+
+    @Override public int[] getListRight(int splatId) {
+        if (splatId == SOLAR) return new int[]{DAWN, ZENITH, TWILIGHT, NIGHT, ECLIPSE};
+        if (splatId == ABYSSAL) return new int[]{DUSK, MIDNIGHT, DAYBREAK, DAY, MOONSHADOW};
+        if (splatId == LUNAR) return new int[]{FULL_MOON, CHANGING_MOON, NO_MOON, CASTELESS};
+        if (splatId == SIDEREAL) return new int[]{AIR, EARTH, FIRE, WATER, WOOD};
+        if (splatId == TERRESTRIAL) return new int[]{CHOSEN_OF_JOURNEYS, CHOSEN_OF_SERENITY, CHOSEN_OF_BATTLES, CHOSEN_OF_SECRETS, CHOSEN_OF_ENDINGS};
+        if (splatId == ALCHEMICAL) return new int[]{ORICHALCUM, MOONSILVER, STARMETAL, JADE, SOULSTEEL};
+        if (splatId == INFERNAL) return new int[]{SLAYER, MALEFACTOR, DEFILER, SCOURGE, FIEND};
+        return null;
+    }
+
+    //Left
+    private static final int SOLAR = 1;
+    private static final int ABYSSAL = 2;
+    private static final int LUNAR = 3;
+    private static final int SIDEREAL = 4;
+    private static final int TERRESTRIAL = 5;
+    private static final int ALCHEMICAL = 6;
+    private static final int INFERNAL = 7;
+
+    //Right
+    private static final int DAWN = 101;
+    private static final int ZENITH = 102;
+    private static final int TWILIGHT = 103;
+    private static final int NIGHT = 104;
+    private static final int ECLIPSE = 105;
+
+    private static final int DUSK = 201;
+    private static final int MIDNIGHT = 202;
+    private static final int DAYBREAK = 203;
+    private static final int DAY = 204;
+    private static final int MOONSHADOW = 205;
+
+    private static final int FULL_MOON = 301;
+    private static final int CHANGING_MOON = 302;
+    private static final int NO_MOON = 303;
+    private static final int CASTELESS = 304;
+
+    private static final int AIR = 401;
+    private static final int EARTH = 402;
+    private static final int FIRE = 403;
+    private static final int WATER = 404;
+    private static final int WOOD = 405;
+
+    private static final int CHOSEN_OF_JOURNEYS = 501;
+    private static final int CHOSEN_OF_SERENITY = 502;
+    private static final int CHOSEN_OF_BATTLES = 503;
+    private static final int CHOSEN_OF_SECRETS = 504;
+    private static final int CHOSEN_OF_ENDINGS = 505;
+
+    private static final int ORICHALCUM = 601;
+    private static final int MOONSILVER = 602;
+    private static final int STARMETAL = 603;
+    private static final int JADE = 604;
+    private static final int SOULSTEEL = 605;
+
+    private static final int SLAYER = 701;
+    private static final int MALEFACTOR = 702;
+    private static final int DEFILER = 703;
+    private static final int SCOURGE = 704;
+    private static final int FIEND = 705;
 }

@@ -2,6 +2,7 @@ package amagi82.modularcharactersheetcreator.models.games;
 
 import android.content.res.Resources;
 import android.support.annotation.Nullable;
+import android.util.SparseArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,14 @@ public class Trinity extends Game {
         this.splashUrl = getString(R.string.url_splash_trinity);
         this.gameColor = R.color.trinity;
         this.isRightListFinal = false;
+        this.splats = getSplats();
+    }
+
+    private SparseArray<Splat> getSplats(){
+        SparseArray<Splat> splats = new SparseArray<>();
+
+
+        return splats;
     }
 
     @Override public int getRightTitle(@Nullable Splat leftSplat) {
