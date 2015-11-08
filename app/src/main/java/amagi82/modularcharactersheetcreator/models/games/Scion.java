@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.content.res.Resources;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -14,14 +15,15 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
  */
 public class Scion extends Game {
 
-    public Scion() {
+    public Scion(Resources res) {
         super();
-        this.gameTitle = R.string.scion;
-        this.leftTitle = R.string.volume;
-        this.rightTitle = R.string.pantheon;
+        this.res = res;
+        this.gameTitle = getString(R.string.scion);
+        this.leftTitle = getString(R.string.volume);
+        this.rightTitle = getString(R.string.pantheon);
         this.isArchetypeLeft = false;
-        this.gameUrl = R.string.url_game_scion;
-        this.splashUrl = R.string.url_splash_scion;
+        this.gameUrl = getString(R.string.url_game_scion);
+        this.splashUrl = getString(R.string.url_splash_scion);
         this.gameColor = R.color.scion;
     }
 

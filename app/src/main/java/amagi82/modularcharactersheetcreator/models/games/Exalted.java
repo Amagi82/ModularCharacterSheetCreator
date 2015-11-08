@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.content.res.Resources;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -14,13 +15,14 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
  */
 public class Exalted extends Game {
 
-    public Exalted() {
+    public Exalted(Resources res) {
         super();
-        this.gameTitle = R.string.exalted;
-        this.leftTitle = R.string.exalt;
-        this.rightTitle = R.string.caste;
-        this.gameUrl = R.string.url_game_exalted;
-        this.splashUrl = R.string.url_splash_exalted;
+        this.res = res;
+        this.gameTitle = getString(R.string.exalted);
+        this.leftTitle = getString(R.string.exalt);
+        this.rightTitle = getString(R.string.caste);
+        this.gameUrl = getString(R.string.url_game_exalted);
+        this.splashUrl = getString(R.string.url_splash_exalted);
         this.gameColor = R.color.exalted;
         this.isRightListFinal = false;
     }

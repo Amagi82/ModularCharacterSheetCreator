@@ -1,11 +1,11 @@
 package amagi82.modularcharactersheetcreator.models.characters;
 
+import android.content.res.Resources;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -16,10 +16,12 @@ import java.util.UUID;
 import amagi82.modularcharactersheetcreator.models.games.Game;
 import auto.parcelgson.AutoParcelGson;
 
+import static amagi82.modularcharactersheetcreator.models.games.Game.NONE;
+
 @AutoParcelGson
 public abstract class GameCharacter implements Parcelable {
     public abstract String name();
-    public abstract @StringRes int gameTitle();
+    public abstract @Game.System int system();
     @Nullable public abstract Splat left();
     @Nullable public abstract Splat right();
     @Nullable public abstract ColorScheme colorScheme();
@@ -30,8 +32,8 @@ public abstract class GameCharacter implements Parcelable {
 
     GameCharacter() {}
 
-    public static GameCharacter create(String name, Game system, Splat left, Splat right) {
-        return builder().name(name).gameTitle(system.getGameTitle()).left(left).right(right).build();
+    public static GameCharacter create(String name, @Game.System int system, Splat left, Splat right) {
+        return builder().name(name).system(system).left(left).right(right).build();
     }
 
     public static GameCharacter create(){
@@ -42,8 +44,8 @@ public abstract class GameCharacter implements Parcelable {
         return toBuilder().name(name).timeStamp(System.currentTimeMillis()).build();
     }
 
-    public GameCharacter withGame(@StringRes int gameTitle){
-        return toBuilder().gameTitle(gameTitle).timeStamp(System.currentTimeMillis()).build();
+    public GameCharacter withGame(@Game.System int system){
+        return toBuilder().system(system).timeStamp(System.currentTimeMillis()).build();
     }
 
     public GameCharacter withLeft(Splat left){
@@ -65,7 +67,7 @@ public abstract class GameCharacter implements Parcelable {
     @AutoParcelGson.Builder
     abstract static class Builder {
         abstract Builder name(String name);
-        abstract Builder gameTitle(@StringRes int title);
+        abstract Builder system(@Game.System int system);
         abstract Builder left(Splat left);
         abstract Builder right(Splat right);
         abstract Builder colorScheme(ColorScheme colorScheme);
@@ -81,7 +83,7 @@ public abstract class GameCharacter implements Parcelable {
     static Builder builder() {
         return new AutoParcelGson_GameCharacter.Builder()
                 .name("")
-                .gameTitle(0)
+                .system(NONE)
                 .sheets(new ArrayList<Sheet>())
                 .entityId(UUID.randomUUID().toString())
                 .timeStamp(System.currentTimeMillis());
@@ -123,25 +125,25 @@ public abstract class GameCharacter implements Parcelable {
     //Used during character creation/editing. Gets the current step in the character creation process
     @Progress
     public int getProgress() {
-        return gameTitle() == 0 ? START : left() == null ? LEFT : right() == null ? RIGHT : FINISH;
+        return system() == NONE ? START : left() == null ? LEFT : right() == null ? RIGHT : FINISH;
     }
 
     //Used during character creation/editing. Removes progress on back.
     public GameCharacter removeProgress(@Progress int toStep) {
-        int gameTitle = toStep == START ? 0 : gameTitle();
+        int system = toStep == START ? NONE : system();
         Splat left = toStep <= LEFT ? null : left();
         Splat right = toStep <= RIGHT ? null : right();
-        return toBuilder().gameTitle(gameTitle).left(left).right(right).timeStamp(System.currentTimeMillis()).build();
+        return toBuilder().system(system).left(left).right(right).timeStamp(System.currentTimeMillis()).build();
     }
 
-    public Game getGameSystem() {
-        return Game.getSystem(gameTitle());
+    public Game getGameSystem(Resources res) {
+        return Game.getSystem(res, system());
     }
 
     @SuppressWarnings("ConstantConditions")
-    public int getArchetype() {
-        if (left() == null || right() == null || gameTitle() == 0) return 0;
-        return Game.getSystem(gameTitle()).isArchetypeLeft() ? left().title() : right().title();
+    public String getArchetype(Resources res) {
+        if (left() == null || right() == null || system() == NONE) return null;
+        return Game.getSystem(res, system()).isArchetypeLeft() ? left().title() : right().title();
     }
 
     @Retention(RetentionPolicy.SOURCE)

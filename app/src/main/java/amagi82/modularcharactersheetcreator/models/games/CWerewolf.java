@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.content.res.Resources;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -15,13 +16,14 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
  */
 public class CWerewolf extends Game {
 
-    public CWerewolf() {
+    public CWerewolf(Resources res) {
         super();
-        this.gameTitle = R.string.cwod_werewolf;
-        this.leftTitle = R.string.tribe;
-        this.rightTitle = R.string.auspice;
-        this.gameUrl = R.string.url_game_cwod_werewolf;
-        this.splashUrl = R.string.url_splash_cwod_werewolf;
+        this.res = res;
+        this.gameTitle = getString(R.string.cwod_werewolf);
+        this.leftTitle = getString(R.string.tribe);
+        this.rightTitle = getString(R.string.auspice);
+        this.gameUrl = getString(R.string.url_game_cwod_werewolf);
+        this.splashUrl = getString(R.string.url_splash_cwod_werewolf);
         this.gameColor = R.color.cwod_werewolf;
     }
 

@@ -1,9 +1,9 @@
 package amagi82.modularcharactersheetcreator.models.characters;
 
 import android.os.Parcelable;
-import android.support.annotation.StringRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import amagi82.modularcharactersheetcreator.R;
 import auto.parcelgson.AutoParcelGson;
 
 /*
@@ -11,24 +11,21 @@ import auto.parcelgson.AutoParcelGson;
  */
 @AutoParcelGson
 public abstract class Splat implements Parcelable{
-
-    private static final int DEFAULT_URL = R.string.url_default;
-
-    public abstract @StringRes int title();
-    public abstract @StringRes int url();
+    @NonNull public abstract String title();
+    @Nullable public abstract String url();
     public abstract boolean isEndPoint();
 
     Splat() {}
 
-    public static Splat create(@StringRes int title) {
-        return new AutoParcelGson_Splat(title, DEFAULT_URL, true);
+    public static Splat create(String title) {
+        return new AutoParcelGson_Splat(title, null, true);
     }
 
-    public static Splat create(@StringRes int title, boolean isEndPoint) {
-        return new AutoParcelGson_Splat(title, DEFAULT_URL, isEndPoint);
+    public static Splat create(String title, boolean isEndPoint) {
+        return new AutoParcelGson_Splat(title, null, isEndPoint);
     }
 
-    public static Splat create(@StringRes int title, @StringRes int url) {
+    public static Splat create(String title, String url) {
         return new AutoParcelGson_Splat(title, url, true);
     }
 }

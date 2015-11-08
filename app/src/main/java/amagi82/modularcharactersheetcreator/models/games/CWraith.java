@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.content.res.Resources;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -15,13 +16,14 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
  */
 public class CWraith extends Game {
 
-    public CWraith() {
+    public CWraith(Resources res) {
         super();
-        this.gameTitle = R.string.cwod_wraith;
-        this.leftTitle = R.string.legion;
-        this.rightTitle = R.string.guild;
-        this.gameUrl = R.string.url_game_cwod_wraith;
-        this.splashUrl = R.string.url_splash_cwod_wraith;
+        this.res = res;
+        this.gameTitle = getString(R.string.cwod_wraith);
+        this.leftTitle = getString(R.string.legion);
+        this.rightTitle = getString(R.string.guild);
+        this.gameUrl = getString(R.string.url_game_cwod_wraith);
+        this.splashUrl = getString(R.string.url_splash_cwod_wraith);
         this.gameColor = R.color.cwod_wraith;
         this.isRightListFinal = false;
     }

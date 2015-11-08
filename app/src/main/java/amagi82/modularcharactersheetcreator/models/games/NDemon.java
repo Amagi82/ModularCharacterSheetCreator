@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.content.res.Resources;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -14,13 +15,14 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
  */
 public class NDemon extends Game {
 
-    public NDemon() {
+    public NDemon(Resources res) {
         super();
-        this.gameTitle = R.string.nwod_demon;
-        this.leftTitle = R.string.incarnation;
-        this.rightTitle = R.string.agenda;
-        this.gameUrl = R.string.url_game_nwod_demon;
-        this.splashUrl = R.string.url_splash_nwod_demon;
+        this.res = res;
+        this.gameTitle = getString(R.string.nwod_demon);
+        this.leftTitle = getString(R.string.incarnation);
+        this.rightTitle = getString(R.string.agenda);
+        this.gameUrl = getString(R.string.url_game_nwod_demon);
+        this.splashUrl = getString(R.string.url_splash_nwod_demon);
         this.gameColor = R.color.nwod_demon;
     }
 

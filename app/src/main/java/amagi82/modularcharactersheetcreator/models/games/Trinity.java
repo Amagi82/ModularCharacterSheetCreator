@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.content.res.Resources;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -14,13 +15,14 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
  */
 public class Trinity extends Game {
 
-    public Trinity() {
+    public Trinity(Resources res) {
         super();
-        this.gameTitle = R.string.trinity;
-        this.leftTitle = R.string.age;
+        this.res = res;
+        this.gameTitle = getString(R.string.trinity;
+        this.leftTitle = getString(R.string.age;
         this.isArchetypeLeft = false;
-        this.gameUrl = R.string.url_game_trinity;
-        this.splashUrl = R.string.url_splash_trinity;
+        this.gameUrl = getString(R.string.url_game_trinity);
+        this.splashUrl = getString(R.string.url_splash_trinity);
         this.gameColor = R.color.trinity;
         this.isRightListFinal = false;
     }

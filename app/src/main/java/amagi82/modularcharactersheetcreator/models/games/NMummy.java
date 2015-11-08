@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.content.res.Resources;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -14,13 +15,14 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
  */
 public class NMummy extends Game {
 
-    public NMummy() {
+    public NMummy(Resources res) {
         super();
-        this.gameTitle = R.string.nwod_mummy;
-        this.leftTitle = R.string.decree;
-        this.rightTitle = R.string.guild;
-        this.gameUrl = R.string.url_game_nwod_mummy;
-        this.splashUrl = R.string.url_splash_nwod_mummy;
+        this.res = res;
+        this.gameTitle = getString(R.string.nwod_mummy);
+        this.leftTitle = getString(R.string.decree);
+        this.rightTitle = getString(R.string.guild);
+        this.gameUrl = getString(R.string.url_game_nwod_mummy);
+        this.splashUrl = getString(R.string.url_splash_nwod_mummy);
         this.gameColor = R.color.nwod_mummy;
     }
 

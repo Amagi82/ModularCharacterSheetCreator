@@ -1,5 +1,6 @@
 package amagi82.modularcharactersheetcreator.models.games;
 
+import android.content.res.Resources;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -14,13 +15,14 @@ import amagi82.modularcharactersheetcreator.models.characters.Splat;
  */
 public class NVampire extends Game {
 
-    public NVampire() {
+    public NVampire(Resources res) {
         super();
-        this.gameTitle = R.string.nwod_vampire;
-        this.leftTitle = R.string.clan;
-        this.rightTitle = R.string.covenant;
-        this.gameUrl = R.string.url_game_nwod_vampire;
-        this.splashUrl = R.string.url_splash_nwod_vampire;
+        this.res = res;
+        this.gameTitle = getString(R.string.nwod_vampire);
+        this.leftTitle = getString(R.string.clan);
+        this.rightTitle = getString(R.string.covenant);
+        this.gameUrl = getString(R.string.url_game_nwod_vampire);
+        this.splashUrl = getString(R.string.url_splash_nwod_vampire);
         this.gameColor = R.color.nwod_vampire;
     }
 
