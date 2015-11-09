@@ -71,5 +71,7 @@
         <item>Choose new photo</item>
     </string-array>
     <string name="title_activity_crop">CropActivity</string>
+    <string name="title">Title</string>
+    <string name="text_body">Body</string>
 
 </resources>

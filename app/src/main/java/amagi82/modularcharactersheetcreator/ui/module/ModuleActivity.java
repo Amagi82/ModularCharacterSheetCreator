@@ -23,5 +23,7 @@ public class ModuleActivity extends BaseActivity{
             ModuleActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.module_activity);
             binding.setModuleViewModel(new ModuleViewModel());
         }
+
+
     }
 }

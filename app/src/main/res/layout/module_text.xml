@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="textViewModel"
+                  type="amagi82.modularcharactersheetcreator.ui.module.modules.TextViewModel"/>
+    </data>
+
+        <LinearLayout
+            style="@style/LinearLayoutCard">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:hint="@string/title"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:minWidth="64dp"
+                    android:singleLine="true"
+                    android:text="@{textViewModel.title}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    app:editTextListener="@{textViewModel.editTextListenerTitle}"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/text_body"
+                    android:imeOptions="actionDone"
+                    android:inputType="textAutoCorrect"
+                    android:text="@{textViewModel.textBody}"
+                    app:editTextListener="@{textViewModel.editTextListenerTextBody}"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+
+
+            <!--TODO: add column chooser -->
+        </LinearLayout>
+</layout>
