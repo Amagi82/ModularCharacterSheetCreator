@@ -75,7 +75,7 @@ public abstract class Template {
     }
 
     Module bloodPool() {
-        return Module.createBloodPool(getString(R.string.blood_pool), Blood.createDefault());
+        return Module.createBlood(getString(R.string.blood_pool), Blood.createDefault());
     }
 
     Module header(@StringRes int resId) {

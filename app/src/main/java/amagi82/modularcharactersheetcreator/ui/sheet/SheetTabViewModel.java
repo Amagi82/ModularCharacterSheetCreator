@@ -20,7 +20,7 @@ import me.tatarka.bindingcollectionadapter.BaseItemViewSelector;
 import me.tatarka.bindingcollectionadapter.ItemView;
 import me.tatarka.bindingcollectionadapter.ItemViewSelector;
 
-import static amagi82.modularcharactersheetcreator.models.modules.Module.BLOODPOOL_MODULE;
+import static amagi82.modularcharactersheetcreator.models.modules.Module.BLOOD_MODULE;
 import static amagi82.modularcharactersheetcreator.models.modules.Module.HEADER_MODULE;
 import static amagi82.modularcharactersheetcreator.models.modules.Module.HEALTH_MODULE;
 import static amagi82.modularcharactersheetcreator.models.modules.Module.IMAGE_MODULE;
@@ -50,8 +50,8 @@ public class SheetTabViewModel {
                 case HEALTH_MODULE:
                     itemView.set(BR.healthViewModel, R.layout.sheet_item_health);
                     break;
-                case BLOODPOOL_MODULE:
-                    itemView.set(BR.bloodPoolViewModel, R.layout.sheet_item_blood);
+                case BLOOD_MODULE:
+                    itemView.set(BR.bloodViewModel, R.layout.sheet_item_blood);
                     break;
                 case IMAGE_MODULE:
                     itemView.set(BR.imageViewModel, R.layout.sheet_item_image);
@@ -80,7 +80,7 @@ public class SheetTabViewModel {
                 case HEALTH_MODULE:
                     modules.add(new HealthViewModel(module));
                     break;
-                case BLOODPOOL_MODULE:
+                case BLOOD_MODULE:
                     modules.add(new BloodViewModel(module));
                     break;
                 case IMAGE_MODULE:

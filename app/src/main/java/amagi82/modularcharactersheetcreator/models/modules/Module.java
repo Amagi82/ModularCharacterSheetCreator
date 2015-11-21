@@ -20,7 +20,7 @@ public abstract class Module implements Parcelable{
     @Nullable public abstract Stat stat();
     @Nullable public abstract List<Stat> statBlock();
     @Nullable public abstract Health health();
-    @Nullable public abstract Blood bloodPool();
+    @Nullable public abstract Blood blood();
     @Nullable public abstract String imageUri();
 
     public static Module createHeader(@NonNull String title){
@@ -51,8 +51,8 @@ public abstract class Module implements Parcelable{
         return builder().type(HEALTH_MODULE).title(title).health(health).build();
     }
 
-    public static Module createBloodPool(@NonNull String title, Blood blood){
-        return builder().type(BLOODPOOL_MODULE).title(title).bloodPool(blood).build();
+    public static Module createBlood(@NonNull String title, Blood blood){
+        return builder().type(BLOOD_MODULE).title(title).blood(blood).build();
     }
 
     public static Module createImage(@NonNull String title, String imageUri){
@@ -68,7 +68,7 @@ public abstract class Module implements Parcelable{
         abstract Builder stat(Stat stat);
         abstract Builder statBlock(List<Stat> statBlock);
         abstract Builder health(Health health);
-        abstract Builder bloodPool(Blood blood);
+        abstract Builder blood(Blood blood);
         abstract Builder imageUri(String imageUri);
         abstract Module build();
 
@@ -82,7 +82,7 @@ public abstract class Module implements Parcelable{
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({HEADER_MODULE, TEXT_MODULE, STAT_MODULE, STAT_BLOCK_MODULE, HEALTH_MODULE, BLOODPOOL_MODULE, IMAGE_MODULE})
+    @IntDef({HEADER_MODULE, TEXT_MODULE, STAT_MODULE, STAT_BLOCK_MODULE, HEALTH_MODULE, BLOOD_MODULE, IMAGE_MODULE})
     public @interface Type {}
 
     public static final int HEADER_MODULE = 1;
@@ -90,7 +90,7 @@ public abstract class Module implements Parcelable{
     public static final int STAT_MODULE = 3;
     public static final int STAT_BLOCK_MODULE = 4;
     public static final int HEALTH_MODULE = 5;
-    public static final int BLOODPOOL_MODULE = 6;
+    public static final int BLOOD_MODULE = 6;
     public static final int IMAGE_MODULE = 7;
 
 
