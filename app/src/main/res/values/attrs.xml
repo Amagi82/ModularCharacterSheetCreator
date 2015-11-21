@@ -1,16 +1,8 @@
 <resources>
-    <declare-styleable name="StatRatingBar">
-        <attr name="colorOutlineOn" format="color" />
-        <attr name="colorOutlineOff" format="color" />
-        <attr name="colorOutlinePressed" format="color" />
+    <declare-styleable name="CircleBlood">
         <attr name="colorFill" format="color" />
-        <attr name="colorFillPressed" format="color" />
-        <attr name="vertical" format="boolean" />
-        <attr name="barType" format="enum">
-            <enum name="circle" value="0" />
-            <enum name="square" value="1" />
-            <enum name="healthbox" value="2" />
-        </attr>
+        <attr name="colorEmpty" format="color" />
+        <attr name="textColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="RoundedStatBar">
@@ -31,4 +23,6 @@
         <attr name="rsb_title" format="string" />
         <attr name="rsb_specialty" format="string" />
     </declare-styleable>
+
+
 </resources>

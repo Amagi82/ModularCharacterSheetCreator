@@ -66,7 +66,6 @@
     <string name="path">Path</string>
     <string name="blood_pool">Blood Pool</string>
     <string name="weakness">Weakness</string>
-    <string name="blood_per_turn">Blood Per Turn:</string>
     <!--CWerewolf-specific-->
     <string name="gifts">Gifts</string>
     <string name="renown">Renown</string>

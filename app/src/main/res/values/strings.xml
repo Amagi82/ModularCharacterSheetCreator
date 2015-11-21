@@ -53,6 +53,7 @@
     <string name="take_agg_damage">Take agg damage</string>
     <string name="take_bashing_damage">Take bashing damage</string>
     <string name="take_lethal_damage">Take lethal damage</string>
+    <string name="blood_per_turn">Blood Per Turn: %s</string>
     <string name="width">Width</string>
 
     <!--Sheet titles-->

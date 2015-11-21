@@ -19,6 +19,7 @@ import java.util.List;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
+import amagi82.modularcharactersheetcreator.models.modules.Blood;
 import amagi82.modularcharactersheetcreator.models.modules.Health;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.models.modules.Stat;
@@ -26,6 +27,7 @@ import amagi82.modularcharactersheetcreator.ui._base.BaseModuleViewModel;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.CircleIcon;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.ScreenSize;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.SplatIcon;
+import amagi82.modularcharactersheetcreator.ui._extras.widgets.CircleBlood;
 import amagi82.modularcharactersheetcreator.ui._extras.widgets.FocusAwareEditText;
 import amagi82.modularcharactersheetcreator.ui._extras.widgets.NoSwipeViewPager;
 import amagi82.modularcharactersheetcreator.ui._extras.widgets.RoundedStatBar;
@@ -130,6 +132,11 @@ public class BindingAdapters {
         statBar.setHealth(health);
     }
 
+    @BindingAdapter("blood")
+    public static void setBlood(CircleBlood circle, Blood blood){
+        circle.setBlood(blood);
+    }
+
     //Set grid layout manager to apply span count for each module
     @BindingAdapter("modules")
     public static void setLayoutManager(RecyclerView recyclerView, final List<BaseModuleViewModel> modules) {
@@ -139,6 +146,7 @@ public class BindingAdapters {
                 return modules.get(position).spanCount;
             }
         });
+
         recyclerView.setLayoutManager(manager);
     }
 }
