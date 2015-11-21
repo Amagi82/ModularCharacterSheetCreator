@@ -10,7 +10,7 @@ import me.tatarka.bindingcollectionadapter.ItemView;
 
 public class GameViewModel extends BaseViewModel{
     public final ObservableArrayList<GameItemViewModel> list = new ObservableArrayList<>();
-    public final ItemView itemView = ItemView.of(BR.gameItemViewModel, R.layout.create_game_tile);
+    public final ItemView itemView = ItemView.of(BR.gameItemViewModel, R.layout.create_game_item);
 
     public GameViewModel() {
         int[] items = Game.getSystems();

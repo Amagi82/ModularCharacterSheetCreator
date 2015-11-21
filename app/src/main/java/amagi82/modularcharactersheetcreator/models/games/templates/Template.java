@@ -11,7 +11,7 @@ import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.Sheet;
 import amagi82.modularcharactersheetcreator.models.games.Game;
-import amagi82.modularcharactersheetcreator.models.modules.BloodPool;
+import amagi82.modularcharactersheetcreator.models.modules.Blood;
 import amagi82.modularcharactersheetcreator.models.modules.Health;
 import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.models.modules.Stat;
@@ -75,7 +75,7 @@ public abstract class Template {
     }
 
     Module bloodPool() {
-        return Module.createBloodPool(getString(R.string.blood_pool), BloodPool.createDefault());
+        return Module.createBloodPool(getString(R.string.blood_pool), Blood.createDefault());
     }
 
     Module header(@StringRes int resId) {

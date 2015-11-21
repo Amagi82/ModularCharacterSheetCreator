@@ -20,7 +20,7 @@ public abstract class Module implements Parcelable{
     @Nullable public abstract Stat stat();
     @Nullable public abstract List<Stat> statBlock();
     @Nullable public abstract Health health();
-    @Nullable public abstract BloodPool bloodPool();
+    @Nullable public abstract Blood bloodPool();
     @Nullable public abstract String imageUri();
 
     public static Module createHeader(@NonNull String title){
@@ -51,8 +51,8 @@ public abstract class Module implements Parcelable{
         return builder().type(HEALTH_MODULE).title(title).health(health).build();
     }
 
-    public static Module createBloodPool(@NonNull String title, BloodPool bloodPool){
-        return builder().type(BLOODPOOL_MODULE).title(title).bloodPool(bloodPool).build();
+    public static Module createBloodPool(@NonNull String title, Blood blood){
+        return builder().type(BLOODPOOL_MODULE).title(title).bloodPool(blood).build();
     }
 
     public static Module createImage(@NonNull String title, String imageUri){
@@ -68,7 +68,7 @@ public abstract class Module implements Parcelable{
         abstract Builder stat(Stat stat);
         abstract Builder statBlock(List<Stat> statBlock);
         abstract Builder health(Health health);
-        abstract Builder bloodPool(BloodPool bloodPool);
+        abstract Builder bloodPool(Blood blood);
         abstract Builder imageUri(String imageUri);
         abstract Module build();
 
