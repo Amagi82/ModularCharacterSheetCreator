@@ -35,8 +35,16 @@ public abstract class Module implements Parcelable{
         return builder().type(TEXT_MODULE).title(title).textBody(textBody).build();
     }
 
+    public static Module createText(@NonNull String title, String textBody, @SpanCount int spanCount){
+        return builder().type(TEXT_MODULE).title(title).textBody(textBody).spanCount(spanCount).build();
+    }
+
     public static Module createStat(@NonNull String title, String textBody, Stat stat){
-        return builder().type(STAT_MODULE).title(title).textBody(textBody).stat(stat).build();
+        return builder().type(STAT_MODULE).title(title).textBody(textBody).stat(stat).spanCount(TWO).build();
+    }
+
+    public static Module createStat(@NonNull String title, String textBody, Stat stat, @SpanCount int spanCount){
+        return builder().type(STAT_MODULE).title(title).textBody(textBody).stat(stat).spanCount(spanCount).build();
     }
 
     public static Module createStatBlock(@NonNull String title, List<Stat> statBlock){
@@ -47,16 +55,28 @@ public abstract class Module implements Parcelable{
         return builder().type(STAT_BLOCK_MODULE).title(title).textBody(textBody).statBlock(statBlock).build();
     }
 
+    public static Module createStatBlock(@NonNull String title, String textBody, List<Stat> statBlock, @SpanCount int spanCount) {
+        return builder().type(STAT_BLOCK_MODULE).title(title).textBody(textBody).statBlock(statBlock).spanCount(spanCount).build();
+    }
+
     public static Module createHealth(@NonNull String title, Health health){
         return builder().type(HEALTH_MODULE).title(title).health(health).build();
+    }
+
+    public static Module createHealth(@NonNull String title, Health health, @SpanCount int spanCount){
+        return builder().type(HEALTH_MODULE).title(title).health(health).spanCount(spanCount).build();
     }
 
     public static Module createBlood(@NonNull String title, Blood blood){
         return builder().type(BLOOD_MODULE).title(title).blood(blood).build();
     }
 
-    public static Module createImage(@NonNull String title, String imageUri){
-        return builder().type(IMAGE_MODULE).title(title).imageUri(imageUri).build();
+    public static Module createBlood(@NonNull String title, Blood blood, @SpanCount int spanCount){
+        return builder().type(BLOOD_MODULE).title(title).blood(blood).spanCount(spanCount).build();
+    }
+
+    public static Module createImage(@NonNull String title, String imageUri, @SpanCount int spanCount){
+        return builder().type(IMAGE_MODULE).title(title).imageUri(imageUri).spanCount(spanCount).build();
     }
 
     @AutoParcelGson.Builder
@@ -93,13 +113,13 @@ public abstract class Module implements Parcelable{
     public static final int BLOOD_MODULE = 6;
     public static final int IMAGE_MODULE = 7;
 
-
+    //One-third, half, two-thirds, full width
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({ONE, TWO, THREE, FULL})
+    @IntDef({ONE, HALF, TWO, FULL})
     public @interface SpanCount {}
 
-    public static final int ONE = 1;
-    public static final int TWO = 2;
-    public static final int THREE = 3;
-    public static final int FULL = 99;
+    public static final int ONE = 2;
+    public static final int HALF = 3;
+    public static final int TWO = 4;
+    public static final int FULL = 6;
 }

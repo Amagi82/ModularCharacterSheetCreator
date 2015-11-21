@@ -2,7 +2,6 @@ package amagi82.modularcharactersheetcreator.ui.sheet;
 
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
-import android.databinding.ObservableInt;
 
 import amagi82.modularcharactersheetcreator.BR;
 import amagi82.modularcharactersheetcreator.R;
@@ -30,7 +29,6 @@ import static amagi82.modularcharactersheetcreator.models.modules.Module.TEXT_MO
 
 public class SheetTabViewModel {
     public final ObservableField<String> title = new ObservableField<>();
-    public final ObservableInt numColumns = new ObservableInt();
     public final ObservableArrayList<BaseModuleViewModel> modules = new ObservableArrayList<>();
     public final ItemViewSelector<BaseModuleViewModel> itemView = new BaseItemViewSelector<BaseModuleViewModel>() {
         @Override public void select(ItemView itemView, int position, BaseModuleViewModel item) {
@@ -62,7 +60,6 @@ public class SheetTabViewModel {
 
     public SheetTabViewModel(Sheet sheet) {
         title.set(sheet.title());
-        numColumns.set(sheet.numColumns());
         for (Module module : sheet.modules()) {
             switch (module.type()) {
                 case HEADER_MODULE:

@@ -20,6 +20,7 @@ import java.util.List;
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.models.GameCharacter;
 import amagi82.modularcharactersheetcreator.models.modules.Health;
+import amagi82.modularcharactersheetcreator.models.modules.Module;
 import amagi82.modularcharactersheetcreator.models.modules.Stat;
 import amagi82.modularcharactersheetcreator.ui._base.BaseModuleViewModel;
 import amagi82.modularcharactersheetcreator.ui._extras.utils.CircleIcon;
@@ -130,12 +131,12 @@ public class BindingAdapters {
     }
 
     //Set grid layout manager to apply span count for each module
-    @BindingAdapter({"columns", "modules"})
-    public static void setLayoutManager(RecyclerView recyclerView, int numColumns, final List<BaseModuleViewModel> modules) {
-        final GridLayoutManager manager = new GridLayoutManager(recyclerView.getContext(), numColumns);
+    @BindingAdapter("modules")
+    public static void setLayoutManager(RecyclerView recyclerView, final List<BaseModuleViewModel> modules) {
+        final GridLayoutManager manager = new GridLayoutManager(recyclerView.getContext(), Module.FULL);
         manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override public int getSpanSize(int position) {
-                return Math.min(manager.getSpanCount(), modules.get(position).spanCount);
+                return modules.get(position).spanCount;
             }
         });
         recyclerView.setLayoutManager(manager);
