@@ -48,8 +48,8 @@ public class BindingAdapters {
     //Load splat image at a specific size. If size unknown, calculate best estimate before downloading.
     @BindingAdapter({"url", "size"})
     public static void loadImage(ImageView img, String url, float size) {
-        if(size < 1){
-            if(url == null) url = img.getResources().getString(R.string.url_default);
+        if (size < 1) {
+            if (url == null) url = img.getResources().getString(R.string.url_default);
             size = Math.min(img.getHeight(), img.getWidth());
             if (size < 1) {
                 int width = new ScreenSize(img.getContext()).getWidth();
@@ -86,7 +86,7 @@ public class BindingAdapters {
     //Tracks current page in EditActivity
     @BindingAdapter("page")
     public static void setCurrentPage(NoSwipeViewPager viewPager, int page) {
-        boolean smoothScroll = Math.abs(page-viewPager.getCurrentItem()) < 2;
+        boolean smoothScroll = Math.abs(page - viewPager.getCurrentItem()) < 2;
         viewPager.setCurrentItem(page, smoothScroll);
     }
 
@@ -133,7 +133,7 @@ public class BindingAdapters {
     }
 
     @BindingAdapter("blood")
-    public static void setBlood(CircleBlood circle, Blood blood){
+    public static void setBlood(CircleBlood circle, Blood blood) {
         circle.setBlood(blood);
     }
 

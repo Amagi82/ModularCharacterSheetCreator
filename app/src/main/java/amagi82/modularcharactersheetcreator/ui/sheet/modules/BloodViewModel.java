@@ -14,7 +14,7 @@ public class BloodViewModel extends BaseModuleViewModel {
         update(module);
     }
 
-    public void update(Module module){
+    public void update(Module module) {
         blood.set(module.blood());
     }
 }
