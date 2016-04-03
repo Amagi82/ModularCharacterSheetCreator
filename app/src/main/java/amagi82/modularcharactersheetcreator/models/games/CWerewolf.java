@@ -15,13 +15,13 @@ public class CWerewolf extends Game {
 
     public CWerewolf() {
         super();
-        this.gameTitle = getString(R.string.cwod_werewolf);
-        this.leftTitle = getString(R.string.tribe);
-        this.rightTitle = getString(R.string.auspice);
-        this.gameUrl = getString(R.string.url_game_cwod_werewolf);
-        this.splashUrl = getString(R.string.url_splash_cwod_werewolf);
-        this.gameColor = R.color.cwod_werewolf;
-        this.splats = getSplats();
+        this.setGameTitle(getString(R.string.cwod_werewolf));
+        this.setLeftTitle(getString(R.string.tribe));
+        this.setRightTitle(getString(R.string.auspice));
+        this.setGameUrl(getString(R.string.url_game_cwod_werewolf));
+        this.setSplashUrl(getString(R.string.url_splash_cwod_werewolf));
+        this.setGameColor(R.color.cwod_werewolf);
+        this.setSplats(getSplats());
     }
 
     private SparseArray<Splat> getSplats(){

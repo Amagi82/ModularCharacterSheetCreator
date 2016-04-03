@@ -15,14 +15,14 @@ public class CMage extends Game {
 
     public CMage() {
         super();
-        this.gameTitle = getString(R.string.cwod_mage);
-        this.leftTitle = getString(R.string.faction);
-        this.isArchetypeLeft = false;
-        this.gameUrl = getString(R.string.url_game_cwod_mage);
-        this.splashUrl = getString(R.string.url_splash_cwod_mage);
-        this.gameColor = R.color.cwod_mage;
-        this.isRightListFinal = false;
-        this.splats = getSplats();
+        this.setGameTitle(getString(R.string.cwod_mage));
+        this.setLeftTitle(getString(R.string.faction));
+        this.setIsArchetypeLeft(false);
+        this.setGameUrl(getString(R.string.url_game_cwod_mage));
+        this.setSplashUrl(getString(R.string.url_splash_cwod_mage));
+        this.setGameColor(R.color.cwod_mage);
+        this.setIsRightListFinal(false);
+        this.setSplats(getSplats());
     }
 
     private SparseArray<Splat> getSplats(){

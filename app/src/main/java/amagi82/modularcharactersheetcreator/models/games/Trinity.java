@@ -14,14 +14,14 @@ public class Trinity extends Game {
 
     public Trinity() {
         super();
-        this.gameTitle = getString(R.string.trinity);
-        this.leftTitle = getString(R.string.age);
-        this.isArchetypeLeft = false;
-        this.gameUrl = getString(R.string.url_game_trinity);
-        this.splashUrl = getString(R.string.url_splash_trinity);
-        this.gameColor = R.color.trinity;
-        this.isRightListFinal = false;
-        this.splats = getSplats();
+        this.setGameTitle(getString(R.string.trinity));
+        this.setLeftTitle(getString(R.string.age));
+        this.setIsArchetypeLeft(false);
+        this.setGameUrl(getString(R.string.url_game_trinity));
+        this.setSplashUrl(getString(R.string.url_splash_trinity));
+        this.setGameColor(R.color.trinity);
+        this.setIsRightListFinal(false);
+        this.setSplats(getSplats());
     }
 
     private SparseArray<Splat> getSplats(){

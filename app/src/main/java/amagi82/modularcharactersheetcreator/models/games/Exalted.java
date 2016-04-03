@@ -14,14 +14,14 @@ public class Exalted extends Game {
 
     public Exalted() {
         super();
-        this.gameTitle = getString(R.string.exalted);
-        this.leftTitle = getString(R.string.exalt);
-        this.rightTitle = getString(R.string.caste);
-        this.gameUrl = getString(R.string.url_game_exalted);
-        this.splashUrl = getString(R.string.url_splash_exalted);
-        this.gameColor = R.color.exalted;
-        this.isRightListFinal = false;
-        this.splats = getSplats();
+        this.setGameTitle(getString(R.string.exalted));
+        this.setLeftTitle(getString(R.string.exalt));
+        this.setRightTitle(getString(R.string.caste));
+        this.setGameUrl(getString(R.string.url_game_exalted));
+        this.setSplashUrl(getString(R.string.url_splash_exalted));
+        this.setGameColor(R.color.exalted);
+        this.setIsRightListFinal(false);
+        this.setSplats(getSplats());
     }
 
     private SparseArray<Splat> getSplats() {
@@ -81,7 +81,7 @@ public class Exalted extends Game {
 
     @Override public String getRightTitle(int leftSplatId) {
         if (leftSplatId == TERRESTRIAL) return getString(R.string.aspect);
-        else return rightTitle;
+        else return getRightTitle();
     }
 
     @NonNull @Override public int[] getListLeft(int splatId) {

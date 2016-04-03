@@ -32,7 +32,7 @@ public class SheetTabViewModel {
     public final ObservableArrayList<BaseModuleViewModel> modules = new ObservableArrayList<>();
     public final ItemViewSelector<BaseModuleViewModel> itemView = new BaseItemViewSelector<BaseModuleViewModel>() {
         @Override public void select(ItemView itemView, int position, BaseModuleViewModel item) {
-            switch (item.type) {
+            switch (item.getType()) {
                 case HEADER_MODULE:
                     itemView.set(BR.headerViewModel, R.layout.sheet_item_header);
                     break;

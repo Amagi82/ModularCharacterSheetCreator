@@ -13,9 +13,9 @@ public class GameViewModel extends BaseViewModel{
     public final ItemView itemView = ItemView.of(BR.gameItemViewModel, R.layout.create_game_item);
 
     public GameViewModel() {
-        int[] items = Game.getSystems();
+        int[] items = Game.Companion.getSystems();
         for(int gameId : items){
-            Game system = Game.getSystem(gameId);
+            Game system = Game.Companion.getSystem(gameId);
             if(system != null) this.list.add(new GameItemViewModel(system.getGameTitle(), system.getGameUrl(), gameId));
         }
     }

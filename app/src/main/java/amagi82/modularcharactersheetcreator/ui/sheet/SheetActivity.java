@@ -1,6 +1,5 @@
 package amagi82.modularcharactersheetcreator.ui.sheet;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
@@ -14,8 +13,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import com.cocosw.bottomsheet.BottomSheet;
 
 import amagi82.modularcharactersheetcreator.R;
 import amagi82.modularcharactersheetcreator.databinding.SheetActivityBinding;
@@ -111,24 +108,24 @@ public class SheetActivity extends BaseActivity {
     public void onFabClicked(View view) {
         final FloatingActionButton fab = (FloatingActionButton) view;
         fab.hide();
-        new BottomSheet.Builder(this).sheet(binding.viewPager.getCurrentItem() == 0 ? R.menu.bottom_sheet_start : R.menu.bottom_sheet).grid()
-                .listener(new DialogInterface.OnClickListener() {
-                    @Override public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case R.id.action_new_module:
-                                break;
-                            case R.id.action_new_tab:
-                                break;
-                            case R.id.action_rename_tab:
-                                break;
-                            case R.id.action_delete_tab:
-                                break;
-                        }
-                    }
-        }).setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override public void onDismiss(DialogInterface dialog) {
-                fab.show();
-            }
-        }).show();
+//        new BottomSheet.Builder(this).sheet(binding.viewPager.getCurrentItem() == 0 ? R.menu.bottom_sheet_start : R.menu.bottom_sheet).grid()
+//                .listener(new DialogInterface.OnClickListener() {
+//                    @Override public void onClick(DialogInterface dialog, int which) {
+//                        switch (which) {
+//                            case R.id.action_new_module:
+//                                break;
+//                            case R.id.action_new_tab:
+//                                break;
+//                            case R.id.action_rename_tab:
+//                                break;
+//                            case R.id.action_delete_tab:
+//                                break;
+//                        }
+//                    }
+//        }).setOnDismissListener(new DialogInterface.OnDismissListener() {
+//            @Override public void onDismiss(DialogInterface dialog) {
+//                fab.show();
+//            }
+//        }).show();
     }
 }

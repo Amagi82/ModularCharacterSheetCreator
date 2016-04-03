@@ -14,13 +14,13 @@ public class NWerewolf extends Game {
 
     public NWerewolf() {
         super();
-        this.gameTitle = getString(R.string.nwod_werewolf);
-        this.leftTitle = getString(R.string.tribe);
-        this.rightTitle = getString(R.string.auspice);
-        this.gameUrl = getString(R.string.url_game_nwod_werewolf);
-        this.splashUrl = getString(R.string.url_splash_nwod_werewolf);
-        this.gameColor = R.color.nwod_werewolf;
-        this.splats = getSplats();
+        this.setGameTitle(getString(R.string.nwod_werewolf));
+        this.setLeftTitle(getString(R.string.tribe));
+        this.setRightTitle(getString(R.string.auspice));
+        this.setGameUrl(getString(R.string.url_game_nwod_werewolf));
+        this.setSplashUrl(getString(R.string.url_splash_nwod_werewolf));
+        this.setGameColor(R.color.nwod_werewolf);
+        this.setSplats(getSplats());
     }
 
     private SparseArray<Splat> getSplats() {

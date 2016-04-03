@@ -143,7 +143,7 @@ public class BindingAdapters {
         final GridLayoutManager manager = new GridLayoutManager(recyclerView.getContext(), Module.FULL);
         manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override public int getSpanSize(int position) {
-                return modules.get(position).spanCount;
+                return modules.get(position).getSpanCount();
             }
         });
 

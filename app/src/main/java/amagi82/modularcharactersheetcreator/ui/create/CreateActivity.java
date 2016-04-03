@@ -59,7 +59,7 @@ public class CreateActivity extends BaseActivity {
 
         if (character == null) {
             if (getIntent().getParcelableExtra(CHARACTER) != null) character = getIntent().getParcelableExtra(CHARACTER);
-            else character = GameCharacter.create();
+            else character = GameCharacter.Companion.create();
         }
 
         createViewModel = new CreateViewModel(character);

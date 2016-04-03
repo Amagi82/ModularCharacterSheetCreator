@@ -14,14 +14,14 @@ public class Scion extends Game {
 
     public Scion() {
         super();
-        this.gameTitle = getString(R.string.scion);
-        this.leftTitle = getString(R.string.volume);
-        this.rightTitle = getString(R.string.pantheon);
-        this.isArchetypeLeft = false;
-        this.gameUrl = getString(R.string.url_game_scion);
-        this.splashUrl = getString(R.string.url_splash_scion);
-        this.gameColor = R.color.scion;
-        this.splats = getSplats();
+        this.setGameTitle(getString(R.string.scion));
+        this.setLeftTitle(getString(R.string.volume));
+        this.setRightTitle(getString(R.string.pantheon));
+        this.setIsArchetypeLeft(false);
+        this.setGameUrl(getString(R.string.url_game_scion));
+        this.setSplashUrl(getString(R.string.url_splash_scion));
+        this.setGameColor(R.color.scion);
+        this.setSplats(getSplats());
     }
 
     private SparseArray<Splat> getSplats() {

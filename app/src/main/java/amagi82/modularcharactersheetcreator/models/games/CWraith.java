@@ -15,14 +15,14 @@ public class CWraith extends Game {
 
     public CWraith() {
         super();
-        this.gameTitle = getString(R.string.cwod_wraith);
-        this.leftTitle = getString(R.string.legion);
-        this.rightTitle = getString(R.string.guild);
-        this.gameUrl = getString(R.string.url_game_cwod_wraith);
-        this.splashUrl = getString(R.string.url_splash_cwod_wraith);
-        this.gameColor = R.color.cwod_wraith;
-        this.isRightListFinal = false;
-        this.splats = getSplats();
+        this.setGameTitle(getString(R.string.cwod_wraith));
+        this.setLeftTitle(getString(R.string.legion));
+        this.setRightTitle(getString(R.string.guild));
+        this.setGameUrl(getString(R.string.url_game_cwod_wraith));
+        this.setSplashUrl(getString(R.string.url_splash_cwod_wraith));
+        this.setGameColor(R.color.cwod_wraith);
+        this.setIsRightListFinal(false);
+        this.setSplats(getSplats());
     }
 
     private SparseArray<Splat> getSplats(){

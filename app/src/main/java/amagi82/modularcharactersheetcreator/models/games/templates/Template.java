@@ -71,7 +71,7 @@ public abstract class Template {
     }
 
     Sheet sheet(List<Module> modules) {
-        return Sheet.create(getString(R.string.character_sheet), modules);
+        return Sheet.Companion.create(getString(R.string.character_sheet), modules);
     }
 
     Module bloodPool() {

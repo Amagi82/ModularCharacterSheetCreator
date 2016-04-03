@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity {
         loadSavedCharacters();
 
         binding.setMainViewModel(viewModel);
-        binding.toolbar.setLogo(R.drawable.title_onyx);
+        //binding.toolbar.setLogo(R.drawable.title_onyx);
     }
 
     @Override protected void onResume() {
@@ -80,12 +80,12 @@ public class MainActivity extends BaseActivity {
     private List<GameCharacter> generateSampleCharacters() {
         Log.i("MainActivity", "Creating data");
         List<GameCharacter> characters = new ArrayList<>();
-        characters.add(GameCharacter.create("Thomas Anstis", Game.CVAMPIRE, 104, 1001));
-        characters.add(GameCharacter.create("Tom Lytton", Game.CVAMPIRE, 102, 1003));
-        characters.add(GameCharacter.create("Georgia Johnson", Game.CVAMPIRE, 121, 1001));
-        characters.add(GameCharacter.create("Augustus von Rabenholtz", Game.CVAMPIRE, 123, 1001));
-        characters.add(GameCharacter.create("Dr. Von Natsi", Game.CMAGE, 1, 107));
-        characters.add(GameCharacter.create("Stormwalker", Game.CWEREWOLF, 8, 101));
+        characters.add(GameCharacter.Companion.create("Thomas Anstis", Game.CVAMPIRE, 104, 1001));
+        characters.add(GameCharacter.Companion.create("Tom Lytton", Game.CVAMPIRE, 102, 1003));
+        characters.add(GameCharacter.Companion.create("Georgia Johnson", Game.CVAMPIRE, 121, 1001));
+        characters.add(GameCharacter.Companion.create("Augustus von Rabenholtz", Game.CVAMPIRE, 123, 1001));
+        characters.add(GameCharacter.Companion.create("Dr. Von Natsi", Game.CMAGE, 1, 107));
+        characters.add(GameCharacter.Companion.create("Stormwalker", Game.CWEREWOLF, 8, 101));
 
         for (int i = 0; i < characters.size(); i++) {
             Sheet defaultSheet = Template.create(getResources(), characters.get(i));

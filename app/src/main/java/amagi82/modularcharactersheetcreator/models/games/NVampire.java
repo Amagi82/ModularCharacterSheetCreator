@@ -14,13 +14,13 @@ public class NVampire extends Game {
 
     public NVampire() {
         super();
-        this.gameTitle = getString(R.string.nwod_vampire);
-        this.leftTitle = getString(R.string.clan);
-        this.rightTitle = getString(R.string.covenant);
-        this.gameUrl = getString(R.string.url_game_nwod_vampire);
-        this.splashUrl = getString(R.string.url_splash_nwod_vampire);
-        this.gameColor = R.color.nwod_vampire;
-        this.splats = getSplats();
+        this.setGameTitle(getString(R.string.nwod_vampire));
+        this.setLeftTitle(getString(R.string.clan));
+        this.setRightTitle(getString(R.string.covenant));
+        this.setGameUrl(getString(R.string.url_game_nwod_vampire));
+        this.setSplashUrl(getString(R.string.url_splash_nwod_vampire));
+        this.setGameColor(R.color.nwod_vampire);
+        this.setSplats(getSplats());
     }
 
     private SparseArray<Splat> getSplats() {

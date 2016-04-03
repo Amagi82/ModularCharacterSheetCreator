@@ -14,13 +14,13 @@ public class NMummy extends Game {
 
     public NMummy() {
         super();
-        this.gameTitle = getString(R.string.nwod_mummy);
-        this.leftTitle = getString(R.string.decree);
-        this.rightTitle = getString(R.string.guild);
-        this.gameUrl = getString(R.string.url_game_nwod_mummy);
-        this.splashUrl = getString(R.string.url_splash_nwod_mummy);
-        this.gameColor = R.color.nwod_mummy;
-        this.splats = getSplats();
+        this.setGameTitle(getString(R.string.nwod_mummy));
+        this.setLeftTitle(getString(R.string.decree));
+        this.setRightTitle(getString(R.string.guild));
+        this.setGameUrl(getString(R.string.url_game_nwod_mummy));
+        this.setSplashUrl(getString(R.string.url_splash_nwod_mummy));
+        this.setGameColor(R.color.nwod_mummy);
+        this.setSplats(getSplats());
     }
 
     private SparseArray<Splat> getSplats() {

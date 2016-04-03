@@ -14,13 +14,13 @@ public class NDemon extends Game {
 
     public NDemon() {
         super();
-        this.gameTitle = getString(R.string.nwod_demon);
-        this.leftTitle = getString(R.string.incarnation);
-        this.rightTitle = getString(R.string.agenda);
-        this.gameUrl = getString(R.string.url_game_nwod_demon);
-        this.splashUrl = getString(R.string.url_splash_nwod_demon);
-        this.gameColor = R.color.nwod_demon;
-        this.splats = getSplats();
+        this.setGameTitle(getString(R.string.nwod_demon));
+        this.setLeftTitle(getString(R.string.incarnation));
+        this.setRightTitle(getString(R.string.agenda));
+        this.setGameUrl(getString(R.string.url_game_nwod_demon));
+        this.setSplashUrl(getString(R.string.url_splash_nwod_demon));
+        this.setGameColor(R.color.nwod_demon);
+        this.setSplats(getSplats());
     }
 
     private SparseArray<Splat> getSplats(){

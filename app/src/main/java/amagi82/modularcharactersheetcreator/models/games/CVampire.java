@@ -16,15 +16,15 @@ public class CVampire extends Game {
 
     public CVampire() {
         super();
-        this.gameTitle = getString(R.string.cwod_vampire);
-        this.leftTitle = getString(R.string.clan);
-        this.rightTitle = getString(R.string.sect);
-        this.gameUrl = getString(R.string.url_game_cwod_vampire);
-        this.splashUrl = getString(R.string.url_splash_cwod_vampire);
-        this.gameColor = R.color.cwod_vampire;
-        this.checkLeft = true;
-        this.isLeftListFinal = false;
-        this.splats = getSplats();
+        this.setGameTitle(getString(R.string.cwod_vampire));
+        this.setLeftTitle(getString(R.string.clan));
+        this.setRightTitle(getString(R.string.sect));
+        this.setGameUrl(getString(R.string.url_game_cwod_vampire));
+        this.setSplashUrl(getString(R.string.url_splash_cwod_vampire));
+        this.setGameColor(R.color.cwod_vampire);
+        this.setCheckLeft(true);
+        this.setIsLeftListFinal(false);
+        this.setSplats(getSplats());
     }
 
     private SparseArray<Splat> getSplats(){
