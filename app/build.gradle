@@ -1,5 +1,5 @@
 buildscript {
-    ext.appcompat_version = '23.2.1'
+    ext.appcompat_version = '23.3.0'
     ext.kotlin_version = '1.0.0'
     ext.paperparcel_version = '1.0.0-rc2'
     ext.retrofit_version = '2.0.1'

@@ -2,7 +2,6 @@ package amagi82.modularcharactersheetcreator.models.games
 
 import amagi82.modularcharactersheetcreator.models.Splat
 import amagi82.modularcharactersheetcreator.ui._base.App
-import android.support.annotation.ColorRes
 import android.support.annotation.IntDef
 import android.support.annotation.StringRes
 import android.util.SparseArray
@@ -11,25 +10,17 @@ import android.util.SparseArray
     Base class implemented by all game systems
  */
 abstract class Game {
-    abstract var gameTitle: String
-        internal set
-    abstract var leftTitle: String
-        internal set
-    abstract internal var rightTitle: String
-    abstract var gameUrl: String
-        internal set
-    abstract var splashUrl: String
-        internal set
-    @ColorRes var gameColor: Int = 0
-        internal set //Used in the list of characters in MainAdapter
-    var isArchetypeLeft = true
-        internal set //Archetype is displayed under the game gameId in the list of characters
-    internal var checkLeft = false //With CVampire, Sect must be known to determine if Clan is antitribu.
-    var isLeftListFinal = true
-        internal set //False if the list can change depending on choices
-    var isRightListFinal = true
-        internal set //False if the list can change depending on choices
-    abstract internal var splats: SparseArray<Splat>
+    abstract val gameTitle: String
+    abstract val leftTitle: String
+    abstract val rightTitle: String
+    abstract val gameUrl: String
+    abstract val splashUrl: String
+    abstract val gameColor: Int
+    abstract val isArchetypeLeft:Boolean //true
+    abstract internal val checkLeft:Boolean //false //With CVampire, Sect must be known to determine if Clan is antitribu.
+    abstract val isLeftListFinal:Boolean //true
+    abstract val isRightListFinal:Boolean //true
+    abstract val splats: SparseArray<Splat>
 
     abstract fun getListLeft(splatId: Int): IntArray
 
@@ -72,9 +63,6 @@ abstract class Game {
                 else ->  null
         }
 
-        val systems: IntArray
-            get() = intArrayOf(CMAGE, CVAMPIRE, CWEREWOLF, CWRAITH, EXALTED, NDEMON, NMUMMY, NVAMPIRE, NWEREWOLF, SCION, TRINITY)
-
         const val NONE = 0
         const val EXALTED = 10
         const val SCION = 20
@@ -87,5 +75,7 @@ abstract class Game {
         const val NMUMMY = 202
         const val NVAMPIRE = 203
         const val NWEREWOLF = 204
+
+        val systems = intArrayOf(CMAGE, CVAMPIRE, CWEREWOLF, CWRAITH, EXALTED, NDEMON, NMUMMY, NVAMPIRE, NWEREWOLF, SCION, TRINITY)
     }
 }

@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity {
         characters.add(GameCharacter.Companion.create("Stormwalker", Game.CWEREWOLF, 8, 101));
 
         for (int i = 0; i < characters.size(); i++) {
-            Sheet defaultSheet = Template.create(getResources(), characters.get(i));
+            Sheet defaultSheet = Template.Companion.create(getResources(), characters.get(i));
             List<Sheet> sheets = new ArrayList<>(1);
             sheets.add(defaultSheet);
             characters.set(i, characters.get(i).withSheets(sheets));
