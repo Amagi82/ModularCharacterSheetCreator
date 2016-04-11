@@ -1,27 +1,25 @@
 package amagi82.modularcharactersheetcreator.models.games
 
-import android.util.SparseArray
-
 import amagi82.modularcharactersheetcreator.R
 import amagi82.modularcharactersheetcreator.models.Splat
+import android.util.SparseArray
 
 /*
     New World of Darkness
     Mummy: The Curse
  */
 class NMummy : Game() {
-
-    init {
-        this.setGameTitle(getString(R.string.nwod_mummy))
-        this.setLeftTitle(getString(R.string.decree))
-        this.setRightTitle(getString(R.string.guild))
-        this.setGameUrl(getString(R.string.url_game_nwod_mummy))
-        this.setSplashUrl(getString(R.string.url_splash_nwod_mummy))
-        this.setGameColor(R.color.nwod_mummy)
-        this.setSplats(splats)
-    }
-
-    private val splats: SparseArray<Splat>
+    override val gameTitle = getString(R.string.nwod_mummy)
+    override val leftTitle = getString(R.string.decree)
+    override val rightTitle = getString(R.string.guild)
+    override val gameUrl = getString(R.string.url_game_nwod_mummy)
+    override val splashUrl = getString(R.string.url_splash_nwod_mummy)
+    override val gameColor = R.color.nwod_mummy
+    override val isArchetypeLeft = true
+    override val checkLeft = false
+    override val isLeftListFinal = true
+    override val isRightListFinal = true
+    override val splats: SparseArray<Splat>
         get() {
             val splats = SparseArray<Splat>(10)
 
@@ -40,13 +38,9 @@ class NMummy : Game() {
             return splats
         }
 
-    override fun getListLeft(splatId: Int): IntArray {
-        return intArrayOf(BULL_HEADED, FALCON_HEADED, JACKAL_HEADED, LION_HEADED, SERPENT_HEADED)
-    }
+    override fun getListLeft(splatId: Int) = intArrayOf(BULL_HEADED, FALCON_HEADED, JACKAL_HEADED, LION_HEADED, SERPENT_HEADED)
 
-    override fun getListRight(splatId: Int): IntArray {
-        return intArrayOf(MAA_KEP, MESEN_NEBU, SESHA_HEBSU, SU_MENENT, TEF_AABHI)
-    }
+    override fun getListRight(splatId: Int) = intArrayOf(MAA_KEP, MESEN_NEBU, SESHA_HEBSU, SU_MENENT, TEF_AABHI)
 
     companion object {
 

@@ -1,9 +1,8 @@
 package amagi82.modularcharactersheetcreator.models.games
 
-import android.util.SparseArray
-
 import amagi82.modularcharactersheetcreator.R
 import amagi82.modularcharactersheetcreator.models.Splat
+import android.util.SparseArray
 
 /*
     Classic World of Darkness
@@ -11,19 +10,17 @@ import amagi82.modularcharactersheetcreator.models.Splat
     20th Anniversary Edition
  */
 class CWraith : Game() {
-
-    init {
-        this.setGameTitle(getString(R.string.cwod_wraith))
-        this.setLeftTitle(getString(R.string.legion))
-        this.setRightTitle(getString(R.string.guild))
-        this.setGameUrl(getString(R.string.url_game_cwod_wraith))
-        this.setSplashUrl(getString(R.string.url_splash_cwod_wraith))
-        this.setGameColor(R.color.cwod_wraith)
-        this.setIsRightListFinal(false)
-        this.setSplats(splats)
-    }
-
-    private val splats: SparseArray<Splat>
+    override val gameTitle = getString(R.string.cwod_wraith)
+    override val leftTitle = getString(R.string.legion)
+    override val rightTitle = getString(R.string.guild)
+    override val gameUrl = getString(R.string.url_game_cwod_wraith)
+    override val splashUrl = getString(R.string.url_splash_cwod_wraith)
+    override val gameColor = R.color.cwod_wraith
+    override val isArchetypeLeft = true
+    override val checkLeft = false
+    override val isLeftListFinal = true
+    override val isRightListFinal = false
+    override val splats: SparseArray<Splat>
         get() {
             val splats = SparseArray<Splat>(29)
 
@@ -65,17 +62,14 @@ class CWraith : Game() {
             return splats
         }
 
-    override fun getListLeft(splatId: Int): IntArray {
-        return intArrayOf(IRON_LEGION, SKELETAL_LEGION, GRIM_LEGION, PENITENT_LEGION, EMERALD_LEGION, SILENT_LEGION, LEGION_OF_PAUPERS, LEGION_OF_FATE)
-    }
+    override fun getListLeft(splatId: Int) = intArrayOf(IRON_LEGION, SKELETAL_LEGION, GRIM_LEGION, PENITENT_LEGION, EMERALD_LEGION, SILENT_LEGION, LEGION_OF_PAUPERS, LEGION_OF_FATE)
 
-    override fun getListRight(splatId: Int): IntArray {
-        if (splatId == GREAT_GUILDS) return intArrayOf(ARTIFICERS, MASQUERS, PARDONERS, USURERS)
-        if (splatId == WORKING_GUILDS) return intArrayOf(CHANTEURS, HARBINGERS, ORACLES, SANDMEN)
-        if (splatId == CRIMINAL_GUILDS) return intArrayOf(HAUNTERS, MONITORS, SPOOKS, PROCTORS, PUPPETEERS)
-        if (splatId == FORBIDDEN_GUILDS) return intArrayOf(ALCHEMISTS, MNEMOI, SOLICITORS)
-        return intArrayOf(NONE, GREAT_GUILDS, WORKING_GUILDS, CRIMINAL_GUILDS, FORBIDDEN_GUILDS)
-
+    override fun getListRight(splatId: Int) = when (splatId) {
+        GREAT_GUILDS -> intArrayOf(ARTIFICERS, MASQUERS, PARDONERS, USURERS)
+        WORKING_GUILDS -> intArrayOf(CHANTEURS, HARBINGERS, ORACLES, SANDMEN)
+        CRIMINAL_GUILDS -> intArrayOf(HAUNTERS, MONITORS, SPOOKS, PROCTORS, PUPPETEERS)
+        FORBIDDEN_GUILDS -> intArrayOf(ALCHEMISTS, MNEMOI, SOLICITORS)
+        else -> intArrayOf(NONE, GREAT_GUILDS, WORKING_GUILDS, CRIMINAL_GUILDS, FORBIDDEN_GUILDS)
     }
 
     companion object {

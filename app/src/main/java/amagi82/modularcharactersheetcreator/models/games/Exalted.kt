@@ -1,28 +1,25 @@
 package amagi82.modularcharactersheetcreator.models.games
 
-import android.util.SparseArray
-
 import amagi82.modularcharactersheetcreator.R
 import amagi82.modularcharactersheetcreator.models.Splat
+import android.util.SparseArray
 
 /*
     Exalted 2nd Edition
     (3rd Edition will be included once available)
  */
 class Exalted : Game() {
-
-    init {
-        this.setGameTitle(getString(R.string.exalted))
-        this.setLeftTitle(getString(R.string.exalt))
-        this.setRightTitle(getString(R.string.caste))
-        this.setGameUrl(getString(R.string.url_game_exalted))
-        this.setSplashUrl(getString(R.string.url_splash_exalted))
-        this.setGameColor(R.color.exalted)
-        this.setIsRightListFinal(false)
-        this.setSplats(splats)
-    }
-
-    private val splats: SparseArray<Splat>
+    override val gameTitle = getString(R.string.exalted)
+    override val leftTitle = getString(R.string.exalt)
+    override val rightTitle = getString(R.string.caste)
+    override val gameUrl = getString(R.string.url_game_exalted)
+    override val splashUrl = getString(R.string.url_splash_exalted)
+    override val gameColor = R.color.exalted
+    override val isArchetypeLeft = true
+    override val checkLeft = false
+    override val isLeftListFinal = true
+    override val isRightListFinal = false
+    override val splats: SparseArray<Splat>
         get() {
             val splats = SparseArray<Splat>(41)
 
@@ -78,26 +75,19 @@ class Exalted : Game() {
             return splats
         }
 
-    override fun getRightTitle(leftSplatId: Int): String {
-        if (leftSplatId == TERRESTRIAL)
-            return getString(R.string.aspect)
-        else
-            return getRightTitle()
-    }
+    override fun getRightTitle(leftSplatId: Int) = if (leftSplatId == TERRESTRIAL) getString(R.string.aspect) else rightTitle
 
-    override fun getListLeft(splatId: Int): IntArray {
-        return intArrayOf(SOLAR, ABYSSAL, LUNAR, SIDEREAL, TERRESTRIAL, ALCHEMICAL, INFERNAL)
-    }
+    override fun getListLeft(splatId: Int) = intArrayOf(SOLAR, ABYSSAL, LUNAR, SIDEREAL, TERRESTRIAL, ALCHEMICAL, INFERNAL)
 
-    override fun getListRight(splatId: Int): IntArray {
-        if (splatId == SOLAR) return intArrayOf(DAWN, ZENITH, TWILIGHT, NIGHT, ECLIPSE)
-        if (splatId == ABYSSAL) return intArrayOf(DUSK, MIDNIGHT, DAYBREAK, DAY, MOONSHADOW)
-        if (splatId == LUNAR) return intArrayOf(FULL_MOON, CHANGING_MOON, NO_MOON, CASTELESS)
-        if (splatId == SIDEREAL) return intArrayOf(AIR, EARTH, FIRE, WATER, WOOD)
-        if (splatId == TERRESTRIAL) return intArrayOf(CHOSEN_OF_JOURNEYS, CHOSEN_OF_SERENITY, CHOSEN_OF_BATTLES, CHOSEN_OF_SECRETS, CHOSEN_OF_ENDINGS)
-        if (splatId == ALCHEMICAL) return intArrayOf(ORICHALCUM, MOONSILVER, STARMETAL, JADE, SOULSTEEL)
-        if (splatId == INFERNAL) return intArrayOf(SLAYER, MALEFACTOR, DEFILER, SCOURGE, FIEND)
-        return intArrayOf()
+    override fun getListRight(splatId: Int) = when (splatId) {
+        SOLAR -> intArrayOf(DAWN, ZENITH, TWILIGHT, NIGHT, ECLIPSE)
+        ABYSSAL -> intArrayOf(DUSK, MIDNIGHT, DAYBREAK, DAY, MOONSHADOW)
+        LUNAR -> intArrayOf(FULL_MOON, CHANGING_MOON, NO_MOON, CASTELESS)
+        SIDEREAL -> intArrayOf(AIR, EARTH, FIRE, WATER, WOOD)
+        TERRESTRIAL -> intArrayOf(CHOSEN_OF_JOURNEYS, CHOSEN_OF_SERENITY, CHOSEN_OF_BATTLES, CHOSEN_OF_SECRETS, CHOSEN_OF_ENDINGS)
+        ALCHEMICAL -> intArrayOf(ORICHALCUM, MOONSILVER, STARMETAL, JADE, SOULSTEEL)
+        INFERNAL -> intArrayOf(SLAYER, MALEFACTOR, DEFILER, SCOURGE, FIEND)
+        else -> intArrayOf()
     }
 
     companion object {

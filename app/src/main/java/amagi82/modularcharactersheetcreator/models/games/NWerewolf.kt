@@ -1,27 +1,25 @@
 package amagi82.modularcharactersheetcreator.models.games
 
-import android.util.SparseArray
-
 import amagi82.modularcharactersheetcreator.R
 import amagi82.modularcharactersheetcreator.models.Splat
+import android.util.SparseArray
 
 /*
     New World of Darkness
     Werewolf: The Forsaken
  */
 class NWerewolf : Game() {
-
-    init {
-        this.setGameTitle(getString(R.string.nwod_werewolf))
-        this.setLeftTitle(getString(R.string.tribe))
-        this.setRightTitle(getString(R.string.auspice))
-        this.setGameUrl(getString(R.string.url_game_nwod_werewolf))
-        this.setSplashUrl(getString(R.string.url_splash_nwod_werewolf))
-        this.setGameColor(R.color.nwod_werewolf)
-        this.setSplats(splats)
-    }
-
-    private val splats: SparseArray<Splat>
+    override val gameTitle = getString(R.string.nwod_werewolf)
+    override val leftTitle = getString(R.string.tribe)
+    override val rightTitle = getString(R.string.auspice)
+    override val gameUrl = getString(R.string.url_game_nwod_werewolf)
+    override val splashUrl = getString(R.string.url_splash_nwod_werewolf)
+    override val gameColor = R.color.nwod_werewolf
+    override val isArchetypeLeft = true
+    override val checkLeft = false
+    override val isLeftListFinal = true
+    override val isRightListFinal = true
+    override val splats: SparseArray<Splat>
         get() {
             val splats = SparseArray<Splat>(11)
 
@@ -41,13 +39,9 @@ class NWerewolf : Game() {
             return splats
         }
 
-    override fun getListLeft(splatId: Int): IntArray {
-        return intArrayOf(BLOOD_TALONS, BONE_SHADOWS, GHOST_WOLVES, HUNTERS_IN_DARKNESS, IRON_MASTERS, STORM_LORDS)
-    }
+    override fun getListLeft(splatId: Int) = intArrayOf(BLOOD_TALONS, BONE_SHADOWS, GHOST_WOLVES, HUNTERS_IN_DARKNESS, IRON_MASTERS, STORM_LORDS)
 
-    override fun getListRight(splatId: Int): IntArray {
-        return intArrayOf(CAHALITH, ELODOTH, IRRAKA, ITHAEUR, RAHU)
-    }
+    override fun getListRight(splatId: Int) = intArrayOf(CAHALITH, ELODOTH, IRRAKA, ITHAEUR, RAHU)
 
     companion object {
 

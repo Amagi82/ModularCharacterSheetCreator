@@ -1,9 +1,8 @@
 package amagi82.modularcharactersheetcreator.models.games
 
-import android.util.SparseArray
-
 import amagi82.modularcharactersheetcreator.R
 import amagi82.modularcharactersheetcreator.models.Splat
+import android.util.SparseArray
 
 /*
     Classic World of Darkness
@@ -11,18 +10,17 @@ import amagi82.modularcharactersheetcreator.models.Splat
     20th Anniversary Edition
  */
 class CWerewolf : Game() {
-
-    init {
-        this.setGameTitle(getString(R.string.cwod_werewolf))
-        this.setLeftTitle(getString(R.string.tribe))
-        this.setRightTitle(getString(R.string.auspice))
-        this.setGameUrl(getString(R.string.url_game_cwod_werewolf))
-        this.setSplashUrl(getString(R.string.url_splash_cwod_werewolf))
-        this.setGameColor(R.color.cwod_werewolf)
-        this.setSplats(splats)
-    }
-
-    private val splats: SparseArray<Splat>
+    override val gameTitle = getString(R.string.cwod_werewolf)
+    override val leftTitle = getString(R.string.tribe)
+    override val rightTitle = getString(R.string.auspice)
+    override val gameUrl = getString(R.string.url_game_cwod_werewolf)
+    override val splashUrl = getString(R.string.url_splash_cwod_werewolf)
+    override val gameColor = R.color.cwod_werewolf
+    override val isArchetypeLeft = true
+    override val checkLeft = false
+    override val isLeftListFinal = true
+    override val isRightListFinal = true
+    override val splats: SparseArray<Splat>
         get() {
             val splats = SparseArray<Splat>(21)
 
@@ -52,13 +50,9 @@ class CWerewolf : Game() {
             return splats
         }
 
-    override fun getListLeft(splatId: Int): IntArray {
-        return intArrayOf(BLACK_FURIES, BONE_GNAWERS, BUNYIP, CHILDREN_OF_GAIA, CROATAN, FIANNA, GET_OF_FENRIS, GLASS_WALKERS, RED_TALONS, SHADOW_LORDS, SILENT_STRIDERS, SILVER_FANGS, STARGAZERS, UKTENA, WENDIGO, WHITE_HOWLERS)
-    }
+    override fun getListLeft(splatId: Int) = intArrayOf(BLACK_FURIES, BONE_GNAWERS, BUNYIP, CHILDREN_OF_GAIA, CROATAN, FIANNA, GET_OF_FENRIS, GLASS_WALKERS, RED_TALONS, SHADOW_LORDS, SILENT_STRIDERS, SILVER_FANGS, STARGAZERS, UKTENA, WENDIGO, WHITE_HOWLERS)
 
-    override fun getListRight(splatId: Int): IntArray {
-        return intArrayOf(AHROUN, GALLIARD, PHILODOX, RAGABASH, THEURGE)
-    }
+    override fun getListRight(splatId: Int) = intArrayOf(AHROUN, GALLIARD, PHILODOX, RAGABASH, THEURGE)
 
     companion object {
 

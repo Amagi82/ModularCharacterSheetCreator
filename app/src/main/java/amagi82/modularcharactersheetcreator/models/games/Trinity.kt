@@ -1,28 +1,25 @@
 package amagi82.modularcharactersheetcreator.models.games
 
-import android.util.SparseArray
-
 import amagi82.modularcharactersheetcreator.R
 import amagi82.modularcharactersheetcreator.models.Splat
+import android.util.SparseArray
 
 /*
     Trinity Continuum
     Includes Aeon, Aberrant, and Adventure
  */
 class Trinity : Game() {
-
-    init {
-        this.setGameTitle(getString(R.string.trinity))
-        this.setLeftTitle(getString(R.string.age))
-        this.setIsArchetypeLeft(false)
-        this.setGameUrl(getString(R.string.url_game_trinity))
-        this.setSplashUrl(getString(R.string.url_splash_trinity))
-        this.setGameColor(R.color.trinity)
-        this.setIsRightListFinal(false)
-        this.setSplats(splats)
-    }
-
-    private val splats: SparseArray<Splat>
+    override val gameTitle = getString(R.string.trinity)
+    override val leftTitle = getString(R.string.age)
+    override val rightTitle = ""
+    override val gameUrl = getString(R.string.url_game_trinity)
+    override val splashUrl = getString(R.string.url_splash_trinity)
+    override val gameColor = R.color.trinity
+    override val isArchetypeLeft = false
+    override val checkLeft = false
+    override val isLeftListFinal = true
+    override val isRightListFinal = false
+    override val splats: SparseArray<Splat>
         get() {
             val splats = SparseArray<Splat>(26)
 
@@ -59,19 +56,14 @@ class Trinity : Game() {
             return splats
         }
 
-    override fun getRightTitle(leftSplatId: Int): String {
-        if (leftSplatId == AEON) return getString(R.string.psi_order)
-        return getString(R.string.allegiance)
-    }
+    override fun getRightTitle(leftSplatId: Int) = getString(if (leftSplatId == AEON) R.string.psi_order else R.string.allegiance)
 
-    override fun getListLeft(splatId: Int): IntArray {
-        return intArrayOf(ADVENTURE, ABERRANT, AEON)
-    }
+    override fun getListLeft(splatId: Int) = intArrayOf(ADVENTURE, ABERRANT, AEON)
 
-    override fun getListRight(splatId: Int): IntArray {
-        if (splatId == ADVENTURE) return intArrayOf(THE_AEON_SOCIETY_FOR_GENTLEMEN, THE_AIR_CIRCUS, BRANCH_9, THE_INTERNATIONAL_DETECTIVE_AGENCY, THE_PONATOWSKI_FOUNDATION)
-        if (splatId == ABERRANT) return intArrayOf(ABERRANTS, PROJECT_UTOPIA, TEAM_TOMORROW, PROJECT_PROTEUS, THE_TERAGEN, THE_DIRECTIVE, CORPORATE, GOVERNMENT, OTHER, INDEPENDENT)
-        return intArrayOf(AESCULAPIAN_ORDER, CHITRA_BHANU, ISRA, THE_LEGIONS, THE_MINISTRY_OF_NOETIC_AFFAIRS, NOVA_FORCA_DAS_NACOES, ORGOTEK, THE_UPEO_WA_MACHO)
+    override fun getListRight(splatId: Int) = when (splatId) {
+        ADVENTURE -> intArrayOf(THE_AEON_SOCIETY_FOR_GENTLEMEN, THE_AIR_CIRCUS, BRANCH_9, THE_INTERNATIONAL_DETECTIVE_AGENCY, THE_PONATOWSKI_FOUNDATION)
+        ABERRANT -> intArrayOf(ABERRANTS, PROJECT_UTOPIA, TEAM_TOMORROW, PROJECT_PROTEUS, THE_TERAGEN, THE_DIRECTIVE, CORPORATE, GOVERNMENT, OTHER, INDEPENDENT)
+        else -> intArrayOf(AESCULAPIAN_ORDER, CHITRA_BHANU, ISRA, THE_LEGIONS, THE_MINISTRY_OF_NOETIC_AFFAIRS, NOVA_FORCA_DAS_NACOES, ORGOTEK, THE_UPEO_WA_MACHO)
     }
 
     companion object {

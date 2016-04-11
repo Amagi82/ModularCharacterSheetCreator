@@ -1,27 +1,25 @@
 package amagi82.modularcharactersheetcreator.models.games
 
-import android.util.SparseArray
-
 import amagi82.modularcharactersheetcreator.R
 import amagi82.modularcharactersheetcreator.models.Splat
+import android.util.SparseArray
 
 /*
     New World of Darkness
     Vampire: The Requiem
  */
 class NVampire : Game() {
-
-    init {
-        this.setGameTitle(getString(R.string.nwod_vampire))
-        this.setLeftTitle(getString(R.string.clan))
-        this.setRightTitle(getString(R.string.covenant))
-        this.setGameUrl(getString(R.string.url_game_nwod_vampire))
-        this.setSplashUrl(getString(R.string.url_splash_nwod_vampire))
-        this.setGameColor(R.color.nwod_vampire)
-        this.setSplats(splats)
-    }
-
-    private val splats: SparseArray<Splat>
+    override val gameTitle = getString(R.string.nwod_vampire)
+    override val leftTitle = getString(R.string.clan)
+    override val rightTitle = getString(R.string.covenant)
+    override val gameUrl = getString(R.string.url_game_nwod_vampire)
+    override val splashUrl = getString(R.string.url_splash_nwod_vampire)
+    override val gameColor = R.color.nwod_vampire
+    override val isArchetypeLeft = true
+    override val checkLeft = false
+    override val isLeftListFinal = true
+    override val isRightListFinal = true
+    override val splats: SparseArray<Splat>
         get() {
             val splats = SparseArray<Splat>(12)
 
@@ -42,13 +40,9 @@ class NVampire : Game() {
             return splats
         }
 
-    override fun getListLeft(splatId: Int): IntArray {
-        return intArrayOf(DAEVA, GANGREL, MEKHET, NOSFERATU, VENTRUE)
-    }
+    override fun getListLeft(splatId: Int) = intArrayOf(DAEVA, GANGREL, MEKHET, NOSFERATU, VENTRUE)
 
-    override fun getListRight(splatId: Int): IntArray {
-        return intArrayOf(CARTHIAN_MOVEMENT, CIRCLE_OF_THE_CRONE, HOLY_ENGINEERS, INVICTUS, LANCEA_ET_SANCTUM, ORDO_DRACUL, UNALIGNED)
-    }
+    override fun getListRight(splatId: Int) = intArrayOf(CARTHIAN_MOVEMENT, CIRCLE_OF_THE_CRONE, HOLY_ENGINEERS, INVICTUS, LANCEA_ET_SANCTUM, ORDO_DRACUL, UNALIGNED)
 
     companion object {
 

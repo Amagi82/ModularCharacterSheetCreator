@@ -1,28 +1,25 @@
 package amagi82.modularcharactersheetcreator.models.games
 
-import android.util.SparseArray
-
 import amagi82.modularcharactersheetcreator.R
 import amagi82.modularcharactersheetcreator.models.Splat
+import android.util.SparseArray
 
 /*
     Scion 2nd Edition: Origins
     Includes Hero, Demigod, and God
  */
 class Scion : Game() {
-
-    init {
-        this.setGameTitle(getString(R.string.scion))
-        this.setLeftTitle(getString(R.string.volume))
-        this.setRightTitle(getString(R.string.pantheon))
-        this.setIsArchetypeLeft(false)
-        this.setGameUrl(getString(R.string.url_game_scion))
-        this.setSplashUrl(getString(R.string.url_splash_scion))
-        this.setGameColor(R.color.scion)
-        this.setSplats(splats)
-    }
-
-    private val splats: SparseArray<Splat>
+    override val gameTitle = getString(R.string.scion)
+    override val leftTitle = getString(R.string.volume)
+    override val rightTitle = getString(R.string.pantheon)
+    override val gameUrl = getString(R.string.url_game_scion)
+    override val splashUrl = getString(R.string.url_splash_scion)
+    override val gameColor = R.color.scion
+    override val isArchetypeLeft = false
+    override val checkLeft = false
+    override val isLeftListFinal = true
+    override val isRightListFinal = true
+    override val splats: SparseArray<Splat>
         get() {
             val splats = SparseArray<Splat>(13)
 
@@ -44,13 +41,9 @@ class Scion : Game() {
             return splats
         }
 
-    override fun getListLeft(splatId: Int): IntArray {
-        return intArrayOf(HERO, DEMIGOD, GOD)
-    }
+    override fun getListLeft(splatId: Int) = intArrayOf(HERO, DEMIGOD, GOD)
 
-    override fun getListRight(splatId: Int): IntArray {
-        return intArrayOf(PESEDJET, DODEKATHEON, AESIR, ATZLANTI, AMATSUKAMI, LOA, TUATHA_DE_DADANN, CELESTIAL_BUREAUCRACY, DEVA, YAZATA)
-    }
+    override fun getListRight(splatId: Int) = intArrayOf(PESEDJET, DODEKATHEON, AESIR, ATZLANTI, AMATSUKAMI, LOA, TUATHA_DE_DADANN, CELESTIAL_BUREAUCRACY, DEVA, YAZATA)
 
     companion object {
 

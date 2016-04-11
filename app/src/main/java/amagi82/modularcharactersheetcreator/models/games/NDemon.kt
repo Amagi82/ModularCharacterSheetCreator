@@ -1,27 +1,25 @@
 package amagi82.modularcharactersheetcreator.models.games
 
-import android.util.SparseArray
-
 import amagi82.modularcharactersheetcreator.R
 import amagi82.modularcharactersheetcreator.models.Splat
+import android.util.SparseArray
 
 /*
     New World of Darkness
     Demon: The Descent
  */
 class NDemon : Game() {
-
-    init {
-        this.setGameTitle(getString(R.string.nwod_demon))
-        this.setLeftTitle(getString(R.string.incarnation))
-        this.setRightTitle(getString(R.string.agenda))
-        this.setGameUrl(getString(R.string.url_game_nwod_demon))
-        this.setSplashUrl(getString(R.string.url_splash_nwod_demon))
-        this.setGameColor(R.color.nwod_demon)
-        this.setSplats(splats)
-    }
-
-    private val splats: SparseArray<Splat>
+    override val gameTitle = getString(R.string.nwod_demon)
+    override val leftTitle = getString(R.string.incarnation)
+    override val rightTitle = getString(R.string.agenda)
+    override val gameUrl = getString(R.string.url_game_nwod_demon)
+    override val splashUrl = getString(R.string.url_splash_nwod_demon)
+    override val gameColor = R.color.nwod_demon
+    override val isArchetypeLeft = true
+    override val checkLeft = false
+    override val isLeftListFinal = true
+    override val isRightListFinal = true
+    override val splats: SparseArray<Splat>
         get() {
             val splats = SparseArray<Splat>(8)
 
@@ -38,13 +36,9 @@ class NDemon : Game() {
             return splats
         }
 
-    override fun getListLeft(splatId: Int): IntArray {
-        return intArrayOf(DESTROYER, GUARDIAN, MESSANGER, PSYCHOPOMP)
-    }
+    override fun getListLeft(splatId: Int) = intArrayOf(DESTROYER, GUARDIAN, MESSANGER, PSYCHOPOMP)
 
-    override fun getListRight(splatId: Int): IntArray {
-        return intArrayOf(INQUISITOR, INTEGRATOR, SABOTEUR, TEMPTER)
-    }
+    override fun getListRight(splatId: Int) = intArrayOf(INQUISITOR, INTEGRATOR, SABOTEUR, TEMPTER)
 
     companion object {
 

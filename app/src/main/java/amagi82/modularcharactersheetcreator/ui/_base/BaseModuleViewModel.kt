@@ -7,8 +7,8 @@ abstract class BaseModuleViewModel(module: Module) {
     @Module.SpanCount val spanCount: Int
 
     init {
-        type = module.type()
-        spanCount = module.spanCount()
+        type = module.type
+        spanCount = module.spanCount
     }
 
     abstract fun update(module: Module)
