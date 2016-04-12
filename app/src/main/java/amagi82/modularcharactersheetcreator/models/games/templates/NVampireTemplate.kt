@@ -1,17 +1,15 @@
 package amagi82.modularcharactersheetcreator.models.games.templates
 
-import android.content.res.Resources
-
-import java.util.ArrayList
-
 import amagi82.modularcharactersheetcreator.R
 import amagi82.modularcharactersheetcreator.models.GameCharacter
 import amagi82.modularcharactersheetcreator.models.Sheet
 import amagi82.modularcharactersheetcreator.models.modules.Module
+import android.content.res.Resources
+import java.util.*
 
 class NVampireTemplate internal constructor(res: Resources) : Template(res) {
 
-    internal override fun createSheet(character: GameCharacter): Sheet {
+    override fun createSheet(character: GameCharacter): Sheet {
         val modules = ArrayList<Module>()
         modules.add(header(R.string.attributes))
         modules.add(statBlock(0, R.array.NWod_Physical, 1, 5))

@@ -9,7 +9,7 @@ import java.util.*
 
 class CMageTemplate internal constructor(res: Resources) : Template(res) {
 
-    public override fun createSheet(character: GameCharacter): Sheet {
+    override fun createSheet(character: GameCharacter): Sheet {
         val modules = ArrayList<Module>()
         modules.add(header(R.string.attributes))
         modules.add(statBlock(R.string.physical, R.array.CWod_Physical, 1, 5))

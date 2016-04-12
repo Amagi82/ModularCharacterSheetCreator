@@ -10,7 +10,7 @@ import java.util.*
 
 class CVampireTemplate internal constructor(res: Resources) : Template(res) {
 
-    internal override fun createSheet(character: GameCharacter): Sheet? {
+    override fun createSheet(character: GameCharacter): Sheet? {
         if (character.leftId == 0) return null
         val modules = ArrayList<Module>()
         modules.add(header(R.string.attributes))

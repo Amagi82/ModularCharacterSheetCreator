@@ -32,26 +32,24 @@ abstract class Template internal constructor(private val res: Resources) {
 
     internal fun sheet(modules: List<Module>) = Sheet(getString(R.string.character_sheet), modules)
 
-    internal fun bloodPool() = Module.createBlood(getString(R.string.blood_pool), Blood.createDefault())
+    internal fun bloodPool() = Module.blood(getString(R.string.blood_pool), Blood())
 
-    internal fun header(@StringRes resId: Int) = Module.createHeader(getString(resId))
+    internal fun header(@StringRes resId: Int, spanCount: Int = Module.ONE) = Module.header(getString(resId), spanCount)
 
-    internal fun header(@StringRes resId: Int, @Module.SpanCount spanCount: Int) = Module.createHeader(getString(resId), spanCount)
+    internal fun health() = Module.health(getString(R.string.health), Health())
 
-    internal fun health() = Module.createHealth(getString(R.string.health), Health.createDefault())
+    internal fun statBlock(@StringRes titleId: Int, @ArrayRes arrayId: Int, valueMin: Int, valueMax: Int) = Module.statBlock(getString(titleId), statBlock = createDefaultStats(arrayId, valueMin, valueMax))
 
-    internal fun statBlock(@StringRes titleId: Int, @ArrayRes arrayId: Int, valueMin: Int, valueMax: Int) = Module.createStatBlock(getString(titleId), createDefaultStats(arrayId, valueMin, valueMax))
+    internal fun statBlock(@StringRes titleId: Int, @StringRes textBody: Int, @ArrayRes arrayId: Int, valueMin: Int, valueMax: Int) = Module.statBlock(getString(titleId), getString(textBody), createDefaultStats(arrayId, valueMin, valueMax))
 
-    internal fun statBlock(@StringRes titleId: Int, @StringRes textBody: Int, @ArrayRes arrayId: Int, valueMin: Int, valueMax: Int) = Module.createStatBlock(getString(titleId), getString(textBody), createDefaultStats(arrayId, valueMin, valueMax))
+    internal fun stat(@StringRes titleId: Int, @StringRes bodyId: Int, valueMin: Int, valueMax: Int) = Module.stat(getString(titleId), getString(bodyId), Stat("", valueMin = valueMin, valueMax = valueMax))
 
-    internal fun stat(@StringRes titleId: Int, @StringRes bodyId: Int, valueMin: Int, valueMax: Int) = Module.createStat(getString(titleId), getString(bodyId), Stat.createDefault("", valueMin, valueMax))
-
-    internal fun text(@StringRes titleId: Int) = Module.createText(getString(titleId), "")
+    internal fun text(@StringRes titleId: Int) = Module.text(getString(titleId), "")
 
     private fun createDefaultStats(arrayId: Int, valueMin: Int, valueMax: Int): List<Stat> {
         val stats = ArrayList<Stat>()
         val categories = getArray(arrayId)
-        categories?.forEach { stats.add(Stat.createDefault(it, valueMin, valueMax)) }
+        categories?.forEach { stats.add(Stat(it, valueMin = valueMin, valueMax = valueMax)) }
         return stats
     }
 

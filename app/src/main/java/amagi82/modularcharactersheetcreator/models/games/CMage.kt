@@ -1,9 +1,8 @@
 package amagi82.modularcharactersheetcreator.models.games
 
-import android.util.SparseArray
-
 import amagi82.modularcharactersheetcreator.R
 import amagi82.modularcharactersheetcreator.models.Splat
+import android.util.SparseArray
 
 /*
     Classic World of Darkness
@@ -11,19 +10,17 @@ import amagi82.modularcharactersheetcreator.models.Splat
     20th Anniversary Edition
  */
 class CMage : Game() {
-
-    init {
-        this.setGameTitle(getString(R.string.cwod_mage))
-        this.setLeftTitle(getString(R.string.faction))
-        this.setIsArchetypeLeft(false)
-        this.setGameUrl(getString(R.string.url_game_cwod_mage))
-        this.setSplashUrl(getString(R.string.url_splash_cwod_mage))
-        this.setGameColor(R.color.cwod_mage)
-        this.setIsRightListFinal(false)
-        this.setSplats(splats)
-    }
-
-    private val splats: SparseArray<Splat>
+    override val gameTitle = getString(R.string.cwod_mage)
+    override val leftTitle = getString(R.string.faction)
+    override val rightTitle = ""
+    override val gameUrl = getString(R.string.url_game_cwod_mage)
+    override val splashUrl = getString(R.string.url_splash_cwod_mage)
+    override val gameColor = R.color.cwod_mage
+    override val isArchetypeLeft = false
+    override val checkLeft = false
+    override val isLeftListFinal = true
+    override val isRightListFinal = false
+    override val splats: SparseArray<Splat>
         get() {
             val splats = SparseArray<Splat>(27)
 
@@ -61,22 +58,20 @@ class CMage : Game() {
             return splats
         }
 
-    override fun getRightTitle(leftSplatId: Int): String {
-        if (leftSplatId == TRADITIONS) return getString(R.string.tradition)
-        if (leftSplatId == TECHNOCRACY) return getString(R.string.convention)
-        if (leftSplatId == CRAFTS) return getString(R.string.craft)
-        return getString(R.string.faction)
+    override fun getRightTitle(leftSplatId: Int) = when (leftSplatId) {
+        TRADITIONS -> getString(R.string.tradition)
+        TECHNOCRACY -> getString(R.string.convention)
+        CRAFTS -> getString(R.string.craft)
+        else -> getString(R.string.faction)
     }
 
-    override fun getListLeft(splatId: Int): IntArray {
-        return intArrayOf(TRADITIONS, TECHNOCRACY, CRAFTS)
-    }
+    override fun getListLeft(splatId: Int) = intArrayOf(TRADITIONS, TECHNOCRACY, CRAFTS)
 
-    override fun getListRight(splatId: Int): IntArray {
-        if (splatId == TRADITIONS) return intArrayOf(AKASHAYANA, CELESTIAL_CHORUS, CULT_OF_ECSTASY, DREAMSPEAKERS, EUTHANOTOI, ORDER_OF_HERMES, SCIONS_OF_ETHER, VERBENAE, VIRTUAL_ADEPTS)
-        if (splatId == TECHNOCRACY) return intArrayOf(ITERATION_X, NEW_WORLD_ORDER, PROGENITORS, SYNDICATE, VOID_ENGINEERS)
-        if (splatId == CRAFTS) return intArrayOf(AHL_I_BATIN, BATAA, CHILDREN_OF_KNOWLEDGE, HOLLOW_ONES, KNIGHTS_TEMPLAR, KOPA_LOEI, NGOMA, SISTERS_OF_HIPPOLYTA, TAFTANI, WU_LUNG)
-        return intArrayOf()
+    override fun getListRight(splatId: Int) = when (splatId) {
+        TRADITIONS -> intArrayOf(AKASHAYANA, CELESTIAL_CHORUS, CULT_OF_ECSTASY, DREAMSPEAKERS, EUTHANOTOI, ORDER_OF_HERMES, SCIONS_OF_ETHER, VERBENAE, VIRTUAL_ADEPTS)
+        TECHNOCRACY -> intArrayOf(ITERATION_X, NEW_WORLD_ORDER, PROGENITORS, SYNDICATE, VOID_ENGINEERS)
+        CRAFTS -> intArrayOf(AHL_I_BATIN, BATAA, CHILDREN_OF_KNOWLEDGE, HOLLOW_ONES, KNIGHTS_TEMPLAR, KOPA_LOEI, NGOMA, SISTERS_OF_HIPPOLYTA, TAFTANI, WU_LUNG)
+        else -> intArrayOf()
     }
 
     companion object {
