@@ -5,8 +5,7 @@ import nz.bradcampbell.paperparcel.PaperParcel
 import nz.bradcampbell.paperparcel.PaperParcelable
 
 @PaperParcel
-data class Module private constructor(@Type val type: Int, @SpanCount val spanCount: Int = ONE, val title: String = "", val textBody: String? = null, val stat: Stat? = null, val statBlock: List<Stat>? = null, val health: Health? = null, val blood: Blood? = null, val imageUri: String? = null) : PaperParcelable {
-    @JvmField val CREATOR = PaperParcelable.Creator(Module::class.java)
+data class Module(@Type val type: Int, @SpanCount val spanCount: Int = ONE, val title: String = "", val textBody: String? = null, val stat: Stat? = null, val statBlock: List<Stat>? = null, val health: Health? = null, val blood: Blood? = null, val imageUri: String? = null) : PaperParcelable {
 
     @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
     @IntDef(HEADER_MODULE.toLong(), TEXT_MODULE.toLong(), STAT_MODULE.toLong(), STAT_BLOCK_MODULE.toLong(), HEALTH_MODULE.toLong(), BLOOD_MODULE.toLong(), IMAGE_MODULE.toLong())
@@ -18,6 +17,7 @@ data class Module private constructor(@Type val type: Int, @SpanCount val spanCo
     annotation class SpanCount
 
     companion object {
+        @JvmField val CREATOR = PaperParcelable.Creator(Module::class.java)
 
         fun header(title: String, spanCount: Int = FULL) = Module(type = HEADER_MODULE, title = title, spanCount = spanCount)
 

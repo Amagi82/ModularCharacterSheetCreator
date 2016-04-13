@@ -8,5 +8,7 @@ import nz.bradcampbell.paperparcel.PaperParcelable
  */
 @PaperParcel
 data class Splat(val title: String, val url: String? = null, val isEndPoint: Boolean = true) : PaperParcelable {
-    @JvmField val CREATOR = PaperParcelable.Creator(Splat::class.java)
+    companion object{
+        @JvmField val CREATOR = PaperParcelable.Creator(Splat::class.java)
+    }
 }

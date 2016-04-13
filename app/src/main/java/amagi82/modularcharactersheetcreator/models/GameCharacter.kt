@@ -17,17 +17,21 @@ data class GameCharacter(var name: String = "",
                          var image: CharacterImage? = null,
                          val entityId: String = UUID.randomUUID().toString(),
                          var timestamp: Long = System.currentTimeMillis()) : PaperParcelable {
-    @JvmField val CREATOR = PaperParcelable.Creator(GameCharacter::class.java)
+
 
 
     @PaperParcel
     data class ColorScheme(@ColorInt val colorBackground: Int, @ColorInt val colorText: Int, @ColorInt val colorTextDim: Int) : PaperParcelable {
-        @JvmField val CREATOR = PaperParcelable.Creator(ColorScheme::class.java)
+        companion object{
+            @JvmField val CREATOR = PaperParcelable.Creator(ColorScheme::class.java)
+        }
     }
 
     @PaperParcel
     data class CharacterImage(val uri: String, val height: Int, val width: Int) : PaperParcelable {
-        @JvmField val CREATOR = PaperParcelable.Creator(CharacterImage::class.java)
+        companion object{
+            @JvmField val CREATOR = PaperParcelable.Creator(CharacterImage::class.java)
+        }
     }
 
     //Minimum requirements necessary to save the character
@@ -61,6 +65,7 @@ data class GameCharacter(var name: String = "",
     annotation class Progress
 
     companion object {
+        @JvmField val CREATOR = PaperParcelable.Creator(GameCharacter::class.java)
         const val START = 0
         const val LEFT = 1
         const val RIGHT = 2

@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
-import android.os.Bundle
 import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
 import android.support.annotation.IntDef
@@ -15,7 +14,6 @@ import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
-import icepick.Icepick
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -27,19 +25,9 @@ abstract class BaseActivity : AppCompatActivity() {
     @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
     annotation class ResultCode
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Icepick.restoreInstanceState(this, savedInstanceState)
-    }
-
     override fun onStart() {
         super.onStart()
         Otto.BUS.get().register(this)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Icepick.saveInstanceState(this, outState)
     }
 
     override fun onStop() {

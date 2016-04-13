@@ -6,5 +6,7 @@ import nz.bradcampbell.paperparcel.PaperParcelable
 
 @PaperParcel
 data class Sheet(val title: String, val modules: List<Module>) : PaperParcelable {
-    @JvmField val CREATOR = PaperParcelable.Creator(Sheet::class.java)
+    companion object{
+        @JvmField val CREATOR = PaperParcelable.Creator(Sheet::class.java)
+    }
 }

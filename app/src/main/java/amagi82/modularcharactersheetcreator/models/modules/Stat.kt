@@ -8,5 +8,7 @@ import nz.bradcampbell.paperparcel.PaperParcelable
  */
 @PaperParcel
 data class Stat(val category: String = "", val specialty: String? = null, val valueMin: Int = 0, val value: Int = 0, val valueTemp: Int = 0, val valueMax: Int = 5, val numStars: Int = 5) : PaperParcelable {
-    @JvmField val CREATOR = PaperParcelable.Creator(Stat::class.java)
+    companion object{
+        @JvmField val CREATOR = PaperParcelable.Creator(Stat::class.java)
+    }
 }
