@@ -87,7 +87,7 @@ class MainView: AnkoComponent<MainActivity> {
         })
 
         override fun onBindViewHolder(holder: Holder, position: Int) {
-            throw UnsupportedOperationException()
+
         }
 
         override fun getItemCount() = characters.size()
