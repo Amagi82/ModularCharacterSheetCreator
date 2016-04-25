@@ -4,7 +4,7 @@ import amagi82.modularcharactersheetcreator.R
 import amagi82.modularcharactersheetcreator.databinding.SheetActivityBinding
 import amagi82.modularcharactersheetcreator.models.GameCharacter
 import amagi82.modularcharactersheetcreator.ui._base.BaseActivity
-import amagi82.modularcharactersheetcreator.ui._extras.utils.ScreenSize
+import amagi82.modularcharactersheetcreator.extras.utils.ScreenSize
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.graphics.Color

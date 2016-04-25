@@ -1,17 +1,16 @@
-package amagi82.modularcharactersheetcreator.ui._extras
+package amagi82.modularcharactersheetcreator.extras
 
 import amagi82.modularcharactersheetcreator.R
+import amagi82.modularcharactersheetcreator.extras.utils.CircleIcon
+import amagi82.modularcharactersheetcreator.extras.utils.ScreenSize
+import amagi82.modularcharactersheetcreator.extras.utils.SplatIcon
+import amagi82.modularcharactersheetcreator.extras.widgets.*
+import amagi82.modularcharactersheetcreator.extras.widgets.callbacks.EditTextListener
 import amagi82.modularcharactersheetcreator.models.GameCharacter
 import amagi82.modularcharactersheetcreator.models.modules.Blood
 import amagi82.modularcharactersheetcreator.models.modules.Health
-import amagi82.modularcharactersheetcreator.models.modules.Module
 import amagi82.modularcharactersheetcreator.models.modules.Stat
 import amagi82.modularcharactersheetcreator.ui._base.BaseModuleViewModel
-import amagi82.modularcharactersheetcreator.ui._extras.utils.CircleIcon
-import amagi82.modularcharactersheetcreator.ui._extras.utils.ScreenSize
-import amagi82.modularcharactersheetcreator.ui._extras.utils.SplatIcon
-import amagi82.modularcharactersheetcreator.ui._extras.widgets.*
-import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener
 import android.databinding.BindingAdapter
 import android.graphics.drawable.Drawable
 import android.os.Handler
@@ -134,7 +133,7 @@ object BindingAdapters {
     //Set grid layout manager to apply span count for each module
     @BindingAdapter("modules")
     fun setLayoutManager(recyclerView: RecyclerView, modules: List<BaseModuleViewModel>) {
-        val manager = GridLayoutManager(recyclerView.context, Module.FULL)
+        val manager = GridLayoutManager(recyclerView.context, FULL)
         manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return modules[position].spanCount

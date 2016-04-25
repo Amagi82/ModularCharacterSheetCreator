@@ -2,10 +2,10 @@ package amagi82.modularcharactersheetcreator.ui.create.name
 
 import amagi82.modularcharactersheetcreator.R
 import amagi82.modularcharactersheetcreator.models.GameCharacter
-import amagi82.modularcharactersheetcreator.ui._base.App
+import amagi82.modularcharactersheetcreator.App
 import amagi82.modularcharactersheetcreator.ui._base.BaseViewModel
-import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto
-import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener
+import amagi82.modularcharactersheetcreator.extras.utils.Otto
+import amagi82.modularcharactersheetcreator.extras.widgets.callbacks.EditTextListener
 import amagi82.modularcharactersheetcreator.ui.create._events.KeyboardVisibleEvent
 import amagi82.modularcharactersheetcreator.ui.create._events.NameChangedEvent
 import android.databinding.ObservableField

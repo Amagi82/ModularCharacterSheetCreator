@@ -4,7 +4,7 @@ import android.view.View
 
 import amagi82.modularcharactersheetcreator.models.GameCharacter
 import amagi82.modularcharactersheetcreator.ui.create._events.ResetSelectionEvent
-import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto
+import amagi82.modularcharactersheetcreator.extras.utils.Otto
 
 class GameCardViewModel(val url: String, val gameTitle: String) {
 

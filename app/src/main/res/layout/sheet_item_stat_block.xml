@@ -19,7 +19,7 @@
                 android:text="@{statBlockViewModel.title}"
                 tools:text="Title"/>
 
-            <amagi82.modularcharactersheetcreator.ui._extras.widgets.RoundedStatBarBlock
+            <amagi82.modularcharactersheetcreator.extras.widgets.RoundedStatBarBlock
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:statBlock="@{statBlockViewModel.statBlock}"/>

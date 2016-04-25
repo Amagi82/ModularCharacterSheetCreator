@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui._extras.utils
+package amagi82.modularcharactersheetcreator.extras.utils
 
 import android.content.Context
 import android.graphics.Point

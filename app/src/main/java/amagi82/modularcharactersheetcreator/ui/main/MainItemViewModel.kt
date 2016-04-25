@@ -1,7 +1,7 @@
 package amagi82.modularcharactersheetcreator.ui.main
 
 import amagi82.modularcharactersheetcreator.models.GameCharacter
-import amagi82.modularcharactersheetcreator.ui._extras.utils.Otto
+import amagi82.modularcharactersheetcreator.extras.utils.Otto
 import android.view.View
 
 class MainItemViewModel(val character: GameCharacter) {

@@ -1,7 +1,7 @@
-package amagi82.modularcharactersheetcreator.ui._extras.widgets
+package amagi82.modularcharactersheetcreator.extras.widgets
 
-import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.EditTextListener
-import amagi82.modularcharactersheetcreator.ui._extras.widgets.callbacks.SimpleTextWatcher
+import amagi82.modularcharactersheetcreator.extras.widgets.callbacks.EditTextListener
+import amagi82.modularcharactersheetcreator.extras.widgets.callbacks.SimpleTextWatcher
 import android.content.Context
 import android.util.AttributeSet
 import android.view.KeyEvent

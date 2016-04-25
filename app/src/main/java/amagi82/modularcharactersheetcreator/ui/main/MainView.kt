@@ -1,10 +1,10 @@
 package amagi82.modularcharactersheetcreator.ui.main
 
 import amagi82.modularcharactersheetcreator.R
+import amagi82.modularcharactersheetcreator.extras.circleImageView
+import amagi82.modularcharactersheetcreator.extras.lparams
+import amagi82.modularcharactersheetcreator.extras.tintResource
 import amagi82.modularcharactersheetcreator.models.GameCharacter
-import amagi82.modularcharactersheetcreator.ui._extras.circleImageView
-import amagi82.modularcharactersheetcreator.ui._extras.lparams
-import amagi82.modularcharactersheetcreator.ui._extras.tintResource
 import android.support.design.widget.AppBarLayout
 import android.support.v7.util.SortedList
 import android.support.v7.widget.LinearLayoutManager
@@ -30,7 +30,7 @@ class MainView: AnkoComponent<MainActivity> {
             appBarLayout {
 
                 toolbar {
-                    //id = R.id.toolbar
+
                     popupTheme = R.style.ThemeOverlay_AppCompat_Light
 
                 }.lparams(width = matchParent)  {
@@ -62,7 +62,7 @@ class MainView: AnkoComponent<MainActivity> {
     //val character: GameCharacter
 
     class Adapter: RecyclerView.Adapter<Holder>() {
-        val characters= SortedList<GameCharacter>(GameCharacter::class.java, object: SortedListAdapterCallback<GameCharacter>(this@Adapter){
+        val characters= SortedList<GameCharacter>(GameCharacter::class.java, object : SortedListAdapterCallback<GameCharacter>(this@Adapter) {
             override fun areContentsTheSame(oldItem: GameCharacter, newItem: GameCharacter) = oldItem == newItem
             override fun areItemsTheSame(item1: GameCharacter, item2: GameCharacter) = item1.entityId == item2.entityId
             override fun compare(o1: GameCharacter, o2: GameCharacter) = o1.timestamp.compareTo(o2.timestamp)

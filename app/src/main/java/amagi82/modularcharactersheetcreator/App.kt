@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui._base
+package amagi82.modularcharactersheetcreator
 
 import android.app.Application
 import android.content.res.Resources
@@ -14,7 +14,7 @@ class App : Application() {
     }
 
     companion object {
-        var res: Resources? = null
+        lateinit var res: Resources
             private set
     }
 }

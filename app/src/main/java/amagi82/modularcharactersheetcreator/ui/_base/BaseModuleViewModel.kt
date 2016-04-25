@@ -1,10 +1,12 @@
 package amagi82.modularcharactersheetcreator.ui._base
 
+import amagi82.modularcharactersheetcreator.extras.ModuleSpanCount
+import amagi82.modularcharactersheetcreator.extras.ModuleType
 import amagi82.modularcharactersheetcreator.models.modules.Module
 
 abstract class BaseModuleViewModel(module: Module) {
-    @Module.Type val type: Int
-    @Module.SpanCount val spanCount: Int
+    @ModuleType val type: Int
+    @ModuleSpanCount val spanCount: Int
 
     init {
         type = module.type

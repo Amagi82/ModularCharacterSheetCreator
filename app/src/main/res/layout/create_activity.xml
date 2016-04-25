@@ -21,7 +21,7 @@
                 style="@style/CollapsingToolbar"
                 app:titleEnabled="false">
 
-                <amagi82.modularcharactersheetcreator.ui._extras.widgets.ImageBackdrop
+                <amagi82.modularcharactersheetcreator.extras.widgets.ImageBackdrop
                     style="@style/ImageBackdrop"
                     app:url="@{createViewModel.splashUrl}"/>
 
@@ -33,7 +33,7 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <amagi82.modularcharactersheetcreator.ui._extras.widgets.NoSwipeViewPager
+        <amagi82.modularcharactersheetcreator.extras.widgets.NoSwipeViewPager
             style="@style/ViewPager"
             app:behavior_overlapTop="@dimen/edit_viewpager_overlap_top"
             app:itemView="@{createViewModel.itemView}"

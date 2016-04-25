@@ -2,6 +2,7 @@ package amagi82.modularcharactersheetcreator.ui.create
 
 import amagi82.modularcharactersheetcreator.R
 import amagi82.modularcharactersheetcreator.databinding.CreateActivityBinding
+import amagi82.modularcharactersheetcreator.extras.*
 import amagi82.modularcharactersheetcreator.models.GameCharacter
 import amagi82.modularcharactersheetcreator.models.Sheet
 import amagi82.modularcharactersheetcreator.models.games.templates.Template
@@ -29,23 +30,22 @@ import java.util.*
     Exiting this screen takes you back to the MainActivity.
  */
 class CreateActivity : BaseActivity() {
-    private var binding: CreateActivityBinding? = null
+    private val binding by lazy { DataBindingUtil.setContentView<CreateActivityBinding>(this, R.layout.create_activity) }
     private var createViewModel: CreateViewModel = CreateViewModel(GameCharacter())
     internal var character: GameCharacter = GameCharacter()
     internal var backstack: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<CreateActivityBinding>(this, R.layout.create_activity)
 
-        binding?.toolbar?.navigationIcon = getTintedIcon(R.drawable.ic_close_24dp, Color.WHITE)
-        binding?.toolbar?.inflateMenu(R.menu.menu_create)
-        binding?.toolbar?.setNavigationOnClickListener { finish(Activity.RESULT_CANCELED) }
+        binding.toolbar.navigationIcon = icon(R.drawable.ic_close_24dp, Color.WHITE)
+        binding.toolbar.inflateMenu(R.menu.menu_create)
+        binding.toolbar.setNavigationOnClickListener { end(RESULT_CANCELED) }
 
-        character = intent.getParcelableExtra<GameCharacter>(BaseActivity.CHARACTER) ?: GameCharacter()
+        character = intent.getParcelableExtra<GameCharacter>(CHARACTER) ?: GameCharacter()
 
         createViewModel = CreateViewModel(character)
-        binding?.setCreateViewModel(createViewModel)
+        binding.setCreateViewModel(createViewModel)
         //If an update to a page > 0 is handled immediately, the adapter doesn't get set up.
         Handler().postDelayed({ createViewModel.update(character) }, 10)
     }
@@ -57,11 +57,11 @@ class CreateActivity : BaseActivity() {
 
     @Subscribe fun axisUpdated(event: AxisUpdateEvent) {
         createViewModel.update(character, event.splatId)
-        binding?.appbar?.setExpanded(true)
+        binding.appbar.setExpanded(true)
     }
 
     @Subscribe fun axisSelected(event: AxisSelectedEvent) {
-        if (createViewModel.page.get() == GameCharacter.LEFT)
+        if (createViewModel.page.get() == LEFT)
         //character = character.withLeft(event.splatId)
         else {
             val system = character.gameSystem()
@@ -103,7 +103,7 @@ class CreateActivity : BaseActivity() {
 
     private fun update() {
         createViewModel.update(character)
-        binding?.appbar?.setExpanded(true)
+        binding.appbar.setExpanded(true)
         //backstack = character.getProgress()
     }
 
@@ -123,12 +123,12 @@ class CreateActivity : BaseActivity() {
     }
 
     private fun getCroppedImage() {
-        startActivityForResult(Intent(this@CreateActivity, CropActivity::class.java).putExtra(BaseActivity.CHARACTER, character), BaseActivity.DEFAULT)
+        startActivityForResult(Intent(this@CreateActivity, CropActivity::class.java).putExtra(CHARACTER, character), REQ_DEFAULT)
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode != Activity.RESULT_OK || data == null) return
-        character = data.getParcelableExtra<GameCharacter>(BaseActivity.CHARACTER)
+        character = data.getParcelableExtra<GameCharacter>(CHARACTER)
         createViewModel.update(character)
     }
 
@@ -139,10 +139,10 @@ class CreateActivity : BaseActivity() {
             //sheets.add(defaultSheet)
             //character = character.withSheets(sheets)
         }
-        finish(Activity.RESULT_OK, Intent().putExtra(BaseActivity.CHARACTER, character))
+        end(RESULT_OK, Intent().putExtra(CHARACTER, character))
     }
 
     fun onActionDelete(item: MenuItem) {
-        finish(BaseActivity.RESULT_DELETED, Intent().putExtra(BaseActivity.CHARACTER, character))
+        end(RESULT_DELETED, Intent().putExtra(CHARACTER, character))
     }
 }

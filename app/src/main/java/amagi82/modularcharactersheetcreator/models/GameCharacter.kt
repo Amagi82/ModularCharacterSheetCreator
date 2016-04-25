@@ -1,15 +1,15 @@
 package amagi82.modularcharactersheetcreator.models
 
+import amagi82.modularcharactersheetcreator.extras.*
 import amagi82.modularcharactersheetcreator.models.games.Game
 import android.support.annotation.ColorInt
-import android.support.annotation.IntDef
 import nz.bradcampbell.paperparcel.PaperParcel
 import nz.bradcampbell.paperparcel.PaperParcelable
 import java.util.*
 
 @PaperParcel
 data class GameCharacter(var name: String = "",
-                         @Game.System var gameId: Int = Game.NONE,
+                         @Game.GameSystem var gameId: Int = Game.NONE,
                          var leftId: Int = 0,
                          var rightId: Int = 0,
                          var colorScheme: ColorScheme? = null,
@@ -41,7 +41,7 @@ data class GameCharacter(var name: String = "",
     fun progress() = if (gameId == Game.NONE) START else if (leftId == 0) LEFT else if (rightId == 0) RIGHT else FINISH
 
     //Used during character creation/editing. Removes progress on back.
-    fun removeProgress(@Progress toStep: Int) {
+    fun removeProgress(@CharacterProgress toStep: Int) {
         gameId = if (toStep == START) Game.NONE else gameId
         leftId = if (toStep <= LEFT) 0 else leftId
         rightId = if (toStep <= RIGHT) 0 else rightId
@@ -60,15 +60,7 @@ data class GameCharacter(var name: String = "",
 
     fun right() = gameSystem()?.getSplat(rightId)
 
-    @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
-    @IntDef(START.toLong(), LEFT.toLong(), RIGHT.toLong(), FINISH.toLong())
-    annotation class Progress
-
     companion object {
         @JvmField val CREATOR = PaperParcelable.Creator(GameCharacter::class.java)
-        const val START = 0
-        const val LEFT = 1
-        const val RIGHT = 2
-        const val FINISH = 3
     }
 }

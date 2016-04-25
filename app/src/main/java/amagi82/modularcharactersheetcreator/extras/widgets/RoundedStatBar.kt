@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui._extras.widgets
+package amagi82.modularcharactersheetcreator.extras.widgets
 
 import amagi82.modularcharactersheetcreator.R
 import amagi82.modularcharactersheetcreator.models.modules.Health

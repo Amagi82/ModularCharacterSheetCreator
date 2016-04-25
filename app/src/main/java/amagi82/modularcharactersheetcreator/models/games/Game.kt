@@ -1,8 +1,8 @@
 package amagi82.modularcharactersheetcreator.models.games
 
+import amagi82.modularcharactersheetcreator.App
+import amagi82.modularcharactersheetcreator.extras.*
 import amagi82.modularcharactersheetcreator.models.Splat
-import amagi82.modularcharactersheetcreator.ui._base.App
-import android.support.annotation.IntDef
 import android.support.annotation.StringRes
 import android.util.SparseArray
 
@@ -34,7 +34,7 @@ abstract class Game {
 
     open fun updateLeft(leftSplatId: Int, rightSplatId: Int)= 0
 
-    internal fun getString(@StringRes resId: Int)=App.res?.getString(resId) ?: ""
+    internal fun getString(@StringRes resId: Int)= App.res?.getString(resId) ?: ""
 
     internal fun splat(@StringRes title: Int) = Splat(getString(title))
 
@@ -42,13 +42,9 @@ abstract class Game {
 
     internal fun splat(@StringRes title: Int, isEndPoint: Boolean)= Splat(getString(title), isEndPoint = isEndPoint)
 
-    @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
-    @IntDef(NONE.toLong(), EXALTED.toLong(), SCION.toLong(), TRINITY.toLong(), CMAGE.toLong(), CVAMPIRE.toLong(), CWEREWOLF.toLong(), CWRAITH.toLong(), NDEMON.toLong(), NMUMMY.toLong(), NVAMPIRE.toLong(), NWEREWOLF.toLong())
-    annotation class System
-
     companion object {
 
-        fun getSystem(@System systemId: Int) = when (systemId) {
+        fun getSystem(@GameSystem systemId: Int) = when (systemId) {
                 CMAGE ->  CMage()
                 CVAMPIRE ->  CVampire()
                 CWEREWOLF ->  CWerewolf()
@@ -62,19 +58,6 @@ abstract class Game {
                 TRINITY ->  Trinity()
                 else ->  null
         }
-
-        const val NONE = 0
-        const val EXALTED = 10
-        const val SCION = 20
-        const val TRINITY = 30
-        const val CMAGE = 101
-        const val CVAMPIRE = 102
-        const val CWEREWOLF = 103
-        const val CWRAITH = 104
-        const val NDEMON = 201
-        const val NMUMMY = 202
-        const val NVAMPIRE = 203
-        const val NWEREWOLF = 204
 
         val systems = intArrayOf(CMAGE, CVAMPIRE, CWEREWOLF, CWRAITH, EXALTED, NDEMON, NMUMMY, NVAMPIRE, NWEREWOLF, SCION, TRINITY)
     }

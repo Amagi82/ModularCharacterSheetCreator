@@ -1,4 +1,4 @@
-package amagi82.modularcharactersheetcreator.ui._extras.widgets
+package amagi82.modularcharactersheetcreator.extras.widgets
 
 import android.content.Context
 import android.support.v7.widget.AppCompatImageView
